@@ -4,6 +4,12 @@
 format: jb-book
 root: intro
 chapters:
-- file: markdown
-- file: notebooks
-- file: markdown-notebooks
+- file: jupyter-notebooks/1.0_Rasterisation.ipynb
+  sections:
+  - glob: jupyter-notebooks/1.*
+
+- file: jupyter-notebooks/2.0_Coordinate_geometry.ipynb
+  sections:
+  - glob: jupyter-notebooks/2.*
+
+- file: jupyter-notebooks/bibliography.ipynb

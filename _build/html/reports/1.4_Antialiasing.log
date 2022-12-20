@@ -1,0 +1,83 @@
+Traceback (most recent call last):
+  File "C:\Users\jonsh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\LocalCache\local-packages\Python39\site-packages\jupyter_cache\executors\utils.py", line 51, in single_nb_execution
+    executenb(
+  File "C:\Users\jonsh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\LocalCache\local-packages\Python39\site-packages\nbclient\client.py", line 1204, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "C:\Users\jonsh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\LocalCache\local-packages\Python39\site-packages\nbclient\util.py", line 84, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "C:\Users\jonsh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\LocalCache\local-packages\Python39\site-packages\nbclient\util.py", line 62, in just_run
+    return loop.run_until_complete(coro)
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.3568.0_x64__qbz5n2kfra8p0\lib\asyncio\base_events.py", line 647, in run_until_complete
+    return future.result()
+  File "C:\Users\jonsh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\LocalCache\local-packages\Python39\site-packages\nbclient\client.py", line 663, in async_execute
+    await self.async_execute_cell(
+  File "C:\Users\jonsh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\LocalCache\local-packages\Python39\site-packages\nbclient\client.py", line 965, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "C:\Users\jonsh\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\LocalCache\local-packages\Python39\site-packages\nbclient\client.py", line 862, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.patches as patches
+from myst_nb import glue
+plt.rcParams['text.usetex'] = True
+
+def plot_two_images(img1: np.array, img2: np.array):
+    _, ax = plt.subplots(1, 2, figsize=(12, 6))
+    ax[0].imshow(img1)
+    ax[1].imshow(img2);
+    
+    
+def drawfilledcircle(R, cx, cy, r, colour):
+    
+    Ny, Nx, _ = R.shape
+    cx, cy, r = int(cx * Nx), int((1 - cy) * Ny), int(r * min(Nx, Ny))
+    D, x, y = 5 - 4 * r, r, 0
+    while y <= x:
+        for i in range(3):
+            R[cy + y, cx - x : cx + x + 1, i] = colour[i]
+            R[cy - y, cx - x : cx + x + 1, i] = colour[i]
+            R[cy + x, cx - y : cx + y + 1, i] = colour[i]
+            R[cy - x, cx - y : cx + y + 1, i] = colour[i]
+        
+        if D > 0:
+            D -= 8 * x - 8
+            x -= 1
+        
+        D += 8 * y + 12
+        y += 1
+        
+    return R
+
+
+Nx, Ny = 101, 101
+cx, cy, r = 0.5, 0.5, 0.3
+colour = [0, 0, 255]
+
+img1 = 255 * np.ones((Ny, Nx, 3)).astype(int)
+img1 = drawfilledcircle(img, cx, cy, r, colour)
+
+img2 = 255 * np.ones((Ny, Nx, 3)).astype(int)
+for i in range(Ny):
+    for j in range(Nx):
+        img2[i,j,:] = (img1[2*i,2*j,:] + img1[2*i,2*j+1,:] + img1[2*i+1,2*j,:] + img1[2*i+1,2*j+1,:]) // 4   
+    
+
+plot_two_images(img1, img2)
+    
+glue("ssaa-plot", fig, display=False)
+------------------
+
+[1;31m---------------------------------------------------------------------------[0m
+[1;31mNameError[0m                                 Traceback (most recent call last)
+Cell [1;32mIn [2], line 40[0m
+[0;32m     37[0m colour [38;5;241m=[39m [[38;5;241m0[39m, [38;5;241m0[39m, [38;5;241m255[39m]
+[0;32m     39[0m img1 [38;5;241m=[39m [38;5;241m255[39m [38;5;241m*[39m np[38;5;241m.[39mones((Ny, Nx, [38;5;241m3[39m))[38;5;241m.[39mastype([38;5;28mint[39m)
+[1;32m---> 40[0m img1 [38;5;241m=[39m drawfilledcircle([43mimg[49m, cx, cy, r, colour)
+[0;32m     42[0m img2 [38;5;241m=[39m [38;5;241m255[39m [38;5;241m*[39m np[38;5;241m.[39mones((Ny, Nx, [38;5;241m3[39m))[38;5;241m.[39mastype([38;5;28mint[39m)
+[0;32m     43[0m [38;5;28;01mfor[39;00m i [38;5;129;01min[39;00m [38;5;28mrange[39m(Ny):
+
+[1;31mNameError[0m: name 'img' is not defined
+NameError: name 'img' is not defined
+
