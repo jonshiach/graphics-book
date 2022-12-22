@@ -3,13 +3,27 @@
 
 format: jb-book
 root: intro
-chapters:
-- file: jupyter-notebooks/1.0_Rasterisation.ipynb
-  sections:
-  - glob: jupyter-notebooks/1.*
+parts:
+- caption: ""
+  chapters:  
+  - glob: files/0.*
 
-- file: jupyter-notebooks/2.0_Coordinate_geometry.ipynb
-  sections:
-  - glob: jupyter-notebooks/2.*
+- caption: Chapters
+  chapters:
+  - file: files/2.0_Coordinate_geometry
+    sections:
+    - glob: files/2.*
+    
+  - file: files/3.0_Transformations
+    sections:
+    - glob: files/3.*
 
-- file: jupyter-notebooks/bibliography.ipynb
+  - file: files/4.0_Virtual_environments
+    sections:
+    - glob: files/4.*
+
+  - file: files/1.0_Rasterisation
+    sections:
+    - glob: files/1.*
+
+  - file: files/bibliography
