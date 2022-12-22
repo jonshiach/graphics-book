@@ -514,7 +514,7 @@ glue("rotation-plot-2", fig, display=False)
 # First we translate by $-\mathbf{c}$ so that the centre of the plane is at the origin.
 # 
 # \begin{align*}
-#     T(-\mathbf{p}) = 
+#     T(-\mathbf{c}) = 
 #     \begin{pmatrix}
 #         1 & 0 & 0 & -c_x \\
 #         0 & 1 & 0 & -c_y \\

@@ -16,5 +16,39 @@
         "application/papermill.record/image/png": null
       }
     }
+  },
+  "files\\3.3_Rotation": {
+    "rotation-plot-1": {
+      "output_type": "display_data",
+      "metadata": {
+        "scrapbook": {
+          "name": "rotation-plot-1",
+          "mime_prefix": "application/papermill.record/"
+        },
+        "filenames": {
+          "image/png": "C:\\Users\\jonsh\\OneDrive - MMU\\Documents\\2022_2023\\Computational_Maths\\graphics-book\\_build\\jupyter_execute\\files\\3.3_Rotation_1_0.png"
+        }
+      },
+      "data": {
+        "application/papermill.record/text/plain": "<Figure size 640x480 with 1 Axes>",
+        "application/papermill.record/image/png": null
+      }
+    },
+    "rotation-plot-2": {
+      "output_type": "display_data",
+      "metadata": {
+        "scrapbook": {
+          "name": "rotation-plot-2",
+          "mime_prefix": "application/papermill.record/"
+        },
+        "filenames": {
+          "image/png": "C:\\Users\\jonsh\\OneDrive - MMU\\Documents\\2022_2023\\Computational_Maths\\graphics-book\\_build\\jupyter_execute\\files\\3.3_Rotation_3_1.png"
+        }
+      },
+      "data": {
+        "application/papermill.record/text/plain": "<Figure size 640x480 with 1 Axes>",
+        "application/papermill.record/image/png": null
+      }
+    }
   }
 }
