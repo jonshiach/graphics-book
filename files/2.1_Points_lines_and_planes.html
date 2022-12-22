@@ -1,0 +1,752 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Points, lines and planes &#8212; Computer Graphics Lecture Notes</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="canonical" href="https://jonshiach.github.io/graphics-book/files/2.1_Points_lines_and_planes.html" />
+    <link rel="shortcut icon" href="../_static/favicon.jpg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Shortest distance problems" href="2.2_Shortest_distance_problems.html" />
+    <link rel="prev" title="Co-ordinate Geometry" href="2.0_Coordinate_geometry.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Computer Graphics Lecture Notes</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="0.1_teaching_schedule.html">
+   Teaching schedule
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Chapters
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="2.0_Coordinate_geometry.html">
+   Co-ordinate Geometry
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Points, lines and planes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2.2_Shortest_distance_problems.html">
+     Shortest distance problems
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="3.0_Transformations.html">
+   Linear Transformations
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="3.1_Translation.html">
+     Translation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="3.2_Scaling.html">
+     Scaling
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="3.3_Rotation.html">
+     Rotation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="4.0_Virtual_environments.html">
+   Virtual environments
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="4.1_The_viewing_pipeline.html">
+     The viewing pipeline
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="4.2_Object_space.html">
+     Object space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="4.3_World_space.html">
+     World space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="4.4_Camera_space.html">
+     Camera space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="4.5_Screen_space.html">
+     Screen space
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="1.0_Rasterisation.html">
+   Rasterisation
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="1.1_Bresenhams_algorithm.html">
+     Drawing lines
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="1.2_Drawing_circles.html">
+     Drawing circles
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="1.3_Drawing_polygons.html">
+     Drawing polygons
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="1.4_Antialiasing.html">
+     Antialiasing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="1.5_Convolution.html">
+     Image processing
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bibliography.html">
+   References
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/files/2.1_Points_lines_and_planes.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#points">
+   Points
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#lines">
+   Lines
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#planes">
+   Planes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-normal-vector">
+   The normal vector
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Points, lines and planes</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#points">
+   Points
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#lines">
+   Lines
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#planes">
+   Planes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-normal-vector">
+   The normal vector
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="points-lines-and-planes">
+<h1>Points, lines and planes<a class="headerlink" href="#points-lines-and-planes" title="Permalink to this headline">#</a></h1>
+<p>Computer graphics uses points, line and planes to describe virtual environments. Euclid defined these in his works <em>The Elements</em> around 300 BCE which is considered the most important mathematical works ever written. It introduced mathematical concepts of Euclidean geometry, mathematical proofs, logic and number theory.</p>
+<section id="points">
+<h2>Points<a class="headerlink" href="#points" title="Permalink to this headline">#</a></h2>
+<p>Euclid described a <em>point</em> as <em>“that which has no part”</em>. A point has position only, it has no length, width or thickness, and thus no area or volume. As we have <span class="xref myst">already seen</span>, a typical point in <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span> is described by its co-ordinates <span class="math notranslate nohighlight">\((a_1,a_2,\dots,a_n)\)</span>, where the <span class="math notranslate nohighlight">\(a_i \in \mathbb{R}\)</span>.</p>
+</section>
+<section id="lines">
+<h2>Lines<a class="headerlink" href="#lines" title="Permalink to this headline">#</a></h2>
+<p>Euclid defined a line as having <em>“breadthless length”</em> which is another way of saying a line is a one dimensional object that has a length but no breadth or volume.</p>
+<div class="proof definition note admonition" id="definition-0">
+<p class="admonition-title"><span class="caption-number">Definition 9 </span> (Vector equation of a line)</p>
+<section class="definition-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\mathbf{p} = (p_1, \ldots ,p_n)\)</span> be the position of a point in <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span> and <span class="math notranslate nohighlight">\(\mathbf{d} = (d_1, \ldots, d_n)\)</span> a non-zero vector in <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span>. The line <span class="math notranslate nohighlight">\(\ell\)</span> <a class="footnote-reference brackets" href="#id2" id="id1">1</a> which passes through <span class="math notranslate nohighlight">\(\mathbf{p}\)</span> in the direction of <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> has equation</p>
+<div class="math notranslate nohighlight" id="equation-line-vector-equation">
+<span class="eqno">(8)<a class="headerlink" href="#equation-line-vector-equation" title="Permalink to this equation">#</a></span>\[\mathbf{q} = \mathbf{p} + t\mathbf{d},\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{q}\)</span> is a general point on <span class="math notranslate nohighlight">\(\ell\)</span> and <span class="math notranslate nohighlight">\(t\in \mathbb{R}\)</span> is known as a <strong>parameter</strong>.</p>
+</section>
+</div><p>In other words, every point on <span class="math notranslate nohighlight">\(\ell\)</span> is obtained by adding some scalar multiple of <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> to <span class="math notranslate nohighlight">\(\mathbf{p}\)</span> (<a class="reference internal" href="#line-vector-equation-figure"><span class="std std-numref">Fig. 10</span></a>). So <span class="math notranslate nohighlight">\(\ell\)</span> is the line which passes through <span class="math notranslate nohighlight">\(\mathbf{p}\)</span> in the direction of <span class="math notranslate nohighlight">\(\mathbf{d}\)</span>. We call the vector <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> a <strong>direction vector</strong> of the line.</p>
+<figure class="align-default" id="line-vector-equation-figure">
+<a class="reference internal image-reference" href="../_images/line_vector_equation.svg"><img alt="../_images/line_vector_equation.svg" src="../_images/line_vector_equation.svg" width="500px" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 10 </span><span class="caption-text">The position of any point on the line <span class="math notranslate nohighlight">\(\ell\)</span> can be obtained by adding a scalar multiple of <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> to <span class="math notranslate nohighlight">\(\mathbf{p}\)</span>.</span><a class="headerlink" href="#line-vector-equation-figure" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>In practice one can determine the direction vector <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> of a line by taking any two distinct points <span class="math notranslate nohighlight">\(\mathbf{p}_1\)</span> and  <span class="math notranslate nohighlight">\(\mathbf{p}_2\)</span> on <span class="math notranslate nohighlight">\(\ell\)</span> and setting <span class="math notranslate nohighlight">\(\mathbf{d}=\mathbf{p}_2 - \mathbf{p}_1\)</span> and <span class="math notranslate nohighlight">\(\mathbf{p}\)</span> in the line equation to be any point on the line. In particular, <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> and <span class="math notranslate nohighlight">\(P\)</span> are not unique.</p>
+<div class="proof example seealso admonition" id="example-1">
+<p class="admonition-title"><span class="caption-number">Example 7 </span></p>
+<section class="example-content" id="proof-content">
+<p>A line <span class="math notranslate nohighlight">\(\ell\)</span> in <span class="math notranslate nohighlight">\(\mathbb{R}^3\)</span> passes through the two points at <span class="math notranslate nohighlight">\(\mathbf{p}_1=(1,0,2)\)</span> and <span class="math notranslate nohighlight">\(\mathbf{p}_2 = (2, 2, 2)\)</span>.</p>
+<p>(i)   Find the equation of the line <span class="math notranslate nohighlight">\(\ell\)</span>.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Calculating the direction vector</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    \mathbf{d} &amp;= \mathbf{p}_2 - \mathbf{p}_1 =
+    \begin{pmatrix} 2 \\ 2 \\ 2 \end{pmatrix} - 
+    \begin{pmatrix} 1 \\ 0 \\ 2 \end{pmatrix}
+    = \begin{pmatrix} 1 \\ 2 \\ 0 \end{pmatrix}.
+\end{align*}\]</div>
+<p class="sd-card-text">Therefore the equation that describes <span class="math notranslate nohighlight">\(\ell\)</span> is</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    \mathbf{q} &amp;= \mathbf{p}_1 + t \mathbf{d} 
+    = \begin{pmatrix} 1 \\ 0 \\ 2 \end{pmatrix} + t
+    \begin{pmatrix} 1 \\ 2 \\ 0 \end{pmatrix}.
+\end{align*}\]</div>
+</div>
+</details><p>(ii)   Find the position of the point one quarter of the way along the chord <span class="math notranslate nohighlight">\(\mathbf{p}_1 \to \mathbf{p}_2\)</span></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    \mathbf{q} &amp;= \mathbf{p}_1 + \frac{1}{4}\mathbf{d} = 
+    \begin{pmatrix} 1 \\ 0 \\ 2 \end{pmatrix} + \frac{1}{4}
+    \begin{pmatrix} 1 \\ 2 \\ 0 \end{pmatrix}
+    = \begin{pmatrix} 5/4 \\ 1/2 \\ 2 \end{pmatrix}.
+\end{align*}\]</div>
+</div>
+</details><p>(iii)   Does the line <span class="math notranslate nohighlight">\(\ell\)</span> pass through the point at <span class="math notranslate nohighlight">\(\mathbf{p}_3 = (2, 1, 2)\)</span>?</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">If <span class="math notranslate nohighlight">\(\mathbf{p}_3\)</span> lies on <span class="math notranslate nohighlight">\(\ell\)</span> then the following system has a unique solution</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    \mathbf{p}_1 + t \mathbf{d} &amp;= \mathbf{p}_3, \\
+    \begin{pmatrix} 1 \\ 0 \\ 2 \end{pmatrix} + t
+    \begin{pmatrix} 1 \\ 2 \\ 0 \end{pmatrix}
+    &amp;= \begin{pmatrix} 2 \\ 1 \\ 2 \end{pmatrix}
+\end{align*}\]</div>
+<p class="sd-card-text">So we have the system</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    1 + t &amp;= 2, \\
+    2t &amp;= 1, \\
+    2 &amp;= 2.
+\end{align*}\]</div>
+<p class="sd-card-text">The second equation gives <span class="math notranslate nohighlight">\(t = 1/2\)</span> so substituting into the first equation gives <span class="math notranslate nohighlight">\(t = 3/2\)</span> which is a contradiction so the line <span class="math notranslate nohighlight">\(\ell\)</span> does not pass through <span class="math notranslate nohighlight">\(\mathbf{p}_3\)</span>.</p>
+</div>
+</details></section>
+</div></section>
+<section id="planes">
+<h2>Planes<a class="headerlink" href="#planes" title="Permalink to this headline">#</a></h2>
+<p>A <strong>plane</strong> is a flat two-dimensional surface. The vector equation for a plane in <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span> is very similar to that of a line. We just need two direction vectors instead of just the one we needed for a line.</p>
+<div class="proof definition note admonition" id="definition-2">
+<p class="admonition-title"><span class="caption-number">Definition 10 </span> (Vector equation of a plane)</p>
+<section class="definition-content" id="proof-content">
+<p>The position of a point <span class="math notranslate nohighlight">\(\mathbf{p}\)</span> that lies on the plane <span class="math notranslate nohighlight">\(p\)</span> which passes through the three point <span class="math notranslate nohighlight">\(\mathbf{p}_1\)</span>, <span class="math notranslate nohighlight">\(\mathbf{p}_2\)</span> and <span class="math notranslate nohighlight">\(\mathbf{p}_3\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[ \mathbf{q} = \mathbf{p}_1 + a (\mathbf{p}_2 - \mathbf{p}_1) + b (\mathbf{p}_3 - \mathbf{p}_2), \]</div>
+<p>where <span class="math notranslate nohighlight">\(a, b \in \mathbb{R}\)</span> are parameters (<a class="reference internal" href="#plane-vector-equation-figure"><span class="std std-numref">Fig. 11</span></a>).</p>
+</section>
+</div><figure class="align-default" id="plane-vector-equation-figure">
+<a class="reference internal image-reference" href="../_images/plane_vector_equation.svg"><img alt="../_images/plane_vector_equation.svg" src="../_images/plane_vector_equation.svg" width="500px" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 11 </span><span class="caption-text">The vector equation of a plane.</span><a class="headerlink" href="#plane-vector-equation-figure" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>In other words, every point on <span class="math notranslate nohighlight">\(p\)</span> is obtained by adding some scalar multiples of the vectors <span class="math notranslate nohighlight">\(\mathbf{p}_2 - \mathbf{p}_1\)</span> and <span class="math notranslate nohighlight">\(\mathbf{p}_3 - \mathbf{p}_2\)</span>. Note that we need <span class="math notranslate nohighlight">\(\mathbf{p}_2 - \mathbf{p}_1\)</span> and <span class="math notranslate nohighlight">\(\mathbf{p}_3 - \mathbf{p}_2\)</span> not to be parallel else we would have only described a line again.</p>
+</section>
+<section id="the-normal-vector">
+<h2>The normal vector<a class="headerlink" href="#the-normal-vector" title="Permalink to this headline">#</a></h2>
+<p>A more convenient way of describing a plane uses the normal vector.</p>
+<div class="proof definition note admonition" id="definition-3">
+<p class="admonition-title"><span class="caption-number">Definition 11 </span> (The normal vector)</p>
+<section class="definition-content" id="proof-content">
+<p>The <strong>normal vector</strong> to a plane is a vector that is perpendicular to that plane. If <span class="math notranslate nohighlight">\(\mathbf{a}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> are two vectors that lie on a plane then the normal vector is calculated using <span class="math notranslate nohighlight">\(\mathbf{n} = \mathbf{a} \times \mathbf{b}\)</span>.</p>
+</section>
+</div><figure class="align-default" id="normal-vector-figure">
+<a class="reference internal image-reference" href="../_images/normal_vector.svg"><img alt="../_images/normal_vector.svg" src="../_images/normal_vector.svg" width="400px" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 12 </span><span class="caption-text">The normal vector <span class="math notranslate nohighlight">\(\mathbf{n}\)</span> is perpendicular to the plane <span class="math notranslate nohighlight">\(p\)</span>.</span><a class="headerlink" href="#normal-vector-figure" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Recall the <span class="xref myst">geometric definition of a dot product</span> which states</p>
+<div class="math notranslate nohighlight">
+\[ \mathbf{a} \cdot \mathbf{b} = |\mathbf{a}| |\mathbf{b}| \cos(\theta),\]</div>
+<p>where <span class="math notranslate nohighlight">\(\theta\)</span> is the angle between <span class="math notranslate nohighlight">\(\mathbf{a}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{b}\)</span>. If the two vectors are perpendicular then <span class="math notranslate nohighlight">\(\theta = \pi / 2\)</span> and <span class="math notranslate nohighlight">\(\cos(\theta) = 0\)</span>. Therefore if <span class="math notranslate nohighlight">\(\mathbf{a} \cdot \mathbf{b}=0\)</span> then <span class="math notranslate nohighlight">\(\mathbf{a}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> are perpendicular. If <span class="math notranslate nohighlight">\(\mathbf{p}\)</span> lies on a plane with normal vector <span class="math notranslate nohighlight">\(\mathbf{n}\)</span> then if <span class="math notranslate nohighlight">\(\mathbf{q}\)</span> is another point that lies on the plane then the vector <span class="math notranslate nohighlight">\(\mathbf{p} - \mathbf{q}\)</span> must be perpendicular to <span class="math notranslate nohighlight">\(\mathbf{n}\)</span>, i.e.,</p>
+<div class="math notranslate nohighlight">
+\[ \mathbf{n} \cdot (\mathbf{p} - \mathbf{q}) = 0,\]</div>
+<p>which can be written as</p>
+<div class="math notranslate nohighlight">
+\[ \mathbf{n} \cdot \mathbf{p} = \mathbf{n} \cdot \mathbf{q},\]</div>
+<p>which gives the point-normal equation of a plane.</p>
+<div class="proof definition admonition" id="definition-4">
+<p class="admonition-title"><span class="caption-number">Definition 12 </span> (Point-normal equation of a plane)</p>
+<section class="definition-content" id="proof-content">
+<p>The <strong>point normal equation of a plane</strong> is</p>
+<div class="math notranslate nohighlight" id="equation-point-normal-equation">
+<span class="eqno">(9)<a class="headerlink" href="#equation-point-normal-equation" title="Permalink to this equation">#</a></span>\[\mathbf{n} \cdot \mathbf{r} = s\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{n}\)</span> is the normal vector, <span class="math notranslate nohighlight">\(\mathbf{r}\)</span> is a vector on the plane and <span class="math notranslate nohighlight">\(s\)</span> is a scalar.</p>
+</section>
+</div><div class="proof example seealso admonition" id="example-5">
+<p class="admonition-title"><span class="caption-number">Example 8 </span></p>
+<section class="example-content" id="proof-content">
+<p>A plane passes through the three points <span class="math notranslate nohighlight">\(\mathbf{p}_1 = (1, 0, 3)\)</span>, <span class="math notranslate nohighlight">\(\mathbf{p}_2 = (2, 1, 1)\)</span> and <span class="math notranslate nohighlight">\(\mathbf{p}_3 = (0, 1, 3)\)</span>.</p>
+<p>(i)   Determine the point-normal equation of the plane.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Calculate the normal vector</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    \mathbf{n} &amp;= (\mathbf{p}_2 - \mathbf{p}_1) \times (\mathbf{p}_3 - \mathbf{p}_1)
+    = \begin{vmatrix}
+        \mathbf{i} &amp; \mathbf{j} &amp; \mathbf{k} \\
+        1 &amp; 1 &amp; -2 \\
+        -1 &amp; 1 &amp; 0 
+    \end{vmatrix}
+    = \begin{pmatrix} 2 \\ 2 \\ 2 \end{pmatrix}.
+\end{align*}\]</div>
+<p class="sd-card-text">Calculate the scalar <span class="math notranslate nohighlight">\(s\)</span></p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    s &amp;= \mathbf{n} \cdot \mathbf{p}_1 = 
+    \begin{pmatrix} 2 \\ 2 \\ 2 \end{pmatrix} \cdot
+    \begin{pmatrix} 1 \\ 0 \\ 3 \end{pmatrix}
+    = 2 + 0 + 6 = 8,
+\end{align*}\]</div>
+<p class="sd-card-text">therefore the point-normal equation of the plane is</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    \begin{pmatrix} 2 \\ 2 \\ 2 \end{pmatrix} \cdot \mathbf{r} = 8.
+\end{align*}\]</div>
+</div>
+</details><p>(ii)   Does the point with position vector <span class="math notranslate nohighlight">\(\mathbf{p}_4 = (1, 2, 5)\)</span> lies on this plane?</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Calculate <span class="math notranslate nohighlight">\(\mathbf{n} \cdot \mathbf{p}_4\)</span></p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    \begin{pmatrix} 2 \\ 2 \\ 2 \end{pmatrix} \cdot 
+    \begin{pmatrix} 1 \\ 2 \\ 5 \end{pmatrix}
+    = 2 + 4 + 10 = 16 \neq 8,
+\end{align*}\]</div>
+<p class="sd-card-text">therefore <span class="math notranslate nohighlight">\(\mathbf{p}_4\)</span> does not lie on the plane.</p>
+</div>
+</details></section>
+</div><hr class="footnotes docutils" />
+<dl class="footnote brackets">
+<dt class="label" id="id2"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p><span class="math notranslate nohighlight">\(\ell\)</span> is used here instead of <span class="math notranslate nohighlight">\(l\)</span> to avoid confusing with a 1 or uppercase i.</p>
+</dd>
+</dl>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./files"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="2.0_Coordinate_geometry.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Co-ordinate Geometry</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="2.2_Shortest_distance_problems.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Shortest distance problems</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Dr Jon Shiach<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
