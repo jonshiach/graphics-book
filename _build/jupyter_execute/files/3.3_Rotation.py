@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+# (rotation-section)=
 # # Rotation
 # 
 # **Rotation** in $\mathbb{R}^3$ is a linear transformation that rotates a set of points by some angle about one of the $x$, $y$ or $z$-axes. The direction of rotation is assumed to be *anti-clockwise* when viewed looking down the axis towards the origin ({numref}`3D-rotation-figure`).
@@ -622,14 +623,14 @@ glue("rotation-plot-2", fig, display=False)
 #     \begin{pmatrix} 13 / \sqrt{14} \\ 0 \\ 0 \\ 1 \end{pmatrix}.
 # \end{align*}
 # 
-# Since $d_y=0$ and $d_z=0$ then the rotated $\mathbf{d}$ vector is now pointing along the $x$-axis.
+# Since $d_y=0$, $d_z=0$ and $d_x > 0$ then $\mathbf{d}$ is now pointing along the $x$ axis. 
 # 
 # ```{figure} ../images/rotate_about_line_example_4.svg
 # 
 # Rotate $\mathbf{d}$ about the $x$ axis.
 # ```
 # 
-# Looking at {numref}`rotate-about-line-example-2` $d_y = 0$, $d_z = 0$ and $d_x > 0$ then $\mathbf{d}$ is now pointing along the $x$ axis. Now we perform the rotation anti-clockwise around the $x$ axis by angle $\theta = \pi / 6$ and the matrix for achieving this rotation is
+# Now we perform the rotation anti-clockwise around the $x$ axis by angle $\theta = \pi / 6$ and the matrix for achieving this rotation is
 # 
 # \begin{align*}
 #     R_x(\theta) &= \begin{pmatrix}

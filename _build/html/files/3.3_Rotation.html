@@ -452,7 +452,7 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="rotation">
-<h1>Rotation<a class="headerlink" href="#rotation" title="Permalink to this headline">#</a></h1>
+<span id="rotation-section"></span><h1>Rotation<a class="headerlink" href="#rotation" title="Permalink to this headline">#</a></h1>
 <p><strong>Rotation</strong> in <span class="math notranslate nohighlight">\(\mathbb{R}^3\)</span> is a linear transformation that rotates a set of points by some angle about one of the <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(y\)</span> or <span class="math notranslate nohighlight">\(z\)</span>-axes. The direction of rotation is assumed to be <em>anti-clockwise</em> when viewed looking down the axis towards the origin (<a class="reference internal" href="#d-rotation-figure"><span class="std std-numref">Fig. 20</span></a>).</p>
 <figure class="align-default" id="d-rotation-figure">
 <a class="reference internal image-reference" href="../_images/3D_rotation.svg"><img alt="../_images/3D_rotation.svg" src="../_images/3D_rotation.svg" width="250px" /></a>
@@ -953,13 +953,13 @@ Solution<div class="sd-summary-down docutils">
     &amp;=
     \begin{pmatrix} 13 / \sqrt{14} \\ 0 \\ 0 \\ 1 \end{pmatrix}.
 \end{align*}\]</div>
-<p class="sd-card-text">Since <span class="math notranslate nohighlight">\(d_y=0\)</span> and <span class="math notranslate nohighlight">\(d_z=0\)</span> then the rotated <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> vector is now pointing along the <span class="math notranslate nohighlight">\(x\)</span>-axis.</p>
+<p class="sd-card-text">Since <span class="math notranslate nohighlight">\(d_y=0\)</span>, <span class="math notranslate nohighlight">\(d_z=0\)</span> and <span class="math notranslate nohighlight">\(d_x &gt; 0\)</span> then <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> is now pointing along the <span class="math notranslate nohighlight">\(x\)</span> axis.</p>
 <figure class="align-default" id="id2">
 <img alt="../_images/rotate_about_line_example_4.svg" src="../_images/rotate_about_line_example_4.svg" /><figcaption>
 <p><span class="caption-number">Fig. 29 </span><span class="caption-text">Rotate <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> about the <span class="math notranslate nohighlight">\(x\)</span> axis.</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p class="sd-card-text">Looking at <a class="reference internal" href="#rotate-about-line-example-2"><span class="std std-numref">Fig. 27</span></a> <span class="math notranslate nohighlight">\(d_y = 0\)</span>, <span class="math notranslate nohighlight">\(d_z = 0\)</span> and <span class="math notranslate nohighlight">\(d_x &gt; 0\)</span> then <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> is now pointing along the <span class="math notranslate nohighlight">\(x\)</span> axis. Now we perform the rotation anti-clockwise around the <span class="math notranslate nohighlight">\(x\)</span> axis by angle <span class="math notranslate nohighlight">\(\theta = \pi / 6\)</span> and the matrix for achieving this rotation is</p>
+<p class="sd-card-text">Now we perform the rotation anti-clockwise around the <span class="math notranslate nohighlight">\(x\)</span> axis by angle <span class="math notranslate nohighlight">\(\theta = \pi / 6\)</span> and the matrix for achieving this rotation is</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
     R_x(\theta) &amp;= \begin{pmatrix}

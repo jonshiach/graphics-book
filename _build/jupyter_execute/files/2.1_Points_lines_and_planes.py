@@ -130,12 +130,14 @@
 # 
 # In other words, every point on $p$ is obtained by adding some scalar multiples of the vectors $\mathbf{p}_2 - \mathbf{p}_1$ and $\mathbf{p}_3 - \mathbf{p}_2$. Note that we need $\mathbf{p}_2 - \mathbf{p}_1$ and $\mathbf{p}_3 - \mathbf{p}_2$ not to be parallel else we would have only described a line again.
 # 
+# (normal-vector-section)=
 # ## The normal vector
 # 
 # A more convenient way of describing a plane uses the normal vector.
 # 
 # ````{prf:definition} The normal vector
 # :class: note
+# :label: normal-vector-definition
 # 
 # The **normal vector** to a plane is a vector that is perpendicular to that plane. If $\mathbf{a}$ and $\mathbf{b}$ are two vectors that lie on a plane then the normal vector is calculated using $\mathbf{n} = \mathbf{a} \times \mathbf{b}$. 
 # ````

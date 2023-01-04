@@ -114,7 +114,7 @@ glue("smiley-raster-plot", fig, display=False)
 # 
 # ### 24-bit colour 
 # 
-# Adding proportions of each primary colours means that many more colours can be produced. Using 8 bits for each primary colour means that there are a possible $2^8 = 256$ different quantities of that colour. Combining the three primary colours means that the number of colours that can be produced is $3 \times 2^8 = 16,772,216$. It is estimated that the most number of colours that the human eye can distinguish is approximately 10 million so 24 bit colour (known as [**true color**](https://en.wikipedia.org/wiki/Color_depth#True_color_(24-bit)) is considered sufficient.
+# Adding proportions of each primary colours means that many more colours can be produced. Using 8 bits for each primary colour means that there are a possible $2^8 = 256$ different quantities of that colour. Combining the three primary colours means that the number of colours that can be produced is $3 \times 2^8 = 16,772,216$. It is estimated that the most number of colours that the human eye can distinguish is approximately 10 million so 24 bit colour (known as [true color](https://en.wikipedia.org/wiki/Color_depth#True_color_(24-bit))) is considered sufficient.
 # 
 # :::{figure} ../images/rgb_wheel.png
 # :width: 300px

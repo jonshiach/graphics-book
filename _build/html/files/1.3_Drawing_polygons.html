@@ -494,7 +494,7 @@ title="Print to PDF"
 </ul>
 </section>
 </div><div class="proof example seealso admonition" id="flood-fill-example">
-<p class="admonition-title"><span class="caption-number">Example 26 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 29 </span></p>
 <section class="example-content" id="proof-content">
 <p>Starting with the pixel at <span class="math notranslate nohighlight">\((3, 3)\)</span>, use the flood fill algorithm to fill in the polygon on the raster below where the target colour is white and the replacement colour is blue.</p>
 <figure class="align-default" style="width: 300px">
@@ -560,7 +560,7 @@ Solution<div class="sd-summary-down docutils">
 <img alt="../_images/1.3_Drawing_polygons_7_0.png" src="../_images/1.3_Drawing_polygons_7_0.png" />
 </div>
 <figcaption>
-<p><span class="caption-number">Fig. 38 </span><span class="caption-text">The flood fill algorithm is blocked by tight corners.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 48 </span><span class="caption-text">The flood fill algorithm is blocked by tight corners.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
@@ -582,10 +582,10 @@ Solution<div class="sd-summary-down docutils">
 <img alt="../_images/1.3_Drawing_polygons_9_0.png" src="../_images/1.3_Drawing_polygons_9_0.png" />
 </div>
 <figcaption>
-<p><span class="caption-number">Fig. 39 </span><span class="caption-text">Calculating span extrema co-ordinates.</span><a class="headerlink" href="#span-extrema-figure" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 49 </span><span class="caption-text">Calculating span extrema co-ordinates.</span><a class="headerlink" href="#span-extrema-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>Consider <a class="reference internal" href="#span-extrema-figure"><span class="std std-numref">Fig. 39</span></a> where the co-ordinates of the span extrema on the left edge of a polygon are <span class="math notranslate nohighlight">\((x_i, y_i)\)</span> and <span class="math notranslate nohighlight">\((x_{i+1}, y_{i+1})\)</span>. If <span class="math notranslate nohighlight">\((x_i, y_i)\)</span> are known then the next value <span class="math notranslate nohighlight">\(y_{i+1}\)</span> is easily calculated using <span class="math notranslate nohighlight">\(y_{i+1} = y_i + 1\)</span>. The values of the <span class="math notranslate nohighlight">\(x\)</span> span extrema co-ordinates are calculated using the <a href="https://en.wikipedia.org/wiki/Linear_equation#Slope%E2%80%93intercept_form_or_Gradient-intercept_form" target="_blank">slope intercept equation of a line</a>.</p>
+<p>Consider <a class="reference internal" href="#span-extrema-figure"><span class="std std-numref">Fig. 49</span></a> where the co-ordinates of the span extrema on the left edge of a polygon are <span class="math notranslate nohighlight">\((x_i, y_i)\)</span> and <span class="math notranslate nohighlight">\((x_{i+1}, y_{i+1})\)</span>. If <span class="math notranslate nohighlight">\((x_i, y_i)\)</span> are known then the next value <span class="math notranslate nohighlight">\(y_{i+1}\)</span> is easily calculated using <span class="math notranslate nohighlight">\(y_{i+1} = y_i + 1\)</span>. The values of the <span class="math notranslate nohighlight">\(x\)</span> span extrema co-ordinates are calculated using the <a href="https://en.wikipedia.org/wiki/Linear_equation#Slope%E2%80%93intercept_form_or_Gradient-intercept_form" target="_blank">slope intercept equation of a line</a>.</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
     y = \frac{\Delta y}{\Delta x} x + c,
@@ -675,7 +675,7 @@ Solution<div class="sd-summary-down docutils">
 </ul>
 </section>
 </div><div class="proof example seealso admonition" id="example-5">
-<p class="admonition-title"><span class="caption-number">Example 27 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 30 </span></p>
 <section class="example-content" id="proof-content">
 <p>Use the scanline algorithm to draw the polygon defined below</p>
 <figure class="align-default" style="width: 300px">

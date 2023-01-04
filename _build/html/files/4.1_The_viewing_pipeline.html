@@ -51,6 +51,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="canonical" href="https://jonshiach.github.io/graphics-book/files/4.1_The_viewing_pipeline.html" />
     <link rel="shortcut icon" href="../_static/favicon.jpg"/>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -403,7 +405,25 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="the-viewing-pipeline">
-<h1>The viewing pipeline<a class="headerlink" href="#the-viewing-pipeline" title="Permalink to this headline">#</a></h1>
+<span id="viewing-pipeline-section"></span><h1>The viewing pipeline<a class="headerlink" href="#the-viewing-pipeline" title="Permalink to this headline">#</a></h1>
+<p>The steps required to construct a virtual environment and display it so it can be viewed by a computer user are summarised in a flow diagram known as <strong>the viewing pipeline</strong> which is shown in <a class="reference internal" href="#viewing-pipeline-figure"><span class="std std-numref">Fig. 30</span></a>.</p>
+<figure class="align-default" id="viewing-pipeline-figure">
+<a class="reference internal image-reference" href="../_images/viewing_pipeline.svg"><img alt="../_images/viewing_pipeline.svg" src="../_images/viewing_pipeline.svg" width="400px" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 30 </span><span class="caption-text">The viewing pipeline</span><a class="headerlink" href="#viewing-pipeline-figure" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The steps are as follows</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="4.2_Object_space.html#object-space-section"><span class="std std-ref"><strong>Object space</strong></span></a>: Primitive objects that are used to build your virtual environment are defined within their own space such that the origin passes through the centre of the object (or sometimes the centre of the bases of the object). For example, a virtual environment that describes a street scene may have objects for buildings, cars, bus stops, street lights etc.</p></li>
+<li><p><strong>World space</strong>: The virtual environment is constructed by copying the objects into the world space and applying scaling, rotation and translation transformations.</p></li>
+<li><p><strong>Camera space</strong>: To view the virtual environment we place a virtual camera in the world space and use translation and rotation transformations so that the position of the camera is at the origin looking along the <span class="math notranslate nohighlight">\(z\)</span> axis in the negative direction.</p></li>
+<li><p><strong>Screen space</strong>: The camera space is projected onto a two-dimensional projection plane using perspective projection so that the further objects are from the camera the smaller they appear giving the illusion of depth.</p></li>
+<li><p><strong>Clipped screen space</strong>: Any objects in the screen space that are outside of the region that visible to the camera are removed and objects that lie partially outside are `clipped’ to the edges. In addition, the surfaces that should not be visible to the viewer are removed.</p></li>
+<li><p><strong>Raster</strong>: The colours of the individual pixels on a display screen are determined from the information obtained about the virtual environment up to this point and any lighting conditions used. This information is stored in a \textbf{raster array} where each element corresponds to a pixel on the display.</p></li>
+<li><p><strong>Display</strong>: The raster array is sent to the display hardware.</p></li>
+</ul>
+<p>If the position and/or direction of the virtual camera used to calculate the camera space changes, e.g., through the actions of a player or a computer game, the steps from the camera space to the display are repeated. This will typically be 30 or 60 times per second which highlights the computational demands placed on computer hardware and the need for all calculations to be as efficient as possible.</p>
 </section>
 
     <script type="text/x-thebe-config">

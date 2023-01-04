@@ -353,6 +353,7 @@
 # 
 # ````
 
+# (basis-section)=
 # ## Basis
 # 
 # A **basis** of a vector space $V$ is the set of vectors $\{ \mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_n \}$ which are linearly independent (i.e., no vector in the basis can be represented as a linear combination of the other vectors in the basis) and span $V$. Every other vector $\mathbf{u}$ in $V$ can be expressed as a unique linear combination of the vectors in the basis, i.e.,
@@ -384,6 +385,7 @@
 # Note that in $\mathbb{R}^3$ it is common to use $\mathbf{i} = \mathbf{e}_1$, $\mathbf{j} = \mathbf{e}_2$ and $\mathbf{k} = \mathbf{e}_3$.
 # ````
 # 
+# (change-of-basis-section)=
 # ### Change of basis
 # 
 # Sometimes it is useful to write a vector with respect to a different basis which is known as the **change of basis**. For example let $\mathbf{a} \in \mathbb{R}^3$ and let $[\mathbf{a}]_U$ denote that $\mathbf{a}$ is represented with respect to the standard basis $E$. If we have another basis $U = \{ \mathbf{u}_1, \mathbf{u}_2, \mathbf{u}_3\}$ then we can repesent $\mathbf{a}$ with respect to this basis where $[\mathbf{a}]_U = (\alpha_1, \alpha_2, \alpha_3)$ such that

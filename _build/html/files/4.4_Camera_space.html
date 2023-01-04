@@ -51,6 +51,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="canonical" href="https://jonshiach.github.io/graphics-book/files/4.4_Camera_space.html" />
     <link rel="shortcut icon" href="../_static/favicon.jpg"/>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -404,7 +406,196 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="camera-space">
 <h1>Camera space<a class="headerlink" href="#camera-space" title="Permalink to this headline">#</a></h1>
-</section>
+<p>The next step in the <a class="reference internal" href="4.1_The_viewing_pipeline.html#viewing-pipeline-section"><span class="std std-ref">viewing pipeline</span></a> is to align the world space to the camera space. Imagine you are viewing a virtual environment through a camera positioned in the world space at <span class="math notranslate nohighlight">\(\mathbf{p}\)</span> and pointed towards the point with position <span class="math notranslate nohighlight">\(\mathbf{c}\)</span> known as the <strong>centre of view</strong> (<a class="reference internal" href="#camera-space-figure"><span class="std std-numref">Fig. 39</span></a>). We want to transform the world space so that <span class="math notranslate nohighlight">\(\mathbf{p}\)</span> is at the origin of a new space with axes <span class="math notranslate nohighlight">\(x^\ast\)</span>, <span class="math notranslate nohighlight">\(y^\ast\)</span> and <span class="math notranslate nohighlight">\(z^\ast\)</span> where, from our point of view, <span class="math notranslate nohighlight">\(x^\ast\)</span> points to the right, <span class="math notranslate nohighlight">\(y^{\ast}\)</span> points up and <span class="math notranslate nohighlight">\(z^\ast\)</span> points towards us. The reason we want this new axes configuration is so that the <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> co-ordinates match the horizontal and vertical axes of the display.</p>
+<figure class="align-default" id="camera-space-figure">
+<a class="reference internal image-reference" href="../_images/camera_space.svg"><img alt="../_images/camera_space.svg" src="../_images/camera_space.svg" width="600px" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 39 </span><span class="caption-text">The world space is transformed so that the viewer <span class="math notranslate nohighlight">\(\mathbf{p}\)</span> is the origin of a new co-ordinate axes <span class="math notranslate nohighlight">\(x^\ast\)</span>, <span class="math notranslate nohighlight">\(y^\ast\)</span> and <span class="math notranslate nohighlight">\(z^\ast\)</span>.</span><a class="headerlink" href="#camera-space-figure" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The first transformation is to translate the world space by <span class="math notranslate nohighlight">\(-\mathbf{p}\)</span> so that the viewer is positioned at the origin. The <a class="reference internal" href="3.1_Translation.html#translation-matrix-definition">matrix</a> that performs this translation is</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+	T = \begin{pmatrix}
+		1 &amp; 0 &amp; 0 &amp; -p_x \\
+		0 &amp; 1 &amp; 0 &amp; -p_y \\
+		0 &amp; 0 &amp; 1 &amp; -p_z \\
+		0 &amp; 0 &amp; 0 &amp; 1
+	\end{pmatrix}.
+\end{align*}\]</div>
+<p>Next we need to transform from the <span class="math notranslate nohighlight">\((x,y,z)\)</span> axes to the <span class="math notranslate nohighlight">\((x^\ast, y^\ast, z^\ast)\)</span> axes. Let <span class="math notranslate nohighlight">\(\{\mathbf{u}, \mathbf{v}, \mathbf{w}\}\)</span> be a <a class="reference internal" href="2.0_Coordinate_geometry.html#basis-section"><span class="std std-ref">basis</span></a> for the new axes where <span class="math notranslate nohighlight">\(\mathbf{u}=(u_1,u_2,u_3)\)</span>, <span class="math notranslate nohighlight">\(\mathbf{v} = (v_1, v_2, v_3)\)</span> and <span class="math notranslate nohighlight">\(\mathbf{w} = (w_1, w_2, w_3)\)</span> are unit vectors pointing in the <span class="math notranslate nohighlight">\(x^\ast\)</span>, <span class="math notranslate nohighlight">\(y^\ast\)</span> and <span class="math notranslate nohighlight">\(z^\ast\)</span> directions respectively. The <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> vector is calculated using</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+	\mathbf{w} = \frac{\mathbf{p} - \mathbf{c}}{|\mathbf{p} - \mathbf{c}|}.
+\end{align*}\]</div>
+<p>The <span class="math notranslate nohighlight">\(\mathbf{u}\)</span> vector is perpendicular to the plane that <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{k}\)</span> lie on so</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+	\mathbf{u} = \frac{\mathbf{k} \times \mathbf{w}}{|\mathbf{k} \times \mathbf{w}|}.
+\end{align*}\]</div>
+<p>The <span class="math notranslate nohighlight">\(\mathbf{v}\)</span> vector is perpendicular to the plane that <span class="math notranslate nohighlight">\(\mathbf{u}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> lie on so</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+	\mathbf{v} = \mathbf{w} \times \mathbf{u}.
+\end{align*}\]</div>
+<p>Note that the order of the vectors in the cross products when calculating <span class="math notranslate nohighlight">\(\mathbf{u}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{v}\)</span> are important as the cross product is not commutative. The <a class="reference internal" href="2.0_Coordinate_geometry.html#change-of-basis-section"><span class="std std-ref">change of basis matrix</span></a> for going from the standard basis <span class="math notranslate nohighlight">\(E = \{\mathbf{i}, \mathbf{j}, \mathbf{k}\}\)</span> to the new basis <span class="math notranslate nohighlight">\(V = \{\mathbf{u}, \mathbf{v}, \mathbf{w}\}\)</span> is</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+	R_{E \to V} =
+	\begin{pmatrix}
+		u_1 &amp; u_2 &amp; u_3 &amp; 0 \\
+		v_1 &amp; v_2 &amp; v_2 &amp; 0 \\
+		w_1 &amp; w_2 &amp; w_3 &amp; 0 \\
+		0 &amp; 0 &amp; 0 &amp; 1
+	\end{pmatrix}.
+\end{align*}\]</div>
+<p>Combining the translation and change of basis matrix gives</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+	A &amp;= T(-\mathbf{p}) \cdot R_{E \to V} = 
+	\begin{pmatrix}
+		u_1 &amp; u_2 &amp; u_3 &amp; 0 \\
+		v_1 &amp; v_2 &amp; v_2 &amp; 0 \\
+		w_1 &amp; w_2 &amp; w_3 &amp; 0 \\
+		0 &amp; 0 &amp; 0 &amp; 1
+	\end{pmatrix}
+	\begin{pmatrix}
+		1 &amp; 0 &amp; 0 &amp; -p_x \\
+		0 &amp; 1 &amp; 0 &amp; -p_y \\
+		0 &amp; 0 &amp; 1 &amp; -p_z \\
+		0 &amp; 0 &amp; 0 &amp; 1
+	\end{pmatrix} \\
+    &amp;=
+	\begin{pmatrix}
+		u_1 &amp; u_2 &amp; u_3 &amp; -p_x u_1 - p_y u_2 - p_z u_3 \\
+		v_1 &amp; v_2 &amp; v_2 &amp; -p_x v_1 - p_y v_2 - p_z v_3 \\
+		w_1 &amp; w_2 &amp; w_3 &amp; -p_x w_1 - p_y w_2 - p_z w_3 \\
+		0 &amp; 0 &amp; 0 &amp; 1
+	\end{pmatrix} \\
+	&amp;=
+	\begin{pmatrix}
+		u_1 &amp; u_2 &amp; u_3 &amp; -\mathbf{p} \cdot \mathbf{u} \\
+		v_1 &amp; v_2 &amp; v_2 &amp; -\mathbf{p} \cdot \mathbf{v} \\
+		w_1 &amp; w_2 &amp; w_3 &amp; -\mathbf{p} \cdot \mathbf{w}\\
+		0 &amp; 0 &amp; 0 &amp; 1
+	\end{pmatrix}.
+\end{align*}\]</div>
+<p><span class="math notranslate nohighlight">\(A\)</span> is the <strong>alignment transformation matrix</strong> that aligns the world space to the camera space. This is applied to the world space vertex matrix to give the camera space vertex matrix</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+	V_{\text{camera}} = A \cdot V_{\text{world}}
+\end{align*}\]</div>
+<p>Note that every time the view position changes or the centre of view changes the alignment transformation matrix will need to be recalculated and applied to calculate the camera space vertices. In a computer game this typically happens 30 or 60 times a second as the player is moving the camera. The player traversing a virtual environment feels like they are moving through the world space, what actually happens is the player remains are the origin looking down the <span class="math notranslate nohighlight">\(z^\ast\)</span> axis and it is the world space that moves around them.</p>
+<div class="proof example seealso admonition" id="example-0">
+<p class="admonition-title"><span class="caption-number">Example 24 </span></p>
+<section class="example-content" id="proof-content">
+<p>The world space from <a class="reference internal" href="4.3_World_space.html#world-space-example">Example 23</a> is viewed from position <span class="math notranslate nohighlight">\(\mathbf{p} = (6, 5, 0.5)\)</span> looking towards the centre of view at <span class="math notranslate nohighlight">\(\mathbf{c} = (2, 2, 1)\)</span>. Calculate the camera space co-ordinates of the virtual environment.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Calculate the basis <span class="math notranslate nohighlight">\(\{ \mathbf{u}, \mathbf{v}, \mathbf{w}\}\)</span> for the camera space</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    \mathbf{w} &amp;= \frac{\mathbf{p} - \mathbf{c}}{|\mathbf{p} - \mathbf{c}|} 
+    = \frac{(4, 3, -0.5)}{\sqrt{4^2 + 3^2 + (-0.5)^2}} = (0.7960, 0.5970, -0.0995), \\
+    \mathbf{u} &amp;= \frac{\mathbf{k} \times \mathbf{w}}{|\mathbf{k} \times \mathbf{w}|}
+    = \frac{ \det
+    \begin{pmatrix} 
+        \mathbf{i} &amp; \mathbf{j} &amp; \mathbf{k} \\
+        0 &amp; 0 &amp; 1 \\
+        0.7960 &amp; 0.5970 &amp; -0.0995
+    \end{pmatrix}
+    }{
+    \left| \det
+    \begin{pmatrix} 
+        \mathbf{i} &amp; \mathbf{j} &amp; \mathbf{k} \\
+        0 &amp; 0 &amp; 1 \\
+        0.7960 &amp; 0.5970 &amp; -0.0995
+    \end{pmatrix}
+    \right|
+    }
+    = (-0.6, 0.8, 0), \\
+    \mathbf{v} &amp;= \mathbf{w} \times \mathbf{u} = \det
+    \begin{pmatrix}
+        \mathbf{i} &amp; \mathbf{j} &amp; \mathbf{k} \\
+        0.7960 &amp; 0.5970 &amp; -0.0995 \\
+        -0.6 &amp; 0.8 &amp; 0
+    \end{pmatrix}
+    = (0.0796, 0.0597, 0.9950).
+\end{align*}\]</div>
+<p class="sd-card-text">So the change of basis matrix is</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    R = \begin{pmatrix}
+        -0.6 &amp; 0.8 &amp; 0 &amp; 0 \\
+        0.0796 &amp; 0.0597 &amp; 0.9950 &amp; 0 \\
+        0.7960 &amp; 0.5970 &amp; -0.0995 &amp; 0 \\
+        0 &amp; 0 &amp; 0 &amp; 1
+    \end{pmatrix}.
+\end{align*}\]</div>
+<p class="sd-card-text">We can check that <span class="math notranslate nohighlight">\(R\)</span> is correct by multiplying it by the homogeneous form of <span class="math notranslate nohighlight">\(\mathbf{p} - \mathbf{c}\)</span> to see if it points along the positive <span class="math notranslate nohighlight">\(z^\ast\)</span> direction</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    R \cdot (\mathbf{p} - \mathbf{c}) = 
+    \begin{pmatrix}
+        -0.6 &amp; 0.8 &amp; 0 &amp; 0 \\
+        0.0796 &amp; 0.0597 &amp; 0.9950 &amp; 0 \\
+        0.7960 &amp; 0.5970 &amp; -0.0995 &amp; 0 \\
+        0 &amp; 0 &amp; 0 &amp; 1
+    \end{pmatrix}
+    \begin{pmatrix}
+        4 \\ 3 \\ -0.5 \\ 1
+    \end{pmatrix} =
+    \begin{pmatrix}
+        0 \\ 0 \\ 5.0249 \\ 1
+    \end{pmatrix}.
+\end{align*}\]</div>
+<p class="sd-card-text">Since the <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> values are 0 and the <span class="math notranslate nohighlight">\(z\)</span> value is positive then <span class="math notranslate nohighlight">\(R\)</span> is correct. The alignment transformation matrix is</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    A = \begin{pmatrix}
+        u_1 &amp; u_2 &amp; u_3 &amp; -\mathbf{p} \cdot \mathbf{u} \\
+        v_1 &amp; v_2 &amp; v_2 &amp; -\mathbf{p} \cdot \mathbf{v} \\
+        w_1 &amp; w_2 &amp; w_3 &amp; -\mathbf{p} \cdot \mathbf{w}\\
+        0 &amp; 0 &amp; 0 &amp; 1
+    \end{pmatrix} =
+    \begin{pmatrix}
+        -0.6000 &amp; 0.8000 &amp; 0.0000 &amp; -0.4000 \\
+        0.0796 &amp; 0.0597 &amp; 0.9950 &amp; -1.2736 \\
+        0.7960 &amp; 0.5970 &amp; -0.0995 &amp; -7.7115 \\
+        0 &amp; 0 &amp; 0 &amp; 1
+    \end{pmatrix}.
+\end{align*}\]</div>
+<p class="sd-card-text">Applying the alignment transformation to the world space co-ordinates</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    V_{\text{camera}} &amp;= A \cdot V_{\text{world}}
+    = \begin{pmatrix}
+        -0.6000 &amp; 0.8000 &amp; 0.0000 &amp; -0.4000 \\
+        0.0796 &amp; 0.0597 &amp; 0.9950 &amp; -1.2736 \\
+        0.7960 &amp; 0.5970 &amp; -0.0995 &amp; -7.7115 \\
+        0 &amp; 0 &amp; 0 &amp; 1
+    \end{pmatrix}
+    \begin{pmatrix}
+        2 &amp; 2 &amp; 4 &amp; 4 &amp; \cdots \\
+        4 &amp; 3 &amp; 3 &amp; 4 &amp; \cdots \\
+        0 &amp; 0 &amp; 0 &amp; 0 &amp; \cdots \\
+        1 &amp; 1 &amp; 1 &amp; 1 &amp; \cdots 
+    \end{pmatrix} \\
+    &amp;= \begin{pmatrix}
+        1.6000 &amp; 0.8000 &amp; -0.4000 &amp; 0.4000 &amp; \cdots \\
+        -0.8745 &amp; -0.9353 &amp; -0.7761 &amp; -0.7164 &amp; \cdots \\
+        -3.7314 &amp; -4.3284 &amp; -2.7364 &amp; -2.1393 &amp; \cdots \\
+        1 &amp; 1 &amp; 1 &amp; 1 &amp; \cdots
+    \end{pmatrix}.
+\end{align*}\]</div>
+</div>
+</details></section>
+</div></section>
 
     <script type="text/x-thebe-config">
     {

@@ -119,7 +119,7 @@
 # 
 # ```{figure} ../images/linear_transformation.svg
 # :name: linear-transformation-figure
-# :width: 300px
+# :width: 400px
 # 
 # The affect of applying a linear transformation $T: (x,y) \mapsto (3x + y, x + 2y)$ to the vector $(1,1)$.
 # ```

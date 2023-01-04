@@ -51,6 +51,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="canonical" href="https://jonshiach.github.io/graphics-book/files/4.3_World_space.html" />
     <link rel="shortcut icon" href="../_static/favicon.jpg"/>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -378,12 +380,36 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#matlab-code">
+   MATLAB code
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
@@ -395,6 +421,19 @@ title="Print to PDF"
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#matlab-code">
+   MATLAB code
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -404,6 +443,309 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="world-space">
 <h1>World space<a class="headerlink" href="#world-space" title="Permalink to this headline">#</a></h1>
+<p>Once the objects have been define they can be used to build the virtual environment. The objects are copied to the world space and transformed using <a class="reference internal" href="3.3_Rotation.html#rotation-section"><span class="std std-ref">scaling</span></a>, <a class="reference internal" href="3.3_Rotation.html#rotation-section"><span class="std std-ref">rotation</span></a> and <a class="reference internal" href="3.1_Translation.html#translation-section"><span class="std std-ref">translation</span></a> operations to construct the virtual world.</p>
+<figure class="align-default" id="world-space-figure">
+<a class="reference internal image-reference" href="../_images/world_space.svg"><img alt="../_images/world_space.svg" src="../_images/world_space.svg" width="500px" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 37 </span><span class="caption-text">The world space</span><a class="headerlink" href="#world-space-figure" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The transformations applied to the objects is done in the order scaling followed by rotation followed by translation so that the shape of the object is preserved. Therefore the world space vertices of each object vertices are calculated using</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+	V_{\text{object}} = T \cdot R_z \cdot R_y \cdot R_x \cdot S \cdot V.
+\end{align*}\]</div>
+<p>The object vertex co-ordinates are then appended to a vertex matrix containing all of the objects in the virtual environment, i.e.,</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+	V_{\text{world}} = \begin{pmatrix} V_{\text{object 1}} &amp; V_{\text{object 2}} &amp; V_{\text{object 3}} &amp; \cdots &amp;\end{pmatrix}.
+\end{align*}\]</div>
+<p>So <span class="math notranslate nohighlight">\(V_{\text{world}}\)</span> is a <span class="math notranslate nohighlight">\(4 \times N_{verts}\)</span> matrix where <span class="math notranslate nohighlight">\(N_{verts}\)</span> is the total number of vertices that define the virtual environment. The face array for each object is also appended to the bottom of a face matrix containing all faces for the objects that make up the virtual environment, i.e.,</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+	F_{\text{world}} = \begin{pmatrix}
+		F_{\text{obj1}} \\
+		F_{\text{obj2}} \\
+		\vdots
+	\end{pmatrix}.
+\end{align*}\]</div>
+<p>So <span class="math notranslate nohighlight">\(F_{\text{world}}\)</span> is an <span class="math notranslate nohighlight">\(N_{faces} \times N_{sides}\)</span> matrix where <span class="math notranslate nohighlight">\(N_{faces}\)</span> is the total number of faces in the virtual environment and <span class="math notranslate nohighlight">\(N_{sides}\)</span> is the maximum number of sides of the faces. Since <span class="math notranslate nohighlight">\(F_{\text{world}}\)</span> links to <span class="math notranslate nohighlight">\(V_{\text{world}}\)</span> then when adding a new face to <span class="math notranslate nohighlight">\(F_{\text{world}}\)</span> we need to add the number of columns currently in <span class="math notranslate nohighlight">\(V_{\text{world}}\)</span> to <span class="math notranslate nohighlight">\(F_{\text{object}}\)</span>.</p>
+<div class="proof example seealso admonition" id="world-space-example">
+<p class="admonition-title"><span class="caption-number">Example 23 </span></p>
+<section class="example-content" id="proof-content">
+<p>The virtual world shown in <a class="reference internal" href="#world-space-figure"><span class="std std-ref">The world space</span></a> is constructed using 2 house objects from <a class="reference internal" href="4.2_Object_space.html#object-space-example">Example 22</a> and a cube object. The house objects are rotated by angle <span class="math notranslate nohighlight">\(\theta = \pi/2\)</span> about the <span class="math notranslate nohighlight">\(z\)</span> axis and translated so that the centre of the bases have position vectors <span class="math notranslate nohighlight">\(\mathbf{c}_1 = (3, 3.5, 0)\)</span> and <span class="math notranslate nohighlight">\(\mathbf{c}_2 = (3, 1.5, 0)\)</span>. The cube object has side lengths 2 is scaled by a factor of <span class="math notranslate nohighlight">\(0.5\)</span> in the <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> directions and <span class="math notranslate nohighlight">\(1.5\)</span> in the <span class="math notranslate nohighlight">\(z\)</span> direction so that it resembles a tower and translated so that the centre of the base is at <span class="math notranslate nohighlight">\(\mathbf{c}_3 = (1.5, 1.5, 0)\)</span>. Determine the vertex and face matrices for the world space.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Since <span class="math notranslate nohighlight">\(\cos(\pi/2) = 0\)</span> and <span class="math notranslate nohighlight">\(\sin(\pi/2) = 1\)</span> then the rotation and translation matrices for the first house object are</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    R_z(\theta) &amp;= 
+    \begin{pmatrix}
+        0 &amp; 1 &amp; 0 &amp; 0 \\
+        -1 &amp; 0 &amp; 0 &amp; 0 \\
+        0 &amp; 0 &amp; 1 &amp; 0 \\
+        0 &amp; 0 &amp; 0 &amp; 1
+    \end{pmatrix}, &amp;
+    T(\mathbf{c}_1) &amp;= 
+    \begin{pmatrix}
+        1 &amp; 0 &amp; 0 &amp; 3 \\
+        0 &amp; 1 &amp; 0 &amp; 3.5 \\
+        0 &amp; 0 &amp; 1 &amp; 0 \\
+        0 &amp; 0 &amp; 0 &amp; 1
+    \end{pmatrix}
+\end{align*}\]</div>
+<p class="sd-card-text">so the composite transformation matrix is</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    A &amp;= T(\mathbf{c}_1) \cdot R_z(\theta) = 
+    \begin{pmatrix} 
+        0 &amp; 1 &amp; 0 &amp; 3 \\
+        -1 &amp; 0 &amp; 0 &amp; 3.5 \\
+        0 &amp; 0 &amp; 1 &amp; 0 \\
+        0 &amp; 0 &amp; 0 &amp; 1 
+    \end{pmatrix}.
+\end{align*}\]</div>
+<p class="sd-card-text">Applying the composite transformation to <span class="math notranslate nohighlight">\(V_{\text{house}}\)</span> from <a class="reference internal" href="4.2_Object_space.html#object-space-example">Example 22</a> gives</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    V_{\text{world}} &amp;=
+    \begin{pmatrix} 
+        0 &amp; 1 &amp; 0 &amp; 3 \\
+        -1 &amp; 0 &amp; 0 &amp; 3.5 \\
+        0 &amp; 0 &amp; 1 &amp; 0 \\
+        0 &amp; 0 &amp; 0 &amp; 1 
+    \end{pmatrix}
+    \begin{pmatrix}
+        -0.5 &amp; 0.5 &amp; 0.5 &amp; -0.5 &amp; -0.5 &amp; 0.5 &amp; 0.5 &amp; -0.5 &amp; 0 &amp; 0 \\
+        -1 &amp; -1 &amp; 1 &amp; 1 &amp; -1 &amp; -1 &amp; 1 &amp; 1 &amp; -1 &amp; 1 \\
+        0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 2 &amp; 2 \\
+        1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1
+    \end{pmatrix} \\
+    &amp;= 
+    \begin{pmatrix}
+        2 &amp; 2 &amp; 4 &amp; 4 &amp; 2 &amp; 2 &amp; 4 &amp; 4 &amp; 2 &amp; 4 \\
+        4 &amp; 3 &amp; 3 &amp; 4 &amp; 4 &amp; 3 &amp; 3 &amp; 4 &amp; 3.5 &amp; 3.5 \\
+        0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 2 &amp; 2 \\
+        1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1
+    \end{pmatrix},
+\end{align*}\]</div>
+<p class="sd-card-text">and since this is the first object added to the world space then <span class="math notranslate nohighlight">\(F_{\text{world}} = F_{\text{house}}\)</span>. Doing similar for the second house object gives the following composite transformation matrix</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    T(\mathbf{c}_1) \cdot R_z(\theta) &amp;= 
+    \begin{pmatrix}
+        0 &amp; 1 &amp; 0 &amp; 3 \\
+        -1 &amp; 0 &amp; 0 &amp; 1.5 \\
+        0 &amp; 0 &amp; 1 &amp; 0 \\
+        0 &amp; 0 &amp; 0 &amp; 1
+    \end{pmatrix}
+\end{align*}\]</div>
+<p class="sd-card-text">which applied to the object co-ordinates for the house object gives</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    T \cdot S \cdot V_{\text{house}} = \begin{pmatrix}
+        2 &amp; 2 &amp; 4 &amp; 4 &amp; 2 &amp; 2 &amp; 4 &amp; 4 &amp; 2 &amp; 4 \\
+        2 &amp; 1 &amp; 1 &amp; 2 &amp; 2 &amp; 1 &amp; 1 &amp; 2 &amp; 1.5 &amp; 1.5 \\
+        0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 2 &amp; 2 \\
+        1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1
+    \end{pmatrix},
+\end{align*}\]</div>
+<p class="sd-card-text">These are appended to the end of the world space vertex matrix</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+V_{\text{world}} &amp;= 
+    \begin{matrix}
+        \left( \begin{matrix}
+            2 &amp; 2 &amp; \cdots &amp; 4 \\
+            2 &amp; 1 &amp; \cdots &amp; 3.5 \\
+            0 &amp; 0 &amp; \cdots &amp; 2 \\
+            1 &amp; 1 &amp; \cdots &amp; 1
+        \end{matrix} \right. &amp; \quad 
+        \left. \begin{matrix}
+            2 &amp; 2 &amp; \cdots &amp; 4 \\
+            2 &amp; 1 &amp; \cdots &amp; 1.5 \\
+            0 &amp; 0 &amp; \cdots &amp; 2 \\
+            1 &amp; 1 &amp; \cdots &amp; 1 
+        \end{matrix} \right) \\
+        \textsf{house 1} &amp; \textsf{house 2}
+    \end{matrix}.
+\end{align*}\]</div>
+<p class="sd-card-text">Since the the number of vertices was <span class="math notranslate nohighlight">\(N_verts = 10\)</span> prior to appending the second house object then we need to add 10 to <span class="math notranslate nohighlight">\(F_{\text{house}}\)</span> and append it to <span class="math notranslate nohighlight">\(F_{\text{world}}\)</span></p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    F_{\text{world}} &amp;= \begin{pmatrix}
+        1 &amp; 4 &amp; 3 &amp; 2 &amp; 2 \\
+        1 &amp; 2 &amp; 6 &amp; 9 &amp; 5 \\
+        \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots \\
+        5 &amp; 9 &amp; 10 &amp; 8 &amp; 8 \\
+        11 &amp; 14 &amp; 13 &amp; 12 &amp; 12 \\
+        11 &amp; 12 &amp; 16 &amp; 19 &amp; 15 \\
+        \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots \\
+        15 &amp; 19 &amp; 20 &amp; 18 &amp; 18
+    \end{pmatrix}
+\end{align*}\]</div>
+<p class="sd-card-text">The scaling and translation matrices for the cube (tower) object are</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    S &amp;= 
+    \begin{pmatrix}
+        0.5 &amp; 0 &amp; 0 &amp; 0 \\
+        0 &amp; 0.5 &amp; 0 &amp; 0 \\
+        0 &amp; 0 &amp; 1.5 &amp; 0 \\
+        0 &amp; 0 &amp; 0 &amp; 1
+    \end{pmatrix}, &amp;
+    T &amp;=
+    \begin{pmatrix}
+        1 &amp; 0 &amp; 0 &amp; 1.5 \\
+        0 &amp; 1 &amp; 0 &amp; 1.5 \\
+        0 &amp; 0 &amp; 1 &amp; 1.5 \\
+        0 &amp; 0 &amp; 0 &amp; 1
+    \end{pmatrix},
+\end{align*}\]</div>
+<p class="sd-card-text">which gives the transformed vertex matrix</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    T(\mathbf{c}_1) \cdot S(\mathbf{s}) \cdot V_{\text{cube}} = 
+    \begin{pmatrix}
+        1 &amp; 2 &amp; 2 &amp; 1 &amp; 1 &amp; 2 &amp; 2 &amp; 1 \\
+        1 &amp; 1 &amp; 2 &amp; 2 &amp; 1 &amp; 1 &amp; 2 &amp; 2 \\
+        0 &amp; 0 &amp; 0 &amp; 0 &amp; 3 &amp; 3 &amp; 3 &amp; 3 \\
+        1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1
+    \end{pmatrix}.
+\end{align*}\]</div>
+<p class="sd-card-text">Appending these to <span class="math notranslate nohighlight">\(V_{\text{world}}\)</span> gives</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    V_{\text{world}} &amp;=
+    \begin{matrix}
+        \left( \begin{matrix}
+            2 &amp; 2 &amp; \cdots &amp; 4 \\
+            2 &amp; 1 &amp; \cdots &amp; 1.5 \\
+            0 &amp; 0 &amp; \cdots &amp; 2 \\
+            1 &amp; 1 &amp; \cdots &amp; 1
+        \end{matrix} \right. &amp; \quad &amp; 
+        \left. \begin{matrix}
+            1 &amp; 2 &amp; \cdots &amp; 1 \\
+            1 &amp; 1 &amp; \cdots &amp; 2 \\
+            0 &amp; 0 &amp; \cdots &amp; 3 \\
+            1 &amp; 1 &amp; \cdots &amp; 1 
+        \end{matrix} \right) \\
+        \textsf{world space} &amp; &amp; \textsf{tower object} 
+    \end{matrix}.
+\end{align*}\]</div>
+<p class="sd-card-text">There were <span class="math notranslate nohighlight">\(N_{verts}=20\)</span> vertices in the world space prior to appending the cube object so we need to add 20 to <span class="math notranslate nohighlight">\(F_{\text{cube}}\)</span> and append it to <span class="math notranslate nohighlight">\(F_{\text{world}}\)</span></p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    \begin{pmatrix}
+        1 &amp; 4 &amp; 3 &amp; 2 &amp; 2 \\
+        1 &amp; 2 &amp; 6 &amp; 9 &amp; 5 \\
+        \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots \\
+        15 &amp; 19 &amp; 20 &amp; 18 &amp; 18 \\
+        21 &amp; 24 &amp; 23 &amp; 22 &amp; 22\\
+        21 &amp; 22 &amp; 26 &amp; 25 &amp; 25 \\
+        \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots \\
+        25 &amp; 26 &amp; 27 &amp; 28 &amp; 28
+    \end{pmatrix}
+\end{align*}\]</div>
+<p class="sd-card-text">After the 3 objects have been added to the world space the virtual world is described by 20 polygons defined by 28 vertices.</p>
+</div>
+</details></section>
+</div><section id="matlab-code">
+<h2>MATLAB code<a class="headerlink" href="#matlab-code" title="Permalink to this headline">#</a></h2>
+<p>The MATLAB code in below builds the virtual world from <a class="reference internal" href="#world-space-example">Example 23</a> and plots the world space.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Define house object</span>
+<span class="n">Vhouse</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span>
+<span class="w">     </span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w">  </span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w">   </span><span class="mi">1</span><span class="p">,</span><span class="w">    </span><span class="mi">1</span><span class="p">,</span><span class="w">   </span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w">  </span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w">   </span><span class="mi">1</span><span class="p">,</span><span class="w">    </span><span class="mi">1</span><span class="p">,</span><span class="w">  </span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">;</span>
+<span class="w">      </span><span class="mi">0</span><span class="p">,</span><span class="w">   </span><span class="mi">0</span><span class="p">,</span><span class="w">   </span><span class="mi">0</span><span class="p">,</span><span class="w">    </span><span class="mi">0</span><span class="p">,</span><span class="w">    </span><span class="mi">1</span><span class="p">,</span><span class="w">   </span><span class="mi">1</span><span class="p">,</span><span class="w">   </span><span class="mi">1</span><span class="p">,</span><span class="w">    </span><span class="mi">1</span><span class="p">,</span><span class="w">   </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">;</span>
+<span class="w">      </span><span class="mi">1</span><span class="p">,</span><span class="w">   </span><span class="mi">1</span><span class="p">,</span><span class="w">   </span><span class="mi">1</span><span class="p">,</span><span class="w">    </span><span class="mi">1</span><span class="p">,</span><span class="w">    </span><span class="mi">1</span><span class="p">,</span><span class="w">   </span><span class="mi">1</span><span class="p">,</span><span class="w">   </span><span class="mi">1</span><span class="p">,</span><span class="w">    </span><span class="mi">1</span><span class="p">,</span><span class="w">   </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">];</span>
+
+<span class="n">Fhouse</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">;</span>
+<span class="w">          </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="p">;</span>
+<span class="w">          </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="p">;</span>
+<span class="w">          </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="w"> </span><span class="p">;</span>
+<span class="w">          </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="p">;</span>
+<span class="w">          </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w"> </span><span class="mi">9</span><span class="w"> </span><span class="p">;</span>
+<span class="w">          </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="w"> </span><span class="p">];</span>
+
+<span class="c">% Define cube object</span>
+<span class="n">Vcube</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w">  </span><span class="mi">1</span><span class="p">,</span><span class="w">  </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w">  </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="w"> </span><span class="p">;</span>
+<span class="w">         </span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w">  </span><span class="mi">1</span><span class="p">,</span><span class="w">  </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">  </span><span class="mi">1</span><span class="w"> </span><span class="p">;</span>
+<span class="w">         </span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w">  </span><span class="mi">1</span><span class="p">,</span><span class="w">  </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">  </span><span class="mi">1</span><span class="w"> </span><span class="p">;</span>
+<span class="w">          </span><span class="mi">1</span><span class="p">,</span><span class="w">  </span><span class="mi">1</span><span class="p">,</span><span class="w">  </span><span class="mi">1</span><span class="p">,</span><span class="w">  </span><span class="mi">1</span><span class="p">,</span><span class="w">  </span><span class="mi">1</span><span class="p">,</span><span class="w">  </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">  </span><span class="mi">1</span><span class="w"> </span><span class="p">];</span>
+
+<span class="n">Fcube</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">;</span>
+<span class="w">         </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="p">;</span><span class="w"> </span>
+<span class="w">         </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="p">;</span>
+<span class="w">         </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="w"> </span><span class="p">;</span>
+<span class="w">         </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="w"> </span><span class="p">;</span>
+<span class="w">         </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="w"> </span><span class="p">];</span>
+
+<span class="c">% Define transformation parameters</span>
+<span class="n">theta</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">pi</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="n">c1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mf">3.5</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">];</span>
+<span class="n">c2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mf">1.5</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">];</span>
+<span class="n">c3</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mf">1.5</span><span class="p">,</span><span class="w"> </span><span class="mf">1.5</span><span class="p">,</span><span class="w"> </span><span class="mf">1.5</span><span class="p">];</span>
+<span class="n">s</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">1.5</span><span class="p">];</span>
+
+<span class="c">% Define transformation functions</span>
+<span class="n">T</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">@(</span><span class="n">t</span><span class="p">)</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">;</span><span class="w"> </span>
+<span class="w">          </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="p">;</span><span class="w"> </span>
+<span class="w">          </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="p">;</span><span class="w"> </span>
+<span class="w">          </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">];</span>
+
+<span class="n">S</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">@(</span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="p">[</span><span class="n">s</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">    </span><span class="mi">0</span><span class="p">,</span><span class="w">    </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w">  </span>
+<span class="w">          </span><span class="mi">0</span><span class="p">,</span><span class="w">    </span><span class="n">s</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">    </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"> </span>
+<span class="w">          </span><span class="mi">0</span><span class="p">,</span><span class="w">    </span><span class="mi">0</span><span class="p">,</span><span class="w">    </span><span class="n">s</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"> </span>
+<span class="w">          </span><span class="mi">0</span><span class="p">,</span><span class="w">    </span><span class="mi">0</span><span class="p">,</span><span class="w">    </span><span class="mi">0</span><span class="p">,</span><span class="w">    </span><span class="mi">1</span><span class="p">];</span>
+
+<span class="n">Rz</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">@(</span><span class="n">theta</span><span class="p">)</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="nb">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span><span class="w"> </span><span class="nb">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span>
+<span class="w">               </span><span class="o">-</span><span class="nb">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span><span class="w"> </span><span class="nb">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span>
+<span class="w">               </span><span class="mi">0</span><span class="p">,</span><span class="w">           </span><span class="mi">0</span><span class="p">,</span><span class="w">          </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span>
+<span class="w">               </span><span class="mi">0</span><span class="p">,</span><span class="w">           </span><span class="mi">0</span><span class="p">,</span><span class="w">          </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">];</span>
+
+<span class="c">% Add first house object</span>
+<span class="n">Vobj</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">T</span><span class="p">(</span><span class="n">c1</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Rz</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Vhouse</span><span class="p">;</span>
+<span class="n">Fobj</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Fhouse</span><span class="p">;</span>
+
+<span class="n">Vworld</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Vobj</span><span class="p">;</span>
+<span class="n">F</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Fobj</span><span class="p">;</span>
+
+<span class="c">% Add second house object</span>
+<span class="n">Vobj</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">T</span><span class="p">(</span><span class="n">c2</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Rz</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Vhouse</span><span class="p">;</span>
+<span class="n">Fobj</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Fhouse</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">size</span><span class="p">(</span><span class="n">Vworld</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span><span class="w"> </span><span class="c">% add number of vertices in world space to face array</span>
+
+<span class="n">Vworld</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="n">Vworld</span><span class="p">,</span><span class="w"> </span><span class="n">Vobj</span><span class="p">];</span>
+<span class="n">F</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="n">F</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">Fobj</span><span class="p">];</span>
+
+<span class="c">% Add tower object</span>
+<span class="n">Vobj</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">T</span><span class="p">(</span><span class="n">c3</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">S</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Vcube</span><span class="p">;</span>
+<span class="n">Fobj</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Fcube</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">size</span><span class="p">(</span><span class="n">Vworld</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
+
+<span class="n">Vworld</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="n">Vworld</span><span class="p">,</span><span class="w"> </span><span class="n">Vobj</span><span class="p">];</span>
+<span class="n">F</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="n">F</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">Fobj</span><span class="p">];</span>
+
+<span class="c">% Plot world space</span>
+<span class="nb">patch</span><span class="p">(</span><span class="s">&#39;Vertices&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">Vworld</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">,:)</span><span class="o">&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;Faces&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">F</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;FaceColor&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;white&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;FaceAlpha&#39;</span><span class="p">,</span><span class="w"> </span><span class="mf">0.75</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;LineWidth&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+<span class="nb">xlabel</span><span class="p">(</span><span class="s">&#39;$x$&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;Interpreter&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;latex&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;FontSize&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">18</span><span class="p">)</span>
+<span class="nb">ylabel</span><span class="p">(</span><span class="s">&#39;$y$&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;Interpreter&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;latex&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;FontSize&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">18</span><span class="p">)</span>
+<span class="nb">zlabel</span><span class="p">(</span><span class="s">&#39;$z$&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;Interpreter&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;latex&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;FontSize&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">18</span><span class="p">)</span>
+<span class="nb">view</span><span class="p">(</span><span class="mi">45</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">)</span>
+<span class="nb">axis</span><span class="w"> </span><span class="n">equal</span>
+<span class="nb">axis</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">])</span>
+<span class="nb">grid</span><span class="w"> </span><span class="n">on</span>
+</pre></div>
+</div>
+<figure class="align-default" id="id1">
+<img alt="../_images/world_space_example.svg" src="../_images/world_space_example.svg" /><figcaption>
+<p><span class="caption-number">Fig. 38 </span><span class="caption-text">The world space from <a class="reference internal" href="#world-space-example">Example 23</a>.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
