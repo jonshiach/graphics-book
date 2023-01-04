@@ -191,27 +191,22 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="4.1_The_viewing_pipeline.html">
-     The viewing pipeline
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="4.2_Object_space.html">
+    <a class="reference internal" href="4.1_Object_space.html">
      Object space
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="4.3_World_space.html">
+    <a class="reference internal" href="4.2_World_space.html">
      World space
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="4.4_Camera_space.html">
+    <a class="reference internal" href="4.3_Camera_space.html">
      Camera space
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="4.5_Screen_space.html">
+    <a class="reference internal" href="4.4_Screen_space.html">
      Screen space
     </a>
    </li>
@@ -560,7 +555,7 @@ Solution<div class="sd-summary-down docutils">
 <img alt="../_images/1.3_Drawing_polygons_7_0.png" src="../_images/1.3_Drawing_polygons_7_0.png" />
 </div>
 <figcaption>
-<p><span class="caption-number">Fig. 55 </span><span class="caption-text">The flood fill algorithm is blocked by tight corners.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 56 </span><span class="caption-text">The flood fill algorithm is blocked by tight corners.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
@@ -582,10 +577,10 @@ Solution<div class="sd-summary-down docutils">
 <img alt="../_images/1.3_Drawing_polygons_9_0.png" src="../_images/1.3_Drawing_polygons_9_0.png" />
 </div>
 <figcaption>
-<p><span class="caption-number">Fig. 56 </span><span class="caption-text">Calculating span extrema co-ordinates.</span><a class="headerlink" href="#span-extrema-figure" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 57 </span><span class="caption-text">Calculating span extrema co-ordinates.</span><a class="headerlink" href="#span-extrema-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>Consider <a class="reference internal" href="#span-extrema-figure"><span class="std std-numref">Fig. 56</span></a> where the co-ordinates of the span extrema on the left edge of a polygon are <span class="math notranslate nohighlight">\((x_i, y_i)\)</span> and <span class="math notranslate nohighlight">\((x_{i+1}, y_{i+1})\)</span>. If <span class="math notranslate nohighlight">\((x_i, y_i)\)</span> are known then the next value <span class="math notranslate nohighlight">\(y_{i+1}\)</span> is easily calculated using <span class="math notranslate nohighlight">\(y_{i+1} = y_i + 1\)</span>. The values of the <span class="math notranslate nohighlight">\(x\)</span> span extrema co-ordinates are calculated using the <a href="https://en.wikipedia.org/wiki/Linear_equation#Slope%E2%80%93intercept_form_or_Gradient-intercept_form" target="_blank">slope intercept equation of a line</a>.</p>
+<p>Consider <a class="reference internal" href="#span-extrema-figure"><span class="std std-numref">Fig. 57</span></a> where the co-ordinates of the span extrema on the left edge of a polygon are <span class="math notranslate nohighlight">\((x_i, y_i)\)</span> and <span class="math notranslate nohighlight">\((x_{i+1}, y_{i+1})\)</span>. If <span class="math notranslate nohighlight">\((x_i, y_i)\)</span> are known then the next value <span class="math notranslate nohighlight">\(y_{i+1}\)</span> is easily calculated using <span class="math notranslate nohighlight">\(y_{i+1} = y_i + 1\)</span>. The values of the <span class="math notranslate nohighlight">\(x\)</span> span extrema co-ordinates are calculated using the <a href="https://en.wikipedia.org/wiki/Linear_equation#Slope%E2%80%93intercept_form_or_Gradient-intercept_form" target="_blank">slope intercept equation of a line</a>.</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
     y = \frac{\Delta y}{\Delta x} x + c,

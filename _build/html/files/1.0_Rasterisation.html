@@ -58,7 +58,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Drawing lines" href="1.1_Bresenhams_algorithm.html" />
-    <link rel="prev" title="Screen space" href="4.5_Screen_space.html" />
+    <link rel="prev" title="Screen space" href="4.4_Screen_space.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -191,27 +191,22 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="4.1_The_viewing_pipeline.html">
-     The viewing pipeline
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="4.2_Object_space.html">
+    <a class="reference internal" href="4.1_Object_space.html">
      Object space
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="4.3_World_space.html">
+    <a class="reference internal" href="4.2_World_space.html">
      World space
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="4.4_Camera_space.html">
+    <a class="reference internal" href="4.3_Camera_space.html">
      Camera space
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="4.5_Screen_space.html">
+    <a class="reference internal" href="4.4_Screen_space.html">
      Screen space
     </a>
    </li>
@@ -479,11 +474,9 @@ title="Print to PDF"
 <h1>Rasterisation<a class="headerlink" href="#rasterisation" title="Permalink to this headline">#</a></h1>
 <p>Computer displays use an array of small squares called pixels which are illuminated using different colours. When the array of pixels is viewed as a whole the brain interprets it as a single image. The pixel array is called a raster array and the process of determining the illumination of the pixels is called <strong>rasterisation</strong>. The image that is approximated as a raster array is known as the <strong>idealised image</strong>.</p>
 <figure class="align-default" id="id1">
-<div class="cell_output docutils container">
-<img alt="../_images/1.0_Rasterisation_1_0.png" src="../_images/1.0_Rasterisation_1_0.png" />
-</div>
+<a class="reference internal image-reference" href="../_images/ideal_and_raster_image.png"><img alt="../_images/ideal_and_raster_image.png" src="../_images/ideal_and_raster_image.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 47 </span><span class="caption-text">The idealised image and the raster approximation.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 48 </span><span class="caption-text">The idealised image and the raster approximation.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <div class="proof definition note admonition" id="definition-0">
@@ -510,7 +503,7 @@ title="Print to PDF"
 <figure class="align-default" id="id2">
 <a class="reference internal image-reference" href="../_images/rgb_wheel.png"><img alt="../_images/rgb_wheel.png" src="../_images/rgb_wheel.png" style="width: 300px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 48 </span><span class="caption-text">RGB color wheel</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 49 </span><span class="caption-text">RGB color wheel</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Since there are 256 levels of the three primary colours in the true color model we can use the integers 0 to 255 in an ordered triplet. For example, the colour <span style="color: cyan;">cyan</span> is made by mixing full amounts of green and blue which corresponds to the triplet <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">255,</span> <span class="pre">255]</span></code>. Most software packages also accept <a class="reference external" href="https://en.wikipedia.org/wiki/Hexadecimal">hexadecimal</a> (base-16) colour codes where the values in the triplet are represented using 2-digit hexadecimal numbers 00 to FF which follow a # symbol. For example, <span style="color: cyan;">cyan</span> is represented using <code class="docutils literal notranslate"><span class="pre">&quot;#00FFFF&quot;</span></code>.</p>
@@ -567,25 +560,25 @@ title="Print to PDF"
 <section id="raster-arrays">
 <h2>Raster arrays<a class="headerlink" href="#raster-arrays" title="Permalink to this headline">#</a></h2>
 <p>The information that defines a raster can be stored in a raster array. If a raster has a width of <span class="math notranslate nohighlight">\(N_x\)</span> pixels and a height of <span class="math notranslate nohighlight">\(N_y\)</span> pixels then it can be defined as an <span class="math notranslate nohighlight">\(N_y \times N_x \times 3\)</span> array. The colour of each of the pixels in the raster is defined by the 3 levels for the red, green and blue components.</p>
-<p>The matplotlib command for reading in an image file is <code class="docutils literal notranslate"><span class="pre">plt.imread(&lt;filename&gt;)</span></code>. For example, the following code reads in the image file <code class="docutils literal notranslate"><span class="pre">cavendish.png</span></code> which if a photograph of my cat Cavendish and prints the size of the raster array.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import matplotlib.pyplot as plt
-import matplotlib.image as mpimg
+<p>The MATLAB command for reading in an image file is <code class="docutils literal notranslate"><span class="pre">imread(&lt;filename&gt;)</span></code>. For example, the following code reads in the image file <code class="docutils literal notranslate"><span class="pre">cavendish.png</span></code> which is a photograph of my cat Cavendish and prints the size of the raster array.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">img</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">imread</span><span class="p">(</span><span class="s">&#39;cavendish.jpg&#39;</span><span class="p">);</span>
+<span class="nb">size</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The output is</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ans</span> <span class="o">=</span>
 
-img = mpimg.imread(&quot;../images/cavendish.jpg&quot;)
-print(img.shape)
+   <span class="mi">600</span>   <span class="mi">800</span>     <span class="mi">3</span>
 </pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(600, 800, 3)
-</pre></div>
-</div>
-</div>
 </div>
 <p>So the raster array has a height of <span class="math notranslate nohighlight">\(N_y = 600\)</span> pixels, a width of <span class="math notranslate nohighlight">\(N_x=800\)</span> pixels with each pixel defined by a colour triplet.</p>
-<p>The matplotlib command for displaying a raster array <code class="docutils literal notranslate"><span class="pre">X</span></code> is <code class="docutils literal notranslate"><span class="pre">plt.imshow(X)</span></code></p>
+<p>The MATLAB command for displaying a raster array <code class="docutils literal notranslate"><span class="pre">img</span></code> is <code class="docutils literal notranslate"><span class="pre">image(img)</span></code></p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">image</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+</pre></div>
+</div>
+<figure class="align-default">
+<a class="reference internal image-reference" href="../_images/cavendish_plot.png"><img alt="../_images/cavendish_plot.png" src="../_images/cavendish_plot.png" style="width: 500px;" /></a>
+</figure>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>imgplot = plt.imshow(img)
@@ -593,7 +586,14 @@ print(img.shape)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/1.0_Rasterisation_5_0.png" src="../_images/1.0_Rasterisation_5_0.png" />
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">imgplot</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;plt&#39; is not defined
+</pre></div>
+</div>
 </div>
 </div>
 <p>Now we have the raster array for the image we can use Python commands to manipulate the image. For example, the following code sets the colour of each pixel to either black or white depending on whether the sum of the colour triplet is greater or less than 383 which is halfway between 0 and 767 .</p>
@@ -608,7 +608,7 @@ imgbwplot = plt.imshow(imgbw)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/1.0_Rasterisation_7_0.png" src="../_images/1.0_Rasterisation_7_0.png" />
+<img alt="../_images/1.0_Rasterisation_4_0.png" src="../_images/1.0_Rasterisation_4_0.png" />
 </div>
 </div>
 </section>
@@ -665,7 +665,7 @@ imgbwplot = plt.imshow(imgbw)
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="4.5_Screen_space.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="4.4_Screen_space.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>

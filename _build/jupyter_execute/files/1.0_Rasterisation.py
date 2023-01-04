@@ -5,7 +5,8 @@
 # 
 # Computer displays use an array of small squares called pixels which are illuminated using different colours. When the array of pixels is viewed as a whole the brain interprets it as a single image. The pixel array is called a raster array and the process of determining the illumination of the pixels is called **rasterisation**. The image that is approximated as a raster array is known as the **idealised image**.
 # 
-# ```{glue:figure} smiley-raster-plot
+# ```{figure} /images/ideal_and_raster_image.png
+# :width: 600px 
 # 
 # The idealised image and the raster approximation.
 # ```
@@ -27,86 +28,6 @@
 # 
 # An **idealised image** is an analogue image that we wish to represent in a raster.
 # ```
-
-# In[1]:
-
-
-import numpy as np
-import matplotlib.pyplot as plt
-import matplotlib.patches as patches
-from myst_nb import glue
-    
-    
-def circle(R, cx, cy, radius, colour):
-    D, x, y = 5 - radius * radius, radius, 0
-    while y <= x:
-        for i in range(3):
-            R[cx + x, cy + y, i] = colour[i]
-            R[cx + x, cy - y, i] = colour[i]
-            R[cx - x, cy + y, i] = colour[i]
-            R[cx - x, cy - y, i] = colour[i] 
-            R[cx + y, cy + x, i] = colour[i]
-            R[cx + y, cy - x, i] = colour[i]
-            R[cx - y, cy + x, i] = colour[i]
-            R[cx - y, cy - x, i] = colour[i]
-        
-        if D > 0:
-            D -= 8 * x - 8
-            x -= 1
-        
-        D += 8 * y + 12
-        y += 1
-        
-    return R
-
-
-# Idealised image
-face_cx, face_cy, face_r = 0.5, 0.5, 0.4
-eye1_cx, eye1_cy, eye1_r = 0.33, 0.6, 0.06
-eye2_cx, eye2_cy, eye2_r = 0.67, 0.6, 0.06
-
-fig, ax = plt.subplots(1, 2, figsize=(12, 6))
-
-circle1 = plt.Circle((face_cx, face_cy), face_r, color="#FFFF00", ec="k", lw=12)
-circle2 = plt.Circle((eye1_cx, eye1_cy), eye1_r, color="k")
-circle3 = plt.Circle((eye2_cx, eye2_cy), eye2_r, color="k")
-arc = patches.Arc((0.5, 0.5), 0.5, 0.5, angle=0, theta1=210, theta2=330, lw=12)
-
-ax[0].add_patch(circle1)
-ax[0].add_patch(circle2)
-ax[0].add_patch(circle3)
-ax[0].add_patch(arc)
-ax[0].set_aspect("equal")
-ax[0].axis("off")
-
-# Raster
-n = 20
-R = 255 * np.ones((n, n, 3)).astype(int)
-
-for i in range(n+1):
-    for j in range(n+1):
-        if (i - face_cx * n + 1) ** 2 + (j - face_cy * n) ** 2 <= (face_r * n) ** 2:
-            R[i,j,:] = [255, 255, 0]
-            
-        ax[1].add_patch(plt.Rectangle((i-0.5,j-0.5), 1, 1, fill=False))
-
-R = circle(R, int(face_cx*n)-1, int(face_cy*n), int(face_r*n), [0, 0, 0])
-
-R[6:8, 13:15, :] = [0,0,0]
-R[6:8, 6:8, :] = [0,0,0]
-R[12,6,:] = [0,0,0]
-R[13,7:8,:] = [0,0,0]
-R[14,8:13,:] = [0,0,0]
-R[13,13:14,:] = [0,0,0]
-R[12,14,:] = [0,0,0]
-
-ax[1].imshow(np.flipud(R))
-ax[1].set_aspect("equal")
-ax[1].axis([-1, 21, -1, 21])
-ax[1].axis("off")
-
-glue("smiley-raster-plot", fig, display=False)
-
 
 # ## The RGB colour model
 # 
@@ -161,23 +82,34 @@ glue("smiley-raster-plot", fig, display=False)
 # 
 # The information that defines a raster can be stored in a raster array. If a raster has a width of $N_x$ pixels and a height of $N_y$ pixels then it can be defined as an $N_y \times N_x \times 3$ array. The colour of each of the pixels in the raster is defined by the 3 levels for the red, green and blue components.
 # 
-# The matplotlib command for reading in an image file is `plt.imread(<filename>)`. For example, the following code reads in the image file `cavendish.png` which if a photograph of my cat Cavendish and prints the size of the raster array.
-
-# In[2]:
-
-
-import matplotlib.pyplot as plt
-import matplotlib.image as mpimg
-
-img = mpimg.imread("../images/cavendish.jpg")
-print(img.shape)
-
-
+# The MATLAB command for reading in an image file is `imread(<filename>)`. For example, the following code reads in the image file `cavendish.png` which is a photograph of my cat Cavendish and prints the size of the raster array.
+# 
+# ```matlab
+# img = imread('cavendish.jpg');
+# size(img)
+# ```
+# 
+# The output is
+# 
+# ```
+# ans =
+# 
+#    600   800     3
+# ```
+# 
 # So the raster array has a height of $N_y = 600$ pixels, a width of $N_x=800$ pixels with each pixel defined by a colour triplet.
 # 
-# The matplotlib command for displaying a raster array `X` is `plt.imshow(X)`
+# The MATLAB command for displaying a raster array `img` is `image(img)`
+# 
+# ```matlab
+# image(img)
+# ```
+# 
+# ```{figure} /images/cavendish_plot.png
+# :width: 500px
+# ```
 
-# In[3]:
+# In[1]:
 
 
 imgplot = plt.imshow(img)
@@ -185,7 +117,7 @@ imgplot = plt.imshow(img)
 
 # Now we have the raster array for the image we can use Python commands to manipulate the image. For example, the following code sets the colour of each pixel to either black or white depending on whether the sum of the colour triplet is greater or less than 383 which is halfway between 0 and 767 .
 
-# In[4]:
+# In[20]:
 
 
 colour_sum = np.sum(img, axis=2)
@@ -213,7 +145,7 @@ imgbwplot = plt.imshow(imgbw)
 # 
 # The Python function defined below calculates the pixel co-ordinates from the $x$ and $y$ Euclidean space co-ordinates
 
-# In[5]:
+# In[ ]:
 
 
 def pixelcoords(x, y, Nx, Ny):

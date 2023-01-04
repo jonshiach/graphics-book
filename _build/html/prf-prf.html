@@ -193,27 +193,22 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="files/4.1_The_viewing_pipeline.html">
-     The viewing pipeline
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="files/4.2_Object_space.html">
+    <a class="reference internal" href="files/4.1_Object_space.html">
      Object space
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="files/4.3_World_space.html">
+    <a class="reference internal" href="files/4.2_World_space.html">
      World space
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="files/4.4_Camera_space.html">
+    <a class="reference internal" href="files/4.3_Camera_space.html">
      Camera space
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="files/4.5_Screen_space.html">
+    <a class="reference internal" href="files/4.4_Screen_space.html">
      Screen space
     </a>
    </li>
@@ -369,7 +364,6 @@ title="Fullscreen mode"
    <a href="#cap-definition-6"><strong>definition-6</strong></a> | 
    <a href="#cap-definition-8"><strong>definition-8</strong></a> | 
    <a href="#cap-definition-9"><strong>definition-9</strong></a> | 
-   <a href="#cap-example-0"><strong>example-0</strong></a> | 
    <a href="#cap-example-1"><strong>example-1</strong></a> | 
    <a href="#cap-example-10"><strong>example-10</strong></a> | 
    <a href="#cap-example-13"><strong>example-13</strong></a> | 
@@ -399,6 +393,7 @@ title="Fullscreen mode"
    <a href="#cap-rotation-in-R3-theorem"><strong>rotation-in-R3-theorem</strong></a> | 
    <a href="#cap-scaling-example"><strong>scaling-example</strong></a> | 
    <a href="#cap-scanline-algorithm"><strong>scanline-algorithm</strong></a> | 
+   <a href="#cap-screen-space-example"><strong>screen-space-example</strong></a> | 
    <a href="#cap-theorem-4"><strong>theorem-4</strong></a> | 
    <a href="#cap-transformation-matrix-example"><strong>transformation-matrix-example</strong></a> | 
    <a href="#cap-translation-matrix-definition"><strong>translation-matrix-definition</strong></a> | 
@@ -436,7 +431,7 @@ title="Fullscreen mode"
      <tr>
        <td></td>
        <td>
-       <a href="files/4.4_Camera_space.html#camera-space-example"><code class="xref">camera-space-example</code></a> <em>(files/4.4_Camera_space)</em></td><td>
+       <a href="files/4.3_Camera_space.html#camera-space-example"><code class="xref">camera-space-example</code></a> <em>(files/4.3_Camera_space)</em></td><td>
        <em>example</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-change-of-basis-example-1"><td></td><td>
@@ -468,7 +463,7 @@ title="Fullscreen mode"
      <tr>
        <td></td>
        <td>
-       <a href="files/2.0_Coordinate_geometry.html#definition-0"><code class="xref">definition-0</code></a> <em>(files/2.0_Coordinate_geometry)</em></td><td>
+       <a href="files/1.0_Rasterisation.html#definition-0"><code class="xref">definition-0</code></a> <em>(files/1.0_Rasterisation)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-definition-1"><td></td><td>
@@ -492,7 +487,7 @@ title="Fullscreen mode"
      <tr>
        <td></td>
        <td>
-       <a href="files/2.1_Points_lines_and_planes.html#definition-2"><code class="xref">definition-2</code></a> <em>(files/2.1_Points_lines_and_planes)</em></td><td>
+       <a href="files/1.0_Rasterisation.html#definition-2"><code class="xref">definition-2</code></a> <em>(files/1.0_Rasterisation)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-definition-3"><td></td><td>
@@ -500,7 +495,7 @@ title="Fullscreen mode"
      <tr>
        <td></td>
        <td>
-       <a href="files/2.0_Coordinate_geometry.html#definition-3"><code class="xref">definition-3</code></a> <em>(files/2.0_Coordinate_geometry)</em></td><td>
+       <a href="files/1.3_Drawing_polygons.html#definition-3"><code class="xref">definition-3</code></a> <em>(files/1.3_Drawing_polygons)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-definition-4"><td></td><td>
@@ -535,14 +530,6 @@ title="Fullscreen mode"
        <a href="files/2.0_Coordinate_geometry.html#definition-9"><code class="xref">definition-9</code></a> <em>(files/2.0_Coordinate_geometry)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-example-0"><td></td><td>
-       <strong>example-0</strong></td><td></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="files/4.5_Screen_space.html#example-0"><code class="xref">example-0</code></a> <em>(files/4.5_Screen_space)</em></td><td>
-       <em>example</em></td></tr>
-     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-example-1"><td></td><td>
        <strong>example-1</strong></td><td></td></tr>
      <tr>
@@ -572,7 +559,7 @@ title="Fullscreen mode"
      <tr>
        <td></td>
        <td>
-       <a href="files/3.1_Translation.html#example-2"><code class="xref">example-2</code></a> <em>(files/3.1_Translation)</em></td><td>
+       <a href="files/2.0_Coordinate_geometry.html#example-2"><code class="xref">example-2</code></a> <em>(files/2.0_Coordinate_geometry)</em></td><td>
        <em>example</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-example-3"><td></td><td>
@@ -580,7 +567,7 @@ title="Fullscreen mode"
      <tr>
        <td></td>
        <td>
-       <a href="files/3.3_Rotation.html#example-3"><code class="xref">example-3</code></a> <em>(files/3.3_Rotation)</em></td><td>
+       <a href="files/3.0_Transformations.html#example-3"><code class="xref">example-3</code></a> <em>(files/3.0_Transformations)</em></td><td>
        <em>example</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-example-4"><td></td><td>
@@ -596,7 +583,7 @@ title="Fullscreen mode"
      <tr>
        <td></td>
        <td>
-       <a href="files/3.0_Transformations.html#example-5"><code class="xref">example-5</code></a> <em>(files/3.0_Transformations)</em></td><td>
+       <a href="files/1.3_Drawing_polygons.html#example-5"><code class="xref">example-5</code></a> <em>(files/1.3_Drawing_polygons)</em></td><td>
        <em>example</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-example-7"><td></td><td>
@@ -724,7 +711,7 @@ title="Fullscreen mode"
      <tr>
        <td></td>
        <td>
-       <a href="files/4.2_Object_space.html#object-space-example"><code class="xref">object-space-example</code></a> <em>(files/4.2_Object_space)</em></td><td>
+       <a href="files/4.1_Object_space.html#object-space-example"><code class="xref">object-space-example</code></a> <em>(files/4.1_Object_space)</em></td><td>
        <em>example</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-point-line-distance-theorem"><td></td><td>
@@ -775,6 +762,14 @@ title="Fullscreen mode"
        <a href="files/1.3_Drawing_polygons.html#scanline-algorithm"><code class="xref">scanline-algorithm</code></a> <em>(files/1.3_Drawing_polygons)</em></td><td>
        <em>algorithm</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-screen-space-example"><td></td><td>
+       <strong>screen-space-example</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="files/4.4_Screen_space.html#screen-space-example"><code class="xref">screen-space-example</code></a> <em>(files/4.4_Screen_space)</em></td><td>
+       <em>example</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-theorem-4"><td></td><td>
        <strong>theorem-4</strong></td><td></td></tr>
      <tr>
@@ -804,7 +799,7 @@ title="Fullscreen mode"
      <tr>
        <td></td>
        <td>
-       <a href="files/4.3_World_space.html#world-space-example"><code class="xref">world-space-example</code></a> <em>(files/4.3_World_space)</em></td><td>
+       <a href="files/4.2_World_space.html#world-space-example"><code class="xref">world-space-example</code></a> <em>(files/4.2_World_space)</em></td><td>
        <em>example</em></td></tr>
    </table>
 

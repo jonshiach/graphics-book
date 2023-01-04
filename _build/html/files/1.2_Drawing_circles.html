@@ -191,27 +191,22 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="4.1_The_viewing_pipeline.html">
-     The viewing pipeline
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="4.2_Object_space.html">
+    <a class="reference internal" href="4.1_Object_space.html">
      Object space
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="4.3_World_space.html">
+    <a class="reference internal" href="4.2_World_space.html">
      World space
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="4.4_Camera_space.html">
+    <a class="reference internal" href="4.3_Camera_space.html">
      Camera space
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="4.5_Screen_space.html">
+    <a class="reference internal" href="4.4_Screen_space.html">
      Screen space
     </a>
    </li>
@@ -444,13 +439,13 @@ title="Print to PDF"
   <section class="tex2jax_ignore mathjax_ignore" id="drawing-circles">
 <span id="drawing-circles-section"></span><h1>Drawing circles<a class="headerlink" href="#drawing-circles" title="Permalink to this headline">#</a></h1>
 <p>Now that we have the ability to rasterise straight lines the next fundamental problem is the rasterisation of circles. This can be done by deriving a Bresenham-type algorithm that uses the <a class="reference external" href="https://en.wikipedia.org/wiki/Circle#Equations">Cartesian equation of a circle</a> to determine which of two candidate pixels are plotted.</p>
-<p>The circle line drawing algorithms can use the concept of <strong>circle symmetry</strong> to reduce the number of computations required to rasterise a circle. Consider <a class="reference internal" href="#circle-symmetry-figure"><span class="std std-numref">Fig. 53</span></a> where a circle is centred at the origin. If the coordinate of a point on the circle in the shaded octant where <span class="math notranslate nohighlight">\(x &gt; y\)</span> is known to be <span class="math notranslate nohighlight">\((x,y)\)</span> then the corresponding points on the circle in the other seven octants can be found via circle symmetry through combinations of <span class="math notranslate nohighlight">\((\pm x,\pm y)\)</span> and <span class="math notranslate nohighlight">\((\pm y,\pm x)\)</span>.</p>
+<p>The circle line drawing algorithms can use the concept of <strong>circle symmetry</strong> to reduce the number of computations required to rasterise a circle. Consider <a class="reference internal" href="#circle-symmetry-figure"><span class="std std-numref">Fig. 54</span></a> where a circle is centred at the origin. If the coordinate of a point on the circle in the shaded octant where <span class="math notranslate nohighlight">\(x &gt; y\)</span> is known to be <span class="math notranslate nohighlight">\((x,y)\)</span> then the corresponding points on the circle in the other seven octants can be found via circle symmetry through combinations of <span class="math notranslate nohighlight">\((\pm x,\pm y)\)</span> and <span class="math notranslate nohighlight">\((\pm y,\pm x)\)</span>.</p>
 <figure class="align-default" id="circle-symmetry-figure" style="width: 400px">
 <div class="cell_output docutils container">
 <img alt="../_images/1.2_Drawing_circles_1_0.png" src="../_images/1.2_Drawing_circles_1_0.png" />
 </div>
 <figcaption>
-<p><span class="caption-number">Fig. 53 </span><span class="caption-text">Circle symmetry can be used to calculate points on a circle.</span><a class="headerlink" href="#circle-symmetry-figure" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 54 </span><span class="caption-text">Circle symmetry can be used to calculate points on a circle.</span><a class="headerlink" href="#circle-symmetry-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>For circles not centred at the original, which will be the case in the vast majority of applications, we calculate the co-ordinates of a point on the circle in the first octant <span class="math notranslate nohighlight">\((x, y)\)</span> and then add the co-ordinates of the circle centre <span class="math notranslate nohighlight">\((c_x,c_y)\)</span> giving the following eight pixel co-ordinates</p>
@@ -482,7 +477,7 @@ title="Print to PDF"
 <img alt="../_images/1.2_Drawing_circles_3_0.png" src="../_images/1.2_Drawing_circles_3_0.png" />
 </div>
 <figcaption>
-<p><span class="caption-number">Fig. 54 </span><span class="caption-text">Determining the pixels on a circle using the midpoint algorithm.</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 55 </span><span class="caption-text">Determining the pixels on a circle using the midpoint algorithm.</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>To derive an algorithm to rasterise a circle we assume that the circle is centred at <span class="math notranslate nohighlight">\((0, 0)\)</span> and we start at the pixel at the 3 o’clock position with pixel co-ordinates <span class="math notranslate nohighlight">\((r,0)\)</span>. We then move clockwise around the circle calculating the pixels that lie closest to the idealised circle until <span class="math notranslate nohighlight">\(x=y\)</span> which is the end of the first octant. For each pixel co-ordinates we calculate, the pixel co-ordinates of the corresponding pixels in the 7 other octants are calculated using circle symmetry.</p>

@@ -62,7 +62,7 @@
 # Consider the diagram shown in {numref}`perspective-projection-calculation-figure` where the point with co-ordinates $(x, y, z)$ is projected onto the projection plane located at $z=-f$ to give to the point with co-ordinates $(x', y', z')$. 
 # 
 # ```{figure} /images/perspective_projection_calculation.svg
-# :width: 500px
+# :width: 600px
 # :name: perspective-projection-calculation-figure
 # 
 # Perspective projection of the point $(x, y, z)$ onto the projection plane located at $z=-f$.
@@ -71,25 +71,25 @@
 # The triangle with sides $x$, $y$ and $h$ is similar to the triangle $x'$, $y'$ and $h'$ so
 # 
 # \begin{align*}
-# 	\frac{x'}{f} &= \frac{x}{z}, &
-# 	\frac{y'}{f} &= \frac{y}{z}, 
+# 	\frac{x'}{-f} &= \frac{x}{z}, &
+# 	\frac{y'}{-f} &= \frac{y}{z}, 
 # \end{align*}
 # 
 # which gives the projected co-ordinates
 # 
 # \begin{align*}
-# 	x' &= \frac{fx}{z}, &
-# 	y' &= \frac{fy}{z}.
+# 	x' &= -\frac{fx}{z}, &
+# 	y' &= -\frac{fy}{z}.
 # \end{align*}
 # 
-# Both $x'$ and $y'$ are divided by $z / f$ so the homogeneous co-ordinates of the projected point is $(x, y, z, z/f)$ (remember that we divide by the fourth co-ordinates to convert to Cartesian co-ordinates). Therefore the transformation matrix for perspective projection is
+# Both $x'$ and $y'$ are divided by $-z / f$ so the homogeneous co-ordinates of the projected point is $(x, y, z, -z/f)$ (remember that we divide by the fourth co-ordinates to convert to Cartesian co-ordinates). Therefore the transformation matrix for perspective projection is
 # 
 # \begin{align*}
 # 	P = \begin{pmatrix}
 # 		1 & 0 & 0 & 0 \\
 # 		0 & 1 & 0 & 0 \\
 # 		0 & 0 & 1 & 0 \\
-# 		0 & 0 & 1/f & 0
+# 		0 & 0 & -1/f & 0
 # 	\end{pmatrix}.
 # \end{align*}
 # 
@@ -101,13 +101,13 @@
 # 		1 & 0 & 0 & 0 \\
 # 		0 & 1 & 0 & 0 \\
 # 		0 & 0 & 1 & 0 \\
-# 		0 & 0 & 1/f & 0
+# 		0 & 0 & -1/f & 0
 # 	\end{pmatrix}
 # 	\begin{pmatrix} x \\ y \\ z \\ 1  \end{pmatrix} =
-# 	\begin{pmatrix} x \\ y \\ z \\ z/f  \end{pmatrix}
+# 	\begin{pmatrix} x \\ y \\ z \\ -z/f  \end{pmatrix}
 # \end{align*}
 # 
-# and dividing by the fourth co-ordinates gives $(fx/z, fy/z, f, 1)$ which are the projected co-ordinates derived above.
+# and dividing by the fourth co-ordinates gives $(-fx/z, -fy/z, -f, 1)$ which are the projected co-ordinates derived above.
 # 
 # ## The viewing frustum
 # 
@@ -120,7 +120,7 @@
 # The viewing frustum
 # ```
 # 
-# The viewing frustum is an awkward shape to deal with when it comes to clipping objects that lie partially outside so we transform it so that the viewing frustum is a cube with sides of lengths 2 parallel to the co-ordinate axes whilst still maintaining the perspective projection. Consider the diagram shown in {numref}`viewing-frustum-details-figure`. The camera space co-ordinates of the vertices of the screen on the near projection plane are $(l,b,-near)$, $(r,b,-near)$, $(r, t, -near)$ and $(l, t, -near)$ where $l$, $r$, $t$ and $b$ denote left, right, top and bottom edges respectively. The values of these co-ordinates are determined by the width-to-height ratio of the screen and the position of the near viewing plane, the **field of view** angle, $fov$, which controls the horizontal peripheral vision of the viewer.
+# The viewing frustum is an awkward shape to deal with when it comes to clipping objects that lie partially outside so we transform it so that the viewing frustum is a cube with sides of lengths 2 parallel to the co-ordinate axes whilst still maintaining the perspective projection. Consider the diagram shown in {numref}`viewing-frustum-details-figure` where a near viewing plane is positioned at distance $near$ from the origin of the camera space. The camera space co-ordinates of the vertices of the screen on the near projection plane are $(l,b,-near)$, $(r,b,-near)$, $(r, t, -near)$ and $(l, t, -near)$ where $l$, $r$, $t$ and $b$ denote left, right, top and bottom edges respectively. The values of these co-ordinates are determined by the width-to-height ratio of the screen and the position of the near viewing plane, the **field of view** angle, $fov$, which controls the horizontal peripheral vision of the viewer.
 # 
 # ```{figure} /images/viewing_frustum_details.svg
 # :width: 500px
@@ -153,7 +153,7 @@
 # so
 # 
 # \begin{align*}
-# 	aspect &= \frac{r - l}{t - b} = \frac{r}{t} \\
+# 	aspect &= \frac{r - l}{t - b} = \frac{r - (-r)}{t - (-t)} = \frac{r}{t} \\
 # 	\therefore t &= \frac{r}{aspect} = \frac{r \cdot height}{width},
 # \end{align*}
 # 
@@ -165,30 +165,30 @@
 # 	-1 \leq \frac{x}{r} \leq 1,
 # \end{align*}
 # 
-# and using perspective projection $x' = x / near$ then
+# and using perspective projection $x' = -near \cdot x / z$ then
 # 
 # \begin{align*}
-# 	-1 \leq \frac{near \cdot x}{rz} \leq 1,
+# 	-1 \leq -\frac{near \cdot x}{rz} \leq 1,
 # \end{align*}
 # 
 # so 
 # 
 # \begin{align*}
-# 	x' = \frac{near \cdot x}{rz}.
+# 	x' = -\frac{near \cdot x}{rz}.
 # \end{align*}
 # 
 # Doing similar for $y'$ gives
 # 
 # \begin{align*}
-# 	y' = \frac{near \cdot y}{tz}.
+# 	y' = -\frac{near \cdot y}{tz}.
 # \end{align*}
 # 
 # Now $x'$ and $y'$ are perspective screen space co-ordinates that are in the range $-1 \leq x', y' \leq 1$. The matrix that performs this transformation is
 # 
 # \begin{align*}
 # 	P = \begin{pmatrix}
-# 		\dfrac{near}{r} & 0 & 0 & 0 \\
-# 		0 & \dfrac{near}{t} & 0 & 0 \\
+# 		-\dfrac{near}{r} & 0 & 0 & 0 \\
+# 		0 & -\dfrac{near}{t} & 0 & 0 \\
 # 		0 & 0 & \alpha & \beta \\
 # 		0 & 0 & 1 & 0 
 # 	\end{pmatrix},
@@ -198,37 +198,37 @@
 # 
 # \begin{align*}
 # 	P \cdot \mathbf{x} = \begin{pmatrix}
-# 		\dfrac{near}{r} & 0 & 0 & 0 \\
-# 		0 & \dfrac{near}{t} & 0 & 0 \\
+# 		-\dfrac{near}{r} & 0 & 0 & 0 \\
+# 		0 & -\dfrac{near}{t} & 0 & 0 \\
 # 		0 & 0 & \alpha & \beta \\
 # 		0 & 0 & 1 & 0 
 # 	\end{pmatrix}
 # 	\begin{pmatrix} x \\ y \\ z \\ 1 \end{pmatrix} =
-# 	\begin{pmatrix} near \cdot x / r \\ near \cdot y / t \\ \alpha z + \beta \\ z  \end{pmatrix},
+# 	\begin{pmatrix} -near \cdot x / r \\ -near \cdot y / t \\ \alpha z + \beta \\ z  \end{pmatrix},
 # \end{align*}
 # 
 # and dividing by the fourth co-ordinate to convert to Cartesian co-ordinates we have
 # 
 # \begin{align*}
 # 	\begin{pmatrix}
-# 		near \cdot x / (r z) \\ near \cdot y / (t z) \\ (\alpha z + \beta)/z \\ 1
+# 		-near \cdot x / (r z) \\ -near \cdot y / (t z) \\ (\alpha z + \beta)/z \\ 1
 # 	\end{pmatrix}.
 # \end{align*}
 # 
-# The $z$ camera space co-ordinate for a point within the viewing frustum is in the range $near \leq z \leq far$ so we need to transform $near \mapsto 1$ and $far \mapsto -1$. So the minimum and maximum $z'$ co-ordinates are
+# The $z$ camera space co-ordinate for a point within the viewing frustum is in the range $-near \leq z \leq -far$ so we need to transform $-near \mapsto 1$ and $-far \mapsto -1$. So the minimum and maximum $z'$ co-ordinates are
 # 
 # \begin{align*}
-# 	1 &= \frac{\alpha \cdot near + \beta}{near}, \\
-# 	-1 &= \frac{\alpha \cdot far + \beta}{far}.
+# 	1 &= \frac{-near \cdot \alpha + \beta}{-near}, \\
+# 	-1 &= \frac{-far \cdot \alpha + \beta}{-far}.
 # \end{align*}
 # 
-# Solving for $\alpha$ and $\beta$ gives $\alpha = (near + far)/(near - far)$ and $\beta = - 2 \cdot near \cdot far / (near - far)$ so the transformation matrix becomes
+# Solving for $\alpha$ and $\beta$ gives $\alpha = (near + far)/(near - far)$ and $\beta = 2 \cdot near \cdot far / (near - far)$ so the transformation matrix becomes
 # 
 # \begin{align*}
 # 	P = \begin{pmatrix}
-# 		\dfrac{near}{r} & 0 & 0 & 0 \\
-# 		0 & \dfrac{near}{t} & 0 & 0 \\
-# 		0 & 0 & \dfrac{near + far}{near - far} & - \dfrac{2 \cdot near \cdot far}{near - far} \\
+# 		-\dfrac{near}{r} & 0 & 0 & 0 \\
+# 		0 & -\dfrac{near}{t} & 0 & 0 \\
+# 		0 & 0 & \dfrac{near + far}{near - far} & \dfrac{2 \cdot near \cdot far}{near - far} \\
 # 		0 & 0 & 1 & 0 
 # 	\end{pmatrix}.
 # \end{align*}
@@ -243,78 +243,120 @@
 # 
 # `````{prf:example}
 # :class: seealso
+# :label: screen-space-example
 # 
-# The camera space from {prf:ref}`camera-space-example` is projected onto the screen space defined by near and far projection plans located at $z = -2$ and $z = -10$, a field of view angle of $fov = 1$ and a width-to-height screen aspect ratio of $aspect = 4/3$. Calculate the screen space co-ordinates of the virtual world.
+# The camera space from {prf:ref}`camera-space-example` is projected onto the screen space defined by near and far projection plans located at distances$near = 1$ and $far = 9$ from the origin, a field of view angle of $fov = \pi/3$ and a width-to-height screen aspect ratio of $4/3$. Calculate the screen space co-ordinates of the virtual world.
 # 
 # ````{dropdown} Solution
-# Calculate the $r$ and $t$ co-ordinates
+# First we calculate the $r$ and $t$ co-ordinates
 # 
 # \begin{align*}
-#     r &= |near| \cdot \tan \left( \frac{fov}{2} \right) = 2 \tan(0.5) = 1.0926, \\
-#     t &= \frac{r \cdot height}{width} = \frac{1.0926(3)}{4} = 0.8195,
+#     r &= near \cdot \tan \left( \frac{fov}{2} \right) = 2 \tan\left(\frac{\pi}{6}\right) \approx 1.1547, \\
+#     t &= \frac{r \cdot height}{width} = \frac{1.1547(3)}{4} \approx 0.8660,
 # \end{align*}
 # 
 # so the projection matrix is
 # 
 # \begin{align*}
-#     P &= \begin{pmatrix}
-#         near / r & 0 & 0 & 0 \\
-#         0 & near / t & 0 & 0 \\
-#         0 & 0 & (near + far)/(near - far) & -2 \cdot near \cdot far / (near - far) \\
-#         0 & 0 & 1 & 0 
-#     \end{pmatrix} \\
+#     P &= 
+#     \begin{pmatrix}
+# 		-\dfrac{near}{r} & 0 & 0 & 0 \\
+# 		0 & -\dfrac{near}{t} & 0 & 0 \\
+# 		0 & 0 & \dfrac{near + far}{near - far} & \dfrac{2 \cdot near \cdot far}{near - far} \\
+# 		0 & 0 & 1 & 0 
+# 	\end{pmatrix} \\
 #     &=
 #     \begin{pmatrix}
-#         -2 / 1.0926 & 0 & 0 & 0 \\
-#         0 & -2 / 0.8195 & 0 & 0 \\
-#         0 & 0 & (-2 - 10) / (-2 + 10) & -2(-2)(-10) / (-2 + 10) \\
-#         0 & 0 & 1 & 0
-#     \end{pmatrix} \\
+# 		-\dfrac{2}{1.1547} & 0 & 0 & 0 \\
+# 		0 & -\dfrac{2}{0.8660} & 0 & 0 \\
+# 		0 & 0 & \dfrac{1 + 9}{1 - 9} & \dfrac{2 \cdot 1 \cdot 9}{1 - 9} \\
+# 		0 & 0 & 1 & 0 
+# 	\end{pmatrix} \\
 #     &=
 #     \begin{pmatrix}
-#         -1.8305 & 0 & 0 & 0 \\
-#         0 & -2.4407 & 0 & 0 \\
-#         0 & 0 & -1.5 & 5 \\
+#         -1.8660 & 0 & 0 & 0 \\
+#         0 & -1.1547 & 0 & 0 \\
+#         0 & 0 & -1.2222 & -2.2222 \\
 #         0 & 0 & 1 & 0
 #     \end{pmatrix}.
 # \end{align*}
 # 
 # Applying the perspective transformation matrix to the camera space co-ordinates from 
-# \cref{exm:camera space example}
+# {prf:ref}`camera-space-example`
 # 
 # \begin{align*}
 #     V_{\text{screen}} &= P \cdot V_{\text{view}} \\
-#     &= \begin{pmatrix}
-#         -1.8305 & 0 & 0 & 0 \\
-#         0 & -2.4407 & 0 & 0 \\
-#         0 & 0 & -1.5 & 5 \\
+#     &= 
+#     \begin{pmatrix}
+#         -1.8660 & 0 & 0 & 0 \\
+#         0 & -1.1547 & 0 & 0 \\
+#         0 & 0 & -1.2222 & -2.2222 \\
 #         0 & 0 & 1 & 0
 #     \end{pmatrix} 
 #     \begin{pmatrix}
-#         1.6000 & 0.8000 & -0.4000 & 0.4000 & \cdots \\
-#         -0.8745 & -0.9353 & -0.7761 & -0.7164 & \cdots \\
-#         -3.7314 & -4.3284 & -2.7364 & -2.1393 & \cdots \\
-#         1 & 1 & 1 & 1 & \cdots
+#         1.4142 &   0.7071 &  -0.7071 &        0 & \cdots \\
+#         -1.2309 &  -1.1078 &  -1.3540 &  -1.4771 & \cdots \\
+#         -3.0899 &  -3.7862 &  -2.3936 &  -1.6973 & \cdots \\
+#         1.0000 &   1.0000 &   1.0000 &   1.0000 & \cdots 
 #     \end{pmatrix} \\
 #     &= \begin{pmatrix}
-#         -2.9288 &  -1.4644 &   0.7322 &  -0.7322 & \cdots \\
-#         2.1371 &   2.2828 &   1.8943 &   1.7485 & \cdots \\
-#         0.5971 &   1.4926 &  -0.8955 &  -1.7910 & \cdots \\
-#        -3.7314 &  -4.3284 &  -2.7364 &  -2.1393 & \cdots
+#         -1.2247 &  -0.6124 &   0.6124 &        0  & \cdots \\
+#         1.4213 &   1.2792 &   1.5635 &   1.7056 & \cdots \\
+#         1.5543 &   2.4053 &   0.7032  & -0.1478 & \cdots \\
+#         -3.0899 &  -3.7862 &  -2.3936  & -1.6973 & \cdots 
 #     \end{pmatrix}.
 # \end{align*}
 # 
-# Dividing $V_{\text{screen}}$ by the fourth row to give the Cartesian screen space co-ordinates
+# Since these are homogeneous co-ordinates we need to divide by the fourth row to give the Cartesian co-ordinates
 # 
 # \begin{align*}
 #     V_{screen} &=
 #     \begin{pmatrix}
-#         0.7849 &   0.3383 &  -0.2676 &   0.3423 & \cdots \\
-#         -0.5727 &  -0.5274 &  -0.6923 &  -0.8173 & \cdots \\
-#         -0.1600 &  -0.3448 &   0.3273 &   0.8372 & \cdots \\
-#          1 &   1 &   1 &   1 & \cdots
+#         0.3964 &   0.1617 &  -0.2558 &        0  & \cdots \\
+#        -0.4600 &  -0.3379 &  -0.6532 &  -1.0049 & \cdots \\
+#        -0.5030 &  -0.6353 &  -0.2938 &   0.0871 & \cdots \\
+#         1 &   1 &   1 &   1 & \cdots 
 #     \end{pmatrix}
 # \end{align*}
 # ````
 # 
 # `````
+# 
+# ## MATLAB code
+# 
+# The MATLAB code below calculates the screen space co-ordinates for the virtual world from {prf:ref}`world-space-example` with the viewing parameters from {prf:ref}`camera-space-example` and projected using perspective projection with the screen parameters from {prf:ref}`screen-space-example`.
+# 
+# ```matlab
+# % Define projection parameters
+# near = 1;
+# far = 10;
+# fov = pi/3;
+# aspect = 4/3;
+# 
+# % Calculate projection matrix
+# r = 2 * tan(fov / 2);
+# t = r / aspect;
+# P = [-near / r, 0, 0, 0 ;
+#      0, -near / t, 0, 0 ;
+#      0, 0, (near + far) / (near - far), 2 * near * far / (near - far) ;
+#      0, 0, 1, 0 ];
+# 
+# % Calculate screen space co-ordinates
+# Vscreen = P * Vcamera;
+# Vscreen = Vscreen ./ Vscreen(4,:);
+# 
+# % Plot camera space (from viewing position)
+# patch('Vertices', Vscreen(1:3,:)', 'Faces', F, FaceColor='w', FaceAlpha=0.75, LineWidth=2)
+# xlabel('$x$', 'Interpreter', 'latex', 'FontSize', 18)
+# ylabel('$y$', 'Interpreter', 'latex', 'FontSize', 18)
+# zlabel('$z$', 'Interpreter', 'latex', 'FontSize', 18)
+# view(0,90)
+# axis([-1, 1, -1, 1, -1, 1])
+# grid on
+# box on
+# ```
+# 
+# ```{figure} /images/screen_space_example.svg
+# 
+# The screen space from {prf:ref}`screen-space-example`.
+# ```
