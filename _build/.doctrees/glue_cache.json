@@ -18,95 +18,15 @@
     }
   },
   "files/1.1_Bresenhams_algorithm": {
-    "line-raster-plot": {
+    "bresenham-example1-plot-2": {
       "output_type": "display_data",
       "metadata": {
         "scrapbook": {
-          "name": "line-raster-plot",
+          "name": "bresenham-example1-plot-2",
           "mime_prefix": "application/papermill.record/"
         },
         "filenames": {
-          "image/png": "/Volumes/Data HD/jon/Desktop/graphics-book/_build/jupyter_execute/files/1.1_Bresenhams_algorithm_1_0.png"
-        }
-      },
-      "data": {
-        "application/papermill.record/text/plain": "<Figure size 640x480 with 1 Axes>",
-        "application/papermill.record/image/png": null
-      }
-    },
-    "bresenham-example-plot-1": {
-      "output_type": "display_data",
-      "metadata": {
-        "scrapbook": {
-          "name": "bresenham-example-plot-1",
-          "mime_prefix": "application/papermill.record/"
-        },
-        "filenames": {
-          "image/png": "/Volumes/Data HD/jon/Desktop/graphics-book/_build/jupyter_execute/files/1.1_Bresenhams_algorithm_5_0.png"
-        }
-      },
-      "data": {
-        "application/papermill.record/text/plain": "<Figure size 640x480 with 1 Axes>",
-        "application/papermill.record/image/png": null
-      }
-    },
-    "bresenham-example1-plot-1": {
-      "output_type": "display_data",
-      "metadata": {
-        "scrapbook": {
-          "name": "bresenham-example1-plot-1",
-          "mime_prefix": "application/papermill.record/"
-        },
-        "filenames": {
-          "image/png": "/Volumes/Data HD/jon/Desktop/graphics-book/_build/jupyter_execute/files/1.1_Bresenhams_algorithm_3_0.png"
-        }
-      },
-      "data": {
-        "application/papermill.record/text/plain": "<Figure size 640x480 with 1 Axes>",
-        "application/papermill.record/image/png": null
-      }
-    },
-    "bresenham-example1-plot-3": {
-      "output_type": "display_data",
-      "metadata": {
-        "scrapbook": {
-          "name": "bresenham-example1-plot-3",
-          "mime_prefix": "application/papermill.record/"
-        },
-        "filenames": {
-          "image/png": "/Volumes/Data HD/jon/Desktop/graphics-book/_build/jupyter_execute/files/1.1_Bresenhams_algorithm_3_2.png"
-        }
-      },
-      "data": {
-        "application/papermill.record/text/plain": "<Figure size 640x480 with 1 Axes>",
-        "application/papermill.record/image/png": null
-      }
-    },
-    "bresenham-plot-2": {
-      "output_type": "display_data",
-      "metadata": {
-        "scrapbook": {
-          "name": "bresenham-plot-2",
-          "mime_prefix": "application/papermill.record/"
-        },
-        "filenames": {
-          "image/png": "/Volumes/Data HD/jon/Desktop/graphics-book/_build/jupyter_execute/files/1.1_Bresenhams_algorithm_4_0.png"
-        }
-      },
-      "data": {
-        "application/papermill.record/text/plain": "<Figure size 500x500 with 1 Axes>",
-        "application/papermill.record/image/png": null
-      }
-    },
-    "bresenham-example-plot-3": {
-      "output_type": "display_data",
-      "metadata": {
-        "scrapbook": {
-          "name": "bresenham-example-plot-3",
-          "mime_prefix": "application/papermill.record/"
-        },
-        "filenames": {
-          "image/png": "/Volumes/Data HD/jon/Desktop/graphics-book/_build/jupyter_execute/files/1.1_Bresenhams_algorithm_7_0.png"
+          "image/png": "/Volumes/Data HD/jon/Desktop/graphics-book/_build/jupyter_execute/files/1.1_Bresenhams_algorithm_3_1.png"
         }
       },
       "data": {
@@ -130,6 +50,70 @@
         "application/papermill.record/image/png": null
       }
     },
+    "bresenham-example1-plot-4": {
+      "output_type": "display_data",
+      "metadata": {
+        "scrapbook": {
+          "name": "bresenham-example1-plot-4",
+          "mime_prefix": "application/papermill.record/"
+        },
+        "filenames": {
+          "image/png": "/Volumes/Data HD/jon/Desktop/graphics-book/_build/jupyter_execute/files/1.1_Bresenhams_algorithm_3_3.png"
+        }
+      },
+      "data": {
+        "application/papermill.record/text/plain": "<Figure size 640x480 with 1 Axes>",
+        "application/papermill.record/image/png": null
+      }
+    },
+    "line-raster-plot": {
+      "output_type": "display_data",
+      "metadata": {
+        "scrapbook": {
+          "name": "line-raster-plot",
+          "mime_prefix": "application/papermill.record/"
+        },
+        "filenames": {
+          "image/png": "/Volumes/Data HD/jon/Desktop/graphics-book/_build/jupyter_execute/files/1.1_Bresenhams_algorithm_1_0.png"
+        }
+      },
+      "data": {
+        "application/papermill.record/text/plain": "<Figure size 640x480 with 1 Axes>",
+        "application/papermill.record/image/png": null
+      }
+    },
+    "bresenham-example1-plot-3": {
+      "output_type": "display_data",
+      "metadata": {
+        "scrapbook": {
+          "name": "bresenham-example1-plot-3",
+          "mime_prefix": "application/papermill.record/"
+        },
+        "filenames": {
+          "image/png": "/Volumes/Data HD/jon/Desktop/graphics-book/_build/jupyter_execute/files/1.1_Bresenhams_algorithm_3_2.png"
+        }
+      },
+      "data": {
+        "application/papermill.record/text/plain": "<Figure size 640x480 with 1 Axes>",
+        "application/papermill.record/image/png": null
+      }
+    },
+    "bresenham-example-plot-3": {
+      "output_type": "display_data",
+      "metadata": {
+        "scrapbook": {
+          "name": "bresenham-example-plot-3",
+          "mime_prefix": "application/papermill.record/"
+        },
+        "filenames": {
+          "image/png": "/Volumes/Data HD/jon/Desktop/graphics-book/_build/jupyter_execute/files/1.1_Bresenhams_algorithm_7_0.png"
+        }
+      },
+      "data": {
+        "application/papermill.record/text/plain": "<Figure size 640x480 with 1 Axes>",
+        "application/papermill.record/image/png": null
+      }
+    },
     "bresenham-plot-1": {
       "output_type": "display_data",
       "metadata": {
@@ -146,15 +130,15 @@
         "application/papermill.record/image/png": null
       }
     },
-    "bresenham-example1-plot-2": {
+    "bresenham-example1-plot-1": {
       "output_type": "display_data",
       "metadata": {
         "scrapbook": {
-          "name": "bresenham-example1-plot-2",
+          "name": "bresenham-example1-plot-1",
           "mime_prefix": "application/papermill.record/"
         },
         "filenames": {
-          "image/png": "/Volumes/Data HD/jon/Desktop/graphics-book/_build/jupyter_execute/files/1.1_Bresenhams_algorithm_3_1.png"
+          "image/png": "/Volumes/Data HD/jon/Desktop/graphics-book/_build/jupyter_execute/files/1.1_Bresenhams_algorithm_3_0.png"
         }
       },
       "data": {
@@ -162,40 +146,40 @@
         "application/papermill.record/image/png": null
       }
     },
-    "bresenham-example1-plot-4": {
+    "bresenham-example-plot-1": {
       "output_type": "display_data",
       "metadata": {
         "scrapbook": {
-          "name": "bresenham-example1-plot-4",
+          "name": "bresenham-example-plot-1",
           "mime_prefix": "application/papermill.record/"
         },
         "filenames": {
-          "image/png": "/Volumes/Data HD/jon/Desktop/graphics-book/_build/jupyter_execute/files/1.1_Bresenhams_algorithm_3_3.png"
+          "image/png": "/Volumes/Data HD/jon/Desktop/graphics-book/_build/jupyter_execute/files/1.1_Bresenhams_algorithm_5_0.png"
         }
       },
       "data": {
         "application/papermill.record/text/plain": "<Figure size 640x480 with 1 Axes>",
+        "application/papermill.record/image/png": null
+      }
+    },
+    "bresenham-plot-2": {
+      "output_type": "display_data",
+      "metadata": {
+        "scrapbook": {
+          "name": "bresenham-plot-2",
+          "mime_prefix": "application/papermill.record/"
+        },
+        "filenames": {
+          "image/png": "/Volumes/Data HD/jon/Desktop/graphics-book/_build/jupyter_execute/files/1.1_Bresenhams_algorithm_4_0.png"
+        }
+      },
+      "data": {
+        "application/papermill.record/text/plain": "<Figure size 500x500 with 1 Axes>",
         "application/papermill.record/image/png": null
       }
     }
   },
   "files/1.2_Drawing_circles": {
-    "midpoint-raster-plot": {
-      "output_type": "display_data",
-      "metadata": {
-        "scrapbook": {
-          "name": "midpoint-raster-plot",
-          "mime_prefix": "application/papermill.record/"
-        },
-        "filenames": {
-          "image/png": "/Volumes/Data HD/jon/Desktop/graphics-book/_build/jupyter_execute/files/1.2_Drawing_circles_5_0.png"
-        }
-      },
-      "data": {
-        "application/papermill.record/text/plain": "<Figure size 1000x1000 with 1 Axes>",
-        "application/papermill.record/image/png": null
-      }
-    },
     "midpoint-algorithm-plot": {
       "output_type": "display_data",
       "metadata": {
@@ -227,66 +211,34 @@
         "application/papermill.record/text/plain": "<Figure size 640x480 with 1 Axes>",
         "application/papermill.record/image/png": null
       }
+    },
+    "midpoint-raster-plot": {
+      "output_type": "display_data",
+      "metadata": {
+        "scrapbook": {
+          "name": "midpoint-raster-plot",
+          "mime_prefix": "application/papermill.record/"
+        },
+        "filenames": {
+          "image/png": "/Volumes/Data HD/jon/Desktop/graphics-book/_build/jupyter_execute/files/1.2_Drawing_circles_5_0.png"
+        }
+      },
+      "data": {
+        "application/papermill.record/text/plain": "<Figure size 1000x1000 with 1 Axes>",
+        "application/papermill.record/image/png": null
+      }
     }
   },
   "files/1.3_Drawing_polygons": {
-    "tight-corner-raster": {
+    "flood-fill-raster-1": {
       "output_type": "display_data",
       "metadata": {
         "scrapbook": {
-          "name": "tight-corner-raster",
+          "name": "flood-fill-raster-1",
           "mime_prefix": "application/papermill.record/"
         },
         "filenames": {
-          "image/png": "/Volumes/Data HD/jon/Desktop/graphics-book/_build/jupyter_execute/files/1.3_Drawing_polygons_7_0.png"
-        }
-      },
-      "data": {
-        "application/papermill.record/text/plain": "<Figure size 640x480 with 1 Axes>",
-        "application/papermill.record/image/png": null
-      }
-    },
-    "flood-fill-raster-2": {
-      "output_type": "display_data",
-      "metadata": {
-        "scrapbook": {
-          "name": "flood-fill-raster-2",
-          "mime_prefix": "application/papermill.record/"
-        },
-        "filenames": {
-          "image/png": "/Volumes/Data HD/jon/Desktop/graphics-book/_build/jupyter_execute/files/1.3_Drawing_polygons_3_0.png"
-        }
-      },
-      "data": {
-        "application/papermill.record/text/plain": "<Figure size 640x480 with 1 Axes>",
-        "application/papermill.record/image/png": null
-      }
-    },
-    "scanline-example-4": {
-      "output_type": "display_data",
-      "metadata": {
-        "scrapbook": {
-          "name": "scanline-example-4",
-          "mime_prefix": "application/papermill.record/"
-        },
-        "filenames": {
-          "image/png": "/Volumes/Data HD/jon/Desktop/graphics-book/_build/jupyter_execute/files/1.3_Drawing_polygons_12_3.png"
-        }
-      },
-      "data": {
-        "application/papermill.record/text/plain": "<Figure size 640x480 with 1 Axes>",
-        "application/papermill.record/image/png": null
-      }
-    },
-    "scanline-example-7": {
-      "output_type": "display_data",
-      "metadata": {
-        "scrapbook": {
-          "name": "scanline-example-7",
-          "mime_prefix": "application/papermill.record/"
-        },
-        "filenames": {
-          "image/png": "/Volumes/Data HD/jon/Desktop/graphics-book/_build/jupyter_execute/files/1.3_Drawing_polygons_12_6.png"
+          "image/png": "/Volumes/Data HD/jon/Desktop/graphics-book/_build/jupyter_execute/files/1.3_Drawing_polygons_2_0.png"
         }
       },
       "data": {
@@ -310,143 +262,15 @@
         "application/papermill.record/image/png": null
       }
     },
-    "scanline-example-3": {
+    "scanline-example-4": {
       "output_type": "display_data",
       "metadata": {
         "scrapbook": {
-          "name": "scanline-example-3",
+          "name": "scanline-example-4",
           "mime_prefix": "application/papermill.record/"
         },
         "filenames": {
-          "image/png": "/Volumes/Data HD/jon/Desktop/graphics-book/_build/jupyter_execute/files/1.3_Drawing_polygons_12_2.png"
-        }
-      },
-      "data": {
-        "application/papermill.record/text/plain": "<Figure size 640x480 with 1 Axes>",
-        "application/papermill.record/image/png": null
-      }
-    },
-    "scanline-example-1": {
-      "output_type": "display_data",
-      "metadata": {
-        "scrapbook": {
-          "name": "scanline-example-1",
-          "mime_prefix": "application/papermill.record/"
-        },
-        "filenames": {
-          "image/png": "/Volumes/Data HD/jon/Desktop/graphics-book/_build/jupyter_execute/files/1.3_Drawing_polygons_12_0.png"
-        }
-      },
-      "data": {
-        "application/papermill.record/text/plain": "<Figure size 640x480 with 1 Axes>",
-        "application/papermill.record/image/png": null
-      }
-    },
-    "flood-fill-raster-1": {
-      "output_type": "display_data",
-      "metadata": {
-        "scrapbook": {
-          "name": "flood-fill-raster-1",
-          "mime_prefix": "application/papermill.record/"
-        },
-        "filenames": {
-          "image/png": "/Volumes/Data HD/jon/Desktop/graphics-book/_build/jupyter_execute/files/1.3_Drawing_polygons_2_0.png"
-        }
-      },
-      "data": {
-        "application/papermill.record/text/plain": "<Figure size 640x480 with 1 Axes>",
-        "application/papermill.record/image/png": null
-      }
-    },
-    "scanline-example-6": {
-      "output_type": "display_data",
-      "metadata": {
-        "scrapbook": {
-          "name": "scanline-example-6",
-          "mime_prefix": "application/papermill.record/"
-        },
-        "filenames": {
-          "image/png": "/Volumes/Data HD/jon/Desktop/graphics-book/_build/jupyter_execute/files/1.3_Drawing_polygons_12_5.png"
-        }
-      },
-      "data": {
-        "application/papermill.record/text/plain": "<Figure size 640x480 with 1 Axes>",
-        "application/papermill.record/image/png": null
-      }
-    },
-    "flood-fill-raster-3": {
-      "output_type": "display_data",
-      "metadata": {
-        "scrapbook": {
-          "name": "flood-fill-raster-3",
-          "mime_prefix": "application/papermill.record/"
-        },
-        "filenames": {
-          "image/png": "/Volumes/Data HD/jon/Desktop/graphics-book/_build/jupyter_execute/files/1.3_Drawing_polygons_4_0.png"
-        }
-      },
-      "data": {
-        "application/papermill.record/text/plain": "<Figure size 640x480 with 1 Axes>",
-        "application/papermill.record/image/png": null
-      }
-    },
-    "span-extrema-plot": {
-      "output_type": "display_data",
-      "metadata": {
-        "scrapbook": {
-          "name": "span-extrema-plot",
-          "mime_prefix": "application/papermill.record/"
-        },
-        "filenames": {
-          "image/png": "/Volumes/Data HD/jon/Desktop/graphics-book/_build/jupyter_execute/files/1.3_Drawing_polygons_9_0.png"
-        }
-      },
-      "data": {
-        "application/papermill.record/text/plain": "<Figure size 640x480 with 1 Axes>",
-        "application/papermill.record/image/png": null
-      }
-    },
-    "flood-fill-raster-0": {
-      "output_type": "display_data",
-      "metadata": {
-        "scrapbook": {
-          "name": "flood-fill-raster-0",
-          "mime_prefix": "application/papermill.record/"
-        },
-        "filenames": {
-          "image/png": "/Volumes/Data HD/jon/Desktop/graphics-book/_build/jupyter_execute/files/1.3_Drawing_polygons_1_1.png"
-        }
-      },
-      "data": {
-        "application/papermill.record/text/plain": "<Figure size 640x480 with 1 Axes>",
-        "application/papermill.record/image/png": null
-      }
-    },
-    "scanline-example-2": {
-      "output_type": "display_data",
-      "metadata": {
-        "scrapbook": {
-          "name": "scanline-example-2",
-          "mime_prefix": "application/papermill.record/"
-        },
-        "filenames": {
-          "image/png": "/Volumes/Data HD/jon/Desktop/graphics-book/_build/jupyter_execute/files/1.3_Drawing_polygons_12_1.png"
-        }
-      },
-      "data": {
-        "application/papermill.record/text/plain": "<Figure size 640x480 with 1 Axes>",
-        "application/papermill.record/image/png": null
-      }
-    },
-    "scanline-example-8": {
-      "output_type": "display_data",
-      "metadata": {
-        "scrapbook": {
-          "name": "scanline-example-8",
-          "mime_prefix": "application/papermill.record/"
-        },
-        "filenames": {
-          "image/png": "/Volumes/Data HD/jon/Desktop/graphics-book/_build/jupyter_execute/files/1.3_Drawing_polygons_12_7.png"
+          "image/png": "/Volumes/Data HD/jon/Desktop/graphics-book/_build/jupyter_execute/files/1.3_Drawing_polygons_12_3.png"
         }
       },
       "data": {
@@ -470,6 +294,86 @@
         "application/papermill.record/image/png": null
       }
     },
+    "tight-corner-raster": {
+      "output_type": "display_data",
+      "metadata": {
+        "scrapbook": {
+          "name": "tight-corner-raster",
+          "mime_prefix": "application/papermill.record/"
+        },
+        "filenames": {
+          "image/png": "/Volumes/Data HD/jon/Desktop/graphics-book/_build/jupyter_execute/files/1.3_Drawing_polygons_7_0.png"
+        }
+      },
+      "data": {
+        "application/papermill.record/text/plain": "<Figure size 640x480 with 1 Axes>",
+        "application/papermill.record/image/png": null
+      }
+    },
+    "flood-fill-raster-3": {
+      "output_type": "display_data",
+      "metadata": {
+        "scrapbook": {
+          "name": "flood-fill-raster-3",
+          "mime_prefix": "application/papermill.record/"
+        },
+        "filenames": {
+          "image/png": "/Volumes/Data HD/jon/Desktop/graphics-book/_build/jupyter_execute/files/1.3_Drawing_polygons_4_0.png"
+        }
+      },
+      "data": {
+        "application/papermill.record/text/plain": "<Figure size 640x480 with 1 Axes>",
+        "application/papermill.record/image/png": null
+      }
+    },
+    "flood-fill-raster-0": {
+      "output_type": "display_data",
+      "metadata": {
+        "scrapbook": {
+          "name": "flood-fill-raster-0",
+          "mime_prefix": "application/papermill.record/"
+        },
+        "filenames": {
+          "image/png": "/Volumes/Data HD/jon/Desktop/graphics-book/_build/jupyter_execute/files/1.3_Drawing_polygons_1_1.png"
+        }
+      },
+      "data": {
+        "application/papermill.record/text/plain": "<Figure size 640x480 with 1 Axes>",
+        "application/papermill.record/image/png": null
+      }
+    },
+    "scanline-example-7": {
+      "output_type": "display_data",
+      "metadata": {
+        "scrapbook": {
+          "name": "scanline-example-7",
+          "mime_prefix": "application/papermill.record/"
+        },
+        "filenames": {
+          "image/png": "/Volumes/Data HD/jon/Desktop/graphics-book/_build/jupyter_execute/files/1.3_Drawing_polygons_12_6.png"
+        }
+      },
+      "data": {
+        "application/papermill.record/text/plain": "<Figure size 640x480 with 1 Axes>",
+        "application/papermill.record/image/png": null
+      }
+    },
+    "scanline-example-1": {
+      "output_type": "display_data",
+      "metadata": {
+        "scrapbook": {
+          "name": "scanline-example-1",
+          "mime_prefix": "application/papermill.record/"
+        },
+        "filenames": {
+          "image/png": "/Volumes/Data HD/jon/Desktop/graphics-book/_build/jupyter_execute/files/1.3_Drawing_polygons_12_0.png"
+        }
+      },
+      "data": {
+        "application/papermill.record/text/plain": "<Figure size 640x480 with 1 Axes>",
+        "application/papermill.record/image/png": null
+      }
+    },
     "scanline-example-5": {
       "output_type": "display_data",
       "metadata": {
@@ -479,6 +383,102 @@
         },
         "filenames": {
           "image/png": "/Volumes/Data HD/jon/Desktop/graphics-book/_build/jupyter_execute/files/1.3_Drawing_polygons_12_4.png"
+        }
+      },
+      "data": {
+        "application/papermill.record/text/plain": "<Figure size 640x480 with 1 Axes>",
+        "application/papermill.record/image/png": null
+      }
+    },
+    "flood-fill-raster-2": {
+      "output_type": "display_data",
+      "metadata": {
+        "scrapbook": {
+          "name": "flood-fill-raster-2",
+          "mime_prefix": "application/papermill.record/"
+        },
+        "filenames": {
+          "image/png": "/Volumes/Data HD/jon/Desktop/graphics-book/_build/jupyter_execute/files/1.3_Drawing_polygons_3_0.png"
+        }
+      },
+      "data": {
+        "application/papermill.record/text/plain": "<Figure size 640x480 with 1 Axes>",
+        "application/papermill.record/image/png": null
+      }
+    },
+    "span-extrema-plot": {
+      "output_type": "display_data",
+      "metadata": {
+        "scrapbook": {
+          "name": "span-extrema-plot",
+          "mime_prefix": "application/papermill.record/"
+        },
+        "filenames": {
+          "image/png": "/Volumes/Data HD/jon/Desktop/graphics-book/_build/jupyter_execute/files/1.3_Drawing_polygons_9_0.png"
+        }
+      },
+      "data": {
+        "application/papermill.record/text/plain": "<Figure size 640x480 with 1 Axes>",
+        "application/papermill.record/image/png": null
+      }
+    },
+    "scanline-example-6": {
+      "output_type": "display_data",
+      "metadata": {
+        "scrapbook": {
+          "name": "scanline-example-6",
+          "mime_prefix": "application/papermill.record/"
+        },
+        "filenames": {
+          "image/png": "/Volumes/Data HD/jon/Desktop/graphics-book/_build/jupyter_execute/files/1.3_Drawing_polygons_12_5.png"
+        }
+      },
+      "data": {
+        "application/papermill.record/text/plain": "<Figure size 640x480 with 1 Axes>",
+        "application/papermill.record/image/png": null
+      }
+    },
+    "scanline-example-3": {
+      "output_type": "display_data",
+      "metadata": {
+        "scrapbook": {
+          "name": "scanline-example-3",
+          "mime_prefix": "application/papermill.record/"
+        },
+        "filenames": {
+          "image/png": "/Volumes/Data HD/jon/Desktop/graphics-book/_build/jupyter_execute/files/1.3_Drawing_polygons_12_2.png"
+        }
+      },
+      "data": {
+        "application/papermill.record/text/plain": "<Figure size 640x480 with 1 Axes>",
+        "application/papermill.record/image/png": null
+      }
+    },
+    "scanline-example-8": {
+      "output_type": "display_data",
+      "metadata": {
+        "scrapbook": {
+          "name": "scanline-example-8",
+          "mime_prefix": "application/papermill.record/"
+        },
+        "filenames": {
+          "image/png": "/Volumes/Data HD/jon/Desktop/graphics-book/_build/jupyter_execute/files/1.3_Drawing_polygons_12_7.png"
+        }
+      },
+      "data": {
+        "application/papermill.record/text/plain": "<Figure size 640x480 with 1 Axes>",
+        "application/papermill.record/image/png": null
+      }
+    },
+    "scanline-example-2": {
+      "output_type": "display_data",
+      "metadata": {
+        "scrapbook": {
+          "name": "scanline-example-2",
+          "mime_prefix": "application/papermill.record/"
+        },
+        "filenames": {
+          "image/png": "/Volumes/Data HD/jon/Desktop/graphics-book/_build/jupyter_execute/files/1.3_Drawing_polygons_12_1.png"
         }
       },
       "data": {
@@ -572,22 +572,6 @@
     }
   },
   "files/3.2_Scaling": {
-    "scaling-about-centre-plot": {
-      "output_type": "display_data",
-      "metadata": {
-        "scrapbook": {
-          "name": "scaling-about-centre-plot",
-          "mime_prefix": "application/papermill.record/"
-        },
-        "filenames": {
-          "image/png": "/Volumes/Data HD/jon/Desktop/graphics-book/_build/jupyter_execute/files/3.2_Scaling_3_0.png"
-        }
-      },
-      "data": {
-        "application/papermill.record/text/plain": "<Figure size 640x480 with 1 Axes>",
-        "application/papermill.record/image/png": null
-      }
-    },
     "scaling-plot": {
       "output_type": "display_data",
       "metadata": {
@@ -603,25 +587,25 @@
         "application/papermill.record/text/plain": "<Figure size 640x480 with 1 Axes>",
         "application/papermill.record/image/png": null
       }
-    }
-  },
-  "files/3.3_Rotation": {
-    "rotation-plot-1": {
+    },
+    "scaling-about-centre-plot": {
       "output_type": "display_data",
       "metadata": {
         "scrapbook": {
-          "name": "rotation-plot-1",
+          "name": "scaling-about-centre-plot",
           "mime_prefix": "application/papermill.record/"
         },
         "filenames": {
-          "image/png": "/Volumes/Data HD/jon/Desktop/graphics-book/_build/jupyter_execute/files/3.3_Rotation_1_0.png"
+          "image/png": "/Volumes/Data HD/jon/Desktop/graphics-book/_build/jupyter_execute/files/3.2_Scaling_3_0.png"
         }
       },
       "data": {
         "application/papermill.record/text/plain": "<Figure size 640x480 with 1 Axes>",
         "application/papermill.record/image/png": null
       }
-    },
+    }
+  },
+  "files/3.3_Rotation": {
     "rotation-plot-2": {
       "output_type": "display_data",
       "metadata": {
@@ -631,6 +615,22 @@
         },
         "filenames": {
           "image/png": "/Volumes/Data HD/jon/Desktop/graphics-book/_build/jupyter_execute/files/3.3_Rotation_3_1.png"
+        }
+      },
+      "data": {
+        "application/papermill.record/text/plain": "<Figure size 640x480 with 1 Axes>",
+        "application/papermill.record/image/png": null
+      }
+    },
+    "rotation-plot-1": {
+      "output_type": "display_data",
+      "metadata": {
+        "scrapbook": {
+          "name": "rotation-plot-1",
+          "mime_prefix": "application/papermill.record/"
+        },
+        "filenames": {
+          "image/png": "/Volumes/Data HD/jon/Desktop/graphics-book/_build/jupyter_execute/files/3.3_Rotation_1_0.png"
         }
       },
       "data": {

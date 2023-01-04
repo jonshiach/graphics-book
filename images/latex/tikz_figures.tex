@@ -16,7 +16,7 @@
 \tikzset{dblarrow/.style={latex'-latex',shorten <= 2pt, shorten >= 2pt}}
 
 \tikzset{partial ellipse/.style args={#1:#2:#3}{insert path={+ (#1:#3) arc (#1:#2:#3)}}}
-\tikzset{flownode/.style={draw,fill=blue!10,align=center,minimum height=0.75cm,rounded corners,text width=3cm}}
+\tikzset{flownode/.style={draw,align=center,minimum height=0.75cm,rounded corners,text width=3cm}}
 
 \begin{document}
 
@@ -461,9 +461,9 @@
 %     node distance=1.5cm,
 %     ]
 %     \node [flownode,fill=blue!10] (object) {object space};
-%     \node [flownode,below of=object] (world) {world space};
-%     \node [flownode,below of=world] (camera) {camera space};
-%     \node [flownode,below of=camera] (screen) {screen space};
+%     \node [flownode,fill=blue!10,below of=object] (world) {world space};
+%     \node [flownode,fill=blue!10,below of=world] (camera) {camera space};
+%     \node [flownode,fill=blue!10,below of=camera] (screen) {screen space};
 %     \node [flownode,below of=screen] (clipped) {clipped screen space};
 %     \node [flownode,below of=clipped] (raster) {raster};
 %     \node [flownode,below of=raster] (display) {display};
@@ -664,36 +664,212 @@
 %     \draw [axis,blue] (O) -- ++(90:1.5) node [left] {$z$};
 % \end{tikzpicture}
 
-\begin{tikzpicture}[auto]
-    \tikzmath{\w=345;\u=50;\v=80;}
-    \coordinate (O) at (0,0);
-    \coordinate (A) at ($(O)+(30:1.25)+(330:4.5)$);
-    \coordinate (C) at ($(O)+(330:3.125)+(30:2.5)+(90:1.25)$);
-    \coordinate (P) at ($(C)+(\w:5)$);
-    \draw ($(A)+(150:2)$) coordinate (1) -- ++(30:1.25) -- ++(90:2.5) -- ++(150:1.25) -- ++(210:1.25) -- ++(270:2.5) -- ++(330:1.25) -- ++(90:2.5) -- ++(30:1.25) 
-        ($(1)+(90:2.5)$) -- ++(150:1.25)
-        ($(1)+(30:1.25)$) -- ++(150:1.25) -- ++(210:1.25);
-    \draw (A) coordinate (1) -- ++(30:1.25) -- ++(90:1) -- ++(150:2.625) -- ++(240:1.08) -- ++(270:1) -- ++(330:2) -- ++(90:1) -- ++(150:2) ($(1)+(90:1)$) -- ++(60:1.08)
-        ($(1)+(30:1.25)$) -- ++(150:2) -- ++(210:1.25)
-        ($(1)+(30:1.25)+(150:2)$) -- ++(90:1);
-    \draw ($(A)+(30:2.5)$) coordinate (1) -- ++(30:1.25) -- ++(90:1) -- ++(150:2.625) -- ++(240:1.08) -- ++(270:1) -- ++(330:2) -- ++(90:1) -- ++(150:2) ($(1)+(90:1)$) -- ++(60:1.08)
-    ($(1)+(30:1.25)$) -- ++(150:2) -- ++(210:1.25)
-    ($(1)+(30:1.25)+(150:2)$) -- ++(90:1);
-    \draw [axis,red] (O) -- ++(330:1.5) node [below] {$x$};
-    \draw [axis,green!50!black] (O) -- ++(30:1.5) node [right] {$y$};
-    \draw [axis,blue] (O) -- ++(90:1.5) node [left] {$z$};
-    \node [point,label={90:$\mathbf{c}$},blue] at (C) {};
-    \node [point,label={270:$\mathbf{p}$},red] at (P) {};
-    \draw [dashed] (C) -- (P);
-    \draw [axis,red] (P) -- ++(\u:1.5) node [below right] {$x^\ast$};
-    \draw [axis,green!50!black] (P) -- ++(\v:1.5) node [left] {$y^\ast$};
-    \draw [axis,blue] (P) -- ++(\w:1.5) node [below] {$z^\ast$};
-    \draw [-triangle 45] (O) -- ++(90:1) node [left] {$\mathbf{k}$};
-    \draw [-triangle 45] (P) -- ++(\u:1) node [below right] {$\mathbf{u}$};
-    \draw [-triangle 45] (P) -- ++(\v:1) node [left] {$\mathbf{v}$};
-    \draw [-triangle 45] (P) -- ++(\w:1) node [below left] {$\mathbf{w}$};
-    \node at ($(P)+(\w:2)$) [rotate=\w] {\includegraphics[width=0.5cm]{../eye.png}};
-    \node [point,label={270:$\mathbf{p}$},red] at (P) {};
+% Camera space
+% \begin{tikzpicture}[auto]
+%     \tikzmath{\w=10;\u=\w+45;\v=\w+90;}
+%     \coordinate (O) at (0,0);
+%     \coordinate (A) at ($(O)+(30:1.25)+(330:4.5)$);
+%     \coordinate (P) at (10,2);
+%     \coordinate (C) at ($(P)+(\w+180:1)$);
+%     \draw ($(A)+(150:2)$) coordinate (1) -- ++(30:1.25) -- ++(90:2.5) -- ++(150:1.25) -- ++(210:1.25) -- ++(270:2.5) -- ++(330:1.25) -- ++(90:2.5) -- ++(30:1.25) 
+%         ($(1)+(90:2.5)$) -- ++(150:1.25)
+%         ($(1)+(30:1.25)$) -- ++(150:1.25) -- ++(210:1.25);
+%     \draw (A) coordinate (1) -- ++(30:1.25) -- ++(90:1) -- ++(150:2.625) -- ++(240:1.08) -- ++(270:1) -- ++(330:2) -- ++(90:1) -- ++(150:2) ($(1)+(90:1)$) -- ++(60:1.08)
+%         ($(1)+(30:1.25)$) -- ++(150:2) -- ++(210:1.25)
+%         ($(1)+(30:1.25)+(150:2)$) -- ++(90:1);
+%     \draw ($(A)+(30:2.5)$) coordinate (1) -- ++(30:1.25) -- ++(90:1) -- ++(150:2.625) -- ++(240:1.08) -- ++(270:1) -- ++(330:2) -- ++(90:1) -- ++(150:2) ($(1)+(90:1)$) -- ++(60:1.08)
+%     ($(1)+(30:1.25)$) -- ++(150:2) -- ++(210:1.25)
+%     ($(1)+(30:1.25)+(150:2)$) -- ++(90:1);
+%     \draw [axis,red] (O) -- ++(330:1.5) node [below right] {$x$};
+%     \draw [axis,green!50!black] (O) -- ++(30:1.5) node [right] {$y$};
+%     \draw [axis,blue] (O) -- ++(90:1.5) node [above] {$z$};    
+%     \draw [axis,red] (P) -- ++(\u:1.5) node at ($(P)+(\u:1.75)$) {$x^\ast$};
+%     \draw [axis,green!50!black] (P) -- ++(\v:1.5) node at ($(P)+(\v:1.75)$) {$y^\ast$};
+%     \draw [axis,blue] (P) -- ++(\w:1.5) node at ($(P)+(\w:1.75)$) {$z^\ast$};
+%     \node [point,label={90:$\mathbf{c}$},blue] at (C) {};
+%     \node [point,label={270:$\mathbf{p}$},red] at (P) {};
+%     \draw [dashed] (C) -- (P);
+%     \draw [bluevec,black] (O) -- ++(90:1) node [left,pos=0.5] {$\mathbf{k}$};
+%     \draw [bluevec,black] (P) -- ++(\u:1) node [below right] {$\mathbf{u}$};
+%     \draw [bluevec,black] (P) -- ++(\v:1) node [left] {$\mathbf{v}$};
+%     \draw [bluevec,black] (P) -- ++(\w:1) node [below,yshift=-0.1cm] {$\mathbf{w}$};
+%     \node at ($(P)+(\w:3)$) [rotate=\w] {\includegraphics[width=1cm]{../eye.png}};
+%     \node [point,label={270:$\mathbf{p}$},red] at (P) {};
+% \end{tikzpicture}
+
+% Projection
+% \begin{tikzpicture}[auto]
+%     \tikzmath{\x=330;\y=30;\z=90;\w=1.25;\h1=1;\h2=1.5;\h3=2.5;\sw=6;\sh=4;};
+%     \coordinate (O) at (0,0);
+%     \coordinate (BL) at ($(O)+(\x+180:0.5*\sw)+(\z+180:0.5*\sh)$);
+%     \coordinate (P) at ($(O)+(\y+180:3.5)$);
+%     \draw ($(BL)+(\x:1+\w)+(\y:2)+(\z:0.5)$) coordinate (1) -- ++(30:2) -- ++(90:1) -- ++(120:1.08) -- ++(210:2.625) -- ++(270:1) -- ++(330:1.25) -- ++(90:1) -- ++(120:1.08) 
+%         ($(1)+(90:1)$) -- ++(30:2) 
+%         ($(1)+(150:1.25)$) -- ++(30:2) -- ++(330:1.25) 
+%         ($(1)+(150:1.25)+(30:2)$) -- ++(90:1);
+%     \draw ($(BL)+(\x:1+\w)+(\y:4)+(\z:0.5)$) coordinate (1) -- ++(30:1.25) -- ++(90:2.5) -- ++(150:1.25) -- ++(210:1.25) -- ++(270:2.5) -- ++(330:1.25) -- ++(90:2.5) -- ++(30:1.25) 
+%         ($(1)+(90:2.5)$) -- ++(150:1.25)
+%         ($(1)+(30:1.25)$) -- ++(150:1.25) -- ++(210:1.25);
+%     \draw ($(BL)+(\x:3.5+\w)+(\y:2)+(\z:0.5)$) coordinate (1) -- ++(30:2) -- ++(90:1) -- ++(120:1.08) -- ++(210:2.625) -- ++(270:1) -- ++(330:1.25) -- ++(90:1) -- ++(120:1.08) 
+%         ($(1)+(90:1)$) -- ++(30:2) 
+%         ($(1)+(150:1.25)$) -- ++(30:2) -- ++(330:1.25) 
+%         ($(1)+(150:1.25)+(30:2)$) -- ++(90:1);
+%     \draw [fill=gray!10,opacity=0.75] (BL) -- ++(330:\sw) -- node [right,pos=0.2] {projection plane} ++(90:\sh) -- ++(150:\sw) -- cycle;
+%     \draw [fill=white] ($(BL)+(\x:1)+(\z:0.5)$) coordinate (1)-- ++(\x:\w) -- ++(\z:\h3) -- ++(\x+180:\w) -- cycle;
+%     \draw ($(1)+(\z:\h1)$) -- ($(1)+(\x:0.5*\w)+(\z:\h2)$) -- ($(1)+(\x:\w)+(\z:\h1)$);
+%     \draw [fill=white] ($(BL)+(\x:3.5)+(\z:0.5)$) coordinate (1)-- ++(\x:\w) -- ++(\z:\h1) -- ($(1)+(\x:0.5*\w)+(\z:\h2)$) -- ($(1)+(\z:\h1)$) -- cycle;
+%     \draw [axis] (P) -- ++(330:1) node [below right] {$x$};
+%     \draw [axis] (P) -- ++(210:1) node [below left] {$z$};
+%     \draw [axis] (P) -- ++(90:1) node [above] {$y$};
+%     \node [rotate=210] at ($(P)+(\y+180:2)$) {\includegraphics[width=1cm]{../eye.png}};
+% \end{tikzpicture}
+
+% Perspective projection
+% \begin{tikzpicture}
+%     \coordinate (C) at (30:3);
+%     \draw [help lines,fill=gray!10] ($(30:2)+(150:2.5)+(270:1.5)$) -- ++(330:5) --  node [pos=0.2,right,black] {projection plane} ++(90:3) -- ++(150:5) -- cycle;
+%     \draw ($(30:4)+(150:1)+(270:0.8)$) coordinate (1) -- ++(330:2) coordinate (2) -- ++(90:1.6) coordinate (3) -- ++(150:2) coordinate (4) -- ++(270:1.6)
+%         ($(1)+(30:2)$) -- ++(330:2) -- ++(90:1.6) -- ++(150:2) -- ++(270:1.6)
+%         (1) -- ++(30:2) (2) -- ++(30:2) (3) -- ++(30:2) (4) -- ++(30:2);
+%     \draw [fill=white] ($(30:2)+(150:0.5)+(270:0.4)$) coordinate (5) -- ++(330:1) coordinate (6) -- ++(90:0.8) coordinate (7) -- ++(150:1) coordinate (8) -- ++(270:0.8);
+%     \draw ($(5)+(45:0.15)$) coordinate (9) -- ++(330:0.7) coordinate (10) -- ++(90:0.5) coordinate (11) -- ++(150:0.7) coordinate (12) -- ++(270:0.5);
+%     \draw (5) -- (9) (6) -- (10) (7) -- (11) (8) -- (12);
+%     \draw [dashed] (0,0) -- (1);
+%     \draw [dashed] (0,0) -- (2);
+%     \draw [dashed] (0,0) -- (3);
+%     \draw [dashed] (0,0) -- (4);
+%     \draw [axis] (0,0) -- ++(330:1) node [below right] {$x$};
+%     \draw [axis] (0,0) -- ++(90:1) node [above] {$y$};
+%     \draw [axis] (0,0) -- ++(210:1) node [below left] {$z$};
+%     \node at (210:2) [rotate=210] {\includegraphics[width=1cm]{../eye.png}};
+%     \draw [dblarrow] (330:2) -- node [below right] {$f$} ++(30:2); 
+% \end{tikzpicture}
+
+% Perspective projection calculation
+% \begin{tikzpicture}[auto]
+%     \coordinate (p) at ($(0:6)+(45:2)+(90:2)$);
+%     \coordinate (q) at ($(0:3)+(45:1)+(90:1)$);
+%     \draw [fill=gray!10] ($(0:3)+(225:1)+(270:1)$) -- ++(45:3.5) -- ++(90:3.5) -- ++(225:3.5) -- cycle;
+%     \draw [axis] (0,0) -- ++(225:2) node [below] {$x$};
+%     \draw [axis] (0,0) -- ++(90:2) node [left] {$y$};
+%     \draw [axis] (0:9) -- (180:1.41) node [left] {$z$} ;
+%     \draw [dblarrow] (225:0.5) -- node [below] {$f$} ++(0:3);
+%     \draw [dashed] (0,0) -- (q);
+%     \draw [dashed] (0,0) -- (p);
+%     \draw [dashed] (0,0) -- ($(p)+(270:2)$);
+%     \draw (0:6) 
+%         -- node [below right] {$x$} ++(45:2) 
+%         -- node [right] {$y$} ++(90:2) 
+%         -- node [above left] {$h$} (0:6);
+%     \draw (0:3) 
+%         -- node [below right,pos=0.67] {$x'$} ++(45:1) 
+%         -- node [right] {$y'$} ++(90:1) 
+%         -- node [above left] {$h'$} (0:3);
+%     \draw ($(0:6)+(45:1.8)$) -- ++(90:0.2) -- ++(45:0.2);
+%     \draw ($(0:3)+(45:0.8)$) -- ++(90:0.2) -- ++(45:0.2);
+%     \node [point,label={90:$(x,y,z)$}] at (p) {};
+%     \node [point,label={90:$(x',y',-f)$}] at (q) {};
+%     \node at (180:2.5) [rotate=180] {\includegraphics[width=1cm]{../eye.png}};
+% \end{tikzpicture}
+
+% Viewing frustum
+% \begin{tikzpicture}
+%     \coordinate (C) at (30:2.5);
+%     \draw [help lines,fill=blue!10] ($(C)+(150:2.1)+(270:1.25)$) -- ++(330:4.1) --  node [pos=0.2,right,black] {near projection plane} ++(90:2.5) -- ++(150:4.1) -- cycle;
+%     \draw [help lines,fill=red!10] ($(C)+(30:3)+(150:2)+(270:1.5)$) -- ++(330:4) --  node [pos=0.2,right,black] {far projection plane} ++(90:3) -- ++(150:4) -- cycle;
+%     \draw [fill=white] ($(C)+(30:3)+(150:1.5)+(270:1)$) coordinate (5) 
+%         -- ++(330:3) coordinate (6)
+%         -- ++(90:2) coordinate (7) 
+%         -- ++(150:3) coordinate (8)-- cycle;
+%     \draw [fill=white] ($(C)+(150:0.75)+(270:0.5)$) coordinate (1) 
+%         -- ++(330:1.5) coordinate (2) 
+%         -- ++(90:1) coordinate (3) 
+%         -- ++(150:1.5) coordinate (4) -- node [left] {screen} cycle;
+%     \draw (1) -- (5) (2) -- (6) (3) -- (7) (4) -- (8);
+%     \draw [axis] (0,0) -- ++(330:1) node [below] {$x$};
+%     \draw [axis] (0,0) -- ++(90:1) node [left] {$y$};
+%     \draw [axis] (30:8) -- (210:1) node [below left] {$z$};
+%     \node at (210:2) [rotate=210] {\includegraphics[width=1cm]{../eye.png}};
+%     \node at (1, 5) (frustum) {viewing frustum};
+%     \draw [-latex'] (frustum) -- ++(2, -2);
+%     \draw [help lines] ($(C)+(150:0.75)$) -- ++(330:1.5);
+%     \draw [help lines] ($(C)+(90:0.5)$) -- ++(270:1);
+% \end{tikzpicture}
+
+% Viewing frustum details
+% \begin{tikzpicture}	
+%     \draw [axis] (0,0) -- ++(330:1) node [below] {$x$};
+%     \draw [axis] (0,0) -- ++(90:1) node [left] {$y$};
+%     \draw [axis] (0,0) -- ++(210:1) node [below] {$z$};
+%     \node at (210:2) [rotate=210] {\includegraphics[width=1cm]{../eye.png}};
+%     \draw ($(30:4)+(150:1.5)+(270:1)$) coordinate (1) 
+%         -- ++(330:3) coordinate (2)
+%         -- ++(90:2) coordinate (3)
+%         -- ++(150:3) coordinate (4) -- cycle;
+%     \draw ($(30:8)+(150:3)+(270:2)$) coordinate (5) 
+%         -- ++(330:6) coordinate (6)
+%         -- ++(90:4) coordinate (7)
+%         -- ++(150:6) coordinate (8) -- cycle;
+%     \draw (1) -- (5) (2) -- (6) (3) -- (7) (4) -- (8);
+%     \node [point,label={left:$(l,b,-near)$}] at (1) {};
+%     \node [point,label={below right:$(r,b,-near)$}] at (2) {};
+%     \node [point,label={above left:$(l,r,-near)$}] at (4) {};
+%     \node [point,label={right:$(r,t,-near)$}] at (3) {};
+%     \draw (0,0) -- ($(30:4)+(330:1.5)$) -- ++(150:3) -- (0,0) -- ++(30:4);
+%     \draw [help lines] ($(30:4)+(150:0.2)$) -- ++(210:0.2) -- ++(330:0.4) -- ++(30:0.2);
+%     \draw [fill=white] (0,0) -- ++(15:0.75) -- ++(15:0.75) arc (15:90:0.75) -- cycle;
+%     \node [rotate=330] at (30:1) {$\!\!fov$};
+%     \draw [dblarrow] ($(30:4)+(150:1.5)+(90:1.2)$) -- node [above,rotate=330,black,pos=0.45] {$width$} ++(330:3);
+%     \draw [dblarrow] ($(30:4)+(330:1.7)+(270:1)$) -- node [above,rotate=-90,black] {$height$} ++(90:2);
+% \end{tikzpicture}
+
+% Transformed viewing frustum
+\begin{tikzpicture}	
+    \tikzmath{\x=345;\y=90;\z=45;\w=3;};
+    \draw [axis] (\x+180:4) -- (\x:4);
+    \draw [axis] (\y+180:4) -- (\y:4);
+    \draw [axis] (\z:4) -- (\z+180:4);
+    \node at (\z+180:5) [rotate=\z+180] {\includegraphics[width=1cm]{../eye.png}};
+    \draw [fill=white, opacity=0.5] ($(\x+180:0.5*\w)+(\z:0.5*\w)+(\y+180:0.5*\w)$) coordinate(4) 
+    -- ++(\x:\w) coordinate (3)
+    -- ++(\y:\w) coordinate (7)
+    -- ++(\x+180:\w) coordinate (8) -- cycle;
+    \node [label={left:$(-1,1,1)$}] at (4) {};
+    \draw [fill=white, opacity=0.5] ($(\x+180:0.5*\w)+(\z+180:0.5*\w)+(\y+180:0.5*\w)$) 
+    -- ++(\z:\w)
+    -- ++(\y:\w)
+    -- ++(\z+180:\w) -- cycle;
+    \draw [fill=white, opacity=0.5] ($(\x+180:0.5*\w)+(\z+180:0.5*\w)+(\y+180:0.5*\w)$) 
+    -- ++(\x:\w)
+    -- ++(\z:\w) 
+    -- ++(\x+180:\w) -- cycle;
+    \node [label={left:$(-1,1,1)$}] at (4) {};
+    \draw [fill=white, opacity=0.5] ($(\x+180:0.5*\w)+(\z+180:0.5*\w)+(\y:0.5*\w)$) 
+    -- ++(\x:\w) 
+    -- ++(\z:\w) 
+    -- ++(\x+180:\w) -- cycle;
+    \draw [fill=white, opacity=0.5] ($(\x:0.5*\w)+(\z+180:0.5*\w)+(\y+180:0.5*\w)$) 
+    -- ++(\z:\w) 
+    -- ++(\y:\w) 
+    -- ++(\z+180:\w) -- cycle;
+    \draw [fill=white, opacity=0.5] ($(\x+180:0.5*\w)+(\z+180:0.5*\w)+(\y+180:0.5*\w)$) coordinate (1)
+    -- ++(\x:\w) coordinate (2)
+    -- ++(\y:\w) coordinate (6)
+    -- ++(\x+180:\w) coordinate (5)
+    -- cycle;
+    \draw ($(\x+180:0.5*\w)+(\z+180:0.5*\w)+(\y:0.5*\w)$) -- ++(\x:\w) -- ++(\z:\w) -- ++(\x+180:\w) -- cycle;
+    \draw ($(\x:0.5*\w)+(\z+180:0.5*\w)+(\y+180:0.5*\w)$) -- ++(\z:\w) -- ++(\y:\w) -- ++(\z+180:\w) -- cycle;
+    \draw ($(\x+180:0.5*\w)+(\z+180:0.5*\w)+(\y+180:0.5*\w)$) -- ++(\x:\w) -- ++(\y:\w) -- ++(\x+180:\w) -- cycle;
+    \draw [axis] (\x:0.5*\w) -- (\x:4) node [below] {$x$};
+    \draw [axis] (\y:0.5*\w) -- (\y:4) node [above] {$y$};
+    \draw [axis] (\z+180:0.5*\w) -- (\z+180:4) node [below left] {$z$};
+    \node [label={left:$(-1,-1,1)$}] at (1) {};
+    \node [label={right:$(1,-1,1)$}] at (2) {};
+    \node [label={above right:$(1,-1,-1)$}] at (3) {};
+    \node [label={above left:$(-1,1,-1)$}] at (5) {};
+    \node [label={right:$(1,1,1)$}] at (6) {};
+    \node [label={right:$(1,1,-1)$}] at (7) {};
+    \node [label={left:$(-1,1,-1)$}] at (8) {};
 \end{tikzpicture}
 
 \end{document}

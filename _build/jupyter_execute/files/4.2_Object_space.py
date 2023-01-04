@@ -4,6 +4,9 @@
 # (object-space-section)=
 # # Object space
 # 
+# ```{figure} /images/viewing_pipeline_object_space.svg
+# :figclass: margin
+# ```
 # 
 # Each object in a virtual world is defined in its own space where the centre of mass of the object is at the origin so that scaling, translation and rotation operations can be easily applied. 
 # 

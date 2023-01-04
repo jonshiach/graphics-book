@@ -3,6 +3,10 @@
 
 # # World space
 # 
+# ```{figure} /images/viewing_pipeline_world_space.svg
+# :figclass: margin
+# ```
+# 
 # Once the objects have been define they can be used to build the virtual environment. The objects are copied to the world space and transformed using [scaling](rotation-section), [rotation](rotation-section) and [translation](translation-section) operations to construct the virtual world.
 # 
 # ```{figure} /images/world_space.svg
@@ -236,33 +240,33 @@
 # 
 # ```matlab
 # % Define house object
-# Vhouse = [-0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0, 0 ;
-#      -1,  -1,   1,    1,   -1,  -1,   1,    1,  -1, 1 ;
-#       0,   0,   0,    0,    1,   1,   1,    1,   2, 2 ;
-#       1,   1,   1,    1,    1,   1,   1,    1,   1, 1];
+# Vhouse = [ -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0, 0 ;
+#            -1,  -1,   1,    1,   -1,  -1,   1,    1,  -1, 1 ;
+#             0,   0,   0,    0,    1,   1,   1,    1,   2, 2 ;
+#             1,   1,   1,    1,    1,   1,   1,    1,   1, 1 ];
 # 
-# Fhouse = [4, 3, 2, 1, 1 ;
-#           1, 2, 6, 9, 5 ;
-#           2, 3, 7, 6, 6 ;
-#           3, 4, 8, 10, 7 ;
-#           1, 5, 8, 4, 4 ;
-#           6, 7, 10, 9, 9 ;
-#           5, 9, 10, 8, 8 ];
+# Fhouse = [ 4, 3, 2, 1, 1 ;
+#            1, 2, 6, 9, 5 ;
+#            2, 3, 7, 6, 6 ;
+#            3, 4, 8, 10, 7 ;
+#            1, 5, 8, 4, 4 ;
+#            6, 7, 10, 9, 9 ;
+#            5, 9, 10, 8, 8 ];
 # 
 # % Define cube object
-# Vcube = [-1,  1,  1, -1, -1,  1, 1, -1 ;
-#          -1, -1,  1,  1, -1, -1, 1,  1 ;
-#          -1, -1, -1, -1,  1,  1, 1,  1 ;
-#           1,  1,  1,  1,  1,  1, 1,  1 ];
+# Vcube = [ -1,  1,  1, -1, -1,  1, 1, -1 ;
+#           -1, -1,  1,  1, -1, -1, 1,  1 ;
+#           -1, -1, -1, -1,  1,  1, 1,  1 ;
+#            1,  1,  1,  1,  1,  1, 1,  1 ];
 # 
-# Fcube = [1, 4, 3, 2, 2 ;
-#          1, 2, 6, 5, 5 ; 
-#          2, 3, 7, 6, 6 ;
-#          3, 4, 8, 7, 7 ;
-#          4, 1, 5, 8, 8 ;
-#          5, 6, 7, 8, 8 ];
+# Fcube = [ 1, 4, 3, 2, 2 ;
+#           1, 2, 6, 5, 5 ; 
+#           2, 3, 7, 6, 6 ;
+#           3, 4, 8, 7, 7 ;
+#           4, 1, 5, 8, 8 ;
+#           5, 6, 7, 8, 8 ];
 # 
-# % Define transformation parameters
+# % Define transformation parmeters
 # theta = pi / 2;
 # c1 = [3, 3.5, 0];
 # c2 = [3, 1.5, 0];
@@ -270,20 +274,20 @@
 # s = [0.5, 0.5, 1.5];
 # 
 # % Define transformation functions
-# T = @(t) [1, 0, 0, t(1) ; 
-#           0, 1, 0, t(2) ; 
-#           0, 0, 1, t(3) ; 
-#           0, 0, 0, 1];
+# T = @(t) [ 1, 0, 0, t(1) ; 
+#            0, 1, 0, t(2) ; 
+#            0, 0, 1, t(3) ; 
+#            0, 0, 0, 1 ];
 # 
-# S = @(s) [s(1), 0,    0,    0 ;  
-#           0,    s(2), 0,    0 ; 
-#           0,    0,    s(3), 0 ; 
-#           0,    0,    0,    1];
+# S = @(s) [ s(1), 0,    0,    0 ;  
+#            0,    s(2), 0,    0 ; 
+#            0,    0,    s(3), 0 ; 
+#            0,    0,    0,    1 ];
 # 
 # Rz = @(theta) [ cos(theta), sin(theta), 0, 0 ;
 #                -sin(theta), cos(theta), 0, 0 ;
-#                0,           0,          1, 0 ;
-#                0,           0,          0, 1];
+#                 0,           0,         1, 0 ;
+#                 0,           0,         0, 1 ];
 # 
 # % Add first house object
 # Vobj = T(c1) * Rz(theta) * Vhouse;
@@ -301,19 +305,18 @@
 # 
 # % Add tower object
 # Vobj = T(c3) * S(s) * Vcube;
-# Fobj = Fcube + size(Vworld, 2);
+# Fobj = Fcube + size(Vworld, 2); % add number of vertices in world space to face array
 # 
 # Vworld = [Vworld, Vobj];
 # F = [F ; Fobj];
 # 
 # % Plot world space
-# patch('Vertices', Vworld(1:3,:)', 'Faces', F, 'FaceColor', 'white', 'FaceAlpha', 0.75, 'LineWidth', 2)
+# patch('Vertices', Vworld(1:3,:)', 'Faces', F, FaceColor='w', FaceAlpha=0.75, LineWidth=2)
 # xlabel('$x$', 'Interpreter', 'latex', 'FontSize', 18)
 # ylabel('$y$', 'Interpreter', 'latex', 'FontSize', 18)
 # zlabel('$z$', 'Interpreter', 'latex', 'FontSize', 18)
 # view(45, 30)
-# axis equal
-# axis([0, 5, 0, 5, 0, 3])
+# axis([0, 5, 0, 5, 0, 4])
 # grid on
 # ```
 # 
