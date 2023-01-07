@@ -191,35 +191,30 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="4.1_The_viewing_pipeline.html">
-     The viewing pipeline
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="4.2_Object_space.html">
+    <a class="reference internal" href="4.1_Object_space.html">
      Object space
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="4.3_World_space.html">
+    <a class="reference internal" href="4.2_World_space.html">
      World space
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="4.4_Camera_space.html">
+    <a class="reference internal" href="4.3_Camera_space.html">
      Camera space
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="4.5_Screen_space.html">
+    <a class="reference internal" href="4.4_Screen_space.html">
      Screen space
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="1.0_Rasterisation.html">
-   Rasterisation
+  <a class="reference internal" href="5.0_Hidden_surface_removal.html">
+   Clipping &amp; hidden surface removal
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
   <label for="toctree-checkbox-4">
@@ -228,7 +223,34 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="1.1_Bresenhams_algorithm.html">
+    <a class="reference internal" href="5.1_Clipping.html">
+     Clipping
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="5.2_Painters_algorithm.html">
+     Painter’s algorithm
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="5.3_Binary_space_partitioning.html">
+     Binary Space Partitioning (BSP)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="1.0_Rasterisation.html">
+   Rasterisation
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="1.1_Drawing_lines.html">
      Drawing lines
     </a>
    </li>
@@ -886,7 +908,7 @@ Solution<div class="sd-summary-down docutils">
 </div></section>
 </section>
 <section id="basis">
-<h2>Basis<a class="headerlink" href="#basis" title="Permalink to this headline">#</a></h2>
+<span id="basis-section"></span><h2>Basis<a class="headerlink" href="#basis" title="Permalink to this headline">#</a></h2>
 <p>A <strong>basis</strong> of a vector space <span class="math notranslate nohighlight">\(V\)</span> is the set of vectors <span class="math notranslate nohighlight">\(\{ \mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_n \}\)</span> which are linearly independent (i.e., no vector in the basis can be represented as a linear combination of the other vectors in the basis) and span <span class="math notranslate nohighlight">\(V\)</span>. Every other vector <span class="math notranslate nohighlight">\(\mathbf{u}\)</span> in <span class="math notranslate nohighlight">\(V\)</span> can be expressed as a unique linear combination of the vectors in the basis, i.e.,</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
@@ -913,7 +935,7 @@ Solution<div class="sd-summary-down docutils">
 <p>Note that in <span class="math notranslate nohighlight">\(\mathbb{R}^3\)</span> it is common to use <span class="math notranslate nohighlight">\(\mathbf{i} = \mathbf{e}_1\)</span>, <span class="math notranslate nohighlight">\(\mathbf{j} = \mathbf{e}_2\)</span> and <span class="math notranslate nohighlight">\(\mathbf{k} = \mathbf{e}_3\)</span>.</p>
 </section>
 </div><section id="change-of-basis">
-<h3>Change of basis<a class="headerlink" href="#change-of-basis" title="Permalink to this headline">#</a></h3>
+<span id="change-of-basis-section"></span><h3>Change of basis<a class="headerlink" href="#change-of-basis" title="Permalink to this headline">#</a></h3>
 <p>Sometimes it is useful to write a vector with respect to a different basis which is known as the <strong>change of basis</strong>. For example let <span class="math notranslate nohighlight">\(\mathbf{a} \in \mathbb{R}^3\)</span> and let <span class="math notranslate nohighlight">\([\mathbf{a}]_U\)</span> denote that <span class="math notranslate nohighlight">\(\mathbf{a}\)</span> is represented with respect to the standard basis <span class="math notranslate nohighlight">\(E\)</span>. If we have another basis <span class="math notranslate nohighlight">\(U = \{ \mathbf{u}_1, \mathbf{u}_2, \mathbf{u}_3\}\)</span> then we can repesent <span class="math notranslate nohighlight">\(\mathbf{a}\)</span> with respect to this basis where <span class="math notranslate nohighlight">\([\mathbf{a}]_U = (\alpha_1, \alpha_2, \alpha_3)\)</span> such that</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}

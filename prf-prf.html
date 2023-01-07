@@ -193,35 +193,30 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="files/4.1_The_viewing_pipeline.html">
-     The viewing pipeline
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="files/4.2_Object_space.html">
+    <a class="reference internal" href="files/4.1_Object_space.html">
      Object space
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="files/4.3_World_space.html">
+    <a class="reference internal" href="files/4.2_World_space.html">
      World space
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="files/4.4_Camera_space.html">
+    <a class="reference internal" href="files/4.3_Camera_space.html">
      Camera space
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="files/4.5_Screen_space.html">
+    <a class="reference internal" href="files/4.4_Screen_space.html">
      Screen space
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="files/1.0_Rasterisation.html">
-   Rasterisation
+  <a class="reference internal" href="files/5.0_Hidden_surface_removal.html">
+   Clipping &amp; hidden surface removal
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
   <label for="toctree-checkbox-4">
@@ -230,7 +225,34 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="files/1.1_Bresenhams_algorithm.html">
+    <a class="reference internal" href="files/5.1_Clipping.html">
+     Clipping
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="files/5.2_Painters_algorithm.html">
+     Painter’s algorithm
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="files/5.3_Binary_space_partitioning.html">
+     Binary Space Partitioning (BSP)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="files/1.0_Rasterisation.html">
+   Rasterisation
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="files/1.1_Drawing_lines.html">
      Drawing lines
     </a>
    </li>
@@ -356,11 +378,11 @@ title="Fullscreen mode"
    <a href="#cap-basic-bresenham-example"><strong>basic-bresenham-example</strong></a> | 
    <a href="#cap-basic-bresenhams-algorithm"><strong>basic-bresenhams-algorithm</strong></a> | 
    <a href="#cap-bresenhams-algorithm"><strong>bresenhams-algorithm</strong></a> | 
+   <a href="#cap-camera-space-example"><strong>camera-space-example</strong></a> | 
    <a href="#cap-change-of-basis-example-1"><strong>change-of-basis-example-1</strong></a> | 
    <a href="#cap-composite-transformation-definition"><strong>composite-transformation-definition</strong></a> | 
    <a href="#cap-composite-transformation-matrices-theorem"><strong>composite-transformation-matrices-theorem</strong></a> | 
    <a href="#cap-definition-0"><strong>definition-0</strong></a> | 
-   <a href="#cap-definition-1"><strong>definition-1</strong></a> | 
    <a href="#cap-definition-11"><strong>definition-11</strong></a> | 
    <a href="#cap-definition-2"><strong>definition-2</strong></a> | 
    <a href="#cap-definition-3"><strong>definition-3</strong></a> | 
@@ -383,6 +405,7 @@ title="Fullscreen mode"
    <a href="#cap-flood-fill-example"><strong>flood-fill-example</strong></a> | 
    <a href="#cap-geometric-dot-product-definition"><strong>geometric-dot-product-definition</strong></a> | 
    <a href="#cap-homogeneous-coordinates-definition"><strong>homogeneous-coordinates-definition</strong></a> | 
+   <a href="#cap-idealised-image-definition"><strong>idealised-image-definition</strong></a> | 
    <a href="#cap-inverse-transformation-definition"><strong>inverse-transformation-definition</strong></a> | 
    <a href="#cap-line-line-distance-theorem"><strong>line-line-distance-theorem</strong></a> | 
    <a href="#cap-linear-transformation-definition"><strong>linear-transformation-definition</strong></a> | 
@@ -390,15 +413,21 @@ title="Fullscreen mode"
    <a href="#cap-midpoint-algorithm"><strong>midpoint-algorithm</strong></a> | 
    <a href="#cap-midpoint-example"><strong>midpoint-example</strong></a> | 
    <a href="#cap-modified-bresenham-example"><strong>modified-bresenham-example</strong></a> | 
+   <a href="#cap-normal-vector-definition"><strong>normal-vector-definition</strong></a> | 
+   <a href="#cap-object-space-example"><strong>object-space-example</strong></a> | 
+   <a href="#cap-pixel-definition"><strong>pixel-definition</strong></a> | 
    <a href="#cap-point-line-distance-theorem"><strong>point-line-distance-theorem</strong></a> | 
+   <a href="#cap-raster-definition"><strong>raster-definition</strong></a> | 
    <a href="#cap-rotation-example-1"><strong>rotation-example-1</strong></a> | 
    <a href="#cap-rotation-example-2"><strong>rotation-example-2</strong></a> | 
    <a href="#cap-rotation-in-R3-theorem"><strong>rotation-in-R3-theorem</strong></a> | 
    <a href="#cap-scaling-example"><strong>scaling-example</strong></a> | 
    <a href="#cap-scanline-algorithm"><strong>scanline-algorithm</strong></a> | 
+   <a href="#cap-screen-space-example"><strong>screen-space-example</strong></a> | 
    <a href="#cap-theorem-4"><strong>theorem-4</strong></a> | 
    <a href="#cap-transformation-matrix-example"><strong>transformation-matrix-example</strong></a> | 
-   <a href="#cap-translation-matrix-definition"><strong>translation-matrix-definition</strong></a>
+   <a href="#cap-translation-matrix-definition"><strong>translation-matrix-definition</strong></a> | 
+   <a href="#cap-world-space-example"><strong>world-space-example</strong></a>
    </div>
 
    <table class="indextable modindextable">
@@ -408,7 +437,7 @@ title="Fullscreen mode"
      <tr>
        <td></td>
        <td>
-       <a href="files/1.1_Bresenhams_algorithm.html#basic-bresenham-example"><code class="xref">basic-bresenham-example</code></a> <em>(files/1.1_Bresenhams_algorithm)</em></td><td>
+       <a href="files/1.1_Drawing_lines.html#basic-bresenham-example"><code class="xref">basic-bresenham-example</code></a> <em>(files/1.1_Drawing_lines)</em></td><td>
        <em>example</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-basic-bresenhams-algorithm"><td></td><td>
@@ -416,7 +445,7 @@ title="Fullscreen mode"
      <tr>
        <td></td>
        <td>
-       <a href="files/1.1_Bresenhams_algorithm.html#basic-bresenhams-algorithm"><code class="xref">basic-bresenhams-algorithm</code></a> <em>(files/1.1_Bresenhams_algorithm)</em></td><td>
+       <a href="files/1.1_Drawing_lines.html#basic-bresenhams-algorithm"><code class="xref">basic-bresenhams-algorithm</code></a> <em>(files/1.1_Drawing_lines)</em></td><td>
        <em>algorithm</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-bresenhams-algorithm"><td></td><td>
@@ -424,8 +453,16 @@ title="Fullscreen mode"
      <tr>
        <td></td>
        <td>
-       <a href="files/1.1_Bresenhams_algorithm.html#bresenhams-algorithm"><code class="xref">bresenhams-algorithm</code></a> <em>(files/1.1_Bresenhams_algorithm)</em></td><td>
+       <a href="files/1.1_Drawing_lines.html#bresenhams-algorithm"><code class="xref">bresenhams-algorithm</code></a> <em>(files/1.1_Drawing_lines)</em></td><td>
        <em>algorithm</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-camera-space-example"><td></td><td>
+       <strong>camera-space-example</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="files/4.3_Camera_space.html#camera-space-example"><code class="xref">camera-space-example</code></a> <em>(files/4.3_Camera_space)</em></td><td>
+       <em>example</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-change-of-basis-example-1"><td></td><td>
        <strong>change-of-basis-example-1</strong></td><td></td></tr>
@@ -456,15 +493,7 @@ title="Fullscreen mode"
      <tr>
        <td></td>
        <td>
-       <a href="files/3.2_Scaling.html#definition-0"><code class="xref">definition-0</code></a> <em>(files/3.2_Scaling)</em></td><td>
-       <em>definition</em></td></tr>
-     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-definition-1"><td></td><td>
-       <strong>definition-1</strong></td><td></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="files/1.0_Rasterisation.html#definition-1"><code class="xref">definition-1</code></a> <em>(files/1.0_Rasterisation)</em></td><td>
+       <a href="files/2.1_Points_lines_and_planes.html#definition-0"><code class="xref">definition-0</code></a> <em>(files/2.1_Points_lines_and_planes)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-definition-11"><td></td><td>
@@ -488,7 +517,7 @@ title="Fullscreen mode"
      <tr>
        <td></td>
        <td>
-       <a href="files/2.1_Points_lines_and_planes.html#definition-3"><code class="xref">definition-3</code></a> <em>(files/2.1_Points_lines_and_planes)</em></td><td>
+       <a href="files/2.0_Coordinate_geometry.html#definition-3"><code class="xref">definition-3</code></a> <em>(files/2.0_Coordinate_geometry)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-definition-4"><td></td><td>
@@ -528,7 +557,7 @@ title="Fullscreen mode"
      <tr>
        <td></td>
        <td>
-       <a href="files/1.1_Bresenhams_algorithm.html#example-0"><code class="xref">example-0</code></a> <em>(files/1.1_Bresenhams_algorithm)</em></td><td>
+       <a href="files/1.1_Drawing_lines.html#example-0"><code class="xref">example-0</code></a> <em>(files/1.1_Drawing_lines)</em></td><td>
        <em>example</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-example-1"><td></td><td>
@@ -536,7 +565,7 @@ title="Fullscreen mode"
      <tr>
        <td></td>
        <td>
-       <a href="files/2.2_Shortest_distance_problems.html#example-1"><code class="xref">example-1</code></a> <em>(files/2.2_Shortest_distance_problems)</em></td><td>
+       <a href="files/2.1_Points_lines_and_planes.html#example-1"><code class="xref">example-1</code></a> <em>(files/2.1_Points_lines_and_planes)</em></td><td>
        <em>example</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-example-10"><td></td><td>
@@ -584,7 +613,7 @@ title="Fullscreen mode"
      <tr>
        <td></td>
        <td>
-       <a href="files/3.0_Transformations.html#example-5"><code class="xref">example-5</code></a> <em>(files/3.0_Transformations)</em></td><td>
+       <a href="files/2.1_Points_lines_and_planes.html#example-5"><code class="xref">example-5</code></a> <em>(files/2.1_Points_lines_and_planes)</em></td><td>
        <em>example</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-example-7"><td></td><td>
@@ -643,6 +672,14 @@ title="Fullscreen mode"
        <a href="files/3.1_Translation.html#homogeneous-coordinates-definition"><code class="xref">homogeneous-coordinates-definition</code></a> <em>(files/3.1_Translation)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-idealised-image-definition"><td></td><td>
+       <strong>idealised-image-definition</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="files/1.0_Rasterisation.html#idealised-image-definition"><code class="xref">idealised-image-definition</code></a> <em>(files/1.0_Rasterisation)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-inverse-transformation-definition"><td></td><td>
        <strong>inverse-transformation-definition</strong></td><td></td></tr>
      <tr>
@@ -696,8 +733,32 @@ title="Fullscreen mode"
      <tr>
        <td></td>
        <td>
-       <a href="files/1.1_Bresenhams_algorithm.html#modified-bresenham-example"><code class="xref">modified-bresenham-example</code></a> <em>(files/1.1_Bresenhams_algorithm)</em></td><td>
+       <a href="files/1.1_Drawing_lines.html#modified-bresenham-example"><code class="xref">modified-bresenham-example</code></a> <em>(files/1.1_Drawing_lines)</em></td><td>
        <em>example</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-normal-vector-definition"><td></td><td>
+       <strong>normal-vector-definition</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="files/2.1_Points_lines_and_planes.html#normal-vector-definition"><code class="xref">normal-vector-definition</code></a> <em>(files/2.1_Points_lines_and_planes)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-object-space-example"><td></td><td>
+       <strong>object-space-example</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="files/4.1_Object_space.html#object-space-example"><code class="xref">object-space-example</code></a> <em>(files/4.1_Object_space)</em></td><td>
+       <em>example</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-pixel-definition"><td></td><td>
+       <strong>pixel-definition</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="files/1.0_Rasterisation.html#pixel-definition"><code class="xref">pixel-definition</code></a> <em>(files/1.0_Rasterisation)</em></td><td>
+       <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-point-line-distance-theorem"><td></td><td>
        <strong>point-line-distance-theorem</strong></td><td></td></tr>
@@ -706,6 +767,14 @@ title="Fullscreen mode"
        <td>
        <a href="files/2.2_Shortest_distance_problems.html#point-line-distance-theorem"><code class="xref">point-line-distance-theorem</code></a> <em>(files/2.2_Shortest_distance_problems)</em></td><td>
        <em>theorem</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-raster-definition"><td></td><td>
+       <strong>raster-definition</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="files/1.0_Rasterisation.html#raster-definition"><code class="xref">raster-definition</code></a> <em>(files/1.0_Rasterisation)</em></td><td>
+       <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-rotation-example-1"><td></td><td>
        <strong>rotation-example-1</strong></td><td></td></tr>
@@ -747,6 +816,14 @@ title="Fullscreen mode"
        <a href="files/1.3_Drawing_polygons.html#scanline-algorithm"><code class="xref">scanline-algorithm</code></a> <em>(files/1.3_Drawing_polygons)</em></td><td>
        <em>algorithm</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-screen-space-example"><td></td><td>
+       <strong>screen-space-example</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="files/4.4_Screen_space.html#screen-space-example"><code class="xref">screen-space-example</code></a> <em>(files/4.4_Screen_space)</em></td><td>
+       <em>example</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-theorem-4"><td></td><td>
        <strong>theorem-4</strong></td><td></td></tr>
      <tr>
@@ -770,6 +847,14 @@ title="Fullscreen mode"
        <td>
        <a href="files/3.1_Translation.html#translation-matrix-definition"><code class="xref">translation-matrix-definition</code></a> <em>(files/3.1_Translation)</em></td><td>
        <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-world-space-example"><td></td><td>
+       <strong>world-space-example</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="files/4.2_World_space.html#world-space-example"><code class="xref">world-space-example</code></a> <em>(files/4.2_World_space)</em></td><td>
+       <em>example</em></td></tr>
    </table>
 
 

@@ -57,8 +57,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../_static/favicon.jpg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Drawing lines" href="1.1_Bresenhams_algorithm.html" />
-    <link rel="prev" title="Screen space" href="4.5_Screen_space.html" />
+    <link rel="next" title="Drawing lines" href="1.1_Drawing_lines.html" />
+    <link rel="prev" title="Binary Space Partitioning (BSP)" href="5.3_Binary_space_partitioning.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -191,28 +191,50 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="4.1_The_viewing_pipeline.html">
-     The viewing pipeline
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="4.2_Object_space.html">
+    <a class="reference internal" href="4.1_Object_space.html">
      Object space
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="4.3_World_space.html">
+    <a class="reference internal" href="4.2_World_space.html">
      World space
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="4.4_Camera_space.html">
+    <a class="reference internal" href="4.3_Camera_space.html">
      Camera space
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="4.5_Screen_space.html">
+    <a class="reference internal" href="4.4_Screen_space.html">
      Screen space
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="5.0_Hidden_surface_removal.html">
+   Clipping &amp; hidden surface removal
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="5.1_Clipping.html">
+     Clipping
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="5.2_Painters_algorithm.html">
+     Painter’s algorithm
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="5.3_Binary_space_partitioning.html">
+     Binary Space Partitioning (BSP)
     </a>
    </li>
   </ul>
@@ -221,14 +243,14 @@ const thebe_selector_output = ".output, .cell_output"
   <a class="current reference internal" href="#">
    Rasterisation
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
-  <label for="toctree-checkbox-4">
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
    <i class="fas fa-chevron-down">
    </i>
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="1.1_Bresenhams_algorithm.html">
+    <a class="reference internal" href="1.1_Drawing_lines.html">
      Drawing lines
     </a>
    </li>
@@ -478,25 +500,23 @@ title="Print to PDF"
   <section class="tex2jax_ignore mathjax_ignore" id="rasterisation">
 <h1>Rasterisation<a class="headerlink" href="#rasterisation" title="Permalink to this headline">#</a></h1>
 <p>Computer displays use an array of small squares called pixels which are illuminated using different colours. When the array of pixels is viewed as a whole the brain interprets it as a single image. The pixel array is called a raster array and the process of determining the illumination of the pixels is called <strong>rasterisation</strong>. The image that is approximated as a raster array is known as the <strong>idealised image</strong>.</p>
-<figure class="align-default" id="id1">
-<div class="cell_output docutils container">
-<img alt="../_images/1.0_Rasterisation_1_0.png" src="../_images/1.0_Rasterisation_1_0.png" />
-</div>
+<figure class="align-default" id="id3">
+<a class="reference internal image-reference" href="../_images/ideal_and_raster_image.png"><img alt="../_images/ideal_and_raster_image.png" src="../_images/ideal_and_raster_image.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 30 </span><span class="caption-text">The idealised image and the raster approximation.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 49 </span><span class="caption-text">The idealised image and the raster approximation.</span><a class="headerlink" href="#id3" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<div class="proof definition note admonition" id="definition-0">
+<div class="proof definition note admonition" id="pixel-definition">
 <p class="admonition-title"><span class="caption-number">Definition 19 </span> (Pixel)</p>
 <section class="definition-content" id="proof-content">
 <p>A <strong>pixel</strong> is a small square that is illuminated using different colours.</p>
 </section>
-</div><div class="proof definition note admonition" id="definition-1">
+</div><div class="proof definition note admonition" id="raster-definition">
 <p class="admonition-title"><span class="caption-number">Definition 20 </span> (Raster)</p>
 <section class="definition-content" id="proof-content">
 <p>A <strong>raster</strong> is a rectangular array of pixels.</p>
 </section>
-</div><div class="proof definition note admonition" id="definition-2">
+</div><div class="proof definition note admonition" id="idealised-image-definition">
 <p class="admonition-title"><span class="caption-number">Definition 21 </span> (Idealised image)</p>
 <section class="definition-content" id="proof-content">
 <p>An <strong>idealised image</strong> is an analogue image that we wish to represent in a raster.</p>
@@ -506,11 +526,11 @@ title="Print to PDF"
 <p>The <strong>RGB</strong> colour model uses the three primary colours <span style="color: red;">Red</span>, <span style="color: green;">Green</span> and <span style="color: blue;">Blue</span> (RGB) that are added to produce colours in the visible spectrum. Using a single bit for each primary colour (i.e., adding all of that colour or none of that colour) means that it is possible to produce eight colours: <span style="color: red;">red</span>, <span style="color: yellow;">yellow</span>, <span style="color: green;">green</span>, <span style="color: cyan;">cyan</span>, <span style="color: blue;">blue</span>, <span style="color: magenta;">magenta</span>, black and <span style="background-color:black;color:white">white</span> as shown in <a class="reference internal" href="#rgb-table"><span class="std std-ref">1-bit RGB codes</span></a>. For example mixing full amounts of red and green results in pure yellow.</p>
 <section id="bit-colour">
 <h3>24-bit colour<a class="headerlink" href="#bit-colour" title="Permalink to this headline">#</a></h3>
-<p>Adding proportions of each primary colours means that many more colours can be produced. Using 8 bits for each primary colour means that there are a possible <span class="math notranslate nohighlight">\(2^8 = 256\)</span> different quantities of that colour. Combining the three primary colours means that the number of colours that can be produced is <span class="math notranslate nohighlight">\(3 \times 2^8 = 16,772,216\)</span>. It is estimated that the most number of colours that the human eye can distinguish is approximately 10 million so 24 bit colour (known as <a class="reference external" href="https://en.wikipedia.org/wiki/Color_depth#True_color_(24-bit)"><strong>true color</strong></a> is considered sufficient.</p>
-<figure class="align-default" id="id2">
+<p>Adding proportions of each primary colours means that many more colours can be produced. Using 8 bits for each primary colour means that there are a possible <span class="math notranslate nohighlight">\(2^8 = 256\)</span> different quantities of that colour. Combining the three primary colours means that the number of colours that can be produced is <span class="math notranslate nohighlight">\(3 \times 2^8 = 16,772,216\)</span>. It is estimated that the most number of colours that the human eye can distinguish is approximately 10 million so 24 bit colour (known as <a class="reference external" href="https://en.wikipedia.org/wiki/Color_depth#True_color_(24-bit)">true color</a>) is considered sufficient.</p>
+<figure class="align-default" id="id4">
 <a class="reference internal image-reference" href="../_images/rgb_wheel.png"><img alt="../_images/rgb_wheel.png" src="../_images/rgb_wheel.png" style="width: 300px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 31 </span><span class="caption-text">RGB color wheel</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 50 </span><span class="caption-text">RGB color wheel</span><a class="headerlink" href="#id4" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Since there are 256 levels of the three primary colours in the true color model we can use the integers 0 to 255 in an ordered triplet. For example, the colour <span style="color: cyan;">cyan</span> is made by mixing full amounts of green and blue which corresponds to the triplet <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">255,</span> <span class="pre">255]</span></code>. Most software packages also accept <a class="reference external" href="https://en.wikipedia.org/wiki/Hexadecimal">hexadecimal</a> (base-16) colour codes where the values in the triplet are represented using 2-digit hexadecimal numbers 00 to FF which follow a # symbol. For example, <span style="color: cyan;">cyan</span> is represented using <code class="docutils literal notranslate"><span class="pre">&quot;#00FFFF&quot;</span></code>.</p>
@@ -567,72 +587,69 @@ title="Print to PDF"
 <section id="raster-arrays">
 <h2>Raster arrays<a class="headerlink" href="#raster-arrays" title="Permalink to this headline">#</a></h2>
 <p>The information that defines a raster can be stored in a raster array. If a raster has a width of <span class="math notranslate nohighlight">\(N_x\)</span> pixels and a height of <span class="math notranslate nohighlight">\(N_y\)</span> pixels then it can be defined as an <span class="math notranslate nohighlight">\(N_y \times N_x \times 3\)</span> array. The colour of each of the pixels in the raster is defined by the 3 levels for the red, green and blue components.</p>
-<p>The matplotlib command for reading in an image file is <code class="docutils literal notranslate"><span class="pre">plt.imread(&lt;filename&gt;)</span></code>. For example, the following code reads in the image file <code class="docutils literal notranslate"><span class="pre">cavendish.png</span></code> which if a photograph of my cat Cavendish and prints the size of the raster array.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">matplotlib.image</span> <span class="k">as</span> <span class="nn">mpimg</span>
-
-<span class="n">img</span> <span class="o">=</span> <span class="n">mpimg</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;../images/cavendish.jpg&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<p>The MATLAB command for reading in an image file is <code class="docutils literal notranslate"><span class="pre">imread(&lt;filename&gt;)</span></code>. For example, the following code reads in the image file <code class="docutils literal notranslate"><span class="pre">cavendish.png</span></code> which is a photograph of my cat Cavendish and prints the size of the raster array.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">img</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">imread</span><span class="p">(</span><span class="s">&#39;cavendish.jpg&#39;</span><span class="p">);</span><span class="w"></span>
+<span class="p">[</span><span class="n">Ny</span><span class="p">,</span><span class="w"> </span><span class="n">Nx</span><span class="p">,</span><span class="w"> </span><span class="n">Ncolours</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">size</span><span class="p">(</span><span class="n">img</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(600, 800, 3)
+<p>The output is</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Ny</span> <span class="o">=</span> <span class="mi">600</span>
+<span class="n">Nx</span> <span class="o">=</span> <span class="mi">800</span>
+<span class="n">Ncolours</span> <span class="o">=</span> <span class="mi">3</span>
 </pre></div>
-</div>
-</div>
 </div>
 <p>So the raster array has a height of <span class="math notranslate nohighlight">\(N_y = 600\)</span> pixels, a width of <span class="math notranslate nohighlight">\(N_x=800\)</span> pixels with each pixel defined by a colour triplet.</p>
-<p>The matplotlib command for displaying a raster array <code class="docutils literal notranslate"><span class="pre">X</span></code> is <code class="docutils literal notranslate"><span class="pre">plt.imshow(X)</span></code></p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">imgplot</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<p>The MATLAB command for displaying a raster array <code class="docutils literal notranslate"><span class="pre">img</span></code> is <code class="docutils literal notranslate"><span class="pre">image(img)</span></code></p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">image</span><span class="p">(</span><span class="n">img</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/1.0_Rasterisation_5_0.png" src="../_images/1.0_Rasterisation_5_0.png" />
-</div>
-</div>
-<p>Now we have the raster array for the image we can use Python commands to manipulate the image. For example, the following code sets the colour of each pixel to either black or white depending on whether the sum of the colour triplet is greater or less than 383 which is halfway between 0 and 767 .</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">colour_sum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">imgbw</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
-<span class="n">imgbw</span><span class="p">[</span><span class="n">colour_sum</span> <span class="o">&gt;</span> <span class="mi">382</span><span class="p">,:]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">255</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="mi">255</span><span class="p">]</span>
-<span class="n">imgbw</span><span class="p">[</span><span class="n">colour_sum</span> <span class="o">&lt;=</span> <span class="mi">382</span><span class="p">,:]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
-<span class="n">imgbwplot</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">imgbw</span><span class="p">)</span>
+<figure class="align-default">
+<a class="reference internal image-reference" href="../_images/cavendish_plot.png"><img alt="../_images/cavendish_plot.png" src="../_images/cavendish_plot.png" style="width: 500px;" /></a>
+</figure>
+<p>Now we have the raster array for the image we can use Python commands to manipulate the image. For example, the following code sets the colour of each pixel to either black or white depending on whether the average of the colour triplet is greater or less than 128 which is halfway between 0 and 255.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Read in image</span><span class="w"></span>
+<span class="n">img</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">imread</span><span class="p">(</span><span class="s">&#39;cavendish.jpg&#39;</span><span class="p">);</span><span class="w"></span>
+
+<span class="c">% Get size of image array</span><span class="w"></span>
+<span class="p">[</span><span class="n">Ny</span><span class="p">,</span><span class="w"> </span><span class="n">Nx</span><span class="p">,</span><span class="w"> </span><span class="n">Ncolours</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">size</span><span class="p">(</span><span class="n">img</span><span class="p">);</span><span class="w"></span>
+
+<span class="c">% Reshape image array</span><span class="w"></span>
+<span class="n">img_bw</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">reshape</span><span class="p">(</span><span class="n">img</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">Nx</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Ny</span><span class="p">,</span><span class="w"> </span><span class="n">Ncolours</span><span class="p">]);</span><span class="w"></span>
+
+<span class="c">% Calculate average colour of each pixel</span><span class="w"></span>
+<span class="n">avg</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">mean</span><span class="p">(</span><span class="n">img_bw</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span><span class="w"></span>
+
+<span class="c">% Change each pixel to black or white depending on the average colour</span><span class="w"></span>
+<span class="n">img_bw</span><span class="p">(</span><span class="n">avg</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">128</span><span class="p">,</span><span class="w"> </span><span class="p">:)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="n">img_bw</span><span class="p">(</span><span class="n">avg</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">128</span><span class="p">,</span><span class="w"> </span><span class="p">:)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">255</span><span class="p">;</span><span class="w"></span>
+
+<span class="c">% Reshape image array back to the original shape</span><span class="w"></span>
+<span class="n">img_bw</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">reshape</span><span class="p">(</span><span class="n">img_bw</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">Ny</span><span class="p">,</span><span class="w"> </span><span class="n">Nx</span><span class="p">,</span><span class="w"> </span><span class="n">Ncolours</span><span class="p">]);</span><span class="w"></span>
+
+<span class="c">% Plot image array</span><span class="w"></span>
+<span class="nb">image</span><span class="p">(</span><span class="n">img_bw</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/1.0_Rasterisation_7_0.png" src="../_images/1.0_Rasterisation_7_0.png" />
-</div>
-</div>
+<figure class="align-default">
+<a class="reference internal image-reference" href="../_images/cavendish_bw.png"><img alt="../_images/cavendish_bw.png" src="../_images/cavendish_bw.png" style="width: 500px;" /></a>
+</figure>
 </section>
 <section id="pixel-co-ordinates">
 <h2>Pixel co-ordinates<a class="headerlink" href="#pixel-co-ordinates" title="Permalink to this headline">#</a></h2>
-<p>You may have noticed that the vertical axes on the image plots have a scale that starts at 0 at the top and increases as we move down the rows of pixels. The reason for this is that digital displays are refreshed using horizontal lines of pixels starting at the top row and moving down to the bottom.</p>
+<p>You may have noticed that the vertical axes on the image plots have a scale that starts at 1 at the top and increases as we move down the rows of pixels <a class="footnote-reference brackets" href="#id2" id="id1">1</a>. The reason for this is that digital displays are refreshed using horizontal lines of pixels starting at the top row and moving down to the bottom.</p>
 <p>If the raster represents a region defined by the <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> Euclidean space co-ordinates <span class="math notranslate nohighlight">\(x, y \in [0, 1]\)</span> which is to be represented by an <span class="math notranslate nohighlight">\(N_y \times N_x\)</span> raster then the corresponding pixel co-ordinates are</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{align}
-    x_{pixel} &amp;= \lfloor x \cdot N_x \rfloor, \\
-    y_{pixel} &amp;= \lfloor (1 - y) \cdot N_y \rfloor, 
+    x_{pixel} &amp;= 1 + \lfloor x \cdot N_x \rfloor, \\
+    y_{pixel} &amp;= 1 + \lfloor (1 - y) \cdot N_y \rfloor, 
 \end{align}\end{split}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\lfloor \cdot \rfloor\)</span> is rounds the contents to the integer below. Note that the <span class="math notranslate nohighlight">\(y\)</span> co-ordinate is subtracted from 1 to ensure that the pixel co-ordinates <span class="math notranslate nohighlight">\((0, 0)\)</span> correspond to <span class="math notranslate nohighlight">\((0, 1)\)</span>, i.e., the top-left hand pixel in the raster.</p>
-<p>The Python function defined below calculates the pixel co-ordinates from the <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> Euclidean space co-ordinates</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">pixelcoords</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">Nx</span><span class="p">,</span> <span class="n">Ny</span><span class="p">):</span>
-    <span class="n">xpixel</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">Nx</span><span class="p">)</span>
-    <span class="n">ypixel</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="mi">1</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span> <span class="o">*</span> <span class="n">Ny</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">xpixel</span><span class="p">,</span> <span class="n">ypixel</span>
-</pre></div>
-</div>
-</div>
-</div>
+<hr class="footnotes docutils" />
+<dl class="footnote brackets">
+<dt class="label" id="id2"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>Note that in most graphical applications we start numbering pixels at 0. In these notes have have used 1 as the starting co-ordinate so that matrix indexing is easier when using MATLAB. If you are using a zero-indexing language such as Python, C etc. then subtract 1 from the pixel co-ordinates.</p>
+</dd>
+</dl>
 </section>
 <div class="toctree-wrapper compound">
 </div>
@@ -665,14 +682,14 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="4.5_Screen_space.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="5.3_Binary_space_partitioning.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Screen space</p>
+            <p class="prev-next-title">Binary Space Partitioning (BSP)</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="1.1_Bresenhams_algorithm.html" title="next page">
+    <a class='right-next' id="next-link" href="1.1_Drawing_lines.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Drawing lines</p>

@@ -191,35 +191,30 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="4.1_The_viewing_pipeline.html">
-     The viewing pipeline
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="4.2_Object_space.html">
+    <a class="reference internal" href="4.1_Object_space.html">
      Object space
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="4.3_World_space.html">
+    <a class="reference internal" href="4.2_World_space.html">
      World space
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="4.4_Camera_space.html">
+    <a class="reference internal" href="4.3_Camera_space.html">
      Camera space
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="4.5_Screen_space.html">
+    <a class="reference internal" href="4.4_Screen_space.html">
      Screen space
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="1.0_Rasterisation.html">
-   Rasterisation
+  <a class="reference internal" href="5.0_Hidden_surface_removal.html">
+   Clipping &amp; hidden surface removal
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
   <label for="toctree-checkbox-4">
@@ -228,7 +223,34 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="1.1_Bresenhams_algorithm.html">
+    <a class="reference internal" href="5.1_Clipping.html">
+     Clipping
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="5.2_Painters_algorithm.html">
+     Painter’s algorithm
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="5.3_Binary_space_partitioning.html">
+     Binary Space Partitioning (BSP)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="1.0_Rasterisation.html">
+   Rasterisation
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="1.1_Drawing_lines.html">
      Drawing lines
     </a>
    </li>
@@ -566,7 +588,7 @@ Solution<div class="sd-summary-down docutils">
 </details></section>
 </div><p>The affects of the linear transformation from <a class="reference internal" href="#transformation-matrix-example">Example 12</a> is illustrated in <a class="reference internal" href="#linear-transformation-figure"><span class="std std-numref">Fig. 16</span></a>. Note that the transformation <span class="math notranslate nohighlight">\(T\)</span> can be thought of as changing the basis of the vector space. The unit square with respect to the basis <span class="math notranslate nohighlight">\(\{\mathbf{e}_1, \mathbf{e}_1\}\)</span> has been transformed into a unit parallelogram with respect to the basis <span class="math notranslate nohighlight">\(\{ T(\mathbf{e}_1), T(\mathbf{e}_2)\}\)</span>.</p>
 <figure class="align-default" id="linear-transformation-figure">
-<a class="reference internal image-reference" href="../_images/linear_transformation.svg"><img alt="../_images/linear_transformation.svg" src="../_images/linear_transformation.svg" width="300px" /></a>
+<a class="reference internal image-reference" href="../_images/linear_transformation.svg"><img alt="../_images/linear_transformation.svg" src="../_images/linear_transformation.svg" width="400px" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 16 </span><span class="caption-text">The affect of applying a linear transformation <span class="math notranslate nohighlight">\(T: (x,y) \mapsto (3x + y, x + 2y)\)</span> to the vector <span class="math notranslate nohighlight">\((1,1)\)</span>.</span><a class="headerlink" href="#linear-transformation-figure" title="Permalink to this image">#</a></p>
 </figcaption>

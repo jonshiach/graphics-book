@@ -51,11 +51,13 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="canonical" href="https://jonshiach.github.io/graphics-book/files/4.0_Virtual_environments.html" />
     <link rel="shortcut icon" href="../_static/favicon.jpg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="The viewing pipeline" href="4.1_The_viewing_pipeline.html" />
+    <link rel="next" title="Object space" href="4.1_Object_space.html" />
     <link rel="prev" title="Rotation" href="3.3_Rotation.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -189,35 +191,30 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="4.1_The_viewing_pipeline.html">
-     The viewing pipeline
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="4.2_Object_space.html">
+    <a class="reference internal" href="4.1_Object_space.html">
      Object space
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="4.3_World_space.html">
+    <a class="reference internal" href="4.2_World_space.html">
      World space
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="4.4_Camera_space.html">
+    <a class="reference internal" href="4.3_Camera_space.html">
      Camera space
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="4.5_Screen_space.html">
+    <a class="reference internal" href="4.4_Screen_space.html">
      Screen space
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="1.0_Rasterisation.html">
-   Rasterisation
+  <a class="reference internal" href="5.0_Hidden_surface_removal.html">
+   Clipping &amp; hidden surface removal
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
   <label for="toctree-checkbox-4">
@@ -226,7 +223,34 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="1.1_Bresenhams_algorithm.html">
+    <a class="reference internal" href="5.1_Clipping.html">
+     Clipping
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="5.2_Painters_algorithm.html">
+     Painter’s algorithm
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="5.3_Binary_space_partitioning.html">
+     Binary Space Partitioning (BSP)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="1.0_Rasterisation.html">
+   Rasterisation
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="1.1_Drawing_lines.html">
      Drawing lines
     </a>
    </li>
@@ -378,12 +402,36 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-viewing-pipeline">
+   The viewing pipeline
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
@@ -395,6 +443,19 @@ title="Print to PDF"
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-viewing-pipeline">
+   The viewing pipeline
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -404,6 +465,27 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="virtual-environments">
 <h1>Virtual environments<a class="headerlink" href="#virtual-environments" title="Permalink to this headline">#</a></h1>
+<section id="the-viewing-pipeline">
+<span id="viewing-pipeline-section"></span><h2>The viewing pipeline<a class="headerlink" href="#the-viewing-pipeline" title="Permalink to this headline">#</a></h2>
+<p>The steps required to construct a virtual environment and display it so it can be viewed by a computer user are summarised in a flow diagram known as <strong>the viewing pipeline</strong> which is shown in <a class="reference internal" href="#viewing-pipeline-figure"><span class="std std-numref">Fig. 30</span></a>.</p>
+<figure class="align-default" id="viewing-pipeline-figure">
+<a class="reference internal image-reference" href="../_images/viewing_pipeline.svg"><img alt="../_images/viewing_pipeline.svg" src="../_images/viewing_pipeline.svg" width="400px" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 30 </span><span class="caption-text">The viewing pipeline</span><a class="headerlink" href="#viewing-pipeline-figure" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The steps are as follows</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="4.1_Object_space.html#object-space-section"><span class="std std-ref"><strong>Object space</strong></span></a>: Primitive objects that are used to build your virtual environment are defined within their own space such that the origin passes through the centre of the object (or sometimes the centre of the bases of the object). For example, a virtual environment that describes a street scene may have objects for buildings, cars, bus stops, street lights etc.</p></li>
+<li><p><a class="reference internal" href="4.2_World_space.html#world-space-section"><span class="std std-ref"><strong>World space</strong></span></a>: The virtual environment is constructed by copying the objects into the world space and applying scaling, rotation and translation transformations.</p></li>
+<li><p><a class="reference internal" href="4.3_Camera_space.html#camera-space-section"><span class="std std-ref"><strong>Camera space</strong></span></a>: To view the virtual environment we place a virtual camera in the world space and use translation and rotation transformations so that the position of the camera is at the origin looking along the <span class="math notranslate nohighlight">\(z\)</span> axis in the negative direction.</p></li>
+<li><p><a class="reference internal" href="4.4_Screen_space.html#screen-space-section"><span class="std std-ref"><strong>Screen space</strong></span></a>: The camera space is projected onto a two-dimensional projection plane using perspective projection so that the further objects are from the camera the smaller they appear giving the illusion of depth.</p></li>
+<li><p><strong>Clipped screen space</strong>: Any objects in the screen space that are outside of the region that visible to the camera are removed and objects that lie partially outside are `clipped’ to the edges. In addition, the surfaces that should not be visible to the viewer are removed.</p></li>
+<li><p><strong>Raster</strong>: The colours of the individual pixels on a display screen are determined from the information obtained about the virtual environment up to this point and any lighting conditions used. This information is stored in a \textbf{raster array} where each element corresponds to a pixel on the display.</p></li>
+<li><p><strong>Display</strong>: The raster array is sent to the display hardware.</p></li>
+</ul>
+<p>If the position and/or direction of the virtual camera used to calculate the camera space changes, e.g., through the actions of a player or a computer game, the steps from the camera space to the display are repeated. This will typically be 30 or 60 times per second which highlights the computational demands placed on computer hardware and the need for all calculations to be as efficient as possible.</p>
+</section>
 <div class="toctree-wrapper compound">
 </div>
 </section>
@@ -442,10 +524,10 @@ title="Print to PDF"
             <p class="prev-next-title">Rotation</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="4.1_The_viewing_pipeline.html" title="next page">
+    <a class='right-next' id="next-link" href="4.1_Object_space.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">The viewing pipeline</p>
+        <p class="prev-next-title">Object space</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
