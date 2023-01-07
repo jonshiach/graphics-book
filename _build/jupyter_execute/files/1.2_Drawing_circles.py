@@ -218,7 +218,7 @@ glue("midpoint-algorithm-plot", fig, display=False)
 # :class: seealso
 # :label: midpoint-example
 # 
-# Use the midpoint algorithm to rasterise a circle centred at $(11, 11)$ with radius 10.
+# Use the midpoint algorithm to rasterise a circle centred at $(12, 12)$ with radius 10.
 # 
 # ````{dropdown} Solution
 # $x=10$, $y = 0$, $D = 5 - 4(10) = -35$
@@ -235,13 +235,16 @@ glue("midpoint-algorithm-plot", fig, display=False)
 # 	x &=  7, & y &= 7.
 # \end{align*}
 # 
-# Adding the centre co-ordinates gives
+# Adding the centre co-ordinates gives the following co-ordinates for the pixels on the first octant of the circle
+# 
 # \begin{align*}
-# 	(21,11), && (21, 12), && (21, 13), && (21, 14), \\
-#     (20, 15), && (20, 16), && (19, 17), && (18, 18).
+# 	(22,12), && (22, 13), && (22, 14), && (22, 15), \\
+#     (21, 16), && (21, 17), && (20, 18), && (19, 19).
 # \end{align*}
 # 
-# ```{glue:figure} midpoint-raster-plot
+# Applying circle symmetry to determine the pixels in the other seven octants completes the circle.
+# 
+# ```{figure} /images/midpoint_example.png
 # :figwidth: 400px
 # ```
 # 

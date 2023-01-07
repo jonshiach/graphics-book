@@ -321,7 +321,9 @@
 # grid on
 # ```
 # 
-# ```{figure} /images/world_space_example.svg
+# ```{figure} /images/world_space_example.png
+# :width: 400px
+# :name: world-space-example-figure
 # 
 # The world space from {prf:ref}`world-space-example`.
 # ```

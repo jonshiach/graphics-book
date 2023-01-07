@@ -253,11 +253,12 @@
 # zlabel('$z$', 'Interpreter', 'latex', 'FontSize', 18)
 # view(0,90)  % align the plot so that we are looking down the z axis
 # axis([-4, 4, -3, 3, -8, 0])
-# grid on
 # box on
 # ```
 # 
-# ```{figure} /images/camera_space_example.svg
+# ```{figure} /images/camera_space_example.png
+# :width: 400px
+# :name: camera-space-example-figure
 # 
 # The camera space from {prf:ref}`camera-space-example`.
 # ```

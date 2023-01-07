@@ -24,8 +24,8 @@
 # 
 # The affects of applying a $\times 2$ super sample antialiasing can be seen in {numref}`antialiased-circle-figure`. 
 # 
-# ```{glue:figure} ssaa-plot
-# :figwidth: 500px
+# ```{figure} /images/antialiasing_example.png
+# :width: 500px
 # :name: antialiased-circle-figure
 # 
 # Filled circle with (left) and without (right) $\times 2$ super sampling antialiasing applied.

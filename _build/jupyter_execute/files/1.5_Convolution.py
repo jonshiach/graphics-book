@@ -43,7 +43,7 @@
 # 
 # The affects of applying Gaussian blur to an image can be seen in {numref}`blur-figure`.
 # 
-# ```{glue:figure} blur-plot
+# ```{figure} ../images/cavendish_blur.png
 # :name: blur-figure
 # 
 # The original image (left) and with Gaussian blur applied (right).
@@ -57,7 +57,7 @@
 # 
 # and the affect of sharpening an image can be seen in {numref}`sharpen-figure`.
 # 
-# ```{glue:figure} sharpen-plot
+# ```{figure} ../images/cavendish_sharpen.png
 # :name: sharpen-figure
 # 
 # The original image (left) and with unsharp masking applied (right).

@@ -455,44 +455,44 @@
 % \end{tikzpicture}
 
 % Graphics pipeline
-% \begin{tikzpicture}[
-%     auto,
-%     every node/.style={align=left},
-%     node distance=1.5cm,
-%     ]
-%     \node [flownode,fill=blue!10] (object) {object space};
-%     \node [flownode,fill=blue!10,below of=object] (world) {world space};
-%     \node [flownode,fill=blue!10,below of=world] (camera) {camera space};
-%     \node [flownode,fill=blue!10,below of=camera] (screen) {screen space};
-%     \node [flownode,below of=screen] (clipped) {clipped screen space};
-%     \node [flownode,below of=clipped] (raster) {raster};
-%     \node [flownode,below of=raster] (display) {display};
-%     \draw [-latex'] (object) -- node {copy and transform into world space} (world);
-%     \draw [-latex'] (world) -- node {align world space to camera} (camera);
-%     \draw [-latex'] (camera) -- node {project onto screen space} (screen);
-%     \draw [-latex'] (screen) -- node {clipping and hidden surface removal} (clipped);
-%     \draw [-latex'] (clipped) -- node {rasterisation} (raster);
-%     \draw [-latex'] (raster) -- node {send raster to display} (display);
-%     \draw [-latex'] ($(raster)!0.5!(display)$) -| node [pos=0.75,above,rotate=90,align=center] {camera position or direction changes} ([xshift=-0.75cm]camera.west) |- ($(world)!0.5!(camera)$);
-% \end{tikzpicture}
+\begin{tikzpicture}[
+    auto,
+    every node/.style={align=left},
+    node distance=1.5cm,
+    ]
+    \node [flownode,fill=blue!10] (object) {object space};
+    \node [flownode,fill=blue!10,below of=object] (world) {world space};
+    \node [flownode,fill=blue!10,below of=world] (camera) {camera space};
+    \node [flownode,fill=blue!10,below of=camera] (screen) {screen space};
+    \node [flownode,fill=blue!10,below of=screen] (clipped) {clipped screen space};
+    \node [flownode,below of=clipped] (raster) {raster};
+    \node [flownode,below of=raster] (display) {display};
+    \draw [-latex'] (object) -- node {copy and transform into world space} (world);
+    \draw [-latex'] (world) -- node {align world space to camera} (camera);
+    \draw [-latex'] (camera) -- node {project onto screen space} (screen);
+    \draw [-latex'] (screen) -- node {clipping and hidden surface removal} (clipped);
+    \draw [-latex'] (clipped) -- node {rasterisation} (raster);
+    \draw [-latex'] (raster) -- node {send raster to display} (display);
+    \draw [-latex'] ($(raster)!0.5!(display)$) -| node [pos=0.75,above,rotate=90,align=center] {camera position or direction changes} ([xshift=-0.75cm]camera.west) |- ($(world)!0.5!(camera)$);
+\end{tikzpicture}
 
 % House object
 % \begin{tikzpicture}[auto]
-%     \tikzmath{\w=1.5;\l=3;\h1=1;\h2=2;}
+%     \tikzmath{\w=1.5;\l=3;\h1=1;\h2=2;\x=330;\y=30;\z=90;}
 %     \draw [axis,blue,opacity=0] (270:1.5) -- (90:5) node [left] {$z$};
-%     \coordinate (0) at ($(150:0.5*\w)+(210:0.5*\l)$);
-%     \coordinate (1) at ($(0)+(330:\w)$);
-%     \coordinate (2) at ($(1)+(30:\l)$);
-%     \coordinate (3) at ($(2)+(150:\w)$);
-%     \coordinate (4) at ($(0)+(90:\h1)$);
-%     \coordinate (5) at ($(4)+(330:\w)$);
-%     \coordinate (6) at ($(5)+(30:\l)$);
-%     \coordinate (7) at ($(6)+(150:\w)$);
-%     \coordinate (8) at ($(210:0.5*\l)+(90:\h2)$);
-%     \coordinate (9) at ($(8)+(30:\l)$);
-%     \draw [axis,red] (150:3) -- (330:3) node [below] {$x$};
-%     \draw [axis,green!50!black] (210:3) -- (30:3) node [right] {$y$};
-%     \draw [axis,blue] (270:2) -- (90:3) node [left] {$z$};
+%     \coordinate (0) at ($(\x+180:0.5*\w)+(\y+180:0.5*\l)$);
+%     \coordinate (1) at ($(0)+(\x:\w)$);
+%     \coordinate (2) at ($(1)+(\y:\l)$);
+%     \coordinate (3) at ($(2)+(\x+180:\w)$);
+%     \coordinate (4) at ($(0)+(\z:\h1)$);
+%     \coordinate (5) at ($(4)+(\x:\w)$);
+%     \coordinate (6) at ($(5)+(\y:\l)$);
+%     \coordinate (7) at ($(6)+(\x+180:\w)$);
+%     \coordinate (8) at ($(\y+180:0.5*\l)+(\z:\h2)$);
+%     \coordinate (9) at ($(8)+(\y:\l)$);
+%     \draw [axis,red] (\x+180:3) -- (\x:3) node at (\x:3.25) {$x$};
+%     \draw [axis,green!50!black] (\y+180:3) -- (\y:3) node at (\y:3.25) {$y$};
+%     \draw [axis,blue] (\z+180:1.5) -- (\z:3) node at (\z:3.25) {$z$};
 %     \draw [fill=white,opacity=0.5] (2) -- (3) -- (7) -- (9) -- (6) -- cycle;
 %     \draw [fill=white,opacity=0.5] (0) -- (4) -- (7) -- (3) -- cycle;
 %     \draw [fill=white,opacity=0.5] (7) -- (4) -- (8) -- (9) -- cycle;
@@ -504,24 +504,25 @@
 
 % Tower object
 % \begin{tikzpicture}[auto]
-%     \tikzmath{\w=1.6;\l=1.6;\h=3;}
-%     \coordinate (0) at ($(150:0.5*\w)+(210:0.5*\l)$);
-%     \coordinate (1) at ($(0)+(330:\w)$);
-%     \coordinate (2) at ($(1)+(30:\l)$);
-%     \coordinate (3) at ($(2)+(150:\w)$);
-%     \coordinate (4) at ($(0)+(90:\h)$);
-%     \coordinate (5) at ($(4)+(330:\w)$);
-%     \coordinate (6) at ($(5)+(30:\l)$);
-%     \coordinate (7) at ($(6)+(150:\w)$);
-%     \draw [axis,red] (150:3) -- (330:3) node [below] {$x$};
-%     \draw [axis,green!50!black] (210:3) -- (30:3) node [right] {$y$};
-%     \draw [axis,blue] (270:1.5) -- (90:5) node [left] {$z$};
+%     \tikzmath{\w=1.6;\l=1.6;\h=3;\x=340;\y=40;\z=90;}
+%     \coordinate (0) at ($(\x+180:0.5*\w)+(\y+180:0.5*\l)$);
+%     \coordinate (1) at ($(0)+(\x:\w)$);
+%     \coordinate (2) at ($(1)+(\y:\l)$);
+%     \coordinate (3) at ($(2)+(\x+180:\w)$);
+%     \coordinate (4) at ($(0)+(\z:\h)$);
+%     \coordinate (5) at ($(4)+(\x:\w)$);
+%     \coordinate (6) at ($(5)+(\y:\l)$);
+%     \coordinate (7) at ($(6)+(\x+180:\w)$);
+%     \draw [axis,red] (\x+180:3) -- (\x:3) node at (\x:3.25) {$x$};
+%     \draw [axis,green!50!black] (\y+180:3) -- (\y:3) node at (\y:3.25) {$y$};
+%     \draw [axis,blue] (\z+180:1.5) -- (\z:5) node at (\z:5.25) {$z$};
 %     \draw [fill=white,opacity=0.5] (0) -- (1) -- (2) -- (3) -- cycle;
 %     \draw [fill=white,opacity=0.5] (0) -- (3) -- (7) -- (4) -- cycle;
 %     \draw [fill=white,opacity=0.5] (2) -- (3) -- (7) -- (6) -- cycle;
 %     \draw [fill=white,opacity=0.5] (0) -- (1) -- (5) -- (4) -- cycle;
 %     \draw [fill=white,opacity=0.5] (1) -- (2) -- (6) -- (5) -- cycle;
 %     \draw [fill=white,opacity=0.5] (4) -- (5) -- (6) -- (7) -- cycle;
+%     \draw [axis,blue] (\z:\h) -- (\z:5) node at (\z:5.25) {$z$};
 % \end{tikzpicture}
 
 % Cube object
@@ -612,39 +613,39 @@
 % \end{tikzpicture}
 
 % House object example
-\begin{tikzpicture}[auto]
-    \tikzmath{\w=1.5;\l=3;\h1=1;\h2=2;}
-    \coordinate (0) at ($(150:0.5*\w)+(210:0.5*\l)$);
-    \coordinate (1) at ($(0)+(330:\w)$);
-    \coordinate (2) at ($(1)+(30:\l)$);
-    \coordinate (3) at ($(2)+(150:\w)$);
-    \coordinate (4) at ($(0)+(90:\h1)$);
-    \coordinate (5) at ($(4)+(330:\w)$);
-    \coordinate (6) at ($(5)+(30:\l)$);
-    \coordinate (7) at ($(6)+(150:\w)$);
-    \coordinate (8) at ($(210:0.5*\l)+(90:\h2)$);
-    \coordinate (9) at ($(8)+(30:\l)$);
-    \draw [axis,red] (150:3) -- (330:3) node [below] {$x$};
-    \draw [axis,green!50!black] (210:3) -- (30:3) node [right] {$y$};
-    \draw [axis,blue] (270:2) -- (90:3) node [left] {$z$};
-    \draw [fill=white,opacity=0.5] (2) -- (3) -- (7) -- (9) -- (6) -- cycle;
-    \draw [fill=white,opacity=0.5] (0) -- (4) -- (7) -- (3) -- cycle;
-    \draw [fill=white,opacity=0.5] (7) -- (4) -- (8) -- (9) -- cycle;
-    \draw [fill=white,opacity=0.5] (0) -- (1) -- (2) -- (3) -- cycle;
-    \draw [fill=white,opacity=0.5] (5) -- (6) -- (9) -- (8) -- cycle;
-    \draw [fill=white,opacity=0.5] (1) -- (2) -- (6) -- (5) -- cycle;
-    \draw [fill=white,opacity=0.5] (0) -- (1) -- (5) -- (8) -- (4) -- cycle;
-    \node [point,label=left:$\mathbf{v}_1$] at (0) {};
-    \node [point,label=below:$\mathbf{v}_2$] at (1) {};
-    \node [point,label=right:$\mathbf{v}_3$] at (2) {};
-    \node [point,label=right:$\mathbf{v}_4$] at (3) {};
-    \node [point,label=left:$\mathbf{v}_5$] at (4) {};
-    \node [point,label=right:$\mathbf{v}_6$] at (5) {};
-    \node [point,label=above right:$\mathbf{v}_7$] at (6) {};
-    \node [point,label=right:$\mathbf{v}_8$] at (7) {};
-    \node [point,label=above:$\mathbf{v}_9$] at (8) {};
-    \node [point,label=above:$\mathbf{v}_{10}$] at (9) {};
-\end{tikzpicture}
+% \begin{tikzpicture}[auto]
+%     \tikzmath{\w=1.5;\l=3;\h1=1;\h2=2;}
+%     \coordinate (0) at ($(150:0.5*\w)+(210:0.5*\l)$);
+%     \coordinate (1) at ($(0)+(330:\w)$);
+%     \coordinate (2) at ($(1)+(30:\l)$);
+%     \coordinate (3) at ($(2)+(150:\w)$);
+%     \coordinate (4) at ($(0)+(90:\h1)$);
+%     \coordinate (5) at ($(4)+(330:\w)$);
+%     \coordinate (6) at ($(5)+(30:\l)$);
+%     \coordinate (7) at ($(6)+(150:\w)$);
+%     \coordinate (8) at ($(210:0.5*\l)+(90:\h2)$);
+%     \coordinate (9) at ($(8)+(30:\l)$);
+%     \draw [axis,red] (150:3) -- (330:3) node [below] {$x$};
+%     \draw [axis,green!50!black] (210:3) -- (30:3) node [right] {$y$};
+%     \draw [axis,blue] (270:2) -- (90:3) node [left] {$z$};
+%     \draw [fill=white,opacity=0.5] (2) -- (3) -- (7) -- (9) -- (6) -- cycle;
+%     \draw [fill=white,opacity=0.5] (0) -- (4) -- (7) -- (3) -- cycle;
+%     \draw [fill=white,opacity=0.5] (7) -- (4) -- (8) -- (9) -- cycle;
+%     \draw [fill=white,opacity=0.5] (0) -- (1) -- (2) -- (3) -- cycle;
+%     \draw [fill=white,opacity=0.5] (5) -- (6) -- (9) -- (8) -- cycle;
+%     \draw [fill=white,opacity=0.5] (1) -- (2) -- (6) -- (5) -- cycle;
+%     \draw [fill=white,opacity=0.5] (0) -- (1) -- (5) -- (8) -- (4) -- cycle;
+%     \node [point,label=left:$\mathbf{v}_1$] at (0) {};
+%     \node [point,label=below:$\mathbf{v}_2$] at (1) {};
+%     \node [point,label=right:$\mathbf{v}_3$] at (2) {};
+%     \node [point,label=right:$\mathbf{v}_4$] at (3) {};
+%     \node [point,label=left:$\mathbf{v}_5$] at (4) {};
+%     \node [point,label=right:$\mathbf{v}_6$] at (5) {};
+%     \node [point,label=above right:$\mathbf{v}_7$] at (6) {};
+%     \node [point,label=right:$\mathbf{v}_8$] at (7) {};
+%     \node [point,label=above:$\mathbf{v}_9$] at (8) {};
+%     \node [point,label=above:$\mathbf{v}_{10}$] at (9) {};
+% \end{tikzpicture}
 
 % World space
 % \begin{tikzpicture}[auto]

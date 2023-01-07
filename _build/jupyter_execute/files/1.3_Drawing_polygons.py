@@ -36,205 +36,70 @@
 # :class: seealso
 # :label: flood-fill-example
 # 
-# Starting with the pixel at $(3, 3)$, use the flood fill algorithm to fill in the polygon on the raster below where the target colour is white and the replacement colour is blue.
+# Starting with the pixel at $(4, 4)$, use the flood fill algorithm to fill in the polygon on the raster below where the target colour is white and the replacement colour is blue.
 # 
-# :::{glue:figure} flood-fill-raster-0
-# :figwidth: 300px
+# :::{figure} /images/floodfill_example_1.png
+# :figwidth: 250px
 # :::
 # 
 # ::::{dropdown} Solution
 # 
 # We begin by initialising the queue to contain the starting pixel
 # 
-# $$ Q = \{\textcolor{blue}{(3,3)}\}.$$
+# $$ Q = \{\textcolor{blue}{(4,4)}\}.$$
 # 
-# We remove this pixel from the queue and check the current colour is the same as the target colour, which it is so we fill this pixel (as indicated by the blue text in $Q$ above) and append the pixels to the right, left, bottom and top of pixel $(3,3)$ to the queue.
+# We remove this pixel from the queue and check the current colour is the same as the target colour, which it is so we fill this pixel (as indicated by the blue text in $Q$ above) and append the pixels to the right, left, bottom and top of pixel $(4,4)$ to the queue.
 # 
-# :::{glue:figure} flood-fill-raster-1
-# :figwidth: 300px
+# :::{figure} /images/floodfill_example_2.png
+# :figwidth: 250px
 # :::
 # 
-# $$Q = \{ \underbrace{(4, 3), (2, 3), (3, 4), \textcolor{blue}{(3, 2)}}_{\text{neighbouring pixels to $(3, 3)$}} \}.$$
+# $$Q = \{ \underbrace{(5, 4), (3, 4), (4, 5), \textcolor{blue}{(4, 3)}}_{\text{neighbouring pixels to $(4, 4)$}} \}.$$
 # 
-# We now remove pixel $(3, 2)$ from $Q$. Its colour is the same as the target colour so we fill this pixel and append the neighbouring pixels to the end of $Q$.
+# We now remove pixel $(4, 3)$ from $Q$. Its colour is the same as the target colour so we fill this pixel and append the neighbouring pixels to the end of $Q$.
 # 
-# :::{glue:figure} flood-fill-raster-2
-# :figwidth: 300px
+# :::{figure} /images/floodfill_example_3.png
+# :figwidth: 250px
 # :::
 # 
-# $$Q = \{ (4, 3), (2, 3), (3, 4), \underbrace{\textcolor{blue}{(4, 2)}, \textcolor{red}{(2, 2)}, \textcolor{red}{(3, 3)}, \textcolor{red}{(3, 1)}}_\text{neighbouring pixels to $(3, 3)$} \}.$$
+# $$Q = \{ (5, 4), (3, 4), (4, 5), \underbrace{\textcolor{blue}{(5, 3)}, \textcolor{red}{(3, 3)}, \textcolor{red}{(4, 4)}, \textcolor{red}{(4, 2)}}_\text{neighbouring pixels to $(4, 3)$} \}.$$
 # 
-# We now remove pixel $(3,1)$ from $Q$. Its colour is not the same as the target colour so we reject this pixel (as inidicated by the red text) and remove the next last pixel in $Q$ $(3, 3)$. This is also not the same as the target colour so is rejected and we remove the next last pixel $(2,2)$. This is also not the same as the target colour so is rejected and we remove the next last pixel $(4, 2)$. This is the same as the target colour so we fill this pixel and append the neighbouring pixels to the end of $Q$.
+# We now remove pixel $(4, 2)$ from $Q$. Its colour is not the same as the target colour so we reject this pixel (as inidicated by the red text) and remove the next last pixel in $Q$ $(4, 4)$. This is also not the same as the target colour so is rejected and we remove the next last pixel $(3,3)$. This is also not the same as the target colour so is rejected and we remove the next last pixel $(5, 3)$. This is the same as the target colour so we fill this pixel and append the neighbouring pixels to the end of $Q$.
 # 
-# :::{glue:figure} flood-fill-raster-3
-# :figwidth: 300px
+# :::{figure} /images/floodfill_example_4.png
+# :figwidth: 250px
 # :::
 # 
-# $$Q = \{ (4, 3), (2, 3), (3, 4), (5, 2), (3, 2), \textcolor{blue}{(4, 3)}, \textcolor{red}{(4, 1)} \}.$$
+# $$Q = \{ (5, 4), (3, 4), (4, 5), (6, 3), (4, 3), \textcolor{blue}{(5, 4)}, \textcolor{red}{(5, 2)} \}.$$
 # 
 # We proceed in the same way that results in the the following queue.
 # 
 # \begin{align*}
-#     Q &= \{(4,3), \ldots, (3, 2), (5, 3), (3, 3), \textcolor{blue}{(4, 4)}, \textcolor{red}{(4, 2)} \}, \\
-#     Q &= \{ (4, 3), \ldots, (3, 3), (5, 4), \textcolor{blue}{(3, 4)}, \textcolor{red}{(4, 5)}, \textcolor{red}{(4, 3)} \}, \\
-#     Q &= \{ (4, 3), \ldots, (5, 4), (4, 4), \textcolor{blue}{(2, 4)}, \textcolor{red}{(3, 5)}, \textcolor{red}{(3, 3)} \ldots \}, \\
-#     Q &= \{ (4, 3), \ldots, (4, 4), (3, 4), (1, 4), (2, 5), \textcolor{blue}{(2, 3)} \}, \\
+#     Q &= \{ (5, 4), \ldots, (4, 3), (6, 4), (4, 4), \textcolor{blue}{(5, 5)}, \textcolor{red}{(5, 3)} \}, \\
+#     Q &= \{ (5, 4), \ldots, (4, 4), (6, 5), \textcolor{blue}{(4, 5)}, \textcolor{red}{(5, 6)}, \textcolor{red}{(5, 4)} \}, \\
+#     Q &= \{ (5, 4), \ldots, (6, 5), (5, 5), \textcolor{blue}{(3, 5)}, \textcolor{red}{(4, 6)}, \textcolor{red}{(4, 4)} \}, \\
+#     Q &= \{ (5, 4), \ldots, (5, 5), (4, 5), (2, 5), (3, 6), \textcolor{blue}{(3, 4)} \}, \\
 #     Q &= \emptyset.
 # \end{align*}
 # 
-# :::{glue:figure} flood-fill-raster-4
-# :figwidth: 300px
+# :::{figure} /images/floodfill_example_9.png
+# :figwidth: 250px
 # :::
 # 
 # ::::
 # 
 # :::::
-
-# In[1]:
-
-
-import numpy as np
-import matplotlib.pyplot as plt
-from matplotlib.patches import Arc       
-from myst_nb import glue
-plt.rcParams['text.usetex'] = True
-
-blue = [210, 210, 255]
-darkblue = [0, 0, 255]
-red = [128, 128, 128]
-green = [230, 255, 230]
-white = [255, 255, 255]
-
-Nx, Ny = 7, 7
-img = 255 * np.ones((Ny, Nx, 3)).astype(int)
-img[1,3:6,:] = red
-img[2:6,5,:] = red
-img[5,1:5,:] = red
-img[3:5,1,:] = red
-img[2,2,:] = red
-
-fig, ax = plt.subplots()
-
-imgplot = plt.imshow(img)
-for i in range(Nx):
-    for j in range(Ny):
-        ax.add_patch(plt.Rectangle((i-0.5,j-0.5), 1, 1, ec="k", fill=False))
-   
-plt.show()
-glue("flood-fill-raster-0", fig, display=False)
-
-
-# In[2]:
-
-
-fig, ax = plt.subplots()
-
-imgplot = plt.imshow(img)
-for i in range(Nx):
-    for j in range(Ny):
-        ax.add_patch(plt.Rectangle((i-0.5,j-0.5), 1, 1, ec="k", fill=False))
-   
-img[3,3,:] = darkblue
-imgplot = plt.imshow(img)
-glue("flood-fill-raster-1", fig, display=False)
-
-
-# In[3]:
-
-
-fig, ax = plt.subplots()
-
-imgplot = plt.imshow(img)
-for i in range(Nx):
-    for j in range(Ny):
-        ax.add_patch(plt.Rectangle((i-0.5,j-0.5), 1, 1, ec="k", fill=False))
-
-img[3,3,:] = blue
-img[2,3,:] = darkblue
-imgplot = plt.imshow(img)
-glue("flood-fill-raster-2", fig, display=False)
-
-
-# In[4]:
-
-
-fig, ax = plt.subplots()
-
-imgplot = plt.imshow(img)
-for i in range(Nx):
-    for j in range(Ny):
-        ax.add_patch(plt.Rectangle((i-0.5,j-0.5), 1, 1, ec="k", fill=False))
-
-img[3,3,:] = blue
-img[2,3,:] = blue
-img[2,4,:] = darkblue
-imgplot = plt.imshow(img)
-glue("flood-fill-raster-3", fig, display=False)
-
-
-# In[5]:
-
-
-fig, ax = plt.subplots()
-
-imgplot = plt.imshow(img)
-for i in range(Nx):
-    for j in range(Ny):
-        ax.add_patch(plt.Rectangle((i-0.5,j-0.5), 1, 1, ec="k", fill=False))
-
-img[3:5,2:5,:] = blue
-img[2,3:5,:] = blue
-imgplot = plt.imshow(img)
-glue("flood-fill-raster-4", fig, display=False)
-
-
+# 
 # ### Use of the flood fill algorithm
 # 
 # Since the flood fill algorithm uses adjacent pixels to the four compass directions to spread the fill colour across a polygon is cannot spread across tight corners. This can be desirable since if the width of the outline is a single pixel then the flood fill will not leak outside of the polygon. In practice the flood fill algorithm is too computationally expensive to be used for virtual worlds and is only really used in drawing applications to provide a filling tool.
 # 
-# :::{glue:figure} tight-corner-raster
-# :figwidth: 500px
+# :::{figure} /images/flood_fill_tight_corner.png
+# :figwidth: 400px
 # 
 # The flood fill algorithm is blocked by tight corners.
 # :::
-
-# In[6]:
-
-
-import numpy as np
-import matplotlib.pyplot as plt
-from matplotlib.patches import Arc       
-from myst_nb import glue
-plt.rcParams['text.usetex'] = True
-
-blue = [210, 210, 255]
-darkblue = [0, 0, 255]
-grey = [128, 128, 128]
-
-Nx, Ny = 10, 10
-img = 255 * np.ones((Ny, Nx, 3)).astype(int)
-fig, ax = plt.subplots()
-
-img[1,4:9,:] = grey
-img[4,1:5,:] = grey
-img[5,5:9,:] = grey
-img[8,1:6,:] = grey
-img[5:8,1,:] = grey
-img[2:5,4,:] = grey
-img[2:5,8,:] = grey
-img[5:9,5,:] = grey
-img[2:5,5:8] = blue
-
-imgplot = plt.imshow(img)
-for i in range(Nx):
-    for j in range(Ny):
-        ax.add_patch(plt.Rectangle((i-0.5,j-0.5), 1, 1, ec="k", fill=False))
-   
-plt.xticks([])
-plt.yticks([])
-glue("tight-corner-raster", fig, display=False)
-
-
+# 
 # ### The scanline algorithm
 # 
 # The **scanline algorithm** is a method of rendering a polygon without drawing the edges beforehand unlike the [flood fill algorithm](flood-fill-algorithm-section) that requires pixels to be plotted to form an outline. Instead of testing pixels one by one, the scanline filling algorithm loops through horizontal rows of pixels (known as a **scanline**) starting from $y=0$ and going down the raster to $y = N_y$. If the scanline intersects with an edge of the polygon the intersection points which are known as **span extrema**, are calculated, sorted into ascending order and all pixels between pairs of intersection points are filled.
@@ -340,8 +205,8 @@ glue("tight-corner-raster", fig, display=False)
 # 
 # Use the scanline algorithm to draw the polygon defined below
 # 
-# :::{glue:figure} scanline-example-0
-# :figwidth: 300px
+# :::{figure} /images/scanline_example_1.png
+# :width: 300px
 # :::
 # 
 # ::::{dropdown} Solution
@@ -350,44 +215,29 @@ glue("tight-corner-raster", fig, display=False)
 # 
 # ```
 # ET         x   N  xstep  Dx   Dy  ymin  ymax
-#     e1 : [ 3   0   -1    2    7    1     8  ]
-#     e3 : [ 7   0    1    1    5    3     8  ]
-#     e4 : [ 7   0   -1    2    3    3     6  ]
-#     e5 : [ 3   0    1    2    5    1     6  ]
+#     e1 : [ 4   0   -1    2    7    2     9  ]
+#     e3 : [ 8   0    1    1    5    4     9  ]
+#     e4 : [ 8   0   -1    2    3    4     7  ]
+#     e5 : [ 4   0    1    2    5    2     7  ]
 # ```
 # 
-# - Starting with $y=0$ none of the edges in ET have $y_{\min} = 0$ so increment $y=1$
-# - Edges e1 and e5 have $y_{\min} = 1$ so are moved to the AET
+# - Starting with $y=0$ none of the edges in ET have $y_{\min} = 1$ so increment $y= 1 + 1 = 2$
+# - Edges e1 and e5 have $y_{\min} = 2$ so are moved to the AET
 # 
 # ```
 # ET         x   N  xstep  Dx   Dy  ymin  ymax
-#     e3 : [ 7   0    1    1    5    3     8  ]
-#     e4 : [ 7   0   -1    2    3    3     6  ]
+#     e3 : [ 8   0    1    1    5    4     9  ]
+#     e4 : [ 8   0   -1    2    3    4     7  ]
 #     
 # AET        x   N  xstep  Dx   Dy  ymin  ymax
-#     e1 : [ 3   0   -1    2    7    1     8  ]
-#     e5 : [ 3   0    1    2    5    1     6  ]
+#     e1 : [ 4   0   -1    2    7    2     9  ]
+#     e5 : [ 4   0    1    2    5    2     7  ]
 # ```
 # 
-# - None of the edges in AET have $y_{\max}=1$ and it is already sorted by $x$ value so fill pixel $(3, 1)$
+# - None of the edges in AET have $y_{\max}=2$ and it is already sorted by $x$ value so fill pixel $(4, 2)$
 # 
-# :::{glue:figure} scanline-example-1
-# :figwidth: 300px
-# :::
-# 
-# - Add $\Delta x$ to $N$ for all edges in AET 
-# - Increment $y = 1 + 1 = 2$
-# 
-# ```
-# AET        x   N  xstep  Dx   Dy  ymin  ymax
-#     e1 : [ 3   2   -1    2    7    1     8  ]
-#     e5 : [ 3   2    1    2    5    1     6  ]
-# ```
-# 
-# - None of the edges in ET have $y_{\min} = 2$ and so fill pixel $(3, 2)$
-# 
-# :::{glue:figure} scanline-example-2
-# :figwidth: 300px
+# :::{figure} /images/scanline_example_2.png
+# :width: 300px
 # :::
 # 
 # - Add $\Delta x$ to $N$ for all edges in AET 
@@ -395,134 +245,149 @@ glue("tight-corner-raster", fig, display=False)
 # 
 # ```
 # AET        x   N  xstep  Dx   Dy  ymin  ymax
-#     e1 : [ 3   4   -1    2    7    1     8  ]
-#     e5 : [ 3   4    1    2    5    1     6  ]
+#     e1 : [ 4   2   -1    2    7    2     9  ]
+#     e5 : [ 4   2    1    2    5    2     7  ]
 # ```
 # 
-# - Edges e3 and e4 in ET both have $y_{\min} = 3$ so are moved to AET
+# - None of the edges in ET have $y_{\min} = 3$ and so fill pixel $(4, 3)$
+# 
+# :::{figure} /images/scanline_example_3.png
+# :width: 300px
+# :::
+# 
+# - Add $\Delta x$ to $N$ for all edges in AET 
+# - Increment $y = 3 + 1 = 4$
+# 
+# ```
+# AET        x   N  xstep  Dx   Dy  ymin  ymax
+#     e1 : [ 4   4   -1    2    7    2     9  ]
+#     e5 : [ 4   4    1    2    5    2     7  ]
+# ```
+# 
+# - Edges e3 and e4 in ET both have $y_{\min} = 4$ so are moved to AET
 # - ET is now empty and ignored from now on
 # 
 # ```
 # AET        x   N  xstep  Dx   Dy  ymin  ymax
-#     e1 : [ 3   4   -1    2    7    1     8  ]
-#     e5 : [ 3   4    1    2    5    1     6  ]
-#     e3 : [ 7   0    1    1    5    3     8  ]
-#     e4 : [ 7   0   -1    2    3    3     6  ]
+#     e1 : [ 4   4   -1    2    7    2     9  ]
+#     e5 : [ 4   4    1    2    5    2     7  ]
+#     e3 : [ 8   0    1    1    5    4     9  ]
+#     e4 : [ 8   0   -1    2    3    4     7  ]
 # ```
 # 
-# - Fill pixels $(3, 3)$ and $(7, 3)$
+# - Fill pixels $(4, 4)$ and $(8, 4)$
 # 
-# :::{glue:figure} scanline-example-3
-# :figwidth: 300px
+# :::{figure} /images/scanline_example_4.png
+# :width: 300px
 # :::
 # 
 # - We add $\Delta x$ to $N$ for all edges in AET
 # 
 # ```
 # AET        x   N  xstep  Dx   Dy  ymin  ymax
-#     e1 : [ 3   6   -1    2    7    1     8  ]
-#     e5 : [ 3   6    1    2    5    1     6  ]
-#     e3 : [ 7   1    1    1    5    3     8  ]
-#     e4 : [ 7   2   -1    2    3    3     6  ]
+#     e1 : [ 4   6   -1    2    7    2     9  ]
+#     e5 : [ 4   6    1    2    5    2     7  ]
+#     e3 : [ 8   1    1    1    5    4     9  ]
+#     e4 : [ 8   2   -1    2    3    4     7  ]
 # ```
 # 
-# - Edge e5 has $N = 6 \geq \Delta y = 7$ so subtract $\Delta y$ from $N$ to give $N = 6 - 5 = 1$ which is less than $\Delta y$ and add $x_{step} = 1$ to $x$ to give $x = 3 + 1 = 4$
-# - Increment $y = 3 + 1 = 4$. 
+# - Edge e5 has $N = 6 \geq \Delta y = 7$ so subtract $\Delta y$ from $N$ to give $N = 6 - 5 = 1$ which is less than $\Delta y$ and add $x_{step} = 1$ to $x$ to give $x = 4 + 1 = 5$
+# - Increment $y = 4 + 1 = 5$. 
 # 
 # ```
 # AET        x   N  xstep  Dx   Dy  ymin  ymax
-#     e1 : [ 3   6   -1    2    7    1     8  ]
-#     e5 : [ 4   1    1    2    5    1     6  ]
-#     e3 : [ 7   1    1    1    5    3     8  ]
-#     e4 : [ 7   2   -1    2    3    3     6  ]
+#     e1 : [ 4   6   -1    2    7    2     9  ]
+#     e5 : [ 5   1    1    2    5    2     7  ]
+#     e3 : [ 8   1    1    1    5    4     9  ]
+#     e4 : [ 8   2   -1    2    3    4     7  ]
 # ```
 # 
-# - We fill pixels $(3, 4)$, $(4, 4)$ and $(7, 4)$
+# - We fill pixels $(4, 5)$, $(5, 5)$ and $(8, 5)$
 # 
-# :::{glue:figure} scanline-example-4
-# :figwidth: 300px
+# :::{figure} /images/scanline_example_6.png
+# :width: 300px
 # :::
 # 
 # - Add $\Delta x$ to $N$ for all edges in AET
 # 
 # ```
 # AET        x   N  xstep  Dx   Dy  ymin  ymax
-#     e1 : [ 3   8   -1    2    7    1     8  ]
-#     e5 : [ 4   3    1    2    5    1     6  ]
-#     e3 : [ 7   2    1    1    5    3     8  ]
-#     e4 : [ 7   4   -1    2    3    3     6  ]
+#     e1 : [ 4   8   -1    2    7    2     9  ]
+#     e5 : [ 5   3    1    2    5    2     7  ]
+#     e3 : [ 8   2    1    1    5    4     9  ]
+#     e4 : [ 8   4   -1    2    3    4     7  ]
 # ```
 # 
-# - Edge e1 has $N = 8 \geq \Delta y = 7$ so subtract $\Delta y$ from $N$ to give $N = 8 - 7 = 1$ which is less than $\Delta y$ and add $x_{step} = -1$ to $x$ to give $x = 3 - 1 = 2$
-# - Edge e4 has $N=4 \geq \Delta y = 3$ so subtract $\Delta y$ from $N$ to give $N = 4 - 3 = 1$ which is less than $\Delta y$ and add $x_{step} = -1$ to $x$ to give $x = 7 - 1 = 6$
-# - Increment $y = 4 + 1 = 5$
+# - Edge e1 has $N = 8 \geq \Delta y = 7$ so subtract $\Delta y$ from $N$ to give $N = 8 - 7 = 1$ which is less than $\Delta y$ and add $x_{step} = -1$ to $x$ to give $x = 4 - 1 = 3$
+# - Edge e4 has $N=4 \geq \Delta y = 3$ so subtract $\Delta y$ from $N$ to give $N = 4 - 3 = 1$ which is less than $\Delta y$ and add $x_{step} = -1$ to $x$ to give $x = 8 - 1 = 7$
+# - Increment $y = 5 + 1 = 6$
 # 
 # ```
 # AET        x   N  xstep  Dx   Dy  ymin  ymax
-#     e1 : [ 2   1   -1    2    7    1     8  ]
-#     e5 : [ 4   3    1    2    5    1     6  ]
-#     e3 : [ 7   2    1    1    5    3     8  ]
-#     e4 : [ 6   1   -1    2    3    3     6  ]
+#     e1 : [ 3   1   -1    2    7    2     9  ]
+#     e5 : [ 5   3    1    2    5    2     7  ]
+#     e3 : [ 8   2    1    1    5    4     9  ]
+#     e4 : [ 7   1   -1    2    3    4     7  ]
 # ```
 # 
 # - AET is sorted by the $x$ values
 # 
 # ```
 # AET        x   N  xstep  Dx   Dy  ymin  ymax
-#     e1 : [ 2   1   -1    2    7    1     8  ]
-#     e5 : [ 4   3    1    2    5    1     6  ]
-#     e4 : [ 6   1   -1    2    3    3     6  ]
-#     e3 : [ 7   2    1    1    5    3     8  ]
+#     e1 : [ 3   1   -1    2    7    2     9  ]
+#     e5 : [ 5   3    1    2    5    2     7  ]
+#     e4 : [ 7   1   -1    2    3    4     7  ]
+#     e3 : [ 8   2    1    1    5    4     9  ]
 # ```
 # 
-# - Fill pixels $(2, 5)$ to $(4, 5)$, $(6, 5)$ and $(7,5)$
+# - Fill pixels $(3, 6)$ to $(5, 6)$, $(7, 6)$ and $(8, 6)$
 # 
-# :::{glue:figure} scanline-example-5
-# :figwidth: 300px
+# :::{figure} /images/scanline_example_6.png
+# :width: 300px
 # :::
 # 
 # - Add $\Delta x$ to $N$ for all edges in AET
 # 
 # ```
 # AET        x   N  xstep  Dx   Dy  ymin  ymax
-#     e1 : [ 2   3   -1    2    7    1     8  ]
-#     e5 : [ 4   5    1    2    5    1     6  ]
-#     e4 : [ 6   3   -1    2    3    3     6  ]
-#     e3 : [ 7   3    1    1    5    3     8  ]
+#     e1 : [ 3   3   -1    2    7    2     9  ]
+#     e5 : [ 5   5    1    2    5    2     7  ]
+#     e4 : [ 7   3   -1    2    3    4     7  ]
+#     e3 : [ 8   3    1    1    5    4     9  ]
 # ```
 # 
-# - Edge e5 has $N = 5 \geq \Delta y = 5$ so subtract $\Delta y$ from $N$ to give $N = 5 - 5 = 0$ which is less than $\Delta y$ and add $x_{step} = 1$ to $x$ to give $x = 4 + 1 = 5$
-# - Edge e4 has $N = 3 \geq \Delta y = 3$ so subtract $\Delta y$ from $N$ to give $N = 3 - 3 = 0$ which is less than $\Delta y$ and add $x_{step} = -1$ to $x$ to give $x = 6 - 1 = 5$
-# - Increment $y = 4 + 1 = 6$
-# 
-# ```
-# AET        x   N  xstep  Dx   Dy  ymin  ymax
-#     e1 : [ 2   3   -1    2    7    1     8  ]
-#     e5 : [ 5   0    1    2    5    1     6  ]
-#     e4 : [ 5   0   -1    2    3    3     6  ]
-#     e3 : [ 7   3    1    1    5    3     8  ]
-# ```
-# 
-# - Fill pixels $(2, 6)$ to $(5, 6)$ and $(5, 6)$ to $(7, 6)$
-# 
-# :::{glue:figure} scanline-example-6
-# :figwidth: 300px
-# :::
-# 
-# - Edges e5 and e4 have $y_{\max} = y$ so are removed from AET
-# - Add $\Delta x$ to $N$ for all edges in AET
+# - Edge e5 has $N = 5 \geq \Delta y = 5$ so subtract $\Delta y$ from $N$ to give $N = 5 - 5 = 0$ which is less than $\Delta y$ and add $x_{step} = 1$ to $x$ to give $x = 5 + 1 = 6$
+# - Edge e4 has $N = 3 \geq \Delta y = 3$ so subtract $\Delta y$ from $N$ to give $N = 3 - 3 = 0$ which is less than $\Delta y$ and add $x_{step} = -1$ to $x$ to give $x = 7 - 1 = 6$
 # - Increment $y = 6 + 1 = 7$
 # 
 # ```
 # AET        x   N  xstep  Dx   Dy  ymin  ymax
-#     e1 : [ 2   5   -1    2    7    1     8  ]
-#     e3 : [ 7   4    1    1    5    3     8  ]
+#     e1 : [ 3   3   -1    2    7    2     9  ]
+#     e5 : [ 6   0    1    2    5    2     7  ]
+#     e4 : [ 6   0   -1    2    3    4     7  ]
+#     e3 : [ 8   3    1    1    5    4     9  ]
 # ```
 # 
-# - Fill pixels $(2, 7)$ to $(7, 7)$
+# - Fill pixels $(3, 7)$ to $(6, 7)$ and $(6, 7)$ to $(8, 7)$
 # 
-# :::{glue:figure} scanline-example-7
-# :figwidth: 300px
+# :::{figure} /images/scanline_example_7.png
+# :width: 300px
+# :::
+# 
+# - Edges e5 and e4 have $y_{\max} = y$ so are removed from AET
+# - Add $\Delta x$ to $N$ for all edges in AET
+# - Increment $y = 7 + 1 = 8$
+# 
+# ```
+# AET        x   N  xstep  Dx   Dy  ymin  ymax
+#     e1 : [ 3   5   -1    2    7    2     9  ]
+#     e3 : [ 8   4    1    1    5    4     9  ]
+# ```
+# 
+# - Fill pixels $(3, 8)$ to $(8, 8)$
+# 
+# :::{figure} /images/scanline_example_8.png
+# :width: 300px
 # :::
 # 
 # - Add $\Delta x$ to $N$ for all edges in AET
@@ -530,33 +395,33 @@ glue("tight-corner-raster", fig, display=False)
 # 
 # ```
 # AET        x   N  xstep  Dx   Dy  ymin  ymax
-#     e1 : [ 2   7   -1    2    7    1     8  ]
-#     e3 : [ 7   5    1    1    5    3     8  ]
+#     e1 : [ 3   7   -1    2    7    2     9  ]
+#     e3 : [ 8   5    1    1    5    4     9  ]
 # ```
 # 
-# - Edge e1 has $N = 7 \geq \Delta y = 7$ so subtract $\Delta y$ from $N$ to give $N = 7 - 7 = 0$ which is less than $\Delta y$ so add $x_{step} = -1$ to $x$ to give $x = 2 - 1 = 1$
-# - Edge e3 has $N = 5 \geq \Delta y = 5$ so subtract $\Delta y$ from $N$ to give $N = 5 - 5 = 0$ which is less than $\Delta y$ so add $x_{step} = 1$ to $x$ to give $x = 7 + 1 = 8$
+# - Edge e1 has $N = 7 \geq \Delta y = 7$ so subtract $\Delta y$ from $N$ to give $N = 7 - 7 = 0$ which is less than $\Delta y$ so add $x_{step} = -1$ to $x$ to give $x = 3 - 1 = 2$
+# - Edge e3 has $N = 5 \geq \Delta y = 5$ so subtract $\Delta y$ from $N$ to give $N = 5 - 5 = 0$ which is less than $\Delta y$ so add $x_{step} = 1$ to $x$ to give $x = 8 + 1 = 9$
 # - Increment $y = 7 + 1 = 8$
 # 
 # ```
 # AET        x   N  xstep  Dx   Dy  ymin  ymax
-#     e1 : [ 1   0   -1    2    7    1     8  ]
-#     e3 : [ 8   0    1    1    5    3     8  ]
+#     e1 : [ 2   0   -1    2    7    2     9  ]
+#     e3 : [ 9   0    1    1    5    4     9  ]
 # ```
 # 
-# - Fill pixels $(1, 8)$ to $(8, 8)$.
+# - Fill pixels $(2, 9)$ to $(9, 9)$.
 # 
-# :::{glue:figure} scanline-example-8
-# :figwidth: 300px
+# :::{figure} /images/scanline_example_9.png
+# :width: 300px
 # :::
 # 
-# - Both edges e1 and e3 have $y_{\max} = 8$ to are removed from AET
+# - Both edges e1 and e3 have $y_{\max} = y$ so are removed from AET
 # - AET is now empty so the algorithm terminates
 # ::::
 # 
 # :::::
 
-# In[7]:
+# In[1]:
 
 
 import numpy as np
@@ -614,7 +479,7 @@ plt.fill(x, y, fill=False,lw=2)
 glue("span-extrema-plot", fig, display=False)
 
 
-# In[8]:
+# In[2]:
 
 
 import numpy as np
@@ -624,7 +489,7 @@ plt.rcParams['text.usetex'] = True
 
 def pixelcoordinates(X, Y, Nx, Ny):
     X = [int(x * Nx) for x in X]
-    Y = [int((1 - y) * Nx) for y in Y]
+    Y = [int((1 - y) * Ny) for y in Y]
     return X, Y
 
 blue = [210, 210, 255]
@@ -663,7 +528,7 @@ plt.fill(X, Y, fill=False,lw=2)
 glue("scanline-example-0", fig, display=False)
 
 
-# In[9]:
+# In[3]:
 
 
 def drawpolygon(R, X, Y, colour):
@@ -746,7 +611,7 @@ for i in range(Nx):
 img = drawpolygon(img, X, Y, blue)        
 
 
-# In[10]:
+# In[4]:
 
 
 def drawpolygon(R, X, Y, colour):

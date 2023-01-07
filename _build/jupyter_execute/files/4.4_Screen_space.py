@@ -110,6 +110,7 @@
 # 
 # and dividing by the fourth co-ordinates gives $(-fx/z, -fy/z, -f, 1)$ which are the projected co-ordinates derived above.
 # 
+# (viewing-frustum-section)=
 # ## The viewing frustum
 # 
 # When we view a virtual world we will only be able to see objects that are located within a finite region known as the **viewing frustum**. Consider the diagram shown in {numref}`viewing-frustum-figure`. The camera space is projected onto the near viewing plane and we view the virtual environment through the display screen which lies on the near projection plane. If we place another plane parallel to the projection plane further away from the origin then we have a volume which will contain the region of the camera space that should be visible to us. The location of the far viewing plane depends upon the computing power available, the further away it is the more of the camera space we will be able to see but this will of course require more computational resources.
@@ -353,11 +354,12 @@
 # zlabel('$z$', 'Interpreter', 'latex', 'FontSize', 18)
 # view(0,90)
 # axis([-1, 1, -1, 1, -1, 1])
-# grid on
 # box on
 # ```
 # 
-# ```{figure} /images/screen_space_example.svg
+# ```{figure} /images/screen_space_example.png
+# :width: 400px
+# :name: screen-space-figure
 # 
 # The screen space from {prf:ref}`screen-space-example`.
 # ```

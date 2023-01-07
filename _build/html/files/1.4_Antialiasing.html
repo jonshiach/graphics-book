@@ -212,18 +212,45 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
   </ul>
  </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="5.0_Hidden_surface_removal.html">
+   Clipping &amp; hidden surface removal
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="5.1_Clipping.html">
+     Clipping
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="5.2_Painters_algorithm.html">
+     Painter’s algorithm
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="5.3_Binary_space_partitioning.html">
+     Binary Space Partitioning (BSP)
+    </a>
+   </li>
+  </ul>
+ </li>
  <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="1.0_Rasterisation.html">
    Rasterisation
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
-  <label for="toctree-checkbox-4">
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
    <i class="fas fa-chevron-down">
    </i>
   </label>
   <ul class="current">
    <li class="toctree-l2">
-    <a class="reference internal" href="1.1_Bresenhams_algorithm.html">
+    <a class="reference internal" href="1.1_Drawing_lines.html">
      Drawing lines
     </a>
    </li>
@@ -447,22 +474,20 @@ title="Print to PDF"
 <img alt="../_images/1.4_Antialiasing_1_1.png" src="../_images/1.4_Antialiasing_1_1.png" />
 </div>
 <figcaption>
-<p><span class="caption-number">Fig. 58 </span><span class="caption-text">Super sampling antialiasing.</span><a class="headerlink" href="#ssaa-figure" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 59 </span><span class="caption-text">Super sampling antialiasing.</span><a class="headerlink" href="#ssaa-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>Consider the diagram in <a class="reference internal" href="#ssaa-figure"><span class="std std-numref">Fig. 58</span></a> where four pixels from a <span class="math notranslate nohighlight">\(\times 2\)</span> super sample are combined to produce the display pixel. Averaging the colour triplets gives</p>
+<p>Consider the diagram in <a class="reference internal" href="#ssaa-figure"><span class="std std-numref">Fig. 59</span></a> where four pixels from a <span class="math notranslate nohighlight">\(\times 2\)</span> super sample are combined to produce the display pixel. Averaging the colour triplets gives</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
     \text{display pixel colour} &amp;= \frac{(255, 255, 255) + (0, 128, 255) + (255, 128, 128) + (0, 255, 64)}{4}\\
     &amp;= (127, 191, 175).
 \end{align*}\]</div>
-<p>The affects of applying a <span class="math notranslate nohighlight">\(\times 2\)</span> super sample antialiasing can be seen in <a class="reference internal" href="#antialiased-circle-figure"><span class="std std-numref">Fig. 59</span></a>.</p>
-<figure class="align-default" id="antialiased-circle-figure" style="width: 500px">
-<div class="cell_output docutils container">
-<img alt="../_images/1.4_Antialiasing_2_0.png" src="../_images/1.4_Antialiasing_2_0.png" />
-</div>
+<p>The affects of applying a <span class="math notranslate nohighlight">\(\times 2\)</span> super sample antialiasing can be seen in <a class="reference internal" href="#antialiased-circle-figure"><span class="std std-numref">Fig. 60</span></a>.</p>
+<figure class="align-default" id="antialiased-circle-figure">
+<a class="reference internal image-reference" href="../_images/antialiasing_example.png"><img alt="../_images/antialiasing_example.png" src="../_images/antialiasing_example.png" style="width: 500px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 59 </span><span class="caption-text">Filled circle with (left) and without (right) <span class="math notranslate nohighlight">\(\times 2\)</span> super sampling antialiasing applied.</span><a class="headerlink" href="#antialiased-circle-figure" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 60 </span><span class="caption-text">Filled circle with (left) and without (right) <span class="math notranslate nohighlight">\(\times 2\)</span> super sampling antialiasing applied.</span><a class="headerlink" href="#antialiased-circle-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>

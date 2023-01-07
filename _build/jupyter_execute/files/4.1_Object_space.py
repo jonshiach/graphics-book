@@ -71,6 +71,7 @@
 # 
 # The faces of the object are defined by a **face matrix** that links to the vertex matrix. The face matrix is an $m \times n$ matrix where $m$ is the number of faces of the object and $n$ is the number of sides for each face, so for the cube object the face matrix will be $6 \times 4$. The rows of the face matrix contain the column number of the vertex matrix corresponding to vertices of that face. For example, consider the faces of the cube object shown below. The face that represents the base has vertices $\mathbf{v}_1$, $\mathbf{v}_2$, $\mathbf{v}_3$ and $\mathbf{v}_4$ so the row of the face matrix will contain the numbers 1, 2, 3 and 4.
 # 
+# (cube-faces)=
 # `````{grid}
 # 
 # ````{grid-item}
@@ -260,7 +261,7 @@
 #      5, 9, 10, 8, 8 ];  % left roof
 # 
 # % Plot object
-# patch('Vertices', V(1:3,:)', 'Faces', F, 'FaceColor', 'white', 'FaceAlpha', 0.75, 'LineWidth', 2)
+# patch('Vertices', V(1:3,:)', 'Faces', F, FaceColor='white', FaceAlpha=0.75, LineWidth=2)
 # xlabel('$x$', 'Interpreter', 'latex', 'FontSize', 18)
 # ylabel('$y$', 'Interpreter', 'latex', 'FontSize', 18)
 # zlabel('$z$', 'Interpreter', 'latex', 'FontSize', 18)
@@ -270,13 +271,9 @@
 # grid on 
 # ```
 # 
-# ```{figure} /images/object_space_example.svg
+# ```{figure} /images/object_space_example.png
+# :width: 400px
+# :name: object-space-example-figure
 # 
 # The object space from {prf:ref}`object-space-example`.
 # ```
-
-# In[ ]:
-
-
-
-

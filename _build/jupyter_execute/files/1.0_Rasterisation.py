@@ -13,22 +13,25 @@
 # 
 # ```{prf:definition} Pixel
 # :class: note
+# :label: pixel-definition
 # 
 # A **pixel** is a small square that is illuminated using different colours.
 # ```
 # 
 # ```{prf:definition} Raster
 # :class: note
+# :label: raster-definition
 # 
 # A **raster** is a rectangular array of pixels.
 # ```
 # 
 # ```{prf:definition} Idealised image
 # :class: note
+# :label: idealised-image-definition
 # 
 # An **idealised image** is an analogue image that we wish to represent in a raster.
 # ```
-
+# 
 # ## The RGB colour model
 # 
 # The **RGB** colour model uses the three primary colours <span style="color: red;">Red</span>, <span style="color: green;">Green</span> and <span style="color: blue;">Blue</span> (RGB) that are added to produce colours in the visible spectrum. Using a single bit for each primary colour (i.e., adding all of that colour or none of that colour) means that it is possible to produce eight colours: <span style="color: red;">red</span>, <span style="color: yellow;">yellow</span>, <span style="color: green;">green</span>, <span style="color: cyan;">cyan</span>, <span style="color: blue;">blue</span>, <span style="color: magenta;">magenta</span>, black and <span style="background-color:black;color:white">white</span> as shown in {ref}`rgb-table`. For example mixing full amounts of red and green results in pure yellow. 
@@ -86,15 +89,15 @@
 # 
 # ```matlab
 # img = imread('cavendish.jpg');
-# size(img)
+# [Ny, Nx, Ncolours] = size(img)
 # ```
 # 
 # The output is
 # 
 # ```
-# ans =
-# 
-#    600   800     3
+# Ny = 600
+# Nx = 800
+# Ncolours = 3
 # ```
 # 
 # So the raster array has a height of $N_y = 600$ pixels, a width of $N_x=800$ pixels with each pixel defined by a colour triplet.
@@ -108,48 +111,52 @@
 # ```{figure} /images/cavendish_plot.png
 # :width: 500px
 # ```
-
-# In[1]:
-
-
-imgplot = plt.imshow(img)
-
-
-# Now we have the raster array for the image we can use Python commands to manipulate the image. For example, the following code sets the colour of each pixel to either black or white depending on whether the sum of the colour triplet is greater or less than 383 which is halfway between 0 and 767 .
-
-# In[20]:
-
-
-colour_sum = np.sum(img, axis=2)
-imgbw = np.copy(img)
-imgbw[colour_sum > 382,:] = [255,255,255]
-imgbw[colour_sum <= 382,:] = [0,0,0]
-imgbwplot = plt.imshow(imgbw)
-
-
+# 
+# Now we have the raster array for the image we can use Python commands to manipulate the image. For example, the following code sets the colour of each pixel to either black or white depending on whether the average of the colour triplet is greater or less than 128 which is halfway between 0 and 255.
+# 
+# ```matlab
+# % Read in image
+# img = imread('cavendish.jpg');
+# 
+# % Get size of image array
+# [Ny, Nx, Ncolours] = size(img);
+# 
+# % Reshape image array
+# img_bw = reshape(img, [Nx * Ny, Ncolours]);
+# 
+# % Calculate average colour of each pixel
+# avg = mean(img_bw, 2);
+# 
+# % Change each pixel to black or white depending on the average colour
+# img_bw(avg <= 128, :) = 0;
+# img_bw(avg > 128, :) = 255;
+# 
+# % Reshape image array back to the original shape
+# img_bw = reshape(img_bw, [Ny, Nx, Ncolours]);
+# 
+# % Plot image array
+# image(img_bw)
+# ```
+# 
+# ```{figure} /images/cavendish_bw.png
+# :width: 500px
+# ```
+# 
 # ## Pixel co-ordinates
 # 
-# You may have noticed that the vertical axes on the image plots have a scale that starts at 0 at the top and increases as we move down the rows of pixels. The reason for this is that digital displays are refreshed using horizontal lines of pixels starting at the top row and moving down to the bottom. 
+# You may have noticed that the vertical axes on the image plots have a scale that starts at 1 at the top and increases as we move down the rows of pixels [^1]. The reason for this is that digital displays are refreshed using horizontal lines of pixels starting at the top row and moving down to the bottom. 
+# 
+# [^1]: Note that in most graphical applications we start numbering pixels at 0. In these notes have have used 1 as the starting co-ordinate so that matrix indexing is easier when using MATLAB. If you are using a zero-indexing language such as Python, C etc. then subtract 1 from the pixel co-ordinates.
 # 
 # If the raster represents a region defined by the $x$ and $y$ Euclidean space co-ordinates $x, y \in [0, 1]$ which is to be represented by an $N_y \times N_x$ raster then the corresponding pixel co-ordinates are
 # 
 # :::{math}
 # 
 # \begin{align}
-#     x_{pixel} &= \lfloor x \cdot N_x \rfloor, \\
-#     y_{pixel} &= \lfloor (1 - y) \cdot N_y \rfloor, 
+#     x_{pixel} &= 1 + \lfloor x \cdot N_x \rfloor, \\
+#     y_{pixel} &= 1 + \lfloor (1 - y) \cdot N_y \rfloor, 
 # \end{align}
 # :::
 # 
 # where $\lfloor \cdot \rfloor$ is rounds the contents to the integer below. Note that the $y$ co-ordinate is subtracted from 1 to ensure that the pixel co-ordinates $(0, 0)$ correspond to $(0, 1)$, i.e., the top-left hand pixel in the raster. 
 # 
-# The Python function defined below calculates the pixel co-ordinates from the $x$ and $y$ Euclidean space co-ordinates
-
-# In[ ]:
-
-
-def pixelcoords(x, y, Nx, Ny):
-    xpixel = int(x * Nx)
-    ypixel = int((1 - y) * Ny)
-    return xpixel, ypixel
-

@@ -26,6 +26,11 @@ parts:
     sections:
     - glob: files/4.*
 
+
+  - file: files/5.0_Hidden_surface_removal
+    sections:
+    - glob: files/5.*
+
   - file: files/1.0_Rasterisation
     sections:
     - glob: files/1.*
