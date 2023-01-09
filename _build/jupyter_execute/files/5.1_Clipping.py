@@ -8,7 +8,7 @@
 # :figclass: margin
 # ```
 # 
-# Consider the plot of the screen space from {prf:ref}`screen-space-example` where some of house object closest to the camera lies partially outside of the unit cube representation of the [viewing frustum]((viewing-frustum-section). The region inside of this unit cube contains the space that is visible to the viewer and is known as the **visible region**. Any objects that are outside of the visible region needs to be ignored from this point onwards in the viewing pipeline and any objects that lie partially outside need to be **clipped** to the edges of the visible region.
+# Consider the plot of the screen space from {prf:ref}`screen-space-example` where some of house object closest to the camera lies partially outside of the unit cube representation of the [viewing frustum](viewing-frustum-section). The region inside of this unit cube contains the space that is visible to the viewer and is known as the **visible region**. Any objects that are outside of the visible region needs to be ignored from this point onwards in the viewing pipeline and any objects that lie partially outside need to be **clipped** to the edges of the visible region.
 # 
 # ```{figure} /images/clipping.png
 # :width: 400px
