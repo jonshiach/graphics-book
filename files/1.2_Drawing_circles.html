@@ -223,17 +223,27 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="5.1_Clipping.html">
-     Clipping
+    <a class="reference internal" href="5.1_Line_clipping.html">
+     Line clipping
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="5.2_Painters_algorithm.html">
+    <a class="reference internal" href="5.2_Polygon_clipping.html">
+     Polygon clipping
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="5.3_Backface_culling.html">
+     Backface culling
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="5.3_Painters_algorithm.html">
      Painter’s algorithm
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="5.3_Binary_space_partitioning.html">
+    <a class="reference internal" href="5.4_Binary_space_partitioning.html">
      Binary Space Partitioning (BSP)
     </a>
    </li>
@@ -466,13 +476,13 @@ title="Print to PDF"
   <section class="tex2jax_ignore mathjax_ignore" id="drawing-circles">
 <span id="drawing-circles-section"></span><h1>Drawing circles<a class="headerlink" href="#drawing-circles" title="Permalink to this headline">#</a></h1>
 <p>Now that we have the ability to rasterise straight lines the next fundamental problem is the rasterisation of circles. This can be done by deriving a Bresenham-type algorithm that uses the <a class="reference external" href="https://en.wikipedia.org/wiki/Circle#Equations">Cartesian equation of a circle</a> to determine which of two candidate pixels are plotted.</p>
-<p>The circle line drawing algorithms can use the concept of <strong>circle symmetry</strong> to reduce the number of computations required to rasterise a circle. Consider <a class="reference internal" href="#circle-symmetry-figure"><span class="std std-numref">Fig. 55</span></a> where a circle is centred at the origin. If the coordinate of a point on the circle in the shaded octant where <span class="math notranslate nohighlight">\(x &gt; y\)</span> is known to be <span class="math notranslate nohighlight">\((x,y)\)</span> then the corresponding points on the circle in the other seven octants can be found via circle symmetry through combinations of <span class="math notranslate nohighlight">\((\pm x,\pm y)\)</span> and <span class="math notranslate nohighlight">\((\pm y,\pm x)\)</span>.</p>
+<p>The circle line drawing algorithms can use the concept of <strong>circle symmetry</strong> to reduce the number of computations required to rasterise a circle. Consider <a class="reference internal" href="#circle-symmetry-figure"><span class="std std-numref">Fig. 73</span></a> where a circle is centred at the origin. If the coordinate of a point on the circle in the shaded octant where <span class="math notranslate nohighlight">\(x &gt; y\)</span> is known to be <span class="math notranslate nohighlight">\((x,y)\)</span> then the corresponding points on the circle in the other seven octants can be found via circle symmetry through combinations of <span class="math notranslate nohighlight">\((\pm x,\pm y)\)</span> and <span class="math notranslate nohighlight">\((\pm y,\pm x)\)</span>.</p>
 <figure class="align-default" id="circle-symmetry-figure" style="width: 400px">
 <div class="cell_output docutils container">
 <img alt="../_images/1.2_Drawing_circles_1_0.png" src="../_images/1.2_Drawing_circles_1_0.png" />
 </div>
 <figcaption>
-<p><span class="caption-number">Fig. 55 </span><span class="caption-text">Circle symmetry can be used to calculate points on a circle.</span><a class="headerlink" href="#circle-symmetry-figure" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 73 </span><span class="caption-text">Circle symmetry can be used to calculate points on a circle.</span><a class="headerlink" href="#circle-symmetry-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>For circles not centred at the original, which will be the case in the vast majority of applications, we calculate the co-ordinates of a point on the circle in the first octant <span class="math notranslate nohighlight">\((x, y)\)</span> and then add the co-ordinates of the circle centre <span class="math notranslate nohighlight">\((c_x,c_y)\)</span> giving the following eight pixel co-ordinates</p>
@@ -504,13 +514,13 @@ title="Print to PDF"
 <img alt="../_images/1.2_Drawing_circles_3_0.png" src="../_images/1.2_Drawing_circles_3_0.png" />
 </div>
 <figcaption>
-<p><span class="caption-number">Fig. 56 </span><span class="caption-text">Determining the pixels on a circle using the midpoint algorithm.</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 74 </span><span class="caption-text">Determining the pixels on a circle using the midpoint algorithm.</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>To derive an algorithm to rasterise a circle we assume that the circle is centred at <span class="math notranslate nohighlight">\((0, 0)\)</span> and we start at the pixel at the 3 o’clock position with pixel co-ordinates <span class="math notranslate nohighlight">\((r,0)\)</span>. We then move clockwise around the circle calculating the pixels that lie closest to the idealised circle until <span class="math notranslate nohighlight">\(x=y\)</span> which is the end of the first octant. For each pixel co-ordinates we calculate, the pixel co-ordinates of the corresponding pixels in the 7 other octants are calculated using circle symmetry.</p>
 <p>Once the first pixel <span class="math notranslate nohighlight">\((r,0)\)</span> is plotted we move down by one pixel so that <span class="math notranslate nohighlight">\(y=1\)</span> and we have a choice between the two pixels at <span class="math notranslate nohighlight">\((r,1)\)</span> and <span class="math notranslate nohighlight">\((r-1,1)\)</span> to plot next. Similar to Bresenham’s line drawing algorithm, we define a value <span class="math notranslate nohighlight">\(D\)</span> as the difference between the value of <span class="math notranslate nohighlight">\(f(x,y)\)</span> between the first pixel <span class="math notranslate nohighlight">\((r,0)\)</span> and the midpoint between the two pixels <span class="math notranslate nohighlight">\((r,1)\)</span> and <span class="math notranslate nohighlight">\((r-1,1)\)</span>.</p>
 <div class="math notranslate nohighlight" id="equation-midpoint-equation-1">
-<span class="eqno">(35)<a class="headerlink" href="#equation-midpoint-equation-1" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align}
+<span class="eqno">(38)<a class="headerlink" href="#equation-midpoint-equation-1" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align}
     \notag D &amp;= f \left( r-\tfrac{1}{2}, 1 \right) - f(r, 0) \\
     \notag &amp;= \left( r-\tfrac{1}{2} \right)^2 + 1^2 - r^2 - r^2 - 0^2 + r^2 \\
     \notag &amp;= r^2 - r + \tfrac{1}{4} + 1 - r^2 \\
@@ -518,7 +528,7 @@ title="Print to PDF"
 \end{align}\end{split}\]</div>
 <p>If <span class="math notranslate nohighlight">\(D \leq 0\)</span> then the midpoint is inside the circle so we plot the pixel at <span class="math notranslate nohighlight">\((x,y+1)\)</span> and the change in the value of <span class="math notranslate nohighlight">\(D\)</span> is</p>
 <div class="math notranslate nohighlight" id="equation-midpoint-equation-2">
-<span class="eqno">(36)<a class="headerlink" href="#equation-midpoint-equation-2" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align}
+<span class="eqno">(39)<a class="headerlink" href="#equation-midpoint-equation-2" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align}
     \Delta D_{inside} &amp;= f\left( x-\tfrac{1}{2},y+2 \right) - f\left(x-\tfrac{1}{2},y+1\right) \\
     &amp;= \left(x-\tfrac{1}{2}\right)^2 + (y+2)^2 - r^2 - \left(x-\tfrac{1}{2}\right)^2 - (y+1)^2 + r^2 \\
     &amp;= y^2 + 4y + 4 - y^2 - y - 1 \\
@@ -526,22 +536,22 @@ title="Print to PDF"
 \end{align}\end{split}\]</div>
 <p>Else if <span class="math notranslate nohighlight">\(D &gt; 0\)</span> then the midepoint is outside ofhte circle so we plot the pixel at <span class="math notranslate nohighlight">\((x-1,y+1)\)</span> and the change in the value of <span class="math notranslate nohighlight">\(D\)</span> is</p>
 <div class="math notranslate nohighlight" id="equation-midpoint-equation-3">
-<span class="eqno">(37)<a class="headerlink" href="#equation-midpoint-equation-3" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align}
+<span class="eqno">(40)<a class="headerlink" href="#equation-midpoint-equation-3" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align}
     \notag \Delta D_{outside} &amp;= f\left(x-\tfrac{3}{2},y+2\right) - f\left(x-\tfrac{1}{2}, y+1\right) \\
     \notag &amp;= \left(x-\tfrac{3}{2}\right)^2 + (y+2)^2 - r^2 - \left(x-\tfrac{1}{2}\right)^2 - (y+1)^2 + r^2 \\
     \notag &amp;= x^2 - 3x + \tfrac{9}{4} + y^2 + 4y + 4 - x^2 + x - \tfrac{1}{4} - y^2 - 2y - 1 \\
     &amp;= 2y - 2x + 5.
 \end{align}\end{split}\]</div>
-<p>Equation <a class="reference internal" href="#equation-midpoint-equation-1">(35)</a> contains a floating point number in <span class="math notranslate nohighlight">\(\frac{5}{4}\)</span>, similar to Bresenham’s algorithm we can multiply equations <a class="reference internal" href="#equation-midpoint-equation-1">(35)</a> to <a class="reference internal" href="#equation-midpoint-equation-3">(37)</a> by 4 so that we have integer only expressions for <span class="math notranslate nohighlight">\(D\)</span>, <span class="math notranslate nohighlight">\(\Delta D_{inside}\)</span> and <span class="math notranslate nohighlight">\(\Delta_{outside}\)</span></p>
+<p>Equation <a class="reference internal" href="#equation-midpoint-equation-1">(38)</a> contains a floating point number in <span class="math notranslate nohighlight">\(\frac{5}{4}\)</span>, similar to Bresenham’s algorithm we can multiply equations <a class="reference internal" href="#equation-midpoint-equation-1">(38)</a> to <a class="reference internal" href="#equation-midpoint-equation-3">(40)</a> by 4 so that we have integer only expressions for <span class="math notranslate nohighlight">\(D\)</span>, <span class="math notranslate nohighlight">\(\Delta D_{inside}\)</span> and <span class="math notranslate nohighlight">\(\Delta_{outside}\)</span></p>
 <div class="math notranslate nohighlight" id="equation-midpoint-equations">
-<span class="eqno">(38)<a class="headerlink" href="#equation-midpoint-equations" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align}
+<span class="eqno">(41)<a class="headerlink" href="#equation-midpoint-equations" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align}
     D &amp;= 5 - 4r, \\
     \Delta D_{inside} &amp;= 8y + 12, \\
     \Delta D_{outside} &amp;= 8y - 8x + 20.
 \end{align}\end{split}\]</div>
 <p>Note that the values of <span class="math notranslate nohighlight">\(\Delta D_{inside}\)</span> and <span class="math notranslate nohighlight">\(\Delta D_{outside}\)</span> depend on the current values of <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> so cannot be pre-calculated.</p>
 <div class="proof algorithm admonition" id="midpoint-algorithm">
-<p class="admonition-title"><span class="caption-number">Algorithm 3 </span> (Midpoint algorithm)</p>
+<p class="admonition-title"><span class="caption-number">Algorithm 6 </span> (Midpoint algorithm)</p>
 <section class="algorithm-content" id="proof-content">
 <p><strong>Inputs</strong> A raster array <span class="math notranslate nohighlight">\(R\)</span>, pixel co-ordinates of the centre of a circle <span class="math notranslate nohighlight">\((c_x, c_y)\)</span> the radius of the circle <span class="math notranslate nohighlight">\(r\)</span> and the colour of the circle line defined by the RBG triplet <span class="math notranslate nohighlight">\(colour\)</span>.</p>
 <p><strong>Output</strong> A raster array <span class="math notranslate nohighlight">\(R\)</span>.</p>
@@ -569,7 +579,7 @@ title="Print to PDF"
 </ul>
 </section>
 </div><div class="proof example seealso admonition" id="midpoint-example">
-<p class="admonition-title"><span class="caption-number">Example 29 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 32 </span></p>
 <section class="example-content" id="proof-content">
 <p>Use the midpoint algorithm to rasterise a circle centred at <span class="math notranslate nohighlight">\((12, 12)\)</span> with radius 10.</p>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">

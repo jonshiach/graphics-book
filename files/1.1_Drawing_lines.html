@@ -223,17 +223,27 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="5.1_Clipping.html">
-     Clipping
+    <a class="reference internal" href="5.1_Line_clipping.html">
+     Line clipping
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="5.2_Painters_algorithm.html">
+    <a class="reference internal" href="5.2_Polygon_clipping.html">
+     Polygon clipping
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="5.3_Backface_culling.html">
+     Backface culling
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="5.3_Painters_algorithm.html">
      Painter’s algorithm
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="5.3_Binary_space_partitioning.html">
+    <a class="reference internal" href="5.4_Binary_space_partitioning.html">
      Binary Space Partitioning (BSP)
     </a>
    </li>
@@ -485,11 +495,11 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="drawing-lines">
 <span id="rasterising-lines-section"></span><h1>Drawing lines<a class="headerlink" href="#drawing-lines" title="Permalink to this headline">#</a></h1>
-<p>One of the fundamental tasks in computer graphics is the rendering of a straight line on a display. Consider the diagram in <a class="reference internal" href="#line-raster-figure"><span class="std std-numref">Fig. 51</span></a> showing the rasterisation of the straight line joining the two points with pixel co-ordinates <span class="math notranslate nohighlight">\((2, 2)\)</span> and <span class="math notranslate nohighlight">\((12, 6)\)</span>. The pixels that are closest to the line are shaded to create a rasterised approximation of the idealise image. This is a simple task for a human since we are able to view the idealised image and determine which pixels need to be shaded. Algorithms are required to determine which pixels to illuminate in order to rasterise straight lines</p>
+<p>One of the fundamental tasks in computer graphics is the rendering of a straight line on a display. Consider the diagram in <a class="reference internal" href="#line-raster-figure"><span class="std std-numref">Fig. 69</span></a> showing the rasterisation of the straight line joining the two points with pixel co-ordinates <span class="math notranslate nohighlight">\((2, 2)\)</span> and <span class="math notranslate nohighlight">\((12, 6)\)</span>. The pixels that are closest to the line are shaded to create a rasterised approximation of the idealise image. This is a simple task for a human since we are able to view the idealised image and determine which pixels need to be shaded. Algorithms are required to determine which pixels to illuminate in order to rasterise straight lines</p>
 <figure class="align-default" id="line-raster-figure">
 <a class="reference internal image-reference" href="../_images/line_raster.png"><img alt="../_images/line_raster.png" src="../_images/line_raster.png" style="width: 400px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 51 </span><span class="caption-text">Rasterising a straight line</span><a class="headerlink" href="#line-raster-figure" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 69 </span><span class="caption-text">Rasterising a straight line</span><a class="headerlink" href="#line-raster-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <section id="bresenham-s-algorithm">
@@ -497,12 +507,12 @@ title="Print to PDF"
 <figure class="margin align-default" id="id2">
 <a class="reference internal image-reference" href="https://www.ithistory.org/sites/default/files/honor-roll/Jack%20E.%20Bresenham.jpg"><img alt="Jack Elton Bresenham" src="https://www.ithistory.org/sites/default/files/honor-roll/Jack%20E.%20Bresenham.jpg" style="width: 200px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 52 </span><span class="caption-text"><a class="reference external" href="https://en.wikipedia.org/wiki/Jack_Elton_Bresenham">Jack Elton Bresenham</a></span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 70 </span><span class="caption-text"><a class="reference external" href="https://en.wikipedia.org/wiki/Jack_Elton_Bresenham">Jack Elton Bresenham</a></span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p><strong>Bresenham’s algorithm</strong> developed by American computer scientist Jack <span id="id1">Bresenham [<a class="reference internal" href="bibliography.html#id2" title="Jack Elton Bresenham. Algorithm for computer control of a digital plotter. IBM Systems journal, 4(1):25–30, 1965.">1965</a>]</span> is a line drawing algorithm that uses integer only arithmetic and offers a vast improvement over other methods in terms of computational efficiency. Consider the <a class="reference external" href="https://en.wikipedia.org/wiki/Linear_equation">Cartesian equation of a straight line</a> joining two points with co-ordinates <span class="math notranslate nohighlight">\((x_0, y_0)\)</span> and <span class="math notranslate nohighlight">\((x_1, y_1)\)</span></p>
 <div class="math notranslate nohighlight" id="equation-cartesian-equation-of-a-line">
-<span class="eqno">(29)<a class="headerlink" href="#equation-cartesian-equation-of-a-line" title="Permalink to this equation">#</a></span>\[y = \frac{y_1 - y_0}{x_1 - x_0} x + c,\]</div>
+<span class="eqno">(32)<a class="headerlink" href="#equation-cartesian-equation-of-a-line" title="Permalink to this equation">#</a></span>\[y = \frac{y_1 - y_0}{x_1 - x_0} x + c,\]</div>
 <p>where <span class="math notranslate nohighlight">\((x, y)\)</span> are the co-ordinates of a point on the line and <span class="math notranslate nohighlight">\(c\)</span> is where the line intercepts with the <span class="math notranslate nohighlight">\(y\)</span>-axis. Letting <span class="math notranslate nohighlight">\(\Delta x = x_1 - x_0\)</span> and <span class="math notranslate nohighlight">\(\Delta y = y_1 - y_0\)</span> this can be written as</p>
 <div class="math notranslate nohighlight">
 \[y = \frac{\Delta y}{\Delta x} x + c, \]</div>
@@ -511,7 +521,7 @@ title="Print to PDF"
 \[ 0 = x \Delta y - y \Delta x + c \Delta x.\]</div>
 <p>Defining the function <span class="math notranslate nohighlight">\(f(x, y)\)</span> as</p>
 <div class="math notranslate nohighlight" id="equation-fxy">
-<span class="eqno">(30)<a class="headerlink" href="#equation-fxy" title="Permalink to this equation">#</a></span>\[f(x, y) = x \Delta y - y \Delta x + c \Delta x,\]</div>
+<span class="eqno">(33)<a class="headerlink" href="#equation-fxy" title="Permalink to this equation">#</a></span>\[f(x, y) = x \Delta y - y \Delta x + c \Delta x,\]</div>
 <p>then if <span class="math notranslate nohighlight">\(f(x, y) = 0\)</span> then the point with co-ordinates <span class="math notranslate nohighlight">\((x, y)\)</span> is on the line else it gives an indication of the distance from the point to the line.</p>
 <p>The premise behind Bresenham’s algorithm is that we use the sign of the value of <span class="math notranslate nohighlight">\(f(x, y)\)</span> at the midpoint between the two pixels whose centres lie either side of the idealised line to determine which of these pixels is plotted. Consider the <a class="reference internal" href="#bresenham-1-figure"><span class="std std-ref">diagram below</span></a>, we know that our idealised line will start at the pixel with co-ordinates <span class="math notranslate nohighlight">\((x_0, y_0)\)</span> so we plot this pixel. For now we will assume that <span class="math notranslate nohighlight">\(x_0 &lt; x_1\)</span> and <span class="math notranslate nohighlight">\(y_0 &lt; y_1\)</span> so our line is drawn from left-to-right and top-to-bottom (we will consider the other cases later), we have a choice between the two pixels at <span class="math notranslate nohighlight">\((x_0 + 1, y_0)\)</span> and <span class="math notranslate nohighlight">\((x_0 + 1, y_0 + 1)\)</span> which to plot next. To decide which of these pixels is plotted we can use the value of <span class="math notranslate nohighlight">\(f(x_0 + 1, y_0 + \frac{1}{2})\)</span> to determine which of these two pixels is closer to the idealised line. If <span class="math notranslate nohighlight">\(f(x_0 + 1, y_0 + \frac{1}{2}) &lt; 0\)</span> then the pixel at <span class="math notranslate nohighlight">\((x_0 + 1, y_0)\)</span> is closer to the idealised line and is plotted else the pixel at <span class="math notranslate nohighlight">\((x_0 + 1, y_0 + 1)\)</span> is closer and plotted.</p>
 <figure class="align-default" id="bresenham-1-figure" style="width: 300px">
@@ -519,13 +529,13 @@ title="Print to PDF"
 <img alt="../_images/1.1_Drawing_lines_2_0.png" src="../_images/1.1_Drawing_lines_2_0.png" />
 </div>
 <figcaption>
-<p><span class="caption-number">Fig. 53 </span><span class="caption-text">The pixel whose centre is closest to the idealised line is plotted.</span><a class="headerlink" href="#bresenham-1-figure" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 71 </span><span class="caption-text">The pixel whose centre is closest to the idealised line is plotted.</span><a class="headerlink" href="#bresenham-1-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <div class="proof example seealso admonition" id="example-0">
-<p class="admonition-title"><span class="caption-number">Example 26 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 29 </span></p>
 <section class="example-content" id="proof-content">
-<p>Use the expression <span class="math notranslate nohighlight">\(f(x,y)\)</span> from equation <a class="reference internal" href="#equation-fxy">(30)</a> to determine the co-ordinates closest to the line joining the two points <span class="math notranslate nohighlight">\((2, 2)\)</span> and <span class="math notranslate nohighlight">\((7, 5)\)</span>.</p>
+<p>Use the expression <span class="math notranslate nohighlight">\(f(x,y)\)</span> from equation <a class="reference internal" href="#equation-fxy">(33)</a> to determine the co-ordinates closest to the line joining the two points <span class="math notranslate nohighlight">\((2, 2)\)</span> and <span class="math notranslate nohighlight">\((7, 5)\)</span>.</p>
 <figure class="align-default" style="width: 300px">
 <img alt="../_images/bresenham_example_1_1.png" src="../_images/bresenham_example_1_1.png" />
 </figure>
@@ -536,7 +546,7 @@ Solution<div class="sd-summary-down docutils">
 <div class="sd-summary-up docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
-<p class="sd-card-text">Here <span class="math notranslate nohighlight">\(x_0=2\)</span>, <span class="math notranslate nohighlight">\(x_1=7\)</span>, <span class="math notranslate nohighlight">\(y_0=2\)</span> and <span class="math notranslate nohighlight">\(y_1 = 5\)</span> so <span class="math notranslate nohighlight">\(\Delta x = x_1 - x_0 = 7 - 2 = 5\)</span> and <span class="math notranslate nohighlight">\(\Delta y = y_1 - y_0 = 5 - 2 = 3\)</span>. To calculate the value of <span class="math notranslate nohighlight">\(c\)</span> we rearrange equation <a class="reference internal" href="#equation-cartesian-equation-of-a-line">(29)</a> and substitute values of <span class="math notranslate nohighlight">\(x_0\)</span> and <span class="math notranslate nohighlight">\(y_0\)</span></p>
+<p class="sd-card-text">Here <span class="math notranslate nohighlight">\(x_0=2\)</span>, <span class="math notranslate nohighlight">\(x_1=7\)</span>, <span class="math notranslate nohighlight">\(y_0=2\)</span> and <span class="math notranslate nohighlight">\(y_1 = 5\)</span> so <span class="math notranslate nohighlight">\(\Delta x = x_1 - x_0 = 7 - 2 = 5\)</span> and <span class="math notranslate nohighlight">\(\Delta y = y_1 - y_0 = 5 - 2 = 3\)</span>. To calculate the value of <span class="math notranslate nohighlight">\(c\)</span> we rearrange equation <a class="reference internal" href="#equation-cartesian-equation-of-a-line">(32)</a> and substitute values of <span class="math notranslate nohighlight">\(x_0\)</span> and <span class="math notranslate nohighlight">\(y_0\)</span></p>
 <div class="math notranslate nohighlight">
 \[ c = y_0 - \frac{\Delta y}{\Delta x} x_0 = 2 - \frac{3}{5}(2) = 0.8.\]</div>
 <p class="sd-card-text">We plot the first pixel at <span class="math notranslate nohighlight">\((2, 2)\)</span> and then have a choice between the pixels at <span class="math notranslate nohighlight">\((3, 2)\)</span> and <span class="math notranslate nohighlight">\((3, 3)\)</span> which the midpoint between these two pixels is at <span class="math notranslate nohighlight">\((3, 2.5)\)</span>. Calculating <span class="math notranslate nohighlight">\(f(3, 2.5)\)</span></p>
@@ -565,7 +575,7 @@ Solution<div class="sd-summary-down docutils">
 <h2>Derivation of Bresenham’s algorithm<a class="headerlink" href="#derivation-of-bresenham-s-algorithm" title="Permalink to this headline">#</a></h2>
 <p>To derive an algorithm that uses integer only values we can define a difference <span class="math notranslate nohighlight">\(D\)</span> between the midpoint between two candidate pixels which is updated as we move along the line. Initially the pixel at <span class="math notranslate nohighlight">\((x_0, y_0)\)</span> is plotted and we define the initial value of <span class="math notranslate nohighlight">\(D\)</span> as the difference between the midpoint at the next two nodes along the <span class="math notranslate nohighlight">\(x\)</span>-axis and the initial node</p>
 <div class="math notranslate nohighlight" id="equation-bresenham-deltad-0-equation">
-<span class="eqno">(31)<a class="headerlink" href="#equation-bresenham-deltad-0-equation" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align}
+<span class="eqno">(34)<a class="headerlink" href="#equation-bresenham-deltad-0-equation" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align}
     D &amp;= f(x_0 + 1, y_0 + \tfrac{1}{2}) - f(x_0, y_0) \\
     &amp;= \left( (x_0 + 1)\Delta y - (y_0 + \tfrac{1}{2})\Delta x + c \Delta x \right) - 
     \left( x_0\Delta y - y_0\Delta x + c \Delta x \right) \\
@@ -578,12 +588,12 @@ Solution<div class="sd-summary-down docutils">
 <img alt="../_images/1.1_Drawing_lines_4_0.png" src="../_images/1.1_Drawing_lines_4_0.png" />
 </div>
 <figcaption>
-<p><span class="caption-number">Fig. 54 </span><span class="caption-text">The sign of <span class="math notranslate nohighlight">\(D\)</span> indicates which candidate pixel is closest to the idealise line.</span><a class="headerlink" href="#bresenham-2-figure" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 72 </span><span class="caption-text">The sign of <span class="math notranslate nohighlight">\(D\)</span> indicates which candidate pixel is closest to the idealise line.</span><a class="headerlink" href="#bresenham-2-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Since the values of <span class="math notranslate nohighlight">\(\Delta x\)</span> and <span class="math notranslate nohighlight">\(\Delta y\)</span> are constant along a straight line, instead of recalculating <span class="math notranslate nohighlight">\(D\)</span> using the function <span class="math notranslate nohighlight">\(f(x,y)\)</span> we can simply update <span class="math notranslate nohighlight">\(D\)</span> by <span class="math notranslate nohighlight">\(\Delta D\)</span>. If <span class="math notranslate nohighlight">\(D \leq 0\)</span> and we have plotted the top pixel then we calculaute <span class="math notranslate nohighlight">\(\Delta D_{top}\)</span> using</p>
 <div class="math notranslate nohighlight" id="equation-bresenham-deltad-1-equation">
-<span class="eqno">(32)<a class="headerlink" href="#equation-bresenham-deltad-1-equation" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align}
+<span class="eqno">(35)<a class="headerlink" href="#equation-bresenham-deltad-1-equation" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align}
     \Delta D_{top} &amp;= f(x_0 + 2, y_0 + \tfrac{1}{2}) - f(x_0 + 1, y_0 + \tfrac{1}{2}) \\
     &amp;= (x_0 + 2) \Delta y - (y_0 + \tfrac{1}{2}) \Delta x + c \Delta x \\
     &amp; \qquad - (x_0 + 1) \Delta y + (y_0 + \tfrac{1}{2}) \Delta x - c \Delta x \\
@@ -593,7 +603,7 @@ Solution<div class="sd-summary-down docutils">
 \end{align}\end{split}\]</div>
 <p>Else if <span class="math notranslate nohighlight">\(D &gt; 0\)</span> and we have plotted the bottom pixel then we calculate <span class="math notranslate nohighlight">\(\Delta D_{bottom}\)</span> using</p>
 <div class="math notranslate nohighlight" id="equation-bresenham-deltad-2-equation">
-<span class="eqno">(33)<a class="headerlink" href="#equation-bresenham-deltad-2-equation" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align}
+<span class="eqno">(36)<a class="headerlink" href="#equation-bresenham-deltad-2-equation" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align}
     \Delta D_{bottom} &amp;= f(x_0 + 2, y_0 + \tfrac{3}{2}) - f(x_0 + 1, y_0 + \tfrac{1}{2}) \\
     &amp;= (x_0 + 2) \Delta y - (y_0 + \tfrac{3}{2}) \Delta x + c \Delta x \\
     &amp; \qquad - (x_0 + 1) \Delta y + (y_0 + \tfrac{1}{2}) \Delta x - c \Delta x \\
@@ -601,16 +611,16 @@ Solution<div class="sd-summary-down docutils">
     &amp; \qquad - x_0 \Delta y - \Delta y + y_0 \Delta x + \tfrac{1}{2} \Delta x \\
     &amp;= \Delta y - \Delta x
 \end{align}\end{split}\]</div>
-<p>Equation <a class="reference internal" href="#equation-bresenham-deltad-0-equation">(31)</a> contains a floating point number in <span class="math notranslate nohighlight">\(\tfrac{1}{2}\)</span>. Since we are only interested in the sign of <span class="math notranslate nohighlight">\(D\)</span> and not its value we can multiplie this by 2. As we have changed the value of the initial difference we also need to multiply the expressions in equations <a class="reference internal" href="#equation-bresenham-deltad-1-equation">(32)</a> and <a class="reference internal" href="#equation-bresenham-deltad-2-equation">(33)</a> by 2.</p>
+<p>Equation <a class="reference internal" href="#equation-bresenham-deltad-0-equation">(34)</a> contains a floating point number in <span class="math notranslate nohighlight">\(\tfrac{1}{2}\)</span>. Since we are only interested in the sign of <span class="math notranslate nohighlight">\(D\)</span> and not its value we can multiplie this by 2. As we have changed the value of the initial difference we also need to multiply the expressions in equations <a class="reference internal" href="#equation-bresenham-deltad-1-equation">(35)</a> and <a class="reference internal" href="#equation-bresenham-deltad-2-equation">(36)</a> by 2.</p>
 <div class="math notranslate nohighlight" id="equation-bresenham-d-equation">
-<span class="eqno">(34)<a class="headerlink" href="#equation-bresenham-d-equation" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align}
+<span class="eqno">(37)<a class="headerlink" href="#equation-bresenham-d-equation" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align}
     D &amp;= 2\Delta y - \Delta x, \\
     \Delta D_{top} &amp;= 2 \Delta y, \\
     \Delta D_{bottom} &amp;= 2 \Delta y - 2\Delta x.
 \end{align}\end{split}\]</div>
-<p>Since <span class="math notranslate nohighlight">\(\Delta x\)</span> and <span class="math notranslate nohighlight">\(\Delta y\)</span> are integer values (they are the difference between pixel co-ordinates) then these expressions for <span class="math notranslate nohighlight">\(D\)</span>, <span class="math notranslate nohighlight">\(\Delta D_{top}\)</span> and <span class="math notranslate nohighlight">\(\Delta D_{bottom}\)</span> are also integer values which is quick for a computer to calculate. The basic Bresenham’s algorithm is written using <a class="reference external" href="https://en.wikipedia.org/wiki/Pseudocode">pseudocode</a> in <a class="reference internal" href="#basic-bresenhams-algorithm">Algorithm 1</a>.</p>
+<p>Since <span class="math notranslate nohighlight">\(\Delta x\)</span> and <span class="math notranslate nohighlight">\(\Delta y\)</span> are integer values (they are the difference between pixel co-ordinates) then these expressions for <span class="math notranslate nohighlight">\(D\)</span>, <span class="math notranslate nohighlight">\(\Delta D_{top}\)</span> and <span class="math notranslate nohighlight">\(\Delta D_{bottom}\)</span> are also integer values which is quick for a computer to calculate. The basic Bresenham’s algorithm is written using <a class="reference external" href="https://en.wikipedia.org/wiki/Pseudocode">pseudocode</a> in <a class="reference internal" href="#basic-bresenhams-algorithm">Algorithm 4</a>.</p>
 <div class="proof algorithm admonition" id="basic-bresenhams-algorithm">
-<p class="admonition-title"><span class="caption-number">Algorithm 1 </span> (Bresenham’s algorithm)</p>
+<p class="admonition-title"><span class="caption-number">Algorithm 4 </span> (Bresenham’s algorithm)</p>
 <section class="algorithm-content" id="proof-content">
 <p><strong>Inputs</strong> A raster array <span class="math notranslate nohighlight">\(R\)</span>, pixel co-ordinates of the endpoints of a straight line <span class="math notranslate nohighlight">\((x_0, y_0)\)</span> and <span class="math notranslate nohighlight">\((x_1, y_1)\)</span> and the colour of the line defined by the RBG triplet <span class="math notranslate nohighlight">\(colour\)</span>.</p>
 <p><strong>Output</strong> A raster array <span class="math notranslate nohighlight">\(R\)</span>.</p>
@@ -639,7 +649,7 @@ Solution<div class="sd-summary-down docutils">
 </ul>
 </section>
 </div><div class="proof example seealso admonition" id="basic-bresenham-example">
-<p class="admonition-title"><span class="caption-number">Example 27 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 30 </span></p>
 <section class="example-content" id="proof-content">
 <p>Use the basic Bresenham’s algorithm to determine the co-ordinates of the pixels on the straight line joining the
 two pixels with co-ordinates <span class="math notranslate nohighlight">\((2, 2)\)</span> and <span class="math notranslate nohighlight">\((7, 5)\)</span></p>
@@ -650,7 +660,7 @@ Solution<div class="sd-summary-down docutils">
 <div class="sd-summary-up docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
-<p class="sd-card-text">First we need to calculate <span class="math notranslate nohighlight">\(\Delta x\)</span>, <span class="math notranslate nohighlight">\(\Delta y\)</span>, <span class="math notranslate nohighlight">\(D\)</span>, <span class="math notranslate nohighlight">\(\Delta D_{top}\)</span> and <span class="math notranslate nohighlight">\(\Delta D_{bottom}\)</span> using equation <a class="reference internal" href="#equation-bresenham-d-equation">(34)</a></p>
+<p class="sd-card-text">First we need to calculate <span class="math notranslate nohighlight">\(\Delta x\)</span>, <span class="math notranslate nohighlight">\(\Delta y\)</span>, <span class="math notranslate nohighlight">\(D\)</span>, <span class="math notranslate nohighlight">\(\Delta D_{top}\)</span> and <span class="math notranslate nohighlight">\(\Delta D_{bottom}\)</span> using equation <a class="reference internal" href="#equation-bresenham-d-equation">(37)</a></p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
     \Delta x &amp;= x_1 - x_0 = 7 - 2 = 5, \\
@@ -678,9 +688,9 @@ Solution<div class="sd-summary-down docutils">
 </div></section>
 <section id="modified-bresenham-s-algorithm">
 <h2>Modified Bresenham’s algorithm<a class="headerlink" href="#modified-bresenham-s-algorithm" title="Permalink to this headline">#</a></h2>
-<p>The basic Bresenham’s algorithm presented in <a class="reference internal" href="#basic-bresenhams-algorithm">Algorithm 1</a> only works for lines that are drawn from left-to-right and top-to-bottom and with a gradient less than 1 (i.e., <span class="math notranslate nohighlight">\(x &lt; x_1\)</span>, <span class="math notranslate nohighlight">\(y &lt; y_1\)</span> and <span class="math notranslate nohighlight">\(\Delta x &gt; \Delta y\)</span>). The basic algorithm can be extended by considering steps in the <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> directions separately which results in the modified Bresenham’s algorithm shown in <a class="reference internal" href="#bresenhams-algorithm">Algorithm 2</a>. Note that in the modified algorithm we introduce a new variable <span class="math notranslate nohighlight">\(E\)</span> which is used tests to determine whether the <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> co-ordinates are incremented.</p>
+<p>The basic Bresenham’s algorithm presented in <a class="reference internal" href="#basic-bresenhams-algorithm">Algorithm 4</a> only works for lines that are drawn from left-to-right and top-to-bottom and with a gradient less than 1 (i.e., <span class="math notranslate nohighlight">\(x &lt; x_1\)</span>, <span class="math notranslate nohighlight">\(y &lt; y_1\)</span> and <span class="math notranslate nohighlight">\(\Delta x &gt; \Delta y\)</span>). The basic algorithm can be extended by considering steps in the <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> directions separately which results in the modified Bresenham’s algorithm shown in <a class="reference internal" href="#bresenhams-algorithm">Algorithm 5</a>. Note that in the modified algorithm we introduce a new variable <span class="math notranslate nohighlight">\(E\)</span> which is used tests to determine whether the <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> co-ordinates are incremented.</p>
 <div class="proof algorithm admonition" id="bresenhams-algorithm">
-<p class="admonition-title"><span class="caption-number">Algorithm 2 </span> (Modified Bresenham’s algorithm)</p>
+<p class="admonition-title"><span class="caption-number">Algorithm 5 </span> (Modified Bresenham’s algorithm)</p>
 <section class="algorithm-content" id="proof-content">
 <p><strong>Inputs</strong> A raster array <span class="math notranslate nohighlight">\(R\)</span>, pixel co-ordinates of the endpoints of a straight line <span class="math notranslate nohighlight">\((x, y)\)</span> and <span class="math notranslate nohighlight">\((x_1, y_1)\)</span> and the colour of the line defined by the RBG triplet <span class="math notranslate nohighlight">\(colour\)</span>.</p>
 <p><strong>Output</strong> A raster array <span class="math notranslate nohighlight">\(R\)</span>.</p>
@@ -720,7 +730,7 @@ Solution<div class="sd-summary-down docutils">
 </ul>
 </section>
 </div><div class="proof example seealso admonition" id="modified-bresenham-example">
-<p class="admonition-title"><span class="caption-number">Example 28 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 31 </span></p>
 <section class="example-content" id="proof-content">
 <p>Use Bresenham’s algorithm for drawing lines in any direction to determine the co-ordinates of
 the pixels on the lines joining the following points:</p>
