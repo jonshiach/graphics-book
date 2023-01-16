@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Binary Space Partitioning (BSP) &#8212; Computer Graphics Lecture Notes</title>
+    <title>Binary space partitioning &#8212; Computer Graphics Lecture Notes</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -51,6 +51,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="canonical" href="https://jonshiach.github.io/graphics-book/files/5.4_Binary_space_partitioning.html" />
     <link rel="shortcut icon" href="../_static/favicon.jpg"/>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -231,13 +233,18 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="5.3_Backface_culling.html">
+     Backface culling
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="5.3_Painters_algorithm.html">
      Painter’s algorithm
     </a>
    </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     Binary Space Partitioning (BSP)
+     Binary space partitioning
     </a>
    </li>
   </ul>
@@ -405,23 +412,70 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bsp-trees">
+   BSP trees
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visible-surface-determination-using-bsp-trees">
+   Visible surface determination using BSP trees
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Binary Space Partitioning (BSP)</h1>
+                <h1>Binary space partitioning</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bsp-trees">
+   BSP trees
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visible-surface-determination-using-bsp-trees">
+   Visible surface determination using BSP trees
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -429,8 +483,257 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="binary-space-partitioning-bsp">
-<h1>Binary Space Partitioning (BSP)<a class="headerlink" href="#binary-space-partitioning-bsp" title="Permalink to this headline">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="binary-space-partitioning">
+<span id="bsp-section"></span><h1>Binary space partitioning<a class="headerlink" href="#binary-space-partitioning" title="Permalink to this headline">#</a></h1>
+<figure class="margin align-default" id="id3">
+<a class="reference internal image-reference" href="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/John_Carmack_at_GDCA_2017_--_1_March_2017_%28cropped%29.jpeg/220px-John_Carmack_at_GDCA_2017_--_1_March_2017_%28cropped%29.jpeg"><img alt="John Carmack" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/John_Carmack_at_GDCA_2017_--_1_March_2017_%28cropped%29.jpeg/220px-John_Carmack_at_GDCA_2017_--_1_March_2017_%28cropped%29.jpeg" style="width: 200px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 66 </span><span class="caption-text"><a href="https://en.wikipedia.org/wiki/John_Carmack" target="_blank">John Carmack</a> developer of <em>Doom</em>, the first game to use binary space partitioning</span><a class="headerlink" href="#id3" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The disadvantage of the <span class="xref myst">painter’s algorithm</span> is that every time the camera position or direction changes the vertex distances need to be recalculated and the face array sorted which is computationally inefficient. A method used in computer games that provides the correct rendering order for static polygons in a virtual environment is called <strong>Binary Space Partitioning (BSP)</strong>. Binary space partitioning was first described in the 1960s by <span id="id1">Schumacker <em>et al.</em> [<a class="reference internal" href="bibliography.html#id10" title="R.A. Schumacker, B. Brand, M.G. Gilliland, and W.H. Sharp. Study for applying computer-generated images to visual simulation. Report U.S. Air Force Human Resources Laboratory, 1969.">1969</a>]</span> to improve the rendering of three-dimensional scenes using computer graphics. However, it wasn’t until the early 1990s that BSP became widely used in the computer game industry to improve the performance of rendering three-dimensional scenes. id Software’s seminal game Doom <span id="id2">[<a class="reference internal" href="bibliography.html#id9" title="John Carmack, John Romero, Adrian Carmack, Kevin Cloud, and Tom Hall. Doom. Video game, 1993.">Carmack <em>et al.</em>, 1993</a>]</span> was the first game to use this method and all games with three-dimensional virtual worlds have since have used BSP.</p>
+<figure class="align-default" id="doom-figure">
+<a class="reference internal image-reference" href="https://upload.wikimedia.org/wikipedia/en/d/de/Doom_ingame_1.png"><img alt="https://upload.wikimedia.org/wikipedia/en/d/de/Doom_ingame_1.png" src="https://upload.wikimedia.org/wikipedia/en/d/de/Doom_ingame_1.png" style="width: 500px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 67 </span><span class="caption-text"><em>Doom</em> by id Software was the first computer game to use binary space partitioning for removing hidden surfaces</span><a class="headerlink" href="#doom-figure" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<div class="proof definition admonition" id="definition-0">
+<p class="admonition-title"><span class="caption-number">Definition 20 </span> (Convex set of polygons)</p>
+<section class="definition-content" id="proof-content">
+<p>A <strong>convex set</strong> of polygons is a set of polygons where each polygon is front facing to every other polygon.</p>
+</section>
+</div><div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row docutils">
+<div class="sd-col sd-d-flex-column docutils">
+<figure class="align-default" id="id4">
+<img alt="../_images/convex_set.svg" src="../_images/convex_set.svg" /><figcaption>
+<p><span class="caption-number">Fig. 68 </span><span class="caption-text">Convex set of polygons</span><a class="headerlink" href="#id4" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+<div class="sd-col sd-d-flex-column docutils">
+<figure class="align-default" id="id5">
+<img alt="../_images/non_convex_set.svg" src="../_images/non_convex_set.svg" /><figcaption>
+<p><span class="caption-number">Fig. 69 </span><span class="caption-text">Non-convex set of polygons</span><a class="headerlink" href="#id5" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="proof definition admonition" id="definition-1">
+<p class="admonition-title"><span class="caption-number">Definition 21 </span> (Hyperplane)</p>
+<section class="definition-content" id="proof-content">
+<p>A <strong>hyperplane</strong> is a subspace with a dimension one less than that of its vector space.</p>
+</section>
+</div><p>Binary space partition recursively subdivides the world space into subspaces where each subspace contains a convex set. The subdivisions are achieved by inserting a hyperplane along the plane which contains one or more coincident polygons. The purpose of dividing the world space in this way is that polygons that are members of a convex set cannot obscure each other when viewed from a position in the front subspace of the polygons, in other words we can render these polygons at the same time in painter’s algorithm.</p>
+<p>Binary space partitioning is primarily used in the rendering of static polygons in the world space. For example, consider a computer game that requires the player to navigate a three-dimensional virtual environment. The polygons that construct the walls, floors, buildings etc. are known prior to the player navigating the map and remain fixed in place. So we can perform binary space partitioning before the scene needs to be rendered in order to save computational effort whilst the game is being played.</p>
+<section id="bsp-trees">
+<h2>BSP trees<a class="headerlink" href="#bsp-trees" title="Permalink to this headline">#</a></h2>
+<p>The subdivisions in binary space partitioning are recorded in a data structure known as a <strong>binary tree</strong> is used. A binary tree is a type of <a href="https://en.wikipedia.org/wiki/Tree_(graph_theory)" target="_blank">tree</a> where each node has at most two child nodes (nodes that are connected by output edges) and at most one parent node (nodes that are connected by input edges). The child nodes are drawn to the left and right hand side beneath the parent node and are referred to as <em>left child node</em> and <em>right child node</em> respectively.</p>
+<figure class="align-default" id="binary-tree-figure">
+<img alt="../_images/binary_tree.svg" src="../_images/binary_tree.svg" /><figcaption>
+<p><span class="caption-number">Fig. 70 </span><span class="caption-text">A binary tree</span><a class="headerlink" href="#binary-tree-figure" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Consider the space containing the three polygons A, B and C in <a class="reference internal" href="#bsp-figure-1"><span class="std std-numref">Fig. 71</span></a>.The set of polygons <span class="math notranslate nohighlight">\(\{ A, B, C \}\)</span> is not a convex set since none of the three polygons face each other. If we subdivide the space by inserting a polygon along the same plane that polygon <span class="math notranslate nohighlight">\(A\)</span> lies on then polygon <span class="math notranslate nohighlight">\(B\)</span> is in the front subspace and polygon <span class="math notranslate nohighlight">\(C\)</span> is in the back subspace. We represent this subdivision as a binary tree with polygon <span class="math notranslate nohighlight">\(A\)</span> contained in the parent node, polygon <span class="math notranslate nohighlight">\(B\)</span> contained in the left child node and polygon <span class="math notranslate nohighlight">\(C\)</span> contained within the right child node. The choice of which node to insert the hyperplane along is arbitrary and we can select any polygon in the set, however, there may be optimality considerations.</p>
+<figure class="align-default" id="bsp-figure-1">
+<img alt="../_images/bsp_1.svg" src="../_images/bsp_1.svg" /><figcaption>
+<p><span class="caption-number">Fig. 71 </span><span class="caption-text">Polygons in the front subspace of the hyperplane are listed in the left child node and polygons in the back subspace are listed in the right child node</span><a class="headerlink" href="#bsp-figure-1" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>If two or more polygons lie on the same plane and have their normal vectors pointing in the same direction then we can insert a hyperplane along all of these polygons. This is advantageous as it  reduces the number of polygons we have to deal with. For example, consider fig. 4.13 where polygons A and B are coincident. Polygon C is in the front subspace and polygon D is in the back subspace.</p>
+<figure class="align-default" id="bsp-figure-2">
+<img alt="../_images/bsp_2.svg" src="../_images/bsp_2.svg" /><figcaption>
+<p><span class="caption-number">Fig. 72 </span><span class="caption-text">Polygons that lie on the same plane can be used for the hyperplane</span><a class="headerlink" href="#bsp-figure-2" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The binary space partition of a world space is outlined in <a class="reference internal" href="#bsp-algorithm">Algorithm 5</a>.</p>
+<div class="proof algorithm admonition" id="bsp-algorithm">
+<p class="admonition-title"><span class="caption-number">Algorithm 5 </span> (Binary space partitioning)</p>
+<section class="algorithm-content" id="proof-content">
+<p><strong>Inputs</strong> A set of polygons</p>
+<p><strong>Outputs</strong> A binary tree</p>
+<ul class="simple">
+<li><p>If the set of polygons is convex set</p>
+<ul>
+<li><p>Return</p></li>
+</ul>
+</li>
+<li><p>Else</p>
+<ul>
+<li><p>Choose a polygon or polygons as the parent node</p></li>
+<li><p>Insert a hyperplane along the parent node</p></li>
+<li><p>List all polygons in the front subspace of the parent node in the left child node</p></li>
+<li><p>List all polygons in the back subspace of the parent node in the right child node</p></li>
+<li><p>Repeat algorithm for the left child node</p></li>
+<li><p>Repeat algorithm for the right child node</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</div><p>Note that inserting a hyperplane into a space may result in the hyperplane intersecting with polygons (this is usually unavoidable).</p>
+<div class="proof example seealso admonition" id="example-3">
+<p class="admonition-title"><span class="caption-number">Example 29 </span></p>
+<section class="example-content" id="proof-content">
+<p>The plan view of a world space is shown in the diagram below. The polygons labelled <span class="math notranslate nohighlight">\(A\)</span> to <span class="math notranslate nohighlight">\(T\)</span> have norm vectors pointing into the interior. Construct a BSP tree for this world space.</p>
+<figure class="align-default">
+<img alt="../_images/bsp_example_1.svg" src="../_images/bsp_example_1.svg" /></figure>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let’s choose <span class="math notranslate nohighlight">\(D\)</span> as the first parent node. This choice is completely arbitrary and we could have selected any other polygon as the parent node. The hyperplane bisects <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(O\)</span> so we label the new polygons <span class="math notranslate nohighlight">\(A_1\)</span>, <span class="math notranslate nohighlight">\(A_2\)</span>, <span class="math notranslate nohighlight">\(O_1\)</span> and <span class="math notranslate nohighlight">\(O_2\)</span>. Polygons <span class="math notranslate nohighlight">\(A_1\)</span> and <span class="math notranslate nohighlight">\(O_2\)</span> to <span class="math notranslate nohighlight">\(T\)</span> are in the front subspace of <span class="math notranslate nohighlight">\(R\)</span> so are listed in the left child node and <span class="math notranslate nohighlight">\(A_2\)</span> to <span class="math notranslate nohighlight">\(O_2\)</span> are in the back subspace of <span class="math notranslate nohighlight">\(R\)</span> and are listed in the right child node.</p>
+<figure class="align-default">
+<img alt="../_images/bsp_example_2.svg" src="../_images/bsp_example_2.svg" /></figure>
+<p class="sd-card-text">We now repeat the process with the left child node. Choosing <span class="math notranslate nohighlight">\(S\)</span> as the parent node we have <span class="math notranslate nohighlight">\(A_1\)</span> and <span class="math notranslate nohighlight">\(T\)</span> in the front subspace so we list these in the left child node and <span class="math notranslate nohighlight">\(O_2\)</span> to <span class="math notranslate nohighlight">\(R\)</span> in the back subspace so we list these in the right child node. Note that the other polygons do not exist in this subspace.</p>
+<figure class="align-default">
+<img alt="../_images/bsp_example_3.svg" src="../_images/bsp_example_3.svg" /></figure>
+<p class="sd-card-text">The left child node contains <span class="math notranslate nohighlight">\(\{ A_1, T \}\)</span> which is a convex set so we move to the right child node <span class="math notranslate nohighlight">\(\{ O_2, P, Q, R \}\)</span>. Choosing <span class="math notranslate nohighlight">\(Q\)</span> as the next parent node we have <span class="math notranslate nohighlight">\(O_2\)</span> and <span class="math notranslate nohighlight">\(P\)</span> in the front subspace so we list these in the left child node and <span class="math notranslate nohighlight">\(R\)</span> is in the back subspace so we list these in the right child node.</p>
+<figure class="align-default">
+<img alt="../_images/bsp_example_4.svg" src="../_images/bsp_example_4.svg" /></figure>
+<p class="sd-card-text">All nodes on a the left subtree of the root node <span class="math notranslate nohighlight">\(D\)</span> contain convex sets so we node move to the right child node of <span class="math notranslate nohighlight">\(D\)</span>. Choosing <span class="math notranslate nohighlight">\(E\)</span> and <span class="math notranslate nohighlight">\(I\)</span> as the parent node we have <span class="math notranslate nohighlight">\(F\)</span>, <span class="math notranslate nohighlight">\(G\)</span>, <span class="math notranslate nohighlight">\(H\)</span> and <span class="math notranslate nohighlight">\(J\)</span> to <span class="math notranslate nohighlight">\(O_1\)</span> in the front subspace so we list these in the left child node and <span class="math notranslate nohighlight">\(A_2\)</span>, <span class="math notranslate nohighlight">\(B\)</span> and <span class="math notranslate nohighlight">\(C\)</span> in the back subspace so we list these in the right child node.</p>
+<figure class="align-default">
+<img alt="../_images/bsp_example_5.svg" src="../_images/bsp_example_5.svg" /></figure>
+<p class="sd-card-text">Moving to the left child node and choosing <span class="math notranslate nohighlight">\(H\)</span> and <span class="math notranslate nohighlight">\(L\)</span> as the parent node we have <span class="math notranslate nohighlight">\(J\)</span> and <span class="math notranslate nohighlight">\(K\)</span> in the front subspace so we list these in the left child node and <span class="math notranslate nohighlight">\(F\)</span>, <span class="math notranslate nohighlight">\(G\)</span>, <span class="math notranslate nohighlight">\(M\)</span>, <span class="math notranslate nohighlight">\(N\)</span> and <span class="math notranslate nohighlight">\(O_1\)</span> in the back subspace so we list these in the right child node.</p>
+<figure class="align-default">
+<img alt="../_images/bsp_example_6.svg" src="../_images/bsp_example_6.svg" /></figure>
+<p class="sd-card-text">The left child node contains <span class="math notranslate nohighlight">\(\{ J, K \}\)</span> which is a convex set so we move to the right child node contains <span class="math notranslate nohighlight">\(\{ F,G,M,N,O_2\}\)</span>. Choosing <span class="math notranslate nohighlight">\(F\)</span> and <span class="math notranslate nohighlight">\(N\)</span> as the parent node we have <span class="math notranslate nohighlight">\(O_1\)</span> in the front subspace so we list this in the left child node and <span class="math notranslate nohighlight">\(G\)</span> and <span class="math notranslate nohighlight">\(M\)</span> in the back subspace so we list this in the right child node.</p>
+<figure class="align-default">
+<img alt="../_images/bsp_example_6.svg" src="../_images/bsp_example_6.svg" /></figure>
+<p class="sd-card-text">All subspaces now contain convex sets so the algorithm terminates.</p>
+</div>
+</details></section>
+</div></section>
+<section id="visible-surface-determination-using-bsp-trees">
+<h2>Visible surface determination using BSP trees<a class="headerlink" href="#visible-surface-determination-using-bsp-trees" title="Permalink to this headline">#</a></h2>
+<p>So far we can construct a BSP tree by performing subdivision of a world space. You might be forgiven in thinking how does BSP help
+with visible surface determination? If you consider what is actually happening with a BSP tree, we are determining which polygons are in front of the others. Therefore BSP trees lend themselves well to a technique similar to the painter’s algorithm where we render the furthest polygons from the camera first and the nearer ones afterwards. The problem with the painter’s algorithm is that every time the camera position changes,
+the distances of each polygon have to be recalculated. Therefore it is not a suitable method to use in computer games where the camera position is commonly controlled by the player and changing often. BSP trees provide the visibility ordering for a scene depending on the camera position relative to the root node of the tree.</p>
+<figure class="align-default" id="bsp-vsd-figure">
+<img alt="../_images/bsp_vsd.svg" src="../_images/bsp_vsd.svg" /><figcaption>
+<p><span class="caption-number">Fig. 73 </span><span class="caption-text">Visible surface detection using BSP trees</span><a class="headerlink" href="#bsp-vsd-figure" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Consider the scene and the associated BSP tree shown in <a class="reference internal" href="#bsp-vsd-figure"><span class="std std-numref">Fig. 73</span></a>. The viewer is in the front subspace of the root node <span class="math notranslate nohighlight">\(A\)</span> so the polygons that are in the back subspace of A, in this case this is just <span class="math notranslate nohighlight">\(C\)</span>, are further away from the viewer than the polygons in the front subspace of <span class="math notranslate nohighlight">\(A\)</span>, which in this case is just <span class="math notranslate nohighlight">\(B\)</span>. So the rendering order used by the painter’s algorithm can be determined by drawing polygons in the opposite subspace to the viewing position first. Notice that polygon
+<span class="math notranslate nohighlight">\(C\)</span> is contained in the left child node <span class="math notranslate nohighlight">\(A\)</span> and polygon <span class="math notranslate nohighlight">\(B\)</span> is contained in the right child node. So the rendering order of polygons using the painter’s algorithm can be determined using a BSP tree.</p>
+<p>The visible surface detection using a BSP tree is performed using an <a href="https://en.wikipedia.org/wiki/Tree_traversal#In-order,_LNR" target="_blank">in-order tree walk</a>.</p>
+<div class="proof algorithm admonition" id="bsp-tree-traversal-algorithm">
+<p class="admonition-title"><span class="caption-number">Algorithm 6 </span> (BSP tree traversal)</p>
+<section class="algorithm-content" id="proof-content">
+<p><strong>Inputs</strong> A BSP tree</p>
+<p><strong>Outputs</strong> Rendering order for polygons</p>
+<ul class="simple">
+<li><p>If current node is a leaf node</p>
+<ul>
+<li><p>Render the polygons in the node</p></li>
+</ul>
+</li>
+<li><p>Else if viewer is in the front subspace of the current node</p>
+<ul>
+<li><p>Repeat the traversal with the right (back subspace) child node</p></li>
+<li><p>Render the current node</p></li>
+<li><p>Repeat the traversal with the left (front subspace) child node</p></li>
+</ul>
+</li>
+<li><p>Else if the viewer is in the back subspace of the current node</p>
+<ul>
+<li><p>Repeat the traversal with the left (front subspace) child node</p></li>
+<li><p>Render the current node</p></li>
+<li><p>Repeat the traversal with the right (back subspace) child node.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</div><div class="proof example seealso admonition" id="example-5">
+<p class="admonition-title"><span class="caption-number">Example 30 </span></p>
+<section class="example-content" id="proof-content">
+<p>Using the BSP given below, determine the rendering order for visible surface detection if the viewer is at position</p>
+<figure class="align-default">
+<img alt="../_images/bsp_vsd_example.svg" src="../_images/bsp_vsd_example.svg" /></figure>
+<p>(i)   <span class="math notranslate nohighlight">\(\mathbf{p}\)</span></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<ul class="simple">
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(\mathbf{p}\)</span> is in the front subspace of the root node <span class="math notranslate nohighlight">\(\{D\}\)</span> so move to the right child node</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(\mathbf{p}\)</span> is in the back subspace of <span class="math notranslate nohighlight">\(\{E,I\}\)</span> so move to the left child node</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(\mathbf{p}\)</span> is in the back subspace of <span class="math notranslate nohighlight">\(\{H,L\}\)</span> so move to the left child node</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(\color{red}\{J,K\}\)</span> is a leaf node so we render it and return to the parent node</p></li>
+<li><p class="sd-card-text">render <span class="math notranslate nohighlight">\(\color{red}\{H,L\}\)</span> and move to the right child node</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(\mathbf{p}\)</span> is in the front subspace of <span class="math notranslate nohighlight">\(\{F,N\}\)</span> so we move to the right child node</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(\color{red}\{G,M\}\)</span> is a leaf node so we render it and return to the parent node</p></li>
+<li><p class="sd-card-text">render <span class="math notranslate nohighlight">\(\color{red}\{F,N\}\)</span> and move to the left child node</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(\color{red}\{O_1\}\)</span> is a leaf node so we render it and return to the parent node</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(\{F,N\}\)</span> has already been rendered so we return to the parent node</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(\{H,L\}\)</span> has already been rendered so we return to the parent node</p></li>
+<li><p class="sd-card-text">render <span class="math notranslate nohighlight">\(\color{red}\{E,I\}\)</span> and move to the right child node</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(\color{red}\{A_2, B, C\}\)</span> is a leaf node so we render it and return to the parent node</p></li>
+<li><p class="sd-card-text">render <span class="math notranslate nohighlight">\(\color{red}\{D\}\)</span> and move to the left child node</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(\mathbf{p}\)</span> is in the front subspace of <span class="math notranslate nohighlight">\(\{S\}\)</span> so we move to the right child node</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(\mathbf{p}\)</span> is in the back subspace of <span class="math notranslate nohighlight">\(\{Q\}\)</span> so we move to the left child node</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(\color{red}\{O_2, P\}\)</span> is a leaf node so we render it and return to the parent node</p></li>
+<li><p class="sd-card-text">render <span class="math notranslate nohighlight">\(\color{red}\{Q\}\)</span> and move to the right child node</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(\color{red}\{R\}\)</span> is a leaf node so we render it and return to the parent node</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(\{Q\}\)</span> has already been rendered so we return to the parent node</p></li>
+<li><p class="sd-card-text">render <span class="math notranslate nohighlight">\(\color{red}\{S\}\)</span> and move to the left child node</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(\color{red}\{A_1,T\}\)</span> is a leaf node so we render it</p></li>
+</ul>
+<p class="sd-card-text">All nodes have been rendered so the tree traversal terminates. The rendering order is</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    &amp; \{ J, K\}, \{H, L\}, \{G,M\}, \{F,N\}, \{O_1\}, \{E,I\}, \{A_2, B, C\}, \\
+    &amp; \{D\}, \{O_2,P\}, \{Q\}, \{R\}, \{S\}, \{A_1,T\}
+\end{align*}\]</div>
+</div>
+</details><p>(ii)   <span class="math notranslate nohighlight">\(\mathbf{q}\)</span></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<ul class="simple">
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(\mathbf{q}\)</span> is in the back subspace of the root node <span class="math notranslate nohighlight">\(\{D\}\)</span> so move to the left child node</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(\mathbf{q}\)</span> is in the back subspace of <span class="math notranslate nohighlight">\(\{S\}\)</span> so move to the left child node</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(\color{red}\{A_1, T\}\)</span> is a leaf node so render it and return to the parent node</p></li>
+<li><p class="sd-card-text">render <span class="math notranslate nohighlight">\(\color{red}\{S\}\)</span> and move to the right child node</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(\mathbf{q}\)</span> is in the front subspace of <span class="math notranslate nohighlight">\(\{Q\}\)</span> so move to the right child node</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(\color{red}\{R\}\)</span> is a leaf node so render it and return to the parent node</p></li>
+<li><p class="sd-card-text">render <span class="math notranslate nohighlight">\(\color{red}\{Q\}\)</span> and move to the left child node</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(\color{red}\{O_2, P\}\)</span> is a leaf node so render it and return to the parent node</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(\{Q\}\)</span> has already been rendered so return to the parent node</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(\{S\}\)</span> has already been rendered so return to the parent node</p></li>
+<li><p class="sd-card-text">render <span class="math notranslate nohighlight">\(\color{red}\{D\}\)</span> and move to the right child node</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(\mathbf{q}\)</span> is in the front subspace of <span class="math notranslate nohighlight">\(\{E,I\}\)</span> so move to the right child node</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(\color{red}\{A_2, B, C\}\)</span> is a leaf node so render it and return to the parent node</p></li>
+<li><p class="sd-card-text">render <span class="math notranslate nohighlight">\(\color{red}\{E,I\}\)</span> and move to the left child node</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(\mathbf{q}\)</span> is in the front subspace of <span class="math notranslate nohighlight">\(\{H, L\}\)</span> so move to the right child node</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(\mathbf{q}\)</span> is in the back subspace of <span class="math notranslate nohighlight">\(\{F, N\}\)</span> so move to the left child node</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(\color{red}\{O_1\}\)</span> is a leaf node so render it and return to the parent node</p></li>
+<li><p class="sd-card-text">render <span class="math notranslate nohighlight">\(\color{red}\{F, N\}\)</span> and move to the right child node</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(\color{red}\{G, M\}\)</span> is a leaf node so render it and return to the parent node</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(\{F, N\}\)</span> has already been rendered so return to the parent node</p></li>
+<li><p class="sd-card-text">render <span class="math notranslate nohighlight">\(\color{red}\{H, L\}\)</span> and move to the left child node</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(\color{red}\{J,K\}\)</span> is a leaf node so render it.</p></li>
+</ul>
+<p class="sd-card-text">All nodes have been rendered so the tree traversal terminates. The rendering order is</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    &amp; \{A_1, T\}, \{S\}, \{R\}, \{Q\}, \{O_2, P\}, \{D\}, \{A_2, B, C\}, \\
+    &amp; \{E, I\}, \{O_1\}, \{F,N\} \{G, M\}, \{H, L\}, \{J, K\}
+\end{align*}\]</div>
+</div>
+</details></section>
+</div></section>
 </section>
 
     <script type="text/x-thebe-config">

@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Clipping &amp; hidden surface removal &#8212; Computer Graphics Lecture Notes</title>
+    <title>Clipping &amp; hidden surface determination &#8212; Computer Graphics Lecture Notes</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -212,7 +212,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1 current active has-children">
   <a class="current reference internal" href="#">
-   Clipping &amp; hidden surface removal
+   Clipping &amp; hidden surface determination
   </a>
   <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
   <label for="toctree-checkbox-4">
@@ -242,7 +242,7 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="5.4_Binary_space_partitioning.html">
-     Binary Space Partitioning (BSP)
+     Binary space partitioning
     </a>
    </li>
   </ul>
@@ -422,7 +422,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Clipping & hidden surface removal</h1>
+                <h1>Clipping & hidden surface determination</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -434,8 +434,8 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="clipping-hidden-surface-removal">
-<span id="clipping-and-hidden-surface-section"></span><h1>Clipping &amp; hidden surface removal<a class="headerlink" href="#clipping-hidden-surface-removal" title="Permalink to this headline">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="clipping-hidden-surface-determination">
+<span id="clipping-and-hsd-section"></span><h1>Clipping &amp; hidden surface determination<a class="headerlink" href="#clipping-hidden-surface-determination" title="Permalink to this headline">#</a></h1>
 <figure class="margin align-default">
 <img alt="../_images/viewing_pipeline_clipped_screen_space.svg" src="../_images/viewing_pipeline_clipped_screen_space.svg" /></figure>
 <p>Consider the plot of the screen space from <a class="reference internal" href="4.4_Screen_space.html#screen-space-example">Example 25</a> which shows the screen space from <a class="reference internal" href="4.4_Screen_space.html#screen-space-example">Example 25</a>. Some of the objects partially outside of the unit cube representation of the <a class="reference internal" href="4.4_Screen_space.html#viewing-frustum-section"><span class="std std-ref">viewing frustum</span></a>. The region inside of this unit cube contains the space that is visible to the viewer and is known as the <strong>visible region</strong>. Any objects that are outside of the visible region needs to be ignored from this point onwards in the viewing pipeline and any objects that lie partially outside need to be clipped to the edges of the visible region. This process is called <strong>clipping</strong>.</p>
@@ -445,7 +445,7 @@ title="Print to PDF"
 <p><span class="caption-number">Fig. 53 </span><span class="caption-text">Some objects are outside of the visible region and need to be clipped.</span><a class="headerlink" href="#clipping-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>In addition to clipping to the edges of the visible region the appearance of the virtual environment can be improved by removing those surfaces that show not be visible to the viewer. This process is called <strong>hidden surface removal</strong>.</p>
+<p>In addition to clipping to the edges of the visible region the appearance of the virtual environment can be improved by removing those surfaces that show not be visible to the viewer. This process is called <strong>hidden surface determination</strong>.</p>
 <div class="toctree-wrapper compound">
 </div>
 </section>

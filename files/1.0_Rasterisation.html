@@ -58,7 +58,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Drawing lines" href="1.1_Drawing_lines.html" />
-    <link rel="prev" title="Binary Space Partitioning (BSP)" href="5.4_Binary_space_partitioning.html" />
+    <link rel="prev" title="Binary space partitioning" href="5.4_Binary_space_partitioning.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -214,7 +214,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="5.0_Hidden_surface_removal.html">
-   Clipping &amp; hidden surface removal
+   Clipping &amp; hidden surface determination
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
   <label for="toctree-checkbox-4">
@@ -244,7 +244,7 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="5.4_Binary_space_partitioning.html">
-     Binary Space Partitioning (BSP)
+     Binary space partitioning
     </a>
    </li>
   </ul>
@@ -518,7 +518,7 @@ title="Print to PDF"
 <figure class="align-default" id="id3">
 <a class="reference internal image-reference" href="../_images/idealised_image.png"><img alt="../_images/idealised_image.png" src="../_images/idealised_image.png" style="width: 390px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 66 </span><span class="caption-text">The idealised image</span><a class="headerlink" href="#id3" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 74 </span><span class="caption-text">The idealised image</span><a class="headerlink" href="#id3" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -526,24 +526,24 @@ title="Print to PDF"
 <figure class="align-default" id="id4">
 <a class="reference internal image-reference" href="../_images/raster_image.png"><img alt="../_images/raster_image.png" src="../_images/raster_image.png" style="width: 400px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 67 </span><span class="caption-text">Raster image</span><a class="headerlink" href="#id4" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 75 </span><span class="caption-text">Raster image</span><a class="headerlink" href="#id4" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
 <div class="proof definition note admonition" id="pixel-definition">
-<p class="admonition-title"><span class="caption-number">Definition 20 </span> (Pixel)</p>
+<p class="admonition-title"><span class="caption-number">Definition 22 </span> (Pixel)</p>
 <section class="definition-content" id="proof-content">
 <p>A <strong>pixel</strong> is a small square that is illuminated using different colours.</p>
 </section>
 </div><div class="proof definition note admonition" id="raster-definition">
-<p class="admonition-title"><span class="caption-number">Definition 21 </span> (Raster)</p>
+<p class="admonition-title"><span class="caption-number">Definition 23 </span> (Raster)</p>
 <section class="definition-content" id="proof-content">
 <p>A <strong>raster</strong> is a rectangular array of pixels.</p>
 </section>
 </div><div class="proof definition note admonition" id="idealised-image-definition">
-<p class="admonition-title"><span class="caption-number">Definition 22 </span> (Idealised image)</p>
+<p class="admonition-title"><span class="caption-number">Definition 24 </span> (Idealised image)</p>
 <section class="definition-content" id="proof-content">
 <p>An <strong>idealised image</strong> is an analogue image that we wish to represent in a raster.</p>
 </section>
@@ -556,7 +556,7 @@ title="Print to PDF"
 <figure class="align-default" id="id5">
 <a class="reference internal image-reference" href="../_images/rgb_wheel.png"><img alt="../_images/rgb_wheel.png" src="../_images/rgb_wheel.png" style="width: 300px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 68 </span><span class="caption-text">RGB color wheel</span><a class="headerlink" href="#id5" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 76 </span><span class="caption-text">RGB color wheel</span><a class="headerlink" href="#id5" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Since there are 256 levels of the three primary colours in the true color model we can use the integers 0 to 255 in an ordered triplet. For example, the colour <span style="color: cyan;">cyan</span> is made by mixing full amounts of green and blue which corresponds to the triplet <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">255,</span> <span class="pre">255)</span></code>. Most software packages also accept <a href="https://en.wikipedia.org/wiki/Hexadecimal" target="_blank">hexadecimal</a> (base-16) colour codes where the values in the triplet are represented using 2-digit hexadecimal numbers 00 to FF which follow a # symbol. For example, <span style="color: cyan;">cyan</span> is represented using <code class="docutils literal notranslate"><span class="pre">&quot;#00FFFF&quot;</span></code>.</p>
@@ -713,7 +713,7 @@ title="Print to PDF"
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Binary Space Partitioning (BSP)</p>
+            <p class="prev-next-title">Binary space partitioning</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="1.1_Drawing_lines.html" title="next page">
