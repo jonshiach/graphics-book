@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# (clipping-and-hidden-surface-section)=
-# # Clipping & hidden surface removal
+# (clipping-and-hsd-section)=
+# # Clipping & hidden surface determination
 # 
 # ```{figure} /images/viewing_pipeline_clipped_screen_space.svg
 # :figclass: margin
@@ -17,4 +17,4 @@
 # Some objects are outside of the visible region and need to be clipped.
 # ```
 # 
-# In addition to clipping to the edges of the visible region the appearance of the virtual environment can be improved by removing those surfaces that show not be visible to the viewer. This process is called **hidden surface removal**.
+# In addition to clipping to the edges of the visible region the appearance of the virtual environment can be improved by removing those surfaces that show not be visible to the viewer. This process is called **hidden surface determination**.

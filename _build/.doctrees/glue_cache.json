@@ -1,53 +1,5 @@
 {
   "files\\1.1_Drawing_lines": {
-    "bresenham-example-plot-2": {
-      "output_type": "display_data",
-      "metadata": {
-        "scrapbook": {
-          "name": "bresenham-example-plot-2",
-          "mime_prefix": "application/papermill.record/"
-        },
-        "filenames": {
-          "image/png": "D:\\Jon\\OneDrive - MMU\\Desktop\\Computational Maths\\graphics-book\\_build\\jupyter_execute\\files\\1.1_Drawing_lines_6_0.png"
-        }
-      },
-      "data": {
-        "application/papermill.record/text/plain": "<Figure size 640x480 with 1 Axes>",
-        "application/papermill.record/image/png": null
-      }
-    },
-    "bresenham-example1-plot-2": {
-      "output_type": "display_data",
-      "metadata": {
-        "scrapbook": {
-          "name": "bresenham-example1-plot-2",
-          "mime_prefix": "application/papermill.record/"
-        },
-        "filenames": {
-          "image/png": "D:\\Jon\\OneDrive - MMU\\Desktop\\Computational Maths\\graphics-book\\_build\\jupyter_execute\\files\\1.1_Drawing_lines_3_1.png"
-        }
-      },
-      "data": {
-        "application/papermill.record/text/plain": "<Figure size 640x480 with 1 Axes>",
-        "application/papermill.record/image/png": null
-      }
-    },
-    "bresenham-example1-plot-4": {
-      "output_type": "display_data",
-      "metadata": {
-        "scrapbook": {
-          "name": "bresenham-example1-plot-4",
-          "mime_prefix": "application/papermill.record/"
-        },
-        "filenames": {
-          "image/png": "D:\\Jon\\OneDrive - MMU\\Desktop\\Computational Maths\\graphics-book\\_build\\jupyter_execute\\files\\1.1_Drawing_lines_3_3.png"
-        }
-      },
-      "data": {
-        "application/papermill.record/text/plain": "<Figure size 640x480 with 1 Axes>",
-        "application/papermill.record/image/png": null
-      }
-    },
     "bresenham-example-plot-1": {
       "output_type": "display_data",
       "metadata": {
@@ -57,22 +9,6 @@
         },
         "filenames": {
           "image/png": "D:\\Jon\\OneDrive - MMU\\Desktop\\Computational Maths\\graphics-book\\_build\\jupyter_execute\\files\\1.1_Drawing_lines_5_0.png"
-        }
-      },
-      "data": {
-        "application/papermill.record/text/plain": "<Figure size 640x480 with 1 Axes>",
-        "application/papermill.record/image/png": null
-      }
-    },
-    "bresenham-example-plot-3": {
-      "output_type": "display_data",
-      "metadata": {
-        "scrapbook": {
-          "name": "bresenham-example-plot-3",
-          "mime_prefix": "application/papermill.record/"
-        },
-        "filenames": {
-          "image/png": "D:\\Jon\\OneDrive - MMU\\Desktop\\Computational Maths\\graphics-book\\_build\\jupyter_execute\\files\\1.1_Drawing_lines_7_0.png"
         }
       },
       "data": {
@@ -112,15 +48,47 @@
         "application/papermill.record/image/png": null
       }
     },
-    "line-raster-plot": {
+    "bresenham-example-plot-3": {
       "output_type": "display_data",
       "metadata": {
         "scrapbook": {
-          "name": "line-raster-plot",
+          "name": "bresenham-example-plot-3",
           "mime_prefix": "application/papermill.record/"
         },
         "filenames": {
-          "image/png": "D:\\Jon\\OneDrive - MMU\\Desktop\\Computational Maths\\graphics-book\\_build\\jupyter_execute\\files\\1.1_Drawing_lines_1_0.png"
+          "image/png": "D:\\Jon\\OneDrive - MMU\\Desktop\\Computational Maths\\graphics-book\\_build\\jupyter_execute\\files\\1.1_Drawing_lines_7_0.png"
+        }
+      },
+      "data": {
+        "application/papermill.record/text/plain": "<Figure size 640x480 with 1 Axes>",
+        "application/papermill.record/image/png": null
+      }
+    },
+    "bresenham-plot-2": {
+      "output_type": "display_data",
+      "metadata": {
+        "scrapbook": {
+          "name": "bresenham-plot-2",
+          "mime_prefix": "application/papermill.record/"
+        },
+        "filenames": {
+          "image/png": "D:\\Jon\\OneDrive - MMU\\Desktop\\Computational Maths\\graphics-book\\_build\\jupyter_execute\\files\\1.1_Drawing_lines_4_0.png"
+        }
+      },
+      "data": {
+        "application/papermill.record/text/plain": "<Figure size 500x500 with 1 Axes>",
+        "application/papermill.record/image/png": null
+      }
+    },
+    "bresenham-example-plot-2": {
+      "output_type": "display_data",
+      "metadata": {
+        "scrapbook": {
+          "name": "bresenham-example-plot-2",
+          "mime_prefix": "application/papermill.record/"
+        },
+        "filenames": {
+          "image/png": "D:\\Jon\\OneDrive - MMU\\Desktop\\Computational Maths\\graphics-book\\_build\\jupyter_execute\\files\\1.1_Drawing_lines_6_0.png"
         }
       },
       "data": {
@@ -144,19 +112,51 @@
         "application/papermill.record/image/png": null
       }
     },
-    "bresenham-plot-2": {
+    "bresenham-example1-plot-2": {
       "output_type": "display_data",
       "metadata": {
         "scrapbook": {
-          "name": "bresenham-plot-2",
+          "name": "bresenham-example1-plot-2",
           "mime_prefix": "application/papermill.record/"
         },
         "filenames": {
-          "image/png": "D:\\Jon\\OneDrive - MMU\\Desktop\\Computational Maths\\graphics-book\\_build\\jupyter_execute\\files\\1.1_Drawing_lines_4_0.png"
+          "image/png": "D:\\Jon\\OneDrive - MMU\\Desktop\\Computational Maths\\graphics-book\\_build\\jupyter_execute\\files\\1.1_Drawing_lines_3_1.png"
         }
       },
       "data": {
-        "application/papermill.record/text/plain": "<Figure size 500x500 with 1 Axes>",
+        "application/papermill.record/text/plain": "<Figure size 640x480 with 1 Axes>",
+        "application/papermill.record/image/png": null
+      }
+    },
+    "line-raster-plot": {
+      "output_type": "display_data",
+      "metadata": {
+        "scrapbook": {
+          "name": "line-raster-plot",
+          "mime_prefix": "application/papermill.record/"
+        },
+        "filenames": {
+          "image/png": "D:\\Jon\\OneDrive - MMU\\Desktop\\Computational Maths\\graphics-book\\_build\\jupyter_execute\\files\\1.1_Drawing_lines_1_0.png"
+        }
+      },
+      "data": {
+        "application/papermill.record/text/plain": "<Figure size 640x480 with 1 Axes>",
+        "application/papermill.record/image/png": null
+      }
+    },
+    "bresenham-example1-plot-4": {
+      "output_type": "display_data",
+      "metadata": {
+        "scrapbook": {
+          "name": "bresenham-example1-plot-4",
+          "mime_prefix": "application/papermill.record/"
+        },
+        "filenames": {
+          "image/png": "D:\\Jon\\OneDrive - MMU\\Desktop\\Computational Maths\\graphics-book\\_build\\jupyter_execute\\files\\1.1_Drawing_lines_3_3.png"
+        }
+      },
+      "data": {
+        "application/papermill.record/text/plain": "<Figure size 640x480 with 1 Axes>",
         "application/papermill.record/image/png": null
       }
     }

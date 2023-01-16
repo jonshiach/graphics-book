@@ -18,6 +18,16 @@
 
 \tikzset{partial ellipse/.style args={#1:#2:#3}{insert path={+ (#1:#3) arc (#1:#2:#3)}}}
 \tikzset{flownode/.style={draw,align=center,minimum height=0.75cm,rounded corners,text width=3cm}}
+\tikzset{convex/.style={draw,ellipse}}
+\tikzset{hyperplane/.style={red,dashed,line width=2pt}}
+
+
+\usepackage{forest}
+\forestset{
+    default preamble={
+        for tree={ellipse,draw}
+    }
+}
 
 \begin{document}
 
@@ -461,23 +471,23 @@
 %     every node/.style={align=left},
 %     node distance=1.5cm,
 %     ]
-%     % \node [flownode] (object) {object space};
-%     \node [flownode,fill=blue!10] (object) {object space};
-%     % \node [flownode,below of=object] (world) {world space};
-%     \node [flownode,fill=blue!10,below of=object] (world) {world space};
-%     % \node [flownode,below of=world] (camera) {camera space};
-%     \node [flownode,fill=blue!10,below of=world] (camera) {camera space};
-%     % \node [flownode,below of=camera] (screen) {screen space};
-%     \node [flownode,fill=blue!10,below of=camera] (screen) {screen space};
-%     % \node [flownode,below of=screen] (clipped) {clipped screen space};
-%     \node [flownode,fill=blue!10,below of=screen] (clipped) {clipped screen space};
-%     % \node [flownode,below of=clipped] (raster) {raster};
-%     \node [flownode,fill=blue!10,below of=clipped] (raster) {raster};
+%     \node [flownode] (object) {object space};
+%     \node [flownode,below of=object] (world) {world space};
+%     \node [flownode,below of=world] (camera) {camera space};
+%     \node [flownode,below of=camera] (screen) {screen space};
+%     \node [flownode,below of=screen] (clipped) {clipped screen space};
+%     \node [flownode,below of=clipped] (raster) {raster};
 %     \node [flownode,below of=raster] (display) {display};
+%     \node [flownode,fill=blue!10] (object) {object space};
+%     \node [flownode,fill=blue!10,below of=object] (world) {world space};
+%     \node [flownode,fill=blue!10,below of=world] (camera) {camera space};
+%     \node [flownode,fill=blue!10,below of=camera] (screen) {screen space};
+%     \node [flownode,fill=blue!10,below of=screen] (clipped) {clipped screen space};
+%     \node [flownode,fill=blue!10,below of=clipped] (raster) {raster};
 %     \draw [-latex'] (object) -- node {copy and transform into world space} (world);
 %     \draw [-latex'] (world) -- node {align world space to camera} (camera);
 %     \draw [-latex'] (camera) -- node {project onto screen space} (screen);
-%     \draw [-latex'] (screen) -- node {clipping and hidden surface removal} (clipped);
+%     \draw [-latex'] (screen) -- node {clipping and hidden surface determination} (clipped);
 %     \draw [-latex'] (clipped) -- node {rasterisation, textures and lighting} (raster);
 %     \draw [-latex'] (raster) -- node {send raster to display} (display);
 %     \draw [-latex'] ($(raster)!0.5!(display)$) -| node [pos=0.75,above,rotate=90,align=center] {camera position or direction changes} ([xshift=-0.75cm]camera.west) |- ($(world)!0.5!(camera)$);
@@ -1037,15 +1047,437 @@
 %     \node at ($(3,0)+(\a1+90:2.25)$) {$\color{red}\mathbf{n}$};
 % \end{tikzpicture}
 
-\begin{tikzpicture}
-    \tikzmath{\a1=120;};
-    \node [rotate=180] {\includegraphics[width=1cm]{../eye.png}};
-    \draw [line width=2pt] ($(3,0)+(\a1:2)$) -- ++(\a1+180:4);
-    \draw [fill=white,opacity=0.75] (3,0) -- (4,0) arc (0:\a1-90:1);
-    \node at ($(3,0)+(0.5*\a1-45:0.67)$) {$\theta$};
-    \draw [bluevec] (0.5,0) -- (5,0) node [right] {$\mathbf{v}$};
-    \draw [redvec] (3,0) -- ++(\a1-90:2);
-    \node at ($(3,0)+(\a1-90:2.25)$) {$\color{red}\mathbf{n}$};
+% \begin{tikzpicture}
+%     \tikzmath{\a1=120;};
+%     \node [rotate=180] {\includegraphics[width=1cm]{../eye.png}};
+%     \draw [line width=2pt] ($(3,0)+(\a1:2)$) -- ++(\a1+180:4);
+%     \draw [fill=white,opacity=0.75] (3,0) -- (4,0) arc (0:\a1-90:1);
+%     \node at ($(3,0)+(0.5*\a1-45:0.67)$) {$\theta$};
+%     \draw [bluevec] (0.5,0) -- (5,0) node [right] {$\mathbf{v}$};
+%     \draw [redvec] (3,0) -- ++(\a1-90:2);
+%     \node at ($(3,0)+(\a1-90:2.25)$) {$\color{red}\mathbf{n}$};
+% \end{tikzpicture}
+
+% \begin{tikzpicture}
+%     \draw [line width=2pt] (0,0) -- ++(3,0);
+%     \draw [line width=2pt] (-0.5,0.5) -- ++(0,3);
+%     \draw [line width=2pt] (3.5,0.5) -- ++(0,3);
+%     \draw [bluevec] (1.5,0) -- ++(0,1);
+%     \draw [bluevec] (-0.5,2) -- ++(1,0);
+%     \draw [bluevec] (3.5,2) -- ++(-1,0);
+% \end{tikzpicture}
+
+% \begin{tikzpicture}
+%     \draw [line width=2pt] (0,0) -- ++(3,0);
+%     \draw [line width=2pt] (-0.5,0.5) -- ++(0,3);
+%     \draw [line width=2pt] (3.5,0.5) -- ++(0,3);
+%     \draw [bluevec] (1.5,0) -- ++(0,1);
+%     \draw [bluevec] (-0.5,2) -- ++(1,0);
+%     \draw [bluevec] (3.5,2) -- ++(1,0);
+% \end{tikzpicture}
+
+
+% BSP
+% \begin{tikzpicture}[every node/.style={draw,ellipse},
+%     level 1/.style={sibling distance=6cm},
+%     level 2/.style={sibling distance=3cm}]
+%     \node {parent}
+%         child {node {left child}
+%             child {node {grandchild}}
+%             child {node {grandchild}}
+%         }
+%         child {node {right child}
+%         child {node {grandchild}}
+%         child {node {grandchild}}
+%         };
+% \end{tikzpicture}
+
+% \begin{tikzpicture}
+%     \node [convex] {$A$}
+%         child {node [convex] {$B$}}
+%         child {node [convex] {$C$}};
+%     \draw (-10, -3)  coordinate (1) rectangle ++(6, 4);
+%     \draw [red,dashed,line width=1pt] ($(1)+(0:3)$) -- ++(90:4);
+%     \draw [line width=2pt] ($(1)+(3,1)$) coordinate (A)-- ++(0,2) node [pos=0.5,left] {$A$};
+%     \draw [line width=2pt] ($(1)+(4,3)$) coordinate (B) -- ++(330:2) node [pos=0.5,below left] {$B$};
+%     \draw [line width=2pt] ($(1)+(2,3)$) coordinate (C) -- ++(225:2) node [pos=0.5,below right] {$C$};
+%     \draw [bluevec] ($(A)+(0,1)$) -- ++(0:1);
+%     \draw [bluevec] ($(B)+(330:1)$) -- ++(60:1);
+%     \draw [bluevec] ($(C)+(225:1)$) -- ++(135:1);
+% \end{tikzpicture}
+
+% \begin{tikzpicture}
+%     \node [convex] {$A,B$}
+%         child {node [convex] {$C$}}
+%         child {node [convex] {$D$}};
+%     \draw (-10, -3)  coordinate (1) rectangle ++(6, 4);
+%     \draw [red,dashed,line width=1pt] ($(1)+(90:2)$) -- ++(0:6);
+%     \draw [line width=2pt] ($(1)+(0.5,2)$) coordinate (A)-- ++(0:2) node [pos=0.5,below] {$A$};
+%     \draw [line width=2pt] ($(1)+(3.5,2)$) coordinate (B) -- ++(0:2) node [pos=0.5,below] {$B$};
+%     \draw [line width=2pt] ($(1)+(2,2.5)$) coordinate (C) -- ++(30:2) node [pos=0.5,below right] {$C$};
+%     \draw [line width=2pt] ($(1)+(2,1.5)$) coordinate (D) -- ++(330:2) node [pos=0.5,below left] {$C$};
+%     \draw [bluevec] ($(A)+(0:1)$) -- ++(90:1);
+%     \draw [bluevec] ($(B)+(0:1)$) -- ++(90:1);
+%     \draw [bluevec] ($(C)+(30:1)$) -- ++(120:1);
+%     \draw [bluevec] ($(D)+(330:1)$) -- ++(60:1);
+% \end{tikzpicture}
+
+% BSP example
+% \begin{tikzpicture}[auto]
+%     \draw [fill=gray!50] (0,0) rectangle ++(8,-8);
+%     \draw [fill=white]
+%         (0.5,-0.5) -- node {$A$} ++(0,-3)
+%         -- node {$B$} ++(3,0)
+%         -- node {$C$} ++(0,1)
+%         -- node {$D$} ++(1,0)
+%         -- node {$E$} ++(0,-1)
+%         -- node {$F$} ++(1,0)
+%         -- node {$G$} ++(0,-1)
+%         -- node {$H$} ++(-1,0)
+%         -- node {$I$} ++(0,-3)
+%         -- node {$J$} ++(3,0)
+%         -- node {$K$} ++(0,3)
+%         -- node {$L$} ++(-1,0)
+%         -- node {$M$} ++(0,1)
+%         -- node {$N$} ++(1,0)
+%         -- node {$O$} ++(0,3)
+%         -- node {$P$} ++(-3,0)
+%         -- node {$Q$} ++(0,-1)
+%         -- node {$R$} ++(-1,0)
+%         -- node {$S$} ++(0,1)
+%         -- node {$T$} ++(-3,0);
+% \end{tikzpicture}
+
+% \begin{tikzpicture}[auto,level 1/.style={sibling distance=5cm},]
+%     \draw [fill=gray!50] (0,0) rectangle ++(8,-8);
+%     \draw [fill=white]
+%         (0.5,-0.5) -- node {$A_1$} ++(0,-2)
+%         -- node {$A_2$} ++(0,-1)
+%         -- node {$B$} ++(3,0)
+%         -- node {$C$} ++(0,1)
+%         -- node {$D$} ++(1,0)
+%         -- node {$E$} ++(0,-1)
+%         -- node {$F$} ++(1,0)
+%         -- node {$G$} ++(0,-1)
+%         -- node {$H$} ++(-1,0)
+%         -- node {$I$} ++(0,-3)
+%         -- node {$J$} ++(3,0)
+%         -- node {$K$} ++(0,3)
+%         -- node {$L$} ++(-1,0)
+%         -- node {$M$} ++(0,1)
+%         -- node {$N$} ++(1,0)
+%         -- node {$O_1$} ++(0,1)
+%         -- node {$O_2$} ++(0,2)
+%         -- node {$P$} ++(-3,0)
+%         -- node {$Q$} ++(0,-1)
+%         -- node {$R$} ++(-1,0)
+%         -- node {$S$} ++(0,1)
+%         -- node {$T$} ++(-3,0);
+%     \draw [hyperplane] (0,-2.5) -- ++(8,0) node [left,pos=0] {\color{red}(1)};
+%     \node [label=above left:\color{red}(1)] at (14,-1) [convex] {$D$}
+%         child {node [convex] {$A_1, O_2, P, Q, R, S, T$}}
+%         child {node [convex,text width=3cm,align=center] {$A_2,B, C, E, F, G, H, $\\$I, J, K, L, M, N, O_1$}
+%         };
+% \end{tikzpicture}
+
+% \begin{tikzpicture}[auto,
+%     level 1/.style={sibling distance=4cm},
+%     level 2/.style={sibling distance=3cm},]
+%     \draw [fill=gray!50] (0,0) rectangle ++(8,-8);
+%     \draw [fill=white]
+%         (0.5,-0.5) -- node {$A_1$} ++(0,-2)
+%         -- node {$A_2$} ++(0,-1)
+%         -- node {$B$} ++(3,0)
+%         -- node {$C$} ++(0,1)
+%         -- node {$D$} ++(1,0)
+%         -- node {$E$} ++(0,-1)
+%         -- node {$F$} ++(1,0)
+%         -- node {$G$} ++(0,-1)
+%         -- node {$H$} ++(-1,0)
+%         -- node {$I$} ++(0,-3)
+%         -- node {$J$} ++(3,0)
+%         -- node {$K$} ++(0,3)
+%         -- node {$L$} ++(-1,0)
+%         -- node {$M$} ++(0,1)
+%         -- node {$N$} ++(1,0)
+%         -- node {$O_1$} ++(0,1)
+%         -- node {$O_2$} ++(0,2)
+%         -- node {$P$} ++(-3,0)
+%         -- node {$Q$} ++(0,-1)
+%         -- node {$R$} ++(-1,0)
+%         -- node {$S$} ++(0,1)
+%         -- node {$T$} ++(-3,0);
+%     \draw [hyperplane] (0,-2.5) -- ++(8,0) node [left,pos=0] {\color{red}(1)};
+%     \draw [hyperplane] (3.5,0) -- ++(0,-2.5) node [above,pos=0] {\color{red}(2)};
+%     \node [label=above left:\color{red}(1)] at (14,-1) [convex] {$D$}
+%         child {node [convex,label=above left:\color{red}(2)] {$S$}
+%             child {node [convex] {$A_1, T$}}
+%             child {node [convex] {$O_2, P, Q, R$}}
+%         }
+%         child {node [convex,text width=3cm,align=center] {$A_2,B, C, E, F, G, H, $\\$I, J, K, L, M, N, O_1$}
+%         };
+% \end{tikzpicture}
+
+% \begin{tikzpicture}[auto,
+%     level 1/.style={sibling distance=4cm},
+%     level 2/.style={sibling distance=2cm},
+%     level 2/.style={sibling distance=2cm},]
+%     \draw [fill=gray!50] (0,0) rectangle ++(8,-8);
+%     \draw [fill=white]
+%         (0.5,-0.5) -- node {$A_1$} ++(0,-2)
+%         -- node {$A_2$} ++(0,-1)
+%         -- node {$B$} ++(3,0)
+%         -- node {$C$} ++(0,1)
+%         -- node {$D$} ++(1,0)
+%         -- node {$E$} ++(0,-1)
+%         -- node {$F$} ++(1,0)
+%         -- node {$G$} ++(0,-1)
+%         -- node {$H$} ++(-1,0)
+%         -- node {$I$} ++(0,-3)
+%         -- node {$J$} ++(3,0)
+%         -- node {$K$} ++(0,3)
+%         -- node {$L$} ++(-1,0)
+%         -- node {$M$} ++(0,1)
+%         -- node {$N$} ++(1,0)
+%         -- node {$O_1$} ++(0,1)
+%         -- node {$O_2$} ++(0,2)
+%         -- node {$P$} ++(-3,0)
+%         -- node {$Q$} ++(0,-1)
+%         -- node {$R$} ++(-1,0)
+%         -- node {$S$} ++(0,1)
+%         -- node {$T$} ++(-3,0);
+%     \draw [hyperplane] (0,-2.5) -- ++(8,0) node [left,pos=0] {\color{red}(1)};
+%     \draw [hyperplane] (3.5,0) -- ++(0,-2.5) node [above,pos=0] {\color{red}(2)};
+%     \draw [hyperplane] (4.5,0) -- ++(0,-2.5) node [above,pos=0] {\color{red}(3)};
+%     \node [label=above left:\color{red}(1)] at (14,-1) [convex] {$D$}
+%         child {node [convex,label=above left:\color{red}(2)] {$S$}
+%             child {node [convex] {$A_1, T$}}
+%             child {node [convex,label=above right:\color{red}(3)] {$Q$}
+%                 child {node [convex] {$O_2,P$}}
+%                 child {node [convex] {$R$}}
+%             }
+%         }
+%         child {node [convex,text width=3cm,align=center] {$A_2,B, C, E, F, G, H, $\\$I, J, K, L, M, N, O_1$}
+%         };
+% \end{tikzpicture}
+
+% \begin{tikzpicture}[auto,
+%     level 1/.style={sibling distance=6cm},
+%     level 2/.style={sibling distance=3cm},
+%     level 3/.style={sibling distance=2cm},]
+%     \draw [fill=gray!50] (0,0) rectangle ++(8,-8);
+%     \draw [fill=white]
+%         (0.5,-0.5) -- node {$A_1$} ++(0,-2)
+%         -- node {$A_2$} ++(0,-1)
+%         -- node {$B$} ++(3,0)
+%         -- node {$C$} ++(0,1)
+%         -- node {$D$} ++(1,0)
+%         -- node {$E$} ++(0,-1)
+%         -- node {$F$} ++(1,0)
+%         -- node {$G$} ++(0,-1)
+%         -- node {$H$} ++(-1,0)
+%         -- node {$I$} ++(0,-3)
+%         -- node {$J$} ++(3,0)
+%         -- node {$K$} ++(0,3)
+%         -- node {$L$} ++(-1,0)
+%         -- node {$M$} ++(0,1)
+%         -- node {$N$} ++(1,0)
+%         -- node {$O_1$} ++(0,1)
+%         -- node {$O_2$} ++(0,2)
+%         -- node {$P$} ++(-3,0)
+%         -- node {$Q$} ++(0,-1)
+%         -- node {$R$} ++(-1,0)
+%         -- node {$S$} ++(0,1)
+%         -- node {$T$} ++(-3,0);
+%     \draw [hyperplane] (0,-2.5) -- ++(8,0) node [left,pos=0] {\color{red}(1)};
+%     \draw [hyperplane] (3.5,0) -- ++(0,-2.5) node [above,pos=0] {\color{red}(2)};
+%     \draw [hyperplane] (4.5,0) -- ++(0,-2.5) node [above,pos=0] {\color{red}(3)};
+%     \draw [hyperplane] (4.5,-2.5) -- ++(0,-5.5) node [below,pos=1] {\color{red}(4)};
+%     \node [label=above left:\color{red}(1)] at (14,-1) [convex] {$D$}
+%         child {node [convex,label=above left:\color{red}(2)] {$S$}
+%             child {node [convex] {$A_1, T$}}
+%             child {node [convex,label=above right:\color{red}(3)] {$Q$}
+%                 child {node [convex] {$O_2,P$}}
+%                 child {node [convex] {$R$}}
+%             }
+%         }
+%         child {node [convex,label=above right:\color{red}(4)] {$E,I$}
+%             child {node [convex,text width=2.2cm,align=center] {$F, G, H, J$ \\ $K, L, M, N, O_1$}}
+%             child {node [convex] {$A_2, B, C$}}
+%         };
+% \end{tikzpicture}
+
+% \begin{tikzpicture}[auto,
+%     level 1/.style={sibling distance=6cm},
+%     level 2/.style={sibling distance=2cm},
+%     level 3/.style={sibling distance=2cm}]
+%     \draw [fill=gray!50] (0,0) rectangle ++(8,-8);
+%     \draw [fill=white]
+%         (0.5,-0.5) -- node {$A_1$} ++(0,-2)
+%         -- node {$A_2$} ++(0,-1)
+%         -- node {$B$} ++(3,0)
+%         -- node {$C$} ++(0,1)
+%         -- node {$D$} ++(1,0)
+%         -- node {$E$} ++(0,-1)
+%         -- node {$F$} ++(1,0)
+%         -- node {$G$} ++(0,-1)
+%         -- node {$H$} ++(-1,0)
+%         -- node {$I$} ++(0,-3)
+%         -- node {$J$} ++(3,0)
+%         -- node {$K$} ++(0,3)
+%         -- node {$L$} ++(-1,0)
+%         -- node {$M$} ++(0,1)
+%         -- node {$N$} ++(1,0)
+%         -- node {$O_1$} ++(0,1)
+%         -- node {$O_2$} ++(0,2)
+%         -- node {$P$} ++(-3,0)
+%         -- node {$Q$} ++(0,-1)
+%         -- node {$R$} ++(-1,0)
+%         -- node {$S$} ++(0,1)
+%         -- node {$T$} ++(-3,0);
+%     \draw [hyperplane] (0,-2.5) -- ++(8,0) node [left,pos=0] {\color{red}(1)};
+%     \draw [hyperplane] (3.5,0) -- ++(0,-2.5) node [above,pos=0] {\color{red}(2)};
+%     \draw [hyperplane] (4.5,0) -- ++(0,-2.5) node [above,pos=0] {\color{red}(3)};
+%     \draw [hyperplane] (4.5,-2.5) -- ++(0,-5.5) node [below,pos=1] {\color{red}(4)};
+%     \draw [hyperplane] (4.5,-4.5) -- ++(3.5,0) node [right,pos=1] {\color{red}(5)};
+%     \node [label=above left:\color{red}(1)] at (14,-1) [convex] {$D$}
+%         child {node [convex,label=above left:\color{red}(2)] {$S$}
+%             child {node [convex] {$A_1, T$}}
+%             child {node [convex,label=above right:\color{red}(3)] {$Q$}
+%                 child {node [convex] {$O_2,P$}}
+%                 child {node [convex] {$R$}}
+%             }
+%         }
+%         child {node [convex,label=above right:\color{red}(4)] {$E,I$}
+%             child {node [convex,label=above left:\color{red}(5)] {$H,L$}
+%                 child {node [convex] {$J,K$}}
+%                 child {node [convex,text width=1.25cm,align=center] {$F,G,M$\\$N,O_1$}}
+%             }
+%             child {node [convex] {$A_2, B, C$}}
+%         };
+% \end{tikzpicture}
+
+% \begin{tikzpicture}[auto,
+%     level 1/.style={sibling distance=6cm},
+%     level 2/.style={sibling distance=2cm},
+%     level 3/.style={sibling distance=2cm}]
+%     \draw [fill=gray!50] (0,0) rectangle ++(8,-8);
+%     \draw [fill=white]
+%         (0.5,-0.5) -- node {$A_1$} ++(0,-2)
+%         -- node {$A_2$} ++(0,-1)
+%         -- node {$B$} ++(3,0)
+%         -- node {$C$} ++(0,1)
+%         -- node {$D$} ++(1,0)
+%         -- node {$E$} ++(0,-1)
+%         -- node {$F$} ++(1,0)
+%         -- node {$G$} ++(0,-1)
+%         -- node {$H$} ++(-1,0)
+%         -- node {$I$} ++(0,-3)
+%         -- node {$J$} ++(3,0)
+%         -- node {$K$} ++(0,3)
+%         -- node {$L$} ++(-1,0)
+%         -- node {$M$} ++(0,1)
+%         -- node {$N$} ++(1,0)
+%         -- node {$O_1$} ++(0,1)
+%         -- node {$O_2$} ++(0,2)
+%         -- node {$P$} ++(-3,0)
+%         -- node {$Q$} ++(0,-1)
+%         -- node {$R$} ++(-1,0)
+%         -- node {$S$} ++(0,1)
+%         -- node {$T$} ++(-3,0);
+%     \draw [hyperplane] (0,-2.5) -- ++(8,0) node [left,pos=0] {\color{red}(1)};
+%     \draw [hyperplane] (3.5,0) -- ++(0,-2.5) node [above,pos=0] {\color{red}(2)};
+%     \draw [hyperplane] (4.5,0) -- ++(0,-2.5) node [above,pos=0] {\color{red}(3)};
+%     \draw [hyperplane] (4.5,-2.5) -- ++(0,-5.5) node [below,pos=1] {\color{red}(4)};
+%     \draw [hyperplane] (4.5,-4.5) -- ++(3.5,0) node [right,pos=1] {\color{red}(5)};
+%     \draw [hyperplane] (4.5,-3.5) -- ++(3.5,0) node [right,pos=1] {\color{red}(6)};
+%     \node [label=above left:\color{red}(1)] at (14,-1) [convex] {$D$}
+%         child {node [convex,label=above left:\color{red}(2)] {$S$}
+%             child {node [convex] {$A_1, T$}}
+%             child {node [convex,label=above right:\color{red}(3)] {$Q$}
+%                 child {node [convex] {$O_2,P$}}
+%                 child {node [convex] {$R$}}
+%             }
+%         }
+%         child {node [convex,label=above right:\color{red}(4)] {$E,I$}
+%             child {node [convex,label=above left:\color{red}(5)] {$H,L$}
+%                 child {node [convex] {$J,K$}}
+%                 child {node [convex,label=above right:\color{red}(6)] {$F,N$}
+%                     child {node [convex] {$O_1$}}
+%                     child {node [convex] {$G,M$}}
+%                 }
+%             }
+%             child {node [convex] {$A_2, B, C$}}
+%         };
+% \end{tikzpicture}
+
+% VSD using BSP trees
+% \begin{tikzpicture}
+%     \node [convex] {$A$}
+%         child {node [convex] {$B$}}
+%         child {node [convex] {$C$}};
+%     \draw (-10, -3)  coordinate (1) rectangle ++(6, 4);
+%     \draw [red,dashed,line width=1pt] ($(1)+(0:3)$) -- ++(90:4);
+%     \draw [line width=2pt] ($(1)+(3,1)$) coordinate (A)-- ++(0,2) node [pos=0.5,left] {$A$};
+%     \draw [line width=2pt] ($(1)+(4,3)$) coordinate (B) -- ++(330:2) node [pos=0.5,below left] {$B$};
+%     \draw [line width=2pt] ($(1)+(2,3)$) coordinate (C) -- ++(225:2) node [pos=0.5,below right] {$C$};
+%     \draw [bluevec] ($(A)+(0,1)$) -- ++(0:1);
+%     \draw [bluevec] ($(B)+(330:1)$) -- ++(60:1);
+%     \draw [bluevec] ($(C)+(225:1)$) -- ++(135:1);
+%     \node [rotate=-45] at (-5, -2) {\includegraphics[width=1cm]{../eye.png}};
+% \end{tikzpicture}
+
+% BSP VSD example
+\begin{tikzpicture}[auto,
+    level 1/.style={sibling distance=6cm},
+    level 2/.style={sibling distance=2cm},
+    level 3/.style={sibling distance=2cm}]
+    \draw [fill=gray!50] (0,0) rectangle ++(8,-8);
+    \draw [fill=white]
+        (0.5,-0.5) -- node {$A_1$} ++(0,-2)
+        -- node {$A_2$} ++(0,-1)
+        -- node {$B$} ++(3,0)
+        -- node {$C$} ++(0,1)
+        -- node {$D$} ++(1,0)
+        -- node {$E$} ++(0,-1)
+        -- node {$F$} ++(1,0)
+        -- node {$G$} ++(0,-1)
+        -- node {$H$} ++(-1,0)
+        -- node {$I$} ++(0,-3)
+        -- node {$J$} ++(3,0)
+        -- node {$K$} ++(0,3)
+        -- node {$L$} ++(-1,0)
+        -- node {$M$} ++(0,1)
+        -- node {$N$} ++(1,0)
+        -- node {$O_1$} ++(0,1)
+        -- node {$O_2$} ++(0,2)
+        -- node {$P$} ++(-3,0)
+        -- node {$Q$} ++(0,-1)
+        -- node {$R$} ++(-1,0)
+        -- node {$S$} ++(0,1)
+        -- node {$T$} ++(-3,0);
+    \draw (0.3,-2.5) -- ++(0.4,0);
+    \draw (7.3,-2.5) -- ++(0.4,0);
+    \node at (14,-1) [convex] {$D$}
+        child {node [convex] {$S$}
+            child {node [convex] {$A_1, T$}}
+            child {node [convex] {$Q$}
+                child {node [convex] {$O_2,P$}}
+                child {node [convex] {$R$}}
+            }
+        }
+        child {node [convex] {$E,I$}
+            child {node [convex] {$H,L$}
+                child {node [convex] {$J,K$}}
+                child {node [convex] {$F,N$}
+                    child {node [convex] {$O_1$}}
+                    child {node [convex] {$G,M$}}
+                }
+            }
+            child {node [convex] {$A_2, B, C$}}
+        };
+    \node [point,label=below:$\mathbf{p}$] at (2,-2) {};
+    \node [point,label=below:$\mathbf{q}$] at (6,-6) {};
 \end{tikzpicture}
 
 \end{document}

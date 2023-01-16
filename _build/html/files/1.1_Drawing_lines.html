@@ -244,7 +244,7 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="5.4_Binary_space_partitioning.html">
-     Binary Space Partitioning (BSP)
+     Binary space partitioning
     </a>
    </li>
   </ul>
@@ -495,11 +495,11 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="drawing-lines">
 <span id="rasterising-lines-section"></span><h1>Drawing lines<a class="headerlink" href="#drawing-lines" title="Permalink to this headline">#</a></h1>
-<p>One of the fundamental tasks in computer graphics is the rendering of a straight line on a display. Consider the diagram in <a class="reference internal" href="#line-raster-figure"><span class="std std-numref">Fig. 69</span></a> showing the rasterisation of the straight line joining the two points with pixel co-ordinates <span class="math notranslate nohighlight">\((2, 2)\)</span> and <span class="math notranslate nohighlight">\((12, 6)\)</span>. The pixels that are closest to the line are shaded to create a rasterised approximation of the idealise image. This is a simple task for a human since we are able to view the idealised image and determine which pixels need to be shaded. Algorithms are required to determine which pixels to illuminate in order to rasterise straight lines</p>
+<p>One of the fundamental tasks in computer graphics is the rendering of a straight line on a display. Consider the diagram in <a class="reference internal" href="#line-raster-figure"><span class="std std-numref">Fig. 77</span></a> showing the rasterisation of the straight line joining the two points with pixel co-ordinates <span class="math notranslate nohighlight">\((2, 2)\)</span> and <span class="math notranslate nohighlight">\((12, 6)\)</span>. The pixels that are closest to the line are shaded to create a rasterised approximation of the idealise image. This is a simple task for a human since we are able to view the idealised image and determine which pixels need to be shaded. Algorithms are required to determine which pixels to illuminate in order to rasterise straight lines</p>
 <figure class="align-default" id="line-raster-figure">
 <a class="reference internal image-reference" href="../_images/line_raster.png"><img alt="../_images/line_raster.png" src="../_images/line_raster.png" style="width: 400px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 69 </span><span class="caption-text">Rasterising a straight line</span><a class="headerlink" href="#line-raster-figure" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 77 </span><span class="caption-text">Rasterising a straight line</span><a class="headerlink" href="#line-raster-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <section id="bresenham-s-algorithm">
@@ -507,7 +507,7 @@ title="Print to PDF"
 <figure class="margin align-default" id="id2">
 <a class="reference internal image-reference" href="https://www.ithistory.org/sites/default/files/honor-roll/Jack%20E.%20Bresenham.jpg"><img alt="Jack Elton Bresenham" src="https://www.ithistory.org/sites/default/files/honor-roll/Jack%20E.%20Bresenham.jpg" style="width: 200px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 70 </span><span class="caption-text"><a class="reference external" href="https://en.wikipedia.org/wiki/Jack_Elton_Bresenham">Jack Elton Bresenham</a></span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 78 </span><span class="caption-text"><a class="reference external" href="https://en.wikipedia.org/wiki/Jack_Elton_Bresenham">Jack Elton Bresenham</a></span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p><strong>Bresenham’s algorithm</strong> developed by American computer scientist Jack <span id="id1">Bresenham [<a class="reference internal" href="bibliography.html#id2" title="Jack Elton Bresenham. Algorithm for computer control of a digital plotter. IBM Systems journal, 4(1):25–30, 1965.">1965</a>]</span> is a line drawing algorithm that uses integer only arithmetic and offers a vast improvement over other methods in terms of computational efficiency. Consider the <a class="reference external" href="https://en.wikipedia.org/wiki/Linear_equation">Cartesian equation of a straight line</a> joining two points with co-ordinates <span class="math notranslate nohighlight">\((x_0, y_0)\)</span> and <span class="math notranslate nohighlight">\((x_1, y_1)\)</span></p>
@@ -529,11 +529,11 @@ title="Print to PDF"
 <img alt="../_images/1.1_Drawing_lines_2_0.png" src="../_images/1.1_Drawing_lines_2_0.png" />
 </div>
 <figcaption>
-<p><span class="caption-number">Fig. 71 </span><span class="caption-text">The pixel whose centre is closest to the idealised line is plotted.</span><a class="headerlink" href="#bresenham-1-figure" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 79 </span><span class="caption-text">The pixel whose centre is closest to the idealised line is plotted.</span><a class="headerlink" href="#bresenham-1-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <div class="proof example seealso admonition" id="example-0">
-<p class="admonition-title"><span class="caption-number">Example 29 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 31 </span></p>
 <section class="example-content" id="proof-content">
 <p>Use the expression <span class="math notranslate nohighlight">\(f(x,y)\)</span> from equation <a class="reference internal" href="#equation-fxy">(33)</a> to determine the co-ordinates closest to the line joining the two points <span class="math notranslate nohighlight">\((2, 2)\)</span> and <span class="math notranslate nohighlight">\((7, 5)\)</span>.</p>
 <figure class="align-default" style="width: 300px">
@@ -588,7 +588,7 @@ Solution<div class="sd-summary-down docutils">
 <img alt="../_images/1.1_Drawing_lines_4_0.png" src="../_images/1.1_Drawing_lines_4_0.png" />
 </div>
 <figcaption>
-<p><span class="caption-number">Fig. 72 </span><span class="caption-text">The sign of <span class="math notranslate nohighlight">\(D\)</span> indicates which candidate pixel is closest to the idealise line.</span><a class="headerlink" href="#bresenham-2-figure" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 80 </span><span class="caption-text">The sign of <span class="math notranslate nohighlight">\(D\)</span> indicates which candidate pixel is closest to the idealise line.</span><a class="headerlink" href="#bresenham-2-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Since the values of <span class="math notranslate nohighlight">\(\Delta x\)</span> and <span class="math notranslate nohighlight">\(\Delta y\)</span> are constant along a straight line, instead of recalculating <span class="math notranslate nohighlight">\(D\)</span> using the function <span class="math notranslate nohighlight">\(f(x,y)\)</span> we can simply update <span class="math notranslate nohighlight">\(D\)</span> by <span class="math notranslate nohighlight">\(\Delta D\)</span>. If <span class="math notranslate nohighlight">\(D \leq 0\)</span> and we have plotted the top pixel then we calculaute <span class="math notranslate nohighlight">\(\Delta D_{top}\)</span> using</p>
@@ -618,9 +618,9 @@ Solution<div class="sd-summary-down docutils">
     \Delta D_{top} &amp;= 2 \Delta y, \\
     \Delta D_{bottom} &amp;= 2 \Delta y - 2\Delta x.
 \end{align}\end{split}\]</div>
-<p>Since <span class="math notranslate nohighlight">\(\Delta x\)</span> and <span class="math notranslate nohighlight">\(\Delta y\)</span> are integer values (they are the difference between pixel co-ordinates) then these expressions for <span class="math notranslate nohighlight">\(D\)</span>, <span class="math notranslate nohighlight">\(\Delta D_{top}\)</span> and <span class="math notranslate nohighlight">\(\Delta D_{bottom}\)</span> are also integer values which is quick for a computer to calculate. The basic Bresenham’s algorithm is written using <a class="reference external" href="https://en.wikipedia.org/wiki/Pseudocode">pseudocode</a> in <a class="reference internal" href="#basic-bresenhams-algorithm">Algorithm 4</a>.</p>
+<p>Since <span class="math notranslate nohighlight">\(\Delta x\)</span> and <span class="math notranslate nohighlight">\(\Delta y\)</span> are integer values (they are the difference between pixel co-ordinates) then these expressions for <span class="math notranslate nohighlight">\(D\)</span>, <span class="math notranslate nohighlight">\(\Delta D_{top}\)</span> and <span class="math notranslate nohighlight">\(\Delta D_{bottom}\)</span> are also integer values which is quick for a computer to calculate. The basic Bresenham’s algorithm is written using <a class="reference external" href="https://en.wikipedia.org/wiki/Pseudocode">pseudocode</a> in <a class="reference internal" href="#basic-bresenhams-algorithm">Algorithm 7</a>.</p>
 <div class="proof algorithm admonition" id="basic-bresenhams-algorithm">
-<p class="admonition-title"><span class="caption-number">Algorithm 4 </span> (Bresenham’s algorithm)</p>
+<p class="admonition-title"><span class="caption-number">Algorithm 7 </span> (Bresenham’s algorithm)</p>
 <section class="algorithm-content" id="proof-content">
 <p><strong>Inputs</strong> A raster array <span class="math notranslate nohighlight">\(R\)</span>, pixel co-ordinates of the endpoints of a straight line <span class="math notranslate nohighlight">\((x_0, y_0)\)</span> and <span class="math notranslate nohighlight">\((x_1, y_1)\)</span> and the colour of the line defined by the RBG triplet <span class="math notranslate nohighlight">\(colour\)</span>.</p>
 <p><strong>Output</strong> A raster array <span class="math notranslate nohighlight">\(R\)</span>.</p>
@@ -649,7 +649,7 @@ Solution<div class="sd-summary-down docutils">
 </ul>
 </section>
 </div><div class="proof example seealso admonition" id="basic-bresenham-example">
-<p class="admonition-title"><span class="caption-number">Example 30 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 32 </span></p>
 <section class="example-content" id="proof-content">
 <p>Use the basic Bresenham’s algorithm to determine the co-ordinates of the pixels on the straight line joining the
 two pixels with co-ordinates <span class="math notranslate nohighlight">\((2, 2)\)</span> and <span class="math notranslate nohighlight">\((7, 5)\)</span></p>
@@ -688,9 +688,9 @@ Solution<div class="sd-summary-down docutils">
 </div></section>
 <section id="modified-bresenham-s-algorithm">
 <h2>Modified Bresenham’s algorithm<a class="headerlink" href="#modified-bresenham-s-algorithm" title="Permalink to this headline">#</a></h2>
-<p>The basic Bresenham’s algorithm presented in <a class="reference internal" href="#basic-bresenhams-algorithm">Algorithm 4</a> only works for lines that are drawn from left-to-right and top-to-bottom and with a gradient less than 1 (i.e., <span class="math notranslate nohighlight">\(x &lt; x_1\)</span>, <span class="math notranslate nohighlight">\(y &lt; y_1\)</span> and <span class="math notranslate nohighlight">\(\Delta x &gt; \Delta y\)</span>). The basic algorithm can be extended by considering steps in the <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> directions separately which results in the modified Bresenham’s algorithm shown in <a class="reference internal" href="#bresenhams-algorithm">Algorithm 5</a>. Note that in the modified algorithm we introduce a new variable <span class="math notranslate nohighlight">\(E\)</span> which is used tests to determine whether the <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> co-ordinates are incremented.</p>
+<p>The basic Bresenham’s algorithm presented in <a class="reference internal" href="#basic-bresenhams-algorithm">Algorithm 7</a> only works for lines that are drawn from left-to-right and top-to-bottom and with a gradient less than 1 (i.e., <span class="math notranslate nohighlight">\(x &lt; x_1\)</span>, <span class="math notranslate nohighlight">\(y &lt; y_1\)</span> and <span class="math notranslate nohighlight">\(\Delta x &gt; \Delta y\)</span>). The basic algorithm can be extended by considering steps in the <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> directions separately which results in the modified Bresenham’s algorithm shown in <a class="reference internal" href="#bresenhams-algorithm">Algorithm 8</a>. Note that in the modified algorithm we introduce a new variable <span class="math notranslate nohighlight">\(E\)</span> which is used tests to determine whether the <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> co-ordinates are incremented.</p>
 <div class="proof algorithm admonition" id="bresenhams-algorithm">
-<p class="admonition-title"><span class="caption-number">Algorithm 5 </span> (Modified Bresenham’s algorithm)</p>
+<p class="admonition-title"><span class="caption-number">Algorithm 8 </span> (Modified Bresenham’s algorithm)</p>
 <section class="algorithm-content" id="proof-content">
 <p><strong>Inputs</strong> A raster array <span class="math notranslate nohighlight">\(R\)</span>, pixel co-ordinates of the endpoints of a straight line <span class="math notranslate nohighlight">\((x, y)\)</span> and <span class="math notranslate nohighlight">\((x_1, y_1)\)</span> and the colour of the line defined by the RBG triplet <span class="math notranslate nohighlight">\(colour\)</span>.</p>
 <p><strong>Output</strong> A raster array <span class="math notranslate nohighlight">\(R\)</span>.</p>
@@ -730,7 +730,7 @@ Solution<div class="sd-summary-down docutils">
 </ul>
 </section>
 </div><div class="proof example seealso admonition" id="modified-bresenham-example">
-<p class="admonition-title"><span class="caption-number">Example 31 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 33 </span></p>
 <section class="example-content" id="proof-content">
 <p>Use Bresenham’s algorithm for drawing lines in any direction to determine the co-ordinates of
 the pixels on the lines joining the following points:</p>

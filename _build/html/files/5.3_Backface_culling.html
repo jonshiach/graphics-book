@@ -214,7 +214,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="5.0_Hidden_surface_removal.html">
-   Clipping &amp; hidden surface removal
+   Clipping &amp; hidden surface determination
   </a>
   <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
   <label for="toctree-checkbox-4">
@@ -244,7 +244,7 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="5.4_Binary_space_partitioning.html">
-     Binary Space Partitioning (BSP)
+     Binary space partitioning
     </a>
    </li>
   </ul>
@@ -474,8 +474,8 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="backface-culling">
-<h1>Backface culling<a class="headerlink" href="#backface-culling" title="Permalink to this headline">#</a></h1>
-<p>The simplest hidden surface removal method is <strong>backface culling</strong> which is where, as the name suggests, we remove all polygons that have a normal vector facing away from the viewer, and therefore considered <strong>back facing</strong>. In doing this, when we only render the front facing polygons, objects appear solid.</p>
+<span id="backface-culling-section"></span><h1>Backface culling<a class="headerlink" href="#backface-culling" title="Permalink to this headline">#</a></h1>
+<p>The simplest hidden surface determination method is <strong>backface culling</strong> which, as the name suggests, we remove all polygons that have a normal vector facing away from the viewer, and therefore considered <strong>back facing</strong>. In doing this, when we only render the front facing polygons, objects appear solid.</p>
 <p>Consider the diagram in <a class="reference internal" href="#backface-culling-figure-1"><span class="std std-numref">Fig. 58</span></a> which shows a hexagonal object with face polygons <span class="math notranslate nohighlight">\(A\)</span> to <span class="math notranslate nohighlight">\(F\)</span> which have their normal vectors pointing away from the centre of the object (this is done when we define the <a class="reference internal" href="4.1_Object_space.html#object-space-section"><span class="std std-ref">object space</span></a>). When viewed from the viewer position on the left polygons <span class="math notranslate nohighlight">\(A\)</span>, <span class="math notranslate nohighlight">\(B\)</span> and <span class="math notranslate nohighlight">\(C\)</span> are <em>front facing</em> and polygons <span class="math notranslate nohighlight">\(D\)</span>, <span class="math notranslate nohighlight">\(E\)</span> and <span class="math notranslate nohighlight">\(F\)</span> are <em>back facing</em>.</p>
 <figure class="align-default" id="backface-culling-figure-1">
 <img alt="../_images/backface_culling_1.svg" src="../_images/backface_culling_1.svg" /><figcaption>
@@ -517,8 +517,8 @@ title="Print to PDF"
 <p class="admonition-title"><span class="caption-number">Definition 19 </span> (Front facing polygons)</p>
 <section class="definition-content" id="proof-content">
 <p>A polygon defined by a normal vector <span class="math notranslate nohighlight">\(\mathbf{n}\)</span> and point <span class="math notranslate nohighlight">\(\mathbf{c}\)</span> is front facing to the viewer if</p>
-<div class="amsmath math notranslate nohighlight" id="equation-7ef3f26c-083c-48ae-9cc5-947fb28f2eda">
-<span class="eqno">(31)<a class="headerlink" href="#equation-7ef3f26c-083c-48ae-9cc5-947fb28f2eda" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-e7c01041-345e-4f76-af91-6b2d2f63ca75">
+<span class="eqno">(31)<a class="headerlink" href="#equation-e7c01041-345e-4f76-af91-6b2d2f63ca75" title="Permalink to this equation">#</a></span>\[\begin{align}
     (\mathbf{c} - \mathbf{p}) \cdot \mathbf{n} &lt; 0.
 \end{align}\]</div>
 </section>
@@ -546,7 +546,7 @@ title="Print to PDF"
 <p class="admonition-title">Note</p>
 <p>If the world space is aligned so that the viewer is looking down the <span class="math notranslate nohighlight">\(z\)</span>-axis, any polygon where the <span class="math notranslate nohighlight">\(z\)</span> value of the normal vector is positive is a front facing polygon.</p>
 </div>
-<div class="proof example seealso admonition" id="back-face-culling-example">
+<div class="proof example seealso admonition" id="backface-culling-example">
 <p class="admonition-title"><span class="caption-number">Example 28 </span></p>
 <section class="example-content" id="proof-content">
 <p>A tetrahedron object is defined by the following homogeneous screen space co-ordinates and face matrix</p>
@@ -684,20 +684,14 @@ Solution<div class="sd-summary-down docutils">
 <span class="k">end</span><span class="w"></span>
 </pre></div>
 </div>
-<p>The affect of applying backface culling to the screen space from <a class="reference internal" href="4.4_Screen_space.html#screen-space-example">Example 25</a> is shown in <a class="reference internal" href="#backface-culling-example-figure-1"><span class="std std-numref">Fig. 62</span></a>. Here the polygons have been plotted using opaque polygons thus giving the objects the appearance of being solid.</p>
-<figure class="align-default" id="backface-culling-example-figure-1">
-<a class="reference internal image-reference" href="../_images/backface_culling_example_1.png"><img alt="../_images/backface_culling_example_1.png" src="../_images/backface_culling_example_1.png" style="width: 500px;" /></a>
+<p>The affect of applying backface culling to the screen space from <a class="reference internal" href="4.4_Screen_space.html#screen-space-example">Example 25</a> is shown in <a class="reference internal" href="#backface-culling-example-figure"><span class="std std-numref">Fig. 62</span></a>.</p>
+<figure class="align-default" id="backface-culling-example-figure">
+<a class="reference internal image-reference" href="../_images/backface_culling_example.png"><img alt="../_images/backface_culling_example.png" src="../_images/backface_culling_example.png" style="width: 400px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 62 </span><span class="caption-text">The screen space from <a class="reference internal" href="4.4_Screen_space.html#screen-space-example">Example 25</a> plotted using only front facing polygons.</span><a class="headerlink" href="#backface-culling-example-figure-1" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 62 </span><span class="caption-text">The screen space from <a class="reference internal" href="4.4_Screen_space.html#screen-space-example">Example 25</a> plotted using only front facing polygons.</span><a class="headerlink" href="#backface-culling-example-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>Unfortunately using backface culling alone is not sufficient to remove hidden surfaces. Consider <a class="reference internal" href="#backface-culling-example-figure-2"><span class="std std-numref">Fig. 63</span></a> where the front facing polygons have been plotted but with no consideration of the order in which they are plotted. This means that the church object which should be in the background and partially obscured by the house object in the foreground has been plotted over the top of the house object.</p>
-<figure class="align-default" id="backface-culling-example-figure-2">
-<a class="reference internal image-reference" href="../_images/backface_culling_example_2.png"><img alt="../_images/backface_culling_example_2.png" src="../_images/backface_culling_example_2.png" style="width: 500px;" /></a>
-<figcaption>
-<p><span class="caption-number">Fig. 63 </span><span class="caption-text">The screen space from <a class="reference internal" href="4.4_Screen_space.html#screen-space-example">Example 25</a> plotted using only front facing polygons without consideration of the order the polygons are plotted.</span><a class="headerlink" href="#backface-culling-example-figure-2" title="Permalink to this image">#</a></p>
-</figcaption>
-</figure>
+<p>Unfortunately using backface culling alone is not sufficient to remove hidden surfaces. This means that the church object which should be in the background and partially obscured by the house object in the foreground has been plotted over the top of the house object.</p>
 </section>
 </section>
 

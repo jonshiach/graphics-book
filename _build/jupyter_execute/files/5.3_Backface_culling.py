@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+# (backface-culling-section)=
 # # Backface culling
 # 
-# The simplest hidden surface removal method is **backface culling** which is where, as the name suggests, we remove all polygons that have a normal vector facing away from the viewer, and therefore considered **back facing**. In doing this, when we only render the front facing polygons, objects appear solid.
+# The simplest hidden surface determination method is **backface culling** which, as the name suggests, we remove all polygons that have a normal vector facing away from the viewer, and therefore considered **back facing**. In doing this, when we only render the front facing polygons, objects appear solid.
 # 
 # Consider the diagram in {numref}`backface-culling-figure-1` which shows a hexagonal object with face polygons $A$ to $F$ which have their normal vectors pointing away from the centre of the object (this is done when we define the [object space](object-space-section)). When viewed from the viewer position on the left polygons $A$, $B$ and $C$ are *front facing* and polygons $D$, $E$ and $F$ are *back facing*. 
 # 
@@ -83,7 +84,7 @@
 # 
 # `````{prf:example}
 # :class: seealso
-# :label: back-face-culling-example
+# :label: backface-culling-example
 # 
 # A tetrahedron object is defined by the following homogeneous screen space co-ordinates and face matrix
 # 
@@ -229,20 +230,13 @@
 # end
 # ```
 # 
-# The affect of applying backface culling to the screen space from {prf:ref}`screen-space-example` is shown in {numref}`backface-culling-example-figure-1`. Here the polygons have been plotted using opaque polygons thus giving the objects the appearance of being solid. 
+# The affect of applying backface culling to the screen space from {prf:ref}`screen-space-example` is shown in {numref}`backface-culling-example-figure`. 
 # 
-# ```{figure} /images/backface_culling_example_1.png
-# :width: 500px
-# :name: backface-culling-example-figure-1
+# ```{figure} /images/backface_culling_example.png
+# :width: 400px
+# :name: backface-culling-example-figure
 # 
 # The screen space from {prf:ref}`screen-space-example` plotted using only front facing polygons.
 # ```
 # 
-# Unfortunately using backface culling alone is not sufficient to remove hidden surfaces. Consider {numref}`backface-culling-example-figure-2` where the front facing polygons have been plotted but with no consideration of the order in which they are plotted. This means that the church object which should be in the background and partially obscured by the house object in the foreground has been plotted over the top of the house object. 
-# 
-# ```{figure} /images/backface_culling_example_2.png
-# :width: 500px
-# :name: backface-culling-example-figure-2
-# 
-# The screen space from {prf:ref}`screen-space-example` plotted using only front facing polygons without consideration of the order the polygons are plotted.
-# ```
+# Unfortunately using backface culling alone is not sufficient to remove hidden surfaces. This means that the church object which should be in the background and partially obscured by the house object in the foreground has been plotted over the top of the house object. 
