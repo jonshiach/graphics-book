@@ -224,7 +224,7 @@
 # 
 # ## MATLAB code
 # 
-# The MATLAB code below calculates the camera space co-ordinates for the virtual world from {prf:ref}`world-space-example` and the viewing parameters from {prf:ref}`camera-space-example` where it is assumed that the world space homogeneous co-ordinates are contained in `Vworld`. Note that the camera space is viewed looking down the $z$ axis using the `view(0,90)` command.
+# The MATLAB code below calculates the camera space co-ordinates for the virtual world from {prf:ref}`world-space-example` and the viewing parameters from {prf:ref}`camera-space-example` where it is assumed that the world space homogeneous co-ordinates are contained in `Vworld`. Here the camera space co-ordinates are plotted with the $y$ and $z$ co-ordinates swapped around so that we can show the camera space from the point of view of the viewer looking down the $z$-axis. The horizontal $z$-axis scale has also been reversed so that the axis points towards the viewer.
 # 
 # ```matlab
 # % Define camera position and centre of view
@@ -246,19 +246,33 @@
 # % Align world space to the camera
 # Vcamera = A * Vworld;
 # 
-# % Plot world space
-# patch('Vertices', Vcamera(1:3,:)', 'Faces', F, FaceColor='w', FaceAlpha=0.75, LineWidth=2)
+# %% Plot camera space (from viewing position)
+# figure
+# h1 = axes;
+# patch('Vertices', Vcamera([1,3,2],:)', 'Faces', F, FaceColor='w', FaceAlpha=0.75, LineWidth=2)
+# set(h1, 'Ydir', 'reverse')
 # xlabel('$x$', 'Interpreter', 'latex', 'FontSize', 18)
-# ylabel('$y$', 'Interpreter', 'latex', 'FontSize', 18)
-# zlabel('$z$', 'Interpreter', 'latex', 'FontSize', 18)
-# view(0,90)  % align the plot so that we are looking down the z axis
-# axis([-4, 4, -3, 3, -8, 0])
+# ylabel('$z$', 'Interpreter', 'latex', 'FontSize', 18)
+# zlabel('$y$', 'Interpreter', 'latex', 'FontSize', 18)
+# view(0,0)
+# axis([-3, 3, -6, 0, -3, 3])
 # box on
 # ```
 # 
-# ```{figure} /images/camera_space_example.png
-# :width: 400px
-# :name: camera-space-example-figure
+# The result of applying the alignment matrix to the world space co-ordinates to produce the camera space co-ordinates can be seen in {numref}`camera-space-example-1-figure` and the plot of the camera space when viewed looking down the $z$-axis is shown in {numref}`camera-space-example-2-figure`.
 # 
-# The camera space from {prf:ref}`camera-space-example`.
+# ```{figure} /images/camera_space_example_1.png
+# :width: 400px
+# :name: camera-space-example-1-figure
+# 
+# The camera space from {prf:ref}`camera-space-example` viewed from an arbitrary point.
 # ```
+# 
+# ```{figure} /images/camera_space_example_2.png
+# :width: 400px
+# :name: camera-space-example-2-figure
+# 
+# The camera space from {prf:ref}`camera-space-example` viewed looking down the $z$-axis.
+# ```
+# 
+# 

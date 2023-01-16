@@ -47,9 +47,18 @@
 # 	\begin{pmatrix} x \\ y \\ 0 \\ 1  \end{pmatrix}
 # \end{align*}
 # 
+# The orthographic projection of the camera space from {prf:ref}`camera-space-example` is shown in {numref}`orthographic-projection-figure`. Note that the two house objects appear the same size even though the house object on the right is closer to the viewer.
+# 
+# ```{figure} /images/camera_space_example_2.png
+# :width: 400px
+# :name: orthographic-projection-figure
+# 
+# The camera space from {prf:ref}`camera-space-example` projected using orthographic projection.
+# ```
+# 
 # ## Perspective projection
 # 
-# The problem with using orthographic projection is that we lose all the depth information and will not be able to tell which object are closer than others. <a href="https://en.wikipedia.org/wiki/3D_projection#Perspective_projection" target="_blank">**Perspective projection**</a> retains this depth information by making objects further away from the viewpoint appear smaller in the projection than similar objects closer to the viewpoint. Perspective projection emulates the way the human eye, or a camera, perceives objects. Rays of light are reflected off objects and travel in straight lines, converging on the eye, or lens, which for these purposes can be thought of as a single point, the viewpoint.
+# We have seen in {numref}`orthographic-projection-figure` that the problem with using orthographic projection is that we lose all the depth information and will not be able to tell which object are closer than others. <a href="https://en.wikipedia.org/wiki/3D_projection#Perspective_projection" target="_blank">**Perspective projection**</a> retains this depth information by making objects further away from the viewpoint appear smaller in the projection than similar objects closer to the viewpoint. Perspective projection emulates the way the human eye, or a camera, perceives objects. Rays of light are reflected off objects and travel in straight lines, converging on the eye, or lens, which for these purposes can be thought of as a single point, the viewpoint.
 # 
 # In perspective projection the viewpoint is often called the centre of projection, it is the point where all the projectors meet. The projected image is formed on a projection plane, a plane parallel to the $xy$-plane and positioned at a distance $f$ from the centre of projection (which after alignment is of course positioned at the origin). The projection plane can be thought of as a glass pane held up between the eye and the scene being viewed ({numref}`perspective-projection-figure`). A projector line from a point in the world space intersects the projection plane in the projected point, and then goes through the centre of projection.
 # 
@@ -247,7 +256,7 @@
 # :class: seealso
 # :label: screen-space-example
 # 
-# The camera space from {prf:ref}`camera-space-example` is projected onto the screen space defined by near and far projection plans located at distances$near = 1$ and $far = 9$ from the origin, a field of view angle of $fov = \pi/3$ and a width-to-height screen aspect ratio of $4/3$. Calculate the screen space co-ordinates of the virtual world.
+# The camera space from {prf:ref}`camera-space-example` is projected onto the screen space defined by near and far projection plans located at distances $near = 1$ and $far = 9$ from the origin, a field of view angle of $fov = \pi/3$ and a width-to-height screen aspect ratio of $4/3$. Calculate the screen space co-ordinates of the virtual world.
 # 
 # ````{dropdown} Solution
 # First we calculate the $r$ and $t$ co-ordinates
@@ -331,12 +340,12 @@
 # ```matlab
 # % Define projection parameters
 # near = 1;
-# far = 10;
-# fov = pi/3;
+# far = 5;
+# fov = pi/2;
 # aspect = 4/3;
 # 
 # % Calculate projection matrix
-# r = 2 * tan(fov / 2);
+# r = near * tan(fov / 2);
 # t = r / aspect;
 # P = [-near / r, 0, 0, 0 ;
 #      0, -near / t, 0, 0 ;
@@ -348,18 +357,39 @@
 # Vscreen = Vscreen ./ Vscreen(4,:);
 # 
 # % Plot camera space (from viewing position)
-# patch('Vertices', Vscreen(1:3,:)', 'Faces', F, FaceColor='w', FaceAlpha=0.75, LineWidth=2)
+# figure()
+# h1 = axes;
+# patch('Vertices', Vscreen([1,3,2],:)', 'Faces', F, FaceColor='w', FaceAlpha=0.75, LineWidth=2)
 # xlabel('$x$', 'Interpreter', 'latex', 'FontSize', 18)
-# ylabel('$y$', 'Interpreter', 'latex', 'FontSize', 18)
-# zlabel('$z$', 'Interpreter', 'latex', 'FontSize', 18)
-# view(0,90)
+# ylabel('$z$', 'Interpreter', 'latex', 'FontSize', 18)
+# zlabel('$y$', 'Interpreter', 'latex', 'FontSize', 18)
+# set(h1, 'Ydir', 'reverse')
+# view(0,0)
 # axis([-1, 1, -1, 1, -1, 1])
-# box on
+# grid on
 # ```
 # 
-# ```{figure} /images/screen_space_example.png
-# :width: 400px
-# :name: screen-space-figure
+# A plot of the camera space with the viewing frustum defined using the viewing parameter from {prf:ref}`screen-space-example` is shown in {numref}`screen-space-example-figure-1`. 
 # 
-# The screen space from {prf:ref}`screen-space-example`.
+# ```{figure} /images/screen_space_example_1.png
+# :width: 400px
+# :name: screen-space-example-figure-1
+# 
+# The camera space and viewing frustum from {prf:ref}`screen-space-example`.
+# ```
+# 
+# The affect of applying the perspective projection to the camera space is shown in {numref}`screen-space-example-figure-2`. Note that the viewing frustum is now a unit cube and the camera space objects have been skewed so that the polygons of the object closest to the viewer are larger than similar polygons further away. The plot of the screen space viewed looking down the $z$-axis is shown in in {numref}`screen-space-example-figure-3` which gives a realistic representation of the world space. 
+# 
+# ```{figure} /images/screen_space_example_2.png
+# :width: 400px
+# :name: screen-space-example-figure-2
+# 
+# The screen space from {prf:ref}`screen-space-example` viewed from an arbitrary point.
+# ```
+# 
+# ```{figure} /images/screen_space_example_3.png
+# :width: 400px
+# :name: screen-space-example-figure-3
+# 
+# The screen space from {prf:ref}`screen-space-example` viewed looking down the $z$-axis.
 # ```

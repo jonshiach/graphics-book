@@ -225,17 +225,27 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="files/5.1_Clipping.html">
-     Clipping
+    <a class="reference internal" href="files/5.1_Line_clipping.html">
+     Line clipping
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="files/5.2_Painters_algorithm.html">
+    <a class="reference internal" href="files/5.2_Polygon_clipping.html">
+     Polygon clipping
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="files/5.3_Backface_culling.html">
+     Backface culling
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="files/5.3_Painters_algorithm.html">
      Painter’s algorithm
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="files/5.3_Binary_space_partitioning.html">
+    <a class="reference internal" href="files/5.4_Binary_space_partitioning.html">
      Binary Space Partitioning (BSP)
     </a>
    </li>
@@ -375,6 +385,8 @@ title="Fullscreen mode"
    <h1>Proof Index</h1>
 
    <div class="modindex-jumpbox">
+   <a href="#cap-back-face-culling-example"><strong>back-face-culling-example</strong></a> | 
+   <a href="#cap-backface-culling-algorithm"><strong>backface-culling-algorithm</strong></a> | 
    <a href="#cap-basic-bresenham-example"><strong>basic-bresenham-example</strong></a> | 
    <a href="#cap-basic-bresenhams-algorithm"><strong>basic-bresenhams-algorithm</strong></a> | 
    <a href="#cap-bresenhams-algorithm"><strong>bresenhams-algorithm</strong></a> | 
@@ -382,6 +394,8 @@ title="Fullscreen mode"
    <a href="#cap-change-of-basis-example-1"><strong>change-of-basis-example-1</strong></a> | 
    <a href="#cap-composite-transformation-definition"><strong>composite-transformation-definition</strong></a> | 
    <a href="#cap-composite-transformation-matrices-theorem"><strong>composite-transformation-matrices-theorem</strong></a> | 
+   <a href="#cap-cyrus-beck-algorithm"><strong>cyrus-beck-algorithm</strong></a> | 
+   <a href="#cap-cyrus-beck-example"><strong>cyrus-beck-example</strong></a> | 
    <a href="#cap-definition-0"><strong>definition-0</strong></a> | 
    <a href="#cap-definition-11"><strong>definition-11</strong></a> | 
    <a href="#cap-definition-2"><strong>definition-2</strong></a> | 
@@ -391,7 +405,6 @@ title="Fullscreen mode"
    <a href="#cap-definition-8"><strong>definition-8</strong></a> | 
    <a href="#cap-definition-9"><strong>definition-9</strong></a> | 
    <a href="#cap-example-0"><strong>example-0</strong></a> | 
-   <a href="#cap-example-1"><strong>example-1</strong></a> | 
    <a href="#cap-example-10"><strong>example-10</strong></a> | 
    <a href="#cap-example-13"><strong>example-13</strong></a> | 
    <a href="#cap-example-2"><strong>example-2</strong></a> | 
@@ -403,6 +416,7 @@ title="Fullscreen mode"
    <a href="#cap-finding-transformation-matrix-theorem"><strong>finding-transformation-matrix-theorem</strong></a> | 
    <a href="#cap-flood-fill-algorithm"><strong>flood-fill-algorithm</strong></a> | 
    <a href="#cap-flood-fill-example"><strong>flood-fill-example</strong></a> | 
+   <a href="#cap-front-facing-polygon-definition"><strong>front-facing-polygon-definition</strong></a> | 
    <a href="#cap-geometric-dot-product-definition"><strong>geometric-dot-product-definition</strong></a> | 
    <a href="#cap-homogeneous-coordinates-definition"><strong>homogeneous-coordinates-definition</strong></a> | 
    <a href="#cap-idealised-image-definition"><strong>idealised-image-definition</strong></a> | 
@@ -424,6 +438,8 @@ title="Fullscreen mode"
    <a href="#cap-scaling-example"><strong>scaling-example</strong></a> | 
    <a href="#cap-scanline-algorithm"><strong>scanline-algorithm</strong></a> | 
    <a href="#cap-screen-space-example"><strong>screen-space-example</strong></a> | 
+   <a href="#cap-sutherland-hodgman-algorithm"><strong>sutherland-hodgman-algorithm</strong></a> | 
+   <a href="#cap-sutherland-hodgman-example"><strong>sutherland-hodgman-example</strong></a> | 
    <a href="#cap-theorem-4"><strong>theorem-4</strong></a> | 
    <a href="#cap-transformation-matrix-example"><strong>transformation-matrix-example</strong></a> | 
    <a href="#cap-translation-matrix-definition"><strong>translation-matrix-definition</strong></a> | 
@@ -431,6 +447,22 @@ title="Fullscreen mode"
    </div>
 
    <table class="indextable modindextable">
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-back-face-culling-example"><td></td><td>
+       <strong>back-face-culling-example</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="files/5.3_Backface_culling.html#back-face-culling-example"><code class="xref">back-face-culling-example</code></a> <em>(files/5.3_Backface_culling)</em></td><td>
+       <em>example</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-backface-culling-algorithm"><td></td><td>
+       <strong>backface-culling-algorithm</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="files/5.3_Backface_culling.html#backface-culling-algorithm"><code class="xref">backface-culling-algorithm</code></a> <em>(files/5.3_Backface_culling)</em></td><td>
+       <em>algorithm</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-basic-bresenham-example"><td></td><td>
        <strong>basic-bresenham-example</strong></td><td></td></tr>
@@ -488,12 +520,28 @@ title="Fullscreen mode"
        <a href="files/3.0_Transformations.html#composite-transformation-matrices-theorem"><code class="xref">composite-transformation-matrices-theorem</code></a> <em>(files/3.0_Transformations)</em></td><td>
        <em>theorem</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-cyrus-beck-algorithm"><td></td><td>
+       <strong>cyrus-beck-algorithm</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="files/5.1_Line_clipping.html#cyrus-beck-algorithm"><code class="xref">cyrus-beck-algorithm</code></a> <em>(files/5.1_Line_clipping)</em></td><td>
+       <em>algorithm</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-cyrus-beck-example"><td></td><td>
+       <strong>cyrus-beck-example</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="files/5.1_Line_clipping.html#cyrus-beck-example"><code class="xref">cyrus-beck-example</code></a> <em>(files/5.1_Line_clipping)</em></td><td>
+       <em>example</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-definition-0"><td></td><td>
        <strong>definition-0</strong></td><td></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="files/3.2_Scaling.html#definition-0"><code class="xref">definition-0</code></a> <em>(files/3.2_Scaling)</em></td><td>
+       <a href="files/2.0_Coordinate_geometry.html#definition-0"><code class="xref">definition-0</code></a> <em>(files/2.0_Coordinate_geometry)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-definition-11"><td></td><td>
@@ -560,14 +608,6 @@ title="Fullscreen mode"
        <a href="files/1.1_Drawing_lines.html#example-0"><code class="xref">example-0</code></a> <em>(files/1.1_Drawing_lines)</em></td><td>
        <em>example</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-example-1"><td></td><td>
-       <strong>example-1</strong></td><td></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="files/2.2_Shortest_distance_problems.html#example-1"><code class="xref">example-1</code></a> <em>(files/2.2_Shortest_distance_problems)</em></td><td>
-       <em>example</em></td></tr>
-     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-example-10"><td></td><td>
        <strong>example-10</strong></td><td></td></tr>
      <tr>
@@ -589,7 +629,7 @@ title="Fullscreen mode"
      <tr>
        <td></td>
        <td>
-       <a href="files/3.2_Scaling.html#example-2"><code class="xref">example-2</code></a> <em>(files/3.2_Scaling)</em></td><td>
+       <a href="files/2.0_Coordinate_geometry.html#example-2"><code class="xref">example-2</code></a> <em>(files/2.0_Coordinate_geometry)</em></td><td>
        <em>example</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-example-3"><td></td><td>
@@ -597,7 +637,7 @@ title="Fullscreen mode"
      <tr>
        <td></td>
        <td>
-       <a href="files/3.3_Rotation.html#example-3"><code class="xref">example-3</code></a> <em>(files/3.3_Rotation)</em></td><td>
+       <a href="files/3.0_Transformations.html#example-3"><code class="xref">example-3</code></a> <em>(files/3.0_Transformations)</em></td><td>
        <em>example</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-example-4"><td></td><td>
@@ -655,6 +695,14 @@ title="Fullscreen mode"
        <td>
        <a href="files/1.3_Drawing_polygons.html#flood-fill-example"><code class="xref">flood-fill-example</code></a> <em>(files/1.3_Drawing_polygons)</em></td><td>
        <em>example</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-front-facing-polygon-definition"><td></td><td>
+       <strong>front-facing-polygon-definition</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="files/5.3_Backface_culling.html#front-facing-polygon-definition"><code class="xref">front-facing-polygon-definition</code></a> <em>(files/5.3_Backface_culling)</em></td><td>
+       <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-geometric-dot-product-definition"><td></td><td>
        <strong>geometric-dot-product-definition</strong></td><td></td></tr>
@@ -822,6 +870,22 @@ title="Fullscreen mode"
        <td></td>
        <td>
        <a href="files/4.4_Screen_space.html#screen-space-example"><code class="xref">screen-space-example</code></a> <em>(files/4.4_Screen_space)</em></td><td>
+       <em>example</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-sutherland-hodgman-algorithm"><td></td><td>
+       <strong>sutherland-hodgman-algorithm</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="files/5.2_Polygon_clipping.html#sutherland-hodgman-algorithm"><code class="xref">sutherland-hodgman-algorithm</code></a> <em>(files/5.2_Polygon_clipping)</em></td><td>
+       <em>algorithm</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-sutherland-hodgman-example"><td></td><td>
+       <strong>sutherland-hodgman-example</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="files/5.2_Polygon_clipping.html#sutherland-hodgman-example"><code class="xref">sutherland-hodgman-example</code></a> <em>(files/5.2_Polygon_clipping)</em></td><td>
        <em>example</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-theorem-4"><td></td><td>

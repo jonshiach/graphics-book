@@ -1,15 +1,35 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+# (rasterisation-section)=
 # # Rasterisation
+# 
+# ```{figure} /images/viewing_pipeline_raster.svg
+# :figclass: margin
+# ```
+# 
 # 
 # Computer displays use an array of small squares called pixels which are illuminated using different colours. When the array of pixels is viewed as a whole the brain interprets it as a single image. The pixel array is called a raster array and the process of determining the illumination of the pixels is called **rasterisation**. The image that is approximated as a raster array is known as the **idealised image**.
 # 
-# ```{figure} /images/ideal_and_raster_image.png
-# :width: 600px 
+# `````{grid}
 # 
-# The idealised image and the raster approximation.
+# ````{grid-item}
+# ```{figure} /images/idealised_image.png
+# :width: 390px 
+# 
+# The idealised image
 # ```
+# ````
+# 
+# ````{grid-item}
+# ```{figure} /images/raster_image.png
+# :width: 400px 
+# 
+# Raster image
+# ```
+# ````
+# 
+# `````
 # 
 # ```{prf:definition} Pixel
 # :class: note
@@ -34,7 +54,7 @@
 # 
 # ## The RGB colour model
 # 
-# The **RGB** colour model uses the three primary colours <span style="color: red;">Red</span>, <span style="color: green;">Green</span> and <span style="color: blue;">Blue</span> (RGB) that are added to produce colours in the visible spectrum. Using a single bit for each primary colour (i.e., adding all of that colour or none of that colour) means that it is possible to produce eight colours: <span style="color: red;">red</span>, <span style="color: yellow;">yellow</span>, <span style="color: green;">green</span>, <span style="color: cyan;">cyan</span>, <span style="color: blue;">blue</span>, <span style="color: magenta;">magenta</span>, black and <span style="background-color:black;color:white">white</span> as shown in {ref}`rgb-table`. For example mixing full amounts of red and green results in pure yellow. 
+# The **RGB** colour model uses the three primary colours <span style="color: red;">Red</span>, <span style="color: green;">Green</span> and <span style="color: blue;">Blue</span> (RGB) that are added to produce colours in the visible spectrum. Using a single bit for each primary colour (i.e., adding all or none of that colour) means that it is possible to produce eight colours: <span style="color: red;">red</span>, <span style="color: yellow;">yellow</span>, <span style="color: green;">green</span>, <span style="color: cyan;">cyan</span>, <span style="color: blue;">blue</span>, <span style="color: magenta;">magenta</span>, black and <span style="background-color:black;color:white">white</span> as shown in {ref}`rgb-table`. For example mixing full amounts of red and green results in pure yellow. 
 # 
 # ### 24-bit colour 
 # 
@@ -46,9 +66,9 @@
 # RGB color wheel
 # :::
 # 
-# Since there are 256 levels of the three primary colours in the true color model we can use the integers 0 to 255 in an ordered triplet. For example, the colour <span style="color: cyan;">cyan</span> is made by mixing full amounts of green and blue which corresponds to the triplet `[0, 255, 255]`. Most software packages also accept [hexadecimal](https://en.wikipedia.org/wiki/Hexadecimal) (base-16) colour codes where the values in the triplet are represented using 2-digit hexadecimal numbers 00 to FF which follow a # symbol. For example, <span style="color: cyan;">cyan</span> is represented using `"#00FFFF"`. 
+# Since there are 256 levels of the three primary colours in the true color model we can use the integers 0 to 255 in an ordered triplet. For example, the colour <span style="color: cyan;">cyan</span> is made by mixing full amounts of green and blue which corresponds to the triplet `(0, 255, 255)`. Most software packages also accept <a href="https://en.wikipedia.org/wiki/Hexadecimal" target="_blank">hexadecimal</a> (base-16) colour codes where the values in the triplet are represented using 2-digit hexadecimal numbers 00 to FF which follow a # symbol. For example, <span style="color: cyan;">cyan</span> is represented using `"#00FFFF"`. 
 # 
-# ```{list-table} 1-bit RGB codes
+# ```{list-table} RGB codes
 # :header-rows: 1
 # :name: rgb-table
 # 
@@ -80,6 +100,9 @@
 #   - `(255, 255, 255)`
 #   - `"#FFFFFF"`
 # ```
+# 
+# To obtain an 8-bit colour triplet you can use web tools such as <a href="https://www.rapidtables.com/web/color/RGB_Color.html" target="_blank">this one</a>.
+# 
 # 
 # ## Raster arrays
 # 
