@@ -341,7 +341,11 @@
 # % Define projection parameters
 # near = 1;
 # far = 5;
+<<<<<<< Updated upstream
 # fov = pi/2;
+=======
+# fov = pi/3;
+>>>>>>> Stashed changes
 # aspect = 4/3;
 # 
 # % Calculate projection matrix
@@ -369,7 +373,11 @@
 # grid on
 # ```
 # 
+<<<<<<< Updated upstream
 # A plot of the camera space with the viewing frustum defined using the viewing parameter from {prf:ref}`screen-space-example` is shown in {numref}`screen-space-example-figure-1`. 
+=======
+# A plot of the camera space with the viewing frustum defined using the viewing parameter from {prf:ref}`screen-space-example` is shownin {numref}`screen_space_example_1`. 
+>>>>>>> Stashed changes
 # 
 # ```{figure} /images/screen_space_example_1.png
 # :width: 400px
@@ -378,18 +386,32 @@
 # The camera space and viewing frustum from {prf:ref}`screen-space-example`.
 # ```
 # 
+<<<<<<< Updated upstream
 # The affect of applying the perspective projection to the camera space is shown in {numref}`screen-space-example-figure-2`. Note that the viewing frustum is now a unit cube and the camera space objects have been skewed so that the polygons of the object closest to the viewer are larger than similar polygons further away. The plot of the screen space viewed looking down the $z$-axis is shown in in {numref}`screen-space-example-figure-3` which gives a realistic representation of the world space. 
 # 
 # ```{figure} /images/screen_space_example_2.png
 # :width: 400px
 # :name: screen-space-example-figure-2
+=======
+# The affect of applying the persective projection to the camera space is shown in {numref}`screen-space-example-figure-1`. Note that the viewing frustum is now a unit cube and the camera space objects have been skewed so that the polygons of the object closest to the viewer are larger than similar polygons further away. The plot of the screen space viewed looking down the $z$-axis is showin in {numref}`screen-space-example-figure-2` which gives a realistic representation of the world space. 
+# 
+# ```{figure} /images/screen_space_example_3.png
+# :width: 400px
+# :name: screen-space-example-figure-1
+>>>>>>> Stashed changes
 # 
 # The screen space from {prf:ref}`screen-space-example` viewed from an arbitrary point.
 # ```
 # 
+<<<<<<< Updated upstream
 # ```{figure} /images/screen_space_example_3.png
 # :width: 400px
 # :name: screen-space-example-figure-3
+=======
+# ```{figure} /images/screen_space_example_2.png
+# :width: 400px
+# :name: screen-space-example-figure-2
+>>>>>>> Stashed changes
 # 
 # The screen space from {prf:ref}`screen-space-example` viewed looking down the $z$-axis.
 # ```

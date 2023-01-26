@@ -21,7 +21,7 @@
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -38,7 +38,7 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
@@ -51,8 +51,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="canonical" href="https://jonshiach.github.io/graphics-book/files/1.2_Drawing_circles.html" />
     <link rel="shortcut icon" href="../_static/favicon.jpg"/>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -476,13 +476,21 @@ title="Print to PDF"
   <section class="tex2jax_ignore mathjax_ignore" id="drawing-circles">
 <span id="drawing-circles-section"></span><h1>Drawing circles<a class="headerlink" href="#drawing-circles" title="Permalink to this headline">#</a></h1>
 <p>Now that we have the ability to rasterise straight lines the next fundamental problem is the rasterisation of circles. This can be done by deriving a Bresenham-type algorithm that uses the <a class="reference external" href="https://en.wikipedia.org/wiki/Circle#Equations">Cartesian equation of a circle</a> to determine which of two candidate pixels are plotted.</p>
+<<<<<<< Updated upstream
 <p>The circle line drawing algorithms can use the concept of <strong>circle symmetry</strong> to reduce the number of computations required to rasterise a circle. Consider <a class="reference internal" href="#circle-symmetry-figure"><span class="std std-numref">Fig. 81</span></a> where a circle is centred at the origin. If the coordinate of a point on the circle in the shaded octant where <span class="math notranslate nohighlight">\(x &gt; y\)</span> is known to be <span class="math notranslate nohighlight">\((x,y)\)</span> then the corresponding points on the circle in the other seven octants can be found via circle symmetry through combinations of <span class="math notranslate nohighlight">\((\pm x,\pm y)\)</span> and <span class="math notranslate nohighlight">\((\pm y,\pm x)\)</span>.</p>
+=======
+<p>The circle line drawing algorithms can use the concept of <strong>circle symmetry</strong> to reduce the number of computations required to rasterise a circle. Consider <a class="reference internal" href="#circle-symmetry-figure"><span class="std std-numref">Fig. 58</span></a> where a circle is centred at the origin. If the coordinate of a point on the circle in the shaded octant where <span class="math notranslate nohighlight">\(x &gt; y\)</span> is known to be <span class="math notranslate nohighlight">\((x,y)\)</span> then the corresponding points on the circle in the other seven octants can be found via circle symmetry through combinations of <span class="math notranslate nohighlight">\((\pm x,\pm y)\)</span> and <span class="math notranslate nohighlight">\((\pm y,\pm x)\)</span>.</p>
+>>>>>>> Stashed changes
 <figure class="align-default" id="circle-symmetry-figure" style="width: 400px">
 <div class="cell_output docutils container">
 <img alt="../_images/1.2_Drawing_circles_1_0.png" src="../_images/1.2_Drawing_circles_1_0.png" />
 </div>
 <figcaption>
+<<<<<<< Updated upstream
 <p><span class="caption-number">Fig. 81 </span><span class="caption-text">Circle symmetry can be used to calculate points on a circle.</span><a class="headerlink" href="#circle-symmetry-figure" title="Permalink to this image">#</a></p>
+=======
+<p><span class="caption-number">Fig. 58 </span><span class="caption-text">Circle symmetry can be used to calculate points on a circle.</span><a class="headerlink" href="#circle-symmetry-figure" title="Permalink to this image">#</a></p>
+>>>>>>> Stashed changes
 </figcaption>
 </figure>
 <p>For circles not centred at the original, which will be the case in the vast majority of applications, we calculate the co-ordinates of a point on the circle in the first octant <span class="math notranslate nohighlight">\((x, y)\)</span> and then add the co-ordinates of the circle centre <span class="math notranslate nohighlight">\((c_x,c_y)\)</span> giving the following eight pixel co-ordinates</p>
@@ -514,7 +522,11 @@ title="Print to PDF"
 <img alt="../_images/1.2_Drawing_circles_3_0.png" src="../_images/1.2_Drawing_circles_3_0.png" />
 </div>
 <figcaption>
+<<<<<<< Updated upstream
 <p><span class="caption-number">Fig. 82 </span><span class="caption-text">Determining the pixels on a circle using the midpoint algorithm.</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
+=======
+<p><span class="caption-number">Fig. 59 </span><span class="caption-text">Determining the pixels on a circle using the midpoint algorithm.</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
+>>>>>>> Stashed changes
 </figcaption>
 </figure>
 <p>To derive an algorithm to rasterise a circle we assume that the circle is centred at <span class="math notranslate nohighlight">\((0, 0)\)</span> and we start at the pixel at the 3 o’clock position with pixel co-ordinates <span class="math notranslate nohighlight">\((r,0)\)</span>. We then move clockwise around the circle calculating the pixels that lie closest to the idealised circle until <span class="math notranslate nohighlight">\(x=y\)</span> which is the end of the first octant. For each pixel co-ordinates we calculate, the pixel co-ordinates of the corresponding pixels in the 7 other octants are calculated using circle symmetry.</p>

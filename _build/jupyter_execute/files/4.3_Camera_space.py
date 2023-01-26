@@ -246,7 +246,11 @@
 # % Align world space to the camera
 # Vcamera = A * Vworld;
 # 
+<<<<<<< Updated upstream
 # %% Plot camera space (from viewing position)
+=======
+# % Plot camera space (y and z co-ordinates are swapped)
+>>>>>>> Stashed changes
 # figure
 # h1 = axes;
 # patch('Vertices', Vcamera([1,3,2],:)', 'Faces', F, FaceColor='w', FaceAlpha=0.75, LineWidth=2)
@@ -255,20 +259,33 @@
 # ylabel('$z$', 'Interpreter', 'latex', 'FontSize', 18)
 # zlabel('$y$', 'Interpreter', 'latex', 'FontSize', 18)
 # view(0,0)
+<<<<<<< Updated upstream
 # axis([-3, 3, -6, 0, -3, 3])
+=======
+# axis([-4, 4, -8, 0, -4, 4])
+# grid on
+>>>>>>> Stashed changes
 # box on
 # ```
 # 
 # The result of applying the alignment matrix to the world space co-ordinates to produce the camera space co-ordinates can be seen in {numref}`camera-space-example-1-figure` and the plot of the camera space when viewed looking down the $z$-axis is shown in {numref}`camera-space-example-2-figure`.
 # 
+<<<<<<< Updated upstream
 # ```{figure} /images/camera_space_example_1.png
+=======
+# ```{figure} /images/camera_space_example_2.png
+>>>>>>> Stashed changes
 # :width: 400px
 # :name: camera-space-example-1-figure
 # 
 # The camera space from {prf:ref}`camera-space-example` viewed from an arbitrary point.
 # ```
 # 
+<<<<<<< Updated upstream
 # ```{figure} /images/camera_space_example_2.png
+=======
+# ```{figure} /images/camera_space_example_1.png
+>>>>>>> Stashed changes
 # :width: 400px
 # :name: camera-space-example-2-figure
 # 
