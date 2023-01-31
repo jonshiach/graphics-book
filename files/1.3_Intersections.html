@@ -573,7 +573,7 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="intersections-between-objects">
-<h1>Intersections between objects<a class="headerlink" href="#intersections-between-objects" title="Permalink to this headline">#</a></h1>
+<span id="intersections-section"></span><h1>Intersections between objects<a class="headerlink" href="#intersections-between-objects" title="Permalink to this headline">#</a></h1>
 <p>In computer graphics it is important that we can determine when objects in <span class="math notranslate nohighlight">\(\mathbb{R}^3\)</span> intersect. Here we look at some of the common situations that could be encountered.</p>
 <section id="intersection-of-two-lines">
 <span id="intersecting-lines-section"></span><h2>Intersection of two lines<a class="headerlink" href="#intersection-of-two-lines" title="Permalink to this headline">#</a></h2>
@@ -591,7 +591,7 @@ title="Print to PDF"
 <li><p>the two lines neither intersect or are parallel and so are skew.</p></li>
 </ul>
 <section id="intersecting-lines">
-<h3>Intersecting lines<a class="headerlink" href="#intersecting-lines" title="Permalink to this headline">#</a></h3>
+<span id="line-line-intersection-section"></span><h3>Intersecting lines<a class="headerlink" href="#intersecting-lines" title="Permalink to this headline">#</a></h3>
 <p>If the two lines intersect between then the point of intersection is the point that passes through both of the lines. We can find this point by equating the vector equations of the lines and attempt to solve for <span class="math notranslate nohighlight">\(t_1\)</span> and <span class="math notranslate nohighlight">\(t_2\)</span>. If no values exists for <span class="math notranslate nohighlight">\(t_1\)</span> and <span class="math notranslate nohighlight">\(t_2\)</span> that satisfies all co-ordinates then the lines do not intersect.</p>
 <div class="proof example seealso admonition" id="line-line-intersection-example">
 <p class="admonition-title"><span class="caption-number">Example 12 </span></p>
@@ -709,7 +709,7 @@ Solution<div class="sd-summary-down docutils">
 </details></section>
 </div></section>
 <section id="intersection-between-a-line-and-a-sphere">
-<h3>Intersection between a line and a sphere<a class="headerlink" href="#intersection-between-a-line-and-a-sphere" title="Permalink to this headline">#</a></h3>
+<span id="line-sphere-intersection-section"></span><h3>Intersection between a line and a sphere<a class="headerlink" href="#intersection-between-a-line-and-a-sphere" title="Permalink to this headline">#</a></h3>
 <p>Consider the possible intersection with a line defined by <span class="math notranslate nohighlight">\(\mathbf{p} + t\mathbf{d}\)</span> and a sphere centred at <span class="math notranslate nohighlight">\(\mathbf{c}\)</span> with radius <span class="math notranslate nohighlight">\(r\)</span> where <span class="math notranslate nohighlight">\(\mathbf{r}\)</span> is the point of intersection. Depending on the values of these we have the following three scenarios</p>
 <ul class="simple">
 <li><p>the line intersects with the sphere twice;</p></li>
@@ -832,7 +832,7 @@ Solution<div class="sd-summary-down docutils">
 \[ \mathbf{n} \cdot \mathbf{p} = s, \]</div>
 <p>where <span class="math notranslate nohighlight">\(\mathbf{n}\)</span> is a normal vector for the plane, <span class="math notranslate nohighlight">\(\mathbf{p}\)</span> is a point on the plane and <span class="math notranslate nohighlight">\(s\)</span> is a scalar.</p>
 <section id="intersection-of-a-line-and-a-plane">
-<h3>Intersection of a line and a plane<a class="headerlink" href="#intersection-of-a-line-and-a-plane" title="Permalink to this headline">#</a></h3>
+<span id="line-plane-intersection-section"></span><h3>Intersection of a line and a plane<a class="headerlink" href="#intersection-of-a-line-and-a-plane" title="Permalink to this headline">#</a></h3>
 <p>Consider the intersection of a line defined by <span class="math notranslate nohighlight">\(\mathbf{q} + t\mathbf{d}\)</span> and the plane which passes through the point <span class="math notranslate nohighlight">\(\mathbf{p}\)</span> and has a normal vector <span class="math notranslate nohighlight">\(\mathbf{n}\)</span>. Here we have two scenarios to consider</p>
 <ul class="simple">
 <li><p>the line intersects with the plane at a single point <span class="math notranslate nohighlight">\(\mathbf{r}\)</span>;</p></li>
@@ -898,7 +898,7 @@ Solution<div class="sd-summary-down docutils">
 </details></section>
 </div></section>
 <section id="intersecting-planes">
-<h3>Intersecting planes<a class="headerlink" href="#intersecting-planes" title="Permalink to this headline">#</a></h3>
+<span id="plane-plane-intersection-section"></span><h3>Intersecting planes<a class="headerlink" href="#intersecting-planes" title="Permalink to this headline">#</a></h3>
 <p>With the intersection between two planes we have three scenarios to consider:</p>
 <ul class="simple">
 <li><p>the two planes intersect at an infinite number of points along a straight line;</p></li>
@@ -982,7 +982,7 @@ Solution<div class="sd-summary-down docutils">
 </details></section>
 </div></section>
 <section id="intersection-between-a-sphere-and-a-plane">
-<h3>Intersection between a sphere and a plane<a class="headerlink" href="#intersection-between-a-sphere-and-a-plane" title="Permalink to this headline">#</a></h3>
+<span id="sphere-plane-intersection-section"></span><h3>Intersection between a sphere and a plane<a class="headerlink" href="#intersection-between-a-sphere-and-a-plane" title="Permalink to this headline">#</a></h3>
 <p>Consider the possible intersection with a sphere centred at position <span class="math notranslate nohighlight">\(\mathbf{c}\)</span> with radius <span class="math notranslate nohighlight">\(r\)</span> traveling in a straight line in the direction of <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> with plane that passes through the point <span class="math notranslate nohighlight">\(\mathbf{p}\)</span> with normal vector <span class="math notranslate nohighlight">\(\mathbf{n}\)</span> (<a class="reference internal" href="#sphere-plane-intersection-1-figure"><span class="std std-numref">Fig. 26</span></a>).</p>
 <figure class="align-default" id="sphere-plane-intersection-1-figure">
 <a class="reference internal image-reference" href="../_images/sphere_plane_intersection_1.svg"><img alt="../_images/sphere_plane_intersection_1.svg" src="../_images/sphere_plane_intersection_1.svg" width="400px" /></a>

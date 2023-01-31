@@ -59,7 +59,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Drawing lines" href="5.1_Drawing_lines.html" />
-    <link rel="prev" title="Painter’s algorithm" href="4.4_Painters_algorithm.html" />
+    <link rel="prev" title="Binary space partitioning" href="4.5_Binary_space_partitioning.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -249,13 +249,13 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="4.4_Binary_space_partitioning.html">
-     Binary space partitioning
+    <a class="reference internal" href="4.4_Painters_algorithm.html">
+     Painter’s algorithm
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="4.4_Painters_algorithm.html">
-     Painter’s algorithm
+    <a class="reference internal" href="4.5_Binary_space_partitioning.html">
+     Binary space partitioning
     </a>
    </li>
   </ul>
@@ -559,7 +559,7 @@ title="Print to PDF"
 <p>An <strong>idealised image</strong> is an analogue image that we wish to represent in a raster.</p>
 </section>
 </div><section id="the-rgb-colour-model">
-<h2>The RGB colour model<a class="headerlink" href="#the-rgb-colour-model" title="Permalink to this headline">#</a></h2>
+<span id="rgb-colour-model-section"></span><h2>The RGB colour model<a class="headerlink" href="#the-rgb-colour-model" title="Permalink to this headline">#</a></h2>
 <p>The <strong>RGB</strong> colour model uses the three primary colours <span style="color: red;">Red</span>, <span style="color: green;">Green</span> and <span style="color: blue;">Blue</span> (RGB) that are added to produce colours in the visible spectrum. Using a single bit for each primary colour (i.e., adding all or none of that colour) means that it is possible to produce eight colours: <span style="color: red;">red</span>, <span style="color: yellow;">yellow</span>, <span style="color: green;">green</span>, <span style="color: cyan;">cyan</span>, <span style="color: blue;">blue</span>, <span style="color: magenta;">magenta</span>, black and <span style="background-color:black;color:white">white</span> as shown in <a class="reference internal" href="#rgb-table"><span class="std std-ref">RGB codes</span></a>. For example mixing full amounts of red and green results in pure yellow.</p>
 <section id="bit-colour">
 <h3>24-bit colour<a class="headerlink" href="#bit-colour" title="Permalink to this headline">#</a></h3>
@@ -623,7 +623,7 @@ title="Print to PDF"
 </section>
 </section>
 <section id="raster-arrays">
-<h2>Raster arrays<a class="headerlink" href="#raster-arrays" title="Permalink to this headline">#</a></h2>
+<span id="raster-arrays-section"></span><h2>Raster arrays<a class="headerlink" href="#raster-arrays" title="Permalink to this headline">#</a></h2>
 <p>The information that defines a raster can be stored in a raster array. If a raster has a width of <span class="math notranslate nohighlight">\(N_x\)</span> pixels and a height of <span class="math notranslate nohighlight">\(N_y\)</span> pixels then it can be defined as an <span class="math notranslate nohighlight">\(N_y \times N_x \times 3\)</span> array. The colour of each of the pixels in the raster is defined by the 3 levels for the red, green and blue components.</p>
 <p>The MATLAB command for reading in an image file is <code class="docutils literal notranslate"><span class="pre">imread(&lt;filename&gt;)</span></code>. For example, the following code reads in the image file <code class="docutils literal notranslate"><span class="pre">cavendish.png</span></code> which is a photograph of my cat Cavendish and prints the size of the raster array.</p>
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">img</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">imread</span><span class="p">(</span><span class="s">&#39;cavendish.jpg&#39;</span><span class="p">);</span><span class="w"></span>
@@ -673,7 +673,7 @@ title="Print to PDF"
 </figure>
 </section>
 <section id="pixel-co-ordinates">
-<h2>Pixel co-ordinates<a class="headerlink" href="#pixel-co-ordinates" title="Permalink to this headline">#</a></h2>
+<span id="pixel-coordinates-section"></span><h2>Pixel co-ordinates<a class="headerlink" href="#pixel-co-ordinates" title="Permalink to this headline">#</a></h2>
 <p>You may have noticed that the vertical axes on the image plots have a scale that starts at 1 at the top and increases as we move down the rows of pixels <a class="footnote-reference brackets" href="#id2" id="id1">1</a>. The reason for this is that digital displays are refreshed using horizontal lines of pixels starting at the top row and moving down to the bottom.</p>
 <p>If the raster represents a region defined by the <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> Euclidean space co-ordinates <span class="math notranslate nohighlight">\(x, y \in [0, 1]\)</span> which is to be represented by an <span class="math notranslate nohighlight">\(N_y \times N_x\)</span> raster then the corresponding pixel co-ordinates are</p>
 <div class="math notranslate nohighlight">
@@ -720,11 +720,11 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="4.4_Painters_algorithm.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="4.5_Binary_space_partitioning.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Painter’s algorithm</p>
+            <p class="prev-next-title">Binary space partitioning</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="5.1_Drawing_lines.html" title="next page">

@@ -485,7 +485,7 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="backface-culling">
-<span id="backface-culling-section"></span><h1>Backface culling<a class="headerlink" href="#backface-culling" title="Permalink to this headline">#</a></h1>
+<span id="back-face-culling-section"></span><h1>Backface culling<a class="headerlink" href="#backface-culling" title="Permalink to this headline">#</a></h1>
 <p>The simplest hidden surface determination method is <strong>backface culling</strong> which, as the name suggests, we remove all polygons that have a normal vector facing away from the viewer, and therefore considered <strong>back facing</strong>. In doing this, when we only render the front facing polygons, objects appear solid.</p>
 <p>Consider the diagram in <a class="reference internal" href="#backface-culling-figure-1"><span class="std std-numref">Fig. 71</span></a> which shows a hexagonal object with face polygons <span class="math notranslate nohighlight">\(A\)</span> to <span class="math notranslate nohighlight">\(F\)</span> which have their normal vectors pointing away from the centre of the object (this is done when we define the <a class="reference internal" href="3.1_Object_space.html#object-space-section"><span class="std std-ref">object space</span></a>). When viewed from the viewer position on the left polygons <span class="math notranslate nohighlight">\(A\)</span>, <span class="math notranslate nohighlight">\(B\)</span> and <span class="math notranslate nohighlight">\(C\)</span> are <em>front facing</em> and polygons <span class="math notranslate nohighlight">\(D\)</span>, <span class="math notranslate nohighlight">\(E\)</span> and <span class="math notranslate nohighlight">\(F\)</span> are <em>back facing</em>.</p>
 <figure class="align-default" id="backface-culling-figure-1">
@@ -528,8 +528,8 @@ title="Print to PDF"
 <p class="admonition-title"><span class="caption-number">Definition 21 </span> (Front facing polygons)</p>
 <section class="definition-content" id="proof-content">
 <p>A polygon defined by a normal vector <span class="math notranslate nohighlight">\(\mathbf{n}\)</span> and point <span class="math notranslate nohighlight">\(\mathbf{c}\)</span> is front facing to the viewer if</p>
-<div class="amsmath math notranslate nohighlight" id="equation-95159d48-27a9-490f-b109-eeb301d196ef">
-<span class="eqno">(33)<a class="headerlink" href="#equation-95159d48-27a9-490f-b109-eeb301d196ef" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-fa7b0795-be2e-4098-a890-473ffe0d784d">
+<span class="eqno">(33)<a class="headerlink" href="#equation-fa7b0795-be2e-4098-a890-473ffe0d784d" title="Permalink to this equation">#</a></span>\[\begin{align}
     (\mathbf{c} - \mathbf{p}) \cdot \mathbf{n} &lt; 0.
 \end{align}\]</div>
 </section>

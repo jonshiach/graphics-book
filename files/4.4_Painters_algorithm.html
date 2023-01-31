@@ -58,8 +58,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../_static/favicon.jpg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Rasterisation" href="5.0_Rasterisation.html" />
-    <link rel="prev" title="Binary space partitioning" href="4.4_Binary_space_partitioning.html" />
+    <link rel="next" title="Binary space partitioning" href="4.5_Binary_space_partitioning.html" />
+    <link rel="prev" title="Backface culling" href="4.3_Backface_culling.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -248,14 +248,14 @@ const thebe_selector_output = ".output, .cell_output"
      Backface culling
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="4.4_Binary_space_partitioning.html">
-     Binary space partitioning
-    </a>
-   </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
      Painter’s algorithm
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="4.5_Binary_space_partitioning.html">
+     Binary space partitioning
     </a>
    </li>
   </ul>
@@ -485,24 +485,24 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="painter-s-algorithm">
-<h1>Painter’s algorithm<a class="headerlink" href="#painter-s-algorithm" title="Permalink to this headline">#</a></h1>
-<p>We saw in the previous section that applying <a class="reference internal" href="4.3_Backface_culling.html#backface-culling-section"><span class="std std-ref">backface culling</span></a> produces the view of the screen space shown in <a class="reference internal" href="#backface-culling-example-figure-2"><span class="std std-numref">Fig. 84</span></a>.</p>
+<span id="painters-algorithm-section"></span><h1>Painter’s algorithm<a class="headerlink" href="#painter-s-algorithm" title="Permalink to this headline">#</a></h1>
+<p>We saw in the previous section that applying <span class="xref myst">backface culling</span> produces the view of the screen space shown in <a class="reference internal" href="#backface-culling-example-figure-2"><span class="std std-numref">Fig. 76</span></a>.</p>
 <figure class="align-default" id="backface-culling-example-figure-2">
 <a class="reference internal image-reference" href="../_images/backface_culling_example.png"><img alt="../_images/backface_culling_example.png" src="../_images/backface_culling_example.png" style="width: 400px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 84 </span><span class="caption-text">The screen space from <a class="reference internal" href="3.4_Screen_space.html#screen-space-example">Example 32</a> after <a class="reference internal" href="4.3_Backface_culling.html#backface-culling-section"><span class="std std-ref">backface culling</span></a> has been applied.</span><a class="headerlink" href="#backface-culling-example-figure-2" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 76 </span><span class="caption-text">The screen space from <a class="reference internal" href="3.4_Screen_space.html#screen-space-example">Example 32</a> after <span class="xref myst">backface culling</span> has been applied.</span><a class="headerlink" href="#backface-culling-example-figure-2" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>Here the faces of the church object that should appear in the background partially obscure the faces of the house object in the foreground. To correct this we can apply <strong>painter’s algorithm</strong> which is named after the order of which an oil painter will paint a scene. This is to start with the background elements, followed by the middle ground elements and finishing with the foreground elements (<a class="reference internal" href="#painters-algorithm-figure"><span class="std std-numref">Fig. 85</span></a>).</p>
+<p>Here the faces of the church object that should appear in the background partially obscure the faces of the house object in the foreground. To correct this we can apply <strong>painter’s algorithm</strong> which is named after the order of which an oil painter will paint a scene. This is to start with the background elements, followed by the middle ground elements and finishing with the foreground elements (<a class="reference internal" href="#painters-algorithm-figure"><span class="std std-numref">Fig. 77</span></a>).</p>
 <figure class="align-default" id="painters-algorithm-figure">
 <img alt="https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Painter%27s_algorithm.svg/600px-Painter%27s_algorithm.svg.png" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Painter%27s_algorithm.svg/600px-Painter%27s_algorithm.svg.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 85 </span><span class="caption-text">The steps an oil painter uses to paint a scene <span id="id1">[<a class="reference internal" href="bibliography.html#id8" title="Zapyon. Painter's algorithm [online]. Wikipedia, 2011. URL: https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Painter%27s_algorithm.svg/600px-Painter%27s_algorithm.svg.png (visited on 2023-01-13).">Zapyon, 2011</a>]</span></span><a class="headerlink" href="#painters-algorithm-figure" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 77 </span><span class="caption-text">The steps an oil painter uses to paint a scene <span id="id1">[<a class="reference internal" href="bibliography.html#id8" title="Zapyon. Painter's algorithm [online]. Wikipedia, 2011. URL: https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Painter%27s_algorithm.svg/600px-Painter%27s_algorithm.svg.png (visited on 2023-01-13).">Zapyon, 2011</a>]</span></span><a class="headerlink" href="#painters-algorithm-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>The painter’s algorithm is simple. We order the polygons that are front facing in ascending order by the vertex with the largest <span class="math notranslate nohighlight">\(z\)</span> co-ordinate. This means that when we render the polygons in order, those polygons that are closest to the viewer are rendered last therefore obscuring any polygons that are further away from the viewer.</p>
 <div class="proof algorithm admonition" id="painters-algorithm">
-<p class="admonition-title"><span class="caption-number">Algorithm 6 </span> (Painter’s algorithm)</p>
+<p class="admonition-title"><span class="caption-number">Algorithm 4 </span> (Painter’s algorithm)</p>
 <section class="algorithm-content" id="proof-content">
 <p><strong>Inputs</strong> A the front facing space polygons defined by a homogeneous vertex matrix <span class="math notranslate nohighlight">\(V\)</span>, and a face matrix <span class="math notranslate nohighlight">\(F\)</span>.</p>
 <p><strong>Outputs</strong> A face matrix containing the screen space polygons listed in descending order by <span class="math notranslate nohighlight">\(z\)</span> distance.</p>
@@ -534,11 +534,11 @@ title="Print to PDF"
 <span class="k">end</span><span class="w"></span>
 </pre></div>
 </div>
-<p>The affect of the painters algorithm is shown in <a class="reference internal" href="#painters-algorithm-example-figure"><span class="std std-numref">Fig. 86</span></a>.</p>
+<p>The affect of the painters algorithm is shown in <a class="reference internal" href="#painters-algorithm-example-figure"><span class="std std-numref">Fig. 78</span></a>.</p>
 <figure class="align-default" id="painters-algorithm-example-figure">
 <a class="reference internal image-reference" href="../_images/painters_example.png"><img alt="../_images/painters_example.png" src="../_images/painters_example.png" style="width: 400px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 86 </span><span class="caption-text">The polygons in the screen space are rendered in ascending order of their <span class="math notranslate nohighlight">\(z\)</span> distance</span><a class="headerlink" href="#painters-algorithm-example-figure" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 78 </span><span class="caption-text">The polygons in the screen space are rendered in ascending order of their <span class="math notranslate nohighlight">\(z\)</span> distance</span><a class="headerlink" href="#painters-algorithm-example-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
@@ -571,17 +571,17 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="4.4_Binary_space_partitioning.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="4.3_Backface_culling.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Binary space partitioning</p>
+            <p class="prev-next-title">Backface culling</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="5.0_Rasterisation.html" title="next page">
+    <a class='right-next' id="next-link" href="4.5_Binary_space_partitioning.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Rasterisation</p>
+        <p class="prev-next-title">Binary space partitioning</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

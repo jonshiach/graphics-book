@@ -485,7 +485,7 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="polygon-clipping">
-<h1>Polygon clipping<a class="headerlink" href="#polygon-clipping" title="Permalink to this headline">#</a></h1>
+<span id="polygon-clipping-section"></span><h1>Polygon clipping<a class="headerlink" href="#polygon-clipping" title="Permalink to this headline">#</a></h1>
 <p>The Sutherland-Hodgman algorithm is used to clip polygons to the edges of the visible region. Given an input list of vertices that define a polygon (e.g., a row of the face array), the Sutherland-Hodgman algorithm loops through each vertex of the polygon and if the current vertex is inside the visible region then we check whether the previous vertex is also inside. If it is the line joining the two points is entirely inside and we add both endpoints to an output list defining the clipped polygon and move onto the next vertex in the input list. If the previous vertex is not inside the visible region we clip the line using the Cyrus-Beck algorithm and add the clipped point and the current endpoint to the output list. If the current point is not inside the visible region but the previous one is, we clip the line to the edge and add the clipped point to the output list. Once all vertices in the input list have been considered the output list contains the information for the clipped polygon.</p>
 <div class="proof algorithm admonition" id="sutherland-hodgman-algorithm">
 <p class="admonition-title"><span class="caption-number">Algorithm 2 </span> (Sutherland-Hodgman algorithm)</p>

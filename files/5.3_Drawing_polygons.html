@@ -249,13 +249,13 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="4.4_Binary_space_partitioning.html">
-     Binary space partitioning
+    <a class="reference internal" href="4.4_Painters_algorithm.html">
+     Painter’s algorithm
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="4.4_Painters_algorithm.html">
-     Painter’s algorithm
+    <a class="reference internal" href="4.5_Binary_space_partitioning.html">
+     Binary space partitioning
     </a>
    </li>
   </ul>
@@ -596,7 +596,7 @@ Solution<div class="sd-summary-down docutils">
 </figure>
 </section>
 <section id="the-scanline-algorithm">
-<h3>The scanline algorithm<a class="headerlink" href="#the-scanline-algorithm" title="Permalink to this headline">#</a></h3>
+<span id="scanline-algorithm-section"></span><h3>The scanline algorithm<a class="headerlink" href="#the-scanline-algorithm" title="Permalink to this headline">#</a></h3>
 <p>The <strong>scanline algorithm</strong> is a method of rendering a polygon without drawing the edges beforehand unlike the <a class="reference internal" href="#flood-fill-algorithm-section"><span class="std std-ref">flood fill algorithm</span></a> that requires pixels to be plotted to form an outline. Instead of testing pixels one by one, the scanline filling algorithm loops through horizontal rows of pixels (known as a <strong>scanline</strong>) starting from <span class="math notranslate nohighlight">\(y=0\)</span> and going down the raster to <span class="math notranslate nohighlight">\(y = N_y\)</span>. If the scanline intersects with an edge of the polygon the intersection points which are known as <strong>span extrema</strong>, are calculated, sorted into ascending order and all pixels between pairs of intersection points are filled.</p>
 <div class="proof definition admonition" id="definition-2">
 <p class="admonition-title"><span class="caption-number">Definition 27 </span> (Scanline)</p>
