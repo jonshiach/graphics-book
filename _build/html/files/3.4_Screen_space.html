@@ -1,0 +1,943 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Screen space &#8212; Computer Graphics Lecture Notes</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="canonical" href="https://jonshiach.github.io/graphics-book/files/3.4_Screen_space.html" />
+    <link rel="shortcut icon" href="../_static/favicon.jpg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Clipping &amp; hidden surface determination" href="4.0_Hidden_surface_removal.html" />
+    <link rel="prev" title="Camera space" href="3.3_Camera_space.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Computer Graphics Lecture Notes</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="0.1_teaching_schedule.html">
+   Teaching schedule
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Chapters
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="1.0_Coordinate_geometry.html">
+   Vector Geometry
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="1.1_Points_lines_and_planes.html">
+     Points, lines, planes and spheres
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="1.2_Shortest_distance_problems.html">
+     Shortest distance problems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="1.3_Intersections.html">
+     Intersections between objects
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="1.4_Coordinate_geometry_exercises.html">
+     Vector Geometry Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="2.0_Transformations.html">
+   Linear Transformations
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2.1_Translation.html">
+     Translation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2.2_Scaling.html">
+     Scaling
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2.3_Rotation.html">
+     Rotation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="3.0_Virtual_environments.html">
+   Virtual environments
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="3.1_Object_space.html">
+     Object space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="3.2_World_space.html">
+     World space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="3.3_Camera_space.html">
+     Camera space
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Screen space
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="4.0_Hidden_surface_removal.html">
+   Clipping &amp; hidden surface determination
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="4.1_Line_clipping.html">
+     Line clipping
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="4.2_Polygon_clipping.html">
+     Polygon clipping
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="4.3_Backface_culling.html">
+     Backface culling
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="4.4_Binary_space_partitioning.html">
+     Binary space partitioning
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="4.4_Painters_algorithm.html">
+     Painter’s algorithm
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="5.0_Rasterisation.html">
+   Rasterisation
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="5.1_Drawing_lines.html">
+     Drawing lines
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="5.2_Drawing_circles.html">
+     Drawing circles
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="5.3_Drawing_polygons.html">
+     Drawing polygons
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="5.4_Antialiasing.html">
+     Antialiasing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="5.5_Convolution.html">
+     Image processing
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bibliography.html">
+   References
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/files/3.4_Screen_space.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Screen space
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#orthographic-projection">
+   Orthographic projection
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#perspective-projection">
+   Perspective projection
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-viewing-frustum">
+   The viewing frustum
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#matlab-code">
+   MATLAB code
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Screen space</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Screen space
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#orthographic-projection">
+   Orthographic projection
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#perspective-projection">
+   Perspective projection
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-viewing-frustum">
+   The viewing frustum
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#matlab-code">
+   MATLAB code
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="screen-space">
+<span id="screen-space-section"></span><h1>Screen space<a class="headerlink" href="#screen-space" title="Permalink to this headline">#</a></h1>
+<figure class="margin align-default">
+<img alt="../_images/viewing_pipeline_screen_space.svg" src="../_images/viewing_pipeline_screen_space.svg" /></figure>
+<p>After aligning the world space to the viewer we need to transform the three-dimensional camera space to a two-dimensional space that we can represent on a computer display. This is achieved by defining a <strong>projection plane</strong> that is parallel to the <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> axes of the camera space (we have dropped the <span class="math notranslate nohighlight">\(^\ast\)</span> suffix from the camera space co-ordinates) and positioned so that intersects with a negative value on the <span class="math notranslate nohighlight">\(z\)</span> axes (<a class="reference internal" href="#screen-space-figure"><span class="std std-numref">Fig. 56</span></a>).</p>
+<figure class="align-default" id="screen-space-figure">
+<a class="reference internal image-reference" href="../_images/screen_space.svg"><img alt="../_images/screen_space.svg" src="../_images/screen_space.svg" width="500px" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 56 </span><span class="caption-text">The camera space is projected onto a projection plane.</span><a class="headerlink" href="#screen-space-figure" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="orthographic-projection">
+<h1>Orthographic projection<a class="headerlink" href="#orthographic-projection" title="Permalink to this headline">#</a></h1>
+<p>The simplest kind of projection is the <a href="https://en.wikipedia.org/wiki/Orthographic_projection" target="_blank"><strong>orthographic projection</strong></a>. This is where we simply ignore the <span class="math notranslate nohighlight">\(z\)</span> co-ordinate of each point in the camera space, and consider the positions of the points in the plane to be given by their <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> coordinates.</p>
+<p>An orthographic projection can often be carried out directly without the need for any real processing by simply neglecting the <span class="math notranslate nohighlight">\(z\)</span> co-ordinate of all the points. However to retain consistency with our previous matrix representations we could carry out this projection with the use of the transformation matrix (again using homogeneous coordinates) <span class="math notranslate nohighlight">\(P\)</span> given by</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+	P = \begin{pmatrix}
+		1 &amp; 0 &amp; 0 &amp; 0 \\ 
+		0 &amp; 1 &amp; 0 &amp; 0 \\
+		0 &amp; 0 &amp; 0 &amp; 0 \\
+		0 &amp; 0 &amp; 0 &amp; 1
+	\end{pmatrix}.
+\end{align*}\]</div>
+<p>A point with a position given by the homogeneous camera space co-ordinates <span class="math notranslate nohighlight">\((x, y, z, 1)\)</span> the orthographic screen space co-ordinates are calculated using</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+	P \cdot 
+    \begin{pmatrix} x \\ y \\ z \\ 1  \end{pmatrix}
+    = \begin{pmatrix}
+		1 &amp; 0 &amp; 0 &amp; 0 \\ 
+		0 &amp; 1 &amp; 0 &amp; 0 \\
+		0 &amp; 0 &amp; 0 &amp; 0 \\
+		0 &amp; 0 &amp; 0 &amp; 1
+	\end{pmatrix}
+	\begin{pmatrix} x \\ y \\ z \\ 1  \end{pmatrix} =
+	\begin{pmatrix} x \\ y \\ 0 \\ 1  \end{pmatrix}
+\end{align*}\]</div>
+<p>The orthographic projection of the camera space from <a class="reference internal" href="3.3_Camera_space.html#camera-space-example">Example 31</a> is shown in <a class="reference internal" href="#orthographic-projection-figure"><span class="std std-numref">Fig. 57</span></a>. Note that the two house objects appear the same size even though the house object on the right is closer to the viewer.</p>
+<figure class="align-default" id="orthographic-projection-figure">
+<a class="reference internal image-reference" href="../_images/camera_space_example_2.png"><img alt="../_images/camera_space_example_2.png" src="../_images/camera_space_example_2.png" style="width: 400px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 57 </span><span class="caption-text">The camera space from <a class="reference internal" href="3.3_Camera_space.html#camera-space-example">Example 31</a> projected using orthographic projection.</span><a class="headerlink" href="#orthographic-projection-figure" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="perspective-projection">
+<h1>Perspective projection<a class="headerlink" href="#perspective-projection" title="Permalink to this headline">#</a></h1>
+<p>We have seen in <a class="reference internal" href="#orthographic-projection-figure"><span class="std std-numref">Fig. 57</span></a> that the problem with using orthographic projection is that we lose all the depth information and will not be able to tell which object are closer than others. <a href="https://en.wikipedia.org/wiki/3D_projection#Perspective_projection" target="_blank"><strong>Perspective projection</strong></a> retains this depth information by making objects further away from the viewpoint appear smaller in the projection than similar objects closer to the viewpoint. Perspective projection emulates the way the human eye, or a camera, perceives objects. Rays of light are reflected off objects and travel in straight lines, converging on the eye, or lens, which for these purposes can be thought of as a single point, the viewpoint.</p>
+<p>In perspective projection the viewpoint is often called the centre of projection, it is the point where all the projectors meet. The projected image is formed on a projection plane, a plane parallel to the <span class="math notranslate nohighlight">\(xy\)</span>-plane and positioned at a distance <span class="math notranslate nohighlight">\(f\)</span> from the centre of projection (which after alignment is of course positioned at the origin). The projection plane can be thought of as a glass pane held up between the eye and the scene being viewed (<a class="reference internal" href="#perspective-projection-figure"><span class="std std-numref">Fig. 58</span></a>). A projector line from a point in the world space intersects the projection plane in the projected point, and then goes through the centre of projection.</p>
+<figure class="align-default" id="perspective-projection-figure">
+<a class="reference internal image-reference" href="../_images/perspective_projection.svg"><img alt="../_images/perspective_projection.svg" src="../_images/perspective_projection.svg" width="400px" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 58 </span><span class="caption-text">Perspective projection</span><a class="headerlink" href="#perspective-projection-figure" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Consider the diagram shown in <a class="reference internal" href="#perspective-projection-calculation-figure"><span class="std std-numref">Fig. 59</span></a> where the point with co-ordinates <span class="math notranslate nohighlight">\((x, y, z)\)</span> is projected onto the projection plane located at <span class="math notranslate nohighlight">\(z=-f\)</span> to give to the point with co-ordinates <span class="math notranslate nohighlight">\((x', y', z')\)</span>.</p>
+<figure class="align-default" id="perspective-projection-calculation-figure">
+<a class="reference internal image-reference" href="../_images/perspective_projection_calculation.svg"><img alt="../_images/perspective_projection_calculation.svg" src="../_images/perspective_projection_calculation.svg" width="600px" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 59 </span><span class="caption-text">Perspective projection of the point <span class="math notranslate nohighlight">\((x, y, z)\)</span> onto the projection plane located at <span class="math notranslate nohighlight">\(z=-f\)</span>.</span><a class="headerlink" href="#perspective-projection-calculation-figure" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The triangle with sides <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(y\)</span> and <span class="math notranslate nohighlight">\(h\)</span> is similar to the triangle <span class="math notranslate nohighlight">\(x'\)</span>, <span class="math notranslate nohighlight">\(y'\)</span> and <span class="math notranslate nohighlight">\(h'\)</span> so</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+	\frac{x'}{-f} &amp;= \frac{x}{z}, &amp;
+	\frac{y'}{-f} &amp;= \frac{y}{z}, 
+\end{align*}\]</div>
+<p>which gives the projected co-ordinates</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+	x' &amp;= -\frac{fx}{z}, &amp;
+	y' &amp;= -\frac{fy}{z}.
+\end{align*}\]</div>
+<p>Both <span class="math notranslate nohighlight">\(x'\)</span> and <span class="math notranslate nohighlight">\(y'\)</span> are divided by <span class="math notranslate nohighlight">\(-z / f\)</span> so the homogeneous co-ordinates of the projected point is <span class="math notranslate nohighlight">\((x, y, z, -z/f)\)</span> (remember that we divide by the fourth co-ordinates to convert to Cartesian co-ordinates). Therefore the transformation matrix for perspective projection is</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+	P = \begin{pmatrix}
+		1 &amp; 0 &amp; 0 &amp; 0 \\
+		0 &amp; 1 &amp; 0 &amp; 0 \\
+		0 &amp; 0 &amp; 1 &amp; 0 \\
+		0 &amp; 0 &amp; -1/f &amp; 0
+	\end{pmatrix}.
+\end{align*}\]</div>
+<p>The screen space co-ordinates of a point with the homogeneous camera space co-ordinates <span class="math notranslate nohighlight">\((x, y, z, 1)\)</span> are calculated using</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+	P \cdot \mathbf{x} =
+	\begin{pmatrix}
+		1 &amp; 0 &amp; 0 &amp; 0 \\
+		0 &amp; 1 &amp; 0 &amp; 0 \\
+		0 &amp; 0 &amp; 1 &amp; 0 \\
+		0 &amp; 0 &amp; -1/f &amp; 0
+	\end{pmatrix}
+	\begin{pmatrix} x \\ y \\ z \\ 1  \end{pmatrix} =
+	\begin{pmatrix} x \\ y \\ z \\ -z/f  \end{pmatrix}
+\end{align*}\]</div>
+<p>and dividing by the fourth co-ordinates gives <span class="math notranslate nohighlight">\((-fx/z, -fy/z, -f, 1)\)</span> which are the projected co-ordinates derived above.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="the-viewing-frustum">
+<span id="viewing-frustum-section"></span><h1>The viewing frustum<a class="headerlink" href="#the-viewing-frustum" title="Permalink to this headline">#</a></h1>
+<p>When we view a virtual world we will only be able to see objects that are located within a finite region known as the <strong>viewing frustum</strong>. Consider the diagram shown in <a class="reference internal" href="#viewing-frustum-figure"><span class="std std-numref">Fig. 60</span></a>. The camera space is projected onto the near viewing plane and we view the virtual environment through the display screen which lies on the near projection plane. If we place another plane parallel to the projection plane further away from the origin then we have a volume which will contain the region of the camera space that should be visible to us. The location of the far viewing plane depends upon the computing power available, the further away it is the more of the camera space we will be able to see but this will of course require more computational resources.</p>
+<figure class="align-default" id="viewing-frustum-figure">
+<a class="reference internal image-reference" href="../_images/viewing_frustum.svg"><img alt="../_images/viewing_frustum.svg" src="../_images/viewing_frustum.svg" width="600px" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 60 </span><span class="caption-text">The viewing frustum</span><a class="headerlink" href="#viewing-frustum-figure" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The viewing frustum is an awkward shape to deal with when it comes to clipping objects that lie partially outside so we transform it so that the viewing frustum is a cube with sides of lengths 2 parallel to the co-ordinate axes whilst still maintaining the perspective projection. Consider the diagram shown in <a class="reference internal" href="#viewing-frustum-details-figure"><span class="std std-numref">Fig. 61</span></a> where a near viewing plane is positioned at distance <span class="math notranslate nohighlight">\(near\)</span> from the origin of the camera space. The camera space co-ordinates of the vertices of the screen on the near projection plane are <span class="math notranslate nohighlight">\((l,b,-near)\)</span>, <span class="math notranslate nohighlight">\((r,b,-near)\)</span>, <span class="math notranslate nohighlight">\((r, t, -near)\)</span> and <span class="math notranslate nohighlight">\((l, t, -near)\)</span> where <span class="math notranslate nohighlight">\(l\)</span>, <span class="math notranslate nohighlight">\(r\)</span>, <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(b\)</span> denote left, right, top and bottom edges respectively. The values of these co-ordinates are determined by the width-to-height ratio of the screen and the position of the near viewing plane, the <strong>field of view</strong> angle, <span class="math notranslate nohighlight">\(fov\)</span>, which controls the horizontal peripheral vision of the viewer.</p>
+<figure class="align-default" id="viewing-frustum-details-figure">
+<a class="reference internal image-reference" href="../_images/viewing_frustum_details.svg"><img alt="../_images/viewing_frustum_details.svg" src="../_images/viewing_frustum_details.svg" width="500px" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 61 </span><span class="caption-text">The viewing frustum</span><a class="headerlink" href="#viewing-frustum-details-figure" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>We want to transform the viewing frustum so that its sides are parallel to the co-ordinate axes and each have side lengths of 2 as shown in <a class="reference internal" href="#transformed-viewing-frustum-figure"><span class="std std-numref">Fig. 62</span></a>. The co-ordinates of the left, right, top and bottom corners of the screen are transformed so they are either <span class="math notranslate nohighlight">\(-1\)</span> or <span class="math notranslate nohighlight">\(+1\)</span>.</p>
+<figure class="align-default" id="transformed-viewing-frustum-figure">
+<a class="reference internal image-reference" href="../_images/clipping_cube.svg"><img alt="../_images/clipping_cube.svg" src="../_images/clipping_cube.svg" width="400px" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 62 </span><span class="caption-text">The transformed viewing frustum</span><a class="headerlink" href="#transformed-viewing-frustum-figure" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The co-ordinate of the right edge, <span class="math notranslate nohighlight">\(r\)</span>, is calculated using</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+	r &amp;= near \cdot \tan \left( \frac{fov}{2} \right),
+\end{align*}\]</div>
+<p>and since the centre of the screen is on the <span class="math notranslate nohighlight">\(z\)</span> axis then <span class="math notranslate nohighlight">\(l = -r\)</span>. The co-ordinate of the top edge, <span class="math notranslate nohighlight">\(t\)</span>, is determined by the aspect ratio of the screen</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+	aspect = \frac{width}{height},
+\end{align*}\]</div>
+<p>so</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+	aspect &amp;= \frac{r - l}{t - b} = \frac{r - (-r)}{t - (-t)} = \frac{r}{t} \\
+	\therefore t &amp;= \frac{r}{aspect} = \frac{r \cdot height}{width},
+\end{align*}\]</div>
+<p>Common aspect ratios are 4/3 (for old televisions and computer monitors), 16/9 (modern televisions) and 2.35/1 (cinema screens).</p>
+<p>To transform the viewing frustum we need to transform the camera space so that the points within the viewing frustum have <span class="math notranslate nohighlight">\(x'\)</span>, <span class="math notranslate nohighlight">\(y'\)</span> and <span class="math notranslate nohighlight">\(z'\)</span> co-ordinates in the range <span class="math notranslate nohighlight">\(x',y',z' \in [-1,1]\)</span> and projected using perspective projection. The <span class="math notranslate nohighlight">\(x\)</span> camera space co-ordinate for a point that is on the near projection plane and within our screen will be in the range <span class="math notranslate nohighlight">\(l \leq x \leq r\)</span>. Since <span class="math notranslate nohighlight">\(l = -r\)</span> and dividing throughout by <span class="math notranslate nohighlight">\(r\)</span> we have</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+	-1 \leq \frac{x}{r} \leq 1,
+\end{align*}\]</div>
+<p>and using perspective projection <span class="math notranslate nohighlight">\(x' = -near \cdot x / z\)</span> then</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+	-1 \leq -\frac{near \cdot x}{rz} \leq 1,
+\end{align*}\]</div>
+<p>so</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+	x' = -\frac{near \cdot x}{rz}.
+\end{align*}\]</div>
+<p>Doing similar for <span class="math notranslate nohighlight">\(y'\)</span> gives</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+	y' = -\frac{near \cdot y}{tz}.
+\end{align*}\]</div>
+<p>Now <span class="math notranslate nohighlight">\(x'\)</span> and <span class="math notranslate nohighlight">\(y'\)</span> are perspective screen space co-ordinates that are in the range <span class="math notranslate nohighlight">\(-1 \leq x', y' \leq 1\)</span>. The matrix that performs this transformation is</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+	P = \begin{pmatrix}
+		-\dfrac{near}{r} &amp; 0 &amp; 0 &amp; 0 \\
+		0 &amp; -\dfrac{near}{t} &amp; 0 &amp; 0 \\
+		0 &amp; 0 &amp; \alpha &amp; \beta \\
+		0 &amp; 0 &amp; 1 &amp; 0 
+	\end{pmatrix},
+\end{align*}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> are some scalars. A point with the homogeneous camera space co-ordinates <span class="math notranslate nohighlight">\((x, y, z, 1)\)</span> the screen space co-ordinates are calculated using</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+	P \cdot \mathbf{x} = \begin{pmatrix}
+		-\dfrac{near}{r} &amp; 0 &amp; 0 &amp; 0 \\
+		0 &amp; -\dfrac{near}{t} &amp; 0 &amp; 0 \\
+		0 &amp; 0 &amp; \alpha &amp; \beta \\
+		0 &amp; 0 &amp; 1 &amp; 0 
+	\end{pmatrix}
+	\begin{pmatrix} x \\ y \\ z \\ 1 \end{pmatrix} =
+	\begin{pmatrix} -near \cdot x / r \\ -near \cdot y / t \\ \alpha z + \beta \\ z  \end{pmatrix},
+\end{align*}\]</div>
+<p>and dividing by the fourth co-ordinate to convert to Cartesian co-ordinates we have</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+	\begin{pmatrix}
+		-near \cdot x / (r z) \\ -near \cdot y / (t z) \\ (\alpha z + \beta)/z \\ 1
+	\end{pmatrix}.
+\end{align*}\]</div>
+<p>The <span class="math notranslate nohighlight">\(z\)</span> camera space co-ordinate for a point within the viewing frustum is in the range <span class="math notranslate nohighlight">\(-near \leq z \leq -far\)</span> so we need to transform <span class="math notranslate nohighlight">\(-near \mapsto 1\)</span> and <span class="math notranslate nohighlight">\(-far \mapsto -1\)</span>. So the minimum and maximum <span class="math notranslate nohighlight">\(z'\)</span> co-ordinates are</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+	1 &amp;= \frac{-near \cdot \alpha + \beta}{-near}, \\
+	-1 &amp;= \frac{-far \cdot \alpha + \beta}{-far}.
+\end{align*}\]</div>
+<p>Solving for <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> gives <span class="math notranslate nohighlight">\(\alpha = (near + far)/(near - far)\)</span> and <span class="math notranslate nohighlight">\(\beta = 2 \cdot near \cdot far / (near - far)\)</span> so the transformation matrix becomes</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+	P = \begin{pmatrix}
+		-\dfrac{near}{r} &amp; 0 &amp; 0 &amp; 0 \\
+		0 &amp; -\dfrac{near}{t} &amp; 0 &amp; 0 \\
+		0 &amp; 0 &amp; \dfrac{near + far}{near - far} &amp; \dfrac{2 \cdot near \cdot far}{near - far} \\
+		0 &amp; 0 &amp; 1 &amp; 0 
+	\end{pmatrix}.
+\end{align*}\]</div>
+<p>The transformation matrix <span class="math notranslate nohighlight">\(P\)</span> combines perspective projection and transformation of the viewing frustum to a cube. The screen space co-ordinates are calculated using</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+	V_{\text{screen}} = P \cdot V_{\text{camera}}.
+\end{align*}\]</div>
+<p>Each column in <span class="math notranslate nohighlight">\(V_{\text{screen}}\)</span> is a homogeneous screen space co-ordinate where the fourth row contains the scaling factor. The Cartesian co-ordinates are calculated by dividing <span class="math notranslate nohighlight">\(V_{\text{screen}}\)</span> by the fourth row.</p>
+<div class="proof example seealso admonition" id="screen-space-example">
+<p class="admonition-title"><span class="caption-number">Example 32 </span></p>
+<section class="example-content" id="proof-content">
+<p>The camera space from <a class="reference internal" href="3.3_Camera_space.html#camera-space-example">Example 31</a> is projected onto the screen space defined by near and far projection plans located at distances <span class="math notranslate nohighlight">\(near = 1\)</span> and <span class="math notranslate nohighlight">\(far = 9\)</span> from the origin, a field of view angle of <span class="math notranslate nohighlight">\(fov = \pi/3\)</span> and a width-to-height screen aspect ratio of <span class="math notranslate nohighlight">\(4/3\)</span>. Calculate the screen space co-ordinates of the virtual world.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">First we calculate the <span class="math notranslate nohighlight">\(r\)</span> and <span class="math notranslate nohighlight">\(t\)</span> co-ordinates</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    r &amp;= near \cdot \tan \left( \frac{fov}{2} \right) = 2 \tan\left(\frac{\pi}{6}\right) \approx 1.1547, \\
+    t &amp;= \frac{r \cdot height}{width} = \frac{1.1547(3)}{4} \approx 0.8660,
+\end{align*}\]</div>
+<p class="sd-card-text">so the projection matrix is</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    P &amp;= 
+    \begin{pmatrix}
+		-\dfrac{near}{r} &amp; 0 &amp; 0 &amp; 0 \\
+		0 &amp; -\dfrac{near}{t} &amp; 0 &amp; 0 \\
+		0 &amp; 0 &amp; \dfrac{near + far}{near - far} &amp; \dfrac{2 \cdot near \cdot far}{near - far} \\
+		0 &amp; 0 &amp; 1 &amp; 0 
+	\end{pmatrix} \\
+    &amp;=
+    \begin{pmatrix}
+		-\dfrac{2}{1.1547} &amp; 0 &amp; 0 &amp; 0 \\
+		0 &amp; -\dfrac{2}{0.8660} &amp; 0 &amp; 0 \\
+		0 &amp; 0 &amp; \dfrac{1 + 9}{1 - 9} &amp; \dfrac{2 \cdot 1 \cdot 9}{1 - 9} \\
+		0 &amp; 0 &amp; 1 &amp; 0 
+	\end{pmatrix} \\
+    &amp;=
+    \begin{pmatrix}
+        -1.8660 &amp; 0 &amp; 0 &amp; 0 \\
+        0 &amp; -1.1547 &amp; 0 &amp; 0 \\
+        0 &amp; 0 &amp; -1.2222 &amp; -2.2222 \\
+        0 &amp; 0 &amp; 1 &amp; 0
+    \end{pmatrix}.
+\end{align*}\]</div>
+<p class="sd-card-text">Applying the perspective transformation matrix to the camera space co-ordinates from
+<a class="reference internal" href="3.3_Camera_space.html#camera-space-example">Example 31</a></p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    V_{\text{screen}} &amp;= P \cdot V_{\text{view}} \\
+    &amp;= 
+    \begin{pmatrix}
+        -1.8660 &amp; 0 &amp; 0 &amp; 0 \\
+        0 &amp; -1.1547 &amp; 0 &amp; 0 \\
+        0 &amp; 0 &amp; -1.2222 &amp; -2.2222 \\
+        0 &amp; 0 &amp; 1 &amp; 0
+    \end{pmatrix} 
+    \begin{pmatrix}
+        1.4142 &amp;   0.7071 &amp;  -0.7071 &amp;        0 &amp; \cdots \\
+        -1.2309 &amp;  -1.1078 &amp;  -1.3540 &amp;  -1.4771 &amp; \cdots \\
+        -3.0899 &amp;  -3.7862 &amp;  -2.3936 &amp;  -1.6973 &amp; \cdots \\
+        1&amp;   1&amp;   1&amp;   1&amp; \cdots 
+    \end{pmatrix} \\
+    &amp;= \begin{pmatrix}
+        -1.2247 &amp;  -0.6124 &amp;   0.6124 &amp;        0  &amp; \cdots \\
+        1.4213 &amp;   1.2792 &amp;   1.5635 &amp;   1.7056 &amp; \cdots \\
+        1.5543 &amp;   2.4053 &amp;   0.7032  &amp; -0.1478 &amp; \cdots \\
+        -3.0899 &amp;  -3.7862 &amp;  -2.3936  &amp; -1.6973 &amp; \cdots 
+    \end{pmatrix}.
+\end{align*}\]</div>
+<p class="sd-card-text">Since these are homogeneous co-ordinates we need to divide by the fourth row to give the Cartesian co-ordinates</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    V_{screen} &amp;=
+    \begin{pmatrix}
+        0.3964 &amp;   0.1617 &amp;  -0.2558 &amp;        0  &amp; \cdots \\
+       -0.4600 &amp;  -0.3379 &amp;  -0.6532 &amp;  -1.0049 &amp; \cdots \\
+       -0.5030 &amp;  -0.6353 &amp;  -0.2938 &amp;   0.0871 &amp; \cdots \\
+        1 &amp;   1 &amp;   1 &amp;   1 &amp; \cdots 
+    \end{pmatrix}
+\end{align*}\]</div>
+</div>
+</details></section>
+</div></section>
+<section class="tex2jax_ignore mathjax_ignore" id="matlab-code">
+<h1>MATLAB code<a class="headerlink" href="#matlab-code" title="Permalink to this headline">#</a></h1>
+<p>The MATLAB code below calculates the screen space co-ordinates for the virtual world from <a class="reference internal" href="3.2_World_space.html#world-space-example">Example 30</a> with the viewing parameters from <a class="reference internal" href="3.3_Camera_space.html#camera-space-example">Example 31</a> and projected using perspective projection with the screen parameters from <a class="reference internal" href="#screen-space-example">Example 32</a>.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Define projection parameters</span><span class="w"></span>
+<span class="n">near</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="n">far</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"></span>
+<span class="n">fov</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span><span class="w"></span>
+<span class="n">aspect</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">4</span><span class="o">/</span><span class="mi">3</span><span class="p">;</span><span class="w"></span>
+
+<span class="c">% Calculate projection matrix</span><span class="w"></span>
+<span class="n">r</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">near</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">tan</span><span class="p">(</span><span class="n">fov</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span><span class="w"></span>
+<span class="n">t</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">aspect</span><span class="p">;</span><span class="w"></span>
+<span class="n">P</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="o">-</span><span class="n">near</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">r</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="w">     </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="n">near</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="w">     </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">near</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">far</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">near</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">far</span><span class="p">),</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">near</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">far</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">near</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">far</span><span class="p">)</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="w">     </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">];</span><span class="w"></span>
+
+<span class="c">% Calculate screen space co-ordinates</span><span class="w"></span>
+<span class="n">Vscreen</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">P</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Vcamera</span><span class="p">;</span><span class="w"></span>
+<span class="n">Vscreen</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Vscreen</span><span class="w"> </span><span class="o">./</span><span class="w"> </span><span class="n">Vscreen</span><span class="p">(</span><span class="mi">4</span><span class="p">,:);</span><span class="w"></span>
+
+<span class="c">% Plot screen space viewed looking down the z-axis</span><span class="w"></span>
+<span class="nb">figure</span><span class="p">()</span><span class="w"></span>
+<span class="n">h1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">axes</span><span class="p">;</span><span class="w"></span>
+<span class="nb">patch</span><span class="p">(</span><span class="s">&#39;Vertices&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">Vscreen</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">],:)</span><span class="o">&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;Faces&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">F</span><span class="p">,</span><span class="w"> </span><span class="n">FaceColor</span><span class="p">=</span><span class="s">&#39;w&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">FaceAlpha</span><span class="p">=</span><span class="mf">0.75</span><span class="p">,</span><span class="w"> </span><span class="n">LineWidth</span><span class="p">=</span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
+<span class="nb">patch</span><span class="p">(</span><span class="s">&#39;Vertices&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">Vcube</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">,:)</span><span class="o">&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;Faces&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">Ffrustum</span><span class="p">,</span><span class="w"> </span><span class="n">FaceAlpha</span><span class="p">=</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">EdgeColor</span><span class="p">=</span><span class="s">&quot;blue&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="nb">xlabel</span><span class="p">(</span><span class="s">&#39;$x$&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;Interpreter&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;latex&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;FontSize&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">18</span><span class="p">)</span><span class="w"></span>
+<span class="nb">ylabel</span><span class="p">(</span><span class="s">&#39;$z$&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;Interpreter&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;latex&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;FontSize&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">18</span><span class="p">)</span><span class="w"></span>
+<span class="nb">zlabel</span><span class="p">(</span><span class="s">&#39;$y$&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;Interpreter&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;latex&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;FontSize&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">18</span><span class="p">)</span><span class="w"></span>
+<span class="nb">set</span><span class="p">(</span><span class="n">h1</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;Ydir&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;reverse&#39;</span><span class="p">)</span><span class="w"></span>
+<span class="nb">view</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="w"></span>
+<span class="nb">box</span><span class="w"> </span><span class="n">on</span><span class="w"></span>
+<span class="nb">axis</span><span class="p">([</span><span class="o">-</span><span class="mf">1.2</span><span class="p">,</span><span class="w"> </span><span class="mf">1.2</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">1.2</span><span class="p">,</span><span class="w"> </span><span class="mf">1.2</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">1.2</span><span class="p">,</span><span class="w"> </span><span class="mf">1.2</span><span class="p">])</span><span class="w"></span>
+</pre></div>
+</div>
+<p>A plot of the camera space with the viewing frustum defined using the viewing parameter from <a class="reference internal" href="#screen-space-example">Example 32</a> is shown in <a class="reference internal" href="#screen-space-example-figure-1"><span class="std std-numref">Fig. 63</span></a>.</p>
+<figure class="align-default" id="screen-space-example-figure-1">
+<a class="reference internal image-reference" href="../_images/screen_space_example_1.png"><img alt="../_images/screen_space_example_1.png" src="../_images/screen_space_example_1.png" style="width: 400px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 63 </span><span class="caption-text">The camera space and viewing frustum from <a class="reference internal" href="#screen-space-example">Example 32</a>.</span><a class="headerlink" href="#screen-space-example-figure-1" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The affect of applying the perspective projection to the camera space is shown in <a class="reference internal" href="#screen-space-example-figure-2"><span class="std std-numref">Fig. 64</span></a>. Note that the viewing frustum is now a unit cube and the camera space objects have been skewed so that the polygons of the object closest to the viewer are larger than similar polygons further away. The plot of the screen space viewed looking down the <span class="math notranslate nohighlight">\(z\)</span>-axis is shown in in <a class="reference internal" href="#screen-space-example-figure-3"><span class="std std-numref">Fig. 65</span></a> which gives a realistic representation of the world space.</p>
+<figure class="align-default" id="screen-space-example-figure-2">
+<a class="reference internal image-reference" href="../_images/screen_space_example_2.png"><img alt="../_images/screen_space_example_2.png" src="../_images/screen_space_example_2.png" style="width: 400px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 64 </span><span class="caption-text">The screen space from <a class="reference internal" href="#screen-space-example">Example 32</a> viewed from an arbitrary point.</span><a class="headerlink" href="#screen-space-example-figure-2" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="screen-space-example-figure-3">
+<a class="reference internal image-reference" href="../_images/screen_space_example_3.png"><img alt="../_images/screen_space_example_3.png" src="../_images/screen_space_example_3.png" style="width: 400px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 65 </span><span class="caption-text">The screen space from <a class="reference internal" href="#screen-space-example">Example 32</a> viewed looking down the <span class="math notranslate nohighlight">\(z\)</span>-axis.</span><a class="headerlink" href="#screen-space-example-figure-3" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./files"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="3.3_Camera_space.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Camera space</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="4.0_Hidden_surface_removal.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Clipping &amp; hidden surface determination</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Dr Jon Shiach<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

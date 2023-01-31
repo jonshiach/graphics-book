@@ -1,27 +1,70 @@
 {
-<<<<<<< Updated upstream
-  "files\\1.1_Drawing_lines": {
-    "bresenham-example-plot-1": {
-=======
-  "files/1.1_Drawing_lines": {
-    "bresenham-example1-plot-4": {
->>>>>>> Stashed changes
+  "files\\2.1_Translation": {
+    "translation-plot": {
       "output_type": "display_data",
       "metadata": {
         "scrapbook": {
-          "name": "bresenham-example1-plot-4",
+          "name": "translation-plot",
           "mime_prefix": "application/papermill.record/"
         },
         "filenames": {
-<<<<<<< Updated upstream
-          "image/png": "D:\\Jon\\OneDrive - MMU\\Desktop\\Computational Maths\\graphics-book\\_build\\jupyter_execute\\files\\1.1_Drawing_lines_5_0.png"
-=======
-          "image/png": "/Users/jon/OneDrive - MMU/Documents/2022_2023/Computational_Maths/graphics-book/_build/jupyter_execute/files/1.1_Drawing_lines_3_3.png"
->>>>>>> Stashed changes
+          "image/png": "C:\\Users\\jonsh\\OneDrive - MMU\\Documents\\2022_2023\\Computational_Maths\\graphics-book\\_build\\jupyter_execute\\files\\2.1_Translation_1_0.png"
         }
       },
       "data": {
-        "application/papermill.record/text/plain": "<Figure size 432x288 with 1 Axes>",
+        "application/papermill.record/text/plain": "<Figure size 640x480 with 1 Axes>",
+        "application/papermill.record/image/png": null
+      }
+    }
+  },
+  "files\\2.3_Rotation": {
+    "rotation-plot-1": {
+      "output_type": "display_data",
+      "metadata": {
+        "scrapbook": {
+          "name": "rotation-plot-1",
+          "mime_prefix": "application/papermill.record/"
+        },
+        "filenames": {
+          "image/png": "C:\\Users\\jonsh\\OneDrive - MMU\\Documents\\2022_2023\\Computational_Maths\\graphics-book\\_build\\jupyter_execute\\files\\2.3_Rotation_1_0.png"
+        }
+      },
+      "data": {
+        "application/papermill.record/text/plain": "<Figure size 640x480 with 1 Axes>",
+        "application/papermill.record/image/png": null
+      }
+    },
+    "rotation-plot-2": {
+      "output_type": "display_data",
+      "metadata": {
+        "scrapbook": {
+          "name": "rotation-plot-2",
+          "mime_prefix": "application/papermill.record/"
+        },
+        "filenames": {
+          "image/png": "C:\\Users\\jonsh\\OneDrive - MMU\\Documents\\2022_2023\\Computational_Maths\\graphics-book\\_build\\jupyter_execute\\files\\2.3_Rotation_3_1.png"
+        }
+      },
+      "data": {
+        "application/papermill.record/text/plain": "<Figure size 640x480 with 1 Axes>",
+        "application/papermill.record/image/png": null
+      }
+    }
+  },
+  "files\\5.1_Drawing_lines": {
+    "bresenham-example-plot-2": {
+      "output_type": "display_data",
+      "metadata": {
+        "scrapbook": {
+          "name": "bresenham-example-plot-2",
+          "mime_prefix": "application/papermill.record/"
+        },
+        "filenames": {
+          "image/png": "C:\\Users\\jonsh\\OneDrive - MMU\\Documents\\2022_2023\\Computational_Maths\\graphics-book\\_build\\jupyter_execute\\files\\5.1_Drawing_lines_7_0.png"
+        }
+      },
+      "data": {
+        "application/papermill.record/text/plain": "<Figure size 640x480 with 1 Axes>",
         "application/papermill.record/image/png": null
       }
     },
@@ -33,119 +76,11 @@
           "mime_prefix": "application/papermill.record/"
         },
         "filenames": {
-<<<<<<< Updated upstream
-          "image/png": "D:\\Jon\\OneDrive - MMU\\Desktop\\Computational Maths\\graphics-book\\_build\\jupyter_execute\\files\\1.1_Drawing_lines_2_0.png"
-=======
-          "image/png": "/Users/jon/OneDrive - MMU/Documents/2022_2023/Computational_Maths/graphics-book/_build/jupyter_execute/files/1.1_Drawing_lines_5_0.png"
->>>>>>> Stashed changes
+          "image/png": "C:\\Users\\jonsh\\OneDrive - MMU\\Documents\\2022_2023\\Computational_Maths\\graphics-book\\_build\\jupyter_execute\\files\\5.1_Drawing_lines_6_0.png"
         }
       },
       "data": {
-        "application/papermill.record/text/plain": "<Figure size 432x288 with 1 Axes>",
-        "application/papermill.record/image/png": null
-      }
-    },
-<<<<<<< Updated upstream
-    "bresenham-example1-plot-3": {
-=======
-    "bresenham-example1-plot-2": {
-      "output_type": "display_data",
-      "metadata": {
-        "scrapbook": {
-          "name": "bresenham-example1-plot-2",
-          "mime_prefix": "application/papermill.record/"
-        },
-        "filenames": {
-          "image/png": "/Users/jon/OneDrive - MMU/Documents/2022_2023/Computational_Maths/graphics-book/_build/jupyter_execute/files/1.1_Drawing_lines_3_1.png"
-        }
-      },
-      "data": {
-        "application/papermill.record/text/plain": "<Figure size 432x288 with 1 Axes>",
-        "application/papermill.record/image/png": null
-      }
-    },
-    "line-raster-plot": {
-      "output_type": "display_data",
-      "metadata": {
-        "scrapbook": {
-          "name": "line-raster-plot",
-          "mime_prefix": "application/papermill.record/"
-        },
-        "filenames": {
-          "image/png": "/Users/jon/OneDrive - MMU/Documents/2022_2023/Computational_Maths/graphics-book/_build/jupyter_execute/files/1.1_Drawing_lines_1_0.png"
-        }
-      },
-      "data": {
-        "application/papermill.record/text/plain": "<Figure size 432x288 with 1 Axes>",
-        "application/papermill.record/image/png": null
-      }
-    },
-    "bresenham-example1-plot-1": {
-      "output_type": "display_data",
-      "metadata": {
-        "scrapbook": {
-          "name": "bresenham-example1-plot-1",
-          "mime_prefix": "application/papermill.record/"
-        },
-        "filenames": {
-          "image/png": "/Users/jon/OneDrive - MMU/Documents/2022_2023/Computational_Maths/graphics-book/_build/jupyter_execute/files/1.1_Drawing_lines_3_0.png"
-        }
-      },
-      "data": {
-        "application/papermill.record/text/plain": "<Figure size 432x288 with 1 Axes>",
-        "application/papermill.record/image/png": null
-      }
-    },
-    "bresenham-example-plot-2": {
-      "output_type": "display_data",
-      "metadata": {
-        "scrapbook": {
-          "name": "bresenham-example-plot-2",
-          "mime_prefix": "application/papermill.record/"
-        },
-        "filenames": {
-          "image/png": "/Users/jon/OneDrive - MMU/Documents/2022_2023/Computational_Maths/graphics-book/_build/jupyter_execute/files/1.1_Drawing_lines_6_0.png"
-        }
-      },
-      "data": {
-        "application/papermill.record/text/plain": "<Figure size 432x288 with 1 Axes>",
-        "application/papermill.record/image/png": null
-      }
-    },
-    "bresenham-example1-plot-3": {
-      "output_type": "display_data",
-      "metadata": {
-        "scrapbook": {
-          "name": "bresenham-example1-plot-3",
-          "mime_prefix": "application/papermill.record/"
-        },
-        "filenames": {
-          "image/png": "/Users/jon/OneDrive - MMU/Documents/2022_2023/Computational_Maths/graphics-book/_build/jupyter_execute/files/1.1_Drawing_lines_3_2.png"
-        }
-      },
-      "data": {
-        "application/papermill.record/text/plain": "<Figure size 432x288 with 1 Axes>",
-        "application/papermill.record/image/png": null
-      }
-    },
-    "bresenham-plot-1": {
->>>>>>> Stashed changes
-      "output_type": "display_data",
-      "metadata": {
-        "scrapbook": {
-          "name": "bresenham-plot-1",
-          "mime_prefix": "application/papermill.record/"
-        },
-        "filenames": {
-<<<<<<< Updated upstream
-          "image/png": "D:\\Jon\\OneDrive - MMU\\Desktop\\Computational Maths\\graphics-book\\_build\\jupyter_execute\\files\\1.1_Drawing_lines_3_2.png"
-=======
-          "image/png": "/Users/jon/OneDrive - MMU/Documents/2022_2023/Computational_Maths/graphics-book/_build/jupyter_execute/files/1.1_Drawing_lines_2_0.png"
->>>>>>> Stashed changes
-        }
-      },
-      "data": {
-        "application/papermill.record/text/plain": "<Figure size 288x288 with 1 Axes>",
+        "application/papermill.record/text/plain": "<Figure size 640x480 with 1 Axes>",
         "application/papermill.record/image/png": null
       }
     },
@@ -157,15 +92,59 @@
           "mime_prefix": "application/papermill.record/"
         },
         "filenames": {
-<<<<<<< Updated upstream
-          "image/png": "D:\\Jon\\OneDrive - MMU\\Desktop\\Computational Maths\\graphics-book\\_build\\jupyter_execute\\files\\1.1_Drawing_lines_7_0.png"
-=======
-          "image/png": "/Users/jon/OneDrive - MMU/Documents/2022_2023/Computational_Maths/graphics-book/_build/jupyter_execute/files/1.1_Drawing_lines_7_0.png"
->>>>>>> Stashed changes
+          "image/png": "C:\\Users\\jonsh\\OneDrive - MMU\\Documents\\2022_2023\\Computational_Maths\\graphics-book\\_build\\jupyter_execute\\files\\5.1_Drawing_lines_8_0.png"
         }
       },
       "data": {
-        "application/papermill.record/text/plain": "<Figure size 432x288 with 1 Axes>",
+        "application/papermill.record/text/plain": "<Figure size 640x480 with 1 Axes>",
+        "application/papermill.record/image/png": null
+      }
+    },
+    "bresenham-plot-1": {
+      "output_type": "display_data",
+      "metadata": {
+        "scrapbook": {
+          "name": "bresenham-plot-1",
+          "mime_prefix": "application/papermill.record/"
+        },
+        "filenames": {
+          "image/png": "C:\\Users\\jonsh\\OneDrive - MMU\\Documents\\2022_2023\\Computational_Maths\\graphics-book\\_build\\jupyter_execute\\files\\5.1_Drawing_lines_3_0.png"
+        }
+      },
+      "data": {
+        "application/papermill.record/text/plain": "<Figure size 400x400 with 1 Axes>",
+        "application/papermill.record/image/png": null
+      }
+    },
+    "bresenham-example1-plot-2": {
+      "output_type": "display_data",
+      "metadata": {
+        "scrapbook": {
+          "name": "bresenham-example1-plot-2",
+          "mime_prefix": "application/papermill.record/"
+        },
+        "filenames": {
+          "image/png": "C:\\Users\\jonsh\\OneDrive - MMU\\Documents\\2022_2023\\Computational_Maths\\graphics-book\\_build\\jupyter_execute\\files\\5.1_Drawing_lines_4_1.png"
+        }
+      },
+      "data": {
+        "application/papermill.record/text/plain": "<Figure size 640x480 with 1 Axes>",
+        "application/papermill.record/image/png": null
+      }
+    },
+    "bresenham-example1-plot-1": {
+      "output_type": "display_data",
+      "metadata": {
+        "scrapbook": {
+          "name": "bresenham-example1-plot-1",
+          "mime_prefix": "application/papermill.record/"
+        },
+        "filenames": {
+          "image/png": "C:\\Users\\jonsh\\OneDrive - MMU\\Documents\\2022_2023\\Computational_Maths\\graphics-book\\_build\\jupyter_execute\\files\\5.1_Drawing_lines_4_0.png"
+        }
+      },
+      "data": {
+        "application/papermill.record/text/plain": "<Figure size 640x480 with 1 Axes>",
         "application/papermill.record/image/png": null
       }
     },
@@ -177,407 +156,11 @@
           "mime_prefix": "application/papermill.record/"
         },
         "filenames": {
-<<<<<<< Updated upstream
-          "image/png": "D:\\Jon\\OneDrive - MMU\\Desktop\\Computational Maths\\graphics-book\\_build\\jupyter_execute\\files\\1.1_Drawing_lines_4_0.png"
-=======
-          "image/png": "/Users/jon/OneDrive - MMU/Documents/2022_2023/Computational_Maths/graphics-book/_build/jupyter_execute/files/1.1_Drawing_lines_4_0.png"
->>>>>>> Stashed changes
+          "image/png": "C:\\Users\\jonsh\\OneDrive - MMU\\Documents\\2022_2023\\Computational_Maths\\graphics-book\\_build\\jupyter_execute\\files\\5.1_Drawing_lines_5_0.png"
         }
       },
       "data": {
-        "application/papermill.record/text/plain": "<Figure size 360x360 with 1 Axes>",
-        "application/papermill.record/image/png": null
-      }
-<<<<<<< Updated upstream
-    },
-    "bresenham-example-plot-2": {
-      "output_type": "display_data",
-      "metadata": {
-        "scrapbook": {
-          "name": "bresenham-example-plot-2",
-          "mime_prefix": "application/papermill.record/"
-        },
-        "filenames": {
-          "image/png": "D:\\Jon\\OneDrive - MMU\\Desktop\\Computational Maths\\graphics-book\\_build\\jupyter_execute\\files\\1.1_Drawing_lines_6_0.png"
-=======
-    }
-  },
-  "files/1.2_Drawing_circles": {
-    "circle-symmetry-plot": {
-      "output_type": "display_data",
-      "metadata": {
-        "scrapbook": {
-          "name": "circle-symmetry-plot",
-          "mime_prefix": "application/papermill.record/"
-        },
-        "filenames": {
-          "image/png": "/Users/jon/OneDrive - MMU/Documents/2022_2023/Computational_Maths/graphics-book/_build/jupyter_execute/files/1.2_Drawing_circles_1_0.png"
-        }
-      },
-      "data": {
-        "application/papermill.record/text/plain": "<Figure size 432x288 with 1 Axes>",
-        "application/papermill.record/image/png": null
-      }
-    },
-    "midpoint-raster-plot": {
-      "output_type": "display_data",
-      "metadata": {
-        "scrapbook": {
-          "name": "midpoint-raster-plot",
-          "mime_prefix": "application/papermill.record/"
-        },
-        "filenames": {
-          "image/png": "/Users/jon/OneDrive - MMU/Documents/2022_2023/Computational_Maths/graphics-book/_build/jupyter_execute/files/1.2_Drawing_circles_5_0.png"
-        }
-      },
-      "data": {
-        "application/papermill.record/text/plain": "<Figure size 720x720 with 1 Axes>",
-        "application/papermill.record/image/png": null
-      }
-    },
-    "midpoint-algorithm-plot": {
-      "output_type": "display_data",
-      "metadata": {
-        "scrapbook": {
-          "name": "midpoint-algorithm-plot",
-          "mime_prefix": "application/papermill.record/"
-        },
-        "filenames": {
-          "image/png": "/Users/jon/OneDrive - MMU/Documents/2022_2023/Computational_Maths/graphics-book/_build/jupyter_execute/files/1.2_Drawing_circles_3_0.png"
-        }
-      },
-      "data": {
-        "application/papermill.record/text/plain": "<Figure size 432x288 with 1 Axes>",
-        "application/papermill.record/image/png": null
-      }
-    }
-  },
-  "files/1.3_Drawing_polygons": {
-    "scanline-example-5": {
-      "output_type": "display_data",
-      "metadata": {
-        "scrapbook": {
-          "name": "scanline-example-5",
-          "mime_prefix": "application/papermill.record/"
-        },
-        "filenames": {
-          "image/png": "/Users/jon/OneDrive - MMU/Documents/2022_2023/Computational_Maths/graphics-book/_build/jupyter_execute/files/1.3_Drawing_polygons_4_4.png"
-        }
-      },
-      "data": {
-        "application/papermill.record/text/plain": "<Figure size 432x288 with 1 Axes>",
-        "application/papermill.record/image/png": null
-      }
-    },
-    "scanline-example-2": {
-      "output_type": "display_data",
-      "metadata": {
-        "scrapbook": {
-          "name": "scanline-example-2",
-          "mime_prefix": "application/papermill.record/"
-        },
-        "filenames": {
-          "image/png": "/Users/jon/OneDrive - MMU/Documents/2022_2023/Computational_Maths/graphics-book/_build/jupyter_execute/files/1.3_Drawing_polygons_4_1.png"
-        }
-      },
-      "data": {
-        "application/papermill.record/text/plain": "<Figure size 432x288 with 1 Axes>",
-        "application/papermill.record/image/png": null
-      }
-    },
-    "scanline-example-7": {
-      "output_type": "display_data",
-      "metadata": {
-        "scrapbook": {
-          "name": "scanline-example-7",
-          "mime_prefix": "application/papermill.record/"
-        },
-        "filenames": {
-          "image/png": "/Users/jon/OneDrive - MMU/Documents/2022_2023/Computational_Maths/graphics-book/_build/jupyter_execute/files/1.3_Drawing_polygons_4_6.png"
-        }
-      },
-      "data": {
-        "application/papermill.record/text/plain": "<Figure size 432x288 with 1 Axes>",
-        "application/papermill.record/image/png": null
-      }
-    },
-    "scanline-example-0": {
-      "output_type": "display_data",
-      "metadata": {
-        "scrapbook": {
-          "name": "scanline-example-0",
-          "mime_prefix": "application/papermill.record/"
-        },
-        "filenames": {
-          "image/png": "/Users/jon/OneDrive - MMU/Documents/2022_2023/Computational_Maths/graphics-book/_build/jupyter_execute/files/1.3_Drawing_polygons_2_0.png"
-        }
-      },
-      "data": {
-        "application/papermill.record/text/plain": "<Figure size 432x288 with 1 Axes>",
-        "application/papermill.record/image/png": null
-      }
-    },
-    "scanline-example-4": {
-      "output_type": "display_data",
-      "metadata": {
-        "scrapbook": {
-          "name": "scanline-example-4",
-          "mime_prefix": "application/papermill.record/"
-        },
-        "filenames": {
-          "image/png": "/Users/jon/OneDrive - MMU/Documents/2022_2023/Computational_Maths/graphics-book/_build/jupyter_execute/files/1.3_Drawing_polygons_4_3.png"
-        }
-      },
-      "data": {
-        "application/papermill.record/text/plain": "<Figure size 432x288 with 1 Axes>",
-        "application/papermill.record/image/png": null
-      }
-    },
-    "scanline-example-1": {
-      "output_type": "display_data",
-      "metadata": {
-        "scrapbook": {
-          "name": "scanline-example-1",
-          "mime_prefix": "application/papermill.record/"
-        },
-        "filenames": {
-          "image/png": "/Users/jon/OneDrive - MMU/Documents/2022_2023/Computational_Maths/graphics-book/_build/jupyter_execute/files/1.3_Drawing_polygons_4_0.png"
-        }
-      },
-      "data": {
-        "application/papermill.record/text/plain": "<Figure size 432x288 with 1 Axes>",
-        "application/papermill.record/image/png": null
-      }
-    },
-    "span-extrema-plot": {
-      "output_type": "display_data",
-      "metadata": {
-        "scrapbook": {
-          "name": "span-extrema-plot",
-          "mime_prefix": "application/papermill.record/"
-        },
-        "filenames": {
-          "image/png": "/Users/jon/OneDrive - MMU/Documents/2022_2023/Computational_Maths/graphics-book/_build/jupyter_execute/files/1.3_Drawing_polygons_1_0.png"
-        }
-      },
-      "data": {
-        "application/papermill.record/text/plain": "<Figure size 432x288 with 1 Axes>",
-        "application/papermill.record/image/png": null
-      }
-    },
-    "scanline-example-6": {
-      "output_type": "display_data",
-      "metadata": {
-        "scrapbook": {
-          "name": "scanline-example-6",
-          "mime_prefix": "application/papermill.record/"
-        },
-        "filenames": {
-          "image/png": "/Users/jon/OneDrive - MMU/Documents/2022_2023/Computational_Maths/graphics-book/_build/jupyter_execute/files/1.3_Drawing_polygons_4_5.png"
-        }
-      },
-      "data": {
-        "application/papermill.record/text/plain": "<Figure size 432x288 with 1 Axes>",
-        "application/papermill.record/image/png": null
-      }
-    },
-    "scanline-example-8": {
-      "output_type": "display_data",
-      "metadata": {
-        "scrapbook": {
-          "name": "scanline-example-8",
-          "mime_prefix": "application/papermill.record/"
-        },
-        "filenames": {
-          "image/png": "/Users/jon/OneDrive - MMU/Documents/2022_2023/Computational_Maths/graphics-book/_build/jupyter_execute/files/1.3_Drawing_polygons_4_7.png"
->>>>>>> Stashed changes
-        }
-      },
-      "data": {
-        "application/papermill.record/text/plain": "<Figure size 432x288 with 1 Axes>",
-        "application/papermill.record/image/png": null
-      }
-    },
-<<<<<<< Updated upstream
-    "bresenham-example1-plot-1": {
-      "output_type": "display_data",
-      "metadata": {
-        "scrapbook": {
-          "name": "bresenham-example1-plot-1",
-          "mime_prefix": "application/papermill.record/"
-        },
-        "filenames": {
-          "image/png": "D:\\Jon\\OneDrive - MMU\\Desktop\\Computational Maths\\graphics-book\\_build\\jupyter_execute\\files\\1.1_Drawing_lines_3_0.png"
-=======
-    "scanline-example-3": {
-      "output_type": "display_data",
-      "metadata": {
-        "scrapbook": {
-          "name": "scanline-example-3",
-          "mime_prefix": "application/papermill.record/"
-        },
-        "filenames": {
-          "image/png": "/Users/jon/OneDrive - MMU/Documents/2022_2023/Computational_Maths/graphics-book/_build/jupyter_execute/files/1.3_Drawing_polygons_4_2.png"
->>>>>>> Stashed changes
-        }
-      },
-      "data": {
-        "application/papermill.record/text/plain": "<Figure size 432x288 with 1 Axes>",
-        "application/papermill.record/image/png": null
-      }
-<<<<<<< Updated upstream
-    },
-    "bresenham-example1-plot-2": {
-=======
-    }
-  },
-  "files/1.4_Antialiasing": {
-    "super-sample-aa-plot": {
-      "output_type": "display_data",
-      "metadata": {
-        "scrapbook": {
-          "name": "super-sample-aa-plot",
-          "mime_prefix": "application/papermill.record/"
-        },
-        "filenames": {
-          "image/png": "/Users/jon/OneDrive - MMU/Documents/2022_2023/Computational_Maths/graphics-book/_build/jupyter_execute/files/1.4_Antialiasing_1_1.png"
-        }
-      },
-      "data": {
-        "application/papermill.record/text/plain": "<Figure size 864x360 with 1 Axes>",
-        "application/papermill.record/image/png": null
-      }
-    },
-    "ssaa-plot": {
-      "output_type": "display_data",
-      "metadata": {
-        "scrapbook": {
-          "name": "ssaa-plot",
-          "mime_prefix": "application/papermill.record/"
-        },
-        "filenames": {
-          "image/png": "/Users/jon/OneDrive - MMU/Documents/2022_2023/Computational_Maths/graphics-book/_build/jupyter_execute/files/1.4_Antialiasing_2_0.png"
-        }
-      },
-      "data": {
-        "application/papermill.record/text/plain": "<Figure size 864x432 with 2 Axes>",
-        "application/papermill.record/image/png": null
-      }
-    }
-  },
-  "files/1.5_Convolution": {
-    "convolution-plot": {
-      "output_type": "display_data",
-      "metadata": {
-        "scrapbook": {
-          "name": "convolution-plot",
-          "mime_prefix": "application/papermill.record/"
-        },
-        "filenames": {
-          "image/png": "/Users/jon/OneDrive - MMU/Documents/2022_2023/Computational_Maths/graphics-book/_build/jupyter_execute/files/1.5_Convolution_1_1.png"
-        }
-      },
-      "data": {
-        "application/papermill.record/text/plain": "<Figure size 720x288 with 1 Axes>",
-        "application/papermill.record/image/png": null
-      }
-    },
-    "sharpen-plot": {
-      "data": {
-        "application/papermill.record/image/png": null,
-        "application/papermill.record/text/plain": "<Figure size 864x432 with 2 Axes>"
-      },
-      "metadata": {
-        "scrapbook": {
-          "mime_prefix": "application/papermill.record/",
-          "name": "sharpen-plot"
-        },
-        "filenames": {
-          "image/png": "/Users/jon/OneDrive - MMU/Documents/2022_2023/Computational_Maths/graphics-book/_build/jupyter_execute/files/1.5_Convolution_3_0.png"
-        }
-      },
-      "output_type": "display_data"
-    }
-  },
-  "files/3.1_Translation": {
-    "translation-plot": {
-      "output_type": "display_data",
-      "metadata": {
-        "scrapbook": {
-          "name": "translation-plot",
-          "mime_prefix": "application/papermill.record/"
-        },
-        "filenames": {
-          "image/png": "/Users/jon/OneDrive - MMU/Documents/2022_2023/Computational_Maths/graphics-book/_build/jupyter_execute/files/3.1_Translation_1_0.png"
-        }
-      },
-      "data": {
-        "application/papermill.record/text/plain": "<Figure size 432x288 with 1 Axes>",
-        "application/papermill.record/image/png": null
-      }
-    }
-  },
-  "files/3.2_Scaling": {
-    "scaling-plot": {
->>>>>>> Stashed changes
-      "output_type": "display_data",
-      "metadata": {
-        "scrapbook": {
-          "name": "bresenham-example1-plot-2",
-          "mime_prefix": "application/papermill.record/"
-        },
-        "filenames": {
-<<<<<<< Updated upstream
-          "image/png": "D:\\Jon\\OneDrive - MMU\\Desktop\\Computational Maths\\graphics-book\\_build\\jupyter_execute\\files\\1.1_Drawing_lines_3_1.png"
-=======
-          "image/png": "/Users/jon/OneDrive - MMU/Documents/2022_2023/Computational_Maths/graphics-book/_build/jupyter_execute/files/3.2_Scaling_1_0.png"
->>>>>>> Stashed changes
-        }
-      },
-      "data": {
-        "application/papermill.record/text/plain": "<Figure size 432x288 with 1 Axes>",
-        "application/papermill.record/image/png": null
-      }
-    },
-<<<<<<< Updated upstream
-    "line-raster-plot": {
-=======
-    "scaling-about-centre-plot": {
-      "output_type": "display_data",
-      "metadata": {
-        "scrapbook": {
-          "name": "scaling-about-centre-plot",
-          "mime_prefix": "application/papermill.record/"
-        },
-        "filenames": {
-          "image/png": "/Users/jon/OneDrive - MMU/Documents/2022_2023/Computational_Maths/graphics-book/_build/jupyter_execute/files/3.2_Scaling_3_0.png"
-        }
-      },
-      "data": {
-        "application/papermill.record/text/plain": "<Figure size 432x288 with 1 Axes>",
-        "application/papermill.record/image/png": null
-      }
-    }
-  },
-  "files/3.3_Rotation": {
-    "rotation-plot-1": {
->>>>>>> Stashed changes
-      "output_type": "display_data",
-      "metadata": {
-        "scrapbook": {
-          "name": "line-raster-plot",
-          "mime_prefix": "application/papermill.record/"
-        },
-        "filenames": {
-<<<<<<< Updated upstream
-          "image/png": "D:\\Jon\\OneDrive - MMU\\Desktop\\Computational Maths\\graphics-book\\_build\\jupyter_execute\\files\\1.1_Drawing_lines_1_0.png"
-=======
-          "image/png": "/Users/jon/OneDrive - MMU/Documents/2022_2023/Computational_Maths/graphics-book/_build/jupyter_execute/files/3.3_Rotation_1_0.png"
->>>>>>> Stashed changes
-        }
-      },
-      "data": {
-        "application/papermill.record/text/plain": "<Figure size 432x288 with 1 Axes>",
+        "application/papermill.record/text/plain": "<Figure size 500x500 with 1 Axes>",
         "application/papermill.record/image/png": null
       }
     },
@@ -589,15 +172,127 @@
           "mime_prefix": "application/papermill.record/"
         },
         "filenames": {
-<<<<<<< Updated upstream
-          "image/png": "D:\\Jon\\OneDrive - MMU\\Desktop\\Computational Maths\\graphics-book\\_build\\jupyter_execute\\files\\1.1_Drawing_lines_3_3.png"
-=======
-          "image/png": "/Users/jon/OneDrive - MMU/Documents/2022_2023/Computational_Maths/graphics-book/_build/jupyter_execute/files/3.3_Rotation_3_1.png"
->>>>>>> Stashed changes
+          "image/png": "C:\\Users\\jonsh\\OneDrive - MMU\\Documents\\2022_2023\\Computational_Maths\\graphics-book\\_build\\jupyter_execute\\files\\5.1_Drawing_lines_4_3.png"
         }
       },
       "data": {
-        "application/papermill.record/text/plain": "<Figure size 432x288 with 1 Axes>",
+        "application/papermill.record/text/plain": "<Figure size 640x480 with 1 Axes>",
+        "application/papermill.record/image/png": null
+      }
+    },
+    "bresenham-example1-plot-3": {
+      "output_type": "display_data",
+      "metadata": {
+        "scrapbook": {
+          "name": "bresenham-example1-plot-3",
+          "mime_prefix": "application/papermill.record/"
+        },
+        "filenames": {
+          "image/png": "C:\\Users\\jonsh\\OneDrive - MMU\\Documents\\2022_2023\\Computational_Maths\\graphics-book\\_build\\jupyter_execute\\files\\5.1_Drawing_lines_4_2.png"
+        }
+      },
+      "data": {
+        "application/papermill.record/text/plain": "<Figure size 640x480 with 1 Axes>",
+        "application/papermill.record/image/png": null
+      }
+    },
+    "line-raster-plot": {
+      "output_type": "display_data",
+      "metadata": {
+        "scrapbook": {
+          "name": "line-raster-plot",
+          "mime_prefix": "application/papermill.record/"
+        },
+        "filenames": {
+          "image/png": "C:\\Users\\jonsh\\OneDrive - MMU\\Documents\\2022_2023\\Computational_Maths\\graphics-book\\_build\\jupyter_execute\\files\\5.1_Drawing_lines_2_0.png"
+        }
+      },
+      "data": {
+        "application/papermill.record/text/plain": "<Figure size 640x480 with 1 Axes>",
+        "application/papermill.record/image/png": null
+      }
+    }
+  },
+  "files\\5.2_Drawing_circles": {
+    "midpoint-raster-plot": {
+      "output_type": "display_data",
+      "metadata": {
+        "scrapbook": {
+          "name": "midpoint-raster-plot",
+          "mime_prefix": "application/papermill.record/"
+        },
+        "filenames": {
+          "image/png": "C:\\Users\\jonsh\\OneDrive - MMU\\Documents\\2022_2023\\Computational_Maths\\graphics-book\\_build\\jupyter_execute\\files\\5.2_Drawing_circles_5_0.png"
+        }
+      },
+      "data": {
+        "application/papermill.record/text/plain": "<Figure size 1000x1000 with 1 Axes>",
+        "application/papermill.record/image/png": null
+      }
+    },
+    "circle-symmetry-plot": {
+      "output_type": "display_data",
+      "metadata": {
+        "scrapbook": {
+          "name": "circle-symmetry-plot",
+          "mime_prefix": "application/papermill.record/"
+        },
+        "filenames": {
+          "image/png": "C:\\Users\\jonsh\\OneDrive - MMU\\Documents\\2022_2023\\Computational_Maths\\graphics-book\\_build\\jupyter_execute\\files\\5.2_Drawing_circles_1_0.png"
+        }
+      },
+      "data": {
+        "application/papermill.record/text/plain": "<Figure size 640x480 with 1 Axes>",
+        "application/papermill.record/image/png": null
+      }
+    },
+    "midpoint-algorithm-plot": {
+      "output_type": "display_data",
+      "metadata": {
+        "scrapbook": {
+          "name": "midpoint-algorithm-plot",
+          "mime_prefix": "application/papermill.record/"
+        },
+        "filenames": {
+          "image/png": "C:\\Users\\jonsh\\OneDrive - MMU\\Documents\\2022_2023\\Computational_Maths\\graphics-book\\_build\\jupyter_execute\\files\\5.2_Drawing_circles_3_0.png"
+        }
+      },
+      "data": {
+        "application/papermill.record/text/plain": "<Figure size 640x480 with 1 Axes>",
+        "application/papermill.record/image/png": null
+      }
+    }
+  },
+  "files\\5.4_Antialiasing": {
+    "ssaa-plot": {
+      "output_type": "display_data",
+      "metadata": {
+        "scrapbook": {
+          "name": "ssaa-plot",
+          "mime_prefix": "application/papermill.record/"
+        },
+        "filenames": {
+          "image/png": "C:\\Users\\jonsh\\OneDrive - MMU\\Documents\\2022_2023\\Computational_Maths\\graphics-book\\_build\\jupyter_execute\\files\\5.4_Antialiasing_2_0.png"
+        }
+      },
+      "data": {
+        "application/papermill.record/text/plain": "<Figure size 1200x600 with 2 Axes>",
+        "application/papermill.record/image/png": null
+      }
+    },
+    "super-sample-aa-plot": {
+      "output_type": "display_data",
+      "metadata": {
+        "scrapbook": {
+          "name": "super-sample-aa-plot",
+          "mime_prefix": "application/papermill.record/"
+        },
+        "filenames": {
+          "image/png": "C:\\Users\\jonsh\\OneDrive - MMU\\Documents\\2022_2023\\Computational_Maths\\graphics-book\\_build\\jupyter_execute\\files\\5.4_Antialiasing_1_1.png"
+        }
+      },
+      "data": {
+        "application/papermill.record/text/plain": "<Figure size 1200x500 with 1 Axes>",
         "application/papermill.record/image/png": null
       }
     }
