@@ -249,13 +249,13 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="4.4_Binary_space_partitioning.html">
-     Binary space partitioning
+    <a class="reference internal" href="4.4_Painters_algorithm.html">
+     Painter’s algorithm
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="4.4_Painters_algorithm.html">
-     Painter’s algorithm
+    <a class="reference internal" href="4.5_Binary_space_partitioning.html">
+     Binary space partitioning
     </a>
    </li>
   </ul>
@@ -765,7 +765,7 @@ title="Print to PDF"
 <p>This is a shortest distance problem between a point <span class="math notranslate nohighlight">\(\mathbf{q}\)</span> and the line <span class="math notranslate nohighlight">\(\mathbf{p} + t \mathbf{d}\)</span>.</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
-    t = \frac{(\mathbf{q} - \mathbf{p}) \cdot \mathbf{d}}{\mathbf{d} \cdot \mathbf{d}} =
+    t &amp;= \frac{(\mathbf{q} - \mathbf{p}) \cdot \mathbf{d}}{\mathbf{d} \cdot \mathbf{d}} =
     \frac{\left(
         \begin{pmatrix} 400 \\ 300 \\ 100 \end{pmatrix} -
         \begin{pmatrix} -500 \\ 200 \\ 100 \end{pmatrix} \right) \cdot 
@@ -785,19 +785,16 @@ title="Print to PDF"
     \therefore d &amp;= |\mathbf{q} - \mathbf{r}| = \left| 
     \begin{pmatrix} 400 \\ 300 \\ 100 \end{pmatrix} -
     \begin{pmatrix} -360 \\ -80 \\ 100 \end{pmatrix} \right|
-    = | \begin{pmatrix} 760 \\ 380 \\ 0 \end{pmatrix} \right| = \sqrt{722000} = 849.7058
+    = \left| \begin{pmatrix} 760 \\ 380 \\ 0 \end{pmatrix} \right| = \sqrt{722000} = 849.7058
 \end{align*}\]</div>
 <p>At its closest point the boat is 849.71 metres from the lighthouse.</p>
 </section>
 </div>
-<div class="exercise admonition" id="co-ordinate-geometry-ex6">
+<!-- ```{exercise}
+:label: co-ordinate-geometry-ex6
 
-<p class="admonition-title"><span class="caption-number">Exercise 6 </span></p>
-<section id="exercise-content">
-<p>In a computer game a character shoots a laser pistol from position <span class="math notranslate nohighlight">\(\mathbf{q} = (5, 1, 2)\)</span> in the direction <span class="math notranslate nohighlight">\(\mathbf{d} = (2, -1, 1)\)</span>. The laser shot collides with a polygon that passes through the point <span class="math notranslate nohighlight">\(\mathbf{p} = (10, 0, -1)\)</span> with the normal vector <span class="math notranslate nohighlight">\(\mathbf{n} = (-4, 1, 1)\)</span>.</p>
-</section>
-</div>
-</section>
+In a computer game a character shoots a laser pistol from position $\mathbf{q} = (5, 1, 2)$ in the direction $\mathbf{d} = (2, -1, 1)$. The laser shot collides with a polygon that passes through the point $\mathbf{p} = (10, 0, -1)$ with the normal vector $\mathbf{n} = (-4, 1, 1)$.  
+``` --></section>
 
     <script type="text/x-thebe-config">
     {
