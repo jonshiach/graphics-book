@@ -1,0 +1,796 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Object space &#8212; Computer Graphics Lecture Notes</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="canonical" href="https://jonshiach.github.io/graphics-book/files/3.1_Object_space.html" />
+    <link rel="shortcut icon" href="../_static/favicon.jpg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="World space" href="3.2_World_space.html" />
+    <link rel="prev" title="Virtual environments" href="3.0_Virtual_environments.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Computer Graphics Lecture Notes</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="0.1_teaching_schedule.html">
+   Teaching schedule
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Chapters
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="1.0_Coordinate_geometry.html">
+   Vector Geometry
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="1.1_Points_lines_and_planes.html">
+     Points, lines, planes and spheres
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="1.2_Shortest_distance_problems.html">
+     Shortest distance problems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="1.3_Intersections.html">
+     Intersections between objects
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="1.4_Coordinate_geometry_exercises.html">
+     Vector Geometry Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="2.0_Transformations.html">
+   Linear Transformations
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2.1_Translation.html">
+     Translation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2.2_Scaling.html">
+     Scaling
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2.3_Rotation.html">
+     Rotation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="3.0_Virtual_environments.html">
+   Virtual environments
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Object space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="3.2_World_space.html">
+     World space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="3.3_Camera_space.html">
+     Camera space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="3.4_Screen_space.html">
+     Screen space
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="4.0_Hidden_surface_removal.html">
+   Clipping &amp; hidden surface determination
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="4.1_Line_clipping.html">
+     Line clipping
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="4.2_Polygon_clipping.html">
+     Polygon clipping
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="4.3_Backface_culling.html">
+     Backface culling
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="4.4_Binary_space_partitioning.html">
+     Binary space partitioning
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="4.4_Painters_algorithm.html">
+     Painter’s algorithm
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="5.0_Rasterisation.html">
+   Rasterisation
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="5.1_Drawing_lines.html">
+     Drawing lines
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="5.2_Drawing_circles.html">
+     Drawing circles
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="5.3_Drawing_polygons.html">
+     Drawing polygons
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="5.4_Antialiasing.html">
+     Antialiasing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="5.5_Convolution.html">
+     Image processing
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bibliography.html">
+   References
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/files/3.1_Object_space.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#matlab-code">
+   MATLAB code
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Object space</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#matlab-code">
+   MATLAB code
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="object-space">
+<span id="object-space-section"></span><h1>Object space<a class="headerlink" href="#object-space" title="Permalink to this headline">#</a></h1>
+<figure class="margin align-default">
+<img alt="../_images/viewing_pipeline_object_space.svg" src="../_images/viewing_pipeline_object_space.svg" /></figure>
+<p>Each object in a virtual world is defined in its own space where the centre of mass of the object is at the origin so that scaling, translation and rotation operations can be easily applied.</p>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row docutils">
+<div class="sd-col sd-d-flex-column docutils">
+<figure class="align-default" id="house-object-figure">
+<img alt="../_images/house_object.svg" src="../_images/house_object.svg" /><figcaption>
+<p><span class="caption-number">Fig. 45 </span><span class="caption-text">House object</span><a class="headerlink" href="#house-object-figure" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+<div class="sd-col sd-d-flex-column docutils">
+<figure class="align-default" id="tower-object-figure">
+<img alt="../_images/tower_object.svg" src="../_images/tower_object.svg" /><figcaption>
+<p><span class="caption-number">Fig. 46 </span><span class="caption-text">Tower object</span><a class="headerlink" href="#tower-object-figure" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>A three-dimensional object is constructed using polygons for the <strong>faces</strong> of the object where each face is defined by its <strong>vertices</strong>. Since multiple faces of on object can share the same vertex we use one array to list the vertex co-ordinates and another array to list the vertices that defines each face.</p>
+<figure class="align-default" id="cube-vertices-object">
+<a class="reference internal image-reference" href="../_images/cube_object.svg"><img alt="../_images/cube_object.svg" src="../_images/cube_object.svg" width="300px" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 47 </span><span class="caption-text">Vertex labeling for a unit cube object.</span><a class="headerlink" href="#cube-vertices-object" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Consider the diagram in <a class="reference internal" href="#cube-vertices-object"><span class="std std-numref">Fig. 47</span></a> that shows a cube centred at the origin with side lengths of 2 which are parallel to the co-ordinates axes (called a <em>unit cube</em>). The eight vertices have been labeled <span class="math notranslate nohighlight">\(\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_8\)</span>. The homogeneous co-ordinates of the vertices are</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+	\mathbf{v}_1 &amp;= \begin{pmatrix} -1 \\ -1 \\ -1 \\ 1 \end{pmatrix}, &amp;
+	\mathbf{v}_2 &amp;= \begin{pmatrix} 1 \\ -1 \\ -1 \\ 1 \end{pmatrix}, &amp;
+	\mathbf{v}_3 &amp;= \begin{pmatrix} 1 \\ 1 \\ -1 \\ 1 \end{pmatrix}, &amp;
+	\mathbf{v}_4 &amp;= \begin{pmatrix} -1 \\ 1 \\ -1 \\ 1 \end{pmatrix}, \\
+	\mathbf{v}_5 &amp;= \begin{pmatrix} -1 \\ -1 \\ 1 \\ 1 \end{pmatrix}, &amp;
+	\mathbf{v}_6 &amp;= \begin{pmatrix} 1 \\ -1 \\ 1 \\ 1 \end{pmatrix}, &amp;
+	\mathbf{v}_7 &amp;= \begin{pmatrix} 1 \\ 1 \\ 1 \\ 1 \end{pmatrix}, &amp;
+	\mathbf{v}_8 &amp;= \begin{pmatrix} -1 \\ 1 \\ 1 \\ 1 \end{pmatrix}.
+\end{align*}\]</div>
+<p>We can form a single matrix containing these vertices known as the <strong>vertex matrix</strong></p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+	V &amp;= \begin{pmatrix}
+		\uparrow &amp; \uparrow &amp; \uparrow &amp; \uparrow &amp; \uparrow &amp; \uparrow &amp; \uparrow &amp; \uparrow\\
+		\mathbf{v}_1 &amp; \mathbf{v}_2 &amp; \mathbf{v}_3 &amp; \mathbf{v}_4 &amp; \mathbf{v}_5 &amp; \mathbf{v}_6 &amp; \mathbf{v}_7 &amp; \mathbf{v}_8 \\
+		\downarrow &amp; \downarrow &amp; \downarrow &amp; \downarrow &amp; \downarrow &amp; \downarrow &amp; \downarrow &amp; \downarrow
+	\end{pmatrix} \\
+    &amp;= 
+	\begin{pmatrix}
+		-1 &amp; 1 &amp; 1 &amp; -1 &amp; -1 &amp; 1 &amp; 1 &amp; -1 \\
+		-1 &amp; -1 &amp; 1 &amp; 1 &amp; -1 &amp; -1 &amp; 1 &amp; 1 \\
+		-1 &amp; -1 &amp; -1 &amp; -1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 \\
+		1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1
+	\end{pmatrix}.
+\end{align*}\]</div>
+<p>The faces of the object are defined by a <strong>face matrix</strong> that links to the vertex matrix. The face matrix is an <span class="math notranslate nohighlight">\(m \times n\)</span> matrix where <span class="math notranslate nohighlight">\(m\)</span> is the number of faces of the object and <span class="math notranslate nohighlight">\(n\)</span> is the number of sides for each face, so for the cube object the face matrix will be <span class="math notranslate nohighlight">\(6 \times 4\)</span>. The rows of the face matrix contain the column number of the vertex matrix corresponding to vertices of that face. For example, consider the faces of the cube object shown below. The face that represents the base has vertices <span class="math notranslate nohighlight">\(\mathbf{v}_1\)</span>, <span class="math notranslate nohighlight">\(\mathbf{v}_2\)</span>, <span class="math notranslate nohighlight">\(\mathbf{v}_3\)</span> and <span class="math notranslate nohighlight">\(\mathbf{v}_4\)</span> so the row of the face matrix will contain the numbers 1, 2, 3 and 4.</p>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils" id="cube-faces">
+<div class="sd-row docutils">
+<div class="sd-col sd-d-flex-column sd-col-4 sd-col-xs-4 sd-col-sm-4 sd-col-md-4 sd-col-lg-4 docutils">
+<figure class="align-default">
+<img alt="../_images/cube_base.svg" src="../_images/cube_base.svg" /></figure>
+<p align=center>base face</p>
+</div>
+<div class="sd-col sd-d-flex-column sd-col-4 sd-col-xs-4 sd-col-sm-4 sd-col-md-4 sd-col-lg-4 docutils">
+<figure class="align-default">
+<img alt="../_images/cube_front.svg" src="../_images/cube_front.svg" /></figure>
+<p align=center>front face</p>
+</div>
+<div class="sd-col sd-d-flex-column sd-col-4 sd-col-xs-4 sd-col-sm-4 sd-col-md-4 sd-col-lg-4 docutils">
+<figure class="align-default">
+<img alt="../_images/cube_right.svg" src="../_images/cube_right.svg" /></figure>
+<p align=center>right face</p>
+</div>
+<div class="sd-col sd-d-flex-column sd-col-4 sd-col-xs-4 sd-col-sm-4 sd-col-md-4 sd-col-lg-4 docutils">
+<figure class="align-default">
+<img alt="../_images/cube_back.svg" src="../_images/cube_back.svg" /></figure>
+<p align=center>back face</p>
+</div>
+<div class="sd-col sd-d-flex-column sd-col-4 sd-col-xs-4 sd-col-sm-4 sd-col-md-4 sd-col-lg-4 docutils">
+<figure class="align-default">
+<img alt="../_images/cube_left.svg" src="../_images/cube_left.svg" /></figure>
+<p align=center>left face</p>
+</div>
+<div class="sd-col sd-d-flex-column sd-col-4 sd-col-xs-4 sd-col-sm-4 sd-col-md-4 sd-col-lg-4 docutils">
+<figure class="align-default">
+<img alt="../_images/cube_top.svg" src="../_images/cube_top.svg" /></figure>
+<p align=center>top face</p>
+</div>
+</div>
+</div>
+<p>We also need to consider the order that the vertices are listed for each face. Objects are defined so that the <a class="reference internal" href="1.1_Points_lines_and_planes.html#normal-vector-definition">normal vectors</a> for each face is pointing away from the centre of the object. We <a class="reference internal" href="1.1_Points_lines_and_planes.html#normal-vector-section"><span class="std std-ref">have seen</span></a> that the normal vector to a plane that passes through the 3 points with position vectors <span class="math notranslate nohighlight">\(\mathbf{v}_1\)</span>, <span class="math notranslate nohighlight">\(\mathbf{v}_2\)</span> and <span class="math notranslate nohighlight">\(\mathbf{v}_3\)</span> is calculated using</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+	\mathbf{n} = (\mathbf{v}_2 - \mathbf{v}_1) \times (\mathbf{v}_3 - \mathbf{v}_1).
+\end{align*}\]</div>
+<p>If <span class="math notranslate nohighlight">\(\mathbf{v}_1\)</span>, <span class="math notranslate nohighlight">\(\mathbf{v}_2\)</span> and <span class="math notranslate nohighlight">\(\mathbf{v}_3\)</span> are ordered anti-clockwise when viewed from one side of the plane then the above equation will result in a normal vector pointing towards the viewer (<a class="reference internal" href="#anticlockwise-vertices-figure"><span class="std std-numref">Fig. 48</span></a>). Alternatively is the vertices are ordered clockwise when viewed from the side fo the plane then this will result in a normal vector pointing away from the viewer (<a class="reference internal" href="#clockwise-vertices-figure"><span class="std std-numref">Fig. 49</span></a>).</p>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row docutils">
+<div class="sd-col sd-d-flex-column docutils">
+<figure class="align-default" id="anticlockwise-vertices-figure">
+<img alt="../_images/normal_vertex_order_1.svg" src="../_images/normal_vertex_order_1.svg" /><figcaption>
+<p><span class="caption-number">Fig. 48 </span><span class="caption-text">Anti-clockwise ordering</span><a class="headerlink" href="#anticlockwise-vertices-figure" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+<div class="sd-col sd-d-flex-column docutils">
+<figure class="align-default" id="clockwise-vertices-figure">
+<img alt="../_images/normal_vertex_order_2.svg" src="../_images/normal_vertex_order_2.svg" /><figcaption>
+<p><span class="caption-number">Fig. 49 </span><span class="caption-text">Clockwise ordering</span><a class="headerlink" href="#clockwise-vertices-figure" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>With this in mind the face matrix for the <a class="reference internal" href="#cube-vertices-object"><span class="std std-ref">cube object</span></a> is</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+	F = 
+    \begin{pmatrix}
+        1 &amp; 4 &amp; 3 &amp; 2 \\
+        1 &amp; 2 &amp; 6 &amp; 5 \\
+        2 &amp; 3 &amp; 7 &amp; 6 \\
+        3 &amp; 4 &amp; 8 &amp; 7 \\
+        4 &amp; 1 &amp; 5 &amp; 8 \\
+        5 &amp; 6 &amp; 7 &amp; 8
+    \end{pmatrix}
+    \quad 
+    \begin{array}{l}
+        \textsf{(base)} \\
+        \textsf{(front)} \\
+        \textsf{(right)} \\
+        \textsf{(back)} \\
+        \textsf{(left)} \\
+        \textsf{(top)}
+    \end{array}
+\end{align*}\]</div>
+<p>Note that it does not matter which order the vertices are listing as columns in the world space vertex matrix or the faces listed in rows of the face matrix, as long as the face matrix correctly links to the vertex matrix.</p>
+<div class="proof example seealso admonition" id="object-space-example">
+<p class="admonition-title"><span class="caption-number">Example 29 </span></p>
+<section class="example-content" id="proof-content">
+<p>A simple three-dimensional object that resembles a house is shown below (modelled on the house piece from the <em>Monopoly</em> board game)</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="../_images/house_object_example.svg"><img alt="../_images/house_object_example.svg" src="../_images/house_object_example.svg" width="300px" /></a>
+</figure>
+<p>The house has length of 2, width of 1, wall height 1 and roof height 2 and defined so that the center of the base is at the origin. Define the vertex and face matrices for this house object.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">The homogeneous co-ordinates of the vertices <span class="math notranslate nohighlight">\(\mathbf{v}_1\)</span> to <span class="math notranslate nohighlight">\(\mathbf{v}_{10}\)</span> are</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    \mathbf{v}_1 &amp;= \begin{pmatrix} -0.5 \\ -1 \\ 0 \\ 1 \end{pmatrix} &amp;
+    \mathbf{v}_2 &amp;= \begin{pmatrix} 0.5 \\ -1 \\ 0 \\ 1 \end{pmatrix} &amp;
+    \mathbf{v}_3 &amp;= \begin{pmatrix} 0.5 \\ 1 \\ 0 \\ 1 \end{pmatrix} \\
+    \mathbf{v}_4 &amp;= \begin{pmatrix} -0.5 \\ 1 \\ 0 \\ 1 \end{pmatrix} &amp;
+    \mathbf{v}_5 &amp;= \begin{pmatrix} -0.5 \\ -1 \\ 1 \\ 1 \end{pmatrix} &amp;
+    \mathbf{v}_6 &amp;= \begin{pmatrix} 0.5 \\ -1 \\ 1 \\ 1 \end{pmatrix} \\
+    \mathbf{v}_7 &amp;= \begin{pmatrix} 0.5 \\ 1 \\ 1 \\ 1 \end{pmatrix} &amp;
+    \mathbf{v}_8 &amp;= \begin{pmatrix} -0.5 \\ 1 \\ 1 \\ 1 \end{pmatrix} &amp;
+    \mathbf{v}_9 &amp;= \begin{pmatrix} 0 \\ -1 \\ 2 \\ 1 \end{pmatrix} \\
+    \mathbf{v}_{10} &amp;= \begin{pmatrix} 0 \\ 1 \\ 2 \\ 1 \end{pmatrix},
+\end{align*}\]</div>
+<p class="sd-card-text">so the vertex matrix is</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    V &amp;=
+    \begin{pmatrix}
+        -0.5 &amp; 0.5 &amp; 0.5 &amp; -0.5 &amp; -0.5 &amp; 0.5 &amp; 0.5 &amp; -0.5 &amp; 0 &amp; 0 \\
+        -1 &amp; -1 &amp; 1 &amp; 1 &amp; -1 &amp; -1 &amp; 1 &amp; 1 &amp; -1 &amp; 1 \\
+        0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 2 &amp; 2 \\
+        1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1
+    \end{pmatrix}.
+\end{align*}\]</div>
+<p class="sd-card-text">The house object has 7 faces: a base, 2 end walls, 2 side walls and 2 roofs. The base, side walls and roofs are 4-sided faces whereas the end walls are 5-sided faces. The face matrix for the house object that ensures the normal vectors are point away from the centre of the object is (vertices are listed in an anti-clockwise direction when looking towards the centre). Note that the last vertex of the 4-sided faces are repeated to ensure that each row of the face matrix has 5 elements.</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    F &amp;=
+    \begin{pmatrix}
+        1 &amp; 4 &amp; 3 &amp; 2 &amp; 2 \\
+        1 &amp; 2 &amp; 6 &amp; 9 &amp; 5 \\
+        2 &amp; 3 &amp; 7 &amp; 6 &amp; 6 \\
+        3 &amp; 4 &amp; 8 &amp; 10 &amp; 7 \\
+        1 &amp; 5 &amp; 8 &amp; 4 &amp; 4 \\
+        6 &amp; 7 &amp; 10 &amp; 9 &amp; 9 \\
+        5 &amp; 9 &amp; 10 &amp; 8 &amp; 8
+    \end{pmatrix}
+    \quad 
+    \begin{array}{l}
+        \textsf{(base)} \\
+        \textsf{(front wall)} \\
+        \textsf{(right wall)} \\
+        \textsf{(back wall)} \\
+        \textsf{(left wall)} \\
+        \textsf{(right roof)} \\
+        \textsf{(left roof)}
+    \end{array}
+\end{align*}\]</div>
+</div>
+</details></section>
+</div><section id="matlab-code">
+<h2>MATLAB code<a class="headerlink" href="#matlab-code" title="Permalink to this headline">#</a></h2>
+<p>The following MATLAB code in defines the vertex and face matrices for the house object from <a class="reference internal" href="#object-space-example">Example 29</a> and plots the object space. The vertex and face matrices are defined in <code class="docutils literal notranslate"><span class="pre">V</span></code> and <code class="docutils literal notranslate"><span class="pre">F</span></code> and the <code class="docutils literal notranslate"><span class="pre">patch()</span></code> command is then used to plot the object. Note that we only use the first three rows of the <code class="docutils literal notranslate"><span class="pre">V</span></code> array which has been transposed because MATLAB assumes the co-ordinates are listed in rows. The <code class="docutils literal notranslate"><span class="pre">FaceAlpha</span></code> is set to 0.5 so that the faces of the object are semi-transparent.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Define object</span><span class="w"></span>
+<span class="n">V</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="w">     </span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w">  </span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w">   </span><span class="mi">1</span><span class="p">,</span><span class="w">    </span><span class="mi">1</span><span class="p">,</span><span class="w">   </span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w">  </span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w">   </span><span class="mi">1</span><span class="p">,</span><span class="w">    </span><span class="mi">1</span><span class="p">,</span><span class="w">  </span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="mi">0</span><span class="p">,</span><span class="w">   </span><span class="mi">0</span><span class="p">,</span><span class="w">   </span><span class="mi">0</span><span class="p">,</span><span class="w">    </span><span class="mi">0</span><span class="p">,</span><span class="w">    </span><span class="mi">1</span><span class="p">,</span><span class="w">   </span><span class="mi">1</span><span class="p">,</span><span class="w">   </span><span class="mi">1</span><span class="p">,</span><span class="w">    </span><span class="mi">1</span><span class="p">,</span><span class="w">   </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="mi">1</span><span class="p">,</span><span class="w">   </span><span class="mi">1</span><span class="p">,</span><span class="w">   </span><span class="mi">1</span><span class="p">,</span><span class="w">    </span><span class="mi">1</span><span class="p">,</span><span class="w">    </span><span class="mi">1</span><span class="p">,</span><span class="w">   </span><span class="mi">1</span><span class="p">,</span><span class="w">   </span><span class="mi">1</span><span class="p">,</span><span class="w">    </span><span class="mi">1</span><span class="p">,</span><span class="w">   </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">];</span><span class="w"></span>
+
+<span class="n">F</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">;</span><span class="w">    </span><span class="c">% base</span><span class="w"></span>
+<span class="w">     </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="p">;</span><span class="w">    </span><span class="c">% front wall</span><span class="w"></span>
+<span class="w">     </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="p">;</span><span class="w">    </span><span class="c">% right wall</span><span class="w"></span>
+<span class="w">     </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="w"> </span><span class="p">;</span><span class="w">   </span><span class="c">% back wall</span><span class="w"></span>
+<span class="w">     </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="p">;</span><span class="w">    </span><span class="c">% left wall</span><span class="w"></span>
+<span class="w">     </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w"> </span><span class="mi">9</span><span class="w"> </span><span class="p">;</span><span class="w">   </span><span class="c">% right roof</span><span class="w"></span>
+<span class="w">     </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="w"> </span><span class="p">];</span><span class="w">  </span><span class="c">% left roof</span><span class="w"></span>
+
+<span class="c">% Plot object</span><span class="w"></span>
+<span class="nb">patch</span><span class="p">(</span><span class="s">&#39;Vertices&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">V</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">,:)</span><span class="o">&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;Faces&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">F</span><span class="p">,</span><span class="w"> </span><span class="n">FaceColor</span><span class="p">=</span><span class="s">&#39;white&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">FaceAlpha</span><span class="p">=</span><span class="mf">0.75</span><span class="p">,</span><span class="w"> </span><span class="n">LineWidth</span><span class="p">=</span><span class="mi">2</span><span class="p">)</span><span class="w"></span>
+<span class="nb">xlabel</span><span class="p">(</span><span class="s">&#39;$x$&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;Interpreter&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;latex&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;FontSize&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">18</span><span class="p">)</span><span class="w"></span>
+<span class="nb">ylabel</span><span class="p">(</span><span class="s">&#39;$y$&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;Interpreter&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;latex&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;FontSize&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">18</span><span class="p">)</span><span class="w"></span>
+<span class="nb">zlabel</span><span class="p">(</span><span class="s">&#39;$z$&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;Interpreter&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;latex&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;FontSize&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">18</span><span class="p">)</span><span class="w"></span>
+<span class="nb">view</span><span class="p">(</span><span class="mi">45</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">)</span><span class="w"></span>
+<span class="nb">axis</span><span class="w"> </span><span class="n">equal</span><span class="w"></span>
+<span class="nb">axis</span><span class="p">([</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">])</span><span class="w"></span>
+<span class="nb">grid</span><span class="w"> </span><span class="n">on</span><span class="w"> </span>
+</pre></div>
+</div>
+<figure class="align-default" id="object-space-example-figure">
+<a class="reference internal image-reference" href="../_images/object_space_example.png"><img alt="../_images/object_space_example.png" src="../_images/object_space_example.png" style="width: 400px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 50 </span><span class="caption-text">The object space from <a class="reference internal" href="#object-space-example">Example 29</a>.</span><a class="headerlink" href="#object-space-example-figure" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./files"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="3.0_Virtual_environments.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Virtual environments</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="3.2_World_space.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">World space</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Dr Jon Shiach<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

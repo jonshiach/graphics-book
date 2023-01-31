@@ -27,6 +27,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/exercise.css" />
     <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
     
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -55,7 +56,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../_static/favicon.jpg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="Image processing" href="1.5_Convolution.html" />
+    <link rel="prev" title="Image processing" href="5.5_Convolution.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -129,8 +130,8 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="2.0_Coordinate_geometry.html">
-   Co-ordinate Geometry
+  <a class="reference internal" href="1.0_Coordinate_geometry.html">
+   Vector Geometry
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
@@ -139,19 +140,29 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="2.1_Points_lines_and_planes.html">
-     Points, lines and planes
+    <a class="reference internal" href="1.1_Points_lines_and_planes.html">
+     Points, lines, planes and spheres
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="2.2_Shortest_distance_problems.html">
+    <a class="reference internal" href="1.2_Shortest_distance_problems.html">
      Shortest distance problems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="1.3_Intersections.html">
+     Intersections between objects
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="1.4_Coordinate_geometry_exercises.html">
+     Vector Geometry Exercises
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="3.0_Transformations.html">
+  <a class="reference internal" href="2.0_Transformations.html">
    Linear Transformations
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
@@ -161,24 +172,24 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="3.1_Translation.html">
+    <a class="reference internal" href="2.1_Translation.html">
      Translation
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="3.2_Scaling.html">
+    <a class="reference internal" href="2.2_Scaling.html">
      Scaling
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="3.3_Rotation.html">
+    <a class="reference internal" href="2.3_Rotation.html">
      Rotation
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="4.0_Virtual_environments.html">
+  <a class="reference internal" href="3.0_Virtual_environments.html">
    Virtual environments
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
@@ -188,30 +199,30 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="4.1_Object_space.html">
+    <a class="reference internal" href="3.1_Object_space.html">
      Object space
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="4.2_World_space.html">
+    <a class="reference internal" href="3.2_World_space.html">
      World space
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="4.3_Camera_space.html">
+    <a class="reference internal" href="3.3_Camera_space.html">
      Camera space
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="4.4_Screen_space.html">
+    <a class="reference internal" href="3.4_Screen_space.html">
      Screen space
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="5.0_Hidden_surface_removal.html">
-   Clipping &amp; hidden surface removal
+  <a class="reference internal" href="4.0_Hidden_surface_removal.html">
+   Clipping &amp; hidden surface determination
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
   <label for="toctree-checkbox-4">
@@ -220,34 +231,34 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="5.1_Line_clipping.html">
+    <a class="reference internal" href="4.1_Line_clipping.html">
      Line clipping
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="5.2_Polygon_clipping.html">
+    <a class="reference internal" href="4.2_Polygon_clipping.html">
      Polygon clipping
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="5.3_Backface_culling.html">
+    <a class="reference internal" href="4.3_Backface_culling.html">
      Backface culling
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="5.3_Painters_algorithm.html">
-     Painter’s algorithm
+    <a class="reference internal" href="4.4_Binary_space_partitioning.html">
+     Binary space partitioning
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="5.4_Binary_space_partitioning.html">
-     Binary Space Partitioning (BSP)
+    <a class="reference internal" href="4.4_Painters_algorithm.html">
+     Painter’s algorithm
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="1.0_Rasterisation.html">
+  <a class="reference internal" href="5.0_Rasterisation.html">
    Rasterisation
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
@@ -257,27 +268,27 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="1.1_Drawing_lines.html">
+    <a class="reference internal" href="5.1_Drawing_lines.html">
      Drawing lines
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="1.2_Drawing_circles.html">
+    <a class="reference internal" href="5.2_Drawing_circles.html">
      Drawing circles
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="1.3_Drawing_polygons.html">
+    <a class="reference internal" href="5.3_Drawing_polygons.html">
      Drawing polygons
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="1.4_Antialiasing.html">
+    <a class="reference internal" href="5.4_Antialiasing.html">
      Antialiasing
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="1.5_Convolution.html">
+    <a class="reference internal" href="5.5_Convolution.html">
      Image processing
     </a>
    </li>
@@ -495,7 +506,7 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="1.5_Convolution.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="5.5_Convolution.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>

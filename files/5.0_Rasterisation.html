@@ -1,0 +1,762 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Rasterisation &#8212; Computer Graphics Lecture Notes</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="canonical" href="https://jonshiach.github.io/graphics-book/files/5.0_Rasterisation.html" />
+    <link rel="shortcut icon" href="../_static/favicon.jpg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Drawing lines" href="5.1_Drawing_lines.html" />
+    <link rel="prev" title="Painter’s algorithm" href="4.4_Painters_algorithm.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Computer Graphics Lecture Notes</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="0.1_teaching_schedule.html">
+   Teaching schedule
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Chapters
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="1.0_Coordinate_geometry.html">
+   Vector Geometry
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="1.1_Points_lines_and_planes.html">
+     Points, lines, planes and spheres
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="1.2_Shortest_distance_problems.html">
+     Shortest distance problems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="1.3_Intersections.html">
+     Intersections between objects
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="1.4_Coordinate_geometry_exercises.html">
+     Vector Geometry Exercises
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="2.0_Transformations.html">
+   Linear Transformations
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2.1_Translation.html">
+     Translation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2.2_Scaling.html">
+     Scaling
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2.3_Rotation.html">
+     Rotation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="3.0_Virtual_environments.html">
+   Virtual environments
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="3.1_Object_space.html">
+     Object space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="3.2_World_space.html">
+     World space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="3.3_Camera_space.html">
+     Camera space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="3.4_Screen_space.html">
+     Screen space
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="4.0_Hidden_surface_removal.html">
+   Clipping &amp; hidden surface determination
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="4.1_Line_clipping.html">
+     Line clipping
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="4.2_Polygon_clipping.html">
+     Polygon clipping
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="4.3_Backface_culling.html">
+     Backface culling
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="4.4_Binary_space_partitioning.html">
+     Binary space partitioning
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="4.4_Painters_algorithm.html">
+     Painter’s algorithm
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="current reference internal" href="#">
+   Rasterisation
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="5.1_Drawing_lines.html">
+     Drawing lines
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="5.2_Drawing_circles.html">
+     Drawing circles
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="5.3_Drawing_polygons.html">
+     Drawing polygons
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="5.4_Antialiasing.html">
+     Antialiasing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="5.5_Convolution.html">
+     Image processing
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bibliography.html">
+   References
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/files/5.0_Rasterisation.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-rgb-colour-model">
+   The RGB colour model
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bit-colour">
+     24-bit colour
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#raster-arrays">
+   Raster arrays
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pixel-co-ordinates">
+   Pixel co-ordinates
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Rasterisation</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-rgb-colour-model">
+   The RGB colour model
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bit-colour">
+     24-bit colour
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#raster-arrays">
+   Raster arrays
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pixel-co-ordinates">
+   Pixel co-ordinates
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="rasterisation">
+<span id="rasterisation-section"></span><h1>Rasterisation<a class="headerlink" href="#rasterisation" title="Permalink to this headline">#</a></h1>
+<figure class="margin align-default">
+<img alt="../_images/viewing_pipeline_raster.svg" src="../_images/viewing_pipeline_raster.svg" /></figure>
+<p>Computer displays use an array of small squares called pixels which are illuminated using different colours. When the array of pixels is viewed as a whole the brain interprets it as a single image. The pixel array is called a raster array and the process of determining the illumination of the pixels is called <strong>rasterisation</strong>. The image that is approximated as a raster array is known as the <strong>idealised image</strong>.</p>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row docutils">
+<div class="sd-col sd-d-flex-column docutils">
+<figure class="align-default" id="id3">
+<a class="reference internal image-reference" href="../_images/idealised_image.png"><img alt="../_images/idealised_image.png" src="../_images/idealised_image.png" style="width: 390px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 87 </span><span class="caption-text">The idealised image</span><a class="headerlink" href="#id3" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+<div class="sd-col sd-d-flex-column docutils">
+<figure class="align-default" id="id4">
+<a class="reference internal image-reference" href="../_images/raster_image.png"><img alt="../_images/raster_image.png" src="../_images/raster_image.png" style="width: 400px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 88 </span><span class="caption-text">Raster image</span><a class="headerlink" href="#id4" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="proof definition note admonition" id="pixel-definition">
+<p class="admonition-title"><span class="caption-number">Definition 24 </span> (Pixel)</p>
+<section class="definition-content" id="proof-content">
+<p>A <strong>pixel</strong> is a small square that is illuminated using different colours.</p>
+</section>
+</div><div class="proof definition note admonition" id="raster-definition">
+<p class="admonition-title"><span class="caption-number">Definition 25 </span> (Raster)</p>
+<section class="definition-content" id="proof-content">
+<p>A <strong>raster</strong> is a rectangular array of pixels.</p>
+</section>
+</div><div class="proof definition note admonition" id="idealised-image-definition">
+<p class="admonition-title"><span class="caption-number">Definition 26 </span> (Idealised image)</p>
+<section class="definition-content" id="proof-content">
+<p>An <strong>idealised image</strong> is an analogue image that we wish to represent in a raster.</p>
+</section>
+</div><section id="the-rgb-colour-model">
+<h2>The RGB colour model<a class="headerlink" href="#the-rgb-colour-model" title="Permalink to this headline">#</a></h2>
+<p>The <strong>RGB</strong> colour model uses the three primary colours <span style="color: red;">Red</span>, <span style="color: green;">Green</span> and <span style="color: blue;">Blue</span> (RGB) that are added to produce colours in the visible spectrum. Using a single bit for each primary colour (i.e., adding all or none of that colour) means that it is possible to produce eight colours: <span style="color: red;">red</span>, <span style="color: yellow;">yellow</span>, <span style="color: green;">green</span>, <span style="color: cyan;">cyan</span>, <span style="color: blue;">blue</span>, <span style="color: magenta;">magenta</span>, black and <span style="background-color:black;color:white">white</span> as shown in <a class="reference internal" href="#rgb-table"><span class="std std-ref">RGB codes</span></a>. For example mixing full amounts of red and green results in pure yellow.</p>
+<section id="bit-colour">
+<h3>24-bit colour<a class="headerlink" href="#bit-colour" title="Permalink to this headline">#</a></h3>
+<p>Adding proportions of each primary colours means that many more colours can be produced. Using 8 bits for each primary colour means that there are a possible <span class="math notranslate nohighlight">\(2^8 = 256\)</span> different quantities of that colour. Combining the three primary colours means that the number of colours that can be produced is <span class="math notranslate nohighlight">\(3 \times 2^8 = 16,772,216\)</span>. It is estimated that the most number of colours that the human eye can distinguish is approximately 10 million so 24 bit colour (known as <a class="reference external" href="https://en.wikipedia.org/wiki/Color_depth#True_color_(24-bit)">true color</a>) is considered sufficient.</p>
+<figure class="align-default" id="id5">
+<a class="reference internal image-reference" href="../_images/rgb_wheel.png"><img alt="../_images/rgb_wheel.png" src="../_images/rgb_wheel.png" style="width: 300px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 89 </span><span class="caption-text">RGB color wheel</span><a class="headerlink" href="#id5" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Since there are 256 levels of the three primary colours in the true color model we can use the integers 0 to 255 in an ordered triplet. For example, the colour <span style="color: cyan;">cyan</span> is made by mixing full amounts of green and blue which corresponds to the triplet <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">255,</span> <span class="pre">255)</span></code>. Most software packages also accept <a href="https://en.wikipedia.org/wiki/Hexadecimal" target="_blank">hexadecimal</a> (base-16) colour codes where the values in the triplet are represented using 2-digit hexadecimal numbers 00 to FF which follow a # symbol. For example, <span style="color: cyan;">cyan</span> is represented using <code class="docutils literal notranslate"><span class="pre">&quot;#00FFFF&quot;</span></code>.</p>
+<table class="table" id="rgb-table">
+<caption><span class="caption-number">Table 1 </span><span class="caption-text">RGB codes</span><a class="headerlink" href="#rgb-table" title="Permalink to this table">#</a></caption>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Colour</p></th>
+<th class="head"><p>RGB triplet</p></th>
+<th class="head"><p>Hexadecimal colour code</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span style="color: black;">Black</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">0,</span> <span class="pre">0)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;#FFFFFF&quot;</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><span style="color: red;">Red</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">(255,</span> <span class="pre">0,</span> <span class="pre">0)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;#FF0000&quot;</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><span style="color: yellow;">Yellow</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">(255,</span> <span class="pre">255,</span> <span class="pre">0)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;#FFFF00&quot;</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><span style="color: green;">Green</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">255,</span> <span class="pre">0)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;#00FF00&quot;</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><span style="color: cyan;">Cyan</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">255,</span> <span class="pre">255)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;#00FFFF&quot;</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><span style="color: blue;">Blue</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">0,</span> <span class="pre">255)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;#0000FF&quot;</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><span style="color: magenta;">Magenta</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">(255,</span> <span class="pre">0,</span> <span class="pre">255)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;#FF00FF&quot;</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><span style=" background-color: black; color: white;">White</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">(255,</span> <span class="pre">255,</span> <span class="pre">255)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;#FFFFFF&quot;</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>To obtain an 8-bit colour triplet you can use web tools such as <a href="https://www.rapidtables.com/web/color/RGB_Color.html" target="_blank">this one</a>.</p>
+</section>
+</section>
+<section id="raster-arrays">
+<h2>Raster arrays<a class="headerlink" href="#raster-arrays" title="Permalink to this headline">#</a></h2>
+<p>The information that defines a raster can be stored in a raster array. If a raster has a width of <span class="math notranslate nohighlight">\(N_x\)</span> pixels and a height of <span class="math notranslate nohighlight">\(N_y\)</span> pixels then it can be defined as an <span class="math notranslate nohighlight">\(N_y \times N_x \times 3\)</span> array. The colour of each of the pixels in the raster is defined by the 3 levels for the red, green and blue components.</p>
+<p>The MATLAB command for reading in an image file is <code class="docutils literal notranslate"><span class="pre">imread(&lt;filename&gt;)</span></code>. For example, the following code reads in the image file <code class="docutils literal notranslate"><span class="pre">cavendish.png</span></code> which is a photograph of my cat Cavendish and prints the size of the raster array.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">img</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">imread</span><span class="p">(</span><span class="s">&#39;cavendish.jpg&#39;</span><span class="p">);</span><span class="w"></span>
+<span class="p">[</span><span class="n">Ny</span><span class="p">,</span><span class="w"> </span><span class="n">Nx</span><span class="p">,</span><span class="w"> </span><span class="n">Ncolours</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">size</span><span class="p">(</span><span class="n">img</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The output is</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Ny</span> <span class="o">=</span> <span class="mi">600</span>
+<span class="n">Nx</span> <span class="o">=</span> <span class="mi">800</span>
+<span class="n">Ncolours</span> <span class="o">=</span> <span class="mi">3</span>
+</pre></div>
+</div>
+<p>So the raster array has a height of <span class="math notranslate nohighlight">\(N_y = 600\)</span> pixels, a width of <span class="math notranslate nohighlight">\(N_x=800\)</span> pixels with each pixel defined by a colour triplet.</p>
+<p>The MATLAB command for displaying a raster array <code class="docutils literal notranslate"><span class="pre">img</span></code> is <code class="docutils literal notranslate"><span class="pre">image(img)</span></code></p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">image</span><span class="p">(</span><span class="n">img</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<figure class="align-default">
+<a class="reference internal image-reference" href="../_images/cavendish_plot.png"><img alt="../_images/cavendish_plot.png" src="../_images/cavendish_plot.png" style="width: 500px;" /></a>
+</figure>
+<p>Now we have the raster array for the image we can use Python commands to manipulate the image. For example, the following code sets the colour of each pixel to either black or white depending on whether the average of the colour triplet is greater or less than 128 which is halfway between 0 and 255.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Read in image</span><span class="w"></span>
+<span class="n">img</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">imread</span><span class="p">(</span><span class="s">&#39;cavendish.jpg&#39;</span><span class="p">);</span><span class="w"></span>
+
+<span class="c">% Get size of image array</span><span class="w"></span>
+<span class="p">[</span><span class="n">Ny</span><span class="p">,</span><span class="w"> </span><span class="n">Nx</span><span class="p">,</span><span class="w"> </span><span class="n">Ncolours</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">size</span><span class="p">(</span><span class="n">img</span><span class="p">);</span><span class="w"></span>
+
+<span class="c">% Reshape image array</span><span class="w"></span>
+<span class="n">img_bw</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">reshape</span><span class="p">(</span><span class="n">img</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">Nx</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Ny</span><span class="p">,</span><span class="w"> </span><span class="n">Ncolours</span><span class="p">]);</span><span class="w"></span>
+
+<span class="c">% Calculate average colour of each pixel</span><span class="w"></span>
+<span class="n">avg</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">mean</span><span class="p">(</span><span class="n">img_bw</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span><span class="w"></span>
+
+<span class="c">% Change each pixel to black or white depending on the average colour</span><span class="w"></span>
+<span class="n">img_bw</span><span class="p">(</span><span class="n">avg</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">128</span><span class="p">,</span><span class="w"> </span><span class="p">:)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="n">img_bw</span><span class="p">(</span><span class="n">avg</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">128</span><span class="p">,</span><span class="w"> </span><span class="p">:)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">255</span><span class="p">;</span><span class="w"></span>
+
+<span class="c">% Reshape image array back to the original shape</span><span class="w"></span>
+<span class="n">img_bw</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">reshape</span><span class="p">(</span><span class="n">img_bw</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">Ny</span><span class="p">,</span><span class="w"> </span><span class="n">Nx</span><span class="p">,</span><span class="w"> </span><span class="n">Ncolours</span><span class="p">]);</span><span class="w"></span>
+
+<span class="c">% Plot image array</span><span class="w"></span>
+<span class="nb">image</span><span class="p">(</span><span class="n">img_bw</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<figure class="align-default">
+<a class="reference internal image-reference" href="../_images/cavendish_bw.png"><img alt="../_images/cavendish_bw.png" src="../_images/cavendish_bw.png" style="width: 500px;" /></a>
+</figure>
+</section>
+<section id="pixel-co-ordinates">
+<h2>Pixel co-ordinates<a class="headerlink" href="#pixel-co-ordinates" title="Permalink to this headline">#</a></h2>
+<p>You may have noticed that the vertical axes on the image plots have a scale that starts at 1 at the top and increases as we move down the rows of pixels <a class="footnote-reference brackets" href="#id2" id="id1">1</a>. The reason for this is that digital displays are refreshed using horizontal lines of pixels starting at the top row and moving down to the bottom.</p>
+<p>If the raster represents a region defined by the <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> Euclidean space co-ordinates <span class="math notranslate nohighlight">\(x, y \in [0, 1]\)</span> which is to be represented by an <span class="math notranslate nohighlight">\(N_y \times N_x\)</span> raster then the corresponding pixel co-ordinates are</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+    x_{pixel} &amp;= 1 + \lfloor x \cdot N_x \rfloor, \\
+    y_{pixel} &amp;= 1 + \lfloor (1 - y) \cdot N_y \rfloor, 
+\end{align}\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\lfloor \cdot \rfloor\)</span> is rounds the contents to the integer below. Note that the <span class="math notranslate nohighlight">\(y\)</span> co-ordinate is subtracted from 1 to ensure that the pixel co-ordinates <span class="math notranslate nohighlight">\((0, 0)\)</span> correspond to <span class="math notranslate nohighlight">\((0, 1)\)</span>, i.e., the top-left hand pixel in the raster.</p>
+<hr class="footnotes docutils" />
+<dl class="footnote brackets">
+<dt class="label" id="id2"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>Note that in most graphical applications we start numbering pixels at 0. In these notes have have used 1 as the starting co-ordinate so that matrix indexing is easier when using MATLAB. If you are using a zero-indexing language such as Python, C etc. then subtract 1 from the pixel co-ordinates.</p>
+</dd>
+</dl>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./files"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="4.4_Painters_algorithm.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Painter’s algorithm</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="5.1_Drawing_lines.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Drawing lines</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Dr Jon Shiach<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
