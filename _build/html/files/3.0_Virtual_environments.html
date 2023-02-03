@@ -133,7 +133,7 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="1.0_Coordinate_geometry.html">
+  <a class="reference internal" href="1.0_Vector_geometry.html">
    Vector Geometry
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
@@ -143,22 +143,32 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="1.1_Points_lines_and_planes.html">
+    <a class="reference internal" href="1.1_Vectors.html">
+     Vectors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="1.2_Basis.html">
+     Basis
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="1.3_Points_lines_and_planes.html">
      Points, lines, planes and spheres
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="1.2_Shortest_distance_problems.html">
-     Shortest distance problems
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="1.3_Intersections.html">
+    <a class="reference internal" href="1.4_Intersections.html">
      Intersections between objects
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="1.4_Coordinate_geometry_exercises.html">
+    <a class="reference internal" href="1.5_Shortest_distance_problems.html">
+     Shortest distance problems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="1.6_Vector_geometry_exercises.html">
      Vector Geometry Exercises
     </a>
    </li>
@@ -224,7 +234,7 @@ const thebe_selector_output = ".output, .cell_output"
   </ul>
  </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="4.0_Hidden_surface_removal.html">
+  <a class="reference internal" href="4.0_Clipping_and_HSD.html">
    Clipping &amp; hidden surface determination
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
@@ -488,18 +498,18 @@ title="Print to PDF"
 <span id="virtual-environments-section"></span><h1>Virtual environments<a class="headerlink" href="#virtual-environments" title="Permalink to this headline">#</a></h1>
 <p>A virtual environment is a computer generated world which which is viewed from a point within the environment. Virtual environments are usually three dimensional and used primarily in computer games, movies and television and virtual reality simulations. In this chapter we will look at home virtual environments are defined and the mathematical operations used to view the virtual environment on a two-dimensional display.</p>
 <figure class="align-default" id="id2">
-<a class="reference internal image-reference" href="https://www.gamespot.com/a/uploads/scale_landscape/1581/15811374/3686824-last%20of%20us%20seattle%20day%201.jpg"><img alt="https://www.gamespot.com/a/uploads/scale_landscape/1581/15811374/3686824-last%20of%20us%20seattle%20day%201.jpg" src="https://www.gamespot.com/a/uploads/scale_landscape/1581/15811374/3686824-last%20of%20us%20seattle%20day%201.jpg" style="width: 400px;" /></a>
+<a class="reference internal image-reference" href="https://www.gamespot.com/a/uploads/scale_landscape/1581/15811374/3686824-last%20of%20us%20seattle%20day%201.jpg"><img alt="https://www.gamespot.com/a/uploads/scale_landscape/1581/15811374/3686824-last%20of%20us%20seattle%20day%201.jpg" src="https://www.gamespot.com/a/uploads/scale_landscape/1581/15811374/3686824-last%20of%20us%20seattle%20day%201.jpg" style="width: 500px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 43 </span><span class="caption-text">A screen shot of the Seattle environment from <em>The Last of Us Part II</em> <span id="id1">[<a class="reference internal" href="bibliography.html#id7" title="Naughty Dog. The Last of Us Part II. Video game, 2020.">Naughty Dog, 2020</a>]</span>.</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 44 </span><span class="caption-text">A screen shot of the Seattle environment from <em>The Last of Us Part II</em> <span id="id1">[<a class="reference internal" href="bibliography.html#id7" title="Naughty Dog. The Last of Us Part II. Video game, 2020.">Naughty Dog, 2020</a>]</span>.</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <section id="the-viewing-pipeline">
 <span id="viewing-pipeline-section"></span><h2>The viewing pipeline<a class="headerlink" href="#the-viewing-pipeline" title="Permalink to this headline">#</a></h2>
-<p>The steps required to construct a virtual environment and display it so it can be viewed by a computer user are summarised in a flow diagram known as <strong>the viewing pipeline</strong> which is shown in <a class="reference internal" href="#viewing-pipeline-figure"><span class="std std-numref">Fig. 44</span></a>.</p>
+<p>The steps required to construct a virtual environment and display it so it can be viewed by a computer user are summarised in a flow diagram known as <strong>the viewing pipeline</strong> which is shown in <a class="reference internal" href="#viewing-pipeline-figure"><span class="std std-numref">Fig. 45</span></a>.</p>
 <figure class="align-default" id="viewing-pipeline-figure">
 <a class="reference internal image-reference" href="../_images/viewing_pipeline.svg"><img alt="../_images/viewing_pipeline.svg" src="../_images/viewing_pipeline.svg" width="400px" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 44 </span><span class="caption-text">The viewing pipeline</span><a class="headerlink" href="#viewing-pipeline-figure" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 45 </span><span class="caption-text">The viewing pipeline</span><a class="headerlink" href="#viewing-pipeline-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>The steps are as follows</p>
@@ -508,7 +518,7 @@ title="Print to PDF"
 <li><p><a class="reference internal" href="3.2_World_space.html#world-space-section"><span class="std std-ref"><strong>World space</strong></span></a>: The virtual environment is constructed by copying the objects into the world space and applying scaling, rotation and translation transformations.</p></li>
 <li><p><a class="reference internal" href="3.3_Camera_space.html#camera-space-section"><span class="std std-ref"><strong>Camera space</strong></span></a>: To view the virtual environment we place a virtual camera in the world space and use translation and rotation transformations so that the position of the camera is at the origin looking along the <span class="math notranslate nohighlight">\(z\)</span> axis in the negative direction.</p></li>
 <li><p><a class="reference internal" href="3.4_Screen_space.html#screen-space-section"><span class="std std-ref"><strong>Screen space</strong></span></a>: The camera space is projected onto a two-dimensional projection plane using perspective projection so that the further objects are from the camera the smaller they appear giving the illusion of depth.</p></li>
-<li><p><a class="reference internal" href="4.0_Hidden_surface_removal.html#clipping-and-hsd-section"><span class="std std-ref"><strong>Clipped screen space</strong></span></a>: Any objects in the screen space that are outside of the region that visible to the camera are removed and objects that lie partially outside are clipped to the edges. In addition, the surfaces that should not be visible to the viewer are removed so to give the appearance of solid surfaces.</p></li>
+<li><p><a class="reference internal" href="4.0_Clipping_and_HSD.html#clipping-and-hsd-section"><span class="std std-ref"><strong>Clipped screen space</strong></span></a>: Any objects in the screen space that are outside of the region that visible to the camera are removed and objects that lie partially outside are clipped to the edges. In addition, the surfaces that should not be visible to the viewer are removed so to give the appearance of solid surfaces.</p></li>
 <li><p><a class="reference internal" href="5.0_Rasterisation.html#rasterisation-section"><span class="std std-ref"><strong>Raster</strong></span></a>: The colours of the individual pixels on a display screen are determined from the information obtained about the virtual environment up to this point and any lighting conditions used. This information is stored in a <strong>raster array</strong> where each element corresponds to a pixel on the display.</p></li>
 <li><p><strong>Display</strong>: The raster array is sent to the display hardware.</p></li>
 </ul>

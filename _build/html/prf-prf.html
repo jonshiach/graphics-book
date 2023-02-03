@@ -135,7 +135,7 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="files/1.0_Coordinate_geometry.html">
+  <a class="reference internal" href="files/1.0_Vector_geometry.html">
    Vector Geometry
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
@@ -145,22 +145,32 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="files/1.1_Points_lines_and_planes.html">
+    <a class="reference internal" href="files/1.1_Vectors.html">
+     Vectors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="files/1.2_Basis.html">
+     Basis
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="files/1.3_Points_lines_and_planes.html">
      Points, lines, planes and spheres
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="files/1.2_Shortest_distance_problems.html">
-     Shortest distance problems
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="files/1.3_Intersections.html">
+    <a class="reference internal" href="files/1.4_Intersections.html">
      Intersections between objects
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="files/1.4_Coordinate_geometry_exercises.html">
+    <a class="reference internal" href="files/1.5_Shortest_distance_problems.html">
+     Shortest distance problems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="files/1.6_Vector_geometry_exercises.html">
      Vector Geometry Exercises
     </a>
    </li>
@@ -226,7 +236,7 @@ const thebe_selector_output = ".output, .cell_output"
   </ul>
  </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="files/4.0_Hidden_surface_removal.html">
+  <a class="reference internal" href="files/4.0_Clipping_and_HSD.html">
    Clipping &amp; hidden surface determination
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
@@ -411,24 +421,21 @@ title="Fullscreen mode"
    <a href="#cap-cyrus-beck-example"><strong>cyrus-beck-example</strong></a> | 
    <a href="#cap-definition-0"><strong>definition-0</strong></a> | 
    <a href="#cap-definition-1"><strong>definition-1</strong></a> | 
-   <a href="#cap-definition-11"><strong>definition-11</strong></a> | 
-   <a href="#cap-definition-12"><strong>definition-12</strong></a> | 
    <a href="#cap-definition-2"><strong>definition-2</strong></a> | 
    <a href="#cap-definition-3"><strong>definition-3</strong></a> | 
+   <a href="#cap-definition-5"><strong>definition-5</strong></a> | 
    <a href="#cap-definition-6"><strong>definition-6</strong></a> | 
+   <a href="#cap-definition-7"><strong>definition-7</strong></a> | 
    <a href="#cap-definition-8"><strong>definition-8</strong></a> | 
-   <a href="#cap-definition-9"><strong>definition-9</strong></a> | 
    <a href="#cap-example-0"><strong>example-0</strong></a> | 
    <a href="#cap-example-1"><strong>example-1</strong></a> | 
-   <a href="#cap-example-10"><strong>example-10</strong></a> | 
-   <a href="#cap-example-14"><strong>example-14</strong></a> | 
    <a href="#cap-example-2"><strong>example-2</strong></a> | 
    <a href="#cap-example-3"><strong>example-3</strong></a> | 
    <a href="#cap-example-4"><strong>example-4</strong></a> | 
    <a href="#cap-example-5"><strong>example-5</strong></a> | 
-   <a href="#cap-example-6"><strong>example-6</strong></a> | 
    <a href="#cap-example-7"><strong>example-7</strong></a> | 
    <a href="#cap-example-8"><strong>example-8</strong></a> | 
+   <a href="#cap-example-9"><strong>example-9</strong></a> | 
    <a href="#cap-finding-transformation-matrix-theorem"><strong>finding-transformation-matrix-theorem</strong></a> | 
    <a href="#cap-flood-fill-algorithm"><strong>flood-fill-algorithm</strong></a> | 
    <a href="#cap-flood-fill-example"><strong>flood-fill-example</strong></a> | 
@@ -440,6 +447,7 @@ title="Fullscreen mode"
    <a href="#cap-inverse-transformation-definition"><strong>inverse-transformation-definition</strong></a> | 
    <a href="#cap-line-line-distance-theorem"><strong>line-line-distance-theorem</strong></a> | 
    <a href="#cap-line-line-intersection-example"><strong>line-line-intersection-example</strong></a> | 
+   <a href="#cap-line-plane-intersection"><strong>line-plane-intersection</strong></a> | 
    <a href="#cap-line-sphere-intersection-example"><strong>line-sphere-intersection-example</strong></a> | 
    <a href="#cap-linear-transformation-definition"><strong>linear-transformation-definition</strong></a> | 
    <a href="#cap-magnitude-definition"><strong>magnitude-definition</strong></a> | 
@@ -463,6 +471,7 @@ title="Fullscreen mode"
    <a href="#cap-skew-lines-example"><strong>skew-lines-example</strong></a> | 
    <a href="#cap-sutherland-hodgman-algorithm"><strong>sutherland-hodgman-algorithm</strong></a> | 
    <a href="#cap-sutherland-hodgman-example"><strong>sutherland-hodgman-example</strong></a> | 
+   <a href="#cap-theorem-1"><strong>theorem-1</strong></a> | 
    <a href="#cap-theorem-4"><strong>theorem-4</strong></a> | 
    <a href="#cap-transformation-matrix-example"><strong>transformation-matrix-example</strong></a> | 
    <a href="#cap-translation-matrix-definition"><strong>translation-matrix-definition</strong></a> | 
@@ -540,7 +549,7 @@ title="Fullscreen mode"
      <tr>
        <td></td>
        <td>
-       <a href="files/1.0_Coordinate_geometry.html#change-of-basis-example-1"><code class="xref">change-of-basis-example-1</code></a> <em>(files/1.0_Coordinate_geometry)</em></td><td>
+       <a href="files/1.2_Basis.html#change-of-basis-example-1"><code class="xref">change-of-basis-example-1</code></a> <em>(files/1.2_Basis)</em></td><td>
        <em>example</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-composite-transformation-definition"><td></td><td>
@@ -591,28 +600,12 @@ title="Fullscreen mode"
        <a href="files/4.5_Binary_space_partitioning.html#definition-1"><code class="xref">definition-1</code></a> <em>(files/4.5_Binary_space_partitioning)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-definition-11"><td></td><td>
-       <strong>definition-11</strong></td><td></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="files/1.0_Coordinate_geometry.html#definition-11"><code class="xref">definition-11</code></a> <em>(files/1.0_Coordinate_geometry)</em></td><td>
-       <em>definition</em></td></tr>
-     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-definition-12"><td></td><td>
-       <strong>definition-12</strong></td><td></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="files/1.0_Coordinate_geometry.html#definition-12"><code class="xref">definition-12</code></a> <em>(files/1.0_Coordinate_geometry)</em></td><td>
-       <em>definition</em></td></tr>
-     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-definition-2"><td></td><td>
        <strong>definition-2</strong></td><td></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="files/5.3_Drawing_polygons.html#definition-2"><code class="xref">definition-2</code></a> <em>(files/5.3_Drawing_polygons)</em></td><td>
+       <a href="files/1.2_Basis.html#definition-2"><code class="xref">definition-2</code></a> <em>(files/1.2_Basis)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-definition-3"><td></td><td>
@@ -623,12 +616,28 @@ title="Fullscreen mode"
        <a href="files/5.3_Drawing_polygons.html#definition-3"><code class="xref">definition-3</code></a> <em>(files/5.3_Drawing_polygons)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-definition-5"><td></td><td>
+       <strong>definition-5</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="files/1.1_Vectors.html#definition-5"><code class="xref">definition-5</code></a> <em>(files/1.1_Vectors)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-definition-6"><td></td><td>
        <strong>definition-6</strong></td><td></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="files/1.0_Coordinate_geometry.html#definition-6"><code class="xref">definition-6</code></a> <em>(files/1.0_Coordinate_geometry)</em></td><td>
+       <a href="files/1.3_Points_lines_and_planes.html#definition-6"><code class="xref">definition-6</code></a> <em>(files/1.3_Points_lines_and_planes)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-definition-7"><td></td><td>
+       <strong>definition-7</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="files/1.1_Vectors.html#definition-7"><code class="xref">definition-7</code></a> <em>(files/1.1_Vectors)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-definition-8"><td></td><td>
@@ -636,15 +645,7 @@ title="Fullscreen mode"
      <tr>
        <td></td>
        <td>
-       <a href="files/1.0_Coordinate_geometry.html#definition-8"><code class="xref">definition-8</code></a> <em>(files/1.0_Coordinate_geometry)</em></td><td>
-       <em>definition</em></td></tr>
-     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-definition-9"><td></td><td>
-       <strong>definition-9</strong></td><td></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="files/1.0_Coordinate_geometry.html#definition-9"><code class="xref">definition-9</code></a> <em>(files/1.0_Coordinate_geometry)</em></td><td>
+       <a href="files/1.1_Vectors.html#definition-8"><code class="xref">definition-8</code></a> <em>(files/1.1_Vectors)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-example-0"><td></td><td>
@@ -660,23 +661,7 @@ title="Fullscreen mode"
      <tr>
        <td></td>
        <td>
-       <a href="files/1.2_Shortest_distance_problems.html#example-1"><code class="xref">example-1</code></a> <em>(files/1.2_Shortest_distance_problems)</em></td><td>
-       <em>example</em></td></tr>
-     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-example-10"><td></td><td>
-       <strong>example-10</strong></td><td></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="files/1.0_Coordinate_geometry.html#example-10"><code class="xref">example-10</code></a> <em>(files/1.0_Coordinate_geometry)</em></td><td>
-       <em>example</em></td></tr>
-     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-example-14"><td></td><td>
-       <strong>example-14</strong></td><td></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="files/1.0_Coordinate_geometry.html#example-14"><code class="xref">example-14</code></a> <em>(files/1.0_Coordinate_geometry)</em></td><td>
+       <a href="files/1.5_Shortest_distance_problems.html#example-1"><code class="xref">example-1</code></a> <em>(files/1.5_Shortest_distance_problems)</em></td><td>
        <em>example</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-example-2"><td></td><td>
@@ -684,7 +669,7 @@ title="Fullscreen mode"
      <tr>
        <td></td>
        <td>
-       <a href="files/1.0_Coordinate_geometry.html#example-2"><code class="xref">example-2</code></a> <em>(files/1.0_Coordinate_geometry)</em></td><td>
+       <a href="files/2.2_Scaling.html#example-2"><code class="xref">example-2</code></a> <em>(files/2.2_Scaling)</em></td><td>
        <em>example</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-example-3"><td></td><td>
@@ -700,7 +685,7 @@ title="Fullscreen mode"
      <tr>
        <td></td>
        <td>
-       <a href="files/1.0_Coordinate_geometry.html#example-4"><code class="xref">example-4</code></a> <em>(files/1.0_Coordinate_geometry)</em></td><td>
+       <a href="files/1.2_Basis.html#example-4"><code class="xref">example-4</code></a> <em>(files/1.2_Basis)</em></td><td>
        <em>example</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-example-5"><td></td><td>
@@ -708,15 +693,7 @@ title="Fullscreen mode"
      <tr>
        <td></td>
        <td>
-       <a href="files/5.3_Drawing_polygons.html#example-5"><code class="xref">example-5</code></a> <em>(files/5.3_Drawing_polygons)</em></td><td>
-       <em>example</em></td></tr>
-     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-example-6"><td></td><td>
-       <strong>example-6</strong></td><td></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="files/1.3_Intersections.html#example-6"><code class="xref">example-6</code></a> <em>(files/1.3_Intersections)</em></td><td>
+       <a href="files/4.5_Binary_space_partitioning.html#example-5"><code class="xref">example-5</code></a> <em>(files/4.5_Binary_space_partitioning)</em></td><td>
        <em>example</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-example-7"><td></td><td>
@@ -724,7 +701,7 @@ title="Fullscreen mode"
      <tr>
        <td></td>
        <td>
-       <a href="files/1.0_Coordinate_geometry.html#example-7"><code class="xref">example-7</code></a> <em>(files/1.0_Coordinate_geometry)</em></td><td>
+       <a href="files/1.4_Intersections.html#example-7"><code class="xref">example-7</code></a> <em>(files/1.4_Intersections)</em></td><td>
        <em>example</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-example-8"><td></td><td>
@@ -733,6 +710,14 @@ title="Fullscreen mode"
        <td></td>
        <td>
        <a href="files/2.0_Transformations.html#example-8"><code class="xref">example-8</code></a> <em>(files/2.0_Transformations)</em></td><td>
+       <em>example</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-example-9"><td></td><td>
+       <strong>example-9</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="files/1.1_Vectors.html#example-9"><code class="xref">example-9</code></a> <em>(files/1.1_Vectors)</em></td><td>
        <em>example</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-finding-transformation-matrix-theorem"><td></td><td>
@@ -772,7 +757,7 @@ title="Fullscreen mode"
      <tr>
        <td></td>
        <td>
-       <a href="files/1.0_Coordinate_geometry.html#geometric-dot-product-definition"><code class="xref">geometric-dot-product-definition</code></a> <em>(files/1.0_Coordinate_geometry)</em></td><td>
+       <a href="files/1.1_Vectors.html#geometric-dot-product-definition"><code class="xref">geometric-dot-product-definition</code></a> <em>(files/1.1_Vectors)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-homogeneous-coordinates-definition"><td></td><td>
@@ -796,7 +781,7 @@ title="Fullscreen mode"
      <tr>
        <td></td>
        <td>
-       <a href="files/1.3_Intersections.html#intersecting-planes-example"><code class="xref">intersecting-planes-example</code></a> <em>(files/1.3_Intersections)</em></td><td>
+       <a href="files/1.4_Intersections.html#intersecting-planes-example"><code class="xref">intersecting-planes-example</code></a> <em>(files/1.4_Intersections)</em></td><td>
        <em>example</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-inverse-transformation-definition"><td></td><td>
@@ -812,7 +797,7 @@ title="Fullscreen mode"
      <tr>
        <td></td>
        <td>
-       <a href="files/1.2_Shortest_distance_problems.html#line-line-distance-theorem"><code class="xref">line-line-distance-theorem</code></a> <em>(files/1.2_Shortest_distance_problems)</em></td><td>
+       <a href="files/1.5_Shortest_distance_problems.html#line-line-distance-theorem"><code class="xref">line-line-distance-theorem</code></a> <em>(files/1.5_Shortest_distance_problems)</em></td><td>
        <em>theorem</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-line-line-intersection-example"><td></td><td>
@@ -820,15 +805,23 @@ title="Fullscreen mode"
      <tr>
        <td></td>
        <td>
-       <a href="files/1.3_Intersections.html#line-line-intersection-example"><code class="xref">line-line-intersection-example</code></a> <em>(files/1.3_Intersections)</em></td><td>
+       <a href="files/1.4_Intersections.html#line-line-intersection-example"><code class="xref">line-line-intersection-example</code></a> <em>(files/1.4_Intersections)</em></td><td>
        <em>example</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-line-plane-intersection"><td></td><td>
+       <strong>line-plane-intersection</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="files/1.4_Intersections.html#line-plane-intersection"><code class="xref">line-plane-intersection</code></a> <em>(files/1.4_Intersections)</em></td><td>
+       <em>theorem</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-line-sphere-intersection-example"><td></td><td>
        <strong>line-sphere-intersection-example</strong></td><td></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="files/1.3_Intersections.html#line-sphere-intersection-example"><code class="xref">line-sphere-intersection-example</code></a> <em>(files/1.3_Intersections)</em></td><td>
+       <a href="files/1.4_Intersections.html#line-sphere-intersection-example"><code class="xref">line-sphere-intersection-example</code></a> <em>(files/1.4_Intersections)</em></td><td>
        <em>example</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-linear-transformation-definition"><td></td><td>
@@ -844,7 +837,7 @@ title="Fullscreen mode"
      <tr>
        <td></td>
        <td>
-       <a href="files/1.0_Coordinate_geometry.html#magnitude-definition"><code class="xref">magnitude-definition</code></a> <em>(files/1.0_Coordinate_geometry)</em></td><td>
+       <a href="files/1.1_Vectors.html#magnitude-definition"><code class="xref">magnitude-definition</code></a> <em>(files/1.1_Vectors)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-midpoint-algorithm"><td></td><td>
@@ -876,7 +869,7 @@ title="Fullscreen mode"
      <tr>
        <td></td>
        <td>
-       <a href="files/1.1_Points_lines_and_planes.html#normal-vector-definition"><code class="xref">normal-vector-definition</code></a> <em>(files/1.1_Points_lines_and_planes)</em></td><td>
+       <a href="files/1.3_Points_lines_and_planes.html#normal-vector-definition"><code class="xref">normal-vector-definition</code></a> <em>(files/1.3_Points_lines_and_planes)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-object-space-example"><td></td><td>
@@ -900,7 +893,7 @@ title="Fullscreen mode"
      <tr>
        <td></td>
        <td>
-       <a href="files/1.3_Intersections.html#parallel-lines-example"><code class="xref">parallel-lines-example</code></a> <em>(files/1.3_Intersections)</em></td><td>
+       <a href="files/1.4_Intersections.html#parallel-lines-example"><code class="xref">parallel-lines-example</code></a> <em>(files/1.4_Intersections)</em></td><td>
        <em>example</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-pixel-definition"><td></td><td>
@@ -916,7 +909,7 @@ title="Fullscreen mode"
      <tr>
        <td></td>
        <td>
-       <a href="files/1.2_Shortest_distance_problems.html#point-line-distance-theorem"><code class="xref">point-line-distance-theorem</code></a> <em>(files/1.2_Shortest_distance_problems)</em></td><td>
+       <a href="files/1.5_Shortest_distance_problems.html#point-line-distance-theorem"><code class="xref">point-line-distance-theorem</code></a> <em>(files/1.5_Shortest_distance_problems)</em></td><td>
        <em>theorem</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-point-normal-definition"><td></td><td>
@@ -924,7 +917,7 @@ title="Fullscreen mode"
      <tr>
        <td></td>
        <td>
-       <a href="files/1.1_Points_lines_and_planes.html#point-normal-definition"><code class="xref">point-normal-definition</code></a> <em>(files/1.1_Points_lines_and_planes)</em></td><td>
+       <a href="files/1.3_Points_lines_and_planes.html#point-normal-definition"><code class="xref">point-normal-definition</code></a> <em>(files/1.3_Points_lines_and_planes)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-raster-definition"><td></td><td>
@@ -988,7 +981,7 @@ title="Fullscreen mode"
      <tr>
        <td></td>
        <td>
-       <a href="files/1.3_Intersections.html#skew-lines-example"><code class="xref">skew-lines-example</code></a> <em>(files/1.3_Intersections)</em></td><td>
+       <a href="files/1.4_Intersections.html#skew-lines-example"><code class="xref">skew-lines-example</code></a> <em>(files/1.4_Intersections)</em></td><td>
        <em>example</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-sutherland-hodgman-algorithm"><td></td><td>
@@ -1007,12 +1000,20 @@ title="Fullscreen mode"
        <a href="files/4.2_Polygon_clipping.html#sutherland-hodgman-example"><code class="xref">sutherland-hodgman-example</code></a> <em>(files/4.2_Polygon_clipping)</em></td><td>
        <em>example</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-theorem-1"><td></td><td>
+       <strong>theorem-1</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="files/1.2_Basis.html#theorem-1"><code class="xref">theorem-1</code></a> <em>(files/1.2_Basis)</em></td><td>
+       <em>theorem</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-theorem-4"><td></td><td>
        <strong>theorem-4</strong></td><td></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="files/1.2_Shortest_distance_problems.html#theorem-4"><code class="xref">theorem-4</code></a> <em>(files/1.2_Shortest_distance_problems)</em></td><td>
+       <a href="files/1.5_Shortest_distance_problems.html#theorem-4"><code class="xref">theorem-4</code></a> <em>(files/1.5_Shortest_distance_problems)</em></td><td>
        <em>theorem</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-transformation-matrix-example"><td></td><td>

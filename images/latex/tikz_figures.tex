@@ -99,6 +99,24 @@
 %     \draw (330:0.2) -- ++(90:0.2) -- ++(150:0.2);
 % \end{tikzpicture}
 
+% Change of basis
+% \begin{tikzpicture}
+%     \tikzmath{\a1=30;\a2=120;\l1=4.2;}
+%     \coordinate (O2) at (0, 0);
+%     \coordinate (P) at (3, 3);
+%     \draw [axis] (0, 0) -- ++(0:5) node at (0:5.25) {$x$};
+%     \draw [axis] (0, 0) -- ++(90:4) node at (90:4.25) {$y$};
+%     \node [point,label=above:{$[(v_1,v_2)]_E = [(a_1,a_2)]_U$}] (p) at (P) {};
+%     \draw [bluevec] (0,0) -- node [below,pos=0.5] {$\mathbf{e}_1$} ++(0:2);
+%     \draw [bluevec] (0,0) -- node [left,pos=0.75] {$\mathbf{e}_2$} ++(90:2);
+%     \draw [bluevec] (2,0) -- node [below] {$v_1 \mathbf{e}_1$} (3,0);
+%     \draw [bluevec] (3,0) -- node [left,pos=0.75] {$v_2 \mathbf{e}_2$} (p); 
+%     \draw [redvec] (O2) -- ++(\a1:2) coordinate (1) node [below right,pos=0.9] {$\mathbf{u}_1$};    
+%     \draw [redvec] (O2) -- node [below left,pos=0.5] {$\mathbf{u}_2$} ++(\a2:2);
+%     \draw [redvec] (1) -- (\a1:\l1) coordinate (2) node [pos=0.75,below right] {$a_1\mathbf{u}_1$};
+%     \draw [redvec] (2) -- (p) node [pos=0.5,above right] {$a_2\mathbf{u}_2$};
+% \end{tikzpicture}
+
 % Vector equation of a line
 % \begin{tikzpicture}
 %     \coordinate (P) at (4, 1);
@@ -153,20 +171,20 @@
 % \end{tikzpicture}
 
 % Intersecting lines
-% \begin{tikzpicture}
-%     \draw [axis] (0,0) -- ++(330:2) node at (330:2.2) {$x$};
-%     \draw [axis] (0,0) -- ++(30:2) node at (30:2.2) {$y$};
-%     \draw [axis] (0,0) -- ++(90:2) node at (90:2.2) {$z$};
-%     \coordinate (P) at (4,0);
-%     \coordinate (Q) at ($(P)+(3,0)$);
-%     \draw ($(P)+(225:1)$) -- ++(45:4) node [pos=0, left] {$\ell_1$};
-%     \draw ($(Q)+(315:1)$) -- ++(135:4) node [pos=0, right] {$\ell_2$};
-%     \draw [bluevec] (P) -- node [above left] {$\mathbf{d}_1$} ++(45:1.5);
-%     \draw [redvec] (Q) -- node [above right] {$\mathbf{d}_2$} ++(135:1.5);
-%     \node [point,blue,label={below right:\textcolor{blue}{$P_1$}}] at (P) {};
-%     \node [point,red,label={below left:\textcolor{red}{$P_2$}}] at (Q) {};
-%     \node [point] at ($(P)+(45:2.125)$) {};
-% \end{tikzpicture}
+\begin{tikzpicture}
+    \draw [axis] (0,0) -- ++(330:2) node at (330:2.2) {$x$};
+    \draw [axis] (0,0) -- ++(30:2) node at (30:2.2) {$y$};
+    \draw [axis] (0,0) -- ++(90:2) node at (90:2.2) {$z$};
+    \coordinate (P) at (4,0);
+    \coordinate (Q) at ($(P)+(3,0)$);
+    \draw ($(P)+(225:1)$) -- ++(45:4) node [pos=0, left] {$\ell_1$};
+    \draw ($(Q)+(315:1)$) -- ++(135:4) node [pos=0, right] {$\ell_2$};
+    \draw [bluevec] (P) -- node [above left] {$\mathbf{d}_1$} ++(45:1.5);
+    \draw [redvec] (Q) -- node [above right] {$\mathbf{d}_2$} ++(135:1.5);
+    \node [point,blue,label={below right:\textcolor{blue}{$\mathbf{p}_1$}}] at (P) {};
+    \node [point,red,label={below left:\textcolor{red}{$\mathbf{p}_2$}}] at (Q) {};
+    \node [point] at ($(P)+(45:2.125)$) {};
+\end{tikzpicture}
 
 % Parallel lines
 % \begin{tikzpicture}
@@ -224,19 +242,19 @@
 % \end{tikzpicture}
 
 % Line-plane intersection
-\begin{tikzpicture}
-    \tikzmath{\x=330;\w=4;}
-    \coordinate (r) at (\x:1);
-    \draw [gray!50] (r) -- ++(15:2);
-    \draw [green,fill=green!15,opacity=0.75] ($(\x+180:\w/2)+(270:\w/2)$) -- ++(\x:\w) -- ++(90:\w) -- ++(\x+180:\w) -- cycle;
-    \node [point,label=below:{$\mathbf{r}$}] (r) at (r) {};
-    \node [point,label=below:{$\mathbf{q}$}] (q) at ($(r)+(195:5)$) {};
-    \draw [gray] (q) -- ++(15:5);
-    \draw [bluevec] (q) -- ++(15:2) node [pos=0.5,below] {$\mathbf{d}$};
-    \draw [redvec] (\x+180:1) coordinate (n)-- ++(180:2) node [left] {$\mathbf{n}$};
-    \node [point,label=below:{$\mathbf{p}$}] at (n) {};
-    \draw [gray] ($(n)+(90:0.2)$) -- ++(180:0.2) -- ++(270:0.2);
-\end{tikzpicture}
+% \begin{tikzpicture}
+%     \tikzmath{\x=330;\w=4;}
+%     \coordinate (r) at (\x:1);
+%     \draw [gray!50] (r) -- ++(15:2);
+%     \draw [green,fill=green!15,opacity=0.75] ($(\x+180:\w/2)+(270:\w/2)$) -- ++(\x:\w) -- ++(90:\w) -- ++(\x+180:\w) -- cycle;
+%     \node [point,label=below:{$\mathbf{r}$}] (r) at (r) {};
+%     \node [point,label=below:{$\mathbf{q}$}] (q) at ($(r)+(195:5)$) {};
+%     \draw [gray] (q) -- ++(15:5);
+%     \draw [bluevec] (q) -- ++(15:2) node [pos=0.5,below] {$\mathbf{d}$};
+%     \draw [redvec] (\x+180:1) coordinate (n)-- ++(180:2) node [left] {$\mathbf{n}$};
+%     \node [point,label=below:{$\mathbf{p}$}] at (n) {};
+%     \draw [gray] ($(n)+(90:0.2)$) -- ++(180:0.2) -- ++(270:0.2);
+% \end{tikzpicture}
 
 % Shortest distance between a point and a line
 % \tikzmath{\a1=10;}
@@ -246,12 +264,12 @@
 %     \coordinate (q) at ($(r)+(\a1+90:2)$);
 %     \draw ($(p)+(\a1-180:2)$) -- ($(p)+(\a1:5)$) node [left,pos=0,black] {$\ell$};
 %     \node [point,label={270:$\mathbf{p}$}] (p) at (p) {};
-%     \node [point,label={below:$\mathbf{q}$}] (r) at (r) {};
-%     \node [point,label={above:$\mathbf{r}$}] (q) at (q) {};
+%     \node [point,label={below:$\mathbf{r}$}] (r) at (r) {};
+%     \node [point,label={above:$\mathbf{q}$}] (q) at (q) {};
 %     \draw [bluevec] (p) -- (r) node [pos=0.5,below] {$\mathbf{d}$} ;
 %     \draw [redvec] (r) -- (q);
 %     \draw ($(r)+(\a1-180:0.2)$) -- ++(\a1+90:0.2) -- ++(\a1:0.2);
-%     \draw [dblarrow] ($(r)+(\a1:0.2)$) -- node [right] {$d$} ($(q)+(\a1:0.2)$);
+%     \draw [dblarrow] ($(r)+(\a1:0.25)$) -- node [right] {$d$} ($(q)+(\a1:0.25)$);
 % \end{tikzpicture}
 
 % Sphere
@@ -372,15 +390,38 @@
 
 % Distance between a point an a plane
 % \begin{tikzpicture}
-%     \draw [line width=1pt] (-3, 0) -- (3, 0) node [pos=0,below] {$p$};
+%     \draw [line width=1pt] (-3, 0) -- (3, 0);
 %     \node [point,label=270:$\mathbf{p}$] (p) {};
 %     \node [point,label=0:$\mathbf{q}$] (q) at (2, 2) {};
-%     \draw [greenvec] (p) -- ++(90:3) node [left] {$\mathbf{n}$};
+%     \draw [greenvec] (p) -- ++(90:3) node [above] {$\mathbf{n}$};
 %     \draw [bluevec] (p) -- (q);
 %     \draw [dblarrow] (-0.2, 0) -- node [left] {$d$} ++(0, 2);
 %     \draw (0, 2) -- (q) (0,1.8) -- ++(0:0.2) -- ++(90:0.2);
 %     \draw (45:1) arc (45:90:1);
 %     \node at (67.5:0.67) {$\theta$};
+% \end{tikzpicture}
+
+% Distance between two spheres
+% \begin{tikzpicture}
+%     \tikzmath{\a1=120;\a2=60;\d1=3;\d2=3;\r=1;}
+%     \coordinate (c1) at (0,0);
+%     \coordinate (c2) at (0:2*\r);
+%     \coordinate (p1) at ($(c1)+(\a1:\d1)$);
+%     \coordinate (p2) at ($(c2)+(\a2:\d2)$);
+%     \draw [blue!20] (p1) -- (c1);
+%     \draw [red!20] (p2) -- (c2);
+%     \draw [blue, dashed] (c1) circle (\r);
+%     \draw [red,dashed] (c2) circle (\r);
+%     \draw [blue] (p1) circle (\r);
+%     \draw [red] (p2) circle (\r);
+%     \node [point,label=left:{$\mathbf{p}_1$}] at (p1) {};
+%     \node [point,label=left:{$\mathbf{p}_2$}] at (p2) {};
+%     \node [point,label=below:{$\mathbf{c}_1$}] at (c1) {};
+%     \node [point,label=below:{$\mathbf{c}_2$}] at (c2) {};
+%     \draw [bluevec] (p1) -- ($(p1)!0.5!(c1)$) node [pos=0.75,below left] {$\mathbf{d}_1$};
+%     \draw [redvec] (p2) -- ($(p2)!0.5!(c2)$) node [pos=0.8,below right] {$\mathbf{d}_2$};
+%     \draw [dblarrow] (p1) -- ++(45:1) node [pos=0.5, below right] {$r$};
+%     \draw [dblarrow] (p2) -- ++(-45:1) node [pos=0.5, above right] {$r$};
 % \end{tikzpicture}
 
 % Linear transformation

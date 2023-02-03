@@ -1,0 +1,317 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+# (basis-section)=
+# # Basis
+# 
+# Imagine that we have a [virtual environment](virtual-environments-section) and we need to view it from a given point within the environment. To represent the environment as it should be seen from this point will require us to calculate the co-ordinates of objects in the environment in relation to where we are viewing it from (known as the [camera space](camera-space-section)). To do this we make use of vector basis and the [change of basis](change-of-basis-section). 
+# 
+# ````{prf:definition} Linear independence
+# :class: note
+# 
+# A set of vectors $\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_n$ in a vector space $V$ are **linearly independent** if the only solution to the equation
+# 
+# $$ \alpha_1 \mathbf{v}_1 + \alpha_2 \mathbf{v}_2 + \cdots + \alpha_n \mathbf{v}_n = \mathbf{0}, $$
+# 
+# is $\alpha_i = 0$ for $i = 1 , 2, \ldots, n$. If a set of vectors is not linearly independent then they must be **linearly dependent**. 
+# ````
+# 
+# ```{prf:theorem} Determinant test for linear independence
+# A set of vectors are linearly independent if $\det (\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_n) \neq 0$.
+# ```
+# 
+# A **basis** of a vector space $V$ is the set of vectors $\{ \mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_n \}$ which are linearly independent (i.e., no vector in the basis can be represented as a linear combination of the other vectors in the basis) and span $V$. Every other vector $\mathbf{u}$ in $V$ can be expressed as a unique linear combination of the vectors in the basis, i.e.,
+# 
+# \begin{align*}
+#     \mathbf{u} = \alpha_1 \mathbf{v}_1 + \alpha_2 \mathbf{v}_2 + \cdots + \alpha_n \mathbf{v}_n.
+# \end{align*}
+# 
+# where $\alpha_i \in \mathbb{R}$. The **dimension** of a vector space $V$ is the number of vectors in the basis. For example, the basis for the Euclidean space $\mathbb{R}^3$ is commonly denoted as $\{ \mathbf{i}, \mathbf{j}, \mathbf{k} \}$ where 
+# \begin{align*}
+#     \mathbf{i} &= \begin{pmatrix} 1 \\ 0 \\ 0 \end{pmatrix}, &
+#     \mathbf{j} &= \begin{pmatrix} 0 \\ 1 \\ 0 \end{pmatrix}, &
+#     \mathbf{k} &= \begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix},
+# \end{align*}
+# 
+# so $\mathbb{R}^3$ is known as a three-dimensional Euclidean space. The basis $\{ \mathbf{i}, \mathbf{j}, \mathbf{k} \}$ is the simplest basis for $\mathbb{R^3}$ in that it has the smallest number of non-zero values and those values are 1s. This basis is known as the standard basis.
+# 
+# ````{prf:definition} The standard basis
+# :class: note
+# 
+# The **standard basis** for a vector space $\mathbb{R}^n$ is $E = \{ \mathbf{e}_1, \mathbf{e}_2, \ldots, \mathbf{e}_n \}$ where $\mathbf{e}_i$ is column $i$ of the identity matrix, i.e.,
+# 
+# \begin{align*}
+#     \mathbf{e}_1 &= \begin{pmatrix} 1  \\ 0 \\ \vdots \\ 0 \end{pmatrix}, &
+#     \mathbf{e}_2 &= \begin{pmatrix} 0 \\ 1 \\ \vdots \\ 0 \end{pmatrix}, & \ldots, &&
+#     \mathbf{e}_n &= \begin{pmatrix} 0 \\ \vdots \\ 0 \\ 1 \end{pmatrix}.
+# \end{align*}
+# 
+# Note that in $\mathbb{R}^3$ it is common to use $\mathbf{i} = \mathbf{e}_1$, $\mathbf{j} = \mathbf{e}_2$ and $\mathbf{k} = \mathbf{e}_3$.
+# ````
+# 
+# (change-of-basis-section)=
+# ## Change of basis
+# 
+# ```{figure} /images/change_of_basis.svg
+# :name: change-of-basis-figure
+# :width: 300px
+# 
+# The same point represented with respect to two different vectors.
+# ```
+# 
+# Sometimes it is useful to write a vector with respect to a different basis which is known as the **change of basis**. Consider {numref}`change-of-basis-figure` where the vector $\mathbf{v} = (v_1,v_2)$ is represented with respect to the standard basis $E=\{\mathbf{e}_1, \mathbf{e}_2\}$ which is denoted by the subscript notation $[(v_1,v_2)]_E$. The same vector can be represent with respect to a different basis $U = \{\mathbf{u}_1, \mathbf{u}_2\}$ by the vector $[(a_1, a_2)]_U$. Changing the basis from $E$ to $U$ requires us to calculate the values of $a_1$ and $a_2$, i.e., in $\mathbb{R}^3$ we solve
+# 
+# \begin{align*}
+#     a_1 \mathbf{u}_1 + a_2 \mathbf{u}_2 + a_3 \mathbf{u}_3 = [\mathbf{v}]_E 
+# \end{align*}
+# 
+# This is a system of linear equations which we can write as a matrix equation
+# 
+# \begin{align*}
+#     \begin{pmatrix}
+#         \uparrow & \uparrow & & \uparrow \\
+#         \mathbf{u}_1 & \mathbf{u}_2 & \cdots & \mathbf{u}_n \\
+#         \downarrow & \downarrow & & \downarrow
+#     \end{pmatrix}
+#     \begin{pmatrix} a_1 \\ \vdots \\ a_n \end{pmatrix} =
+#     \begin{pmatrix} v_1 \\ \vdots \\ v_n \end{pmatrix}.
+# \end{align*}
+# 
+# We can solve this system by inverting the coefficient matrix. Using <a href="https://jonshiach.github.io/LA-book/2_Systems_of_Linear_Equations/2.6_Gauss_Jordan_elimination.html" target="_blank">Gauss-Jordan elimination</a> we form the augmented matrix 
+# 
+# \begin{align*}
+#     \left( \begin{array}{cccc|cccc}
+#         \uparrow & \uparrow & & \uparrow & \uparrow & \uparrow & & \uparrow \\
+#         \mathbf{u}_1 & \mathbf{u}_2 & \cdots & \mathbf{u}_n & \mathbf{e}_1 & \mathbf{e}_2 & \cdots & \mathbf{e}_n \\
+#         \downarrow & \downarrow & & \downarrow & \downarrow & \downarrow & & \downarrow
+#     \end{array} \right)
+# \end{align*}
+# 
+# and row reduce to reduced row echelon form. Note that the matrix to the right hand side of the partition is the identity matrix. Then $[\mathbf{v}]_U$ can be calculated using
+# 
+# \begin{align*}
+#     [\mathbf{v}]_U &= 
+#     \begin{pmatrix}
+#         \uparrow & \uparrow & & \uparrow \\
+#         \mathbf{u}_1 & \mathbf{u}_2 & \cdots & \mathbf{u}_n \\
+#         \downarrow & \downarrow & & \downarrow
+#     \end{pmatrix}^{-1}
+#     [\mathbf{v}]_E.
+# \end{align*}
+# 
+# The square matrix here is known as the **change of basis matrix** that changes the basis from $E$ to $U$ and is denoted by $A_{E \to U}$. 
+# 
+# ````{prf:example}
+# :class: seealso
+# :label: change-of-basis-example-1
+# 
+# Represent the vector $[\mathbf{a}]_E = (4, 0, 5)$ with respect to the basis $U = \{(1, 1, 0), (1, -1, 1), (1, -1, -2)\}$.
+# 
+# ```{dropdown} Solution
+# 
+# We need to solve the system
+# 
+# \begin{align*}
+#     \alpha_1 \begin{pmatrix} 1 \\ 1 \\ 0 \end{pmatrix} + 
+#     \alpha_2 \begin{pmatrix} 1 \\ -1 \\ 1 \end{pmatrix} +
+#     \alpha_3 \begin{pmatrix} 1 \\ -1 \\ -2 \end{pmatrix} =
+#     \begin{pmatrix} 4 \\ 0 \\ 5 \end{pmatrix},
+# \end{align*}
+# 
+# which can be written as the matrix equation
+# 
+# \begin{align*}
+#     \begin{pmatrix}
+#         1 & 1 & 1 \\
+#         1 & -1 & -1 \\
+#         0 & 1 & -2 
+#     \end{pmatrix}
+#     \begin{pmatrix} \alpha_1 \\ \alpha_2 \\ \alpha_3 \end{pmatrix} =
+#     \begin{pmatrix} 4 \\ 0 \\ 5 \end{pmatrix},
+# \end{align*}
+# 
+# where $[\mathbf{a}]_U = (\alpha_1, \alpha_2, \alpha_3)$. Calculating the inverse of the coefficient matrix using Gauss-Jordan elimination
+# 
+# \begin{align*}
+#     & \left( \begin{array}{ccc|ccc}
+#         1 &  1 &  1 &  1 &  0 &  0 \\
+#         1 & -1 & -1 &  0 &  1 &  0 \\
+#         0 &  1 & -2 &  0 &  0 &  1
+#     \end{array} \right)
+#     \begin{array}{l} \\ R_2 - R_1 \\ \phantom{x} \end{array} \\ \\ 
+#     \longrightarrow \qquad
+#     & \left( \begin{array}{ccc|ccc}
+#         1 &  1 &  1 &  1 &  0 &  0 \\
+#         0 & -2 & -2 & -1 &  1 &  0 \\
+#         0 &  1 & -2 &  0 &  0 &  1
+#     \end{array} \right)   
+#     \begin{array}{l} \\ -\frac{1}{2}R_2 \\ \phantom{x} \end{array} \\ \\ 
+#     \longrightarrow \qquad
+#     & \left( \begin{array}{ccc|ccc}
+#         1 &  1 &  1 &  1   &  0   &  0 \\
+#         0 &  1 &  1 &  1/2 & -1/2 &  0 \\
+#         0 &  1 & -2 &  0   &  0   &  1
+#     \end{array} \right)     
+#     \begin{array}{l} R_1 - R_2 \\ \\ R_3 - R_2 \end{array} \\ \\ 
+#     \longrightarrow \qquad
+#     & \left( \begin{array}{ccc|ccc}
+#         1 &  0 &  0 &  1/2 &  1/2 &  0 \\
+#         0 &  1 &  1 &  1/2 & -1/2 &  0 \\
+#         0 &  0 & -3 & -1/2 &  1/2 &  1
+#     \end{array} \right)     
+#     \begin{array}{l} \\ \\ -\frac{1}{3}R_3 \end{array} \\ \\ 
+#     \longrightarrow \qquad
+#     & \left( \begin{array}{ccc|ccc}
+#         1 &  0 &  0 &  1/2 &  1/2 &  0 \\
+#         0 &  1 &  1 &  1/2 & -1/2 &  0 \\
+#         0 &  0 &  1 &  1/6 & -1/6 & -1/3
+#     \end{array} \right)   
+#     \begin{array}{l} \\ R_2 - R_3 \\ \phantom{x} \end{array} \\ \\ 
+#     \longrightarrow \qquad
+#     & \left( \begin{array}{ccc|ccc}
+#         1 &  0 &  0 &  1/2 &  1/2 &  0 \\
+#         0 &  1 &  0 &  1/3 & -1/3 &  1/3 \\
+#         0 &  0 &  1 &  1/6 & -1/6 & -1/3
+#     \end{array} \right) 
+# \end{align*}
+# 
+# therefore the change of basis matrix is $A_{E \to U} = \begin{pmatrix} 1/2 & 1/2 & 0 \\ 1/3 & -1/3 & 1/3 \\ 1/6 & -1/6 & -1/3 \end{pmatrix}$
+# 
+# so
+# 
+# \begin{align*}
+#     [\mathbf{a}]_U &= A_{E \to U} \mathbf{v} \\
+#     &=
+#     \begin{pmatrix} 
+#         \frac{1}{2} & \frac{1}{2} & 0 \\
+#         \frac{1}{3} & -\frac{1}{3} & \frac{1}{3} \\
+#         \frac{1}{6} & -\frac{1}{6} & -\frac{1}{3}
+#     \end{pmatrix}
+#     \begin{pmatrix} 4 \\ 0 \\ 5 \end{pmatrix} =
+#     \begin{pmatrix} 2 \\ 3 \\ -1 \end{pmatrix}.
+# \end{align*}
+# ```
+# ````
+# 
+# The change of basis calculation shown in {prf:ref}`change-of-basis-example-1` was relatively straightforward as it involved changing from the standard basis. We can extend this method to change between two arbitrary basis. Let $U = \{ \mathbf{u}_1, \mathbf{u}_2, \ldots, \mathbf{u}_n\}$ and $W = \{ \mathbf{w}_1, \mathbf{w}_2, \ldots, \mathbf{w}_n \}$ be two basis for the vector space $V$ then the basis $U$ can be represnted with respect to $W$, i.e., 
+# 
+# ```{math}
+# :label: U_W-equation
+# 
+# \begin{align}
+#     \mathbf{u}_1 &= a_{11} \mathbf{w}_1 + a_{21} \mathbf{w}_2 + \cdots + a_{n1} \mathbf{w}_n, \\
+#     \mathbf{u}_2 &= a_{12} \mathbf{w}_1 + a_{22} \mathbf{w}_2 + \cdots + a_{n2} \mathbf{w}_n, \\
+#     & \vdots \\
+#     \mathbf{u}_n &= a_{1n} \mathbf{w}_1 + a_{2n} \mathbf{w}_2 + \cdots + a_{nn} \mathbf{w}_n,
+# \end{align}
+# ```
+# 
+# where $a_{ij}$ are scalars. Given a vector $\mathbf{v} = (v_1, v_2, \ldots, v_n) \in V$ expressed with respect to the basis $U$ then
+# 
+# \begin{align*}
+#     \mathbf{v} &= v_1 \mathbf{u}_1 + v_2 \mathbf{u}_2 + \cdots + v_n \mathbf{u}_n,
+# \end{align*}
+# 
+# and substituting the expressions for $\mathbf{u}_i$ from equation {eq}`U_W-equation` then
+# 
+# \begin{align*}
+#     \mathbf{v} &= v_1 (a_{11} \mathbf{w}_1 + a_{21} \mathbf{w}_2 + \cdots + a_{n1} \mathbf{w}_n) \\
+#     & \quad + v_2 (a_{12} \mathbf{w}_1 + a_{22} \mathbf{w}_2 + \cdots + a_{n2} \mathbf{w}_n) + \cdots \\
+#     & \quad + v_n (a_{1n} \mathbf{w}_1 + a_{2n} \mathbf{w}_2 + \cdots + a_{nn} \mathbf{w}_n).
+# \end{align*}
+# 
+# Factorising out the $\mathbf{w}_i$ vectors we can write this as
+# 
+# \begin{align*}
+#     \mathbf{v} &=  (a_{11} v_1 + a_{12} v_2 + \cdots + a_{1n} v_n) \mathbf{w}_1 \\
+#     & \quad + (a_{21} v_1 + a_{22} v_2 + \cdots + a_{2n} v_n) \mathbf{w}_2 + \cdots \\
+#     & \quad + (a_{n1} v_1 + a_{n2} v_2 + \cdots + a_{nn} v_n) \mathbf{w}_n.
+# \end{align*}
+# 
+# So we know that $\mathbf{v}$ represented with respect to the basis $W$ is
+# 
+# \begin{align*}
+#     [\mathbf{v}]_W = \begin{pmatrix} 
+#         a_{11} & a_{12} & \cdots & a_{1n} \\
+#         a_{21} & a_{22} & \cdots & a_{2n} \\
+#         \vdots & \vdots & \ddots & \vdots \\
+#         a_{n1} & a_{n2} & \cdots & a_{nn}
+#     \end{pmatrix}
+#     \begin{pmatrix} v_1 \\ v_2 \\ \vdots \\ v_n \end{pmatrix}.
+# \end{align*}
+# 
+# To calculate the change of basis matrix $A_{U \to W}$ such that $[\mathbf{v}]_W = A_{U \to W} [\mathbf{v}]_U$ we need to solve the system
+# 
+# \begin{align*}
+#     a_{11} \mathbf{w}_1 + a_{21} \mathbf{w}_2 + \cdots + a_{n1} \mathbf{w}_n &= \mathbf{u}_1, \\
+#     a_{12} \mathbf{w}_1 + a_{22} \mathbf{w}_2 + \cdots + a_{n2} \mathbf{w}_n &= \mathbf{u}_2, \\
+#     & \vdots \\
+#     a_{1n} \mathbf{w}_1 + a_{2n} \mathbf{w}_2 + \cdots + a_{nn} \mathbf{w}_n &= \mathbf{u}_n.
+# \end{align*}
+# 
+# We can do this by row reducing the augmented matrix 
+# 
+# $$\left( 
+# \begin{array}{cccc|cccc} 
+#     \uparrow & \uparrow & & \uparrow & \uparrow & \uparrow & & \uparrow \\
+#     \mathbf{w}_1 & \mathbf{w}_2 & \ldots & \mathbf{w}_n & \mathbf{u}_1 & \mathbf{u}_2 & \ldots & \mathbf{u}_n \\
+#     \downarrow & \downarrow & & \downarrow & \downarrow & \downarrow &  & \downarrow 
+# \end{array} \right)$$ 
+# 
+# to reduced row echelon form where $A_{U\to W}$ is the matrix to the right of the partition. Note that this is what was done in the solution to {prf:ref}`change-of-basis-example-1` where the matrix to the right-hand side of the partition of the augmented matrix was the identity matrix, i.e., the standard basis.
+# 
+# ````{prf:example}
+# :class: seealso
+# 
+# $U$ and $W$ are two basis of $\mathbb{R}^n$ given by
+# 
+# \begin{align*}
+#     U &= \left\{ \begin{pmatrix} 1 \\ 0 \end{pmatrix}, \begin{pmatrix} 1 \\ 1 \end{pmatrix} \right\}, \\
+#     W &= \left\{ \begin{pmatrix} 0 \\ 1 \end{pmatrix}, \begin{pmatrix} -1 \\ 1 \end{pmatrix} \right\}
+# \end{align*}
+# 
+# (i) &emsp; Calculate the change of basis matrix $A_{U \to W}$
+# 
+# ```{dropdown} Solution
+# To calculate $A_{U \to W}$ we need to reduce the following augmented matrix to reduced row echelon form
+# 
+# \begin{align*}
+#     & \left( \begin{array}{cc|cc}
+#         0 & -1 & 1 & 1 \\
+#         1 & 1 & 0 & 1
+#     \end{array} \right) 
+#     \begin{array}{l} R_1 \leftrightarrow R_2 \\ \phantom{x} \end{array} \\ \\
+#     \longrightarrow  
+#     & \left( \begin{array}{cc|cc}
+#         1 & 1 & 0 & 1 \\
+#         0 & -1 & 1 & 1
+#     \end{array}\right) 
+#     \begin{array}{l} \\ -R_2 \end{array} \\ \\
+#     \longrightarrow  
+#     & \left( \begin{array}{cc|cc}
+#         1 & 1 & 0 & 1 \\
+#         0 & 1 & -1 & -1
+#     \end{array} \right) 
+#     \begin{array}{l} R_1 - R_2 \\ \phantom{x} \end{array} \\ \\
+#     \longrightarrow
+#     & \left( \begin{array}{cc|cc}
+#         1 & 0 & 1 & 2 \\
+#         0 & 1 & -1 & -1
+#     \end{array} \right) 
+# \end{align*}
+# 
+# therefore $A_{U\to W} = \begin{pmatrix} 1 & 2 \\ -1 & -1 \end{pmatrix}$.
+# ```
+# 
+# (ii) &emsp; If $\mathbf{v} \in \mathbb{R}^2$ where $[\mathbf{v}]_U = (1,2)$, calculate $[\mathbf{v}]_W$
+# 
+# ```{dropdown} Solution
+# \begin{align*}
+#     [\mathbf{v}]_W &= A_{U \to W} [\mathbf{v}]_U = 
+#     \begin{pmatrix} 1 & 2 \\ -1 & -1 \end{pmatrix}
+#     \begin{pmatrix} 1 \\ 2 \end{pmatrix} 
+#     = \begin{pmatrix} 5 \\ -3 \end{pmatrix}
+# \end{align*}
+# ```
+# 
+# ````

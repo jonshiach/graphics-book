@@ -14,7 +14,7 @@ parts:
 
 - caption: Chapters
   chapters:
-  - file: files/1.0_Coordinate_geometry
+  - file: files/1.0_Vector_geometry
     sections:
     - glob: files/1.*
     
@@ -26,8 +26,7 @@ parts:
     sections:
     - glob: files/3.*
 
-
-  - file: files/4.0_Hidden_surface_removal
+  - file: files/4.0_Clipping_and_HSD
     sections:
     - glob: files/4.*
 

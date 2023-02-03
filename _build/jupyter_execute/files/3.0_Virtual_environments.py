@@ -7,7 +7,7 @@
 # A virtual environment is a computer generated world which which is viewed from a point within the environment. Virtual environments are usually three dimensional and used primarily in computer games, movies and television and virtual reality simulations. In this chapter we will look at home virtual environments are defined and the mathematical operations used to view the virtual environment on a two-dimensional display.
 # 
 # ```{figure} https://www.gamespot.com/a/uploads/scale_landscape/1581/15811374/3686824-last%20of%20us%20seattle%20day%201.jpg
-# :width: 400px
+# :width: 500px
 # 
 # A screen shot of the Seattle environment from *The Last of Us Part II* {cite:p}`naughtydog:2020`.
 # ```

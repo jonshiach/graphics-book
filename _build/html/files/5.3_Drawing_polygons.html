@@ -133,7 +133,7 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="1.0_Coordinate_geometry.html">
+  <a class="reference internal" href="1.0_Vector_geometry.html">
    Vector Geometry
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
@@ -143,22 +143,32 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="1.1_Points_lines_and_planes.html">
+    <a class="reference internal" href="1.1_Vectors.html">
+     Vectors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="1.2_Basis.html">
+     Basis
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="1.3_Points_lines_and_planes.html">
      Points, lines, planes and spheres
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="1.2_Shortest_distance_problems.html">
-     Shortest distance problems
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="1.3_Intersections.html">
+    <a class="reference internal" href="1.4_Intersections.html">
      Intersections between objects
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="1.4_Coordinate_geometry_exercises.html">
+    <a class="reference internal" href="1.5_Shortest_distance_problems.html">
+     Shortest distance problems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="1.6_Vector_geometry_exercises.html">
      Vector Geometry Exercises
     </a>
    </li>
@@ -224,7 +234,7 @@ const thebe_selector_output = ".output, .cell_output"
   </ul>
  </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="4.0_Hidden_surface_removal.html">
+  <a class="reference internal" href="4.0_Clipping_and_HSD.html">
    Clipping &amp; hidden surface determination
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
@@ -591,7 +601,7 @@ Solution<div class="sd-summary-down docutils">
 <figure class="align-default" id="id1" style="width: 400px">
 <img alt="../_images/flood_fill_tight_corner.png" src="../_images/flood_fill_tight_corner.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 96 </span><span class="caption-text">The flood fill algorithm is blocked by tight corners.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 97 </span><span class="caption-text">The flood fill algorithm is blocked by tight corners.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
@@ -599,12 +609,12 @@ Solution<div class="sd-summary-down docutils">
 <span id="scanline-algorithm-section"></span><h3>The scanline algorithm<a class="headerlink" href="#the-scanline-algorithm" title="Permalink to this headline">#</a></h3>
 <p>The <strong>scanline algorithm</strong> is a method of rendering a polygon without drawing the edges beforehand unlike the <a class="reference internal" href="#flood-fill-algorithm-section"><span class="std std-ref">flood fill algorithm</span></a> that requires pixels to be plotted to form an outline. Instead of testing pixels one by one, the scanline filling algorithm loops through horizontal rows of pixels (known as a <strong>scanline</strong>) starting from <span class="math notranslate nohighlight">\(y=0\)</span> and going down the raster to <span class="math notranslate nohighlight">\(y = N_y\)</span>. If the scanline intersects with an edge of the polygon the intersection points which are known as <strong>span extrema</strong>, are calculated, sorted into ascending order and all pixels between pairs of intersection points are filled.</p>
 <div class="proof definition admonition" id="definition-2">
-<p class="admonition-title"><span class="caption-number">Definition 27 </span> (Scanline)</p>
+<p class="admonition-title"><span class="caption-number">Definition 26 </span> (Scanline)</p>
 <section class="definition-content" id="proof-content">
 <p>A horizontal row of pixels.</p>
 </section>
 </div><div class="proof definition admonition" id="definition-3">
-<p class="admonition-title"><span class="caption-number">Definition 28 </span> (Span extrema)</p>
+<p class="admonition-title"><span class="caption-number">Definition 27 </span> (Span extrema)</p>
 <section class="definition-content" id="proof-content">
 <p>A pixel where a scanline intersects with the edge of a polygons.</p>
 </section>
@@ -613,18 +623,18 @@ Solution<div class="sd-summary-down docutils">
 <img alt="../_images/5.3_Drawing_polygons_1_0.png" src="../_images/5.3_Drawing_polygons_1_0.png" />
 </div>
 <figcaption>
-<p><span class="caption-number">Fig. 97 </span><span class="caption-text">Calculating span extrema co-ordinates.</span><a class="headerlink" href="#span-extrema-figure" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 98 </span><span class="caption-text">Calculating span extrema co-ordinates.</span><a class="headerlink" href="#span-extrema-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>Consider <a class="reference internal" href="#span-extrema-figure"><span class="std std-numref">Fig. 97</span></a> where the co-ordinates of the span extrema on the left edge of a polygon are <span class="math notranslate nohighlight">\((x_i, y_i)\)</span> and <span class="math notranslate nohighlight">\((x_{i+1}, y_{i+1})\)</span>. If <span class="math notranslate nohighlight">\((x_i, y_i)\)</span> are known then the next value <span class="math notranslate nohighlight">\(y_{i+1}\)</span> is easily calculated using <span class="math notranslate nohighlight">\(y_{i+1} = y_i + 1\)</span>. The values of the <span class="math notranslate nohighlight">\(x\)</span> span extrema co-ordinates are calculated using the <a href="https://en.wikipedia.org/wiki/Linear_equation#Slope%E2%80%93intercept_form_or_Gradient-intercept_form" target="_blank">slope intercept equation of a line</a>.</p>
+<p>Consider <a class="reference internal" href="#span-extrema-figure"><span class="std std-numref">Fig. 98</span></a> where the co-ordinates of the span extrema on the left edge of a polygon are <span class="math notranslate nohighlight">\((x_i, y_i)\)</span> and <span class="math notranslate nohighlight">\((x_{i+1}, y_{i+1})\)</span>. If <span class="math notranslate nohighlight">\((x_i, y_i)\)</span> are known then the next value <span class="math notranslate nohighlight">\(y_{i+1}\)</span> is easily calculated using <span class="math notranslate nohighlight">\(y_{i+1} = y_i + 1\)</span>. The values of the <span class="math notranslate nohighlight">\(x\)</span> span extrema co-ordinates are calculated using the <a href="https://en.wikipedia.org/wiki/Linear_equation#Slope%E2%80%93intercept_form_or_Gradient-intercept_form" target="_blank">slope intercept equation of a line</a>.</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
     y = \frac{\Delta y}{\Delta x} x + c,
 \end{align*}\]</div>
 <p>where <span class="math notranslate nohighlight">\(y\)</span> and <span class="math notranslate nohighlight">\(x\)</span> are the co-ordinates of a point on the line, <span class="math notranslate nohighlight">\(\Delta y / \Delta x\)</span> is the gradient of the line and <span class="math notranslate nohighlight">\(c\)</span> is where the line intercepts the <span class="math notranslate nohighlight">\(y\)</span>-axis. Rearranging this to make <span class="math notranslate nohighlight">\(x\)</span> the subject gives</p>
 <div class="math notranslate nohighlight" id="equation-span-extrema-x-equation">
-<span class="eqno">(44)<a class="headerlink" href="#equation-span-extrema-x-equation" title="Permalink to this equation">#</a></span>\[x = \frac{\Delta x}{\Delta y} (y - c). \]</div>
-<p>To derive an expression for calculating <span class="math notranslate nohighlight">\(x_{i+1}\)</span> we let <span class="math notranslate nohighlight">\(x_{i+1} =x \)</span> and rearrange equation <a class="reference internal" href="#equation-span-extrema-x-equation">(44)</a> and substitute <span class="math notranslate nohighlight">\(y_{i+1} = y_i + 1\)</span></p>
+<span class="eqno">(45)<a class="headerlink" href="#equation-span-extrema-x-equation" title="Permalink to this equation">#</a></span>\[x = \frac{\Delta x}{\Delta y} (y - c). \]</div>
+<p>To derive an expression for calculating <span class="math notranslate nohighlight">\(x_{i+1}\)</span> we let <span class="math notranslate nohighlight">\(x_{i+1} =x \)</span> and rearrange equation <a class="reference internal" href="#equation-span-extrema-x-equation">(45)</a> and substitute <span class="math notranslate nohighlight">\(y_{i+1} = y_i + 1\)</span></p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
     x_{i+1} &amp;= \frac{\Delta x}{\Delta y} (y_{i+1} - c) \\

@@ -133,7 +133,7 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="1.0_Coordinate_geometry.html">
+  <a class="reference internal" href="1.0_Vector_geometry.html">
    Vector Geometry
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
@@ -143,22 +143,32 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="1.1_Points_lines_and_planes.html">
+    <a class="reference internal" href="1.1_Vectors.html">
+     Vectors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="1.2_Basis.html">
+     Basis
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="1.3_Points_lines_and_planes.html">
      Points, lines, planes and spheres
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="1.2_Shortest_distance_problems.html">
-     Shortest distance problems
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="1.3_Intersections.html">
+    <a class="reference internal" href="1.4_Intersections.html">
      Intersections between objects
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="1.4_Coordinate_geometry_exercises.html">
+    <a class="reference internal" href="1.5_Shortest_distance_problems.html">
+     Shortest distance problems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="1.6_Vector_geometry_exercises.html">
      Vector Geometry Exercises
     </a>
    </li>
@@ -224,7 +234,7 @@ const thebe_selector_output = ".output, .cell_output"
   </ul>
  </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="4.0_Hidden_surface_removal.html">
+  <a class="reference internal" href="4.0_Clipping_and_HSD.html">
    Clipping &amp; hidden surface determination
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
@@ -249,13 +259,13 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="4.4_Binary_space_partitioning.html">
-     Binary space partitioning
+    <a class="reference internal" href="4.4_Painters_algorithm.html">
+     Painter’s algorithm
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="4.4_Painters_algorithm.html">
-     Painter’s algorithm
+    <a class="reference internal" href="4.5_Binary_space_partitioning.html">
+     Binary space partitioning
     </a>
    </li>
   </ul>
@@ -496,22 +506,22 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="rotation">
 <span id="rotation-section"></span><h1>Rotation<a class="headerlink" href="#rotation" title="Permalink to this headline">#</a></h1>
-<p><strong>Rotation</strong> in <span class="math notranslate nohighlight">\(\mathbb{R}^3\)</span> is a linear transformation that rotates a set of points by some angle about one of the <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(y\)</span> or <span class="math notranslate nohighlight">\(z\)</span>-axes. The direction of rotation is assumed to be <em>anti-clockwise</em> when viewed looking down the axis towards the origin (<a class="reference internal" href="#d-rotation-figure"><span class="std std-numref">Fig. 33</span></a>).</p>
+<p><strong>Rotation</strong> in <span class="math notranslate nohighlight">\(\mathbb{R}^3\)</span> is a linear transformation that rotates a set of points by some angle about one of the <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(y\)</span> or <span class="math notranslate nohighlight">\(z\)</span>-axes. The direction of rotation is assumed to be <em>anti-clockwise</em> when viewed looking down the axis towards the origin (<a class="reference internal" href="#d-rotation-figure"><span class="std std-numref">Fig. 34</span></a>).</p>
 <figure class="align-default" id="d-rotation-figure">
 <a class="reference internal image-reference" href="../_images/3D_rotation.svg"><img alt="../_images/3D_rotation.svg" src="../_images/3D_rotation.svg" width="250px" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 33 </span><span class="caption-text">The direction of rotation is assumed as anti-clockwise when viewed looking towards the origin.</span><a class="headerlink" href="#d-rotation-figure" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 34 </span><span class="caption-text">The direction of rotation is assumed as anti-clockwise when viewed looking towards the origin.</span><a class="headerlink" href="#d-rotation-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-default" id="rotation-figure">
 <a class="reference internal image-reference" href="../_images/rotation.svg"><img alt="../_images/rotation.svg" src="../_images/rotation.svg" width="300px" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 34 </span><span class="caption-text">Rotation of the vector <span class="math notranslate nohighlight">\(\mathbf{u}\)</span> anti-clockwise about the origin.</span><a class="headerlink" href="#rotation-figure" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 35 </span><span class="caption-text">Rotation of the vector <span class="math notranslate nohighlight">\(\mathbf{u}\)</span> anti-clockwise about the origin.</span><a class="headerlink" href="#rotation-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>Consider the diagram in <a class="reference internal" href="#rotation-figure"><span class="std std-numref">Fig. 34</span></a> that shows the axes from <a class="reference internal" href="#d-rotation-figure"><span class="std std-numref">Fig. 33</span></a> when viewed looking down the <span class="math notranslate nohighlight">\(x\)</span>-axis. The point with position vector <span class="math notranslate nohighlight">\(\mathbf{u}=(u_x, u_y, u_z)\)</span> is rotated anti-clockwise about the <span class="math notranslate nohighlight">\(x\)</span>-axis by the angle <span class="math notranslate nohighlight">\(\theta\)</span> to <span class="math notranslate nohighlight">\(\mathbf{v}=(v_x, v_y, v_z)\)</span>. To determine the linear mapping we first consider the rotation of a vector pointing along the <span class="math notranslate nohighlight">\(x\)</span>-axis which has the same magnitude of <span class="math notranslate nohighlight">\(\mathbf{u}\)</span>, i.e., <span class="math notranslate nohighlight">\(|\mathbf{u}| \mathbf{e}_1\)</span>, rotated by the angle <span class="math notranslate nohighlight">\(\phi\)</span>. Forming a right-angled triangle with the angle <span class="math notranslate nohighlight">\(\phi\)</span> and hypotenuse of length <span class="math notranslate nohighlight">\(|\mathbf{u}|\)</span> then</p>
+<p>Consider the diagram in <a class="reference internal" href="#rotation-figure"><span class="std std-numref">Fig. 35</span></a> that shows the axes from <a class="reference internal" href="#d-rotation-figure"><span class="std std-numref">Fig. 34</span></a> when viewed looking down the <span class="math notranslate nohighlight">\(x\)</span>-axis. The point with position vector <span class="math notranslate nohighlight">\(\mathbf{u}=(u_x, u_y, u_z)\)</span> is rotated anti-clockwise about the <span class="math notranslate nohighlight">\(x\)</span>-axis by the angle <span class="math notranslate nohighlight">\(\theta\)</span> to <span class="math notranslate nohighlight">\(\mathbf{v}=(v_x, v_y, v_z)\)</span>. To determine the linear mapping we first consider the rotation of a vector pointing along the <span class="math notranslate nohighlight">\(x\)</span>-axis which has the same magnitude of <span class="math notranslate nohighlight">\(\mathbf{u}\)</span>, i.e., <span class="math notranslate nohighlight">\(|\mathbf{u}| \mathbf{e}_1\)</span>, rotated by the angle <span class="math notranslate nohighlight">\(\phi\)</span>. Forming a right-angled triangle with the angle <span class="math notranslate nohighlight">\(\phi\)</span> and hypotenuse of length <span class="math notranslate nohighlight">\(|\mathbf{u}|\)</span> then</p>
 <div class="math notranslate nohighlight" id="equation-rotation-equation-1">
-<span class="eqno">(25)<a class="headerlink" href="#equation-rotation-equation-1" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align*}
+<span class="eqno">(26)<a class="headerlink" href="#equation-rotation-equation-1" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align*}
     \cos(\phi) &amp;= \frac{u_x}{|\mathbf{u}|} &amp; \therefore u_x &amp;= |\mathbf{u}| \cos(\phi), \\
     \sin(\phi) &amp;= \frac{u_y}{|\mathbf{u}|} &amp; \therefore u_y &amp;= |\mathbf{u}| \sin(\phi).
 \end{align*}\end{split}\]</div>
@@ -530,11 +540,11 @@ title="Print to PDF"
 \end{align*}\]</div>
 <p>then we have</p>
 <div class="math notranslate nohighlight" id="equation-rotation-equation-2">
-<span class="eqno">(26)<a class="headerlink" href="#equation-rotation-equation-2" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align*}
+<span class="eqno">(27)<a class="headerlink" href="#equation-rotation-equation-2" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align*}
     v_x &amp;= |\mathbf{u}| \cos(\phi) \cos(\theta) - |\mathbf{u}|\sin(\phi) \sin(\theta) \\
     v_y &amp;= |\mathbf{u}| \sin(\phi) \cos(\theta) + |\mathbf{u}|\cos(\phi) \sin(\theta).
 \end{align*}\end{split}\]</div>
-<p>Substituting equation <a class="reference internal" href="#equation-rotation-equation-1">(25)</a> into equation <a class="reference internal" href="#equation-rotation-equation-2">(26)</a></p>
+<p>Substituting equation <a class="reference internal" href="#equation-rotation-equation-1">(26)</a> into equation <a class="reference internal" href="#equation-rotation-equation-2">(27)</a></p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
     v_x &amp;= u_x \cos(\theta) - u_y \sin(\theta), \\
@@ -554,11 +564,11 @@ title="Print to PDF"
 \end{align*}\]</div>
 <p>The square matrix is the transformation matrix for rotation by the angle <span class="math notranslate nohighlight">\(\theta\)</span> anti-clockwise about the <span class="math notranslate nohighlight">\(x-axis\)</span>. Doing similar we can determine the equivalent matrices for rotating about the <span class="math notranslate nohighlight">\(y\)</span> and <span class="math notranslate nohighlight">\(z\)</span>-axes.</p>
 <div class="proof theorem admonition" id="rotation-in-R3-theorem">
-<p class="admonition-title"><span class="caption-number">Theorem 6 </span> (Rotation in <span class="math notranslate nohighlight">\(\mathbb{R}^3\)</span>)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 8 </span> (Rotation in <span class="math notranslate nohighlight">\(\mathbb{R}^3\)</span>)</p>
 <section class="theorem-content" id="proof-content">
 <p>The rotation of a vector in <span class="math notranslate nohighlight">\(\mathbb{R}^3\)</span> expressed using homogeneous co-ordinates <em>anti-clockwise</em> by an angle <span class="math notranslate nohighlight">\(\theta\)</span> about the <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(y\)</span> and <span class="math notranslate nohighlight">\(z\)</span> axes is the linear transformation given by the following rotation matrices.</p>
 <div class="math notranslate nohighlight" id="equation-rotation-matrix-equation">
-<span class="eqno">(27)<a class="headerlink" href="#equation-rotation-matrix-equation" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align*}
+<span class="eqno">(28)<a class="headerlink" href="#equation-rotation-matrix-equation" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align*}
     R_x(\theta) &amp;= 
     \begin{pmatrix} 
         1 &amp; 0 &amp; 0 &amp; 0 \\
@@ -583,7 +593,7 @@ title="Print to PDF"
 \end{align*}\end{split}\]</div>
 <p>Since <span class="math notranslate nohighlight">\(\cos(-\theta) = \cos(\theta)\)</span> and <span class="math notranslate nohighlight">\(\sin(-\theta) = -\sin(\theta)\)</span>, the transformation matrices for inverse rotation, rotation in the <em>clockwise</em> direction, are</p>
 <div class="math notranslate nohighlight" id="equation-inverse-rotation-matrix-equation">
-<span class="eqno">(28)<a class="headerlink" href="#equation-inverse-rotation-matrix-equation" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align*}
+<span class="eqno">(29)<a class="headerlink" href="#equation-inverse-rotation-matrix-equation" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align*}
     R_x^{-1}(\theta) &amp;= 
     \begin{pmatrix} 
         1 &amp; 0 &amp; 0 &amp; 0 \\
@@ -678,10 +688,10 @@ Solution<div class="sd-summary-down docutils">
 </details></section>
 </div><section id="rotation-about-polygon-centre">
 <h2>Rotation about polygon centre<a class="headerlink" href="#rotation-about-polygon-centre" title="Permalink to this headline">#</a></h2>
-<p>We saw in <a class="reference internal" href="#rotation-example-1">Example 26</a> that the polygon has shifted position because we rotate about the origin. If we wanted to rotate the polygon about its centre we first need to translate it so that its centre is at the origin, apply the rotation transformation and then translate the centre to the original position (<a class="reference internal" href="#rotate-about-centre-figure"><span class="std std-numref">Fig. 35</span></a>).</p>
+<p>We saw in <a class="reference internal" href="#rotation-example-1">Example 26</a> that the polygon has shifted position because we rotate about the origin. If we wanted to rotate the polygon about its centre we first need to translate it so that its centre is at the origin, apply the rotation transformation and then translate the centre to the original position (<a class="reference internal" href="#rotate-about-centre-figure"><span class="std std-numref">Fig. 36</span></a>).</p>
 <figure class="align-default" id="rotate-about-centre-figure">
 <img alt="../_images/rotate_about_centre.svg" src="../_images/rotate_about_centre.svg" /><figcaption>
-<p><span class="caption-number">Fig. 35 </span><span class="caption-text">Steps required to rotate a polygon by its centre.</span><a class="headerlink" href="#rotate-about-centre-figure" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 36 </span><span class="caption-text">Steps required to rotate a polygon by its centre.</span><a class="headerlink" href="#rotate-about-centre-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>If the centre of the polygon is at point <span class="math notranslate nohighlight">\(\mathbf{c}=(c_x, c_y, c_z)\)</span> then the first transformation is translation by <span class="math notranslate nohighlight">\(-\mathbf{c}\)</span> and the <a class="reference internal" href="2.1_Translation.html#translation-matrix-definition"> transformation matrix</a> is</p>
@@ -808,11 +818,11 @@ Solution<div class="sd-summary-down docutils">
 </div></section>
 <section id="rotation-about-a-line">
 <h2>Rotation about a line<a class="headerlink" href="#rotation-about-a-line" title="Permalink to this headline">#</a></h2>
-<p>Suppose we wish to rotate <span class="math notranslate nohighlight">\(\mathbb{R}^3\)</span> by an angle <span class="math notranslate nohighlight">\(\theta\)</span> about a general line that passes through the point <span class="math notranslate nohighlight">\(\mathbf{p}=(p_x,p_y,p_z)\)</span> with direction <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> that does not pass through the origin and <span class="math notranslate nohighlight">\(\mathbf{d}=(d_x,d_y,d_z)\)</span> is not parallel to any of the three co-ordinate axes (<a class="reference internal" href="#rotation-about-line-figure-1"><span class="std std-numref">Fig. 36</span></a>). To achieve this we first need to apply translation and rotation so that the line lies along one of the co-ordinate axes, preform the rotation about this axis before reversing the rotation and translation operations. Each of the individual transformations can be represented by a matrix so the composite transformation that achieves the rotation about the line is a product of the individual matrices.</p>
+<p>Suppose we wish to rotate <span class="math notranslate nohighlight">\(\mathbb{R}^3\)</span> by an angle <span class="math notranslate nohighlight">\(\theta\)</span> about a general line that passes through the point <span class="math notranslate nohighlight">\(\mathbf{p}=(p_x,p_y,p_z)\)</span> with direction <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> that does not pass through the origin and <span class="math notranslate nohighlight">\(\mathbf{d}=(d_x,d_y,d_z)\)</span> is not parallel to any of the three co-ordinate axes (<a class="reference internal" href="#rotation-about-line-figure-1"><span class="std std-numref">Fig. 37</span></a>). To achieve this we first need to apply translation and rotation so that the line lies along one of the co-ordinate axes, preform the rotation about this axis before reversing the rotation and translation operations. Each of the individual transformations can be represented by a matrix so the composite transformation that achieves the rotation about the line is a product of the individual matrices.</p>
 <figure class="align-default" id="rotation-about-line-figure-1">
 <a class="reference internal image-reference" href="../_images/rotate_about_line_1.svg"><img alt="../_images/rotate_about_line_1.svg" src="../_images/rotate_about_line_1.svg" width="400px" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 36 </span><span class="caption-text">Rotation about a line.</span><a class="headerlink" href="#rotation-about-line-figure-1" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 37 </span><span class="caption-text">Rotation about a line.</span><a class="headerlink" href="#rotation-about-line-figure-1" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>The first transformation is to translate by <span class="math notranslate nohighlight">\(-\mathbf{p}\)</span> so that the line passes through the origin so the transformation matrix is</p>
@@ -829,10 +839,10 @@ Solution<div class="sd-summary-down docutils">
 <figure class="align-default" id="rotation-about-line-figure-2">
 <a class="reference internal image-reference" href="../_images/rotate_about_line_2.svg"><img alt="../_images/rotate_about_line_2.svg" src="../_images/rotate_about_line_2.svg" width="300px" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 37 </span><span class="caption-text">The line is translated so that <span class="math notranslate nohighlight">\(\mathbf{p}\)</span> is at the origin.</span><a class="headerlink" href="#rotation-about-line-figure-2" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 38 </span><span class="caption-text">The line is translated so that <span class="math notranslate nohighlight">\(\mathbf{p}\)</span> is at the origin.</span><a class="headerlink" href="#rotation-about-line-figure-2" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p><a class="reference internal" href="#rotation-about-line-figure-2"><span class="std std-numref">Fig. 37</span></a> shows that affect of translating by <span class="math notranslate nohighlight">\(-\mathbf{p}\)</span>. Now we need to rotate the line so that it lies in a plane the contains two of the three co-ordinate axes. If we rotate about the <span class="math notranslate nohighlight">\(z\)</span> axis then the line will be in the <span class="math notranslate nohighlight">\(yz\)</span> plane. The values of <span class="math notranslate nohighlight">\(\cos(\phi)\)</span> and <span class="math notranslate nohighlight">\(\sin(\phi)\)</span> in <span class="math notranslate nohighlight">\(R_z(\phi)\)</span> are</p>
+<p><a class="reference internal" href="#rotation-about-line-figure-2"><span class="std std-numref">Fig. 38</span></a> shows that affect of translating by <span class="math notranslate nohighlight">\(-\mathbf{p}\)</span>. Now we need to rotate the line so that it lies in a plane the contains two of the three co-ordinate axes. If we rotate about the <span class="math notranslate nohighlight">\(z\)</span> axis then the line will be in the <span class="math notranslate nohighlight">\(yz\)</span> plane. The values of <span class="math notranslate nohighlight">\(\cos(\phi)\)</span> and <span class="math notranslate nohighlight">\(\sin(\phi)\)</span> in <span class="math notranslate nohighlight">\(R_z(\phi)\)</span> are</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
     \cos(\phi) &amp;= \frac{d_y}{d_1}, &amp;
@@ -852,10 +862,10 @@ Solution<div class="sd-summary-down docutils">
 <figure class="align-default" id="rotation-about-line-figure-3">
 <a class="reference internal image-reference" href="../_images/rotate_about_line_3.svg"><img alt="../_images/rotate_about_line_3.svg" src="../_images/rotate_about_line_3.svg" width="220px" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 38 </span><span class="caption-text">The line is rotated about the <span class="math notranslate nohighlight">\(z\)</span>-axis so that <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> is in the <span class="math notranslate nohighlight">\(yz\)</span> plane.</span><a class="headerlink" href="#rotation-about-line-figure-3" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 39 </span><span class="caption-text">The line is rotated about the <span class="math notranslate nohighlight">\(z\)</span>-axis so that <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> is in the <span class="math notranslate nohighlight">\(yz\)</span> plane.</span><a class="headerlink" href="#rotation-about-line-figure-3" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p><a class="reference internal" href="#rotation-about-line-figure-3"><span class="std std-numref">Fig. 38</span></a> shows that affect of rotating about the <span class="math notranslate nohighlight">\(z\)</span>-axis. Now we need to rotate about the <span class="math notranslate nohighlight">\(x\)</span> axis so that <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> points along the <span class="math notranslate nohighlight">\(z\)</span> axis. The values of <span class="math notranslate nohighlight">\(\cos(\psi)\)</span> and <span class="math notranslate nohighlight">\(\sin(\psi)\)</span> are</p>
+<p><a class="reference internal" href="#rotation-about-line-figure-3"><span class="std std-numref">Fig. 39</span></a> shows that affect of rotating about the <span class="math notranslate nohighlight">\(z\)</span>-axis. Now we need to rotate about the <span class="math notranslate nohighlight">\(x\)</span> axis so that <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> points along the <span class="math notranslate nohighlight">\(z\)</span> axis. The values of <span class="math notranslate nohighlight">\(\cos(\psi)\)</span> and <span class="math notranslate nohighlight">\(\sin(\psi)\)</span> are</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
     \cos(\psi) &amp;= \frac{d_z}{|\mathbf{d}|}, &amp;
@@ -875,10 +885,10 @@ Solution<div class="sd-summary-down docutils">
 <figure class="align-default" id="rotation-about-line-figure-4">
 <a class="reference internal image-reference" href="../_images/rotate_about_line_4.svg"><img alt="../_images/rotate_about_line_4.svg" src="../_images/rotate_about_line_4.svg" width="150px" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 39 </span><span class="caption-text">The line is rotated about the <span class="math notranslate nohighlight">\(x\)</span>-axis so that <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> points along the <span class="math notranslate nohighlight">\(z\)</span> axis.</span><a class="headerlink" href="#rotation-about-line-figure-4" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 40 </span><span class="caption-text">The line is rotated about the <span class="math notranslate nohighlight">\(x\)</span>-axis so that <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> points along the <span class="math notranslate nohighlight">\(z\)</span> axis.</span><a class="headerlink" href="#rotation-about-line-figure-4" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p><a class="reference internal" href="#rotation-about-line-figure-4"><span class="std std-numref">Fig. 39</span></a> shows that affect of rotating about the <span class="math notranslate nohighlight">\(x\)</span>-axis. Now that the line is pointing along the <span class="math notranslate nohighlight">\(z\)</span>-axis we can perform the rotation about the line using <span class="math notranslate nohighlight">\(R_z(\theta)\)</span> and reverse the two rotation and translation transformations. The composite transformation matrix is</p>
+<p><a class="reference internal" href="#rotation-about-line-figure-4"><span class="std std-numref">Fig. 40</span></a> shows that affect of rotating about the <span class="math notranslate nohighlight">\(x\)</span>-axis. Now that the line is pointing along the <span class="math notranslate nohighlight">\(z\)</span>-axis we can perform the rotation about the line using <span class="math notranslate nohighlight">\(R_z(\theta)\)</span> and reverse the two rotation and translation transformations. The composite transformation matrix is</p>
 <div class="math notranslate nohighlight">
 \[A = T(\mathbf{p}) \cdot R_z(-\phi) \cdot R_x(-\psi) \cdot R_z(\theta) \cdot R_x(\psi) \cdot R_z(\phi) \cdot T(-\mathbf{p}).\]</div>
 <div class="proof example seealso admonition" id="example-3">
@@ -913,10 +923,10 @@ Solution<div class="sd-summary-down docutils">
 \end{align*}\]</div>
 <figure class="align-default" id="rotate-about-line-example-2">
 <img alt="../_images/rotate_about_line_example_2.svg" src="../_images/rotate_about_line_example_2.svg" /><figcaption>
-<p><span class="caption-number">Fig. 40 </span><span class="caption-text">Rotate <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> about the <span class="math notranslate nohighlight">\(z\)</span>-axis.</span><a class="headerlink" href="#rotate-about-line-example-2" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 41 </span><span class="caption-text">Rotate <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> about the <span class="math notranslate nohighlight">\(z\)</span>-axis.</span><a class="headerlink" href="#rotate-about-line-example-2" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p class="sd-card-text">Now we need to consider which rotations we apply so that <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> points along one of the axes. This decision is arbitrary but in this case since <span class="math notranslate nohighlight">\(d_x\)</span> is positive then rotating so that <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> points along the <span class="math notranslate nohighlight">\(x\)</span> axis would require the fewest rotations. Looking at <a class="reference internal" href="#rotate-about-line-example-2"><span class="std std-numref">Fig. 40</span></a> this means can first rotate anti-clockwise about the <span class="math notranslate nohighlight">\(z\)</span> axis by angle <span class="math notranslate nohighlight">\(\phi\)</span> so that <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> is in the <span class="math notranslate nohighlight">\(xz\)</span> plane. The values of <span class="math notranslate nohighlight">\(\cos(\phi)\)</span> and <span class="math notranslate nohighlight">\(\sin(\phi)\)</span> are</p>
+<p class="sd-card-text">Now we need to consider which rotations we apply so that <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> points along one of the axes. This decision is arbitrary but in this case since <span class="math notranslate nohighlight">\(d_x\)</span> is positive then rotating so that <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> points along the <span class="math notranslate nohighlight">\(x\)</span> axis would require the fewest rotations. Looking at <a class="reference internal" href="#rotate-about-line-example-2"><span class="std std-numref">Fig. 41</span></a> this means can first rotate anti-clockwise about the <span class="math notranslate nohighlight">\(z\)</span> axis by angle <span class="math notranslate nohighlight">\(\phi\)</span> so that <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> is in the <span class="math notranslate nohighlight">\(xz\)</span> plane. The values of <span class="math notranslate nohighlight">\(\cos(\phi)\)</span> and <span class="math notranslate nohighlight">\(\sin(\phi)\)</span> are</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
     \cos(\phi) &amp;= \frac{d_x}{d_1} = \frac{2}{\sqrt{5}}, &amp;
@@ -953,10 +963,10 @@ Solution<div class="sd-summary-down docutils">
 <p class="sd-card-text">Since <span class="math notranslate nohighlight">\(d_y = 0\)</span> then the rotated <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> vector is now in the <span class="math notranslate nohighlight">\(xz\)</span> plane.</p>
 <figure class="align-default" id="id1">
 <img alt="../_images/rotate_about_line_example_3.svg" src="../_images/rotate_about_line_example_3.svg" /><figcaption>
-<p><span class="caption-number">Fig. 41 </span><span class="caption-text">Rotate <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> about the <span class="math notranslate nohighlight">\(y\)</span> axis.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 42 </span><span class="caption-text">Rotate <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> about the <span class="math notranslate nohighlight">\(y\)</span> axis.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p class="sd-card-text">Looking at <a class="reference internal" href="#rotate-about-line-example-2"><span class="std std-numref">Fig. 40</span></a> we need to rotate clockwise around the <span class="math notranslate nohighlight">\(y\)</span> axis by angle <span class="math notranslate nohighlight">\(\psi\)</span> so that <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> points along the <span class="math notranslate nohighlight">\(x\)</span> axis (remember that the direction of rotation is based on the view looking down the axis towards the origin). The values of <span class="math notranslate nohighlight">\(\cos(\psi)\)</span> and <span class="math notranslate nohighlight">\(\sin(\psi)\)</span> are</p>
+<p class="sd-card-text">Looking at <a class="reference internal" href="#rotate-about-line-example-2"><span class="std std-numref">Fig. 41</span></a> we need to rotate clockwise around the <span class="math notranslate nohighlight">\(y\)</span> axis by angle <span class="math notranslate nohighlight">\(\psi\)</span> so that <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> points along the <span class="math notranslate nohighlight">\(x\)</span> axis (remember that the direction of rotation is based on the view looking down the axis towards the origin). The values of <span class="math notranslate nohighlight">\(\cos(\psi)\)</span> and <span class="math notranslate nohighlight">\(\sin(\psi)\)</span> are</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
     \cos(\psi) &amp;= \frac{d_1}{|\mathbf{d}|} = \frac{\sqrt{5}}{\sqrt{14}}, &amp;
@@ -999,7 +1009,7 @@ Solution<div class="sd-summary-down docutils">
 <p class="sd-card-text">Since <span class="math notranslate nohighlight">\(d_y=0\)</span>, <span class="math notranslate nohighlight">\(d_z=0\)</span> and <span class="math notranslate nohighlight">\(d_x &gt; 0\)</span> then <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> is now pointing along the <span class="math notranslate nohighlight">\(x\)</span> axis.</p>
 <figure class="align-default" id="id2">
 <img alt="../_images/rotate_about_line_example_4.svg" src="../_images/rotate_about_line_example_4.svg" /><figcaption>
-<p><span class="caption-number">Fig. 42 </span><span class="caption-text">Rotate <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> about the <span class="math notranslate nohighlight">\(x\)</span> axis.</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 43 </span><span class="caption-text">Rotate <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> about the <span class="math notranslate nohighlight">\(x\)</span> axis.</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p class="sd-card-text">Now we perform the rotation anti-clockwise around the <span class="math notranslate nohighlight">\(x\)</span> axis by angle <span class="math notranslate nohighlight">\(\theta = \pi / 6\)</span> and the matrix for achieving this rotation is</p>

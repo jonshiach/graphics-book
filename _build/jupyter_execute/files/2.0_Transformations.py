@@ -4,6 +4,8 @@
 # (linear-transformations-section)=
 # # Linear Transformations
 # 
+# To create a virtual environment we need to be able to scale, rotate and move objects in the space. To do this we make use of linear transformations. 
+# 
 # ## Definition
 # 
 # ```{prf:definition} Linear transformation

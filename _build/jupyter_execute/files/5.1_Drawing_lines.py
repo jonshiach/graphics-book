@@ -341,10 +341,32 @@
 # Let $f(x,y) = x \Delta y - y \Delta x + c \Delta x$ then
 # 
 # \begin{align*}
-#     f(x,y) \begin{cases} 
-#         \geq 0, & (x,y) \text{ is above the line,} \\
-#         < 0, & (x,y) \text{ is below the line.}
+#     f(x,y) 
+#     \begin{cases} 
+#         \geq 0, & (x,y) \textsf{ is on or above the line,} \\
+#         < 0, & (x,y) \textsf{ is below the line.}
+#     \end{cases}
 # \end{align*}
+# 
+# We have a choice between two candidate pixels at $(x_i+1,y_i)$ and $(x_i+1,y_i+1)$. To decide we calculate the value of $f(x,y)$ at the midpoint between these two pixels and use its sign to decide. Let $d_i = f(x_i+1,y_i+\frac{1}{2})$ be a **decision variable** then
+# 
+# $$ d_i = (x_i + 1) \Delta y - (y_i + \tfrac{1}{2}) \Delta x + c \Delta x. $$
+# 
+# So the sign of $d_i$ will tell use which of the candidate nodes to choose. The value of $d$ will change as we proceed along the line. Let $\Delta d$ be the change in $d$ then we can calculate $d_{i+1} = d_i + \Delta d$ and
+# \begin{align*}
+#     \Delta d &= d_{i+1} - d_{i} \\
+#     &= f(x_i + 2, y_{i+1} + \tfrac{1}{2}) - f(x_i + 1, y_i + \tfrac{1}{2}) \\
+#     &= (x_i + 2) \Delta y - (y_{i+1} + \tfrac{1}{2}) \Delta x + c \Delta x - (x_i + 1) \Delta y + (y_i + \tfrac{1}{2}) \Delta x - c \Delta x \\
+#     &= (x_i + 2) \Delta y - (x_i + 1) \Delta y - (y_{i+1} + \tfrac{1}{2}) \Delta x + (y_i + \tfrac{1}{2}) \Delta x
+# \end{align*}
+# The value of $\Delta d$ will depend on which of the candidate nodes we have chosen. If $d_i < 0$ the midpoint is beneath the line and we choose the upper pixel where the new value of $y$ is $y_{i+1} = y_i$
+# \begin{align*}
+#     \Delta d &= (x_i + 2) \Delta y - (x_i + 1) \Delta y -(y_i + \tfrac{1}{2}) \Delta x + (y_i + \tfrac{1}{2}) \Delta x \\
+#     &= 2\Delta y
+# \end{align*}
+# 
+
+# 
 
 # In[1]:
 

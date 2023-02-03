@@ -139,7 +139,7 @@
 # 
 # The left child node contains $\{ J, K \}$ which is a convex set so we move to the right child node contains $\{ F,G,M,N,O_2\}$. Choosing $F$ and $N$ as the parent node we have $O_1$ in the front subspace so we list this in the left child node and $G$ and $M$ in the back subspace so we list this in the right child node.
 # 
-# ```{figure} /images/bsp_example_6.svg
+# ```{figure} /images/bsp_example_7.svg
 # ```
 # 
 # All subspaces now contain convex sets so the algorithm terminates.

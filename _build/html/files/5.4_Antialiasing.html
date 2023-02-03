@@ -133,7 +133,7 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="1.0_Coordinate_geometry.html">
+  <a class="reference internal" href="1.0_Vector_geometry.html">
    Vector Geometry
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
@@ -143,22 +143,32 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="1.1_Points_lines_and_planes.html">
+    <a class="reference internal" href="1.1_Vectors.html">
+     Vectors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="1.2_Basis.html">
+     Basis
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="1.3_Points_lines_and_planes.html">
      Points, lines, planes and spheres
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="1.2_Shortest_distance_problems.html">
-     Shortest distance problems
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="1.3_Intersections.html">
+    <a class="reference internal" href="1.4_Intersections.html">
      Intersections between objects
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="1.4_Coordinate_geometry_exercises.html">
+    <a class="reference internal" href="1.5_Shortest_distance_problems.html">
+     Shortest distance problems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="1.6_Vector_geometry_exercises.html">
      Vector Geometry Exercises
     </a>
    </li>
@@ -224,7 +234,7 @@ const thebe_selector_output = ".output, .cell_output"
   </ul>
  </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="4.0_Hidden_surface_removal.html">
+  <a class="reference internal" href="4.0_Clipping_and_HSD.html">
    Clipping &amp; hidden surface determination
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
@@ -496,20 +506,20 @@ title="Print to PDF"
 <img alt="../_images/5.4_Antialiasing_1_1.png" src="../_images/5.4_Antialiasing_1_1.png" />
 </div>
 <figcaption>
-<p><span class="caption-number">Fig. 98 </span><span class="caption-text">Super sampling antialiasing.</span><a class="headerlink" href="#ssaa-figure" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 99 </span><span class="caption-text">Super sampling antialiasing.</span><a class="headerlink" href="#ssaa-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>Consider the diagram in <a class="reference internal" href="#ssaa-figure"><span class="std std-numref">Fig. 98</span></a> where four pixels from a <span class="math notranslate nohighlight">\(\times 2\)</span> super sample are combined to produce the display pixel. Averaging the colour triplets gives</p>
+<p>Consider the diagram in <a class="reference internal" href="#ssaa-figure"><span class="std std-numref">Fig. 99</span></a> where four pixels from a <span class="math notranslate nohighlight">\(\times 2\)</span> super sample are combined to produce the display pixel. Averaging the colour triplets gives</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
     \text{display pixel colour} &amp;= \frac{(255, 255, 255) + (0, 128, 255) + (255, 128, 128) + (0, 255, 64)}{4}\\
     &amp;= (127, 191, 175).
 \end{align*}\]</div>
-<p>The affects of applying a <span class="math notranslate nohighlight">\(\times 2\)</span> super sample antialiasing can be seen in <a class="reference internal" href="#antialiased-circle-figure"><span class="std std-numref">Fig. 99</span></a>.</p>
+<p>The affects of applying a <span class="math notranslate nohighlight">\(\times 2\)</span> super sample antialiasing can be seen in <a class="reference internal" href="#antialiased-circle-figure"><span class="std std-numref">Fig. 100</span></a>.</p>
 <figure class="align-default" id="antialiased-circle-figure">
 <a class="reference internal image-reference" href="../_images/antialiasing_example.png"><img alt="../_images/antialiasing_example.png" src="../_images/antialiasing_example.png" style="width: 500px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 99 </span><span class="caption-text">Filled circle with (left) and without (right) <span class="math notranslate nohighlight">\(\times 2\)</span> super sampling antialiasing applied.</span><a class="headerlink" href="#antialiased-circle-figure" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 100 </span><span class="caption-text">Filled circle with (left) and without (right) <span class="math notranslate nohighlight">\(\times 2\)</span> super sampling antialiasing applied.</span><a class="headerlink" href="#antialiased-circle-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
