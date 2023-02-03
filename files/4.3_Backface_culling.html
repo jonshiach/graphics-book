@@ -133,7 +133,7 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="1.0_Coordinate_geometry.html">
+  <a class="reference internal" href="1.0_Vector_geometry.html">
    Vector Geometry
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
@@ -143,22 +143,32 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="1.1_Points_lines_and_planes.html">
+    <a class="reference internal" href="1.1_Vectors.html">
+     Vectors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="1.2_Basis.html">
+     Basis
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="1.3_Points_lines_and_planes.html">
      Points, lines, planes and spheres
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="1.2_Shortest_distance_problems.html">
-     Shortest distance problems
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="1.3_Intersections.html">
+    <a class="reference internal" href="1.4_Intersections.html">
      Intersections between objects
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="1.4_Coordinate_geometry_exercises.html">
+    <a class="reference internal" href="1.5_Shortest_distance_problems.html">
+     Shortest distance problems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="1.6_Vector_geometry_exercises.html">
      Vector Geometry Exercises
     </a>
    </li>
@@ -224,7 +234,7 @@ const thebe_selector_output = ".output, .cell_output"
   </ul>
  </li>
  <li class="toctree-l1 current active has-children">
-  <a class="reference internal" href="4.0_Hidden_surface_removal.html">
+  <a class="reference internal" href="4.0_Clipping_and_HSD.html">
    Clipping &amp; hidden surface determination
   </a>
   <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
@@ -487,49 +497,49 @@ title="Print to PDF"
   <section class="tex2jax_ignore mathjax_ignore" id="backface-culling">
 <span id="back-face-culling-section"></span><h1>Backface culling<a class="headerlink" href="#backface-culling" title="Permalink to this headline">#</a></h1>
 <p>The simplest hidden surface determination method is <strong>backface culling</strong> which, as the name suggests, we remove all polygons that have a normal vector facing away from the viewer, and therefore considered <strong>back facing</strong>. In doing this, when we only render the front facing polygons, objects appear solid.</p>
-<p>Consider the diagram in <a class="reference internal" href="#backface-culling-figure-1"><span class="std std-numref">Fig. 71</span></a> which shows a hexagonal object with face polygons <span class="math notranslate nohighlight">\(A\)</span> to <span class="math notranslate nohighlight">\(F\)</span> which have their normal vectors pointing away from the centre of the object (this is done when we define the <a class="reference internal" href="3.1_Object_space.html#object-space-section"><span class="std std-ref">object space</span></a>). When viewed from the viewer position on the left polygons <span class="math notranslate nohighlight">\(A\)</span>, <span class="math notranslate nohighlight">\(B\)</span> and <span class="math notranslate nohighlight">\(C\)</span> are <em>front facing</em> and polygons <span class="math notranslate nohighlight">\(D\)</span>, <span class="math notranslate nohighlight">\(E\)</span> and <span class="math notranslate nohighlight">\(F\)</span> are <em>back facing</em>.</p>
+<p>Consider the diagram in <a class="reference internal" href="#backface-culling-figure-1"><span class="std std-numref">Fig. 72</span></a> which shows a hexagonal object with face polygons <span class="math notranslate nohighlight">\(A\)</span> to <span class="math notranslate nohighlight">\(F\)</span> which have their normal vectors pointing away from the centre of the object (this is done when we define the <a class="reference internal" href="3.1_Object_space.html#object-space-section"><span class="std std-ref">object space</span></a>). When viewed from the viewer position on the left polygons <span class="math notranslate nohighlight">\(A\)</span>, <span class="math notranslate nohighlight">\(B\)</span> and <span class="math notranslate nohighlight">\(C\)</span> are <em>front facing</em> and polygons <span class="math notranslate nohighlight">\(D\)</span>, <span class="math notranslate nohighlight">\(E\)</span> and <span class="math notranslate nohighlight">\(F\)</span> are <em>back facing</em>.</p>
 <figure class="align-default" id="backface-culling-figure-1">
 <img alt="../_images/backface_culling_1.svg" src="../_images/backface_culling_1.svg" /><figcaption>
-<p><span class="caption-number">Fig. 71 </span><span class="caption-text">All polygons</span><a class="headerlink" href="#backface-culling-figure-1" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 72 </span><span class="caption-text">All polygons</span><a class="headerlink" href="#backface-culling-figure-1" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>Using backface culling if we only render the front facing polygons then from the point of view of the viewer the object is unchanged and appears solution (<a class="reference internal" href="#backface-culling-figure-2"><span class="std std-numref">Fig. 72</span></a>)</p>
+<p>Using backface culling if we only render the front facing polygons then from the point of view of the viewer the object is unchanged and appears solution (<a class="reference internal" href="#backface-culling-figure-2"><span class="std std-numref">Fig. 73</span></a>)</p>
 <figure class="align-default" id="backface-culling-figure-2">
 <img alt="../_images/backface_culling_2.svg" src="../_images/backface_culling_2.svg" /><figcaption>
-<p><span class="caption-number">Fig. 72 </span><span class="caption-text">Front facing polygons only</span><a class="headerlink" href="#backface-culling-figure-2" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 73 </span><span class="caption-text">Front facing polygons only</span><a class="headerlink" href="#backface-culling-figure-2" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>To determine whether a polygon is front or back facing we can use the <a class="reference internal" href="1.0_Coordinate_geometry.html#geometric-dot-product-definition">dot product</a>. Consider <a class="reference internal" href="#front-facing-polygon-figure"><span class="std std-numref">Fig. 73</span></a> that shows a front facing polygon. The angle <span class="math notranslate nohighlight">\(\theta\)</span> between the polygon normal vector and a viewing vector from the viewer to the polygon is greater that <span class="math notranslate nohighlight">\(\pi/2\)</span>. Alternatively a similar diagram in <a class="reference internal" href="#back-facing-polygon-figure"><span class="std std-numref">Fig. 74</span></a> that shows a back facing polygon where the angle between the normal vector and viewing vector is less than <span class="math notranslate nohighlight">\(\pi/2\)</span>.</p>
+<p>To determine whether a polygon is front or back facing we can use the <a class="reference internal" href="1.1_Vectors.html#geometric-dot-product-definition">dot product</a>. Consider <a class="reference internal" href="#front-facing-polygon-figure"><span class="std std-numref">Fig. 74</span></a> that shows a front facing polygon. The angle <span class="math notranslate nohighlight">\(\theta\)</span> between the polygon normal vector and a viewing vector from the viewer to the polygon is greater that <span class="math notranslate nohighlight">\(\pi/2\)</span>. Alternatively a similar diagram in <a class="reference internal" href="#back-facing-polygon-figure"><span class="std std-numref">Fig. 75</span></a> that shows a back facing polygon where the angle between the normal vector and viewing vector is less than <span class="math notranslate nohighlight">\(\pi/2\)</span>.</p>
 <div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
 <div class="sd-row docutils">
 <div class="sd-col sd-d-flex-column docutils">
 <figure class="align-default" id="front-facing-polygon-figure">
 <img alt="../_images/front_facing_polygon.svg" src="../_images/front_facing_polygon.svg" /><figcaption>
-<p><span class="caption-number">Fig. 73 </span><span class="caption-text">Front facing polygon</span><a class="headerlink" href="#front-facing-polygon-figure" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 74 </span><span class="caption-text">Front facing polygon</span><a class="headerlink" href="#front-facing-polygon-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
 <div class="sd-col sd-d-flex-column docutils">
 <figure class="align-default" id="back-facing-polygon-figure">
 <img alt="../_images/back_facing_polygon.svg" src="../_images/back_facing_polygon.svg" /><figcaption>
-<p><span class="caption-number">Fig. 74 </span><span class="caption-text">Back facing polygon</span><a class="headerlink" href="#back-facing-polygon-figure" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 75 </span><span class="caption-text">Back facing polygon</span><a class="headerlink" href="#back-facing-polygon-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>Recall that the<a class="reference internal" href="1.0_Coordinate_geometry.html#geometric-dot-product-definition">geometric definition of the dot product</a> is</p>
+<p>Recall that the<a class="reference internal" href="1.1_Vectors.html#geometric-dot-product-definition">geometric definition of the dot product</a> is</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
     \mathbf{a} \cdot \mathbf{b} = |\mathbf{a}| |\mathbf{b}| \cos(\theta),
 \end{align*}\]</div>
 <p>and since <span class="math notranslate nohighlight">\(\cos(\pi/2) = 0\)</span> then a polygon is front facing if <span class="math notranslate nohighlight">\(\mathbf{n} \cdot \mathbf{v} &lt; 0\)</span>.</p>
 <div class="proof definition admonition" id="front-facing-polygon-definition">
-<p class="admonition-title"><span class="caption-number">Definition 21 </span> (Front facing polygons)</p>
+<p class="admonition-title"><span class="caption-number">Definition 20 </span> (Front facing polygons)</p>
 <section class="definition-content" id="proof-content">
 <p>A polygon defined by a normal vector <span class="math notranslate nohighlight">\(\mathbf{n}\)</span> and point <span class="math notranslate nohighlight">\(\mathbf{c}\)</span> is front facing to the viewer if</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9d2ad39d-aa0a-481d-874e-4cfa05a4048c">
-<span class="eqno">(33)<a class="headerlink" href="#equation-9d2ad39d-aa0a-481d-874e-4cfa05a4048c" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-c3897f10-cc4a-450f-ae4c-f3cfec7a1d78">
+<span class="eqno">(34)<a class="headerlink" href="#equation-c3897f10-cc4a-450f-ae4c-f3cfec7a1d78" title="Permalink to this equation">#</a></span>\[\begin{align}
     (\mathbf{c} - \mathbf{p}) \cdot \mathbf{n} &lt; 0.
 \end{align}\]</div>
 </section>
@@ -695,11 +705,11 @@ Solution<div class="sd-summary-down docutils">
 <span class="k">end</span><span class="w"></span>
 </pre></div>
 </div>
-<p>The affect of applying backface culling to the screen space from <a class="reference internal" href="3.4_Screen_space.html#screen-space-example">Example 32</a> is shown in <a class="reference internal" href="#backface-culling-example-figure"><span class="std std-numref">Fig. 75</span></a>.</p>
+<p>The affect of applying backface culling to the screen space from <a class="reference internal" href="3.4_Screen_space.html#screen-space-example">Example 32</a> is shown in <a class="reference internal" href="#backface-culling-example-figure"><span class="std std-numref">Fig. 76</span></a>.</p>
 <figure class="align-default" id="backface-culling-example-figure">
 <a class="reference internal image-reference" href="../_images/backface_culling_example.png"><img alt="../_images/backface_culling_example.png" src="../_images/backface_culling_example.png" style="width: 400px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 75 </span><span class="caption-text">The screen space from <a class="reference internal" href="3.4_Screen_space.html#screen-space-example">Example 32</a> plotted using only front facing polygons.</span><a class="headerlink" href="#backface-culling-example-figure" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 76 </span><span class="caption-text">The screen space from <a class="reference internal" href="3.4_Screen_space.html#screen-space-example">Example 32</a> plotted using only front facing polygons.</span><a class="headerlink" href="#backface-culling-example-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Unfortunately using backface culling alone is not sufficient to remove hidden surfaces. This means that the church object which should be in the background and partially obscured by the house object in the foreground has been plotted over the top of the house object.</p>

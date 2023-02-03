@@ -133,7 +133,7 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="1.0_Coordinate_geometry.html">
+  <a class="reference internal" href="1.0_Vector_geometry.html">
    Vector Geometry
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
@@ -143,22 +143,32 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="1.1_Points_lines_and_planes.html">
+    <a class="reference internal" href="1.1_Vectors.html">
+     Vectors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="1.2_Basis.html">
+     Basis
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="1.3_Points_lines_and_planes.html">
      Points, lines, planes and spheres
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="1.2_Shortest_distance_problems.html">
-     Shortest distance problems
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="1.3_Intersections.html">
+    <a class="reference internal" href="1.4_Intersections.html">
      Intersections between objects
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="1.4_Coordinate_geometry_exercises.html">
+    <a class="reference internal" href="1.5_Shortest_distance_problems.html">
+     Shortest distance problems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="1.6_Vector_geometry_exercises.html">
      Vector Geometry Exercises
     </a>
    </li>
@@ -224,7 +234,7 @@ const thebe_selector_output = ".output, .cell_output"
   </ul>
  </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="4.0_Hidden_surface_removal.html">
+  <a class="reference internal" href="4.0_Clipping_and_HSD.html">
    Clipping &amp; hidden surface determination
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
@@ -449,11 +459,11 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="translation">
 <span id="translation-section"></span><h1>Translation<a class="headerlink" href="#translation" title="Permalink to this headline">#</a></h1>
-<p><strong>Translation</strong> is a linear transformation that moves a set of points by the vector <span class="math notranslate nohighlight">\(\mathbf{t}\)</span> (<a class="reference internal" href="#translation-figure"><span class="std std-numref">Fig. 30</span></a>).</p>
+<p><strong>Translation</strong> is a linear transformation that moves a set of points by the vector <span class="math notranslate nohighlight">\(\mathbf{t}\)</span> (<a class="reference internal" href="#translation-figure"><span class="std std-numref">Fig. 31</span></a>).</p>
 <figure class="align-default" id="translation-figure">
 <a class="reference internal image-reference" href="../_images/translation.svg"><img alt="../_images/translation.svg" src="../_images/translation.svg" width="250px" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 30 </span><span class="caption-text">The translation of a point <span class="math notranslate nohighlight">\(\mathbf{u}\)</span> by the translation vector <span class="math notranslate nohighlight">\(\mathbf{t}\)</span> to the point <span class="math notranslate nohighlight">\(\mathbf{v}\)</span></span><a class="headerlink" href="#translation-figure" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 31 </span><span class="caption-text">The translation of a point <span class="math notranslate nohighlight">\(\mathbf{u}\)</span> by the translation vector <span class="math notranslate nohighlight">\(\mathbf{t}\)</span> to the point <span class="math notranslate nohighlight">\(\mathbf{v}\)</span></span><a class="headerlink" href="#translation-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Using vector addition it is easy to see that</p>
@@ -466,7 +476,7 @@ title="Print to PDF"
 \end{align*}\]</div>
 <p>Unfornately the matrix <span class="math notranslate nohighlight">\(T(\mathbf{t})\)</span> does not exist which is independent of <span class="math notranslate nohighlight">\(u_1\)</span>, <span class="math notranslate nohighlight">\(u_2\)</span> and <span class="math notranslate nohighlight">\(u_3\)</span> so we can use a trick which makes use of <strong>homogeneous co-ordinates</strong>.</p>
 <div class="proof definition admonition" id="homogeneous-coordinates-definition">
-<p class="admonition-title"><span class="caption-number">Definition 18 </span> (Homogeneous co-ordinates)</p>
+<p class="admonition-title"><span class="caption-number">Definition 17 </span> (Homogeneous co-ordinates)</p>
 <section class="definition-content" id="proof-content">
 <p>The homogeneous co-ordinates of a point <span class="math notranslate nohighlight">\(\mathbf{u}\)</span> in <span class="math notranslate nohighlight">\(\mathbb{R}^3\)</span> expressed using the Cartesian co-ordinates is the 4-tuple <span class="math notranslate nohighlight">\((w x, w y, w z, w)\)</span> where <span class="math notranslate nohighlight">\(w \in \mathbb{R}\backslash \{0\}\)</span>.</p>
 <p>Note that a point with homogeneous co-ordinates <span class="math notranslate nohighlight">\((x, y, z, 1)\)</span> has the Cartesian co-ordinates <span class="math notranslate nohighlight">\((x, y, z)\)</span>$.</p>
@@ -493,11 +503,11 @@ title="Print to PDF"
 \end{align*}\]</div>
 <p>The square matrix is the transformation matrix for translating a point of set of points by the translation vector <span class="math notranslate nohighlight">\(\mathbf{t}\)</span>.</p>
 <div class="proof definition admonition" id="translation-matrix-definition">
-<p class="admonition-title"><span class="caption-number">Definition 19 </span> (Translation matrix)</p>
+<p class="admonition-title"><span class="caption-number">Definition 18 </span> (Translation matrix)</p>
 <section class="definition-content" id="proof-content">
 <p>The transformation matrix for the translation of a vector in <span class="math notranslate nohighlight">\(\mathbb{R}^3\)</span> expressed using homogeneous co-ordinates by the translation vector <span class="math notranslate nohighlight">\(\mathbf{t} = (t_x, t_y, t_z)\)</span> is</p>
 <div class="math notranslate nohighlight" id="equation-translation-matrix-equation">
-<span class="eqno">(21)<a class="headerlink" href="#equation-translation-matrix-equation" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align*}
+<span class="eqno">(22)<a class="headerlink" href="#equation-translation-matrix-equation" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align*}
     T(\mathbf{t}) = \begin{pmatrix}
         1 &amp; 0 &amp; 0 &amp; t_x \\
         0 &amp; 1 &amp; 0 &amp; t_y \\
@@ -507,7 +517,7 @@ title="Print to PDF"
 \end{align*}\end{split}\]</div>
 <p>The transformation matrix for inverse translation is</p>
 <div class="math notranslate nohighlight" id="equation-inverse-translation-matrix-equation">
-<span class="eqno">(22)<a class="headerlink" href="#equation-inverse-translation-matrix-equation" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align*}
+<span class="eqno">(23)<a class="headerlink" href="#equation-inverse-translation-matrix-equation" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align*}
     T^{-1}(\mathbf{t}) = T(\mathbf{-t}) = \begin{pmatrix}
         1 &amp; 0 &amp; 0 &amp; -t_x \\
         0 &amp; 1 &amp; 0 &amp; -t_y \\

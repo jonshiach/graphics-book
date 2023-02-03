@@ -133,7 +133,7 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="1.0_Coordinate_geometry.html">
+  <a class="reference internal" href="1.0_Vector_geometry.html">
    Vector Geometry
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
@@ -143,22 +143,32 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="1.1_Points_lines_and_planes.html">
+    <a class="reference internal" href="1.1_Vectors.html">
+     Vectors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="1.2_Basis.html">
+     Basis
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="1.3_Points_lines_and_planes.html">
      Points, lines, planes and spheres
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="1.2_Shortest_distance_problems.html">
-     Shortest distance problems
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="1.3_Intersections.html">
+    <a class="reference internal" href="1.4_Intersections.html">
      Intersections between objects
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="1.4_Coordinate_geometry_exercises.html">
+    <a class="reference internal" href="1.5_Shortest_distance_problems.html">
+     Shortest distance problems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="1.6_Vector_geometry_exercises.html">
      Vector Geometry Exercises
     </a>
    </li>
@@ -224,7 +234,7 @@ const thebe_selector_output = ".output, .cell_output"
   </ul>
  </li>
  <li class="toctree-l1 current active has-children">
-  <a class="reference internal" href="4.0_Hidden_surface_removal.html">
+  <a class="reference internal" href="4.0_Clipping_and_HSD.html">
    Clipping &amp; hidden surface determination
   </a>
   <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
@@ -499,18 +509,18 @@ title="Print to PDF"
 <figure class="margin align-default" id="id3">
 <a class="reference internal image-reference" href="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/John_Carmack_at_GDCA_2017_--_1_March_2017_%28cropped%29.jpeg/220px-John_Carmack_at_GDCA_2017_--_1_March_2017_%28cropped%29.jpeg"><img alt="John Carmack" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/John_Carmack_at_GDCA_2017_--_1_March_2017_%28cropped%29.jpeg/220px-John_Carmack_at_GDCA_2017_--_1_March_2017_%28cropped%29.jpeg" style="width: 200px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 79 </span><span class="caption-text"><a href="https://en.wikipedia.org/wiki/John_Carmack" target="_blank">John Carmack</a> developer of <em>Doom</em>, the first game to use binary space partitioning</span><a class="headerlink" href="#id3" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 80 </span><span class="caption-text"><a href="https://en.wikipedia.org/wiki/John_Carmack" target="_blank">John Carmack</a> developer of <em>Doom</em>, the first game to use binary space partitioning</span><a class="headerlink" href="#id3" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>The disadvantage of the <a class="reference internal" href="4.4_Painters_algorithm.html#painters-algorithm-section"><span class="std std-ref">painter’s algorithm</span></a> is that every time the camera position or direction changes the vertex distances need to be recalculated and the face array sorted which is computationally inefficient. A method used in computer games that provides the correct rendering order for static polygons in a virtual environment is called <strong>Binary Space Partitioning (BSP)</strong>. Binary space partitioning was first described in the 1960s by <span id="id1">Schumacker <em>et al.</em> [<a class="reference internal" href="bibliography.html#id10" title="R.A. Schumacker, B. Brand, M.G. Gilliland, and W.H. Sharp. Study for applying computer-generated images to visual simulation. Report U.S. Air Force Human Resources Laboratory, 1969.">1969</a>]</span> to improve the rendering of three-dimensional scenes using computer graphics. However, it wasn’t until the early 1990s that BSP became widely used in the computer game industry to improve the performance of rendering three-dimensional scenes. id Software’s seminal game Doom <span id="id2">[<a class="reference internal" href="bibliography.html#id9" title="John Carmack, John Romero, Adrian Carmack, Kevin Cloud, and Tom Hall. Doom. Video game, 1993.">Carmack <em>et al.</em>, 1993</a>]</span> was the first game to use this method and all games with three-dimensional virtual worlds have since have used BSP.</p>
 <figure class="align-default" id="doom-figure">
 <a class="reference internal image-reference" href="https://upload.wikimedia.org/wikipedia/en/d/de/Doom_ingame_1.png"><img alt="https://upload.wikimedia.org/wikipedia/en/d/de/Doom_ingame_1.png" src="https://upload.wikimedia.org/wikipedia/en/d/de/Doom_ingame_1.png" style="width: 500px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 80 </span><span class="caption-text"><em>Doom</em> by id Software was the first computer game to use binary space partitioning for removing hidden surfaces</span><a class="headerlink" href="#doom-figure" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 81 </span><span class="caption-text"><em>Doom</em> by id Software was the first computer game to use binary space partitioning for removing hidden surfaces</span><a class="headerlink" href="#doom-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <div class="proof definition admonition" id="definition-0">
-<p class="admonition-title"><span class="caption-number">Definition 22 </span> (Convex set of polygons)</p>
+<p class="admonition-title"><span class="caption-number">Definition 21 </span> (Convex set of polygons)</p>
 <section class="definition-content" id="proof-content">
 <p>A <strong>convex set</strong> of polygons is a set of polygons where each polygon is front facing to every other polygon.</p>
 </section>
@@ -519,21 +529,21 @@ title="Print to PDF"
 <div class="sd-col sd-d-flex-column docutils">
 <figure class="align-default" id="id4">
 <img alt="../_images/convex_set.svg" src="../_images/convex_set.svg" /><figcaption>
-<p><span class="caption-number">Fig. 81 </span><span class="caption-text">Convex set of polygons</span><a class="headerlink" href="#id4" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 82 </span><span class="caption-text">Convex set of polygons</span><a class="headerlink" href="#id4" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
 <div class="sd-col sd-d-flex-column docutils">
 <figure class="align-default" id="id5">
 <img alt="../_images/non_convex_set.svg" src="../_images/non_convex_set.svg" /><figcaption>
-<p><span class="caption-number">Fig. 82 </span><span class="caption-text">Non-convex set of polygons</span><a class="headerlink" href="#id5" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 83 </span><span class="caption-text">Non-convex set of polygons</span><a class="headerlink" href="#id5" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
 <div class="proof definition admonition" id="definition-1">
-<p class="admonition-title"><span class="caption-number">Definition 23 </span> (Hyperplane)</p>
+<p class="admonition-title"><span class="caption-number">Definition 22 </span> (Hyperplane)</p>
 <section class="definition-content" id="proof-content">
 <p>A <strong>hyperplane</strong> is a subspace with a dimension one less than that of its vector space.</p>
 </section>
@@ -544,19 +554,19 @@ title="Print to PDF"
 <p>The subdivisions in binary space partitioning are recorded in a data structure known as a <strong>binary tree</strong> is used. A binary tree is a type of <a href="https://en.wikipedia.org/wiki/Tree_(graph_theory)" target="_blank">tree</a> where each node has at most two child nodes (nodes that are connected by output edges) and at most one parent node (nodes that are connected by input edges). The child nodes are drawn to the left and right hand side beneath the parent node and are referred to as <em>left child node</em> and <em>right child node</em> respectively.</p>
 <figure class="align-default" id="binary-tree-figure">
 <img alt="../_images/binary_tree.svg" src="../_images/binary_tree.svg" /><figcaption>
-<p><span class="caption-number">Fig. 83 </span><span class="caption-text">A binary tree</span><a class="headerlink" href="#binary-tree-figure" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 84 </span><span class="caption-text">A binary tree</span><a class="headerlink" href="#binary-tree-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>Consider the space containing the three polygons A, B and C in <a class="reference internal" href="#bsp-figure-1"><span class="std std-numref">Fig. 84</span></a>.The set of polygons <span class="math notranslate nohighlight">\(\{ A, B, C \}\)</span> is not a convex set since none of the three polygons face each other. If we subdivide the space by inserting a polygon along the same plane that polygon <span class="math notranslate nohighlight">\(A\)</span> lies on then polygon <span class="math notranslate nohighlight">\(B\)</span> is in the front subspace and polygon <span class="math notranslate nohighlight">\(C\)</span> is in the back subspace. We represent this subdivision as a binary tree with polygon <span class="math notranslate nohighlight">\(A\)</span> contained in the parent node, polygon <span class="math notranslate nohighlight">\(B\)</span> contained in the left child node and polygon <span class="math notranslate nohighlight">\(C\)</span> contained within the right child node. The choice of which node to insert the hyperplane along is arbitrary and we can select any polygon in the set, however, there may be optimality considerations.</p>
+<p>Consider the space containing the three polygons A, B and C in <a class="reference internal" href="#bsp-figure-1"><span class="std std-numref">Fig. 85</span></a>.The set of polygons <span class="math notranslate nohighlight">\(\{ A, B, C \}\)</span> is not a convex set since none of the three polygons face each other. If we subdivide the space by inserting a polygon along the same plane that polygon <span class="math notranslate nohighlight">\(A\)</span> lies on then polygon <span class="math notranslate nohighlight">\(B\)</span> is in the front subspace and polygon <span class="math notranslate nohighlight">\(C\)</span> is in the back subspace. We represent this subdivision as a binary tree with polygon <span class="math notranslate nohighlight">\(A\)</span> contained in the parent node, polygon <span class="math notranslate nohighlight">\(B\)</span> contained in the left child node and polygon <span class="math notranslate nohighlight">\(C\)</span> contained within the right child node. The choice of which node to insert the hyperplane along is arbitrary and we can select any polygon in the set, however, there may be optimality considerations.</p>
 <figure class="align-default" id="bsp-figure-1">
 <img alt="../_images/bsp_1.svg" src="../_images/bsp_1.svg" /><figcaption>
-<p><span class="caption-number">Fig. 84 </span><span class="caption-text">Polygons in the front subspace of the hyperplane are listed in the left child node and polygons in the back subspace are listed in the right child node</span><a class="headerlink" href="#bsp-figure-1" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 85 </span><span class="caption-text">Polygons in the front subspace of the hyperplane are listed in the left child node and polygons in the back subspace are listed in the right child node</span><a class="headerlink" href="#bsp-figure-1" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>If two or more polygons lie on the same plane and have their normal vectors pointing in the same direction then we can insert a hyperplane along all of these polygons. This is advantageous as it  reduces the number of polygons we have to deal with. For example, consider fig. 4.13 where polygons A and B are coincident. Polygon C is in the front subspace and polygon D is in the back subspace.</p>
 <figure class="align-default" id="bsp-figure-2">
 <img alt="../_images/bsp_2.svg" src="../_images/bsp_2.svg" /><figcaption>
-<p><span class="caption-number">Fig. 85 </span><span class="caption-text">Polygons that lie on the same plane can be used for the hyperplane</span><a class="headerlink" href="#bsp-figure-2" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 86 </span><span class="caption-text">Polygons that lie on the same plane can be used for the hyperplane</span><a class="headerlink" href="#bsp-figure-2" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>The binary space partition of a world space is outlined in <a class="reference internal" href="#bsp-algorithm">Algorithm 5</a>.</p>
@@ -614,7 +624,7 @@ Solution<div class="sd-summary-down docutils">
 <img alt="../_images/bsp_example_6.svg" src="../_images/bsp_example_6.svg" /></figure>
 <p class="sd-card-text">The left child node contains <span class="math notranslate nohighlight">\(\{ J, K \}\)</span> which is a convex set so we move to the right child node contains <span class="math notranslate nohighlight">\(\{ F,G,M,N,O_2\}\)</span>. Choosing <span class="math notranslate nohighlight">\(F\)</span> and <span class="math notranslate nohighlight">\(N\)</span> as the parent node we have <span class="math notranslate nohighlight">\(O_1\)</span> in the front subspace so we list this in the left child node and <span class="math notranslate nohighlight">\(G\)</span> and <span class="math notranslate nohighlight">\(M\)</span> in the back subspace so we list this in the right child node.</p>
 <figure class="align-default">
-<img alt="../_images/bsp_example_6.svg" src="../_images/bsp_example_6.svg" /></figure>
+<img alt="../_images/bsp_example_7.svg" src="../_images/bsp_example_7.svg" /></figure>
 <p class="sd-card-text">All subspaces now contain convex sets so the algorithm terminates.</p>
 </div>
 </details></section>
@@ -626,10 +636,10 @@ with visible surface determination? If you consider what is actually happening w
 the distances of each polygon have to be recalculated. Therefore it is not a suitable method to use in computer games where the camera position is commonly controlled by the player and changing often. BSP trees provide the visibility ordering for a scene depending on the camera position relative to the root node of the tree.</p>
 <figure class="align-default" id="bsp-vsd-figure">
 <img alt="../_images/bsp_vsd.svg" src="../_images/bsp_vsd.svg" /><figcaption>
-<p><span class="caption-number">Fig. 86 </span><span class="caption-text">Visible surface detection using BSP trees</span><a class="headerlink" href="#bsp-vsd-figure" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 87 </span><span class="caption-text">Visible surface detection using BSP trees</span><a class="headerlink" href="#bsp-vsd-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>Consider the scene and the associated BSP tree shown in <a class="reference internal" href="#bsp-vsd-figure"><span class="std std-numref">Fig. 86</span></a>. The viewer is in the front subspace of the root node <span class="math notranslate nohighlight">\(A\)</span> so the polygons that are in the back subspace of A, in this case this is just <span class="math notranslate nohighlight">\(C\)</span>, are further away from the viewer than the polygons in the front subspace of <span class="math notranslate nohighlight">\(A\)</span>, which in this case is just <span class="math notranslate nohighlight">\(B\)</span>. So the rendering order used by the painter’s algorithm can be determined by drawing polygons in the opposite subspace to the viewing position first. Notice that polygon
+<p>Consider the scene and the associated BSP tree shown in <a class="reference internal" href="#bsp-vsd-figure"><span class="std std-numref">Fig. 87</span></a>. The viewer is in the front subspace of the root node <span class="math notranslate nohighlight">\(A\)</span> so the polygons that are in the back subspace of A, in this case this is just <span class="math notranslate nohighlight">\(C\)</span>, are further away from the viewer than the polygons in the front subspace of <span class="math notranslate nohighlight">\(A\)</span>, which in this case is just <span class="math notranslate nohighlight">\(B\)</span>. So the rendering order used by the painter’s algorithm can be determined by drawing polygons in the opposite subspace to the viewing position first. Notice that polygon
 <span class="math notranslate nohighlight">\(C\)</span> is contained in the left child node <span class="math notranslate nohighlight">\(A\)</span> and polygon <span class="math notranslate nohighlight">\(B\)</span> is contained in the right child node. So the rendering order of polygons using the painter’s algorithm can be determined using a BSP tree.</p>
 <p>The visible surface detection using a BSP tree is performed using an <a href="https://en.wikipedia.org/wiki/Tree_traversal#In-order,_LNR" target="_blank">in-order tree walk</a>.</p>
 <div class="proof algorithm admonition" id="bsp-tree-traversal-algorithm">

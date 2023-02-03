@@ -59,7 +59,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Polygon clipping" href="4.2_Polygon_clipping.html" />
-    <link rel="prev" title="Clipping &amp; hidden surface determination" href="4.0_Hidden_surface_removal.html" />
+    <link rel="prev" title="Clipping &amp; hidden surface determination" href="4.0_Clipping_and_HSD.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -133,7 +133,7 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="1.0_Coordinate_geometry.html">
+  <a class="reference internal" href="1.0_Vector_geometry.html">
    Vector Geometry
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
@@ -143,22 +143,32 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="1.1_Points_lines_and_planes.html">
+    <a class="reference internal" href="1.1_Vectors.html">
+     Vectors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="1.2_Basis.html">
+     Basis
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="1.3_Points_lines_and_planes.html">
      Points, lines, planes and spheres
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="1.2_Shortest_distance_problems.html">
-     Shortest distance problems
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="1.3_Intersections.html">
+    <a class="reference internal" href="1.4_Intersections.html">
      Intersections between objects
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="1.4_Coordinate_geometry_exercises.html">
+    <a class="reference internal" href="1.5_Shortest_distance_problems.html">
+     Shortest distance problems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="1.6_Vector_geometry_exercises.html">
      Vector Geometry Exercises
     </a>
    </li>
@@ -224,7 +234,7 @@ const thebe_selector_output = ".output, .cell_output"
   </ul>
  </li>
  <li class="toctree-l1 current active has-children">
-  <a class="reference internal" href="4.0_Hidden_surface_removal.html">
+  <a class="reference internal" href="4.0_Clipping_and_HSD.html">
    Clipping &amp; hidden surface determination
   </a>
   <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
@@ -486,14 +496,14 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="line-clipping">
 <span id="line-clipping-section"></span><h1>Line clipping<a class="headerlink" href="#line-clipping" title="Permalink to this headline">#</a></h1>
-<p>Since the objects that form our virtual environment are constructed using polygons which are formed using lines, the problem of clipping the screen space can be reduced to the clipping of individual lines. Consider the diagram in <a class="reference internal" href="#clipping-lines-figure"><span class="std std-numref">Fig. 67</span></a> which shows the different line clipping scenarios we need to consider.</p>
+<p>Since the objects that form our virtual environment are constructed using polygons which are formed using lines, the problem of clipping the screen space can be reduced to the clipping of individual lines. Consider the diagram in <a class="reference internal" href="#clipping-lines-figure"><span class="std std-numref">Fig. 68</span></a> which shows the different line clipping scenarios we need to consider.</p>
 <figure class="align-default" id="clipping-lines-figure">
 <a class="reference internal image-reference" href="../_images/clipping_lines.svg"><img alt="../_images/clipping_lines.svg" src="../_images/clipping_lines.svg" width="400px" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 67 </span><span class="caption-text">Various line clipping scenarios.</span><a class="headerlink" href="#clipping-lines-figure" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 68 </span><span class="caption-text">Various line clipping scenarios.</span><a class="headerlink" href="#clipping-lines-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>Visual inspection of <a class="reference internal" href="#clipping-lines-figure"><span class="std std-numref">Fig. 67</span></a> shows we need to do the following</p>
+<p>Visual inspection of <a class="reference internal" href="#clipping-lines-figure"><span class="std std-numref">Fig. 68</span></a> shows we need to do the following</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(\mathbf{a} \to \mathbf{b}\)</span>: both endpoints are inside of the visible region so we can draw the line <span class="math notranslate nohighlight">\(\mathbf{a} \to \mathbf{b}\)</span>;</p></li>
 <li><p><span class="math notranslate nohighlight">\(\mathbf{c} \to \mathbf{d}\)</span>: the endpoint <span class="math notranslate nohighlight">\(\mathbf{c}\)</span> is outside and <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> is inside of the visible region so we clip <span class="math notranslate nohighlight">\(\mathbf{c}\)</span> to the top edge at <span class="math notranslate nohighlight">\(\mathbf{c}'\)</span> and draw the line <span class="math notranslate nohighlight">\(\mathbf{c}' \to \mathbf{d}\)</span>;</p></li>
@@ -502,34 +512,34 @@ title="Print to PDF"
 </ul>
 <section id="the-cyrus-beck-algorithm">
 <h2>The Cyrus-Beck algorithm<a class="headerlink" href="#the-cyrus-beck-algorithm" title="Permalink to this headline">#</a></h2>
-<p>The Cyrus-Beck algorithm <span id="id1">[<a class="reference internal" href="bibliography.html#id6" title="M. Cyrus and J. Beck. Generalized two- and three-dimensional clipping. Computers and Graphics, pages 23 - 28, 1978. URL: https://www.sciencedirect.com/science/article/abs/pii/0097849378900213.">Cyrus and Beck, 1978</a>]</span> is an algorithm for clipping a single line to a single edge. Consider the diagram in <a class="reference internal" href="#clip-to-edge-figure"><span class="std std-numref">Fig. 68</span></a> which shows the line joining two points <span class="math notranslate nohighlight">\(\mathbf{a} \to \mathbf{b}\)</span> that passes through the plane defined by the <a class="reference internal" href="1.1_Points_lines_and_planes.html#normal-vector-section"><span class="std std-ref">normal vector</span></a> <span class="math notranslate nohighlight">\(\mathbf{n}\)</span> and point <span class="math notranslate nohighlight">\(\mathbf{p}\)</span>.</p>
+<p>The Cyrus-Beck algorithm <span id="id1">[<a class="reference internal" href="bibliography.html#id6" title="M. Cyrus and J. Beck. Generalized two- and three-dimensional clipping. Computers and Graphics, pages 23 - 28, 1978. URL: https://www.sciencedirect.com/science/article/abs/pii/0097849378900213.">Cyrus and Beck, 1978</a>]</span> is an algorithm for clipping a single line to a single edge. Consider the diagram in <a class="reference internal" href="#clip-to-edge-figure"><span class="std std-numref">Fig. 69</span></a> which shows the line joining two points <span class="math notranslate nohighlight">\(\mathbf{a} \to \mathbf{b}\)</span> that passes through the plane defined by the <a class="reference internal" href="1.3_Points_lines_and_planes.html#normal-vector-section"><span class="std std-ref">normal vector</span></a> <span class="math notranslate nohighlight">\(\mathbf{n}\)</span> and point <span class="math notranslate nohighlight">\(\mathbf{p}\)</span>.</p>
 <figure class="align-default" id="clip-to-edge-figure">
 <a class="reference internal image-reference" href="../_images/clip_to_edge.svg"><img alt="../_images/clip_to_edge.svg" src="../_images/clip_to_edge.svg" width="300px" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 68 </span><span class="caption-text">The line joining points <span class="math notranslate nohighlight">\(\mathbf{a} \to \mathbf{b}\)</span> is clipped to the left edge at point <span class="math notranslate nohighlight">\(\mathbf{c}\)</span>.</span><a class="headerlink" href="#clip-to-edge-figure" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 69 </span><span class="caption-text">The line joining points <span class="math notranslate nohighlight">\(\mathbf{a} \to \mathbf{b}\)</span> is clipped to the left edge at point <span class="math notranslate nohighlight">\(\mathbf{c}\)</span>.</span><a class="headerlink" href="#clip-to-edge-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>Clipping of the line joining points <span class="math notranslate nohighlight">\(\mathbf{a}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> to the plane requires the calculation of the point where the line intersects with the plane. To calculate the intersection point <span class="math notranslate nohighlight">\(\mathbf{c}\)</span> we use the vector formula for calculating the shortest distance between a point and a plane, equation <a class="reference internal" href="1.2_Shortest_distance_problems.html#equation-point-plane-distance-equation">(16)</a></p>
+<p>Clipping of the line joining points <span class="math notranslate nohighlight">\(\mathbf{a}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> to the plane requires the calculation of the point where the line intersects with the plane. To calculate the intersection point <span class="math notranslate nohighlight">\(\mathbf{c}\)</span> we use the vector formula for calculating the shortest distance between a point and a plane, equation <a class="reference internal" href="1.5_Shortest_distance_problems.html#equation-point-plane-distance-equation">(18)</a></p>
 <div class="math notranslate nohighlight" id="equation-cyrus-beck-d-equation">
-<span class="eqno">(29)<a class="headerlink" href="#equation-cyrus-beck-d-equation" title="Permalink to this equation">#</a></span>\[d = (\mathbf{q} - \mathbf{p}) \cdot \frac{\mathbf{n}}{|\mathbf{n}|}.\]</div>
+<span class="eqno">(30)<a class="headerlink" href="#equation-cyrus-beck-d-equation" title="Permalink to this equation">#</a></span>\[d = (\mathbf{q} - \mathbf{p}) \cdot \frac{\mathbf{n}}{|\mathbf{n}|}.\]</div>
 <p>The vector equation of the line <span class="math notranslate nohighlight">\(\mathbf{a} \to \mathbf{b}\)</span> is</p>
 <div class="math notranslate nohighlight" id="equation-cyrus-beck-q-equation">
-<span class="eqno">(30)<a class="headerlink" href="#equation-cyrus-beck-q-equation" title="Permalink to this equation">#</a></span>\[\mathbf{q} = \mathbf{a} + t(\mathbf{b} - \mathbf{a}),\]</div>
-<p>and substituting into equation <a class="reference internal" href="#equation-cyrus-beck-d-equation">(29)</a></p>
+<span class="eqno">(31)<a class="headerlink" href="#equation-cyrus-beck-q-equation" title="Permalink to this equation">#</a></span>\[\mathbf{q} = \mathbf{a} + t(\mathbf{b} - \mathbf{a}),\]</div>
+<p>and substituting into equation <a class="reference internal" href="#equation-cyrus-beck-d-equation">(30)</a></p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
     d &amp;= (\mathbf{a} + t(\mathbf{b} - \mathbf{a}) - \mathbf{p}) \cdot \frac{\mathbf{n}}{|\mathbf{n}|}.
 \end{align*}\]</div>
 <p>The intersection point <span class="math notranslate nohighlight">\(\mathbf{c}\)</span> is where the distance to the plane is zero so setting <span class="math notranslate nohighlight">\(d=0\)</span> and rearranging to make <span class="math notranslate nohighlight">\(t\)</span> the subject gives</p>
 <div class="math notranslate nohighlight" id="equation-cyrus-beck-t-equation-1">
-<span class="eqno">(31)<a class="headerlink" href="#equation-cyrus-beck-t-equation-1" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align}
+<span class="eqno">(32)<a class="headerlink" href="#equation-cyrus-beck-t-equation-1" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align}
      0 &amp;= (\mathbf{a} + t(\mathbf{b} - \mathbf{a}) - \mathbf{p}) \cdot \frac{\mathbf{n}}{|\mathbf{n}|}\\
      &amp;= (\mathbf{a} - \mathbf{p}) \cdot \mathbf{n} + t(\mathbf{b} - \mathbf{a}) \cdot \mathbf{n} \\
      t(\mathbf{a} - \mathbf{b}) \cdot \mathbf{n} &amp;= (\mathbf{a} - \mathbf{p}) \cdot \mathbf{n} \\
      t &amp;= \frac{(\mathbf{a} - \mathbf{p}) \cdot \mathbf{n}}{(\mathbf{a} - \mathbf{b}) \cdot \mathbf{n}}
 \end{align}\end{split}\]</div>
-<p>This expression for <span class="math notranslate nohighlight">\(t\)</span> can be substituted into equation <a class="reference internal" href="#equation-cyrus-beck-q-equation">(30)</a> to give <span class="math notranslate nohighlight">\(\mathbf{c}\)</span>.</p>
-<p>On visual inspection it is easy for us to see that in <a class="reference internal" href="#clip-to-edge-figure"><span class="std std-numref">Fig. 68</span></a> point <span class="math notranslate nohighlight">\(\mathbf{a}\)</span> is outside of the visible region and needs to be clipped to the left edge at <span class="math notranslate nohighlight">\(\mathbf{c}\)</span> and the line <span class="math notranslate nohighlight">\(\mathbf{a}\)</span> to <span class="math notranslate nohighlight">\(\mathbf{c}\)</span> is replaced by <span class="math notranslate nohighlight">\(\mathbf{c}\)</span> to <span class="math notranslate nohighlight">\(\mathbf{b}\)</span>. To get a computer to do this we can use the distance between the endpoints and the edges of the visible region. If the normal vectors of the edges of the visible region are pointing into the interior, then any point where the distance to the edge calculated using equation <a class="reference internal" href="1.2_Shortest_distance_problems.html#equation-point-plane-distance-equation">(16)</a> is negative is outside and needs to be clipped. So before calculating <span class="math notranslate nohighlight">\(t\)</span> we calculate the distances of <span class="math notranslate nohighlight">\(\mathbf{a}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> to the edge</p>
+<p>This expression for <span class="math notranslate nohighlight">\(t\)</span> can be substituted into equation <a class="reference internal" href="#equation-cyrus-beck-q-equation">(31)</a> to give <span class="math notranslate nohighlight">\(\mathbf{c}\)</span>.</p>
+<p>On visual inspection it is easy for us to see that in <a class="reference internal" href="#clip-to-edge-figure"><span class="std std-numref">Fig. 69</span></a> point <span class="math notranslate nohighlight">\(\mathbf{a}\)</span> is outside of the visible region and needs to be clipped to the left edge at <span class="math notranslate nohighlight">\(\mathbf{c}\)</span> and the line <span class="math notranslate nohighlight">\(\mathbf{a}\)</span> to <span class="math notranslate nohighlight">\(\mathbf{c}\)</span> is replaced by <span class="math notranslate nohighlight">\(\mathbf{c}\)</span> to <span class="math notranslate nohighlight">\(\mathbf{b}\)</span>. To get a computer to do this we can use the distance between the endpoints and the edges of the visible region. If the normal vectors of the edges of the visible region are pointing into the interior, then any point where the distance to the edge calculated using equation <a class="reference internal" href="1.5_Shortest_distance_problems.html#equation-point-plane-distance-equation">(18)</a> is negative is outside and needs to be clipped. So before calculating <span class="math notranslate nohighlight">\(t\)</span> we calculate the distances of <span class="math notranslate nohighlight">\(\mathbf{a}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> to the edge</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
     d_\mathbf{a} &amp;= (\mathbf{a} - \mathbf{p}) \cdot \mathbf{n}, \\
@@ -542,9 +552,9 @@ title="Print to PDF"
 <li><p>Else if <span class="math notranslate nohighlight">\(d_\mathbf{a} &gt; 0\)</span> and <span class="math notranslate nohighlight">\(d_\mathbf{b} &gt; 0\)</span> then both <span class="math notranslate nohighlight">\(\mathbf{a} \to \mathbf{b}\)</span> are inside so we don’t need to clip the line joining <span class="math notranslate nohighlight">\(\mathbf{a} \to \mathbf{b}\)</span>;</p></li>
 <li><p>Else if <span class="math notranslate nohighlight">\(d_\mathbf{a} &lt; 0\)</span> and <span class="math notranslate nohighlight">\(d_\mathbf{b} &lt; 0\)</span> then both <span class="math notranslate nohighlight">\(\mathbf{a} \to \mathbf{b}\)</span> are outside so we ignore the line joining <span class="math notranslate nohighlight">\(\mathbf{a} \to \mathbf{b}\)</span>.</p></li>
 </ul>
-<p>Since we have calculated <span class="math notranslate nohighlight">\(d_\mathbf{a}\)</span> and <span class="math notranslate nohighlight">\(d_\mathbf{b}\)</span> to determine whether clipping is required, it makes sense to use these values to calculate <span class="math notranslate nohighlight">\(t\)</span>. Rearranging equation <a class="reference internal" href="#equation-cyrus-beck-t-equation-1">(31)</a> gives</p>
+<p>Since we have calculated <span class="math notranslate nohighlight">\(d_\mathbf{a}\)</span> and <span class="math notranslate nohighlight">\(d_\mathbf{b}\)</span> to determine whether clipping is required, it makes sense to use these values to calculate <span class="math notranslate nohighlight">\(t\)</span>. Rearranging equation <a class="reference internal" href="#equation-cyrus-beck-t-equation-1">(32)</a> gives</p>
 <div class="math notranslate nohighlight" id="equation-cyrus-beck-t-equation-2">
-<span class="eqno">(32)<a class="headerlink" href="#equation-cyrus-beck-t-equation-2" title="Permalink to this equation">#</a></span>\[\begin{align}
+<span class="eqno">(33)<a class="headerlink" href="#equation-cyrus-beck-t-equation-2" title="Permalink to this equation">#</a></span>\[\begin{align}
     t &amp;= \frac{d_\mathbf{a}}{d_\mathbf{a} - d_\mathbf{b}}.
 \end{align}\]</div>
 <div class="proof algorithm admonition" id="cyrus-beck-algorithm">
@@ -671,7 +681,7 @@ Solution<div class="sd-summary-down docutils">
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="4.0_Hidden_surface_removal.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="4.0_Clipping_and_HSD.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>

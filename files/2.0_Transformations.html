@@ -59,7 +59,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Translation" href="2.1_Translation.html" />
-    <link rel="prev" title="Vector Geometry Exercises" href="1.4_Coordinate_geometry_exercises.html" />
+    <link rel="prev" title="Vector Geometry Exercises" href="1.6_Vector_geometry_exercises.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -133,7 +133,7 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="1.0_Coordinate_geometry.html">
+  <a class="reference internal" href="1.0_Vector_geometry.html">
    Vector Geometry
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
@@ -143,22 +143,32 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="1.1_Points_lines_and_planes.html">
+    <a class="reference internal" href="1.1_Vectors.html">
+     Vectors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="1.2_Basis.html">
+     Basis
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="1.3_Points_lines_and_planes.html">
      Points, lines, planes and spheres
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="1.2_Shortest_distance_problems.html">
-     Shortest distance problems
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="1.3_Intersections.html">
+    <a class="reference internal" href="1.4_Intersections.html">
      Intersections between objects
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="1.4_Coordinate_geometry_exercises.html">
+    <a class="reference internal" href="1.5_Shortest_distance_problems.html">
+     Shortest distance problems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="1.6_Vector_geometry_exercises.html">
      Vector Geometry Exercises
     </a>
    </li>
@@ -224,7 +234,7 @@ const thebe_selector_output = ".output, .cell_output"
   </ul>
  </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="4.0_Hidden_surface_removal.html">
+  <a class="reference internal" href="4.0_Clipping_and_HSD.html">
    Clipping &amp; hidden surface determination
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
@@ -526,10 +536,11 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="linear-transformations">
 <span id="linear-transformations-section"></span><h1>Linear Transformations<a class="headerlink" href="#linear-transformations" title="Permalink to this headline">#</a></h1>
+<p>To create a virtual environment we need to be able to scale, rotate and move objects in the space. To do this we make use of linear transformations.</p>
 <section id="definition">
 <h2>Definition<a class="headerlink" href="#definition" title="Permalink to this headline">#</a></h2>
 <div class="proof definition admonition" id="linear-transformation-definition">
-<p class="admonition-title"><span class="caption-number">Definition 15 </span> (Linear transformation)</p>
+<p class="admonition-title"><span class="caption-number">Definition 14 </span> (Linear transformation)</p>
 <section class="definition-content" id="proof-content">
 <p>If <span class="math notranslate nohighlight">\(V\)</span> and <span class="math notranslate nohighlight">\(W\)</span> are two vector spaces over the same field <span class="math notranslate nohighlight">\(F\)</span> then by a <strong>linear transformation</strong> (or <strong>linear mapping</strong>) is a mapping <span class="math notranslate nohighlight">\(T: V \to W\)</span> that for any two vectors <span class="math notranslate nohighlight">\(\mathbf{u}, \mathbf{v} \in V\)</span> and any scalar <span class="math notranslate nohighlight">\(\alpha \in F\)</span> the following conditions hold</p>
 <ul class="simple">
@@ -538,9 +549,9 @@ title="Print to PDF"
 </ul>
 <p>The result of applying a linear transformation to an object is known as the <strong>image</strong>.</p>
 </section>
-</div><p>To show whether a transformation is a linear transformation can combine both conditions from <a class="reference internal" href="#linear-transformation-definition">Definition 15</a> to show that</p>
+</div><p>To show whether a transformation is a linear transformation can combine both conditions from <a class="reference internal" href="#linear-transformation-definition">Definition 14</a> to show that</p>
 <div class="math notranslate nohighlight" id="equation-linear-transformation-condition-equation">
-<span class="eqno">(18)<a class="headerlink" href="#equation-linear-transformation-condition-equation" title="Permalink to this equation">#</a></span>\[T(\mathbf{u} + \alpha \mathbf{v}) = T(\mathbf{u}) + \alpha T(\mathbf{v}).\]</div>
+<span class="eqno">(19)<a class="headerlink" href="#equation-linear-transformation-condition-equation" title="Permalink to this equation">#</a></span>\[T(\mathbf{u} + \alpha \mathbf{v}) = T(\mathbf{u}) + \alpha T(\mathbf{v}).\]</div>
 </section>
 <section id="transformation-matrices">
 <span id="transformation-matrices-section"></span><h2>Transformation matrices<a class="headerlink" href="#transformation-matrices" title="Permalink to this headline">#</a></h2>
@@ -607,11 +618,11 @@ Solution<div class="sd-summary-down docutils">
 \end{align*}\]</div>
 </div>
 </details></section>
-</div><p>The affects of the linear transformation from <a class="reference internal" href="#transformation-matrix-example">Example 19</a> is illustrated in <a class="reference internal" href="#linear-transformation-figure"><span class="std std-numref">Fig. 29</span></a>. Note that the transformation <span class="math notranslate nohighlight">\(T\)</span> can be thought of as changing the basis of the vector space. The unit square with respect to the basis <span class="math notranslate nohighlight">\(\{\mathbf{e}_1, \mathbf{e}_1\}\)</span> has been transformed into a unit parallelogram with respect to the basis <span class="math notranslate nohighlight">\(\{ T(\mathbf{e}_1), T(\mathbf{e}_2)\}\)</span>.</p>
+</div><p>The affects of the linear transformation from <a class="reference internal" href="#transformation-matrix-example">Example 19</a> is illustrated in <a class="reference internal" href="#linear-transformation-figure"><span class="std std-numref">Fig. 30</span></a>. Note that the transformation <span class="math notranslate nohighlight">\(T\)</span> can be thought of as changing the basis of the vector space. The unit square with respect to the basis <span class="math notranslate nohighlight">\(\{\mathbf{e}_1, \mathbf{e}_1\}\)</span> has been transformed into a unit parallelogram with respect to the basis <span class="math notranslate nohighlight">\(\{ T(\mathbf{e}_1), T(\mathbf{e}_2)\}\)</span>.</p>
 <figure class="align-default" id="linear-transformation-figure">
 <a class="reference internal image-reference" href="../_images/linear_transformation.svg"><img alt="../_images/linear_transformation.svg" src="../_images/linear_transformation.svg" width="400px" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 29 </span><span class="caption-text">The affect of applying a linear transformation <span class="math notranslate nohighlight">\(T: (x,y) \mapsto (3x + y, x + 2y)\)</span> to the vector <span class="math notranslate nohighlight">\((1,1)\)</span>.</span><a class="headerlink" href="#linear-transformation-figure" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 30 </span><span class="caption-text">The affect of applying a linear transformation <span class="math notranslate nohighlight">\(T: (x,y) \mapsto (3x + y, x + 2y)\)</span> to the vector <span class="math notranslate nohighlight">\((1,1)\)</span>.</span><a class="headerlink" href="#linear-transformation-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
@@ -648,11 +659,11 @@ Solution<div class="sd-summary-down docutils">
     \end{pmatrix}^{-1}
 \end{align*}\]</div>
 <div class="proof theorem admonition" id="finding-transformation-matrix-theorem">
-<p class="admonition-title"><span class="caption-number">Theorem 4 </span> (Determining the linear transformation given the inputs and image vectors)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 6 </span> (Determining the linear transformation given the inputs and image vectors)</p>
 <section class="theorem-content" id="proof-content">
 <p>Given a linear transformation <span class="math notranslate nohighlight">\(T: \mathbb{R}^n \to \mathbb{R}^m\)</span> applied to a set of <span class="math notranslate nohighlight">\(n\)</span> vectors <span class="math notranslate nohighlight">\(\mathbf{u}_1, \mathbf{u}_2, \ldots, \mathbf{u}_n\)</span> with known image vectors <span class="math notranslate nohighlight">\(T(\mathbf{u}_1), T(\mathbf{u}_2), \ldots, T(\mathbf{u}_n)\)</span> then the transformation matrix <span class="math notranslate nohighlight">\(A\)</span> for <span class="math notranslate nohighlight">\(T\)</span> is</p>
 <div class="math notranslate nohighlight" id="equation-determining-the-transformation-matrix">
-<span class="eqno">(19)<a class="headerlink" href="#equation-determining-the-transformation-matrix" title="Permalink to this equation">#</a></span>\[A = (T(\mathbf{u}_1), T(\mathbf{u}_2), \ldots, T(\mathbf{u}_n)) \cdot (\mathbf{u}_1, \mathbf{u}_2, \ldots, \mathbf{u}_n)^{-1}.\]</div>
+<span class="eqno">(20)<a class="headerlink" href="#equation-determining-the-transformation-matrix" title="Permalink to this equation">#</a></span>\[A = (T(\mathbf{u}_1), T(\mathbf{u}_2), \ldots, T(\mathbf{u}_n)) \cdot (\mathbf{u}_1, \mathbf{u}_2, \ldots, \mathbf{u}_n)^{-1}.\]</div>
 </section>
 </div><div class="proof example seealso admonition" id="example-3">
 <p class="admonition-title"><span class="caption-number">Example 20 </span></p>
@@ -704,7 +715,7 @@ Solution<div class="sd-summary-down docutils">
 <span id="inverse-transformations-section"></span><h2>Inverse transformation<a class="headerlink" href="#inverse-transformation" title="Permalink to this headline">#</a></h2>
 <p>An important property of linear transformations for computer graphics is that their affects can be reversed, i.e., if <span class="math notranslate nohighlight">\(\mathbf{v} = T(\mathbf{u})\)</span> then we can undo this to get <span class="math notranslate nohighlight">\(\mathbf{u} = T^{-1}(\mathbf{v})\)</span>. The transformation <span class="math notranslate nohighlight">\(T^{-1}\)</span> is known as the <strong>inverse transformation</strong>.</p>
 <div class="proof definition admonition" id="inverse-transformation-definition">
-<p class="admonition-title"><span class="caption-number">Definition 16 </span> (Inverse linear transformation)</p>
+<p class="admonition-title"><span class="caption-number">Definition 15 </span> (Inverse linear transformation)</p>
 <section class="definition-content" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(T: V \to W\)</span> be a linear transformation with the transformation matrix <span class="math notranslate nohighlight">\(A\)</span> then <span class="math notranslate nohighlight">\(T\)</span> has an inverse transformation denoted by <span class="math notranslate nohighlight">\(T^{-1}: W \to V\)</span> which reverses the affects of <span class="math notranslate nohighlight">\(T\)</span>. If <span class="math notranslate nohighlight">\(\mathbf{u} \in V\)</span> and <span class="math notranslate nohighlight">\(\mathbf{v} \in W\)</span> then</p>
 <div class="amsmath math notranslate nohighlight">
@@ -757,7 +768,7 @@ Solution<div class="sd-summary-down docutils">
 <section id="composite-linear-transformations">
 <span id="composite-transformation-section"></span><h2>Composite linear transformations<a class="headerlink" href="#composite-linear-transformations" title="Permalink to this headline">#</a></h2>
 <div class="proof definition admonition" id="composite-transformation-definition">
-<p class="admonition-title"><span class="caption-number">Definition 17 </span> (Composite transformations)</p>
+<p class="admonition-title"><span class="caption-number">Definition 16 </span> (Composite transformations)</p>
 <section class="definition-content" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(S : V \to W\)</span> and <span class="math notranslate nohighlight">\(T: W \to X\)</span> be two linear transformations over the vector spaces <span class="math notranslate nohighlight">\(V, W\)</span> and <span class="math notranslate nohighlight">\(X\)</span>. The <strong>composition</strong> of <span class="math notranslate nohighlight">\(S\)</span> and <span class="math notranslate nohighlight">\(T\)</span> is the transformation <span class="math notranslate nohighlight">\(S \circ T: V \to X\)</span> defined by</p>
 <div class="amsmath math notranslate nohighlight">
@@ -773,11 +784,11 @@ Solution<div class="sd-summary-down docutils">
 <div class="math notranslate nohighlight">
 \[ S \circ T(\mathbf{u}) = C \mathbf{u}.\]</div>
 <div class="proof theorem admonition" id="composite-transformation-matrices-theorem">
-<p class="admonition-title"><span class="caption-number">Theorem 5 </span> (Composite transformation matrices)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 7 </span> (Composite transformation matrices)</p>
 <section class="theorem-content" id="proof-content">
 <p>Given two linear transformations <span class="math notranslate nohighlight">\(S:V \to W\)</span> and <span class="math notranslate nohighlight">\(T:W \to X\)</span> with transformation matrices <span class="math notranslate nohighlight">\(B\)</span> and <span class="math notranslate nohighlight">\(A\)</span> respectively then the composition <span class="math notranslate nohighlight">\(S \circ T\)</span> of the vector <span class="math notranslate nohighlight">\(\mathbf{u} \in V\)</span> is</p>
 <div class="math notranslate nohighlight" id="equation-composite-transformation-matrices-theorem-equation">
-<span class="eqno">(20)<a class="headerlink" href="#equation-composite-transformation-matrices-theorem-equation" title="Permalink to this equation">#</a></span>\[S \circ T (\mathbf{u}) = C \mathbf{u}.\]</div>
+<span class="eqno">(21)<a class="headerlink" href="#equation-composite-transformation-matrices-theorem-equation" title="Permalink to this equation">#</a></span>\[S \circ T (\mathbf{u}) = C \mathbf{u}.\]</div>
 <p>where <span class="math notranslate nohighlight">\(C = B \cdot A\)</span>.</p>
 </section>
 </div><div class="proof example seealso admonition" id="example-8">
@@ -871,7 +882,7 @@ Solution<div class="sd-summary-down docutils">
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="1.4_Coordinate_geometry_exercises.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="1.6_Vector_geometry_exercises.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>

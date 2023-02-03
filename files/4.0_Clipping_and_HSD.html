@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Teaching schedule &#8212; Computer Graphics Lecture Notes</title>
+    <title>Clipping &amp; hidden surface determination &#8212; Computer Graphics Lecture Notes</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -52,12 +52,12 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <link rel="canonical" href="https://jonshiach.github.io/graphics-book/files/0.1_teaching_schedule.html" />
+    <link rel="canonical" href="https://jonshiach.github.io/graphics-book/files/4.0_Clipping_and_HSD.html" />
     <link rel="shortcut icon" href="../_static/favicon.jpg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Vector Geometry" href="1.0_Vector_geometry.html" />
-    <link rel="prev" title="Introduction" href="../intro.html" />
+    <link rel="next" title="Line clipping" href="4.1_Line_clipping.html" />
+    <link rel="prev" title="Screen space" href="3.4_Screen_space.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -117,9 +117,9 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="0.1_teaching_schedule.html">
    Teaching schedule
   </a>
  </li>
@@ -129,7 +129,7 @@ const thebe_selector_output = ".output, .cell_output"
   Chapters
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="1.0_Vector_geometry.html">
    Vector Geometry
@@ -231,11 +231,11 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
   </ul>
  </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="4.0_Clipping_and_HSD.html">
+ <li class="toctree-l1 current active has-children">
+  <a class="current reference internal" href="#">
    Clipping &amp; hidden surface determination
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
   <label for="toctree-checkbox-4">
    <i class="fas fa-chevron-down">
    </i>
@@ -361,6 +361,17 @@ title="Toggle navigation"
         
     </div>
     <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+    </ul>
+  </div>
+</div>
+
 <button onclick="toggleFullScreen()"
   class="headerbtn"
   data-toggle="tooltip"
@@ -383,7 +394,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/files/0.1_teaching_schedule.md"
+        <a href="../_sources/files/4.0_Clipping_and_HSD.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -394,7 +405,7 @@ title="Download source file"
 <span class="headerbtn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="headerbtn__text-container">.md</span>
+<span class="headerbtn__text-container">.ipynb</span>
 </a>
 
       </li>
@@ -432,7 +443,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Teaching schedule</h1>
+                <h1>Clipping & hidden surface determination</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -444,95 +455,19 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="teaching-schedule">
-<h1>Teaching schedule<a class="headerlink" href="#teaching-schedule" title="Permalink to this headline">#</a></h1>
-<div class="full-width docutils">
-<table class="colwidths-auto table">
-<thead>
-<tr class="row-odd"><th class="text-align:center head"><p>Week</p></th>
-<th class="text-align:center head"><p>Date (w/c)</p></th>
-<th class="text-align:left head"><p>Lecture</p></th>
-<th class="text-align:left head"><p><div style="width:160px">Tutorial</div></p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td class="text-align:center"><p>1</p></td>
-<td class="text-align:center"><p>30/01/2023</p></td>
-<td class="text-align:left"><p><a class="reference internal" href="1.0_Vector_geometry.html#vector-geometry-section"><span class="std std-ref"><strong>Vector Geometry</strong></span></a>: <a class="reference internal" href="1.1_Vectors.html#vectors-section"><span class="std std-ref">review of vectors</span></a>, <a class="reference internal" href="1.1_Vectors.html#dot-product-section"><span class="std std-ref">dot</span></a> and <a class="reference internal" href="1.1_Vectors.html#cross-product-section"><span class="std std-ref">cross products</span></a>, <a class="reference internal" href="1.2_Basis.html#basis-section"><span class="std std-ref">basis</span></a>; <a class="reference internal" href="1.3_Points_lines_and_planes.html#points-section"><span class="std std-ref">points</span></a>, <a class="reference internal" href="1.3_Points_lines_and_planes.html#lines-section"><span class="std std-ref">lines</span></a>, <a class="reference internal" href="1.3_Points_lines_and_planes.html#planes-section"><span class="std std-ref">planes</span></a> and <a class="reference internal" href="1.3_Points_lines_and_planes.html#spheres-section"><span class="std std-ref">spheres</span></a>; the <a class="reference internal" href="1.3_Points_lines_and_planes.html#normal-vector-section"><span class="std std-ref">normal vector</span></a></p></td>
-<td class="text-align:left"><p><span class="xref std std-ref">co-ordinate-geometry-ex1</span> to <span class="xref std std-ref">co-ordinate-geometry-ex5</span></p></td>
-</tr>
-<tr class="row-odd"><td class="text-align:center"><p>2</p></td>
-<td class="text-align:center"><p>10/10/2023</p></td>
-<td class="text-align:left"><p><a class="reference internal" href="1.5_Shortest_distance_problems.html#shortest-distance-problems-section"><span class="std std-ref"><strong>Vector Geometry (cont)</strong></span></a>: shortest distances between <a class="reference internal" href="1.5_Shortest_distance_problems.html#point-line-distance-section"><span class="std std-ref">a point and a line</span></a>, <a class="reference internal" href="1.5_Shortest_distance_problems.html#line-line-distance-section"><span class="std std-ref">two lines</span></a> and a <a class="reference internal" href="1.5_Shortest_distance_problems.html#point-plane-distance-section"><span class="std std-ref">point and a plane</span></a>; intersections between <a class="reference internal" href="1.4_Intersections.html#line-line-intersection-section"><span class="std std-ref">two lines</span></a>, a <a class="reference internal" href="1.4_Intersections.html#line-sphere-intersection-section"><span class="std std-ref">line and a sphere</span></a>, a <span class="xref myst">line and a plane</span>, <a class="reference internal" href="1.4_Intersections.html#plane-plane-intersection-section"><span class="std std-ref">two planes</span></a> and a <a class="reference internal" href="1.4_Intersections.html#sphere-plane-intersection-section"><span class="std std-ref">sphere and a plane</span></a></p></td>
-<td class="text-align:left"><p></p></td>
-</tr>
-<tr class="row-even"><td class="text-align:center"><p>3</p></td>
-<td class="text-align:center"><p>13/02/2023</p></td>
-<td class="text-align:left"><p><a class="reference internal" href="2.0_Transformations.html#linear-transformations-section"><span class="std std-ref"><strong>Linear Transformations</strong></span></a>: <a class="reference internal" href="2.0_Transformations.html#transformation-matrices-section"><span class="std std-ref">transformation matrices</span></a>; <a class="reference internal" href="2.0_Transformations.html#inverse-transformations-section"><span class="std std-ref">inverse transformations</span></a>; <a class="reference internal" href="2.0_Transformations.html#composite-transformation-section"><span class="std std-ref">composite-transformations</span></a>; <a class="reference internal" href="2.1_Translation.html#translation-section"><span class="std std-ref">translation</span></a>, <a class="reference internal" href="2.2_Scaling.html#scaling-section"><span class="std std-ref">scaling</span></a> and <a class="reference internal" href="2.3_Rotation.html#rotation-section"><span class="std std-ref">rotation</span></a> transformations</p></td>
-<td class="text-align:left"><p></p></td>
-</tr>
-<tr class="row-odd"><td class="text-align:center"><p>4</p></td>
-<td class="text-align:center"><p>20/02/2023</p></td>
-<td class="text-align:left"><p><a class="reference internal" href="3.0_Virtual_environments.html#virtual-environments-section"><span class="std std-ref"><strong>Virtual Environments</strong></span></a>: the <a class="reference internal" href="3.0_Virtual_environments.html#viewing-pipeline-section"><span class="std std-ref">viewing pipeline</span></a>; defining objects in the <a class="reference internal" href="3.1_Object_space.html#object-space-section"><span class="std std-ref">object space</span></a>; transforming objects into the <a class="reference internal" href="3.2_World_space.html#world-space-section"><span class="std std-ref">world space</span></a></p></td>
-<td class="text-align:left"><p></p></td>
-</tr>
-<tr class="row-even"><td class="text-align:center"><p>5</p></td>
-<td class="text-align:center"><p>27/02/2023</p></td>
-<td class="text-align:left"><p><a class="reference internal" href="3.0_Virtual_environments.html#virtual-environments-section"><span class="std std-ref"><strong>Virtual Environments (cont)</strong></span></a>: aligning the world space to the <a class="reference internal" href="3.3_Camera_space.html#camera-space-section"><span class="std std-ref">camera space</span></a>; projecting the camera space on to the <a class="reference internal" href="3.4_Screen_space.html#screen-space-section"><span class="std std-ref">screen space</span></a></p></td>
-<td class="text-align:left"><p></p></td>
-</tr>
-<tr class="row-odd"><td class="text-align:center"><p>6</p></td>
-<td class="text-align:center"><p>06/03/2023</p></td>
-<td class="text-align:left"><p><a class="reference internal" href="4.0_Clipping_and_HSD.html#clipping-and-hsd-section"><span class="std std-ref"><strong>Clipping</strong></span></a>: <a class="reference internal" href="4.1_Line_clipping.html#line-clipping-section"><span class="std std-ref">line clipping</span></a> and <a class="reference internal" href="4.2_Polygon_clipping.html#polygon-clipping-section"><span class="std std-ref">polygon clipping</span></a></p></td>
-<td class="text-align:left"><p></p></td>
-</tr>
-<tr class="row-even"><td class="text-align:center"><p>7</p></td>
-<td class="text-align:center"><p>13/03/2023</p></td>
-<td class="text-align:left"><p><a class="reference internal" href="4.0_Clipping_and_HSD.html#clipping-and-hsd-section"><span class="std std-ref"><strong>Hidden Surface Determination</strong></span></a>: <a class="reference internal" href="4.3_Backface_culling.html#back-face-culling-section"><span class="std std-ref">back-face culling</span></a>; <a class="reference internal" href="4.4_Painters_algorithm.html#painters-algorithm-section"><span class="std std-ref">painter’s algorithm</span></a>; <a class="reference internal" href="4.5_Binary_space_partitioning.html#binary-space-partitioning-section"><span class="std std-ref">binary space partitioning</span></a>, <a class="reference internal" href="4.5_Binary_space_partitioning.html#bsp-trees-section"><span class="std std-ref">BSP-trees</span></a> and <a class="reference internal" href="4.5_Binary_space_partitioning.html#vsd-using-bsp-trees-section"><span class="std std-ref">hidden surface determination using BSP trees</span></a></p></td>
-<td class="text-align:left"><p></p></td>
-</tr>
-<tr class="row-odd"><td class="text-align:center"><p>8</p></td>
-<td class="text-align:center"><p>20/03/2023</p></td>
-<td class="text-align:left"><p><a class="reference internal" href="5.0_Rasterisation.html#rasterisation-section"><span class="std std-ref"><strong>Rasterisation</strong></span></a>: the <a class="reference internal" href="5.0_Rasterisation.html#rgb-colour-model-section"><span class="std std-ref">RGB colour model</span></a>; <a class="reference internal" href="5.0_Rasterisation.html#raster-arrays-section"><span class="std std-ref">raster arrays</span></a>; <a class="reference internal" href="5.0_Rasterisation.html#pixel-coordinates-section"><span class="std std-ref">pixel co-ordinates</span></a>; rasterising <a class="reference internal" href="5.1_Drawing_lines.html#rasterising-lines-section"><span class="std std-ref">lines</span></a> and <a class="reference internal" href="5.2_Drawing_circles.html#drawing-circles-section"><span class="std std-ref">circles</span></a></p></td>
-<td class="text-align:left"><p></p></td>
-</tr>
-<tr class="row-even"><td class="text-align:center"><p>9</p></td>
-<td class="text-align:center"><p>27/03/2023</p></td>
-<td class="text-align:left"><p><a class="reference internal" href="5.0_Rasterisation.html#rasterisation-section"><span class="std std-ref"><strong>Rasterisation (cont)</strong></span></a>: <a class="reference internal" href="5.3_Drawing_polygons.html#flood-fill-algorithm-section"><span class="std std-ref">filling</span></a> and <a class="reference internal" href="5.3_Drawing_polygons.html#scanline-algorithm-section"><span class="std std-ref">drawing polygons</span></a>; <span class="xref myst">antialiasing</span> and <a class="reference internal" href="5.5_Convolution.html#image-processing-section"><span class="std std-ref">image processing</span></a></p></td>
-<td class="text-align:left"><p></p></td>
-</tr>
-<tr class="row-odd"><td class="text-align:center"><p></p></td>
-<td class="text-align:center"><p></p></td>
-<td class="text-align:left"><p><strong>Easter Break</strong></p></td>
-<td class="text-align:left"><p></p></td>
-</tr>
-<tr class="row-even"><td class="text-align:center"><p>10</p></td>
-<td class="text-align:center"><p>24/04/2023</p></td>
-<td class="text-align:left"><p><strong>Exam preparation</strong></p></td>
-<td class="text-align:left"><p></p></td>
-</tr>
-<tr class="row-odd"><td class="text-align:center"><p>11</p></td>
-<td class="text-align:center"><p>01/05/2023</p></td>
-<td class="text-align:left"><p><strong>Exam preparation</strong></p></td>
-<td class="text-align:left"><p></p></td>
-</tr>
-<tr class="row-even"><td class="text-align:center"><p></p></td>
-<td class="text-align:center"><p>09/01/2023</p></td>
-<td class="text-align:left"><p><strong>Assessment week 1</strong></p></td>
-<td class="text-align:left"><p></p></td>
-</tr>
-<tr class="row-odd"><td class="text-align:center"><p></p></td>
-<td class="text-align:center"><p>16/01/2023</p></td>
-<td class="text-align:left"><p><strong>Assessment week 2</strong></p></td>
-<td class="text-align:left"><p></p></td>
-</tr>
-<tr class="row-even"><td class="text-align:center"><p></p></td>
-<td class="text-align:center"><p>16/01/2023</p></td>
-<td class="text-align:left"><p><strong>Assessment week 3</strong></p></td>
-<td class="text-align:left"><p></p></td>
-</tr>
-</tbody>
-</table>
+  <section class="tex2jax_ignore mathjax_ignore" id="clipping-hidden-surface-determination">
+<span id="clipping-and-hsd-section"></span><h1>Clipping &amp; hidden surface determination<a class="headerlink" href="#clipping-hidden-surface-determination" title="Permalink to this headline">#</a></h1>
+<figure class="margin align-default">
+<img alt="../_images/viewing_pipeline_clipped_screen_space.svg" src="../_images/viewing_pipeline_clipped_screen_space.svg" /></figure>
+<p>Consider the plot of the screen space from <a class="reference internal" href="3.4_Screen_space.html#screen-space-example">Example 32</a> which shows the screen space from <a class="reference internal" href="3.4_Screen_space.html#screen-space-example">Example 32</a>. Some of the objects partially outside of the unit cube representation of the <a class="reference internal" href="3.4_Screen_space.html#viewing-frustum-section"><span class="std std-ref">viewing frustum</span></a>. The region inside of this unit cube contains the space that is visible to the viewer and is known as the <strong>visible region</strong>. Any objects that are outside of the visible region needs to be ignored from this point onwards in the viewing pipeline and any objects that lie partially outside need to be clipped to the edges of the visible region. This process is called <strong>clipping</strong>.</p>
+<figure class="align-default" id="clipping-figure">
+<a class="reference internal image-reference" href="../_images/clipped_space_example_1.png"><img alt="../_images/clipped_space_example_1.png" src="../_images/clipped_space_example_1.png" style="width: 400px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 67 </span><span class="caption-text">Some objects are outside of the visible region and need to be clipped.</span><a class="headerlink" href="#clipping-figure" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>In addition to clipping to the edges of the visible region the appearance of the virtual environment can be improved by removing those surfaces that show not be visible to the viewer. This process is called <strong>hidden surface determination</strong>.</p>
+<div class="toctree-wrapper compound">
 </div>
 </section>
 
@@ -563,17 +498,17 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="../intro.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="3.4_Screen_space.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Introduction</p>
+            <p class="prev-next-title">Screen space</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="1.0_Vector_geometry.html" title="next page">
+    <a class='right-next' id="next-link" href="4.1_Line_clipping.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Vector Geometry</p>
+        <p class="prev-next-title">Line clipping</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

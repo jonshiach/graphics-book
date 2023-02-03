@@ -133,7 +133,7 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="1.0_Coordinate_geometry.html">
+  <a class="reference internal" href="1.0_Vector_geometry.html">
    Vector Geometry
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
@@ -143,22 +143,32 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="1.1_Points_lines_and_planes.html">
+    <a class="reference internal" href="1.1_Vectors.html">
+     Vectors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="1.2_Basis.html">
+     Basis
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="1.3_Points_lines_and_planes.html">
      Points, lines, planes and spheres
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="1.2_Shortest_distance_problems.html">
-     Shortest distance problems
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="1.3_Intersections.html">
+    <a class="reference internal" href="1.4_Intersections.html">
      Intersections between objects
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="1.4_Coordinate_geometry_exercises.html">
+    <a class="reference internal" href="1.5_Shortest_distance_problems.html">
+     Shortest distance problems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="1.6_Vector_geometry_exercises.html">
      Vector Geometry Exercises
     </a>
    </li>
@@ -224,7 +234,7 @@ const thebe_selector_output = ".output, .cell_output"
   </ul>
  </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="4.0_Hidden_surface_removal.html">
+  <a class="reference internal" href="4.0_Clipping_and_HSD.html">
    Clipping &amp; hidden surface determination
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
@@ -486,11 +496,11 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="scaling">
 <span id="scaling-section"></span><h1>Scaling<a class="headerlink" href="#scaling" title="Permalink to this headline">#</a></h1>
-<p><strong>Scaling</strong> is a linear transformation that moves a point closer or further away from the origin by a certain <strong>scaling vector</strong>. Consider the diagram shown in <a class="reference internal" href="#scaling-figure"><span class="std std-numref">Fig. 31</span></a> where the point at position <span class="math notranslate nohighlight">\(\mathbf{u}= (u_x, u_y, u_z)\)</span> has been scaled by the scaling vector <span class="math notranslate nohighlight">\(\mathbf{s} = (s_x, s_y, s_z)\)</span>.</p>
+<p><strong>Scaling</strong> is a linear transformation that moves a point closer or further away from the origin by a certain <strong>scaling vector</strong>. Consider the diagram shown in <a class="reference internal" href="#scaling-figure"><span class="std std-numref">Fig. 32</span></a> where the point at position <span class="math notranslate nohighlight">\(\mathbf{u}= (u_x, u_y, u_z)\)</span> has been scaled by the scaling vector <span class="math notranslate nohighlight">\(\mathbf{s} = (s_x, s_y, s_z)\)</span>.</p>
 <figure class="align-default" id="scaling-figure">
 <a class="reference internal image-reference" href="../_images/scaling.svg"><img alt="../_images/scaling.svg" src="../_images/scaling.svg" width="300px" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 31 </span><span class="caption-text">Scaling of the point <span class="math notranslate nohighlight">\(\mathbf{u} = (u_x, u_y, u_z)\)</span> by the scaling vector <span class="math notranslate nohighlight">\(\mathbf{s} = (s_x, s_y, s_z)\)</span>.</span><a class="headerlink" href="#scaling-figure" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 32 </span><span class="caption-text">Scaling of the point <span class="math notranslate nohighlight">\(\mathbf{u} = (u_x, u_y, u_z)\)</span> by the scaling vector <span class="math notranslate nohighlight">\(\mathbf{s} = (s_x, s_y, s_z)\)</span>.</span><a class="headerlink" href="#scaling-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>The co-ordinates of the scaled point <span class="math notranslate nohighlight">\(\mathbf{v}\)</span> are easily calculated using</p>
@@ -513,11 +523,11 @@ title="Print to PDF"
 \end{align*}\]</div>
 <p>Since the <a class="reference internal" href="2.1_Translation.html#translation-matrix-definition">translation matrix</a> requires homogeneous co-ordinates and we would like to combine transformations we can extend the square matrix above by adding the fourth row and column of the identity matrix to give the transformation matrix for scaling.</p>
 <div class="proof definition admonition" id="definition-0">
-<p class="admonition-title"><span class="caption-number">Definition 20 </span> (Scaling in <span class="math notranslate nohighlight">\(\mathbb{R}^3\)</span>)</p>
+<p class="admonition-title"><span class="caption-number">Definition 19 </span> (Scaling in <span class="math notranslate nohighlight">\(\mathbb{R}^3\)</span>)</p>
 <section class="definition-content" id="proof-content">
 <p>The scaling of a set of points in <span class="math notranslate nohighlight">\(\mathbb{R}^3\)</span> expressed using homogeneous co-ordinates by the scaling vector <span class="math notranslate nohighlight">\(\mathbf{s} = (s_x, s_y, s_z)\)</span> is the linear transformation with the transformation matrix</p>
 <div class="math notranslate nohighlight" id="equation-scaling-matrix-equation">
-<span class="eqno">(23)<a class="headerlink" href="#equation-scaling-matrix-equation" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align*}
+<span class="eqno">(24)<a class="headerlink" href="#equation-scaling-matrix-equation" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align*}
     S(\mathbf{s}) =
     \begin{pmatrix} 
         s_x &amp; 0 &amp; 0 &amp; 0 \\
@@ -528,7 +538,7 @@ title="Print to PDF"
 \end{align*}\end{split}\]</div>
 <p>The transformation matrix for inverse scaling is</p>
 <div class="math notranslate nohighlight" id="equation-inverse-scaling-matrix-equation">
-<span class="eqno">(24)<a class="headerlink" href="#equation-inverse-scaling-matrix-equation" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align*}
+<span class="eqno">(25)<a class="headerlink" href="#equation-inverse-scaling-matrix-equation" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align*}
     S(\mathbf{s}) =
     \begin{pmatrix} 
         1/s_x &amp; 0 &amp; 0 &amp; 0 \\
@@ -602,10 +612,10 @@ Solution<div class="sd-summary-down docutils">
 </details></section>
 </div><section id="scaling-about-the-centre-of-a-shape">
 <h2>Scaling about the centre of a shape<a class="headerlink" href="#scaling-about-the-centre-of-a-shape" title="Permalink to this headline">#</a></h2>
-<p>We have seen in <a class="reference internal" href="#scaling-example">Example 24</a> that scaling the polygon resulted in the centre of the polygon shifting position and the aspect ratio of the polygon changed.. This was because scaling was applied to a shape whose centre was not at the origin. To preserve the position of the centre of a shape when scaling we first need to translate the points that define the shape to the origin, which means that the translation vector if <span class="math notranslate nohighlight">\(-\mathbf{c}\)</span> where <span class="math notranslate nohighlight">\(\mathbf{c}\)</span> is the centre of the shape. Then we can perform the scaling before using the inverse translation so that the centre of the shape is back at <span class="math notranslate nohighlight">\(\mathbf{c}\)</span> (<a class="reference internal" href="#scaling-about-centre-figure"><span class="std std-numref">Fig. 32</span></a>).</p>
+<p>We have seen in <a class="reference internal" href="#scaling-example">Example 24</a> that scaling the polygon resulted in the centre of the polygon shifting position and the aspect ratio of the polygon changed.. This was because scaling was applied to a shape whose centre was not at the origin. To preserve the position of the centre of a shape when scaling we first need to translate the points that define the shape to the origin, which means that the translation vector if <span class="math notranslate nohighlight">\(-\mathbf{c}\)</span> where <span class="math notranslate nohighlight">\(\mathbf{c}\)</span> is the centre of the shape. Then we can perform the scaling before using the inverse translation so that the centre of the shape is back at <span class="math notranslate nohighlight">\(\mathbf{c}\)</span> (<a class="reference internal" href="#scaling-about-centre-figure"><span class="std std-numref">Fig. 33</span></a>).</p>
 <figure class="align-default" id="scaling-about-centre-figure">
 <img alt="../_images/scaling_about_centre.svg" src="../_images/scaling_about_centre.svg" /><figcaption>
-<p><span class="caption-number">Fig. 32 </span><span class="caption-text">Steps required to rotate a polygon by its centre.</span><a class="headerlink" href="#scaling-about-centre-figure" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 33 </span><span class="caption-text">Steps required to rotate a polygon by its centre.</span><a class="headerlink" href="#scaling-about-centre-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>So we have the following composite transformation matrix</p>

@@ -54,12 +54,12 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <link rel="canonical" href="https://jonshiach.github.io/graphics-book/files/1.1_Points_lines_and_planes.html" />
+    <link rel="canonical" href="https://jonshiach.github.io/graphics-book/files/1.3_Points_lines_and_planes.html" />
     <link rel="shortcut icon" href="../_static/favicon.jpg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Shortest distance problems" href="1.2_Shortest_distance_problems.html" />
-    <link rel="prev" title="Vector Geometry" href="1.0_Coordinate_geometry.html" />
+    <link rel="next" title="Intersections between objects" href="1.4_Intersections.html" />
+    <link rel="prev" title="Basis" href="1.2_Basis.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -133,7 +133,7 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active has-children">
-  <a class="reference internal" href="1.0_Coordinate_geometry.html">
+  <a class="reference internal" href="1.0_Vector_geometry.html">
    Vector Geometry
   </a>
   <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
@@ -142,23 +142,33 @@ const thebe_selector_output = ".output, .cell_output"
    </i>
   </label>
   <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="1.1_Vectors.html">
+     Vectors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="1.2_Basis.html">
+     Basis
+    </a>
+   </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
      Points, lines, planes and spheres
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="1.2_Shortest_distance_problems.html">
-     Shortest distance problems
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="1.3_Intersections.html">
+    <a class="reference internal" href="1.4_Intersections.html">
      Intersections between objects
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="1.4_Coordinate_geometry_exercises.html">
+    <a class="reference internal" href="1.5_Shortest_distance_problems.html">
+     Shortest distance problems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="1.6_Vector_geometry_exercises.html">
      Vector Geometry Exercises
     </a>
    </li>
@@ -224,7 +234,7 @@ const thebe_selector_output = ".output, .cell_output"
   </ul>
  </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="4.0_Hidden_surface_removal.html">
+  <a class="reference internal" href="4.0_Clipping_and_HSD.html">
    Clipping &amp; hidden surface determination
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
@@ -386,7 +396,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/files/1.1_Points_lines_and_planes.ipynb"
+        <a href="../_sources/files/1.3_Points_lines_and_planes.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -535,21 +545,21 @@ title="Print to PDF"
 <span id="lines-section"></span><h2>Lines<a class="headerlink" href="#lines" title="Permalink to this headline">#</a></h2>
 <p>Euclid defined a line as having <em>“breadthless length”</em> which is another way of saying a line is a one dimensional object that has a length but no breadth or volume.</p>
 <div class="proof definition note admonition" id="definition-0">
-<p class="admonition-title"><span class="caption-number">Definition 10 </span> (Vector equation of a line)</p>
+<p class="admonition-title"><span class="caption-number">Definition 9 </span> (Vector equation of a line)</p>
 <section class="definition-content" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(\mathbf{p} = (p_1, \ldots ,p_n)\)</span> be the position of a point in <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span> and <span class="math notranslate nohighlight">\(\mathbf{d} = (d_1, \ldots, d_n)\)</span> a non-zero vector in <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span>. The line <span class="math notranslate nohighlight">\(\ell\)</span> <a class="footnote-reference brackets" href="#id2" id="id1">1</a> which passes through <span class="math notranslate nohighlight">\(\mathbf{p}\)</span> in the direction of <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> has equation</p>
 <div class="math notranslate nohighlight" id="equation-line-vector-equation">
 <span class="eqno">(8)<a class="headerlink" href="#equation-line-vector-equation" title="Permalink to this equation">#</a></span>\[\mathbf{q} = \mathbf{p} + t\mathbf{d},\]</div>
 <p>where <span class="math notranslate nohighlight">\(\mathbf{q}\)</span> is a general point on <span class="math notranslate nohighlight">\(\ell\)</span> and <span class="math notranslate nohighlight">\(t\in \mathbb{R}\)</span> is known as a <strong>parameter</strong>.</p>
 </section>
-</div><p>In other words, every point on <span class="math notranslate nohighlight">\(\ell\)</span> is obtained by adding some scalar multiple of <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> to <span class="math notranslate nohighlight">\(\mathbf{p}\)</span> (<a class="reference internal" href="#line-vector-equation-figure"><span class="std std-numref">Fig. 10</span></a>). So <span class="math notranslate nohighlight">\(\ell\)</span> is the line which passes through <span class="math notranslate nohighlight">\(\mathbf{p}\)</span> in the direction of <span class="math notranslate nohighlight">\(\mathbf{d}\)</span>. We call the vector <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> a <strong>direction vector</strong> of the line.</p>
+</div><p>In other words, every point on <span class="math notranslate nohighlight">\(\ell\)</span> is obtained by adding some scalar multiple of <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> to <span class="math notranslate nohighlight">\(\mathbf{p}\)</span> (<a class="reference internal" href="#line-vector-equation-figure"><span class="std std-numref">Fig. 11</span></a>). So <span class="math notranslate nohighlight">\(\ell\)</span> is the line which passes through <span class="math notranslate nohighlight">\(\mathbf{p}\)</span> in the direction of <span class="math notranslate nohighlight">\(\mathbf{d}\)</span>. We call the vector <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> a <strong>direction vector</strong> of the line.</p>
 <figure class="align-default" id="line-vector-equation-figure">
 <a class="reference internal image-reference" href="../_images/line_vector_equation.svg"><img alt="../_images/line_vector_equation.svg" src="../_images/line_vector_equation.svg" width="500px" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 10 </span><span class="caption-text">The position of any point on the line <span class="math notranslate nohighlight">\(\ell\)</span> can be obtained by adding a scalar multiple of <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> to <span class="math notranslate nohighlight">\(\mathbf{p}\)</span>.</span><a class="headerlink" href="#line-vector-equation-figure" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 11 </span><span class="caption-text">The position of any point on the line <span class="math notranslate nohighlight">\(\ell\)</span> can be obtained by adding a scalar multiple of <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> to <span class="math notranslate nohighlight">\(\mathbf{p}\)</span>.</span><a class="headerlink" href="#line-vector-equation-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>In practice one can determine the direction vector <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> of a line by taking any two distinct points <span class="math notranslate nohighlight">\(\mathbf{p}_1\)</span> and  <span class="math notranslate nohighlight">\(\mathbf{p}_2\)</span> on <span class="math notranslate nohighlight">\(\ell\)</span> and setting <span class="math notranslate nohighlight">\(\mathbf{d}=\mathbf{p}_2 - \mathbf{p}_1\)</span> and <span class="math notranslate nohighlight">\(\mathbf{p}\)</span> in the line equation to be any point on the line. In particular, <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> and <span class="math notranslate nohighlight">\(P\)</span> are not unique.</p>
+<p>In practice one can determine the direction vector <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> of a line by taking any two distinct points <span class="math notranslate nohighlight">\(\mathbf{p}_1\)</span> and  <span class="math notranslate nohighlight">\(\mathbf{p}_2\)</span> on <span class="math notranslate nohighlight">\(\ell\)</span> and setting <span class="math notranslate nohighlight">\(\mathbf{d}=\mathbf{p}_2 - \mathbf{p}_1\)</span> and <span class="math notranslate nohighlight">\(\mathbf{p}\)</span> in the line equation to be any point on the line. In particular, <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{p}\)</span> are not unique.</p>
 <div class="proof example seealso admonition" id="example-1">
 <p class="admonition-title"><span class="caption-number">Example 7 </span></p>
 <section class="example-content" id="proof-content">
@@ -625,17 +635,17 @@ Solution<div class="sd-summary-down docutils">
 <span id="planes-section"></span><h2>Planes<a class="headerlink" href="#planes" title="Permalink to this headline">#</a></h2>
 <p>A <strong>plane</strong> is a flat two-dimensional surface. The vector equation for a plane in <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span> is very similar to that of a line. We just need two direction vectors instead of just the one we needed for a line.</p>
 <div class="proof definition note admonition" id="definition-2">
-<p class="admonition-title"><span class="caption-number">Definition 11 </span> (Vector equation of a plane)</p>
+<p class="admonition-title"><span class="caption-number">Definition 10 </span> (Vector equation of a plane)</p>
 <section class="definition-content" id="proof-content">
 <p>The position of a point <span class="math notranslate nohighlight">\(\mathbf{p}\)</span> that lies on the plane <span class="math notranslate nohighlight">\(p\)</span> which passes through the three point <span class="math notranslate nohighlight">\(\mathbf{p}_1\)</span>, <span class="math notranslate nohighlight">\(\mathbf{p}_2\)</span> and <span class="math notranslate nohighlight">\(\mathbf{p}_3\)</span> is</p>
 <div class="math notranslate nohighlight">
 \[ \mathbf{q} = \mathbf{p}_1 + a (\mathbf{p}_2 - \mathbf{p}_1) + b (\mathbf{p}_3 - \mathbf{p}_2), \]</div>
-<p>where <span class="math notranslate nohighlight">\(a, b \in \mathbb{R}\)</span> are parameters (<a class="reference internal" href="#plane-vector-equation-figure"><span class="std std-numref">Fig. 11</span></a>).</p>
+<p>where <span class="math notranslate nohighlight">\(a, b \in \mathbb{R}\)</span> are parameters (<a class="reference internal" href="#plane-vector-equation-figure"><span class="std std-numref">Fig. 12</span></a>).</p>
 </section>
 </div><figure class="align-default" id="plane-vector-equation-figure">
 <a class="reference internal image-reference" href="../_images/plane_vector_equation.svg"><img alt="../_images/plane_vector_equation.svg" src="../_images/plane_vector_equation.svg" width="500px" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 11 </span><span class="caption-text">The vector equation of a plane.</span><a class="headerlink" href="#plane-vector-equation-figure" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 12 </span><span class="caption-text">The vector equation of a plane.</span><a class="headerlink" href="#plane-vector-equation-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>In other words, every point on <span class="math notranslate nohighlight">\(p\)</span> is obtained by adding some scalar multiples of the vectors <span class="math notranslate nohighlight">\(\mathbf{p}_2 - \mathbf{p}_1\)</span> and <span class="math notranslate nohighlight">\(\mathbf{p}_3 - \mathbf{p}_2\)</span>. Note that we need <span class="math notranslate nohighlight">\(\mathbf{p}_2 - \mathbf{p}_1\)</span> and <span class="math notranslate nohighlight">\(\mathbf{p}_3 - \mathbf{p}_2\)</span> not to be parallel else we would have only described a line again.</p>
@@ -644,14 +654,14 @@ Solution<div class="sd-summary-down docutils">
 <span id="normal-vector-section"></span><h2>The normal vector<a class="headerlink" href="#the-normal-vector" title="Permalink to this headline">#</a></h2>
 <p>A more convenient way of describing a plane uses the normal vector.</p>
 <div class="proof definition note admonition" id="normal-vector-definition">
-<p class="admonition-title"><span class="caption-number">Definition 12 </span> (The normal vector)</p>
+<p class="admonition-title"><span class="caption-number">Definition 11 </span> (The normal vector)</p>
 <section class="definition-content" id="proof-content">
 <p>The <strong>normal vector</strong> to a plane is a vector that is perpendicular to that plane. If <span class="math notranslate nohighlight">\(\mathbf{a}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> are two vectors that lie on a plane then the normal vector is calculated using <span class="math notranslate nohighlight">\(\mathbf{n} = \mathbf{a} \times \mathbf{b}\)</span>.</p>
 </section>
 </div><figure class="align-default" id="normal-vector-figure">
 <a class="reference internal image-reference" href="../_images/normal_vector.svg"><img alt="../_images/normal_vector.svg" src="../_images/normal_vector.svg" width="400px" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 12 </span><span class="caption-text">The normal vector <span class="math notranslate nohighlight">\(\mathbf{n}\)</span> is perpendicular to the plane <span class="math notranslate nohighlight">\(p\)</span>.</span><a class="headerlink" href="#normal-vector-figure" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 13 </span><span class="caption-text">The normal vector <span class="math notranslate nohighlight">\(\mathbf{n}\)</span> is perpendicular to the plane <span class="math notranslate nohighlight">\(p\)</span>.</span><a class="headerlink" href="#normal-vector-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Recall the <span class="xref myst">geometric definition of a dot product</span> which states</p>
@@ -665,12 +675,12 @@ Solution<div class="sd-summary-down docutils">
 \[ \mathbf{n} \cdot \mathbf{p} = \mathbf{n} \cdot \mathbf{q},\]</div>
 <p>which gives the point-normal equation of a plane.</p>
 <div class="proof definition admonition" id="point-normal-definition">
-<p class="admonition-title"><span class="caption-number">Definition 13 </span> (Point-normal equation of a plane)</p>
+<p class="admonition-title"><span class="caption-number">Definition 12 </span> (Point-normal equation of a plane)</p>
 <section class="definition-content" id="proof-content">
 <p>The <strong>point normal equation of a plane</strong> is</p>
 <div class="math notranslate nohighlight" id="equation-point-normal-equation">
-<span class="eqno">(9)<a class="headerlink" href="#equation-point-normal-equation" title="Permalink to this equation">#</a></span>\[\mathbf{n} \cdot \mathbf{r} = s\]</div>
-<p>where <span class="math notranslate nohighlight">\(\mathbf{n}\)</span> is the normal vector, <span class="math notranslate nohighlight">\(\mathbf{r}\)</span> is a vector on the plane and <span class="math notranslate nohighlight">\(s\)</span> is a scalar.</p>
+<span class="eqno">(9)<a class="headerlink" href="#equation-point-normal-equation" title="Permalink to this equation">#</a></span>\[\mathbf{n} \cdot \mathbf{p} = s\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{n}\)</span> is the normal vector, <span class="math notranslate nohighlight">\(\mathbf{p}\)</span> is a point on the plane and <span class="math notranslate nohighlight">\(s\)</span> is a scalar.</p>
 </section>
 </div><div class="proof example seealso admonition" id="example-5">
 <p class="admonition-title"><span class="caption-number">Example 8 </span></p>
@@ -732,9 +742,9 @@ Solution<div class="sd-summary-down docutils">
 <span id="spheres-section"></span><h2>Spheres<a class="headerlink" href="#spheres" title="Permalink to this headline">#</a></h2>
 <p>A sphere is a three-dimensional geometric object where all points on the surface of the sphere are the same distance from its centre.</p>
 <div class="proof definition admonition" id="definition-6">
-<p class="admonition-title"><span class="caption-number">Definition 14 </span> (Equation of a sphere)</p>
+<p class="admonition-title"><span class="caption-number">Definition 13 </span> (Equation of a sphere)</p>
 <section class="definition-content" id="proof-content">
-<p>The <strong>Cartesian equation of a sphere</strong> centred at <span class="math notranslate nohighlight">\((x_0, y_0, z_0)\)</span> is</p>
+<p>The <strong>Cartesian equation of a sphere</strong> centred at <span class="math notranslate nohighlight">\((x_0, y_0, z_0)\)</span> with radius <span class="math notranslate nohighlight">\(r\)</span> is</p>
 <div class="math notranslate nohighlight" id="equation-sphere-equation">
 <span class="eqno">(10)<a class="headerlink" href="#equation-sphere-equation" title="Permalink to this equation">#</a></span>\[(x - x_0)^2 + (y - y_0)^2 + (z - z_0)^2 = r^2\]</div>
 <figure class="align-default">
@@ -776,17 +786,17 @@ Solution<div class="sd-summary-down docutils">
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="1.0_Coordinate_geometry.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="1.2_Basis.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Vector Geometry</p>
+            <p class="prev-next-title">Basis</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="1.2_Shortest_distance_problems.html" title="next page">
+    <a class='right-next' id="next-link" href="1.4_Intersections.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Shortest distance problems</p>
+        <p class="prev-next-title">Intersections between objects</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

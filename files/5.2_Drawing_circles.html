@@ -133,7 +133,7 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="1.0_Coordinate_geometry.html">
+  <a class="reference internal" href="1.0_Vector_geometry.html">
    Vector Geometry
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
@@ -143,22 +143,32 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="1.1_Points_lines_and_planes.html">
+    <a class="reference internal" href="1.1_Vectors.html">
+     Vectors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="1.2_Basis.html">
+     Basis
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="1.3_Points_lines_and_planes.html">
      Points, lines, planes and spheres
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="1.2_Shortest_distance_problems.html">
-     Shortest distance problems
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="1.3_Intersections.html">
+    <a class="reference internal" href="1.4_Intersections.html">
      Intersections between objects
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="1.4_Coordinate_geometry_exercises.html">
+    <a class="reference internal" href="1.5_Shortest_distance_problems.html">
+     Shortest distance problems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="1.6_Vector_geometry_exercises.html">
      Vector Geometry Exercises
     </a>
    </li>
@@ -224,7 +234,7 @@ const thebe_selector_output = ".output, .cell_output"
   </ul>
  </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="4.0_Hidden_surface_removal.html">
+  <a class="reference internal" href="4.0_Clipping_and_HSD.html">
    Clipping &amp; hidden surface determination
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
@@ -487,13 +497,13 @@ title="Print to PDF"
   <section class="tex2jax_ignore mathjax_ignore" id="drawing-circles">
 <span id="drawing-circles-section"></span><h1>Drawing circles<a class="headerlink" href="#drawing-circles" title="Permalink to this headline">#</a></h1>
 <p>Now that we have the ability to rasterise straight lines the next fundamental problem is the rasterisation of circles. This can be done by deriving a Bresenham-type algorithm that uses the <a class="reference external" href="https://en.wikipedia.org/wiki/Circle#Equations">Cartesian equation of a circle</a> to determine which of two candidate pixels are plotted.</p>
-<p>The circle line drawing algorithms can use the concept of <strong>circle symmetry</strong> to reduce the number of computations required to rasterise a circle. Consider <a class="reference internal" href="#circle-symmetry-figure"><span class="std std-numref">Fig. 94</span></a> where a circle is centred at the origin. If the coordinate of a point on the circle in the shaded octant where <span class="math notranslate nohighlight">\(x &gt; y\)</span> is known to be <span class="math notranslate nohighlight">\((x,y)\)</span> then the corresponding points on the circle in the other seven octants can be found via circle symmetry through combinations of <span class="math notranslate nohighlight">\((\pm x,\pm y)\)</span> and <span class="math notranslate nohighlight">\((\pm y,\pm x)\)</span>.</p>
+<p>The circle line drawing algorithms can use the concept of <strong>circle symmetry</strong> to reduce the number of computations required to rasterise a circle. Consider <a class="reference internal" href="#circle-symmetry-figure"><span class="std std-numref">Fig. 95</span></a> where a circle is centred at the origin. If the coordinate of a point on the circle in the shaded octant where <span class="math notranslate nohighlight">\(x &gt; y\)</span> is known to be <span class="math notranslate nohighlight">\((x,y)\)</span> then the corresponding points on the circle in the other seven octants can be found via circle symmetry through combinations of <span class="math notranslate nohighlight">\((\pm x,\pm y)\)</span> and <span class="math notranslate nohighlight">\((\pm y,\pm x)\)</span>.</p>
 <figure class="align-default" id="circle-symmetry-figure" style="width: 400px">
 <div class="cell_output docutils container">
 <img alt="../_images/5.2_Drawing_circles_1_0.png" src="../_images/5.2_Drawing_circles_1_0.png" />
 </div>
 <figcaption>
-<p><span class="caption-number">Fig. 94 </span><span class="caption-text">Circle symmetry can be used to calculate points on a circle.</span><a class="headerlink" href="#circle-symmetry-figure" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 95 </span><span class="caption-text">Circle symmetry can be used to calculate points on a circle.</span><a class="headerlink" href="#circle-symmetry-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>For circles not centred at the original, which will be the case in the vast majority of applications, we calculate the co-ordinates of a point on the circle in the first octant <span class="math notranslate nohighlight">\((x, y)\)</span> and then add the co-ordinates of the circle centre <span class="math notranslate nohighlight">\((c_x,c_y)\)</span> giving the following eight pixel co-ordinates</p>
@@ -525,13 +535,13 @@ title="Print to PDF"
 <img alt="../_images/5.2_Drawing_circles_3_0.png" src="../_images/5.2_Drawing_circles_3_0.png" />
 </div>
 <figcaption>
-<p><span class="caption-number">Fig. 95 </span><span class="caption-text">Determining the pixels on a circle using the midpoint algorithm.</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 96 </span><span class="caption-text">Determining the pixels on a circle using the midpoint algorithm.</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>To derive an algorithm to rasterise a circle we assume that the circle is centred at <span class="math notranslate nohighlight">\((0, 0)\)</span> and we start at the pixel at the 3 o’clock position with pixel co-ordinates <span class="math notranslate nohighlight">\((r,0)\)</span>. We then move clockwise around the circle calculating the pixels that lie closest to the idealised circle until <span class="math notranslate nohighlight">\(x=y\)</span> which is the end of the first octant. For each pixel co-ordinates we calculate, the pixel co-ordinates of the corresponding pixels in the 7 other octants are calculated using circle symmetry.</p>
 <p>Once the first pixel <span class="math notranslate nohighlight">\((r,0)\)</span> is plotted we move down by one pixel so that <span class="math notranslate nohighlight">\(y=1\)</span> and we have a choice between the two pixels at <span class="math notranslate nohighlight">\((r,1)\)</span> and <span class="math notranslate nohighlight">\((r-1,1)\)</span> to plot next. Similar to Bresenham’s line drawing algorithm, we define a value <span class="math notranslate nohighlight">\(D\)</span> as the difference between the value of <span class="math notranslate nohighlight">\(f(x,y)\)</span> between the first pixel <span class="math notranslate nohighlight">\((r,0)\)</span> and the midpoint between the two pixels <span class="math notranslate nohighlight">\((r,1)\)</span> and <span class="math notranslate nohighlight">\((r-1,1)\)</span>.</p>
 <div class="math notranslate nohighlight" id="equation-midpoint-equation-1">
-<span class="eqno">(40)<a class="headerlink" href="#equation-midpoint-equation-1" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align}
+<span class="eqno">(41)<a class="headerlink" href="#equation-midpoint-equation-1" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align}
     \notag D &amp;= f \left( r-\tfrac{1}{2}, 1 \right) - f(r, 0) \\
     \notag &amp;= \left( r-\tfrac{1}{2} \right)^2 + 1^2 - r^2 - r^2 - 0^2 + r^2 \\
     \notag &amp;= r^2 - r + \tfrac{1}{4} + 1 - r^2 \\
@@ -539,7 +549,7 @@ title="Print to PDF"
 \end{align}\end{split}\]</div>
 <p>If <span class="math notranslate nohighlight">\(D \leq 0\)</span> then the midpoint is inside the circle so we plot the pixel at <span class="math notranslate nohighlight">\((x,y+1)\)</span> and the change in the value of <span class="math notranslate nohighlight">\(D\)</span> is</p>
 <div class="math notranslate nohighlight" id="equation-midpoint-equation-2">
-<span class="eqno">(41)<a class="headerlink" href="#equation-midpoint-equation-2" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align}
+<span class="eqno">(42)<a class="headerlink" href="#equation-midpoint-equation-2" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align}
     \Delta D_{inside} &amp;= f\left( x-\tfrac{1}{2},y+2 \right) - f\left(x-\tfrac{1}{2},y+1\right) \\
     &amp;= \left(x-\tfrac{1}{2}\right)^2 + (y+2)^2 - r^2 - \left(x-\tfrac{1}{2}\right)^2 - (y+1)^2 + r^2 \\
     &amp;= y^2 + 4y + 4 - y^2 - y - 1 \\
@@ -547,15 +557,15 @@ title="Print to PDF"
 \end{align}\end{split}\]</div>
 <p>Else if <span class="math notranslate nohighlight">\(D &gt; 0\)</span> then the midepoint is outside ofhte circle so we plot the pixel at <span class="math notranslate nohighlight">\((x-1,y+1)\)</span> and the change in the value of <span class="math notranslate nohighlight">\(D\)</span> is</p>
 <div class="math notranslate nohighlight" id="equation-midpoint-equation-3">
-<span class="eqno">(42)<a class="headerlink" href="#equation-midpoint-equation-3" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align}
+<span class="eqno">(43)<a class="headerlink" href="#equation-midpoint-equation-3" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align}
     \notag \Delta D_{outside} &amp;= f\left(x-\tfrac{3}{2},y+2\right) - f\left(x-\tfrac{1}{2}, y+1\right) \\
     \notag &amp;= \left(x-\tfrac{3}{2}\right)^2 + (y+2)^2 - r^2 - \left(x-\tfrac{1}{2}\right)^2 - (y+1)^2 + r^2 \\
     \notag &amp;= x^2 - 3x + \tfrac{9}{4} + y^2 + 4y + 4 - x^2 + x - \tfrac{1}{4} - y^2 - 2y - 1 \\
     &amp;= 2y - 2x + 5.
 \end{align}\end{split}\]</div>
-<p>Equation <a class="reference internal" href="#equation-midpoint-equation-1">(40)</a> contains a floating point number in <span class="math notranslate nohighlight">\(\frac{5}{4}\)</span>, similar to Bresenham’s algorithm we can multiply equations <a class="reference internal" href="#equation-midpoint-equation-1">(40)</a> to <a class="reference internal" href="#equation-midpoint-equation-3">(42)</a> by 4 so that we have integer only expressions for <span class="math notranslate nohighlight">\(D\)</span>, <span class="math notranslate nohighlight">\(\Delta D_{inside}\)</span> and <span class="math notranslate nohighlight">\(\Delta_{outside}\)</span></p>
+<p>Equation <a class="reference internal" href="#equation-midpoint-equation-1">(41)</a> contains a floating point number in <span class="math notranslate nohighlight">\(\frac{5}{4}\)</span>, similar to Bresenham’s algorithm we can multiply equations <a class="reference internal" href="#equation-midpoint-equation-1">(41)</a> to <a class="reference internal" href="#equation-midpoint-equation-3">(43)</a> by 4 so that we have integer only expressions for <span class="math notranslate nohighlight">\(D\)</span>, <span class="math notranslate nohighlight">\(\Delta D_{inside}\)</span> and <span class="math notranslate nohighlight">\(\Delta_{outside}\)</span></p>
 <div class="math notranslate nohighlight" id="equation-midpoint-equations">
-<span class="eqno">(43)<a class="headerlink" href="#equation-midpoint-equations" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align}
+<span class="eqno">(44)<a class="headerlink" href="#equation-midpoint-equations" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align}
     D &amp;= 5 - 4r, \\
     \Delta D_{inside} &amp;= 8y + 12, \\
     \Delta D_{outside} &amp;= 8y - 8x + 20.

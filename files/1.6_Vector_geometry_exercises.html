@@ -54,12 +54,12 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <link rel="canonical" href="https://jonshiach.github.io/graphics-book/files/1.4_Coordinate_geometry_exercises.html" />
+    <link rel="canonical" href="https://jonshiach.github.io/graphics-book/files/1.6_Vector_geometry_exercises.html" />
     <link rel="shortcut icon" href="../_static/favicon.jpg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Linear Transformations" href="2.0_Transformations.html" />
-    <link rel="prev" title="Intersections between objects" href="1.3_Intersections.html" />
+    <link rel="prev" title="Shortest distance problems" href="1.5_Shortest_distance_problems.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -133,7 +133,7 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active has-children">
-  <a class="reference internal" href="1.0_Coordinate_geometry.html">
+  <a class="reference internal" href="1.0_Vector_geometry.html">
    Vector Geometry
   </a>
   <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
@@ -143,18 +143,28 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul class="current">
    <li class="toctree-l2">
-    <a class="reference internal" href="1.1_Points_lines_and_planes.html">
+    <a class="reference internal" href="1.1_Vectors.html">
+     Vectors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="1.2_Basis.html">
+     Basis
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="1.3_Points_lines_and_planes.html">
      Points, lines, planes and spheres
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="1.2_Shortest_distance_problems.html">
-     Shortest distance problems
+    <a class="reference internal" href="1.4_Intersections.html">
+     Intersections between objects
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="1.3_Intersections.html">
-     Intersections between objects
+    <a class="reference internal" href="1.5_Shortest_distance_problems.html">
+     Shortest distance problems
     </a>
    </li>
    <li class="toctree-l2 current active">
@@ -224,7 +234,7 @@ const thebe_selector_output = ".output, .cell_output"
   </ul>
  </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="4.0_Hidden_surface_removal.html">
+  <a class="reference internal" href="4.0_Clipping_and_HSD.html">
    Clipping &amp; hidden surface determination
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
@@ -386,7 +396,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/files/1.4_Coordinate_geometry_exercises.ipynb"
+        <a href="../_sources/files/1.6_Vector_geometry_exercises.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -449,7 +459,7 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="vector-geometry-exercises">
 <h1>Vector Geometry Exercises<a class="headerlink" href="#vector-geometry-exercises" title="Permalink to this headline">#</a></h1>
-<div class="exercise admonition" id="co-ordinate-geometry-ex1">
+<div class="exercise admonition" id="vector-geometry-ex1">
 
 <p class="admonition-title"><span class="caption-number">Exercise 1 </span></p>
 <section id="exercise-content">
@@ -470,13 +480,13 @@ title="Print to PDF"
 <p>(g) a unit vector <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> which is perpendicular to <span class="math notranslate nohighlight">\(\mathbf{a}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{b}\)</span></p>
 </section>
 </div>
-<div class="solution dropdown admonition" id="co-ordinate-geometry-ex1-solution">
+<div class="solution dropdown admonition" id="vector-geometry-ex1-solution">
 
-<p class="admonition-title">Solution to<a class="reference internal" href="#co-ordinate-geometry-ex1"> Exercise 1</a></p>
+<p class="admonition-title">Solution to<a class="reference internal" href="#vector-geometry-ex1"> Exercise 1</a></p>
 <section id="solution-content">
 <p>(a) <span class="math notranslate nohighlight">\(|\mathbf{a}| = \sqrt{1^2 + 0^2 + 3^2} = \sqrt{1 + 9} = \sqrt{10}\)</span>;</p>
 <p>(b) <span class="math notranslate nohighlight">\(\hat{\mathbf{b}} = \dfrac{\mathbf{b}}{|\mathbf{b}|} = \dfrac{1}{\sqrt{14}} \begin{pmatrix} -2 \\ 3 \\ 1 \end{pmatrix} = \begin{pmatrix} -\sqrt{14} / 7 \\ 3\sqrt{14} / 14 \\ \sqrt{14} / 14 \end{pmatrix}\)</span>;</p>
-<p>(c) <span class="math notranslate nohighlight">\( 3\mathbf{a} + 2 \mathbf{c} = 3 \begin{pmatrix} 1 \\ 0 \\ 3 \end{pmatrix} + 2\begin{pmatrix} -2 \\ 3 \\ 1 \end{pmatrix} = \begin{pmatrix} 3 \\ 0 \\ 9 \end{pmatrix} + \begin{pmatrix} -4 \\ 6 \\ 2 \end{pmatrix} = \begin{pmatrix} -1 \\ 6 \\ 11 \end{pmatrix}\)</span>;</p>
+<p>(c) <span class="math notranslate nohighlight">\( 3\mathbf{a} + 2 \mathbf{c} = 3 \begin{pmatrix} 1 \\ 0 \\ 3 \end{pmatrix} + 2\begin{pmatrix} 2 \\ 5 \\ -3 \end{pmatrix} = \begin{pmatrix} 3 \\ 0 \\ 9 \end{pmatrix} + \begin{pmatrix} 4 \\ 10 \\ -6 \end{pmatrix} = \begin{pmatrix} 7 \\ 10 \\ 3 \end{pmatrix}\)</span>;</p>
 <p>(d) <span class="math notranslate nohighlight">\( \mathbf{a} \cdot \mathbf{b} = \mathbf{a} = \begin{pmatrix} 1 \\ 0 \\ 3 \end{pmatrix} \cdot \begin{pmatrix} -2 \\ 3 \\ 1 \end{pmatrix} 1(-2) + 0(3) + 3(1) = 1\)</span>;</p>
 <p>(e) <span class="math notranslate nohighlight">\(\theta = \cos^{-1} \left( \dfrac{\mathbf{a} \cdot \mathbf{c}}{|\mathbf{a}||\mathbf{c}|} \right) = \cos^{-1} \left( \dfrac{-7}{\sqrt{10}\sqrt{38}} \right) \approx 1.938\)</span>;</p>
 <p>(f)</p>
@@ -498,14 +508,14 @@ title="Print to PDF"
         1 &amp; 0 &amp; 3 \\ 
         -2 &amp; 3 &amp; 1 
     \end{vmatrix} =
-    \begin{pmatrix} -9 \\ -5 \\ 3 \end{pmatrix}, \\
+    \begin{pmatrix} -9 \\ -7 \\ 3 \end{pmatrix}, \\
     \therefore \mathbf{d} = \frac{\mathbf{a} \times \mathbf{b}}{|\mathbf{a} \times \mathbf{b}|}
-    = \frac{1}{\sqrt{115}} \begin{pmatrix} -9 \\ -5 \\ 3 \end{pmatrix}
-    = \begin{pmatrix} -9\sqrt{115}/115 \\ \sqrt{115}/23 \\ 3\sqrt{115}/115 \end{pmatrix}
+    = \frac{1}{\sqrt{139}} \begin{pmatrix} -9 \\ -7 \\ 3 \end{pmatrix}
+    = \begin{pmatrix} -9\sqrt{139}/139 \\ -7\sqrt{139}/139 \\ 3\sqrt{139}/139 \end{pmatrix}
 \end{align*}\]</div>
 </section>
 </div>
-<div class="exercise admonition" id="co-ordinate-geometry-ex2">
+<div class="exercise admonition" id="vector-geometry-ex2">
 
 <p class="admonition-title"><span class="caption-number">Exercise 2 </span></p>
 <section id="exercise-content">
@@ -522,102 +532,83 @@ title="Print to PDF"
 <p>(d) Another basis in <span class="math notranslate nohighlight">\(\mathbb{R}^3\)</span> is <span class="math notranslate nohighlight">\(W = \{(-1, 1, 1), (0, 1, 0), (0, 1, -1) \}\)</span>, calculate the change of basis matrix <span class="math notranslate nohighlight">\(A_{U\to W}\)</span> and hence <span class="math notranslate nohighlight">\([\mathbf{v}]_W\)</span>.</p>
 </section>
 </div>
-<div class="solution dropdown admonition" id="co-ordinate-geometry-ex2-solution">
+<div class="solution dropdown admonition" id="vector-geometry-ex2-solution">
 
-<p class="admonition-title">Solution to<a class="reference internal" href="#co-ordinate-geometry-ex2"> Exercise 2</a></p>
+<p class="admonition-title">Solution to<a class="reference internal" href="#vector-geometry-ex2"> Exercise 2</a></p>
 <section id="solution-content">
-<p>(a)</p>
+<p>(a) A set of vectors is linearly independent if the determinant of the matrix formed by the column vectors is non-zero.</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
-    &amp; \left( \begin{array}{ccc|c}
-        1 &amp; 0 &amp; 1 &amp; 0 \\
-        0 &amp; 1 &amp; 1 &amp; 0 \\
-        1 &amp; 1 &amp; 0 &amp; 0 
-    \end{array} \right)
-    \begin{array}{l} \\ \\ R_3 - R_1 \end{array} &amp;
-    \longrightarrow
-    &amp; \left( \begin{array}{ccc|c}
-        1 &amp; 0 &amp; 1 &amp; 0 \\
-        0 &amp; 1 &amp; 1 &amp; 0 \\
-        0 &amp; 1 &amp; -1 &amp; 0 
-    \end{array} \right)
-    \begin{array}{l} \\ \\ R_3 - R_2 \end{array} \\ \\
-    \longrightarrow
-    &amp; \left( \begin{array}{ccc|c}
-        1 &amp; 0 &amp; 1 &amp; 0 \\
-        0 &amp; 1 &amp; 1 &amp; 0 \\
-        0 &amp; 0 &amp; -2 &amp; 0 
-    \end{array} \right)
-    \begin{array}{l} \\  \\ -\frac{1}{2}R_3 \end{array} &amp;
-    \longrightarrow
-    &amp; \left( \begin{array}{ccc|c}
-        1 &amp; 0 &amp; 1 &amp; 0 \\
-        0 &amp; 1 &amp; 1 &amp; 0 \\
-        0 &amp; 0 &amp; 1 &amp; 0 
-    \end{array} \right)
-    \begin{array}{l} R_1 - R_3 \\ R_2 - R_3 \\ \phantom{x} \end{array} \\ \\ 
-    \longrightarrow
-    &amp; \left( \begin{array}{ccc|c}
-        1 &amp; 0 &amp; 0 &amp; 0 \\
-        0 &amp; 1 &amp; 0 &amp; 0 \\
-        0 &amp; 0 &amp; 1 &amp; 0 
-    \end{array} \right)
-\end{align*}\]</div>
-<p>Therefore the only solution to <span class="math notranslate nohighlight">\(\alpha_1 \mathbf{u}_1 + \alpha_2 \mathbf{u}_2 + \alpha_3 \mathbf{u}_3 = \mathbf{0}\)</span> is <span class="math notranslate nohighlight">\(\alpha_1 = \alpha_2 = \alpha_3\)</span> so <span class="math notranslate nohighlight">\(\{ \mathbf{u}_1, \mathbf{u}_2, \mathbf{u}_3 \}\)</span> are linearly independent.</p>
-<p>(b) <span class="math notranslate nohighlight">\(A_{E\to U} = (\mathbf{u}_1, \mathbf{u}_2, \mathbf{u}_3)^{-1}\)</span></p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
-    \begin{vmatrix} 
-        1 &amp; 0 &amp; 1 \\
-        0 &amp; 1 &amp; 1 \\
-        1 &amp; 1 &amp; 0 
-    \end{vmatrix} &amp;= 
-    \begin{vmatrix} 1 &amp; 1 \\ 1 &amp; 0 \end{vmatrix} +
-    \begin{vmatrix} 0 &amp; 1 \\ 1 &amp; 1 \end{vmatrix}
-    = -1 - 1 = -2, \\
-    \operatorname{adj}\begin{pmatrix} 
+    \det 
+    \begin{pmatrix}
         1 &amp; 0 &amp; 1 \\
         0 &amp; 1 &amp; 1 \\
         1 &amp; 1 &amp; 0 
     \end{pmatrix} &amp;=
-    \begin{pmatrix}
-        -1 &amp; 1 &amp; -1 \\
-        1 &amp; -1 &amp; -1 \\
-        -1 &amp; -1 &amp; 1 
-    \end{pmatrix}^\mathrm{T} =
-    \begin{pmatrix}
-        -1 &amp; 1 &amp; -1 \\
-        1 &amp; -1 &amp; -1 \\ 
-        -1 &amp; -1 &amp; 1
-    \end{pmatrix}, \\
-    \therefore 
-    A_{E \to U} &amp;= \begin{pmatrix} 
-        1 &amp; 0 &amp; 1 \\
-        0 &amp; 1 &amp; 1 \\
-        1 &amp; 1 &amp; 0 
-    \end{pmatrix}^{-1} = \frac{1}{-2}
-    \begin{pmatrix}
-        -1 &amp; 1 &amp; -1 \\
-        1 &amp; -1 &amp; -1 \\ 
-        -1 &amp; -1 &amp; 1
-    \end{pmatrix} \\
-    &amp;=
+    \begin{vmatrix} 1 &amp; 1 \\ 1 &amp; 0 \end{vmatrix} + 
+    \begin{vmatrix} 0 &amp; 1 \\ 1 &amp; 1 \end{vmatrix} \\
+    &amp;= -1 - 1 = -2,
+\end{align*}\]</div>
+<p>so <span class="math notranslate nohighlight">\(\mathbf{u}_1\)</span>, <span class="math notranslate nohighlight">\(\mathbf{u}_2\)</span> and <span class="math notranslate nohighlight">\(\mathbf{u}_3\)</span> are linearly independent.</p>
+<p>(b) <span class="math notranslate nohighlight">\(A_{E\to U} = (\mathbf{u}_1, \mathbf{u}_2, \mathbf{u}_3)^{-1}\)</span>. Using Gauss-Jordan elimination to calculate the inverse matrix</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    &amp; \left( \begin{array}{ccc|ccc}
+        1 &amp; 0 &amp; 1 &amp; 1 &amp; 0 &amp; 0 \\ 
+        0 &amp; 1 &amp; 1 &amp; 0 &amp; 1 &amp; 0 \\
+        1 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 1
+    \end{array} \right)
+    \begin{array}{l} \\ \\ R_3 - R_1 \end{array} \\ \\
+    \longrightarrow \qquad
+    &amp; \left( \begin{array}{ccc|ccc}
+        1 &amp; 0 &amp;  1 &amp;  1 &amp; 0 &amp; 0 \\ 
+        0 &amp; 1 &amp;  1 &amp;  0 &amp; 1 &amp; 0 \\
+        0 &amp; 1 &amp; -1 &amp; -1 &amp; 0 &amp; 1
+    \end{array} \right)
+    \begin{array}{l} \\ \\ R_3 - R_2 \end{array} \\ \\
+    \longrightarrow \qquad
+    &amp; \left( \begin{array}{ccc|ccc}
+        1 &amp; 0 &amp;  1 &amp;  1 &amp;  0 &amp; 0 \\ 
+        0 &amp; 1 &amp;  1 &amp;  0 &amp;  1 &amp; 0 \\
+        0 &amp; 0 &amp; -2 &amp; -1 &amp; -1 &amp; 1
+    \end{array} \right)
+    \begin{array}{l} \\ \\ -\frac{1}{2}R_3 \end{array} \\ \\
+    \longrightarrow \qquad
+    &amp; \left( \begin{array}{ccc|ccc}
+        1 &amp; 0 &amp;  1 &amp;  1   &amp;  0   &amp; 0 \\ 
+        0 &amp; 1 &amp;  1 &amp;  0   &amp;  1   &amp; 0 \\
+        0 &amp; 0 &amp;  1 &amp;  1/2 &amp;  1/2 &amp; -1/2
+    \end{array} \right)
+    \begin{array}{l} R_1 - R_3 \\ R_2 - R_3 \\ \phantom{x} \end{array} \\ \\
+    \longrightarrow \qquad
+    &amp; \left( \begin{array}{ccc|ccc}
+        1 &amp; 0 &amp;  0 &amp;  1/2 &amp; -1/2 &amp;  1/2 \\ 
+        0 &amp; 1 &amp;  0 &amp; -1/2 &amp;  1/2 &amp;  1/2 \\
+        0 &amp; 0 &amp;  1 &amp;  1/2 &amp;  1/2 &amp; -1/2
+    \end{array} \right)
+\end{align*}\]</div>
+<p>therefore</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    A_{E \to U} &amp;= 
     \begin{pmatrix} 
         1/2 &amp; -1/2 &amp; 1/2 \\
         -1/2 &amp; 1/2 &amp; 1/2 \\
         1/2 &amp; 1/2 &amp; -1/2
     \end{pmatrix}.
 \end{align*}\]</div>
-<p>(c) <span class="math notranslate nohighlight">\([\mathbf{v}]_U = A_{E \to U} \mathbf{v}\)</span></p>
+<p>(c)</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
-    [\mathbf{v}]_U  =
+    [\mathbf{v}]_U &amp;= A_{E \to U} \mathbf{v} \\
+    &amp;=
     \begin{pmatrix} 
         1/2 &amp; -1/2 &amp; 1/2 \\
         -1/2 &amp; 1/2 &amp; 1/2 \\
         1/2 &amp; 1/2 &amp; -1/2
     \end{pmatrix}
-    \begin{pmatrix} 2 \\ -1 \\ 3 \end{pmatrix} &amp;= 
+    \begin{pmatrix} 2 \\ -1 \\ 3 \end{pmatrix} 
+    = 
     \begin{pmatrix} 3 \\ 0 \\ -1 \end{pmatrix}.
 \end{align*}\]</div>
 <p>(d)</p>
@@ -655,12 +646,19 @@ title="Print to PDF"
         1 &amp; 0 &amp; 0 &amp; -1 &amp; 0 &amp; -1 \\
         0 &amp; 1 &amp; 0 &amp; 3 &amp; 2 &amp; 3 \\
         0 &amp; 0 &amp; 1 &amp; -2 &amp; -1 &amp; -1 
-    \end{array} \right)
-    \begin{array}{l}  \\ R_2 - R_3 \\ \phantom{x} \end{array} \\ \\
+    \end{array} \right),
+\end{align*}\]</div>
+<p>Therefore <span class="math notranslate nohighlight">\(A_{U \to W} = \begin{pmatrix} -1 &amp; 0 &amp; -1 \\ 3 &amp; 2 &amp; 3 \\ -2 &amp; -1 &amp; -1 \end{pmatrix}\)</span>.</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    [\mathbf{v}]_W &amp;= A_{U \to W} [\mathbf{v}]_U \\
+    &amp;= \begin{pmatrix} -1 &amp; 0 &amp; -1 \\ 3 &amp; 2 &amp; 3 \\ -2 &amp; -1 &amp; -1 \end{pmatrix}
+    \begin{pmatrix} 3 \\ 0 \\ -1 \end{pmatrix} = 
+    \begin{pmatrix} -2 \\ 6 \\ -5 \end{pmatrix}.
 \end{align*}\]</div>
 </section>
 </div>
-<div class="exercise admonition" id="co-ordinate-geometry-ex3">
+<div class="exercise admonition" id="vector-geometry-ex3">
 
 <p class="admonition-title"><span class="caption-number">Exercise 3 </span></p>
 <section id="exercise-content">
@@ -670,9 +668,9 @@ title="Print to PDF"
 <p>(c) Does <span class="math notranslate nohighlight">\(\ell\)</span> pass through the point <span class="math notranslate nohighlight">\((-7, 9, 6)\)</span>?</p>
 </section>
 </div>
-<div class="solution dropdown admonition" id="co-ordinate-geometry-ex3-solution">
+<div class="solution dropdown admonition" id="vector-geometry-ex3-solution">
 
-<p class="admonition-title">Solution to<a class="reference internal" href="#co-ordinate-geometry-ex3"> Exercise 3</a></p>
+<p class="admonition-title">Solution to<a class="reference internal" href="#vector-geometry-ex3"> Exercise 3</a></p>
 <section id="solution-content">
 <p>(a)</p>
 <div class="amsmath math notranslate nohighlight">
@@ -700,18 +698,18 @@ title="Print to PDF"
 <p>The first equation gives <span class="math notranslate nohighlight">\(t = -2\)</span> and substituting into the other two equations gives <span class="math notranslate nohighlight">\(1 - 4(-2) = 9\)</span> and <span class="math notranslate nohighlight">\(2 - 2(-2) = 6\)</span> so <span class="math notranslate nohighlight">\(\ell\)</span> passes through <span class="math notranslate nohighlight">\((-7,9,6)\)</span>.</p>
 </section>
 </div>
-<div class="exercise admonition" id="co-ordinate-geometry-ex4">
+<div class="exercise admonition" id="vector-geometry-ex4">
 
 <p class="admonition-title"><span class="caption-number">Exercise 4 </span></p>
 <section id="exercise-content">
 <p>A polygon has vertices with the co-ordinates <span class="math notranslate nohighlight">\(\mathbf{p}_1=(8,-2,1)\)</span>, <span class="math notranslate nohighlight">\(\mathbf{p}_2=(9,1,3)\)</span> and <span class="math notranslate nohighlight">\(\mathbf{p}_3=(8,2,-2)\)</span>.</p>
-<p>(a) Determine the point-normal equation of the plane.</p>
+<p>(a) Determine the point-normal equation of the plane that passes through the polygon.</p>
 <p>(b) Another point on the plane has co-ordinates <span class="math notranslate nohighlight">\(\mathbf{p}_4 = (x, 9, 0)\)</span>. Determine the value of <span class="math notranslate nohighlight">\(x\)</span>.</p>
 </section>
 </div>
-<div class="solution dropdown admonition" id="co-ordinate-geometry-ex4-solution">
+<div class="solution dropdown admonition" id="vector-geometry-ex4-solution">
 
-<p class="admonition-title">Solution to<a class="reference internal" href="#co-ordinate-geometry-ex4"> Exercise 4</a></p>
+<p class="admonition-title">Solution to<a class="reference internal" href="#vector-geometry-ex4"> Exercise 4</a></p>
 <section id="solution-content">
 <p>(a)</p>
 <div class="amsmath math notranslate nohighlight">
@@ -750,48 +748,288 @@ title="Print to PDF"
 \end{align*}\]</div>
 </section>
 </div>
-<div class="exercise admonition" id="co-ordinate-geometry-ex5">
+<div class="exercise admonition" id="vector-geometry-ex5">
 
 <p class="admonition-title"><span class="caption-number">Exercise 5 </span></p>
 <section id="exercise-content">
-<p>A lighthouse is positioned at co-ordinates <span class="math notranslate nohighlight">\(\mathbf{q} = (400, 300, 100)\)</span> (m) and a boat positioned at co-ordinates <span class="math notranslate nohighlight">\((-500, 200, 100)\)</span> (m) is traveling with the velocity <span class="math notranslate nohighlight">\(\mathbf{d} = (5, -10, 0) \text{ ms^{-1}}\)</span>.</p>
-<p>How many seconds elapse when the boat is at its closest position to the lighthouse? How far is the boat from the lighthouse at its closest point?</p>
+<p>Two lines are defined by the vector equations <span class="math notranslate nohighlight">\((1, 0, 1) + t_1(2, -1, 3)\)</span> and <span class="math notranslate nohighlight">\((1, 4, 7) + t_2(2, 0, -1)\)</span>.</p>
+<p>(a) find the point of intersection or show that they are skew;</p>
+<p>(b) find the shortest distance between the two lines;</p>
 </section>
 </div>
-<div class="solution dropdown admonition" id="co-ordinate-geometry-ex5-solution">
+<div class="solution dropdown admonition" id="vector-geometry-ex5-solution">
 
-<p class="admonition-title">Solution to<a class="reference internal" href="#co-ordinate-geometry-ex5"> Exercise 5</a></p>
+<p class="admonition-title">Solution to<a class="reference internal" href="#vector-geometry-ex5"> Exercise 5</a></p>
 <section id="solution-content">
-<p>This is a shortest distance problem between a point <span class="math notranslate nohighlight">\(\mathbf{q}\)</span> and the line <span class="math notranslate nohighlight">\(\mathbf{p} + t \mathbf{d}\)</span>.</p>
+<p>(a) Setting the two lines equal to each other</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
-    t &amp;= \frac{(\mathbf{q} - \mathbf{p}) \cdot \mathbf{d}}{\mathbf{d} \cdot \mathbf{d}} =
-    \frac{\left(
-        \begin{pmatrix} 400 \\ 300 \\ 100 \end{pmatrix} -
-        \begin{pmatrix} -500 \\ 200 \\ 100 \end{pmatrix} \right) \cdot 
-        \begin{pmatrix} 5 \\ -10 \\ 0 \end{pmatrix}}{
-        \begin{pmatrix} 5 \\ -10 \\ 0 \end{pmatrix} \cdot
-        \begin{pmatrix} 5 \\ -10 \\ 0 \end{pmatrix}} \\
-    &amp;= \frac{\begin{pmatrix} 900 \\ 100 \\ 0 \end{pmatrix} \cdot
-    \begin{pmatrix} 5 \\ -10 \\ 0 \end{pmatrix}}{125} 
-    = \frac{3500}{125} = 28,
+    1 + 2t_1 &amp;= 1 + 2t_2, \\
+    -t_1 &amp;= 4, \\
+    1 + 3t_1 &amp;= 7 - t_2.
 \end{align*}\]</div>
-<p>so the boat is closest to the lighthouse after 28 seconds.</p>
+<p>The second equation gives <span class="math notranslate nohighlight">\(t_1 = -4\)</span> which substituted into the first equation gives <span class="math notranslate nohighlight">\(t_2 = -4\)</span>. Substituting both <span class="math notranslate nohighlight">\(t_1\)</span> and <span class="math notranslate nohighlight">\(t_2\)</span> into the third equation gives <span class="math notranslate nohighlight">\(-11 \neq 11\)</span> which is a contradiction so the two lines do not intersect.</p>
+<p>The direction vectors are <span class="math notranslate nohighlight">\(\mathbf{d}_1 = (2, -1, 3)\)</span> and <span class="math notranslate nohighlight">\(\mathbf{d}_2 = (2, 0, -1)\)</span>. For the two lines to be parallel we need a scalar <span class="math notranslate nohighlight">\(k\)</span> such that <span class="math notranslate nohighlight">\(\mathbf{d}_1 = k\mathbf{d}_2\)</span></p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
-    \mathbf{r} &amp;= \mathbf{p} + t \mathbf{d} = \begin{pmatrix} -500 \\ 200 \\ 100 \end{pmatrix} + 28
-    \begin{pmatrix} 5 \\ -10 \\ 0 \end{pmatrix} =
-    \begin{pmatrix} -360 \\ -80 \\ 100 \end{pmatrix}, \\
-    \therefore d &amp;= |\mathbf{q} - \mathbf{r}| = \left| 
-    \begin{pmatrix} 400 \\ 300 \\ 100 \end{pmatrix} -
-    \begin{pmatrix} -360 \\ -80 \\ 100 \end{pmatrix} \right|
-    = \left| \begin{pmatrix} 760 \\ 380 \\ 0 \end{pmatrix} \right| = \sqrt{722000} = 849.7058
+    2 &amp;= 2k, \\
+    -1 &amp;= 0, \\
+    -1 &amp;= -k,
 \end{align*}\]</div>
-<p>At its closest point the boat is 849.71 metres from the lighthouse.</p>
+<p>the second equation is a contradiction so no value of <span class="math notranslate nohighlight">\(k\)</span> exists and the two lines are not parallel. Since the lines do not intersect and they are not parallel they are skew.</p>
+<p>(b) Calculate the unit vector <span class="math notranslate nohighlight">\(\hat{\mathbf{n}}\)</span> which is perpendicular to both of the lines</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    \mathbf{n} &amp;= \mathbf{d}_1 \times \mathbf{d}_2 \\
+    &amp;=
+    \begin{pmatrix} 2 \\ -1 \\ 3 \end{pmatrix} \times
+    \begin{pmatrix} 2 \\ 0 \\ -1 \end{pmatrix} \\
+    &amp;= 
+    \begin{vmatrix}
+        \mathbf{i} &amp; \mathbf{j} &amp; \mathbf{k} \\
+        2 &amp; -1 &amp; 3 \\
+        2 &amp; 0 &amp; -1
+    \end{vmatrix}
+    = 
+    \begin{pmatrix} 1 \\ 8 \\ 2 \end{pmatrix}, \\
+    |\mathbf{n}| &amp;= \sqrt{1^2 + 8^2 + 2^2} 
+    = \sqrt{69}\\
+    \therefore \hat{\mathbf{n}}
+    &amp;= \frac{\sqrt{69}}{69}
+    \begin{pmatrix} 1 \\ 8 \\ 2 \end{pmatrix}
+\end{align*}\]</div>
+<p>Using equation <a class="reference internal" href="1.5_Shortest_distance_problems.html#equation-line-line-distance-equation">(16)</a></p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    
+    d &amp;= (\mathbf{p}_2 - \mathbf{p}_1) \cdot \hat{\mathbf{n}} \\
+    &amp;= \left(
+        \begin{pmatrix} 1 \\ 4 \\ 7 \end{pmatrix} -
+        \begin{pmatrix} 1 \\ 0 \\ 1 \end{pmatrix}
+    \right) \cdot \frac{1}{\sqrt{69}} 
+    \begin{pmatrix} 1 \\ 8 \\ 2 \end{pmatrix} \\
+    &amp;= \frac{0 + 32 - 12}{\sqrt{69}} = \frac{44 \sqrt{69}}{69}.
+\end{align*}\]</div>
+</section>
+</div>
+<div class="exercise admonition" id="vector-geometry-ex7">
+
+<p class="admonition-title"><span class="caption-number">Exercise 6 </span></p>
+<section id="exercise-content">
+<p>In computer game a projectile is fired from position <span class="math notranslate nohighlight">\((0, 5, -10)\)</span> with velocity <span class="math notranslate nohighlight">\((100, 100, 200)\)</span> towards a wall that is modelled by the plane with normal vector <span class="math notranslate nohighlight">\((-3, 0, -2)\)</span> and the point at position <span class="math notranslate nohighlight">\((10, 10, 0)\)</span>.</p>
+<p>Calculate the position where the projectile will collide with the wall.</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="vector-geometry-ex7-solution">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#vector-geometry-ex7"> Exercise 6</a></p>
+<section id="solution-content">
+<p>Let <span class="math notranslate nohighlight">\(\mathbf{q} = (0, 5, -10)\)</span>, <span class="math notranslate nohighlight">\(\mathbf{d} = (100, 100, 200)\)</span>, <span class="math notranslate nohighlight">\(\mathbf{n} = (-3, 0, -2)\)</span> and <span class="math notranslate nohighlight">\(\mathbf{p} = (10, 10, 0)\)</span>. Using equation <a class="reference internal" href="1.4_Intersections.html#equation-line-plane-intersection-equation">(11)</a></p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    t &amp;= \frac{(\mathbf{p} - \mathbf{q}) \cdot \mathbf{n}}{\mathbf{d} \cdot \mathbf{n}} \\
+    &amp;= \frac{
+        \left(
+            \begin{pmatrix} 10 \\ 10 \\ 0 \end{pmatrix} -
+            \begin{pmatrix} 0 \\ 5 \\ -10 \end{pmatrix}
+        \right)
+        \cdot
+        \begin{pmatrix} -3 \\ 0 \\ -2 \end{pmatrix}
+    }{
+        \begin{pmatrix} 100 \\ 100 \\ 200 \end{pmatrix} \cdot
+        \begin{pmatrix} -3 \\ 0 \\ -2 \end{pmatrix}
+    } \\
+    &amp;= \frac{-30 + 0 - 20}{-300 + 0 - 400} = \frac{-50}{-700} = \frac{1}{14}, \\
+    \therefore \mathbf{r} &amp;= \mathbf{p} + t \mathbf{d} \\
+    &amp;= 
+    \begin{pmatrix} 0 \\ 5 \\ -10 \end{pmatrix} + \frac{1}{14}
+    \begin{pmatrix} 100 \\ 100 \\ 200 \end{pmatrix} \\
+    &amp;=
+    \begin{pmatrix} 120/7 \\ 120/7 \\ 100/7 \end{pmatrix}
+    \approx
+    \begin{pmatrix} 17.1429 \\ 17.1429 \\ 14.2857 \end{pmatrix}.
+\end{align*}\]</div>
+</section>
+</div>
+<div class="exercise admonition" id="vector-geometry-ex999">
+
+<p class="admonition-title"><span class="caption-number">Exercise 7 </span></p>
+<section id="exercise-content">
+<p>A point is at co-ordinates <span class="math notranslate nohighlight">\((-1,0,25)\)</span> m travels along a straight line with velocity <span class="math notranslate nohighlight">\((5, 2, -1)\)</span> m/s and an observer watches the object from a point at position <span class="math notranslate nohighlight">\((4, 6, 6)\)</span> m.</p>
+<p>(a) Calculate the time <span class="math notranslate nohighlight">\(t\)</span> at which the object makes its closest approach to the viewer.</p>
+<p>(b) What is the distance between the observer and the object when it makes its closest approach?</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="vector-geometry-ex999-solution">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#vector-geometry-ex999"> Exercise 7</a></p>
+<section id="solution-content">
+<p>(a) This is a shortest distance problem between the point <span class="math notranslate nohighlight">\(\mathbf{q}=(4,6,6)\)</span> and the line defined by the point <span class="math notranslate nohighlight">\(\mathbf{p} = (-1, 0, 25)\)</span> and the direction vector <span class="math notranslate nohighlight">\(\mathbf{d} = (5, 2, -1)\)</span>. Using equation <a class="reference internal" href="1.5_Shortest_distance_problems.html#equation-point-line-t-equation">(14)</a> we have</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    t &amp;= \frac{(\mathbf{q} - \mathbf{p}) \cdot \mathbf{d}}{\mathbf{d} \cdot \mathbf{d}} \\
+    &amp;= \frac{
+        \left( 
+            \begin{pmatrix} 4 \\ 6 \\ 6 \end{pmatrix} -
+            \begin{pmatrix} -1 \\ 0 \\ 25 \end{pmatrix}
+        \right) \cdot
+        \begin{pmatrix} 5 \\ 2 \\ -1 \end{pmatrix}
+    }{
+        \begin{pmatrix} 5 \\ 2 \\ -1 \end{pmatrix} \cdot
+        \begin{pmatrix} 5 \\ 2 \\ -1 \end{pmatrix}
+    } \\
+    &amp;= \frac{25 + 12 + 19}{25 + 4 + 1} = \frac{28}{15} \approx 1.8667.
+\end{align*}\]</div>
+<p>So the point makes its closest approach after 1.87 seconds.</p>
+<p>(b) The point at closest approach is</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    \mathbf{r} &amp;= \mathbf{p} + t \mathbf{d} \\
+    &amp;= \begin{pmatrix} -1 \\ 0 \\ 25 \end{pmatrix} + \frac{28}{15}
+    \begin{pmatrix} 5 \\ 2 \\ -1 \end{pmatrix} \\
+    &amp;= \begin{pmatrix} 25/3 \\ 56/15 \\ 347/15 \end{pmatrix}
+    \approx
+    \begin{pmatrix} 8.3333 \\ 3.7333 \\ 23.1333 \end{pmatrix}, 
+\end{align*}\]</div>
+<p>so the distance between the observer and the point at the closest approach is</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    | \mathbf{q} - \mathbf{r} | &amp;=
+    \left|
+        \begin{pmatrix} 4 \\ 6 \\ 6 \end{pmatrix} - 
+        \begin{pmatrix} 25/3 \\ 56/15 \\ 347/15 \end{pmatrix}
+    \right| 
+    = \left|
+        \begin{pmatrix} -13/3 \\ 34/15 \\ -257/15 \end{pmatrix}
+    \right| \\
+    &amp;= \sqrt{\left(\frac{13}{3}\right)^2 + \left(\frac{34}{15}\right)^2 + \left(\frac{257}{15}\right)^2} \\
+    &amp;= \frac{\sqrt{71430}}{15} \approx 17.8176 \text{ m}.
+\end{align*}\]</div>
+</section>
+</div>
+<div class="exercise admonition" id="vector-geometry-ex8">
+
+<p class="admonition-title"><span class="caption-number">Exercise 8 </span></p>
+<section id="exercise-content">
+<p>Two spherical objects are moving along straight lines. The centre of the first sphere is at <span class="math notranslate nohighlight">\(\mathbf{p}_1\)</span> and is travelling in the direction <span class="math notranslate nohighlight">\(\mathbf{d}_1\)</span> and the second sphere is at <span class="math notranslate nohighlight">\(\mathbf{p}_2\)</span> and is travelling in the direction <span class="math notranslate nohighlight">\(\mathbf{d}_2\)</span>. Both spheres have the same radius <span class="math notranslate nohighlight">\(r\)</span>.</p>
+<figure class="align-default">
+<img alt="../_images/sphere_sphere_collision.svg" src="../_images/sphere_sphere_collision.svg" /></figure>
+<p>(a) Derive the following formula for the calculation of <span class="math notranslate nohighlight">\(t\)</span> (hint: how far appart are <span class="math notranslate nohighlight">\(\mathbf{c}_1\)</span> and <span class="math notranslate nohighlight">\(\mathbf{c}_2\)</span> at the point of collision?)</p>
+<div class="math notranslate nohighlight">
+\[ 0 = t^2 (\mathbf{d}_1 - \mathbf{d}_2)^2 + 2t(\mathbf{p}_1 - \mathbf{p}_2) \cdot (\mathbf{d}_1 - \mathbf{d}_2) + (\mathbf{p}_1 - \mathbf{p}_2)^2 - 4t^2.\]</div>
+<p>(b) Write down a test for determining whether the spheres collide or not.</p>
+<p>(c) Given that <span class="math notranslate nohighlight">\(\mathbf{p}_1 = (67/3, 91/3, 103/3)\)</span>, <span class="math notranslate nohighlight">\(\mathbf{d}_1 = (-7, -13, -10)\)</span>, <span class="math notranslate nohighlight">\(\mathbf{p}_2 = (4/3, -9, -10)\)</span>, <span class="math notranslate nohighlight">\(\mathbf{d}_2 = (2, 3, 9)\)</span> and <span class="math notranslate nohighlight">\(r = 1\)</span>, show that the spheres will collide and hence calculate the positions of the centres of the spheres at this time.</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="vector-geometry-ex8-solution">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#vector-geometry-ex8"> Exercise 8</a></p>
+<section id="solution-content">
+<p>(a) The spheres collide when the distance between their centres is <span class="math notranslate nohighlight">\(2r\)</span></p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    2r &amp;= | \mathbf{c}_1 - \mathbf{c}_2 | \\
+    &amp;= | \mathbf{p}_1 + t\mathbf{d}_1 - \mathbf{p}_2 - t\mathbf{d}_2 | \\
+    4r^2 &amp;= ((\mathbf{p}_1 - \mathbf{p}_2) + t(\mathbf{d}_1 - \mathbf{d}_2))^2 \\
+    0 &amp;= t^2 (\mathbf{d}_1 - \mathbf{d}_2)^2 + 2t(\mathbf{p}_1 - \mathbf{p}_2) \cdot (\mathbf{d}_1 - \mathbf{d}_2) + (\mathbf{p}_1 - \mathbf{p}_2)^2 - 4r^2.
+\end{align*}\]</div>
+<p>(b) Let <span class="math notranslate nohighlight">\(a = (\mathbf{d}_1 - \mathbf{d}_2)^2\)</span>, <span class="math notranslate nohighlight">\(b = 2 (\mathbf{p}_1 - \mathbf{p}_2) \cdot (\mathbf{d}_1 - \mathbf{d}_2)\)</span> and <span class="math notranslate nohighlight">\(c = (\mathbf{p}_1 - \mathbf{p}_2)^2 - 4r^2\)</span> then</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} b^2 - 4ac 
+\begin{cases}
+    \leq 0, &amp; \text{spheres do not collide}, \\
+    &gt; 0, &amp; \text{spheres collide}.
+\end{cases}\end{split}\]</div>
+<p>(c)</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    \mathbf{p}_1 - \mathbf{p}_2 &amp;=
+     \left(
+        \begin{pmatrix} 67/3 \\ 91/3 \\ 103/3 \end{pmatrix} -
+        \begin{pmatrix} 4/3 \\ -9 \\ -10 \end{pmatrix}
+    \right)   
+    = \begin{pmatrix} 21 \\ 118/3 \\ 133/3 \end{pmatrix}, \\
+    \mathbf{d}_1 - \mathbf{d}_2 &amp;= 
+    \left(
+        \begin{pmatrix} -7 \\ -13 \\ -10 \end{pmatrix} -
+        \begin{pmatrix} 2 \\ 3 \\ 9 \end{pmatrix}
+    \right)
+    \begin{pmatrix} -9 \\ -16 \\ -19 \end{pmatrix}, \\
+    a &amp;= (\mathbf{p}_1 - \mathbf{p}_2)^2 = 
+    \begin{pmatrix} 21 \\ 118/3 \\ 133/3 \end{pmatrix} \cdot
+    \begin{pmatrix} 21 \\ 118/3 \\ 133/3 \end{pmatrix} = 698, \\
+    b &amp;= 2 (\mathbf{p}_1 - \mathbf{p}_2) \cdot (\mathbf{d}_1 - \mathbf{d}_2) \\
+    &amp;= 2 \begin{pmatrix} 21 \\ 118/3 \\ 133/3 \end{pmatrix} \cdot
+    \begin{pmatrix} -9 \\ -16 \\ -19 \end{pmatrix} 
+    = -\frac{9964}{3}, \\
+    c &amp;= (\mathbf{p}_1 - \mathbf{p}_2)^2 - 4r^2 \\
+    &amp;= \begin{pmatrix} 21 \\ 118/3 \\ 133/3 \end{pmatrix} \cdot
+    \begin{pmatrix} 21 \\ 118/3 \\ 133/3 \end{pmatrix} - 4(1^2) 
+    = \frac{35546}{9},  \\
+    \therefore b^2 - 4ac &amp;= \left( \frac{9964}{3} \right)^2 - 4(698) \left(\frac{35546}{9} \right) = 4096.  
+\end{align*}\]</div>
+<p>Since <span class="math notranslate nohighlight">\(b^2 - 4ac = 4096 &gt; 0\)</span> the two spheres collide. Calculating the value of <span class="math notranslate nohighlight">\(t\)</span></p>
+<div class="math notranslate nohighlight">
+\[ t = \frac{-b \pm \sqrt{b^2}}{2a} = \frac{\frac{9964}{3} \pm \sqrt{4096}}{2(698)} = \frac{7}{3}, \frac{2539}{1047}.\]</div>
+<p>Therefore the spheres collide at <span class="math notranslate nohighlight">\(t = 7/3\)</span>. Calculating the positions of the centres of the spheres at the point of collision</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    \mathbf{c}_1 &amp;= \mathbf{p}_1 + t\mathbf{d}_1 = 
+    \begin{pmatrix} 67/3 \\ 91/3 \\ 103/3 \end{pmatrix} + \frac{7}{3}
+    \begin{pmatrix} -7 \\ -13 \\ -10 \end{pmatrix} = 
+    \begin{pmatrix} 6 \\ 0 \\ 11 \end{pmatrix}, \\
+    \mathbf{c}_2 &amp;= \mathbf{p}_2 + t\mathbf{d}_2 =
+    \begin{pmatrix} 4/3 \\ -9 \\ -10 \end{pmatrix} + \frac{7}{3}
+    \begin{pmatrix} 2 \\ 3 \\ 9 \end{pmatrix} =
+    \begin{pmatrix} 6 \\ -2 \\ 11 \end{pmatrix}.
+\end{align*}\]</div>
+</section>
+</div>
+<div class="exercise admonition" id="vector-geometry-ex9">
+
+<p class="admonition-title"><span class="caption-number">Exercise 9 </span></p>
+<section id="exercise-content">
+<p>Two planes are defined by their normal vectors <span class="math notranslate nohighlight">\(\mathbf{n}_1 = (1, -1, 2)\)</span> and <span class="math notranslate nohighlight">\(\mathbf{n}_2 = (-2, 1, 3)\)</span> and pass through the points <span class="math notranslate nohighlight">\(\mathbf{p}_1 = (1, 0, 3)\)</span> and <span class="math notranslate nohighlight">\(\mathbf{p}_2 = (4, 1, 1)\)</span> respectively.</p>
+<p>Determine the equation of the line of intersection.</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="vector-geometry-ex9-solution">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#vector-geometry-ex9"> Exercise 9</a></p>
+<section id="solution-content">
+<p>Calculate the vector perpendicular to both <span class="math notranslate nohighlight">\(\mathbf{n}_1\)</span> and <span class="math notranslate nohighlight">\(\mathbf{n}_2\)</span></p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    \mathbf{d} &amp;= \mathbf{n}_1 \times \mathbf{n}_2
+    = 
+    \begin{vmatrix}
+        \mathbf{i} &amp; \mathbf{j} &amp; \mathbf{k} \\
+        1 &amp; -1 &amp; 2 \\
+        -2 &amp; 1 &amp; 3
+    \end{vmatrix}
+    = 
+    \begin{pmatrix} -5 \\ -7 \\ -1 \end{pmatrix}.
+\end{align*}\]</div>
+<p>Calculate the scalars in the point-normal form of the equation of a plane</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    s_1 &amp;= \mathbf{n}_1 \cdot \mathbf{p}_1 = 
+    \begin{pmatrix} 1 \\ -1 \\ 2 \end{pmatrix} \cdot
+    \begin{pmatrix} 1 \\ 0 \\ 3 \end{pmatrix} = 7 \\
+    s_2 &amp;= \mathbf{n}_2 \cdot \mathbf{p}_2 = 
+    \begin{pmatrix} -2 \\ 1 \\ 3 \end{pmatrix} \cdot
+    \begin{pmatrix} 4 \\ 1 \\ 1 \end{pmatrix} = -4.
+\end{align*}\]</div>
+<p>Let <span class="math notranslate nohighlight">\(\mathbf{r} = (x, 0, 0)\)</span> be a point on the line of intersection then</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    x = \frac{s_1 - s_2}{n_{1x} - n_{2x}} = \frac{7+4}{1+2} = \frac{11}{3},
+\end{align*}\]</div>
+<p>so the equation of the line of intersection is <span class="math notranslate nohighlight">\((11/3, 0, 0) + t(-5, -7, -1)\)</span>.</p>
 </section>
 </div>
 <!-- ```{exercise}
-:label: co-ordinate-geometry-ex6
+:label: vector-geometry-ex6
 
 In a computer game a character shoots a laser pistol from position $\mathbf{q} = (5, 1, 2)$ in the direction $\mathbf{d} = (2, -1, 1)$. The laser shot collides with a polygon that passes through the point $\mathbf{p} = (10, 0, -1)$ with the normal vector $\mathbf{n} = (-4, 1, 1)$.  
 ``` --></section>
@@ -823,11 +1061,11 @@ In a computer game a character shoots a laser pistol from position $\mathbf{q} =
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="1.3_Intersections.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="1.5_Shortest_distance_problems.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Intersections between objects</p>
+            <p class="prev-next-title">Shortest distance problems</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="2.0_Transformations.html" title="next page">
