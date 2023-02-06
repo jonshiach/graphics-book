@@ -570,7 +570,7 @@ title="Print to PDF"
 </section>
 </div><section id="the-rgb-colour-model">
 <span id="rgb-colour-model-section"></span><h2>The RGB colour model<a class="headerlink" href="#the-rgb-colour-model" title="Permalink to this headline">#</a></h2>
-<p>The <strong>RGB</strong> colour model uses the three primary colours <span style="color: red;">Red</span>, <span style="color: green;">Green</span> and <span style="color: blue;">Blue</span> (RGB) that are added to produce colours in the visible spectrum. Using a single bit for each primary colour (i.e., adding all or none of that colour) means that it is possible to produce eight colours: <span style="color: red;">red</span>, <span style="color: yellow;">yellow</span>, <span style="color: green;">green</span>, <span style="color: cyan;">cyan</span>, <span style="color: blue;">blue</span>, <span style="color: magenta;">magenta</span>, black and <span style="background-color:black;color:white">white</span> as shown in <a class="reference internal" href="#rgb-table"><span class="std std-ref">RGB codes</span></a>. For example mixing full amounts of red and green results in pure yellow.</p>
+<p>The <strong>RGB</strong> colour model uses the three primary colours <span style="color: red;">Red</span>, <span style="color: green;">Green</span> and <span style="color: blue;">Blue</span> (RGB) that are added to produce colours in the visible spectrum. Using a single bit for each primary colour (i.e., adding all or none of that colour) means that it is possible to produce eight colours: <span style="color: red;">red</span>, <span style="color: yellow;">yellow</span>, <span style="color: green;">green</span>, <span style="color: cyan;">cyan</span>, <span style="color: blue;">blue</span>, <span style="color: magenta;">magenta</span>, black and <span style="background-color:gray;color:white">white</span> as shown in <a class="reference internal" href="#rgb-table"><span class="std std-ref">RGB colour codes</span></a>. For example mixing full amounts of red and green results in pure yellow.</p>
 <section id="bit-colour">
 <h3>24-bit colour<a class="headerlink" href="#bit-colour" title="Permalink to this headline">#</a></h3>
 <p>Adding proportions of each primary colours means that many more colours can be produced. Using 8 bits for each primary colour means that there are a possible <span class="math notranslate nohighlight">\(2^8 = 256\)</span> different quantities of that colour. Combining the three primary colours means that the number of colours that can be produced is <span class="math notranslate nohighlight">\(3 \times 2^8 = 16,772,216\)</span>. It is estimated that the most number of colours that the human eye can distinguish is approximately 10 million so 24 bit colour (known as <a class="reference external" href="https://en.wikipedia.org/wiki/Color_depth#True_color_(24-bit)">true color</a>) is considered sufficient.</p>
@@ -582,7 +582,7 @@ title="Print to PDF"
 </figure>
 <p>Since there are 256 levels of the three primary colours in the true color model we can use the integers 0 to 255 in an ordered triplet. For example, the colour <span style="color: cyan;">cyan</span> is made by mixing full amounts of green and blue which corresponds to the triplet <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">255,</span> <span class="pre">255)</span></code>. Most software packages also accept <a href="https://en.wikipedia.org/wiki/Hexadecimal" target="_blank">hexadecimal</a> (base-16) colour codes where the values in the triplet are represented using 2-digit hexadecimal numbers 00 to FF which follow a # symbol. For example, <span style="color: cyan;">cyan</span> is represented using <code class="docutils literal notranslate"><span class="pre">&quot;#00FFFF&quot;</span></code>.</p>
 <table class="table" id="rgb-table">
-<caption><span class="caption-number">Table 1 </span><span class="caption-text">RGB codes</span><a class="headerlink" href="#rgb-table" title="Permalink to this table">#</a></caption>
+<caption><span class="caption-number">Table 1 </span><span class="caption-text">RGB colour codes</span><a class="headerlink" href="#rgb-table" title="Permalink to this table">#</a></caption>
 <colgroup>
 <col style="width: 33%" />
 <col style="width: 33%" />
@@ -597,7 +597,7 @@ title="Print to PDF"
 <tbody>
 <tr class="row-even"><td><p><span style="color: black;">Black</span></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">0,</span> <span class="pre">0)</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">&quot;#FFFFFF&quot;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;#000000&quot;</span></code></p></td>
 </tr>
 <tr class="row-odd"><td><p><span style="color: red;">Red</span></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">(255,</span> <span class="pre">0,</span> <span class="pre">0)</span></code></p></td>
@@ -623,7 +623,7 @@ title="Print to PDF"
 <td><p><code class="docutils literal notranslate"><span class="pre">(255,</span> <span class="pre">0,</span> <span class="pre">255)</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">&quot;#FF00FF&quot;</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><p><span style=" background-color: black; color: white;">White</span></p></td>
+<tr class="row-odd"><td><p><span style=" background-color: gray; color: white;">White</span></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">(255,</span> <span class="pre">255,</span> <span class="pre">255)</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">&quot;#FFFFFF&quot;</span></code></p></td>
 </tr>
@@ -654,14 +654,14 @@ title="Print to PDF"
 <figure class="align-default">
 <a class="reference internal image-reference" href="../_images/cavendish_plot.png"><img alt="../_images/cavendish_plot.png" src="../_images/cavendish_plot.png" style="width: 500px;" /></a>
 </figure>
-<p>Now we have the raster array for the image we can use Python commands to manipulate the image. For example, the following code sets the colour of each pixel to either black or white depending on whether the average of the colour triplet is greater or less than 128 which is halfway between 0 and 255.</p>
+<p>Now we have the raster array for the image we can use MATLAB commands to manipulate the image. For example, the following code sets the colour of each pixel to either black or white depending on whether the average of the colour triplet is greater or less than 128 which is halfway between 0 and 255.</p>
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Read in image</span><span class="w"></span>
 <span class="n">img</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">imread</span><span class="p">(</span><span class="s">&#39;cavendish.jpg&#39;</span><span class="p">);</span><span class="w"></span>
 
 <span class="c">% Get size of image array</span><span class="w"></span>
 <span class="p">[</span><span class="n">Ny</span><span class="p">,</span><span class="w"> </span><span class="n">Nx</span><span class="p">,</span><span class="w"> </span><span class="n">Ncolours</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">size</span><span class="p">(</span><span class="n">img</span><span class="p">);</span><span class="w"></span>
 
-<span class="c">% Reshape image array</span><span class="w"></span>
+<span class="c">% Reshape image array to a (num pixels x 3) array</span><span class="w"></span>
 <span class="n">img_bw</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">reshape</span><span class="p">(</span><span class="n">img</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">Nx</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Ny</span><span class="p">,</span><span class="w"> </span><span class="n">Ncolours</span><span class="p">]);</span><span class="w"></span>
 
 <span class="c">% Calculate average colour of each pixel</span><span class="w"></span>
@@ -695,7 +695,7 @@ title="Print to PDF"
 <hr class="footnotes docutils" />
 <dl class="footnote brackets">
 <dt class="label" id="id2"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
-<dd><p>Note that in most graphical applications we start numbering pixels at 0. In these notes have have used 1 as the starting co-ordinate so that matrix indexing is easier when using MATLAB. If you are using a zero-indexing language such as Python, C etc. then subtract 1 from the pixel co-ordinates.</p>
+<dd><p>Note that in most graphical applications we start numbering pixels at 0. In these notes I have used 1 as the starting co-ordinate so that matrix indexing is easier when using MATLAB. If you are using a zero-indexing language such as Python, C etc. then subtract 1 from the pixel co-ordinates.</p>
 </dd>
 </dl>
 </section>

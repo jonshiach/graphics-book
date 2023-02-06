@@ -45,7 +45,7 @@
 # 
 # `````
 # 
-# Recall that the{prf:ref}`geometric definition of the dot product <geometric-dot-product-definition>` is
+# Recall that the {prf:ref}`geometric definition of the dot product <geometric-dot-product-definition>` is
 # 
 # \begin{align*}
 #     \mathbf{a} \cdot \mathbf{b} = |\mathbf{a}| |\mathbf{b}| \cos(\theta),

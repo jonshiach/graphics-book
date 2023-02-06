@@ -171,20 +171,20 @@
 % \end{tikzpicture}
 
 % Intersecting lines
-\begin{tikzpicture}
-    \draw [axis] (0,0) -- ++(330:2) node at (330:2.2) {$x$};
-    \draw [axis] (0,0) -- ++(30:2) node at (30:2.2) {$y$};
-    \draw [axis] (0,0) -- ++(90:2) node at (90:2.2) {$z$};
-    \coordinate (P) at (4,0);
-    \coordinate (Q) at ($(P)+(3,0)$);
-    \draw ($(P)+(225:1)$) -- ++(45:4) node [pos=0, left] {$\ell_1$};
-    \draw ($(Q)+(315:1)$) -- ++(135:4) node [pos=0, right] {$\ell_2$};
-    \draw [bluevec] (P) -- node [above left] {$\mathbf{d}_1$} ++(45:1.5);
-    \draw [redvec] (Q) -- node [above right] {$\mathbf{d}_2$} ++(135:1.5);
-    \node [point,blue,label={below right:\textcolor{blue}{$\mathbf{p}_1$}}] at (P) {};
-    \node [point,red,label={below left:\textcolor{red}{$\mathbf{p}_2$}}] at (Q) {};
-    \node [point] at ($(P)+(45:2.125)$) {};
-\end{tikzpicture}
+% \begin{tikzpicture}
+%     \draw [axis] (0,0) -- ++(330:2) node at (330:2.2) {$x$};
+%     \draw [axis] (0,0) -- ++(30:2) node at (30:2.2) {$y$};
+%     \draw [axis] (0,0) -- ++(90:2) node at (90:2.2) {$z$};
+%     \coordinate (P) at (4,0);
+%     \coordinate (Q) at ($(P)+(3,0)$);
+%     \draw ($(P)+(225:1)$) -- ++(45:4) node [pos=0, left] {$\ell_1$};
+%     \draw ($(Q)+(315:1)$) -- ++(135:4) node [pos=0, right] {$\ell_2$};
+%     \draw [bluevec] (P) -- node [above left] {$\mathbf{d}_1$} ++(45:1.5);
+%     \draw [redvec] (Q) -- node [above right] {$\mathbf{d}_2$} ++(135:1.5);
+%     \node [point,blue,label={below right:\textcolor{blue}{$\mathbf{p}_1$}}] at (P) {};
+%     \node [point,red,label={below left:\textcolor{red}{$\mathbf{p}_2$}}] at (Q) {};
+%     \node [point] at ($(P)+(45:2.125)$) {};
+% \end{tikzpicture}
 
 % Parallel lines
 % \begin{tikzpicture}
@@ -834,9 +834,9 @@
 %     \draw [bluevec] (0,0) -- (0:2) node [right] {$\mathbf{n}$};
 %     \draw [fill=blue!10,opacity=0.5] (1) -- (2) -- (3) -- (4) -- cycle;
 %     \node [point,label=left:$\mathbf{v}_1$] (1) at (1) {};
-%     \node [point,label=below right:$\mathbf{v}_2$] (2) at (2) {};
+%     \node [point,label=below right:$\mathbf{v}_4$] (2) at (2) {};
 %     \node [point,label=right:$\mathbf{v}_3$] (3) at (3) {};
-%     \node [point,label=left:$\mathbf{v}_4$] (4) at (4) {};
+%     \node [point,label=left:$\mathbf{v}_2$] (4) at (4) {};
 %     \draw [redvec] (1) -- (4);
 %     \draw [redvec] (4) -- (3);
 %     \node [rotate=180] at (180:4) {\includegraphics[width=1cm]{../eye.png}};
@@ -1290,7 +1290,7 @@
 % \end{tikzpicture}
 
 
-% BSP
+% % BSP
 % \begin{tikzpicture}[every node/.style={draw,ellipse},
 %     level 1/.style={sibling distance=6cm},
 %     level 2/.style={sibling distance=3cm}]
@@ -1310,7 +1310,7 @@
 %         child {node [convex] {$B$}}
 %         child {node [convex] {$C$}};
 %     \draw (-10, -3)  coordinate (1) rectangle ++(6, 4);
-%     \draw [red,dashed,line width=1pt] ($(1)+(0:3)$) -- ++(90:4);
+%     \draw [hyperplane] ($(1)+(0:3)$) -- ++(90:4);
 %     \draw [line width=2pt] ($(1)+(3,1)$) coordinate (A)-- ++(0,2) node [pos=0.5,left] {$A$};
 %     \draw [line width=2pt] ($(1)+(4,3)$) coordinate (B) -- ++(330:2) node [pos=0.5,below left] {$B$};
 %     \draw [line width=2pt] ($(1)+(2,3)$) coordinate (C) -- ++(225:2) node [pos=0.5,below right] {$C$};
@@ -1324,7 +1324,7 @@
 %         child {node [convex] {$C$}}
 %         child {node [convex] {$D$}};
 %     \draw (-10, -3)  coordinate (1) rectangle ++(6, 4);
-%     \draw [red,dashed,line width=1pt] ($(1)+(90:2)$) -- ++(0:6);
+%     \draw [hyperplane] ($(1)+(90:2)$) -- ++(0:6);
 %     \draw [line width=2pt] ($(1)+(0.5,2)$) coordinate (A)-- ++(0:2) node [pos=0.5,below] {$A$};
 %     \draw [line width=2pt] ($(1)+(3.5,2)$) coordinate (B) -- ++(0:2) node [pos=0.5,below] {$B$};
 %     \draw [line width=2pt] ($(1)+(2,2.5)$) coordinate (C) -- ++(30:2) node [pos=0.5,below right] {$C$};
@@ -1625,20 +1625,20 @@
 % \end{tikzpicture}
 
 % VSD using BSP trees
-% \begin{tikzpicture}
-%     \node [convex] {$A$}
-%         child {node [convex] {$B$}}
-%         child {node [convex] {$C$}};
-%     \draw (-10, -3)  coordinate (1) rectangle ++(6, 4);
-%     \draw [red,dashed,line width=1pt] ($(1)+(0:3)$) -- ++(90:4);
-%     \draw [line width=2pt] ($(1)+(3,1)$) coordinate (A)-- ++(0,2) node [pos=0.5,left] {$A$};
-%     \draw [line width=2pt] ($(1)+(4,3)$) coordinate (B) -- ++(330:2) node [pos=0.5,below left] {$B$};
-%     \draw [line width=2pt] ($(1)+(2,3)$) coordinate (C) -- ++(225:2) node [pos=0.5,below right] {$C$};
-%     \draw [bluevec] ($(A)+(0,1)$) -- ++(0:1);
-%     \draw [bluevec] ($(B)+(330:1)$) -- ++(60:1);
-%     \draw [bluevec] ($(C)+(225:1)$) -- ++(135:1);
-%     \node [rotate=-45] at (-5, -2) {\includegraphics[width=1cm]{../eye.png}};
-% \end{tikzpicture}
+\begin{tikzpicture}
+    \node [convex] {$A$}
+        child {node [convex] {$B$}}
+        child {node [convex] {$C$}};
+    \draw (-10, -3)  coordinate (1) rectangle ++(6, 4);
+    \draw [hyperplane] ($(1)+(0:3)$) -- ++(90:4);
+    \draw [line width=2pt] ($(1)+(3,1)$) coordinate (A)-- ++(0,2) node [pos=0.5,left] {$A$};
+    \draw [line width=2pt] ($(1)+(4,3)$) coordinate (B) -- ++(330:2) node [pos=0.5,below left] {$B$};
+    \draw [line width=2pt] ($(1)+(2,3)$) coordinate (C) -- ++(225:2) node [pos=0.5,below right] {$C$};
+    \draw [bluevec] ($(A)+(0,1)$) -- ++(0:1);
+    \draw [bluevec] ($(B)+(330:1)$) -- ++(60:1);
+    \draw [bluevec] ($(C)+(225:1)$) -- ++(135:1);
+    \node [rotate=-45] at (-5, -2) {\includegraphics[width=1cm]{../eye.png}};
+\end{tikzpicture}
 
 % BSP VSD example
 % \begin{tikzpicture}[auto,

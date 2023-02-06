@@ -20,7 +20,7 @@
 # Rotation of the vector $\mathbf{u}$ anti-clockwise about the origin.
 # ```
 # 
-# Consider the diagram in {numref}`rotation-figure` that shows the axes from {numref}`3D-rotation-figure` when viewed looking down the $x$-axis. The point with position vector $\mathbf{u}=(u_x, u_y, u_z)$ is rotated anti-clockwise about the $x$-axis by the angle $\theta$ to $\mathbf{v}=(v_x, v_y, v_z)$. To determine the linear mapping we first consider the rotation of a vector pointing along the $x$-axis which has the same magnitude of $\mathbf{u}$, i.e., $|\mathbf{u}| \mathbf{e}_1$, rotated by the angle $\phi$. Forming a right-angled triangle with the angle $\phi$ and hypotenuse of length $|\mathbf{u}|$ then
+# Consider the diagram in {numref}`rotation-figure` that shows the axes from {numref}`3D-rotation-figure` when viewed looking down the $x$-axis. The point with position vector $\mathbf{u}=(u_x, u_y, u_z)$ is rotated anti-clockwise about the $x$-axis by the angle $\theta$ to $\mathbf{v}=(v_x, v_y, v_z)$. To determine the linear transformation we first consider the rotation of a vector pointing along the $x$-axis which has the same magnitude of $\mathbf{u}$, i.e., $|\mathbf{u}| \mathbf{e}_1$, rotated by the angle $\phi$. Forming a right-angled triangle with the angle $\phi$ and hypotenuse of length $|\mathbf{u}|$ then
 # 
 # ```{math}
 # :label: rotation-equation-1
@@ -77,7 +77,7 @@
 #     \begin{pmatrix} u_x \\ u_y \\ u_z \end{pmatrix}.
 # \end{align*}
 # 
-# The square matrix is the transformation matrix for rotation by the angle $\theta$ anti-clockwise about the $x-axis$. Doing similar we can determine the equivalent matrices for rotating about the $y$ and $z$-axes.
+# The square matrix is the transformation matrix for rotation by the angle $\theta$ anti-clockwise about the $x$-axis. Doing similar we can determine the equivalent matrices for rotating about the $y$ and $z$-axes.
 # 
 # ````{prf:theorem} Rotation in $\mathbb{R}^3$
 # :label: rotation-in-R3-theorem

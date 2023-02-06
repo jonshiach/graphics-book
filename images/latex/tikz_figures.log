@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.10.27)  3 FEB 2023 10:29
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.10.27)  6 FEB 2023 10:14
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -498,22 +498,28 @@ Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
  (c:/texlive/2021/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
-)) [1
+))
+<../eye.png, id=4, 602.25pt x 602.25pt>
+File: ../eye.png Graphic file (type png)
+<use ../eye.png>
+Package pdftex.def Info: ../eye.png  used on input line 1640.
+(pdftex.def)             Requested size: 28.45274pt x 28.45094pt.
+ [1
 
-{c:/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] (./tikz_figures.aux) ) 
+{c:/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <../eye.png>] (./tikz_figures.aux) ) 
 Here is how much of TeX's memory you used:
- 24492 strings out of 478579
- 592814 string characters out of 5857457
- 883307 words of memory out of 5000000
- 42047 multiletter control sequences out of 15000+600000
- 405572 words of font info for 33 fonts, out of 8000000 for 9000
+ 24519 strings out of 478579
+ 593534 string characters out of 5857457
+ 881307 words of memory out of 5000000
+ 42074 multiletter control sequences out of 15000+600000
+ 404645 words of font info for 30 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 117i,7n,122p,1694b,655s stack positions out of 5000i,500n,10000p,200000b,80000s
-<c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb>
-Output written on tikz_figures.pdf (1 page, 28707 bytes).
+ 117i,9n,122p,1694b,783s stack positions out of 5000i,500n,10000p,200000b,80000s
+<c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb>
+Output written on tikz_figures.pdf (1 page, 27086 bytes).
 PDF statistics:
- 26 PDF objects out of 1000 (max. 8388607)
- 16 compressed objects within 1 object stream
+ 19 PDF objects out of 1000 (max. 8388607)
+ 11 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 13 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 18 words of extra memory for PDF output out of 10000 (max. 10000000)
 

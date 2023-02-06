@@ -54,7 +54,7 @@
 # (rgb-colour-model-section)=
 # ## The RGB colour model
 # 
-# The **RGB** colour model uses the three primary colours <span style="color: red;">Red</span>, <span style="color: green;">Green</span> and <span style="color: blue;">Blue</span> (RGB) that are added to produce colours in the visible spectrum. Using a single bit for each primary colour (i.e., adding all or none of that colour) means that it is possible to produce eight colours: <span style="color: red;">red</span>, <span style="color: yellow;">yellow</span>, <span style="color: green;">green</span>, <span style="color: cyan;">cyan</span>, <span style="color: blue;">blue</span>, <span style="color: magenta;">magenta</span>, black and <span style="background-color:black;color:white">white</span> as shown in {ref}`rgb-table`. For example mixing full amounts of red and green results in pure yellow. 
+# The **RGB** colour model uses the three primary colours <span style="color: red;">Red</span>, <span style="color: green;">Green</span> and <span style="color: blue;">Blue</span> (RGB) that are added to produce colours in the visible spectrum. Using a single bit for each primary colour (i.e., adding all or none of that colour) means that it is possible to produce eight colours: <span style="color: red;">red</span>, <span style="color: yellow;">yellow</span>, <span style="color: green;">green</span>, <span style="color: cyan;">cyan</span>, <span style="color: blue;">blue</span>, <span style="color: magenta;">magenta</span>, black and <span style="background-color:gray;color:white">white</span> as shown in {ref}`rgb-table`. For example mixing full amounts of red and green results in pure yellow. 
 # 
 # ### 24-bit colour 
 # 
@@ -68,7 +68,7 @@
 # 
 # Since there are 256 levels of the three primary colours in the true color model we can use the integers 0 to 255 in an ordered triplet. For example, the colour <span style="color: cyan;">cyan</span> is made by mixing full amounts of green and blue which corresponds to the triplet `(0, 255, 255)`. Most software packages also accept <a href="https://en.wikipedia.org/wiki/Hexadecimal" target="_blank">hexadecimal</a> (base-16) colour codes where the values in the triplet are represented using 2-digit hexadecimal numbers 00 to FF which follow a # symbol. For example, <span style="color: cyan;">cyan</span> is represented using `"#00FFFF"`. 
 # 
-# ```{list-table} RGB codes
+# ```{list-table} RGB colour codes
 # :header-rows: 1
 # :name: rgb-table
 # 
@@ -77,7 +77,7 @@
 #   - Hexadecimal colour code
 # * - <span style="color: black;">Black</span>
 #   - `(0, 0, 0)`
-#   - `"#FFFFFF"`
+#   - `"#000000"`
 # * - <span style="color: red;">Red</span>
 #   - `(255, 0, 0)`
 #   - `"#FF0000"`
@@ -96,7 +96,7 @@
 # * - <span style="color: magenta;">Magenta</span>
 #   - `(255, 0, 255)`
 #   - `"#FF00FF"`
-# * - <span style=" background-color: black; color: white;">White</span>
+# * - <span style=" background-color: gray; color: white;">White</span>
 #   - `(255, 255, 255)`
 #   - `"#FFFFFF"`
 # ```
@@ -135,7 +135,7 @@
 # :width: 500px
 # ```
 # 
-# Now we have the raster array for the image we can use Python commands to manipulate the image. For example, the following code sets the colour of each pixel to either black or white depending on whether the average of the colour triplet is greater or less than 128 which is halfway between 0 and 255.
+# Now we have the raster array for the image we can use MATLAB commands to manipulate the image. For example, the following code sets the colour of each pixel to either black or white depending on whether the average of the colour triplet is greater or less than 128 which is halfway between 0 and 255.
 # 
 # ```matlab
 # % Read in image
@@ -144,7 +144,7 @@
 # % Get size of image array
 # [Ny, Nx, Ncolours] = size(img);
 # 
-# % Reshape image array
+# % Reshape image array to a (num pixels x 3) array
 # img_bw = reshape(img, [Nx * Ny, Ncolours]);
 # 
 # % Calculate average colour of each pixel
@@ -170,7 +170,7 @@
 # 
 # You may have noticed that the vertical axes on the image plots have a scale that starts at 1 at the top and increases as we move down the rows of pixels [^1]. The reason for this is that digital displays are refreshed using horizontal lines of pixels starting at the top row and moving down to the bottom. 
 # 
-# [^1]: Note that in most graphical applications we start numbering pixels at 0. In these notes have have used 1 as the starting co-ordinate so that matrix indexing is easier when using MATLAB. If you are using a zero-indexing language such as Python, C etc. then subtract 1 from the pixel co-ordinates.
+# [^1]: Note that in most graphical applications we start numbering pixels at 0. In these notes I have used 1 as the starting co-ordinate so that matrix indexing is easier when using MATLAB. If you are using a zero-indexing language such as Python, C etc. then subtract 1 from the pixel co-ordinates.
 # 
 # If the raster represents a region defined by the $x$ and $y$ Euclidean space co-ordinates $x, y \in [0, 1]$ which is to be represented by an $N_y \times N_x$ raster then the corresponding pixel co-ordinates are
 # 

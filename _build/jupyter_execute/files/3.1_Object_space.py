@@ -121,7 +121,7 @@
 # We also need to consider the order that the vertices are listed for each face. Objects are defined so that the {prf:ref}`normal vectors <normal-vector-definition>` for each face is pointing away from the centre of the object. We [have seen](normal-vector-section) that the normal vector to a plane that passes through the 3 points with position vectors $\mathbf{v}_1$, $\mathbf{v}_2$ and $\mathbf{v}_3$ is calculated using 
 # 
 # \begin{align*}
-# 	\mathbf{n} = (\mathbf{v}_2 - \mathbf{v}_1) \times (\mathbf{v}_3 - \mathbf{v}_1).
+# 	\mathbf{n} = (\mathbf{v}_2 - \mathbf{v}_1) \times (\mathbf{v}_3 - \mathbf{v}_2).
 # \end{align*}
 # 
 # If $\mathbf{v}_1$, $\mathbf{v}_2$ and $\mathbf{v}_3$ are ordered anti-clockwise when viewed from one side of the plane then the above equation will result in a normal vector pointing towards the viewer ({numref}`anticlockwise-vertices-figure`). Alternatively is the vertices are ordered clockwise when viewed from the side fo the plane then this will result in a normal vector pointing away from the viewer ({numref}`clockwise-vertices-figure`). 
@@ -246,21 +246,21 @@
 # The following MATLAB code in defines the vertex and face matrices for the house object from {prf:ref}`object-space-example` and plots the object space. The vertex and face matrices are defined in `V` and `F` and the `patch()` command is then used to plot the object. Note that we only use the first three rows of the `V` array which has been transposed because MATLAB assumes the co-ordinates are listed in rows. The `FaceAlpha` is set to 0.5 so that the faces of the object are semi-transparent.
 # 
 # ```matlab
-# % Define object
+# # Define object
 # V = [-0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0, 0 ;
 #      -1,  -1,   1,    1,   -1,  -1,   1,    1,  -1, 1 ;
 #       0,   0,   0,    0,    1,   1,   1,    1,   2, 2 ;
 #       1,   1,   1,    1,    1,   1,   1,    1,   1, 1];
 # 
-# F = [4, 3, 2, 1, 1 ;    % base
-#      1, 2, 6, 9, 5 ;    % front wall
-#      2, 3, 7, 6, 6 ;    % right wall
-#      3, 4, 8, 10, 7 ;   % back wall
-#      1, 5, 8, 4, 4 ;    % left wall
-#      6, 7, 10, 9, 9 ;   % right roof
-#      5, 9, 10, 8, 8 ];  % left roof
+# F = [4, 3, 2, 1, 1 ;    # base
+#      1, 2, 6, 9, 5 ;    # front wall
+#      2, 3, 7, 6, 6 ;    # right wall
+#      3, 4, 8, 10, 7 ;   # back wall
+#      1, 5, 8, 4, 4 ;    # left wall
+#      6, 7, 10, 9, 9 ;   # right roof
+#      5, 9, 10, 8, 8 ];  # left roof
 # 
-# % Plot object
+# # Plot object
 # patch('Vertices', V(1:3,:)', 'Faces', F, FaceColor='white', FaceAlpha=0.75, LineWidth=2)
 # xlabel('$x$', 'Interpreter', 'latex', 'FontSize', 18)
 # ylabel('$y$', 'Interpreter', 'latex', 'FontSize', 18)
@@ -276,4 +276,5 @@
 # :name: object-space-example-figure
 # 
 # The object space from {prf:ref}`object-space-example`.
+# 
 # ```
