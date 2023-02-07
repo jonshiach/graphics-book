@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# (antialiasing-section)
+# (antialiasing-section)=
 # # Antialiasing
 # 
 # We have seen in the previous sections that when an idealised image is represented using a raster array, lines and edges of curved and sloping surfaces appear jagged because pixels are square. We can attempt to reduce this effect by using **antialising** which is the process of smoothing lines and edges so that they appear less jagged. Antialiasing is achieved by illuminating the pixels adjacent to the idealised image using a colour intensity less than that of the colour intensity used for the rasterised image. There are several approaches used in practice and the most common of these is super sampling antialiasing.

@@ -497,13 +497,11 @@ title="Print to PDF"
   <section class="tex2jax_ignore mathjax_ignore" id="drawing-circles">
 <span id="drawing-circles-section"></span><h1>Drawing circles<a class="headerlink" href="#drawing-circles" title="Permalink to this headline">#</a></h1>
 <p>Now that we have the ability to rasterise straight lines the next fundamental problem is the rasterisation of circles. This can be done by deriving a Bresenham-type algorithm that uses the <a class="reference external" href="https://en.wikipedia.org/wiki/Circle#Equations">Cartesian equation of a circle</a> to determine which of two candidate pixels are plotted.</p>
-<p>The circle line drawing algorithms can use the concept of <strong>circle symmetry</strong> to reduce the number of computations required to rasterise a circle. Consider <a class="reference internal" href="#circle-symmetry-figure"><span class="std std-numref">Fig. 95</span></a> where a circle is centred at the origin. If the coordinate of a point on the circle in the shaded octant where <span class="math notranslate nohighlight">\(x &gt; y\)</span> is known to be <span class="math notranslate nohighlight">\((x,y)\)</span> then the corresponding points on the circle in the other seven octants can be found via circle symmetry through combinations of <span class="math notranslate nohighlight">\((\pm x,\pm y)\)</span> and <span class="math notranslate nohighlight">\((\pm y,\pm x)\)</span>.</p>
-<figure class="align-default" id="circle-symmetry-figure" style="width: 400px">
-<div class="cell_output docutils container">
-<img alt="../_images/5.2_Drawing_circles_1_0.png" src="../_images/5.2_Drawing_circles_1_0.png" />
-</div>
+<p>The circle line drawing algorithms can use the concept of <strong>circle symmetry</strong> to reduce the number of computations required to rasterise a circle. Consider <a class="reference internal" href="#circle-symmetry-figure"><span class="std std-numref">Fig. 94</span></a> where a circle is centred at the origin. If the coordinate of a point on the circle in the shaded octant where <span class="math notranslate nohighlight">\(x &gt; y\)</span> is known to be <span class="math notranslate nohighlight">\((x,y)\)</span> then the corresponding points on the circle in the other seven octants can be found via circle symmetry through combinations of <span class="math notranslate nohighlight">\((\pm x,\pm y)\)</span> and <span class="math notranslate nohighlight">\((\pm y,\pm x)\)</span>.</p>
+<figure class="align-default" id="circle-symmetry-figure">
+<a class="reference internal image-reference" href="../_images/circle_symmetry.svg"><img alt="../_images/circle_symmetry.svg" src="../_images/circle_symmetry.svg" width="400px" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 95 </span><span class="caption-text">Circle symmetry can be used to calculate points on a circle.</span><a class="headerlink" href="#circle-symmetry-figure" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 94 </span><span class="caption-text">Circle symmetry can be used to calculate points on a circle.</span><a class="headerlink" href="#circle-symmetry-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>For circles not centred at the original, which will be the case in the vast majority of applications, we calculate the co-ordinates of a point on the circle in the first octant <span class="math notranslate nohighlight">\((x, y)\)</span> and then add the co-ordinates of the circle centre <span class="math notranslate nohighlight">\((c_x,c_y)\)</span> giving the following eight pixel co-ordinates</p>
@@ -523,84 +521,88 @@ title="Print to PDF"
 <p>The <strong>midpoint algorithm</strong> <span id="id1">[<a class="reference internal" href="bibliography.html#id3" title="M.L.V. Pitteway. Algorithm for drawing ellipses of hyperbolae with a digital plotter. Computer Journal, 10(3):282–289, 1967.">Pitteway, 1967</a>]</span> is a form of Bresenham’s algorithm that is used to draw circles. Consider the <a href="https://en.wikipedia.org/wiki/Circle#Equations" target="_blank">Cartesian equation of a circle</a> centred at <span class="math notranslate nohighlight">\((0, 0)\)</span> with radius <span class="math notranslate nohighlight">\(r\)</span></p>
 <div class="math notranslate nohighlight">
 \[x^2 + y^2 = r^2,\]</div>
-<p>which an be rearranged to give</p>
+<p>which an be rearranged to</p>
 <div class="math notranslate nohighlight">
-\[0 = x^2 + y^2 - r^2,\]</div>
-<p>and defining the function <span class="math notranslate nohighlight">\(f(x,y)\)</span> as</p>
-<div class="math notranslate nohighlight">
-\[f(x,y) = x^2 + y^2 - r^2,\]</div>
-<p>then if <span class="math notranslate nohighlight">\(f(x,y)=0\)</span> we know that the point <span class="math notranslate nohighlight">\((x,y)\)</span> is on the circle.</p>
-<figure class="align-default" id="id2" style="width: 300px">
-<div class="cell_output docutils container">
-<img alt="../_images/5.2_Drawing_circles_3_0.png" src="../_images/5.2_Drawing_circles_3_0.png" />
-</div>
+\[0 = x^2 + y^2 - r^2.\]</div>
+<p>Let <span class="math notranslate nohighlight">\(f(x,y) = x^2 + y^2 - r^2\)</span> then like Bresenham’s algorithm, the sign of <span class="math notranslate nohighlight">\(f(x,y)\)</span> tells us whether the pixel at <span class="math notranslate nohighlight">\((x,y)\)</span> is inside or outside of the circle</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    f(x,y) 
+    \begin{cases}
+        \geq 0, &amp; \text{$(x,y)$ is on or outside of the circle,} \\
+        &lt;0, &amp; \text{$(x,y)$ is inside the circle.}
+    \end{cases}
+\end{align*}\]</div>
+<p>To derive an algorithm to rasterise a circle we assume that the circle is centred at <span class="math notranslate nohighlight">\((0, 0)\)</span> and we start at the pixel at the 3 o’clock position with pixel co-ordinates <span class="math notranslate nohighlight">\((r,0)\)</span>. We then move clockwise around the circle calculating the pixels that lie closest to the idealised circle until <span class="math notranslate nohighlight">\(x=y\)</span> which is the end of the first octant. For each pixel co-ordinates we calculate, the pixel co-ordinates of the corresponding pixels in the 7 other octants are calculated using circle symmetry.</p>
+<p>Once a pixel <span class="math notranslate nohighlight">\((x,y)\)</span> has been plotted we move down by one pixel so that <span class="math notranslate nohighlight">\(y=y+1\)</span> and we have a choice between the two pixels at <span class="math notranslate nohighlight">\((x-1,y+1)\)</span> and <span class="math notranslate nohighlight">\((x,y+1)\)</span> to plot next. Similar to Bresenham’s line drawing algorithm, we define a decision variable <span class="math notranslate nohighlight">\(d=f(x-\frac{1}{2}, y+1)\)</span> which is the distance between the plotted pixel and the midpoint between the two candidate pixels (<a class="reference internal" href="#midpoint-algorithm-figure"><span class="std std-numref">Fig. 95</span></a>).</p>
+<figure class="align-default" id="midpoint-algorithm-figure">
+<a class="reference internal image-reference" href="../_images/midpoint_algorithm.svg"><img alt="../_images/midpoint_algorithm.svg" src="../_images/midpoint_algorithm.svg" width="250px" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 96 </span><span class="caption-text">Determining the pixels on a circle using the midpoint algorithm.</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 95 </span><span class="caption-text">Determining the pixels on a circle using the midpoint algorithm.</span><a class="headerlink" href="#midpoint-algorithm-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>To derive an algorithm to rasterise a circle we assume that the circle is centred at <span class="math notranslate nohighlight">\((0, 0)\)</span> and we start at the pixel at the 3 o’clock position with pixel co-ordinates <span class="math notranslate nohighlight">\((r,0)\)</span>. We then move clockwise around the circle calculating the pixels that lie closest to the idealised circle until <span class="math notranslate nohighlight">\(x=y\)</span> which is the end of the first octant. For each pixel co-ordinates we calculate, the pixel co-ordinates of the corresponding pixels in the 7 other octants are calculated using circle symmetry.</p>
-<p>Once the first pixel <span class="math notranslate nohighlight">\((r,0)\)</span> is plotted we move down by one pixel so that <span class="math notranslate nohighlight">\(y=1\)</span> and we have a choice between the two pixels at <span class="math notranslate nohighlight">\((r,1)\)</span> and <span class="math notranslate nohighlight">\((r-1,1)\)</span> to plot next. Similar to Bresenham’s line drawing algorithm, we define a value <span class="math notranslate nohighlight">\(D\)</span> as the difference between the value of <span class="math notranslate nohighlight">\(f(x,y)\)</span> between the first pixel <span class="math notranslate nohighlight">\((r,0)\)</span> and the midpoint between the two pixels <span class="math notranslate nohighlight">\((r,1)\)</span> and <span class="math notranslate nohighlight">\((r-1,1)\)</span>.</p>
-<div class="math notranslate nohighlight" id="equation-midpoint-equation-1">
-<span class="eqno">(41)<a class="headerlink" href="#equation-midpoint-equation-1" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align}
-    \notag D &amp;= f \left( r-\tfrac{1}{2}, 1 \right) - f(r, 0) \\
-    \notag &amp;= \left( r-\tfrac{1}{2} \right)^2 + 1^2 - r^2 - r^2 - 0^2 + r^2 \\
-    \notag &amp;= r^2 - r + \tfrac{1}{4} + 1 - r^2 \\
-    &amp;= \tfrac{5}{4} - r.
-\end{align}\end{split}\]</div>
-<p>If <span class="math notranslate nohighlight">\(D \leq 0\)</span> then the midpoint is inside the circle so we plot the pixel at <span class="math notranslate nohighlight">\((x,y+1)\)</span> and the change in the value of <span class="math notranslate nohighlight">\(D\)</span> is</p>
-<div class="math notranslate nohighlight" id="equation-midpoint-equation-2">
-<span class="eqno">(42)<a class="headerlink" href="#equation-midpoint-equation-2" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align}
-    \Delta D_{inside} &amp;= f\left( x-\tfrac{1}{2},y+2 \right) - f\left(x-\tfrac{1}{2},y+1\right) \\
-    &amp;= \left(x-\tfrac{1}{2}\right)^2 + (y+2)^2 - r^2 - \left(x-\tfrac{1}{2}\right)^2 - (y+1)^2 + r^2 \\
-    &amp;= y^2 + 4y + 4 - y^2 - y - 1 \\
+<p>The change in the value of <span class="math notranslate nohighlight">\(d\)</span>, denoted by <span class="math notranslate nohighlight">\(\Delta d\)</span>, depends upon which of the candidate pixels has been plotted. If <span class="math notranslate nohighlight">\(d \leq 0\)</span> then the pixel at <span class="math notranslate nohighlight">\((x,y+1)\)</span> has been chosen and <span class="math notranslate nohighlight">\(\Delta d\)</span> is the difference between <span class="math notranslate nohighlight">\(f(x-\tfrac{1}{2},y+1)\)</span> and <span class="math notranslate nohighlight">\(f(x-\tfrac{1}{2},y+2)\)</span></p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    \Delta d &amp;= f(x-\tfrac{1}{2},y+2) - f(x-\tfrac{1}{2},y+1) \\
+    &amp;= (x - \tfrac{1}{2})^2 + (y+2)^2 - r^2 - (x + \tfrac{1}{2})^2 - (y+1)^2 + r^2 \\
+    &amp;= y^2 + 4y + 4 - y^2 - 2y - 1 \\
     &amp;= 2y + 3.
-\end{align}\end{split}\]</div>
-<p>Else if <span class="math notranslate nohighlight">\(D &gt; 0\)</span> then the midepoint is outside ofhte circle so we plot the pixel at <span class="math notranslate nohighlight">\((x-1,y+1)\)</span> and the change in the value of <span class="math notranslate nohighlight">\(D\)</span> is</p>
-<div class="math notranslate nohighlight" id="equation-midpoint-equation-3">
-<span class="eqno">(43)<a class="headerlink" href="#equation-midpoint-equation-3" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align}
-    \notag \Delta D_{outside} &amp;= f\left(x-\tfrac{3}{2},y+2\right) - f\left(x-\tfrac{1}{2}, y+1\right) \\
-    \notag &amp;= \left(x-\tfrac{3}{2}\right)^2 + (y+2)^2 - r^2 - \left(x-\tfrac{1}{2}\right)^2 - (y+1)^2 + r^2 \\
-    \notag &amp;= x^2 - 3x + \tfrac{9}{4} + y^2 + 4y + 4 - x^2 + x - \tfrac{1}{4} - y^2 - 2y - 1 \\
+\end{align*}\]</div>
+<p>Else if <span class="math notranslate nohighlight">\(d &gt; 0\)</span> then the pixel at <span class="math notranslate nohighlight">\((x-1,y+1)\)</span> has been chosen and <span class="math notranslate nohighlight">\(\Delta d\)</span> is the difference between <span class="math notranslate nohighlight">\(f(x-\tfrac{1}{2},y+1)\)</span> and <span class="math notranslate nohighlight">\(f(x - \tfrac{3}{2},y+2)\)</span></p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    \Delta d &amp;= f(x - \tfrac{3}{2},y+2) - f(x-\tfrac{1}{2},y+1) \\
+    &amp;= (x - \tfrac{3}{2})^2 + (y+2)^2 - r^2 - (x-\tfrac{1}{2})^2 - (y+1)^2 + r^2 \\
+    &amp;= x^2 - 3x + \tfrac{9}{4} + y^2 + 4y + 4 - x^2 + x - \tfrac{1}{4} - y^2 - 2y - 1 \\
     &amp;= 2y - 2x + 5.
-\end{align}\end{split}\]</div>
-<p>Equation <a class="reference internal" href="#equation-midpoint-equation-1">(41)</a> contains a floating point number in <span class="math notranslate nohighlight">\(\frac{5}{4}\)</span>, similar to Bresenham’s algorithm we can multiply equations <a class="reference internal" href="#equation-midpoint-equation-1">(41)</a> to <a class="reference internal" href="#equation-midpoint-equation-3">(43)</a> by 4 so that we have integer only expressions for <span class="math notranslate nohighlight">\(D\)</span>, <span class="math notranslate nohighlight">\(\Delta D_{inside}\)</span> and <span class="math notranslate nohighlight">\(\Delta_{outside}\)</span></p>
-<div class="math notranslate nohighlight" id="equation-midpoint-equations">
-<span class="eqno">(44)<a class="headerlink" href="#equation-midpoint-equations" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align}
-    D &amp;= 5 - 4r, \\
-    \Delta D_{inside} &amp;= 8y + 12, \\
-    \Delta D_{outside} &amp;= 8y - 8x + 20.
-\end{align}\end{split}\]</div>
-<p>Note that the values of <span class="math notranslate nohighlight">\(\Delta D_{inside}\)</span> and <span class="math notranslate nohighlight">\(\Delta D_{outside}\)</span> depend on the current values of <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> so cannot be pre-calculated.</p>
+\end{align*}\]</div>
+<p>Since the first pixel to be plotted has the co-ordinates <span class="math notranslate nohighlight">\((r,0)\)</span>, the initial value of <span class="math notranslate nohighlight">\(d\)</span> is the difference between <span class="math notranslate nohighlight">\(f(r,0)\)</span> and <span class="math notranslate nohighlight">\(f(r-\tfrac{1}{2},1)\)</span></p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    d &amp;= f(r,0) - f(r-\tfrac{1}{2},1) \\
+    &amp;= r^2 + 0^2 - r^2 - (r-\tfrac{1}{2})^2 - 1^2 + r^2 \\
+    &amp;= -r^2 + r - \tfrac{1}{4} - 1 + r^2 \\
+    &amp;= r - \tfrac{5}{4}.
+\end{align*}\]</div>
+<p>Here we have a floating point number in <span class="math notranslate nohighlight">\(\frac{5}{4}=1.25\)</span>. To write down an algorithm that only uses integer numbers we simply round this number to <span class="math notranslate nohighlight">\(1\)</span></p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    d &amp;= r - 1.
+\end{align*}\]</div>
+<p>We do not need to adjust the expressions for <span class="math notranslate nohighlight">\(\Delta d\)</span> since these used the values of the pixel co-ordinates.</p>
 <div class="proof algorithm admonition" id="midpoint-algorithm">
 <p class="admonition-title"><span class="caption-number">Algorithm 9 </span> (Midpoint algorithm)</p>
 <section class="algorithm-content" id="proof-content">
 <p><strong>Inputs</strong> A raster array <span class="math notranslate nohighlight">\(R\)</span>, pixel co-ordinates of the centre of a circle <span class="math notranslate nohighlight">\((c_x, c_y)\)</span> the radius of the circle <span class="math notranslate nohighlight">\(r\)</span> and the colour of the circle line defined by the RBG triplet <span class="math notranslate nohighlight">\(colour\)</span>.</p>
 <p><strong>Output</strong> A raster array <span class="math notranslate nohighlight">\(R\)</span>.</p>
 <ul class="simple">
-<li><p>Initialise <span class="math notranslate nohighlight">\(x \gets r\)</span>, <span class="math notranslate nohighlight">\(y \gets 0\)</span>, <span class="math notranslate nohighlight">\(D \gets 5 - 4r\)</span>.</p></li>
-<li><p>While <span class="math notranslate nohighlight">\(y \leq x\)</span> do</p>
+<li><p><span class="math notranslate nohighlight">\(x \gets r\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(y \gets 0\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(d \gets 1 - r\)</span>.</p></li>
+<li><p>While <span class="math notranslate nohighlight">\(x \geq y\)</span> do</p>
 <ul>
 <li><p><span class="math notranslate nohighlight">\(R(c_x \pm x, c_y \pm y) \gets colour\)</span> (use circle symmetry to plot the 8 pixels)</p></li>
 <li><p><span class="math notranslate nohighlight">\(R(c_x \pm y, c_y \pm x) \gets colour\)</span></p></li>
-<li><p>If <span class="math notranslate nohighlight">\(D &gt; 0\)</span> then</p>
+<li><p>If <span class="math notranslate nohighlight">\(d \leq 0\)</span> then</p>
 <ul>
-<li><p><span class="math notranslate nohighlight">\(D \gets D - 8x + 8y + 8\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(x \gets x - 1\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(d \gets D + 2y + 3\)</span></p></li>
 </ul>
 </li>
 <li><p>Else</p>
 <ul>
-<li><p><span class="math notranslate nohighlight">\(D \gets D + 8y + 12\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(d \gets d + 2y - 2x + 5\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(x \gets x - 1\)</span></p></li>
 </ul>
 </li>
-<li><p><span class="math notranslate nohighlight">\(y \gets y + 14\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(y \gets y + 1\)</span></p></li>
 </ul>
 </li>
 <li><p>Return <span class="math notranslate nohighlight">\(R\)</span></p></li>
 </ul>
 </section>
 </div><div class="proof example seealso admonition" id="midpoint-example">
-<p class="admonition-title"><span class="caption-number">Example 41 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 40 </span></p>
 <section class="example-content" id="proof-content">
 <p>Use the midpoint algorithm to rasterise a circle centred at <span class="math notranslate nohighlight">\((12, 12)\)</span> with radius 10.</p>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
@@ -610,17 +612,22 @@ Solution<div class="sd-summary-down docutils">
 <div class="sd-summary-up docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
-<p class="sd-card-text"><span class="math notranslate nohighlight">\(x=10\)</span>, <span class="math notranslate nohighlight">\(y = 0\)</span>, <span class="math notranslate nohighlight">\(D = 5 - 4(10) = -35\)</span></p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    x &amp;= 10, \\
+    y &amp;= 0, \\
+    d &amp;= 1 - 10 = -9.
+\end{align*}\]</div>
 <p class="sd-card-text">Stepping through the algorithm:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
-	x &amp;= 10, &amp; y &amp;= 0, &amp; D &amp;\leq 0, &amp; \therefore D &amp;= -35 + 8(0) + 12 = -23, \\
-	x &amp;= 10, &amp; y &amp;= 1, &amp; D &amp;\leq 0, &amp; \therefore D &amp;= -23 + 8(1) + 12 = -3, \\
-	x &amp;= 10, &amp; y &amp;= 2, &amp; D &amp;\leq 0, &amp; \therefore D &amp;= -3 + 8(2) + 12 = 25,\\
-	x &amp;= 10, &amp; y &amp;= 3, &amp; D &amp;&gt; 0, &amp; \therefore D &amp;= 25 + 8(3) - 8(10) + 20 = -11, \\
-	x &amp;=  9, &amp; y &amp;= 4, &amp; D &amp;\leq 0, &amp; \therefore D &amp;= -11 + 8(4) + 12 = 33, \\
-	x &amp;=  9, &amp; y &amp;= 5, &amp; D &amp;&gt; 0, &amp; \therefore D &amp;= 33 + 8(5) - 8(9) + 20 = 21, \\
-	x &amp;=  8, &amp; y &amp;= 6, &amp; D &amp;&gt; 0, &amp; \therefore D &amp;= 21 + 8(6) - 8(8) + 20 = 25, \\
+	x &amp;= 10, &amp; y &amp;= 0, &amp; d &amp;\leq 0, &amp; \therefore d &amp;= -9 + 2(0) + 3 = -6, \\
+	x &amp;= 10, &amp; y &amp;= 1, &amp; d &amp;\leq 0, &amp; \therefore d &amp;= -6 + 2(1) + 3 = -1, \\
+	x &amp;= 10, &amp; y &amp;= 2, &amp; d &amp;\leq 0, &amp; \therefore d &amp;= -1 + 2(2) + 3 = 6,\\
+	x &amp;= 10, &amp; y &amp;= 3, &amp; d &amp;&gt; 0, &amp; \therefore d &amp;= 6 + 2(3) - 2(10) + 5 = -3, \\
+	x &amp;=  9, &amp; y &amp;= 4, &amp; d &amp;\leq 0, &amp; \therefore d &amp;= -3 + 2(4) + 3 = 8, \\
+	x &amp;=  9, &amp; y &amp;= 5, &amp; d &amp;&gt; 0, &amp; \therefore d &amp;= 8 + 2(5) - 2(9) + 5 = 5, \\
+	x &amp;=  8, &amp; y &amp;= 6, &amp; d &amp;&gt; 0, &amp; \therefore d &amp;= 5 + 2(6) - 2(8) + 5 = 6, \\
 	x &amp;=  7, &amp; y &amp;= 7.
 \end{align*}\]</div>
 <p class="sd-card-text">Adding the centre co-ordinates gives the following co-ordinates for the pixels on the first octant of the circle</p>
