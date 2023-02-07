@@ -378,7 +378,7 @@
 #         \begin{pmatrix} 1 \\ 0 \\ 1 \end{pmatrix}
 #     \right) \cdot \frac{1}{\sqrt{69}} 
 #     \begin{pmatrix} 1 \\ 8 \\ 2 \end{pmatrix} \\
-#     &= \frac{0 + 32 - 12}{\sqrt{69}} = \frac{44 \sqrt{69}}{69}.
+#     &= \frac{0 + 32 + 12}{\sqrt{69}} = \frac{44 \sqrt{69}}{69}.
 # \end{align*}
 # ```
 
