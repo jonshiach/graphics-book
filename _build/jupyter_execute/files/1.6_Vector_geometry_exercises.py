@@ -410,14 +410,14 @@
 #         \begin{pmatrix} -3 \\ 0 \\ -2 \end{pmatrix}
 #     } \\
 #     &= \frac{-30 + 0 - 20}{-300 + 0 - 400} = \frac{-50}{-700} = \frac{1}{14}, \\
-#     \therefore \mathbf{r} &= \mathbf{p} + t \mathbf{d} \\
+#     \therefore \mathbf{r} &= \mathbf{q} + t \mathbf{d} \\
 #     &= 
 #     \begin{pmatrix} 0 \\ 5 \\ -10 \end{pmatrix} + \frac{1}{14}
 #     \begin{pmatrix} 100 \\ 100 \\ 200 \end{pmatrix} \\
 #     &=
-#     \begin{pmatrix} 120/7 \\ 120/7 \\ 100/7 \end{pmatrix}
+#     \begin{pmatrix} 50/7 \\ 85/7 \\ 30/7 \end{pmatrix}
 #     \approx
-#     \begin{pmatrix} 17.1429 \\ 17.1429 \\ 14.2857 \end{pmatrix}.
+#     \begin{pmatrix} 7.1429 \\ 12.1429 \\ 4.2857 \end{pmatrix}.
 # \end{align*}
 # ```
 
@@ -491,7 +491,7 @@
 # 
 # (a) Derive the following formula for the calculation of $t$ (hint: how far appart are $\mathbf{c}_1$ and $\mathbf{c}_2$ at the point of collision?)
 # 
-# $$ 0 = t^2 (\mathbf{d}_1 - \mathbf{d}_2)^2 + 2t(\mathbf{p}_1 - \mathbf{p}_2) \cdot (\mathbf{d}_1 - \mathbf{d}_2) + (\mathbf{p}_1 - \mathbf{p}_2)^2 - 4t^2.$$
+# $$ 0 = t^2 (\mathbf{d}_1 - \mathbf{d}_2)^2 + 2t(\mathbf{p}_1 - \mathbf{p}_2) \cdot (\mathbf{d}_1 - \mathbf{d}_2) + (\mathbf{p}_1 - \mathbf{p}_2)^2 - 4r^2.$$
 # 
 # (b) Write down a test for determining whether the spheres collide or not.
 # 

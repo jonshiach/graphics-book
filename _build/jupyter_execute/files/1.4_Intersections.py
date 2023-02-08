@@ -33,11 +33,11 @@
 # :class: seealso
 # :label: line-line-intersection-example
 # 
-# Three lines in $\mathbb{R}^3$ are defined as $(1,-3,0) + t_1(1,2,1)$, $(6,-5,-1) + t_2(-1,-2,-1)$ and $(6,-11,-2)+t_3(2,2,-1)$. Determine the points of intersection between the three lines (if possible).
+# Three lines in $\mathbb{R}^3$ are defined as $(1,-3,0) + t_1(1,2,1)$, $(6,-5,-1) + t_2(-1,2,1)$ and $(6,-11,-2)+t_3(2,2,-1)$. Determine the points of intersection between the three lines (if possible).
 # 
 # ```{dropdown} Solution
 # 
-# Let $\mathbf{p}_1 = (1, -3, 0)$, $\mathbf{p}_2 = (6, -5, -1)$, $\mathbf{p}_3 = (6, -11, -2)$, $\mathbf{d}_1 = (1, 2, 1)$, $\mathbf{d}_2 = (-1, -2, -1)$ and $\mathbf{d}_3 = (2, 2, -1)$. Equating the first two lines gives
+# Let $\mathbf{p}_1 = (1, -3, 0)$, $\mathbf{p}_2 = (6, -5, -1)$, $\mathbf{p}_3 = (6, -11, -2)$, $\mathbf{d}_1 = (1, 2, 1)$, $\mathbf{d}_2 = (-1, 2, 1)$ and $\mathbf{d}_3 = (2, 2, -1)$. Equating the first two lines gives
 # 
 # \begin{align*}
 #     1 + t_1 &= 6 - t_2, \\
@@ -48,8 +48,10 @@
 # The third equation is $t_1 = t_2 - 1$ and substituting into the first equation gives $t_2 = 3$ so $t_1 = 2$. Substituting these into the second equation gives $-3 + 2(2) = -5 + 2(3)$ which is $1 = 1$ so $\ell_1$ and $\ell_2$ intersect. To find the point of intersection we substitute $t_1$ or $t_2$ into the vector equations gives
 # 
 # \begin{align*}
-#     \begin{pmatrix} 1 + 2 \\ -3 + 2(2) \\ 2 \end{pmatrix}  &= \begin{pmatrix} 3 \\ 1 \\ 2 \end{pmatrix}, \\
-#     \begin{pmatrix} 6 - 3 \\ -5 -2(3) \\ 3 - 1 \end{pmatrix} &= \begin{pmatrix} 3 \\ 1 \\ 2 \end{pmatrix}. \\
+#     \mathbf{p}_1 + t_1 \mathbf{d}_1 &= \begin{pmatrix} 1 \\ -3 \\ 0 \end{pmatrix} + 2\begin{pmatrix} 1 \\ 2 \\ 1 \end{pmatrix} 
+#     = \begin{pmatrix} 3 \\ 1 \\ 2 \end{pmatrix}, \\
+#     \mathbf{p}_2 + t_2 \mathbf{d}_2 &= \begin{pmatrix} 6 \\ -5 \\ -1 \end{pmatrix} + 3\begin{pmatrix} -1 \\ 2 \\ 1 \end{pmatrix} 
+#     = \begin{pmatrix} 3 \\ 1 \\ 2 \end{pmatrix}.
 # \end{align*}
 # 
 # So the first two lines intersect at $(3, 1, 2)$. 
@@ -57,29 +59,22 @@
 # Equating the first and third lines gives
 # 
 # \begin{align*}
-#     1 + t_1 &= 6 + t_3, \\
+#     1 + t_1 &= 6 + 2t_3, \\
 #     -3 + 2t_1 &= -11 + 2t_3, \\
 #     t_1 &= -2 - t_3.
 # \end{align*}
 # 
-# Substituting the third equation into the first equation gives $1 - 2 - t_3 = 6 + t_3$ so $t_3 = -\frac{7}{2}$ and $t_1 = -\frac{21}{2}$. Substituting these into the second equation gives $-3 + 2(-\frac{21}{2}) = -11 + 2(-\frac{7}{2})$ which is $-24 = -18$ which is a contradiction so no values of $t_1$ or $t_3$ satisfy all co-ordinates so these lines do not intersect.
+# Substituting the third equation into the first equation gives $t_3 = -\frac{7}{3}$ which substituted into the third equation gives $t_1 = -\frac{14}{3}$. Substituting these into the second equation gives $-24 = -18$ which is a contradiction so no values of $t_1$ or $t_3$ satisfy all co-ordinates so these lines do not intersect.
 # 
 # Equating the second and third lines gives the system
 # 
 # \begin{align*}
-#     6 - t_2 &= 6 + 2t_3, \\
+#     6 - t_2 &= 6 + t_3, \\
 #     -5 + 2t_2 &= -11 + 2t_3, \\
 #     -1 + t_2 &= -2 - t_3.
 # \end{align*}
 # 
-# The third equation gives $t_2 = -1 - t_3$ and substituting into the first equation gives $6 + 1 + t_3 = 6 + 2t_3$ so $t_3 = 1$ and $t_2 = -2$. Substituting these into the second equation gives $-5 + 2(-2) = -11 + 2(1)$ which is $-9 = -9$ so these lines intersect. Substituting $t_2$ and $t_3$ into the vectors equations gives
-# 
-# \begin{align*}
-#     \begin{pmatrix} 6 - (-2) \\ -5 + 2(-2) \\ -1 + (-2) \end{pmatrix} &= \begin{pmatrix} 8 \\ -9 \\ -3 \end{pmatrix}, \\
-#     \begin{pmatrix} 6 + 2(1) \\ -11 + 2(1) \\ -2 - 1 \end{pmatrix} &= \begin{pmatrix} 8 \\ -9 \\ -3 \end{pmatrix}.
-# \end{align*}
-# 
-# So the second and third lines intersect at $(8, -9, -3)$.
+# The third equations give $t_2 = -1 - t_3$ which substituted into the first equation gives $7+t_3 = 6 + t_3$ which is a contradiction so these lines do not intersect.
 # 
 # ```
 # ````
@@ -134,7 +129,7 @@
 # :class: seealso
 # :label: skew-lines-example
 # 
-# Show that the lines $\ell_1$ and $\ell_2$ from [example 4.3](parallel-lines-example) are skew lines.
+# Show that the lines $\ell_1$ and $\ell_2$ from {prf:ref}`parallel-lines-example` are skew lines.
 # 
 # ```{dropdown} Solution
 # 
@@ -342,17 +337,17 @@
 #       \begin{pmatrix} -3 \\ -1 \\ 1 \end{pmatrix}}{
 #         \begin{pmatrix} 3 \\ 1 \\ -2 \end{pmatrix} \cdot
 #         \begin{pmatrix} -3 \\ -1 \\ 1 \end{pmatrix}
-#       } \\
-#     &= \frac{-23}{-12} \approx 1.9167.
+#       } 
+#     = \frac{23}{12}.
 # \end{align*}
 # 
 # Calculating the intersection point
 # 
 # \begin{align*}
-#     \mathbf{r} &= \mathbf{q} + t \mathbf{r} = 
-#     \begin{pmatrix} 0 \\ 1 \\ 1 \end{pmatrix} + 1.9167 
+#     \mathbf{r} &= \mathbf{q} + t \mathbf{d} = 
+#     \begin{pmatrix} 0 \\ 1 \\ 1 \end{pmatrix} + \frac{23}{12} 
 #     \begin{pmatrix} 3 \\ 1 \\ -2 \end{pmatrix} = 
-#     \begin{pmatrix} 5.75 \\ 2.9167 \\ -2.8333 \end{pmatrix}.
+#     \begin{pmatrix} 23/4 \\ 35/12 \\ -17/6 \end{pmatrix}.
 # \end{align*}
 # ```
 # ````

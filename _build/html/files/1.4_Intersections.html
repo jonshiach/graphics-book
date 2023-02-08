@@ -606,7 +606,7 @@ title="Print to PDF"
 <div class="proof example seealso admonition" id="line-line-intersection-example">
 <p class="admonition-title"><span class="caption-number">Example 9 </span></p>
 <section class="example-content" id="proof-content">
-<p>Three lines in <span class="math notranslate nohighlight">\(\mathbb{R}^3\)</span> are defined as <span class="math notranslate nohighlight">\((1,-3,0) + t_1(1,2,1)\)</span>, <span class="math notranslate nohighlight">\((6,-5,-1) + t_2(-1,-2,-1)\)</span> and <span class="math notranslate nohighlight">\((6,-11,-2)+t_3(2,2,-1)\)</span>. Determine the points of intersection between the three lines (if possible).</p>
+<p>Three lines in <span class="math notranslate nohighlight">\(\mathbb{R}^3\)</span> are defined as <span class="math notranslate nohighlight">\((1,-3,0) + t_1(1,2,1)\)</span>, <span class="math notranslate nohighlight">\((6,-5,-1) + t_2(-1,2,1)\)</span> and <span class="math notranslate nohighlight">\((6,-11,-2)+t_3(2,2,-1)\)</span>. Determine the points of intersection between the three lines (if possible).</p>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
 Solution<div class="sd-summary-down docutils">
@@ -614,7 +614,7 @@ Solution<div class="sd-summary-down docutils">
 <div class="sd-summary-up docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
-<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(\mathbf{p}_1 = (1, -3, 0)\)</span>, <span class="math notranslate nohighlight">\(\mathbf{p}_2 = (6, -5, -1)\)</span>, <span class="math notranslate nohighlight">\(\mathbf{p}_3 = (6, -11, -2)\)</span>, <span class="math notranslate nohighlight">\(\mathbf{d}_1 = (1, 2, 1)\)</span>, <span class="math notranslate nohighlight">\(\mathbf{d}_2 = (-1, -2, -1)\)</span> and <span class="math notranslate nohighlight">\(\mathbf{d}_3 = (2, 2, -1)\)</span>. Equating the first two lines gives</p>
+<p class="sd-card-text">Let <span class="math notranslate nohighlight">\(\mathbf{p}_1 = (1, -3, 0)\)</span>, <span class="math notranslate nohighlight">\(\mathbf{p}_2 = (6, -5, -1)\)</span>, <span class="math notranslate nohighlight">\(\mathbf{p}_3 = (6, -11, -2)\)</span>, <span class="math notranslate nohighlight">\(\mathbf{d}_1 = (1, 2, 1)\)</span>, <span class="math notranslate nohighlight">\(\mathbf{d}_2 = (-1, 2, 1)\)</span> and <span class="math notranslate nohighlight">\(\mathbf{d}_3 = (2, 2, -1)\)</span>. Equating the first two lines gives</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
     1 + t_1 &amp;= 6 - t_2, \\
@@ -624,32 +624,28 @@ Solution<div class="sd-summary-down docutils">
 <p class="sd-card-text">The third equation is <span class="math notranslate nohighlight">\(t_1 = t_2 - 1\)</span> and substituting into the first equation gives <span class="math notranslate nohighlight">\(t_2 = 3\)</span> so <span class="math notranslate nohighlight">\(t_1 = 2\)</span>. Substituting these into the second equation gives <span class="math notranslate nohighlight">\(-3 + 2(2) = -5 + 2(3)\)</span> which is <span class="math notranslate nohighlight">\(1 = 1\)</span> so <span class="math notranslate nohighlight">\(\ell_1\)</span> and <span class="math notranslate nohighlight">\(\ell_2\)</span> intersect. To find the point of intersection we substitute <span class="math notranslate nohighlight">\(t_1\)</span> or <span class="math notranslate nohighlight">\(t_2\)</span> into the vector equations gives</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
-    \begin{pmatrix} 1 + 2 \\ -3 + 2(2) \\ 2 \end{pmatrix}  &amp;= \begin{pmatrix} 3 \\ 1 \\ 2 \end{pmatrix}, \\
-    \begin{pmatrix} 6 - 3 \\ -5 -2(3) \\ 3 - 1 \end{pmatrix} &amp;= \begin{pmatrix} 3 \\ 1 \\ 2 \end{pmatrix}. \\
+    \mathbf{p}_1 + t_1 \mathbf{d}_1 &amp;= \begin{pmatrix} 1 \\ -3 \\ 0 \end{pmatrix} + 2\begin{pmatrix} 1 \\ 2 \\ 1 \end{pmatrix} 
+    = \begin{pmatrix} 3 \\ 1 \\ 2 \end{pmatrix}, \\
+    \mathbf{p}_2 + t_2 \mathbf{d}_2 &amp;= \begin{pmatrix} 6 \\ -5 \\ -1 \end{pmatrix} + 3\begin{pmatrix} -1 \\ 2 \\ 1 \end{pmatrix} 
+    = \begin{pmatrix} 3 \\ 1 \\ 2 \end{pmatrix}.
 \end{align*}\]</div>
 <p class="sd-card-text">So the first two lines intersect at <span class="math notranslate nohighlight">\((3, 1, 2)\)</span>.</p>
 <p class="sd-card-text">Equating the first and third lines gives</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
-    1 + t_1 &amp;= 6 + t_3, \\
+    1 + t_1 &amp;= 6 + 2t_3, \\
     -3 + 2t_1 &amp;= -11 + 2t_3, \\
     t_1 &amp;= -2 - t_3.
 \end{align*}\]</div>
-<p class="sd-card-text">Substituting the third equation into the first equation gives <span class="math notranslate nohighlight">\(1 - 2 - t_3 = 6 + t_3\)</span> so <span class="math notranslate nohighlight">\(t_3 = -\frac{7}{2}\)</span> and <span class="math notranslate nohighlight">\(t_1 = -\frac{21}{2}\)</span>. Substituting these into the second equation gives <span class="math notranslate nohighlight">\(-3 + 2(-\frac{21}{2}) = -11 + 2(-\frac{7}{2})\)</span> which is <span class="math notranslate nohighlight">\(-24 = -18\)</span> which is a contradiction so no values of <span class="math notranslate nohighlight">\(t_1\)</span> or <span class="math notranslate nohighlight">\(t_3\)</span> satisfy all co-ordinates so these lines do not intersect.</p>
+<p class="sd-card-text">Substituting the third equation into the first equation gives <span class="math notranslate nohighlight">\(t_3 = -\frac{7}{3}\)</span> which substituted into the third equation gives <span class="math notranslate nohighlight">\(t_1 = -\frac{14}{3}\)</span>. Substituting these into the second equation gives <span class="math notranslate nohighlight">\(-24 = -18\)</span> which is a contradiction so no values of <span class="math notranslate nohighlight">\(t_1\)</span> or <span class="math notranslate nohighlight">\(t_3\)</span> satisfy all co-ordinates so these lines do not intersect.</p>
 <p class="sd-card-text">Equating the second and third lines gives the system</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
-    6 - t_2 &amp;= 6 + 2t_3, \\
+    6 - t_2 &amp;= 6 + t_3, \\
     -5 + 2t_2 &amp;= -11 + 2t_3, \\
     -1 + t_2 &amp;= -2 - t_3.
 \end{align*}\]</div>
-<p class="sd-card-text">The third equation gives <span class="math notranslate nohighlight">\(t_2 = -1 - t_3\)</span> and substituting into the first equation gives <span class="math notranslate nohighlight">\(6 + 1 + t_3 = 6 + 2t_3\)</span> so <span class="math notranslate nohighlight">\(t_3 = 1\)</span> and <span class="math notranslate nohighlight">\(t_2 = -2\)</span>. Substituting these into the second equation gives <span class="math notranslate nohighlight">\(-5 + 2(-2) = -11 + 2(1)\)</span> which is <span class="math notranslate nohighlight">\(-9 = -9\)</span> so these lines intersect. Substituting <span class="math notranslate nohighlight">\(t_2\)</span> and <span class="math notranslate nohighlight">\(t_3\)</span> into the vectors equations gives</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
-    \begin{pmatrix} 6 - (-2) \\ -5 + 2(-2) \\ -1 + (-2) \end{pmatrix} &amp;= \begin{pmatrix} 8 \\ -9 \\ -3 \end{pmatrix}, \\
-    \begin{pmatrix} 6 + 2(1) \\ -11 + 2(1) \\ -2 - 1 \end{pmatrix} &amp;= \begin{pmatrix} 8 \\ -9 \\ -3 \end{pmatrix}.
-\end{align*}\]</div>
-<p class="sd-card-text">So the second and third lines intersect at <span class="math notranslate nohighlight">\((8, -9, -3)\)</span>.</p>
+<p class="sd-card-text">The third equations give <span class="math notranslate nohighlight">\(t_2 = -1 - t_3\)</span> which substituted into the first equation gives <span class="math notranslate nohighlight">\(7+t_3 = 6 + t_3\)</span> which is a contradiction so these lines do not intersect.</p>
 </div>
 </details></section>
 </div></section>
@@ -699,7 +695,7 @@ Solution<div class="sd-summary-down docutils">
 <div class="proof example seealso admonition" id="skew-lines-example">
 <p class="admonition-title"><span class="caption-number">Example 11 </span></p>
 <section class="example-content" id="proof-content">
-<p>Show that the lines <span class="math notranslate nohighlight">\(\ell_1\)</span> and <span class="math notranslate nohighlight">\(\ell_2\)</span> from <span class="xref myst">example 4.3</span> are skew lines.</p>
+<p>Show that the lines <span class="math notranslate nohighlight">\(\ell_1\)</span> and <span class="math notranslate nohighlight">\(\ell_2\)</span> from <a class="reference internal" href="#parallel-lines-example">Example 10</a> are skew lines.</p>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
 Solution<div class="sd-summary-down docutils">
@@ -898,16 +894,16 @@ Solution<div class="sd-summary-down docutils">
       \begin{pmatrix} -3 \\ -1 \\ 1 \end{pmatrix}}{
         \begin{pmatrix} 3 \\ 1 \\ -2 \end{pmatrix} \cdot
         \begin{pmatrix} -3 \\ -1 \\ 1 \end{pmatrix}
-      } \\
-    &amp;= \frac{-23}{-12} \approx 1.9167.
+      } 
+    = \frac{23}{12}.
 \end{align*}\]</div>
 <p class="sd-card-text">Calculating the intersection point</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
-    \mathbf{r} &amp;= \mathbf{q} + t \mathbf{r} = 
-    \begin{pmatrix} 0 \\ 1 \\ 1 \end{pmatrix} + 1.9167 
+    \mathbf{r} &amp;= \mathbf{q} + t \mathbf{d} = 
+    \begin{pmatrix} 0 \\ 1 \\ 1 \end{pmatrix} + \frac{23}{12} 
     \begin{pmatrix} 3 \\ 1 \\ -2 \end{pmatrix} = 
-    \begin{pmatrix} 5.75 \\ 2.9167 \\ -2.8333 \end{pmatrix}.
+    \begin{pmatrix} 23/4 \\ 35/12 \\ -17/6 \end{pmatrix}.
 \end{align*}\]</div>
 </div>
 </details></section>
