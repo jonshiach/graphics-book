@@ -455,7 +455,6 @@
 %     \draw [bluevec] (u) -- (v) node [above,pos=0.5] {$\mathbf{t}$};
 % \end{tikzpicture}
 
-
 % Rotation
 % \tikzmath{\a1=20; \a2=60; \l1=4; \l2=1;}
 % \begin{tikzpicture}
@@ -676,6 +675,15 @@
 %     \node at ($(O2)+(1.5,-1.5)$) {scale about origin};
 %     \node at ($(O3)+(1.5,-1.5)$) {translate by $\mathbf{c}$};
 % \end{tikzpicture}
+
+% Transformation exercises
+\begin{tikzpicture}
+    \tikzmath{\l=4;}
+    \draw (0,0) -- ++(0:\l) -- ++(120:\l) -- cycle;
+    \draw [help lines] (\l/2,0) -- ++(90:{sqrt(3)/2*\l}) (\l/2-0.2,0) -- ++(0,0.2) -- ++(0.2,0);
+    \draw [dblarrow] (270:0.25) -- ++(0:\l/2) node [pos=0.5,fill=white] {$1$};
+    \draw [dblarrow] (150:0.25) -- ++(60:\l) node [pos=0.5,fill=white,rotate=60] {$2$};
+\end{tikzpicture}
 
 % Graphics pipeline
 % \begin{tikzpicture}[
@@ -1762,34 +1770,34 @@
 
 
 % Midpoint algorithm
-\begin{tikzpicture}
-    \fill [blue!10] (2,2) rectangle ++(2,4);
-    \fill [blue!10] (0,0) rectangle ++(2,2);
-    \draw [step=2] (0,0) grid (4, 6);
-    \foreach \i in {0,...,2} {
-        \foreach \j in {0,1} {
-            \fill (2*\j+1,2*\i+1) circle (2pt);
-        }
-    }
-    \node at (1, -0.25) {$x-1$};
-    \node at (3, -0.25) {$x$};
-    \node at (-0.5,5) {$y$};
-    \node at (-0.5,3) {$y+1$};
-    \node at (-0.5,1) {$y+2$};
-    \node at (2,-0.75) (x-1/2) {$x-\tfrac{1}{2}$};
-    \begin{scope}
-        \clip (0,0) rectangle ++(4,6);
-        \draw [line width=1.5pt] (-4,5.5) circle (7);
-    \end{scope}
-    \draw [dblarrow] (2,3) -- coordinate (a1) ++(0.55,0);
-    \draw [dblarrow] (2,1) -- coordinate (a2) ++(-0.6,0);
-    \node (d1) at (1.25, 3.5) {$d \leq 0$};
-    \node (d2) at (2.75, 0.5) {$d > 0$};
-    \draw [->,shorten >= 2pt] (d1) to [out=0,in=90] (a1);
-    \draw [->,shorten >= 2pt] (d2) to [out=180,in=270] (a2);
-    \draw [->,shorten >= 2pt] (x-1/2) to (2,0);
-    \draw [line width=1.5pt] (2,2.75) -- ++(0,0.5);
-    \draw [line width=1.5pt] (2,0.75) -- ++(0,0.5);
-\end{tikzpicture}
+% \begin{tikzpicture}
+%     \fill [blue!10] (2,2) rectangle ++(2,4);
+%     \fill [blue!10] (0,0) rectangle ++(2,2);
+%     \draw [step=2] (0,0) grid (4, 6);
+%     \foreach \i in {0,...,2} {
+%         \foreach \j in {0,1} {
+%             \fill (2*\j+1,2*\i+1) circle (2pt);
+%         }
+%     }
+%     \node at (1, -0.25) {$x-1$};
+%     \node at (3, -0.25) {$x$};
+%     \node at (-0.5,5) {$y$};
+%     \node at (-0.5,3) {$y+1$};
+%     \node at (-0.5,1) {$y+2$};
+%     \node at (2,-0.75) (x-1/2) {$x-\tfrac{1}{2}$};
+%     \begin{scope}
+%         \clip (0,0) rectangle ++(4,6);
+%         \draw [line width=1.5pt] (-4,5.5) circle (7);
+%     \end{scope}
+%     \draw [dblarrow] (2,3) -- coordinate (a1) ++(0.55,0);
+%     \draw [dblarrow] (2,1) -- coordinate (a2) ++(-0.6,0);
+%     \node (d1) at (1.25, 3.5) {$d \leq 0$};
+%     \node (d2) at (2.75, 0.5) {$d > 0$};
+%     \draw [->,shorten >= 2pt] (d1) to [out=0,in=90] (a1);
+%     \draw [->,shorten >= 2pt] (d2) to [out=180,in=270] (a2);
+%     \draw [->,shorten >= 2pt] (x-1/2) to (2,0);
+%     \draw [line width=1.5pt] (2,2.75) -- ++(0,0.5);
+%     \draw [line width=1.5pt] (2,0.75) -- ++(0,0.5);
+% \end{tikzpicture}
 
 \end{document}
