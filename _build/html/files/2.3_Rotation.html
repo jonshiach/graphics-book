@@ -577,7 +577,7 @@ title="Print to PDF"
     \end{pmatrix}
     \begin{pmatrix} u_x \\ u_y \\ u_z \end{pmatrix}.
 \end{align*}\]</div>
-<p>The square matrix is the transformation matrix for rotation by the angle <span class="math notranslate nohighlight">\(\theta\)</span> anti-clockwise about the <span class="math notranslate nohighlight">\(x\)</span>-axis. Doing similar we can determine the equivalent matrices for rotating about the <span class="math notranslate nohighlight">\(y\)</span> and <span class="math notranslate nohighlight">\(z\)</span>-axes.</p>
+<p>The square matrix is the transformation matrix for rotation by the angle <span class="math notranslate nohighlight">\(\theta\)</span> anti-clockwise about the <span class="math notranslate nohighlight">\(z\)</span>-axis, i.e., in <a class="reference internal" href="#rotation-figure"><span class="std std-numref">Fig. 35</span></a> we are looking down the <span class="math notranslate nohighlight">\(z\)</span>-axis. Doing similar we can determine the equivalent matrices for rotating about the <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span>-axes.</p>
 <div class="proof theorem admonition" id="rotation-in-R3-theorem">
 <p class="admonition-title"><span class="caption-number">Theorem 8 </span> (Rotation in <span class="math notranslate nohighlight">\(\mathbb{R}^3\)</span>)</p>
 <section class="theorem-content" id="proof-content">
@@ -587,21 +587,21 @@ title="Print to PDF"
     R_x(\theta) &amp;= 
     \begin{pmatrix} 
         1 &amp; 0 &amp; 0 &amp; 0 \\
-        0 &amp; \cos(\theta) &amp; \sin(\theta) &amp; 0 \\
-        0 &amp; -\sin(\theta) &amp; \cos(\theta) &amp; 0 \\
+        0 &amp; \cos(\theta) &amp; -\sin(\theta) &amp; 0 \\
+        0 &amp; \sin(\theta) &amp; \cos(\theta) &amp; 0 \\
         0 &amp; 0 &amp; 0 &amp; 1
     \end{pmatrix}, \\
     R_y(\theta) &amp;= 
     \begin{pmatrix} 
-        \cos(\theta) &amp; 0 &amp; -\sin(\theta) &amp; 0 \\
+        \cos(\theta) &amp; 0 &amp; \sin(\theta) &amp; 0 \\
         0 &amp; 1 &amp; 0 &amp; 0 \\
-        \sin(\theta) &amp; 0 &amp; \cos(\theta) &amp; 0 \\
+        -\sin(\theta) &amp; 0 &amp; \cos(\theta) &amp; 0 \\
         0 &amp; 0 &amp; 0 &amp; 1
     \end{pmatrix}, \\
     R_z(\theta) &amp;= 
     \begin{pmatrix} 
-        \cos(\theta) &amp; \sin(\theta) &amp; 0 &amp; 0 \\
-        -\sin(\theta) &amp; \cos(\theta) &amp; 0 &amp; 0 \\
+        \cos(\theta) &amp; -\sin(\theta) &amp; 0 &amp; 0 \\
+        \sin(\theta) &amp; \cos(\theta) &amp; 0 &amp; 0 \\
         0 &amp; 0 &amp; 1 &amp; 0 \\
         0 &amp; 0 &amp; 0 &amp; 1
     \end{pmatrix}.
@@ -612,21 +612,21 @@ title="Print to PDF"
     R_x^{-1}(\theta) &amp;= 
     \begin{pmatrix} 
         1 &amp; 0 &amp; 0 &amp; 0 \\
-        0 &amp; \cos(\theta) &amp; -\sin(\theta) &amp; 0 \\
-        0 &amp; \sin(\theta) &amp; \cos(\theta) &amp; 0 \\
+        0 &amp; \cos(\theta) &amp; \sin(\theta) &amp; 0 \\
+        0 &amp; -\sin(\theta) &amp; \cos(\theta) &amp; 0 \\
         0 &amp; 0 &amp; 0 &amp; 1
     \end{pmatrix}, \\
     R_y^{-1}(\theta) &amp;= 
     \begin{pmatrix} 
-        \cos(\theta) &amp; 0 &amp; \sin(\theta) &amp; 0 \\
+        \cos(\theta) &amp; 0 &amp; -\sin(\theta) &amp; 0 \\
         0 &amp; 1 &amp; 0 &amp; 0 \\
-        -\sin(\theta) &amp; 0 &amp; \cos(\theta) &amp; 0 \\
+        \sin(\theta) &amp; 0 &amp; \cos(\theta) &amp; 0 \\
         0 &amp; 0 &amp; 0 &amp; 1
     \end{pmatrix}, \\
     R_z^{-1}(\theta) &amp;= 
     \begin{pmatrix} 
-        \cos(\theta) &amp; -\sin(\theta) &amp; 0 &amp; 0 \\
-        \sin(\theta) &amp; \cos(\theta) &amp; 0 &amp; 0 \\
+        \cos(\theta) &amp; \sin(\theta) &amp; 0 &amp; 0 \\
+        -\sin(\theta) &amp; \cos(\theta) &amp; 0 &amp; 0 \\
         0 &amp; 0 &amp; 1 &amp; 0 \\
         0 &amp; 0 &amp; 0 &amp; 1
     \end{pmatrix}.
@@ -635,7 +635,7 @@ title="Print to PDF"
 </div><div class="proof example seealso admonition" id="rotation-example-1">
 <p class="admonition-title"><span class="caption-number">Example 26 </span></p>
 <section class="example-content" id="proof-content">
-<p>A triangular polygon has vertices located at <span class="math notranslate nohighlight">\(\mathbf{p}_1 = (4, 0, 1)\)</span>, <span class="math notranslate nohighlight">\((\mathbf{p}_2 = (6, 0, 1)\)</span> and <span class="math notranslate nohighlight">\(\mathbf{p}_3 = (5, 0, 3)\)</span>. The triangle is rotated by angle <span class="math notranslate nohighlight">\(\theta = \pi/4\)</span> anti-clockwise about the <span class="math notranslate nohighlight">\(y\)</span>-axis. Calculate the positions of the vertices of the rotated triangle.</p>
+<p>A triangular polygon has vertices located at <span class="math notranslate nohighlight">\(\mathbf{p}_1 = (4, 1, 2)\)</span>, <span class="math notranslate nohighlight">\(\mathbf{p}_2 = (6, 1, 2)\)</span> and <span class="math notranslate nohighlight">\(\mathbf{p}_3 = (5, 3, 2)\)</span>. The triangle is rotated by angle <span class="math notranslate nohighlight">\(\theta = \pi/4\)</span> anti-clockwise about the <span class="math notranslate nohighlight">\(z\)</span>-axis. Calculate the positions of the vertices of the rotated triangle.</p>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
 Solution<div class="sd-summary-down docutils">
@@ -648,25 +648,25 @@ Solution<div class="sd-summary-down docutils">
 \[\begin{align*}
     P &amp;= \begin{pmatrix}
         4 &amp; 6 &amp; 5 \\
-        0 &amp; 0 &amp; 0 \\
         1 &amp; 1 &amp; 3 \\
+        2 &amp; 2 &amp; 2 \\
         1 &amp; 1 &amp; 1 
     \end{pmatrix},
 \end{align*}\]</div>
 <p class="sd-card-text">and the rotation matrix is</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
-    R_y &amp;= \begin{pmatrix}
-        \cos(\pi / 4) &amp; 0 &amp; -\sin(\pi / 4) &amp; 0 \\
-        0 &amp; 1 &amp; 0 &amp; 0 \\
-        \sin(\pi / 4) &amp; 0 &amp; \cos(\pi / 4) &amp; 0 \\
+    R_z &amp;= \begin{pmatrix}
+        \cos(\pi/4) &amp; -\sin(\pi/4) &amp; 0 &amp; 0 \\
+        \sin(\pi/4) &amp;  \cos(\pi/4) &amp; 0 &amp; 0 \\
+        0 &amp; 0 &amp; 1 &amp; 0 \\
         0 &amp; 0 &amp; 0 &amp; 1 
     \end{pmatrix} \\
     &amp;= 
     \begin{pmatrix}
-        \sqrt{2} / 2 &amp; 0 &amp; -\sqrt{2} / 2 &amp; 0 \\
-        0 &amp; 1 &amp; 0 &amp; 0 \\
-        \sqrt{2} / 2 &amp; 0 &amp; \sqrt{2} / 2 &amp; 0 \\
+        \sqrt{2}/2 &amp; -\sqrt{2}/2 &amp; 0 &amp; 0 \\
+        \sqrt{2}/2 &amp; \sqrt{2}/2 &amp; 0 &amp; 0 \\
+        0 &amp; 0 &amp; 1 &amp; 0 \\
         0 &amp; 0 &amp; 0 &amp; 1 
     \end{pmatrix}
 \end{align*}\]</div>
@@ -674,26 +674,26 @@ Solution<div class="sd-summary-down docutils">
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
     R_y \cdot P &amp;= 
-    \begin{pmatrix} 
-        \sqrt{2}/2 &amp; 0 &amp; -\sqrt{2}/2 &amp; 0 \\
-        0 &amp; 1 &amp; 0 &amp; 0 \\
-        \sqrt{2}/2 &amp; 0 &amp; \sqrt{2}/2 &amp; 0 \\
-        0 &amp; 0 &amp; 0 &amp; 1
+    \begin{pmatrix}
+        \sqrt{2}/2 &amp; -\sqrt{2}/2 &amp; 0 &amp; 0 \\
+        \sqrt{2}/2 &amp; \sqrt{2}/2 &amp; 0 &amp; 0 \\
+        0 &amp; 0 &amp; 1 &amp; 0 \\
+        0 &amp; 0 &amp; 0 &amp; 1 
     \end{pmatrix}
     \begin{pmatrix}
         4 &amp; 6 &amp; 5 \\
-        0 &amp; 0 &amp; 0 \\
         1 &amp; 1 &amp; 3 \\
+        2 &amp; 2 &amp; 2 \\
         1 &amp; 1 &amp; 1 
     \end{pmatrix} \\
     &amp;= \begin{pmatrix}
         3\sqrt{2}/2 &amp; 5\sqrt{2}/2 &amp; \sqrt{2} \\
-        0 &amp; 0 &amp; 0 \\
         5\sqrt{2}/2 &amp; 7\sqrt{2}/2 &amp; 4\sqrt{2} \\
+        2 &amp; 2 &amp; 2 \\
         1 &amp; 1 &amp; 1
     \end{pmatrix}.
 \end{align*}\]</div>
-<p class="sd-card-text">So the vertex co-ordinates fo the translated triangle are <span class="math notranslate nohighlight">\((3\sqrt{2}, 0, 5\sqrt{2}/2) \approx (2.12, 0, 3.54)\)</span>, <span class="math notranslate nohighlight">\((5\sqrt{2}/2, 0, 7\sqrt{2}{2}) \approx (3.54, 0, 4.95)\)</span> and <span class="math notranslate nohighlight">\((\sqrt{2}, 0, 4\sqrt{2}) \approx (1.41, 0, 5.66)\)</span>. The original triangle and the translated triangle are plotted below looking along the <span class="math notranslate nohighlight">\(y\)</span> axis.</p>
+<p class="sd-card-text">So the vertex co-ordinates fo the translated triangle are <span class="math notranslate nohighlight">\((3\sqrt{2}, 5\sqrt{2}/2, 2) \approx (2.12, 3.54, 2)\)</span>, <span class="math notranslate nohighlight">\((5\sqrt{2}/2, 7\sqrt{2}{2}, 2) \approx (3.54, 4.95, 2.00)\)</span> and <span class="math notranslate nohighlight">\((\sqrt{2}, 4\sqrt{2}, 2) \approx (1.41, 5.66, 2.00)\)</span>. The original triangle and the translated triangle are plotted below looking along the <span class="math notranslate nohighlight">\(z\)</span> axis.</p>
 <figure class="align-default">
 <a class="reference internal image-reference" href="../_images/rotation_example.png"><img alt="../_images/rotation_example.png" src="../_images/rotation_example.png" style="width: 400px;" /></a>
 </figure>
@@ -736,7 +736,7 @@ Solution<div class="sd-summary-down docutils">
 <div class="proof example seealso admonition" id="rotation-example-2">
 <p class="admonition-title"><span class="caption-number">Example 27 </span></p>
 <section class="example-content" id="proof-content">
-<p>Rotate the polygon from <a class="reference internal" href="#rotation-example-1">Example 26</a> by <span class="math notranslate nohighlight">\(\theta = \pi / 4\)</span> about its centre.</p>
+<p>Rotate the polygon from <a class="reference internal" href="#rotation-example-1">Example 26</a> by <span class="math notranslate nohighlight">\(\theta = \pi/4\)</span> about its centre.</p>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
 Solution<div class="sd-summary-down docutils">
@@ -758,29 +758,29 @@ Solution<div class="sd-summary-down docutils">
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
     \mathbf{c} &amp;= \frac{(4, 0, 1) + (6, 0, 1) + (5, 0, 3)}{3} = 
-    \begin{pmatrix} 5 \\ 0 \\ 5/3 \end{pmatrix}.
+    \begin{pmatrix} 5 \\ 5/3 \\ 2 \end{pmatrix}.
 \end{align*}\]</div>
 <p class="sd-card-text">The individual transformation matrices are</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
     T(-\mathbf{c}) &amp;= \begin{pmatrix}
         1 &amp; 0 &amp; 0 &amp; -5 \\
-        0 &amp; 1 &amp; 0 &amp; 0 \\
-        0 &amp; 0 &amp; 1 &amp; -5/3 \\
+        0 &amp; 1 &amp; 0 &amp; -5/3 \\
+        0 &amp; 0 &amp; 1 &amp; -2 \\
         0 &amp; 0 &amp; 0 &amp; 1
     \end{pmatrix}, \\
     R_y\left(\frac{\pi}{4}\right) &amp;=
     \begin{pmatrix}
-        \sqrt{2}/2 &amp; 0 &amp; -\sqrt{2}/2 &amp; 0 \\
-        0 &amp; 1 &amp; 0 &amp; 0 \\
-        \sqrt{2}/2 &amp; 0 &amp; \sqrt{2}/2 &amp; 0 \\
+        \sqrt{2}/2 &amp; -\sqrt{2}/2 &amp; 0 &amp; 0 \\
+        \sqrt{2}/2 &amp; \sqrt{2}/2 &amp; 0 &amp; 0 \\
+        0 &amp; 0 &amp; 1 &amp; 0 \\
         0 &amp; 0 &amp; 0 &amp; 1
     \end{pmatrix}, \\
     T(\mathbf{c}) &amp;= 
     \begin{pmatrix}
         1 &amp; 0 &amp; 0 &amp; 5 \\
-        0 &amp; 1 &amp; 0 &amp; 0 \\
-        0 &amp; 0 &amp; 1 &amp; 5/3 \\
+        0 &amp; 1 &amp; 0 &amp; 5/3 \\
+        0 &amp; 0 &amp; 1 &amp; 2 \\
         0 &amp; 0 &amp; 0 &amp; 1
     \end{pmatrix},
 \end{align*}\]</div>
@@ -790,9 +790,9 @@ Solution<div class="sd-summary-down docutils">
     A &amp;= T(\mathbf{c}) \cdot R_y\left(\frac{\pi}{4}\right) \cdot T(-\mathbf{c}) \\
     &amp;= 
     \begin{pmatrix} 
-        \sqrt{2}/2 &amp; 0 &amp; - \sqrt{2}/2 &amp;  5 - 5\sqrt{2}/3 \\
-        0 &amp; 1 &amp; 0 &amp; 0\\
-        \sqrt{2}/2 &amp; 0 &amp; \sqrt{2}/2 &amp; 5/3 - 10\sqrt{2}/3 \\
+        \sqrt{2}/2 &amp; -\sqrt{2}/2 &amp;  0 &amp; 5 - 5\sqrt{2}/3 \\
+        \sqrt{2}/2 &amp; \sqrt{2}/2 &amp; 0 &amp; 5/3 - 10\sqrt{2}/3 \\
+        0 &amp; 0 &amp; 1 &amp; 0 \\
         0 &amp; 0 &amp; 0 &amp; 1
     \end{pmatrix}
 \end{align*}\]</div>
@@ -801,26 +801,29 @@ Solution<div class="sd-summary-down docutils">
 \[\begin{align*}
     A \cdot P &amp;= 
     \begin{pmatrix} 
-        \sqrt{2}/2 &amp; 0 &amp; - \sqrt{2}/2 &amp;  10/3 - \sqrt{2}/3 \\
-        0 &amp; 1 &amp; 0 &amp; 0\\
-        \sqrt{2}/2 &amp; 0 &amp; \sqrt{2}/2 &amp; -5/3 - \sqrt{2}/3 \\
+        \sqrt{2}/2 &amp; -\sqrt{2}/2 &amp;  0 &amp; 5 - 5\sqrt{2}/3 \\
+        \sqrt{2}/2 &amp; \sqrt{2}/2 &amp; 0 &amp; 5/3 - 10\sqrt{2}/3 \\
+        0 &amp; 0 &amp; 1 &amp; 0 \\
         0 &amp; 0 &amp; 0 &amp; 1
     \end{pmatrix}
     \begin{pmatrix}
         4 &amp; 6 &amp; 5 \\
-        0 &amp; 0 &amp; 0 \\
         1 &amp; 1 &amp; 3 \\
+        2 &amp; 2 &amp; 2 \\
         1 &amp; 1 &amp; 1 
     \end{pmatrix} \\
     &amp;= 
     \begin{pmatrix}
         5 - \sqrt{2}/6 &amp; 5 + 5\sqrt{2}/6 &amp; 5 - 2\sqrt{2}/3 \\
-        0 &amp; 0 &amp; 0\\
         5/3 - 5\sqrt{2}/6 &amp; 5/3 + \sqrt{2}/6 &amp; 5/3 + 2 \sqrt{2}/3 \\
+        2 &amp; 2 &amp; 2 \\
         1 &amp; 1 &amp; 1
     \end{pmatrix}.
 \end{align*}\]</div>
-<p class="sd-card-text">So the vertices of the rotated polygon are <span class="math notranslate nohighlight">\((5 - \sqrt{2}/6, 0, 5/3 - 5\sqrt{2}/6) \approx (4.76, 0, 0.49)\)</span>, <span class="math notranslate nohighlight">\((5 + 5\sqrt{2}/6, 0, 5/3 + \sqrt{2}/6) \approx (6.18, 0, 1.90)\)</span> and <span class="math notranslate nohighlight">\((5 - 2\sqrt{2}/3, 0, 5/3 + 2\sqrt{2}/3) \approx (4.06, 0, 2.61)\)</span>. The original polygon and the translated polygon are plotted below looking along the <span class="math notranslate nohighlight">\(y\)</span> axis.</p>
+<p class="sd-card-text">So the vertices of the rotated polygon are <span class="math notranslate nohighlight">\((5 - \sqrt{2}/6, 5/3 - 5\sqrt{2}/6, 2) \approx (4.76, 0.49, 2.00)\)</span>, <span class="math notranslate nohighlight">\((5 + 5\sqrt{2}/6, 5/3 + \sqrt{2}/6, 2) \approx (6.18, 1.90, 2.00)\)</span> and <span class="math notranslate nohighlight">\((5 - 2\sqrt{2}/3, 5/3 + 2\sqrt{2}/3, 2) \approx (4.06, 2.61, 2.00)\)</span>. The original polygon and the translated polygon are plotted below looking along the <span class="math notranslate nohighlight">\(z\)</span> axis.</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="../_images/rotation_about_centre_example.png"><img alt="../_images/rotation_about_centre_example.png" src="../_images/rotation_about_centre_example.png" style="width: 400px;" /></a>
+</figure>
 </div>
 </details></section>
 </div></section>
@@ -853,16 +856,16 @@ Solution<div class="sd-summary-down docutils">
 <p><a class="reference internal" href="#rotation-about-line-figure-2"><span class="std std-numref">Fig. 38</span></a> shows that affect of translating by <span class="math notranslate nohighlight">\(-\mathbf{p}\)</span>. Now we need to rotate the line so that it lies in a plane the contains two of the three co-ordinate axes. If we rotate about the <span class="math notranslate nohighlight">\(z\)</span> axis then the line will be in the <span class="math notranslate nohighlight">\(yz\)</span> plane. The values of <span class="math notranslate nohighlight">\(\cos(\phi)\)</span> and <span class="math notranslate nohighlight">\(\sin(\phi)\)</span> in <span class="math notranslate nohighlight">\(R_z(\phi)\)</span> are</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
-    \cos(\phi) &amp;= \frac{d_y}{d_1}, &amp;
-    \sin(\phi) &amp;= \frac{d_x}{d_1},
+    \cos(\phi) &amp;= \frac{|d_y|}{d_1}, &amp;
+    \sin(\phi) &amp;= \frac{|d_x|}{d_1},
 \end{align*}\]</div>
 <p>where <span class="math notranslate nohighlight">\(d_1 = \sqrt{d_x^2 + d_y^2}\)</span>. The transformation matrix is</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
     R_z(\phi) &amp;=
     \begin{pmatrix} 
-        d_y/d_1 &amp; d_x/d_1 &amp; 0 &amp; 0 \\
-        -d_x/d_1 &amp; d_y/d_1 &amp; 0 &amp; 0 \\
+        |d_y|/d_1 &amp; -|d_x|/d_1 &amp; 0 &amp; 0 \\
+        |d_x|/d_1 &amp; |d_y|/d_1 &amp; 0 &amp; 0 \\
         0 &amp; 0 &amp; 1 &amp; 0 \\
         0 &amp; 0 &amp; 0 &amp; 1
     \end{pmatrix}.
@@ -873,10 +876,10 @@ Solution<div class="sd-summary-down docutils">
 <p><span class="caption-number">Fig. 39 </span><span class="caption-text">The line is rotated about the <span class="math notranslate nohighlight">\(z\)</span>-axis so that <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> is in the <span class="math notranslate nohighlight">\(yz\)</span> plane.</span><a class="headerlink" href="#rotation-about-line-figure-3" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p><a class="reference internal" href="#rotation-about-line-figure-3"><span class="std std-numref">Fig. 39</span></a> shows that affect of rotating about the <span class="math notranslate nohighlight">\(z\)</span>-axis. Now we need to rotate about the <span class="math notranslate nohighlight">\(x\)</span> axis so that <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> points along the <span class="math notranslate nohighlight">\(z\)</span> axis. The values of <span class="math notranslate nohighlight">\(\cos(\psi)\)</span> and <span class="math notranslate nohighlight">\(\sin(\psi)\)</span> are</p>
+<p><a class="reference internal" href="#rotation-about-line-figure-3"><span class="std std-numref">Fig. 39</span></a> shows that affect of rotating about the <span class="math notranslate nohighlight">\(z\)</span>-axis. Now we need to rotate <strong>clockwise</strong> about the <span class="math notranslate nohighlight">\(x\)</span> axis so that <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> points along the <span class="math notranslate nohighlight">\(z\)</span> axis. The values of <span class="math notranslate nohighlight">\(\cos(\psi)\)</span> and <span class="math notranslate nohighlight">\(\sin(\psi)\)</span> are</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
-    \cos(\psi) &amp;= \frac{d_z}{|\mathbf{d}|}, &amp;
+    \cos(\psi) &amp;= \frac{|d_z|}{|\mathbf{d}|}, &amp;
     \sin(\psi) &amp;= \frac{\sqrt{d_x^2 + d_y^2}}{|\mathbf{d}|},
 \end{align*}\]</div>
 <p>so the transformation matrix is</p>
@@ -885,8 +888,8 @@ Solution<div class="sd-summary-down docutils">
     R_x &amp;=
     \begin{pmatrix}
         1 &amp; 0 &amp; 0 &amp; 0 \\
-        0 &amp; d_z/|\mathbf{d}| &amp; d_1/|\mathbf{d}| &amp; 0 \\
-        0 &amp; d_1/|\mathbf{d}| &amp; d_z/|\mathbf{d}| &amp; 0 \\
+        0 &amp; |d_z|/|\mathbf{d}| &amp; -d_1/|\mathbf{d}| &amp; 0 \\
+        0 &amp; d_1/|\mathbf{d}| &amp; |d_z|/|\mathbf{d}| &amp; 0 \\
         0 &amp; 0 &amp; 0 &amp; 1
     \end{pmatrix}.
 \end{align*}\]</div>
@@ -934,24 +937,24 @@ Solution<div class="sd-summary-down docutils">
 <p><span class="caption-number">Fig. 41 </span><span class="caption-text">Rotate <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> about the <span class="math notranslate nohighlight">\(z\)</span>-axis.</span><a class="headerlink" href="#rotate-about-line-example-2" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p class="sd-card-text">Now we need to consider which rotations we apply so that <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> points along one of the axes. This decision is arbitrary but in this case since <span class="math notranslate nohighlight">\(d_x\)</span> is positive then rotating so that <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> points along the <span class="math notranslate nohighlight">\(x\)</span> axis would require the fewest rotations. Looking at <a class="reference internal" href="#rotate-about-line-example-2"><span class="std std-numref">Fig. 41</span></a> this means can first rotate anti-clockwise about the <span class="math notranslate nohighlight">\(z\)</span> axis by angle <span class="math notranslate nohighlight">\(\phi\)</span> so that <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> is in the <span class="math notranslate nohighlight">\(xz\)</span> plane. The values of <span class="math notranslate nohighlight">\(\cos(\phi)\)</span> and <span class="math notranslate nohighlight">\(\sin(\phi)\)</span> are</p>
+<p class="sd-card-text">Now we need to consider which rotations we apply so that <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> points along one of the axes. This decision is arbitrary but in this case since <span class="math notranslate nohighlight">\(d_x\)</span> is positive then rotating so that <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> points along the <span class="math notranslate nohighlight">\(x\)</span> axis would require the fewest rotations. Looking at <a class="reference internal" href="#rotate-about-line-example-2"><span class="std std-numref">Fig. 41</span></a> this means can first rotate <strong>anti-clockwise</strong> about the <span class="math notranslate nohighlight">\(z\)</span> axis by angle <span class="math notranslate nohighlight">\(\phi\)</span> so that <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> is in the <span class="math notranslate nohighlight">\(xz\)</span> plane. The values of <span class="math notranslate nohighlight">\(\cos(\phi)\)</span> and <span class="math notranslate nohighlight">\(\sin(\phi)\)</span> are</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
-    \cos(\phi) &amp;= \frac{d_x}{d_1} = \frac{2}{\sqrt{5}}, &amp;
-    \sin(\phi) &amp;= \frac{d_y}{d_1} = \frac{-1}{\sqrt{5}},
+    \cos(\phi) &amp;= \frac{|d_x|}{d_1} = \frac{2\sqrt{5}}{5}, &amp;
+    \sin(\phi) &amp;= \frac{|d_y|}{d_1} = \frac{\sqrt{5}}{5},
 \end{align*}\]</div>
-<p class="sd-card-text">so the transformation matrix is</p>
+<p class="sd-card-text">and the transformation matrix is</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
     R_z(\phi) &amp;= \begin{pmatrix}
-        \cos(\phi) &amp; \sin(\phi) &amp; 0 &amp; 0 \\
-        -\sin(\phi) &amp; \cos(\phi) &amp; 0 &amp; 0 \\
+        \cos(\phi) &amp; -\sin(\phi) &amp; 0 &amp; 0 \\
+        \sin(\phi) &amp; \cos(\phi) &amp; 0 &amp; 0 \\
         0 &amp; 0 &amp; 1 &amp; 0 \\
         0 &amp; 0 &amp; 0 &amp; 1
     \end{pmatrix} \\
     &amp;= \begin{pmatrix}
-        2/\sqrt{5} &amp; -1/\sqrt{5} &amp; 0 &amp; 0 \\
-        1/\sqrt{5} &amp; 2/\sqrt{5} &amp; 0 &amp; 0 \\
+        2\sqrt{5}/5 &amp; -\sqrt{5}/5 &amp; 0 &amp; 0 \\
+        \sqrt{5}/5 &amp; 2\sqrt{5}/5 &amp; 0 &amp; 0 \\
         0 &amp; 0 &amp; 1 &amp; 0 \\
         0 &amp; 0 &amp; 0 &amp; 1
     \end{pmatrix}
@@ -959,9 +962,10 @@ Solution<div class="sd-summary-down docutils">
 <p class="sd-card-text">We can check whether this rotation is correct by multiplying it by the homogeneous form of <span class="math notranslate nohighlight">\(\mathbf{d}\)</span></p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
-    R_z(\phi) \cdot \mathbf{d} &amp;= \begin{pmatrix}
-        2/\sqrt{5} &amp; -1/\sqrt{5} &amp; 0 &amp; 0 \\
-        1/\sqrt{5} &amp; 2/\sqrt{5} &amp; 0 &amp; 0 \\
+    R_z(\phi) \cdot \mathbf{d} &amp;= 
+    \begin{pmatrix}
+        2\sqrt{5}/5 &amp; -\sqrt{5}/5 &amp; 0 &amp; 0 \\
+        \sqrt{5}/5 &amp; 2\sqrt{5}/5 &amp; 0 &amp; 0 \\
         0 &amp; 0 &amp; 1 &amp; 0 \\
         0 &amp; 0 &amp; 0 &amp; 1
     \end{pmatrix}
@@ -974,11 +978,11 @@ Solution<div class="sd-summary-down docutils">
 <p><span class="caption-number">Fig. 42 </span><span class="caption-text">Rotate <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> about the <span class="math notranslate nohighlight">\(y\)</span> axis.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p class="sd-card-text">Looking at <a class="reference internal" href="#rotate-about-line-example-2"><span class="std std-numref">Fig. 41</span></a> we need to rotate clockwise around the <span class="math notranslate nohighlight">\(y\)</span> axis by angle <span class="math notranslate nohighlight">\(\psi\)</span> so that <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> points along the <span class="math notranslate nohighlight">\(x\)</span> axis (remember that the direction of rotation is based on the view looking down the axis towards the origin). The values of <span class="math notranslate nohighlight">\(\cos(\psi)\)</span> and <span class="math notranslate nohighlight">\(\sin(\psi)\)</span> are</p>
+<p class="sd-card-text">Looking at <a class="reference internal" href="#rotate-about-line-example-2"><span class="std std-numref">Fig. 41</span></a> we need to rotate <strong>clockwise</strong> around the <span class="math notranslate nohighlight">\(y\)</span> axis by angle <span class="math notranslate nohighlight">\(\psi\)</span> so that <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> points along the <span class="math notranslate nohighlight">\(x\)</span> axis (remember that the direction of rotation is based on the view looking down the axis towards the origin). The values of <span class="math notranslate nohighlight">\(\cos(\psi)\)</span> and <span class="math notranslate nohighlight">\(\sin(\psi)\)</span> are</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
     \cos(\psi) &amp;= \frac{d_1}{|\mathbf{d}|} = \frac{\sqrt{5}}{\sqrt{14}}, &amp;
-    \sin(\psi) &amp;= \frac{d_z}{|\mathbf{d}|} = \frac{3}{\sqrt{14}},
+    \sin(\psi) &amp;= \frac{|d_z|}{|\mathbf{d}|} = \frac{3}{\sqrt{14}},
 \end{align*}\]</div>
 <p class="sd-card-text">so the transformation matrix is</p>
 <div class="amsmath math notranslate nohighlight">
@@ -992,9 +996,9 @@ Solution<div class="sd-summary-down docutils">
     \end{pmatrix} \\
     &amp;= 
     \begin{pmatrix}
-        \sqrt{5} / \sqrt{14} &amp; 0 &amp; -3 / \sqrt{14} &amp; 0 \\
+        \sqrt{5}\sqrt{14}/14 &amp; 0 &amp; -3\sqrt{14}/14 &amp; 0 \\
         0 &amp; 1 &amp; 0 &amp; 0 \\
-        3 / \sqrt{14} &amp; 0 &amp; \sqrt{5} / \sqrt{14} &amp; 0 \\
+        3\sqrt{14}/14 &amp; 0 &amp; \sqrt{5}\sqrt{14}/14 &amp; 0 \\
         0 &amp; 0 &amp; 0 &amp; 1
     \end{pmatrix}.
 \end{align*}\]</div>
@@ -1003,9 +1007,9 @@ Solution<div class="sd-summary-down docutils">
 \[\begin{align*}
     R_y(\psi) \cdot R_z(\phi) \cdot \mathbf{d} &amp;= 
     \begin{pmatrix}
-        \sqrt{5} / \sqrt{14} &amp; 0 &amp; -3 / \sqrt{14} &amp; 0 \\
+        \sqrt{5}\sqrt{14}/14 &amp; 0 &amp; -3\sqrt{14}/14 &amp; 0 \\
         0 &amp; 1 &amp; 0 &amp; 0 \\
-        3 / \sqrt{14} &amp; 0 &amp; \sqrt{5} / \sqrt{14} &amp; 0 \\
+        3\sqrt{14}/14 &amp; 0 &amp; \sqrt{5}\sqrt{14}/14 &amp; 0 \\
         0 &amp; 0 &amp; 0 &amp; 1
     \end{pmatrix}
     \begin{pmatrix}
@@ -1025,15 +1029,15 @@ Solution<div class="sd-summary-down docutils">
 \[\begin{align*}
     R_x(\theta) &amp;= \begin{pmatrix}
         1 &amp; 0 &amp; 0 &amp; 0 \\
-        0 &amp; \cos(\theta) &amp; \sin(\theta) &amp; 0 \\
-        0 &amp; -\sin(\theta) &amp; \cos(\theta) &amp; 0 \\
+        0 &amp; \cos(\theta) &amp; -\sin(\theta) &amp; 0 \\
+        0 &amp; \sin(\theta) &amp; \cos(\theta) &amp; 0 \\
         0 &amp; 0 &amp; 0 &amp; 1
     \end{pmatrix} \\
     &amp;= 
     \begin{pmatrix}
         1 &amp; 0 &amp; 0 &amp; 0 \\
-        0 &amp; \sqrt{3} / 2 &amp; 1 / 2 &amp; 0 \\
-        0 &amp; -1/2 &amp; \sqrt{3} / 2 &amp; 0 \\
+        0 &amp; \sqrt{3}/2 &amp; -1/2 &amp; 0 \\
+        0 &amp; 1/2 &amp; \sqrt{3}/2 &amp; 0 \\
         0 &amp; 0 &amp; 0 &amp; 1
     \end{pmatrix}.
 \end{align*}\]</div>

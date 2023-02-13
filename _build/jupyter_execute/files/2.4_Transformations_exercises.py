@@ -373,4 +373,6 @@
 # :width: 400px
 # ```
 # 
+# <img src="/images/programming.gif" alt="Computer man" style="width:48px;height:48px;">
+# 
 # ````

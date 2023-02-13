@@ -6,14 +6,14 @@
 # 
 # **Rotation** in $\mathbb{R}^3$ is a linear transformation that rotates a set of points by some angle about one of the $x$, $y$ or $z$-axes. The direction of rotation is assumed to be *anti-clockwise* when viewed looking down the axis towards the origin ({numref}`3D-rotation-figure`).
 # 
-# ```{figure} ../images/3D_rotation.svg
+# ```{figure} /images/3D_rotation.svg
 # :name: 3D-rotation-figure
 # :width: 250px
 # 
 # The direction of rotation is assumed as anti-clockwise when viewed looking towards the origin.
 # ```
 # 
-# ```{figure} ../images/rotation.svg
+# ```{figure} /images/rotation.svg
 # :name: rotation-figure
 # :width: 300px
 # 
@@ -77,7 +77,7 @@
 #     \begin{pmatrix} u_x \\ u_y \\ u_z \end{pmatrix}.
 # \end{align*}
 # 
-# The square matrix is the transformation matrix for rotation by the angle $\theta$ anti-clockwise about the $x$-axis. Doing similar we can determine the equivalent matrices for rotating about the $y$ and $z$-axes.
+# The square matrix is the transformation matrix for rotation by the angle $\theta$ anti-clockwise about the $z$-axis, i.e., in {numref}`rotation-figure` we are looking down the $z$-axis. Doing similar we can determine the equivalent matrices for rotating about the $x$ and $y$-axes.
 # 
 # ````{prf:theorem} Rotation in $\mathbb{R}^3$
 # :label: rotation-in-R3-theorem
@@ -91,21 +91,21 @@
 #     R_x(\theta) &= 
 #     \begin{pmatrix} 
 #         1 & 0 & 0 & 0 \\
-#         0 & \cos(\theta) & \sin(\theta) & 0 \\
-#         0 & -\sin(\theta) & \cos(\theta) & 0 \\
+#         0 & \cos(\theta) & -\sin(\theta) & 0 \\
+#         0 & \sin(\theta) & \cos(\theta) & 0 \\
 #         0 & 0 & 0 & 1
 #     \end{pmatrix}, \\
 #     R_y(\theta) &= 
 #     \begin{pmatrix} 
-#         \cos(\theta) & 0 & -\sin(\theta) & 0 \\
+#         \cos(\theta) & 0 & \sin(\theta) & 0 \\
 #         0 & 1 & 0 & 0 \\
-#         \sin(\theta) & 0 & \cos(\theta) & 0 \\
+#         -\sin(\theta) & 0 & \cos(\theta) & 0 \\
 #         0 & 0 & 0 & 1
 #     \end{pmatrix}, \\
 #     R_z(\theta) &= 
 #     \begin{pmatrix} 
-#         \cos(\theta) & \sin(\theta) & 0 & 0 \\
-#         -\sin(\theta) & \cos(\theta) & 0 & 0 \\
+#         \cos(\theta) & -\sin(\theta) & 0 & 0 \\
+#         \sin(\theta) & \cos(\theta) & 0 & 0 \\
 #         0 & 0 & 1 & 0 \\
 #         0 & 0 & 0 & 1
 #     \end{pmatrix}.
@@ -121,21 +121,21 @@
 #     R_x^{-1}(\theta) &= 
 #     \begin{pmatrix} 
 #         1 & 0 & 0 & 0 \\
-#         0 & \cos(\theta) & -\sin(\theta) & 0 \\
-#         0 & \sin(\theta) & \cos(\theta) & 0 \\
+#         0 & \cos(\theta) & \sin(\theta) & 0 \\
+#         0 & -\sin(\theta) & \cos(\theta) & 0 \\
 #         0 & 0 & 0 & 1
 #     \end{pmatrix}, \\
 #     R_y^{-1}(\theta) &= 
 #     \begin{pmatrix} 
-#         \cos(\theta) & 0 & \sin(\theta) & 0 \\
+#         \cos(\theta) & 0 & -\sin(\theta) & 0 \\
 #         0 & 1 & 0 & 0 \\
-#         -\sin(\theta) & 0 & \cos(\theta) & 0 \\
+#         \sin(\theta) & 0 & \cos(\theta) & 0 \\
 #         0 & 0 & 0 & 1
 #     \end{pmatrix}, \\
 #     R_z^{-1}(\theta) &= 
 #     \begin{pmatrix} 
-#         \cos(\theta) & -\sin(\theta) & 0 & 0 \\
-#         \sin(\theta) & \cos(\theta) & 0 & 0 \\
+#         \cos(\theta) & \sin(\theta) & 0 & 0 \\
+#         -\sin(\theta) & \cos(\theta) & 0 & 0 \\
 #         0 & 0 & 1 & 0 \\
 #         0 & 0 & 0 & 1
 #     \end{pmatrix}.
@@ -147,7 +147,7 @@
 # :class: seealso
 # :label: rotation-example-1
 # 
-# A triangular polygon has vertices located at $\mathbf{p}_1 = (4, 0, 1)$, $(\mathbf{p}_2 = (6, 0, 1)$ and $\mathbf{p}_3 = (5, 0, 3)$. The triangle is rotated by angle $\theta = \pi/4$ anti-clockwise about the $y$-axis. Calculate the positions of the vertices of the rotated triangle.
+# A triangular polygon has vertices located at $\mathbf{p}_1 = (4, 1, 2)$, $\mathbf{p}_2 = (6, 1, 2)$ and $\mathbf{p}_3 = (5, 3, 2)$. The triangle is rotated by angle $\theta = \pi/4$ anti-clockwise about the $z$-axis. Calculate the positions of the vertices of the rotated triangle.
 # 
 # ````{dropdown} Solution
 # 
@@ -156,8 +156,8 @@
 # \begin{align*}
 #     P &= \begin{pmatrix}
 #         4 & 6 & 5 \\
-#         0 & 0 & 0 \\
 #         1 & 1 & 3 \\
+#         2 & 2 & 2 \\
 #         1 & 1 & 1 
 #     \end{pmatrix},
 # \end{align*}
@@ -165,17 +165,17 @@
 # and the rotation matrix is
 # 
 # \begin{align*}
-#     R_y &= \begin{pmatrix}
-#         \cos(\pi / 4) & 0 & -\sin(\pi / 4) & 0 \\
-#         0 & 1 & 0 & 0 \\
-#         \sin(\pi / 4) & 0 & \cos(\pi / 4) & 0 \\
+#     R_z &= \begin{pmatrix}
+#         \cos(\pi/4) & -\sin(\pi/4) & 0 & 0 \\
+#         \sin(\pi/4) &  \cos(\pi/4) & 0 & 0 \\
+#         0 & 0 & 1 & 0 \\
 #         0 & 0 & 0 & 1 
 #     \end{pmatrix} \\
 #     &= 
 #     \begin{pmatrix}
-#         \sqrt{2} / 2 & 0 & -\sqrt{2} / 2 & 0 \\
-#         0 & 1 & 0 & 0 \\
-#         \sqrt{2} / 2 & 0 & \sqrt{2} / 2 & 0 \\
+#         \sqrt{2}/2 & -\sqrt{2}/2 & 0 & 0 \\
+#         \sqrt{2}/2 & \sqrt{2}/2 & 0 & 0 \\
+#         0 & 0 & 1 & 0 \\
 #         0 & 0 & 0 & 1 
 #     \end{pmatrix}
 # \end{align*}
@@ -184,39 +184,41 @@
 # 
 # \begin{align*}
 #     R_y \cdot P &= 
-#     \begin{pmatrix} 
-#         \sqrt{2}/2 & 0 & -\sqrt{2}/2 & 0 \\
-#         0 & 1 & 0 & 0 \\
-#         \sqrt{2}/2 & 0 & \sqrt{2}/2 & 0 \\
-#         0 & 0 & 0 & 1
+#     \begin{pmatrix}
+#         \sqrt{2}/2 & -\sqrt{2}/2 & 0 & 0 \\
+#         \sqrt{2}/2 & \sqrt{2}/2 & 0 & 0 \\
+#         0 & 0 & 1 & 0 \\
+#         0 & 0 & 0 & 1 
 #     \end{pmatrix}
 #     \begin{pmatrix}
 #         4 & 6 & 5 \\
-#         0 & 0 & 0 \\
 #         1 & 1 & 3 \\
+#         2 & 2 & 2 \\
 #         1 & 1 & 1 
 #     \end{pmatrix} \\
 #     &= \begin{pmatrix}
 #         3\sqrt{2}/2 & 5\sqrt{2}/2 & \sqrt{2} \\
-#         0 & 0 & 0 \\
 #         5\sqrt{2}/2 & 7\sqrt{2}/2 & 4\sqrt{2} \\
+#         2 & 2 & 2 \\
 #         1 & 1 & 1
 #     \end{pmatrix}.
 # \end{align*}
 # 
-# So the vertex co-ordinates fo the translated triangle are $(3\sqrt{2}, 0, 5\sqrt{2}/2) \approx (2.12, 0, 3.54)$, $(5\sqrt{2}/2, 0, 7\sqrt{2}{2}) \approx (3.54, 0, 4.95)$ and $(\sqrt{2}, 0, 4\sqrt{2}) \approx (1.41, 0, 5.66)$. The original triangle and the translated triangle are plotted below looking along the $y$ axis.
+# So the vertex co-ordinates fo the translated triangle are $(3\sqrt{2}, 5\sqrt{2}/2, 2) \approx (2.12, 3.54, 2)$, $(5\sqrt{2}/2, 7\sqrt{2}{2}, 2) \approx (3.54, 4.95, 2.00)$ and $(\sqrt{2}, 4\sqrt{2}, 2) \approx (1.41, 5.66, 2.00)$. The original triangle and the translated triangle are plotted below looking along the $z$ axis.
 # 
 # ```{figure} /images/rotation_example.png
 # :width: 400px
 # ```
+# 
 # ````
+# 
 # `````
 # 
 # ## Rotation about polygon centre
 # 
 # We saw in {prf:ref}`rotation-example-1` that the polygon has shifted position because we rotate about the origin. If we wanted to rotate the polygon about its centre we first need to translate it so that its centre is at the origin, apply the rotation transformation and then translate the centre to the original position ({numref}`rotate-about-centre-figure`).
 # 
-# ```{figure} ../images/rotate_about_centre.svg
+# ```{figure} /images/rotate_about_centre.svg
 # :name: rotate-about-centre-figure
 # 
 # Steps required to rotate a polygon by its centre.
@@ -256,7 +258,7 @@
 # :class: seealso
 # :label: rotation-example-2
 # 
-# Rotate the polygon from {prf:ref}`rotation-example-1` by $\theta = \pi / 4$ about its centre.
+# Rotate the polygon from {prf:ref}`rotation-example-1` by $\theta = \pi/4$ about its centre.
 # 
 # ````{dropdown} Solution
 # The homogeneous co-ordinate matrix is 
@@ -274,7 +276,7 @@
 # 
 # \begin{align*}
 #     \mathbf{c} &= \frac{(4, 0, 1) + (6, 0, 1) + (5, 0, 3)}{3} = 
-#     \begin{pmatrix} 5 \\ 0 \\ 5/3 \end{pmatrix}.
+#     \begin{pmatrix} 5 \\ 5/3 \\ 2 \end{pmatrix}.
 # \end{align*}
 # 
 # The individual transformation matrices are
@@ -282,22 +284,22 @@
 # \begin{align*}
 #     T(-\mathbf{c}) &= \begin{pmatrix}
 #         1 & 0 & 0 & -5 \\
-#         0 & 1 & 0 & 0 \\
-#         0 & 0 & 1 & -5/3 \\
+#         0 & 1 & 0 & -5/3 \\
+#         0 & 0 & 1 & -2 \\
 #         0 & 0 & 0 & 1
 #     \end{pmatrix}, \\
 #     R_y\left(\frac{\pi}{4}\right) &=
 #     \begin{pmatrix}
-#         \sqrt{2}/2 & 0 & -\sqrt{2}/2 & 0 \\
-#         0 & 1 & 0 & 0 \\
-#         \sqrt{2}/2 & 0 & \sqrt{2}/2 & 0 \\
+#         \sqrt{2}/2 & -\sqrt{2}/2 & 0 & 0 \\
+#         \sqrt{2}/2 & \sqrt{2}/2 & 0 & 0 \\
+#         0 & 0 & 1 & 0 \\
 #         0 & 0 & 0 & 1
 #     \end{pmatrix}, \\
 #     T(\mathbf{c}) &= 
 #     \begin{pmatrix}
 #         1 & 0 & 0 & 5 \\
-#         0 & 1 & 0 & 0 \\
-#         0 & 0 & 1 & 5/3 \\
+#         0 & 1 & 0 & 5/3 \\
+#         0 & 0 & 1 & 2 \\
 #         0 & 0 & 0 & 1
 #     \end{pmatrix},
 # \end{align*}
@@ -308,9 +310,9 @@
 #     A &= T(\mathbf{c}) \cdot R_y\left(\frac{\pi}{4}\right) \cdot T(-\mathbf{c}) \\
 #     &= 
 #     \begin{pmatrix} 
-#         \sqrt{2}/2 & 0 & - \sqrt{2}/2 &  5 - 5\sqrt{2}/3 \\
-#         0 & 1 & 0 & 0\\
-#         \sqrt{2}/2 & 0 & \sqrt{2}/2 & 5/3 - 10\sqrt{2}/3 \\
+#         \sqrt{2}/2 & -\sqrt{2}/2 &  0 & 5 - 5\sqrt{2}/3 \\
+#         \sqrt{2}/2 & \sqrt{2}/2 & 0 & 5/3 - 10\sqrt{2}/3 \\
+#         0 & 0 & 1 & 0 \\
 #         0 & 0 & 0 & 1
 #     \end{pmatrix}
 # \end{align*}
@@ -320,29 +322,29 @@
 # \begin{align*}
 #     A \cdot P &= 
 #     \begin{pmatrix} 
-#         \sqrt{2}/2 & 0 & - \sqrt{2}/2 &  10/3 - \sqrt{2}/3 \\
-#         0 & 1 & 0 & 0\\
-#         \sqrt{2}/2 & 0 & \sqrt{2}/2 & -5/3 - \sqrt{2}/3 \\
+#         \sqrt{2}/2 & -\sqrt{2}/2 &  0 & 5 - 5\sqrt{2}/3 \\
+#         \sqrt{2}/2 & \sqrt{2}/2 & 0 & 5/3 - 10\sqrt{2}/3 \\
+#         0 & 0 & 1 & 0 \\
 #         0 & 0 & 0 & 1
 #     \end{pmatrix}
 #     \begin{pmatrix}
 #         4 & 6 & 5 \\
-#         0 & 0 & 0 \\
 #         1 & 1 & 3 \\
+#         2 & 2 & 2 \\
 #         1 & 1 & 1 
 #     \end{pmatrix} \\
 #     &= 
 #     \begin{pmatrix}
 #         5 - \sqrt{2}/6 & 5 + 5\sqrt{2}/6 & 5 - 2\sqrt{2}/3 \\
-#         0 & 0 & 0\\
 #         5/3 - 5\sqrt{2}/6 & 5/3 + \sqrt{2}/6 & 5/3 + 2 \sqrt{2}/3 \\
+#         2 & 2 & 2 \\
 #         1 & 1 & 1
 #     \end{pmatrix}.
 # \end{align*}
 # 
-# So the vertices of the rotated polygon are $(5 - \sqrt{2}/6, 0, 5/3 - 5\sqrt{2}/6) \approx (4.76, 0, 0.49)$, $(5 + 5\sqrt{2}/6, 0, 5/3 + \sqrt{2}/6) \approx (6.18, 0, 1.90)$ and $(5 - 2\sqrt{2}/3, 0, 5/3 + 2\sqrt{2}/3) \approx (4.06, 0, 2.61)$. The original polygon and the translated polygon are plotted below looking along the $y$ axis.
+# So the vertices of the rotated polygon are $(5 - \sqrt{2}/6, 5/3 - 5\sqrt{2}/6, 2) \approx (4.76, 0.49, 2.00)$, $(5 + 5\sqrt{2}/6, 5/3 + \sqrt{2}/6, 2) \approx (6.18, 1.90, 2.00)$ and $(5 - 2\sqrt{2}/3, 5/3 + 2\sqrt{2}/3, 2) \approx (4.06, 2.61, 2.00)$. The original polygon and the translated polygon are plotted below looking along the $z$ axis.
 # 
-# ```{glue:figure} rotation_about_centre_example.png
+# ```{figure} /images/rotation_about_centre_example.png
 # :width: 400px
 # ````
 # 
@@ -381,8 +383,8 @@
 # {numref}`rotation-about-line-figure-2` shows that affect of translating by $-\mathbf{p}$. Now we need to rotate the line so that it lies in a plane the contains two of the three co-ordinate axes. If we rotate about the $z$ axis then the line will be in the $yz$ plane. The values of $\cos(\phi)$ and $\sin(\phi)$ in $R_z(\phi)$ are
 # 
 # \begin{align*}
-#     \cos(\phi) &= \frac{d_y}{d_1}, &
-#     \sin(\phi) &= \frac{d_x}{d_1},
+#     \cos(\phi) &= \frac{|d_y|}{d_1}, &
+#     \sin(\phi) &= \frac{|d_x|}{d_1},
 # \end{align*}
 # 
 # where $d_1 = \sqrt{d_x^2 + d_y^2}$. The transformation matrix is
@@ -390,8 +392,8 @@
 # \begin{align*}
 #     R_z(\phi) &=
 #     \begin{pmatrix} 
-#         d_y/d_1 & d_x/d_1 & 0 & 0 \\
-#         -d_x/d_1 & d_y/d_1 & 0 & 0 \\
+#         |d_y|/d_1 & -|d_x|/d_1 & 0 & 0 \\
+#         |d_x|/d_1 & |d_y|/d_1 & 0 & 0 \\
 #         0 & 0 & 1 & 0 \\
 #         0 & 0 & 0 & 1
 #     \end{pmatrix}.
@@ -404,10 +406,10 @@
 # The line is rotated about the $z$-axis so that $\mathbf{d}$ is in the $yz$ plane.
 # ```
 # 
-# {numref}`rotation-about-line-figure-3` shows that affect of rotating about the $z$-axis. Now we need to rotate about the $x$ axis so that $\mathbf{d}$ points along the $z$ axis. The values of $\cos(\psi)$ and $\sin(\psi)$ are
+# {numref}`rotation-about-line-figure-3` shows that affect of rotating about the $z$-axis. Now we need to rotate **clockwise** about the $x$ axis so that $\mathbf{d}$ points along the $z$ axis. The values of $\cos(\psi)$ and $\sin(\psi)$ are
 # 
 # \begin{align*}
-#     \cos(\psi) &= \frac{d_z}{|\mathbf{d}|}, &
+#     \cos(\psi) &= \frac{|d_z|}{|\mathbf{d}|}, &
 #     \sin(\psi) &= \frac{\sqrt{d_x^2 + d_y^2}}{|\mathbf{d}|},
 # \end{align*}
 # 
@@ -417,8 +419,8 @@
 #     R_x &=
 #     \begin{pmatrix}
 #         1 & 0 & 0 & 0 \\
-#         0 & d_z/|\mathbf{d}| & d_1/|\mathbf{d}| & 0 \\
-#         0 & d_1/|\mathbf{d}| & d_z/|\mathbf{d}| & 0 \\
+#         0 & |d_z|/|\mathbf{d}| & -d_1/|\mathbf{d}| & 0 \\
+#         0 & d_1/|\mathbf{d}| & |d_z|/|\mathbf{d}| & 0 \\
 #         0 & 0 & 0 & 1
 #     \end{pmatrix}.
 # \end{align*}
@@ -469,25 +471,25 @@
 # Rotate $\mathbf{d}$ about the $z$-axis.
 # ```
 # 
-# Now we need to consider which rotations we apply so that $\mathbf{d}$ points along one of the axes. This decision is arbitrary but in this case since $d_x$ is positive then rotating so that $\mathbf{d}$ points along the $x$ axis would require the fewest rotations. Looking at {numref}`rotate-about-line-example-2` this means can first rotate anti-clockwise about the $z$ axis by angle $\phi$ so that $\mathbf{d}$ is in the $xz$ plane. The values of $\cos(\phi)$ and $\sin(\phi)$ are
+# Now we need to consider which rotations we apply so that $\mathbf{d}$ points along one of the axes. This decision is arbitrary but in this case since $d_x$ is positive then rotating so that $\mathbf{d}$ points along the $x$ axis would require the fewest rotations. Looking at {numref}`rotate-about-line-example-2` this means can first rotate **anti-clockwise** about the $z$ axis by angle $\phi$ so that $\mathbf{d}$ is in the $xz$ plane. The values of $\cos(\phi)$ and $\sin(\phi)$ are
 # 
 # \begin{align*}
-#     \cos(\phi) &= \frac{d_x}{d_1} = \frac{2}{\sqrt{5}}, &
-#     \sin(\phi) &= \frac{d_y}{d_1} = \frac{-1}{\sqrt{5}},
+#     \cos(\phi) &= \frac{|d_x|}{d_1} = \frac{2\sqrt{5}}{5}, &
+#     \sin(\phi) &= \frac{|d_y|}{d_1} = \frac{\sqrt{5}}{5},
 # \end{align*}
 # 
-# so the transformation matrix is
+# and the transformation matrix is
 # 
 # \begin{align*}
 #     R_z(\phi) &= \begin{pmatrix}
-#         \cos(\phi) & \sin(\phi) & 0 & 0 \\
-#         -\sin(\phi) & \cos(\phi) & 0 & 0 \\
+#         \cos(\phi) & -\sin(\phi) & 0 & 0 \\
+#         \sin(\phi) & \cos(\phi) & 0 & 0 \\
 #         0 & 0 & 1 & 0 \\
 #         0 & 0 & 0 & 1
 #     \end{pmatrix} \\
 #     &= \begin{pmatrix}
-#         2/\sqrt{5} & -1/\sqrt{5} & 0 & 0 \\
-#         1/\sqrt{5} & 2/\sqrt{5} & 0 & 0 \\
+#         2\sqrt{5}/5 & -\sqrt{5}/5 & 0 & 0 \\
+#         \sqrt{5}/5 & 2\sqrt{5}/5 & 0 & 0 \\
 #         0 & 0 & 1 & 0 \\
 #         0 & 0 & 0 & 1
 #     \end{pmatrix}
@@ -496,9 +498,10 @@
 # We can check whether this rotation is correct by multiplying it by the homogeneous form of $\mathbf{d}$
 # 
 # \begin{align*}
-#     R_z(\phi) \cdot \mathbf{d} &= \begin{pmatrix}
-#         2/\sqrt{5} & -1/\sqrt{5} & 0 & 0 \\
-#         1/\sqrt{5} & 2/\sqrt{5} & 0 & 0 \\
+#     R_z(\phi) \cdot \mathbf{d} &= 
+#     \begin{pmatrix}
+#         2\sqrt{5}/5 & -\sqrt{5}/5 & 0 & 0 \\
+#         \sqrt{5}/5 & 2\sqrt{5}/5 & 0 & 0 \\
 #         0 & 0 & 1 & 0 \\
 #         0 & 0 & 0 & 1
 #     \end{pmatrix}
@@ -513,11 +516,11 @@
 # Rotate $\mathbf{d}$ about the $y$ axis.
 # ```
 # 
-# Looking at {numref}`rotate-about-line-example-2` we need to rotate clockwise around the $y$ axis by angle $\psi$ so that $\mathbf{d}$ points along the $x$ axis (remember that the direction of rotation is based on the view looking down the axis towards the origin). The values of $\cos(\psi)$ and $\sin(\psi)$ are
+# Looking at {numref}`rotate-about-line-example-2` we need to rotate **clockwise** around the $y$ axis by angle $\psi$ so that $\mathbf{d}$ points along the $x$ axis (remember that the direction of rotation is based on the view looking down the axis towards the origin). The values of $\cos(\psi)$ and $\sin(\psi)$ are
 # 
 # \begin{align*}
 #     \cos(\psi) &= \frac{d_1}{|\mathbf{d}|} = \frac{\sqrt{5}}{\sqrt{14}}, &
-#     \sin(\psi) &= \frac{d_z}{|\mathbf{d}|} = \frac{3}{\sqrt{14}},
+#     \sin(\psi) &= \frac{|d_z|}{|\mathbf{d}|} = \frac{3}{\sqrt{14}},
 # \end{align*}
 # 
 # so the transformation matrix is 
@@ -532,9 +535,9 @@
 #     \end{pmatrix} \\
 #     &= 
 #     \begin{pmatrix}
-#         \sqrt{5} / \sqrt{14} & 0 & -3 / \sqrt{14} & 0 \\
+#         \sqrt{5}\sqrt{14}/14 & 0 & -3\sqrt{14}/14 & 0 \\
 #         0 & 1 & 0 & 0 \\
-#         3 / \sqrt{14} & 0 & \sqrt{5} / \sqrt{14} & 0 \\
+#         3\sqrt{14}/14 & 0 & \sqrt{5}\sqrt{14}/14 & 0 \\
 #         0 & 0 & 0 & 1
 #     \end{pmatrix}.
 # \end{align*}
@@ -544,9 +547,9 @@
 # \begin{align*}
 #     R_y(\psi) \cdot R_z(\phi) \cdot \mathbf{d} &= 
 #     \begin{pmatrix}
-#         \sqrt{5} / \sqrt{14} & 0 & -3 / \sqrt{14} & 0 \\
+#         \sqrt{5}\sqrt{14}/14 & 0 & -3\sqrt{14}/14 & 0 \\
 #         0 & 1 & 0 & 0 \\
-#         3 / \sqrt{14} & 0 & \sqrt{5} / \sqrt{14} & 0 \\
+#         3\sqrt{14}/14 & 0 & \sqrt{5}\sqrt{14}/14 & 0 \\
 #         0 & 0 & 0 & 1
 #     \end{pmatrix}
 #     \begin{pmatrix}
@@ -558,7 +561,7 @@
 # 
 # Since $d_y=0$, $d_z=0$ and $d_x > 0$ then $\mathbf{d}$ is now pointing along the $x$ axis. 
 # 
-# ```{figure} ../images/rotate_about_line_example_4.svg
+# ```{figure} /images/rotate_about_line_example_4.svg
 # 
 # Rotate $\mathbf{d}$ about the $x$ axis.
 # ```
@@ -568,15 +571,15 @@
 # \begin{align*}
 #     R_x(\theta) &= \begin{pmatrix}
 #         1 & 0 & 0 & 0 \\
-#         0 & \cos(\theta) & \sin(\theta) & 0 \\
-#         0 & -\sin(\theta) & \cos(\theta) & 0 \\
+#         0 & \cos(\theta) & -\sin(\theta) & 0 \\
+#         0 & \sin(\theta) & \cos(\theta) & 0 \\
 #         0 & 0 & 0 & 1
 #     \end{pmatrix} \\
 #     &= 
 #     \begin{pmatrix}
 #         1 & 0 & 0 & 0 \\
-#         0 & \sqrt{3} / 2 & 1 / 2 & 0 \\
-#         0 & -1/2 & \sqrt{3} / 2 & 0 \\
+#         0 & \sqrt{3}/2 & -1/2 & 0 \\
+#         0 & 1/2 & \sqrt{3}/2 & 0 \\
 #         0 & 0 & 0 & 1
 #     \end{pmatrix}.
 # \end{align*}
