@@ -206,55 +206,12 @@
 # 
 # So the vertex co-ordinates fo the translated triangle are $(3\sqrt{2}, 0, 5\sqrt{2}/2) \approx (2.12, 0, 3.54)$, $(5\sqrt{2}/2, 0, 7\sqrt{2}{2}) \approx (3.54, 0, 4.95)$ and $(\sqrt{2}, 0, 4\sqrt{2}) \approx (1.41, 0, 5.66)$. The original triangle and the translated triangle are plotted below looking along the $y$ axis.
 # 
-# ```{glue:figure} rotation-plot-1
-# :figwidth: 400px
+# ```{figure} /images/rotation_example.png
+# :width: 400px
 # ```
 # ````
 # `````
-
-# In[1]:
-
-
-import numpy as np
-import matplotlib.pyplot as plt
-from myst_nb import glue
-plt.rcParams['text.usetex'] = True
-
-def translation(t):
-    T = np.eye(4)
-    T[:3,3] = t
-    return T
-
-
-def rotation_y(theta):
-    c, s = np.cos(theta), np.sin(theta)
-    return np.array([[c, 0, -s, 0], [0, 1, 0, 0], [s, 0, c, 0], [0, 0, 0, 1]])
-
-
-P = np.array([[4, 6, 5],
-              [0, 0, 0],
-              [1, 1, 3],
-              [1, 1, 1]])
-
-theta = np.pi / 4
-Ry = rotation_y(theta)
-P1 = np.dot(Ry, P)
-
-# Plot polygons
-fig, ax = plt.subplots()
-
-plt.fill(P[0,:], P[2,:], fc='b', alpha=0.5)
-plt.fill(P1[0,:], P1[2,:], fc='r', alpha=0.5)
-
-plt.xlabel('$x$', fontsize=16)
-plt.ylabel('$z$', fontsize=16)
-ax.set_xlim([0, 7])
-ax.set_ylim([0, 7])
-ax.set_aspect('equal')
-
-glue("rotation-plot-1", fig, display=False)
-
-
+# 
 # ## Rotation about polygon centre
 # 
 # We saw in {prf:ref}`rotation-example-1` that the polygon has shifted position because we rotate about the origin. If we wanted to rotate the polygon about its centre we first need to translate it so that its centre is at the origin, apply the rotation transformation and then translate the centre to the original position ({numref}`rotate-about-centre-figure`).
@@ -299,7 +256,7 @@ glue("rotation-plot-1", fig, display=False)
 # :class: seealso
 # :label: rotation-example-2
 # 
-# Rotate the polygon from {prf:ref}`rotation-example-1` about its centre.
+# Rotate the polygon from {prf:ref}`rotation-example-1` by $\theta = \pi / 4$ about its centre.
 # 
 # ````{dropdown} Solution
 # The homogeneous co-ordinate matrix is 
@@ -351,9 +308,9 @@ glue("rotation-plot-1", fig, display=False)
 #     A &= T(\mathbf{c}) \cdot R_y\left(\frac{\pi}{4}\right) \cdot T(-\mathbf{c}) \\
 #     &= 
 #     \begin{pmatrix} 
-#         \sqrt{2}/2 & 0 & - \sqrt{2}/2 &  10/3 - \sqrt{2}/3 \\
+#         \sqrt{2}/2 & 0 & - \sqrt{2}/2 &  5 - 5\sqrt{2}/3 \\
 #         0 & 1 & 0 & 0\\
-#         \sqrt{2}/2 & 0 & \sqrt{2}/2 & -5/3 - \sqrt{2}/3 \\
+#         \sqrt{2}/2 & 0 & \sqrt{2}/2 & 5/3 - 10\sqrt{2}/3 \\
 #         0 & 0 & 0 & 1
 #     \end{pmatrix}
 # \end{align*}
@@ -378,43 +335,19 @@ glue("rotation-plot-1", fig, display=False)
 #     \begin{pmatrix}
 #         5 - \sqrt{2}/6 & 5 + 5\sqrt{2}/6 & 5 - 2\sqrt{2}/3 \\
 #         0 & 0 & 0\\
-#         \frac{5}{3} - 5\sqrt{2}/6 & 5/3 + \sqrt{2}/6 & 5/3 + 2 \sqrt{2}/3 \\
+#         5/3 - 5\sqrt{2}/6 & 5/3 + \sqrt{2}/6 & 5/3 + 2 \sqrt{2}/3 \\
 #         1 & 1 & 1
 #     \end{pmatrix}.
 # \end{align*}
 # 
 # So the vertices of the rotated polygon are $(5 - \sqrt{2}/6, 0, 5/3 - 5\sqrt{2}/6) \approx (4.76, 0, 0.49)$, $(5 + 5\sqrt{2}/6, 0, 5/3 + \sqrt{2}/6) \approx (6.18, 0, 1.90)$ and $(5 - 2\sqrt{2}/3, 0, 5/3 + 2\sqrt{2}/3) \approx (4.06, 0, 2.61)$. The original polygon and the translated polygon are plotted below looking along the $y$ axis.
 # 
-# ```{glue:figure} rotation-plot-2
+# ```{glue:figure} rotation_about_centre_example.png
+# :width: 400px
 # ````
 # 
 # `````
-
-# In[2]:
-
-
-t = np.mean(P[:3,:],axis=1)
-T1 = translation(-t)
-T2 = translation(t)
-A = np.linalg.multi_dot((T2, Ry, T1))
-P2 = np.dot(A, P)
-
-# Plot polygons
-fig, ax = plt.subplots()
-
-plt.fill(P[0,:], P[2,:], fc='b', alpha=0.5)
-plt.fill(P2[0,:], P2[2,:], fc='r', alpha=0.5)
-
-plt.xlabel('$x$', fontsize=16)
-plt.ylabel('$z$', fontsize=16)
-ax.set_xlim([0, 7])
-ax.set_ylim([0, 7])
-ax.set_aspect('equal')
-
-print(P2)
-glue("rotation-plot-2", fig, display=False)
-
-
+# 
 # ## Rotation about a line
 # 
 # Suppose we wish to rotate $\mathbb{R}^3$ by an angle $\theta$ about a general line that passes through the point $\mathbf{p}=(p_x,p_y,p_z)$ with direction $\mathbf{d}$ that does not pass through the origin and $\mathbf{d}=(d_x,d_y,d_z)$ is not parallel to any of the three co-ordinate axes ({numref}`rotation-about-line-figure-1`). To achieve this we first need to apply translation and rotation so that the line lies along one of the co-ordinate axes, preform the rotation about this axis before reversing the rotation and translation operations. Each of the individual transformations can be represented by a matrix so the composite transformation that achieves the rotation about the line is a product of the individual matrices.
@@ -592,16 +525,16 @@ glue("rotation-plot-2", fig, display=False)
 # \begin{align*}
 #     R_y(\psi) &= 
 #     \begin{pmatrix}
-#         \cos(\psi) & 0 & \sin(\psi) & 0 \\
+#         \cos(\psi) & 0 & -\sin(\psi) & 0 \\
 #         0 & 1 & 0 & 0 \\
-#         -\sin(\psi) & 0 & \cos(\psi) & 0 \\
+#         \sin(\psi) & 0 & \cos(\psi) & 0 \\
 #         0 & 0 & 0 & 1
 #     \end{pmatrix} \\
 #     &= 
 #     \begin{pmatrix}
-#         \sqrt{5} / \sqrt{14} & 0 & 3 / \sqrt{14} & 0 \\
+#         \sqrt{5} / \sqrt{14} & 0 & -3 / \sqrt{14} & 0 \\
 #         0 & 1 & 0 & 0 \\
-#         -3 / \sqrt{14} & 0 & \sqrt{5} / \sqrt{14} & 0 \\
+#         3 / \sqrt{14} & 0 & \sqrt{5} / \sqrt{14} & 0 \\
 #         0 & 0 & 0 & 1
 #     \end{pmatrix}.
 # \end{align*}
@@ -611,16 +544,16 @@ glue("rotation-plot-2", fig, display=False)
 # \begin{align*}
 #     R_y(\psi) \cdot R_z(\phi) \cdot \mathbf{d} &= 
 #     \begin{pmatrix}
-#         \sqrt{5} / \sqrt{14} & 0 & 3 / \sqrt{14} & 0 \\
+#         \sqrt{5} / \sqrt{14} & 0 & -3 / \sqrt{14} & 0 \\
 #         0 & 1 & 0 & 0 \\
-#         -3 / \sqrt{14} & 0 & \sqrt{5} / \sqrt{14} & 0 \\
+#         3 / \sqrt{14} & 0 & \sqrt{5} / \sqrt{14} & 0 \\
 #         0 & 0 & 0 & 1
 #     \end{pmatrix}
 #     \begin{pmatrix}
 #         \sqrt{5} \\ 0 \\ -3 \\ 1
 #     \end{pmatrix} \\
 #     &=
-#     \begin{pmatrix} 13 / \sqrt{14} \\ 0 \\ 0 \\ 1 \end{pmatrix}.
+#     \begin{pmatrix} \sqrt{14} \\ 0 \\ 0 \\ 1 \end{pmatrix}.
 # \end{align*}
 # 
 # Since $d_y=0$, $d_z=0$ and $d_x > 0$ then $\mathbf{d}$ is now pointing along the $x$ axis. 

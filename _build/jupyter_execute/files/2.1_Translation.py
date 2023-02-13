@@ -135,8 +135,8 @@
 #         0 & 0 & 0 \\
 #         1 & 1 & 3 \\
 #         1 & 1 & 1 
-#     \end{pmatrix} 
-#     = \begin{pmatrix}
+#     \end{pmatrix} \\
+#     &= \begin{pmatrix}
 #         4 & 6 & 5 \\
 #         0 & 0 & 0 \\
 #         2 & 2 & 4 \\
@@ -146,46 +146,9 @@
 # 
 # So the vertex co-ordinates of the translated triangle are $(4,0,2)$, $(6, 0, 2)$ and $(5, 0, 4)$. The original triangle and the translated triangle are plotted below looking along the $y$-axis.
 # 
-# ```{glue:figure} translation-plot
-# :figwidth: 500px
+# ```{figure} /images/translation_example.png
+# :width: 400px
 # ```
 # ````
 # 
 # `````
-
-# In[1]:
-
-
-import numpy as np
-import matplotlib.pyplot as plt
-from myst_nb import glue
-plt.rcParams['text.usetex'] = True
-
-def translation(t):
-    T = np.eye(4)
-    T[:3,3] = t
-    return T
-
-
-P = np.array([[1, 3, 2],
-              [0, 0, 0],
-              [1, 1, 3],
-              [1, 1, 1]])
-t = np.array([3, 0, 1])
-T = translation(t)
-P1 = np.dot(T, P)
-
-# Plot polygons
-fig, ax = plt.subplots()
-
-plt.fill(P[0,:], P[2,:], fc='b', alpha=0.5)
-plt.fill(P1[0,:], P1[2,:], fc='r', alpha=0.5)
-
-plt.xlabel('$x$', fontsize=16)
-plt.ylabel('$z$', fontsize=16)
-ax.set_xlim([0, 7])
-ax.set_ylim([0, 5])
-ax.set_aspect('equal')
-
-glue("translation-plot", fig, display=False)
-

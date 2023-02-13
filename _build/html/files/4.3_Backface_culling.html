@@ -199,6 +199,11 @@ const thebe_selector_output = ".output, .cell_output"
      Rotation
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2.4_Transformations_exercises.html">
+     Linear Transformations Exercises
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
@@ -264,6 +269,11 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="4.4_Screen_space.html">
+     Screen space
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="4.5_Binary_space_partitioning.html">
      Binary space partitioning
     </a>
@@ -280,6 +290,11 @@ const thebe_selector_output = ".output, .cell_output"
    </i>
   </label>
   <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="5.1_Clipping.html">
+     Clipping
+    </a>
+   </li>
    <li class="toctree-l2">
     <a class="reference internal" href="5.1_Drawing_lines.html">
      Drawing lines
@@ -538,8 +553,8 @@ title="Print to PDF"
 <p class="admonition-title"><span class="caption-number">Definition 20 </span> (Front facing polygons)</p>
 <section class="definition-content" id="proof-content">
 <p>A polygon defined by a normal vector <span class="math notranslate nohighlight">\(\mathbf{n}\)</span> and point <span class="math notranslate nohighlight">\(\mathbf{c}\)</span> is front facing to the viewer if</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f07c7daf-9181-4f2b-a964-22b6272014b8">
-<span class="eqno">(34)<a class="headerlink" href="#equation-f07c7daf-9181-4f2b-a964-22b6272014b8" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-fbe637f1-289f-4a64-9c8c-2172b72426c3">
+<span class="eqno">(34)<a class="headerlink" href="#equation-fbe637f1-289f-4a64-9c8c-2172b72426c3" title="Permalink to this equation">#</a></span>\[\begin{align}
     (\mathbf{c} - \mathbf{p}) \cdot \mathbf{n} &lt; 0.
 \end{align}\]</div>
 </section>
@@ -705,11 +720,11 @@ Solution<div class="sd-summary-down docutils">
 <span class="k">end</span><span class="w"></span>
 </pre></div>
 </div>
-<p>The affect of applying backface culling to the screen space from <a class="reference internal" href="3.4_Screen_space.html#screen-space-example">Example 32</a> is shown in <a class="reference internal" href="#backface-culling-example-figure"><span class="std std-numref">Fig. 76</span></a>.</p>
+<p>The affect of applying backface culling to the screen space from <a class="reference internal" href="4.4_Screen_space.html#screen-space-example">Example 36</a> is shown in <a class="reference internal" href="#backface-culling-example-figure"><span class="std std-numref">Fig. 76</span></a>.</p>
 <figure class="align-default" id="backface-culling-example-figure">
 <a class="reference internal image-reference" href="../_images/backface_culling_example.png"><img alt="../_images/backface_culling_example.png" src="../_images/backface_culling_example.png" style="width: 400px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 76 </span><span class="caption-text">The screen space from <a class="reference internal" href="3.4_Screen_space.html#screen-space-example">Example 32</a> plotted using only front facing polygons.</span><a class="headerlink" href="#backface-culling-example-figure" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 76 </span><span class="caption-text">The screen space from <a class="reference internal" href="4.4_Screen_space.html#screen-space-example">Example 36</a> plotted using only front facing polygons.</span><a class="headerlink" href="#backface-culling-example-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Unfortunately using backface culling alone is not sufficient to remove hidden surfaces. This means that the church object which should be in the background and partially obscured by the house object in the foreground has been plotted over the top of the house object.</p>

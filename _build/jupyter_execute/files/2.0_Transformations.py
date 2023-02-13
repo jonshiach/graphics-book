@@ -328,7 +328,7 @@
 #         3(2 x + 4 y) + (x + 2 y) \\
 #         (-x + 3 y) - 2(x + 2 y)
 #     \end{pmatrix} \\
-#     &= \begin{pmatrix} 2 x + 9 y \\ 7 x + 14 y \\ -3 x + y \end{pmatrix}.
+#     &= \begin{pmatrix} 2 x + 9 y \\ 7 x + 14 y \\ -3 x - y \end{pmatrix}.
 # \end{align*}
 # ```
 # 
@@ -340,19 +340,19 @@
 #     B &= \begin{pmatrix} 2 & 1 & - 1 \\ 3 & 0 & 1 \\ 0 & 1 & -2 \end{pmatrix}, \\ 
 #     \therefore C &= BA = \begin{pmatrix} 2 & 1 & - 1 \\ 3 & 0 & 1 \\ 0 & 1 & -2 \end{pmatrix}
 #     \begin{pmatrix} 2 & 4 \\ -1 & 3 \\ 1 & 2 \end{pmatrix} \\
-#     &= \begin{pmatrix} 2 & 9 \\ 7 & 14 \\ -3 & 1 \end{pmatrix}.
+#     &= \begin{pmatrix} 2 & 9 \\ 7 & 14 \\ -3 & -1 \end{pmatrix}.
 # \end{align*}
 # ```
 # 
-# (iii) &emsp; Use your matrix $C$ to determine $S \circ T(\mathbf{u})$ for $\mathbf{u} = (x, y, z)$.
+# (iii) &emsp; Use your matrix $C$ to determine $S \circ T(\mathbf{u})$ for $\mathbf{u} = (x, y)$.
 # 
 # ```{dropdown} Solution
 # 
 # \begin{align*}
 #     C \cdot \begin{pmatrix} x \\ y \\ z \end{pmatrix} = 
 #     \begin{pmatrix} 2 & 9 \\ 7 & 14 \\ -3 & 1 \end{pmatrix}
-#     \begin{pmatrix} x \\ y \\ z \end{pmatrix} =
-#     \begin{pmatrix} 2 x + 9 y \\ 7 x + 14 y \\ -3 x + y \end{pmatrix}.
+#     \begin{pmatrix} x \\ y \end{pmatrix} =
+#     \begin{pmatrix} 2 x + 9 y \\ 7 x + 14 y \\ -3 x - y \end{pmatrix}.
 # \end{align*}
 # ```
 # 

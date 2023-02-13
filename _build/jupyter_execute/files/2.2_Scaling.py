@@ -127,49 +127,12 @@
 # 
 # So the vertex co-ordinates of the transformed polygon are $(3, 0, 2)$, $(9, 0, 2)$ and $(6, 0, 6)$. The original triangle and the translated triangle are plotted below look along the $y$-axis.
 # 
-# ```{glue:figure} scaling-plot
+# ```{figure} /images/scaling_example.png
+# :width: 400px
 # ```
 # 
 # ````
 # `````
-
-# In[1]:
-
-
-import numpy as np
-import matplotlib.pyplot as plt
-from myst_nb import glue
-plt.rcParams['text.usetex'] = True
-
-def scaling(s):
-    return np.array([[s[0], 0, 0 ,0], [0, s[1], 0, 0], [0, 0, s[2], 0]])
-
-
-P = np.array([[1, 3, 2],
-              [0, 0, 0],
-              [1, 1, 3],
-              [1, 1, 1]])
-
-s = np.array([3, 1, 2])
-S = scaling(s)
-
-P1 = np.dot(S, P)
-
-# Plot polygons
-fig, ax = plt.subplots()
-
-plt.fill(P[0,:], P[2,:], fc='b', alpha=0.5)
-plt.fill(P1[0,:], P1[2,:], fc='r', alpha=0.5)
-
-plt.xlabel('$x$', fontsize=16)
-plt.ylabel('$z$', fontsize=16)
-ax.set_xlim([0, 10])
-ax.set_ylim([0, 7])
-ax.set_aspect('equal')
-
-glue("scaling-plot", fig, display=False)
-
-
 # ## Scaling about the centre of a shape
 # 
 # We have seen in {prf:ref}`scaling-example` that scaling the polygon resulted in the centre of the polygon shifting position and the aspect ratio of the polygon changed.. This was because scaling was applied to a shape whose centre was not at the origin. To preserve the position of the centre of a shape when scaling we first need to translate the points that define the shape to the origin, which means that the translation vector if $-\mathbf{c}$ where $\mathbf{c}$ is the centre of the shape. Then we can perform the scaling before using the inverse translation so that the centre of the shape is back at $\mathbf{c}$ ({numref}`scaling-about-centre-figure`). 
@@ -277,54 +240,9 @@ glue("scaling-plot", fig, display=False)
 # 
 # So the vertex co-ordinates of the translated polygon are $(0, 0, 1/3) \approx (0, 0, 0.33)$, $(4, 0, 1/3) \approx (4, 0, 0.33)$ and $(2, 0, 13/3) \approx (2, 0, 4.33)$. The original polygon and the translated polygon are plotted below looking along the $y$ axis.
 # 
-# ```{glue:figure} scaling-about-centre-plot
+# ```{figure} /images/scaling_about_centre_example.png
+# :width: 400px
 # ```
 # 
 # ````
 # `````
-
-# In[2]:
-
-
-import numpy as np
-import matplotlib.pyplot as plt
-from myst_nb import glue
-plt.rcParams['text.usetex'] = True
-
-def scaling(s):
-    return np.array([[s[0], 0, 0 ,0], [0, s[1], 0, 0], [0, 0, s[2], 0], [0, 0, 0, 1]])
-
-
-def translation(t):
-    return np.array([[1, 0, 0, t[0]], [0, 1, 0, t[1]], [0, 0, 1, t[2]], [0, 0, 0, 1]])
-
-
-P = np.array([[1, 3, 2],
-              [0, 0, 0],
-              [1, 1, 3],
-              [1, 1, 1]])
-
-c = np.mean(P[:3,:], axis=1)
-s = np.array([2, 2, 2])
-
-T1 = translation(-c)
-S = scaling(s)
-T2 = translation(c)
-
-A = np.linalg.multi_dot((T2, S, T1))
-P1 = np.dot(A, P)
-
-# Plot polygons
-fig, ax = plt.subplots()
-
-plt.fill(P[0,:], P[2,:], fc='b', alpha=0.5)
-plt.fill(P1[0,:], P1[2,:], fc='r', alpha=0.5)
-
-plt.xlabel('$x$', fontsize=16)
-plt.ylabel('$z$', fontsize=16)
-ax.set_xlim([0, 6])
-ax.set_ylim([0, 5])
-ax.set_aspect('equal')
-
-glue("scaling-about-centre-plot", fig, display=False)
-

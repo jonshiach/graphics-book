@@ -59,7 +59,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Object space" href="3.1_Object_space.html" />
-    <link rel="prev" title="Rotation" href="2.3_Rotation.html" />
+    <link rel="prev" title="Linear Transformations Exercises" href="2.4_Transformations_exercises.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -199,6 +199,11 @@ const thebe_selector_output = ".output, .cell_output"
      Rotation
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2.4_Transformations_exercises.html">
+     Linear Transformations Exercises
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toctree-l1 current active has-children">
@@ -264,6 +269,11 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="4.4_Screen_space.html">
+     Screen space
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="4.5_Binary_space_partitioning.html">
      Binary space partitioning
     </a>
@@ -280,6 +290,11 @@ const thebe_selector_output = ".output, .cell_output"
    </i>
   </label>
   <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="5.1_Clipping.html">
+     Clipping
+    </a>
+   </li>
    <li class="toctree-l2">
     <a class="reference internal" href="5.1_Drawing_lines.html">
      Drawing lines
@@ -517,7 +532,7 @@ title="Print to PDF"
 <li><p><a class="reference internal" href="3.1_Object_space.html#object-space-section"><span class="std std-ref"><strong>Object space</strong></span></a>: Primitive objects that are used to build your virtual environment are defined within their own space such that the origin passes through the centre of the object (or sometimes the centre of the bases of the object). For example, a virtual environment that describes a street scene may have objects for buildings, cars, bus stops, street lights etc.</p></li>
 <li><p><a class="reference internal" href="3.2_World_space.html#world-space-section"><span class="std std-ref"><strong>World space</strong></span></a>: The virtual environment is constructed by copying the objects into the world space and applying scaling, rotation and translation transformations.</p></li>
 <li><p><a class="reference internal" href="3.3_Camera_space.html#camera-space-section"><span class="std std-ref"><strong>Camera space</strong></span></a>: To view the virtual environment we place a virtual camera in the world space and use translation and rotation transformations so that the position of the camera is at the origin looking along the <span class="math notranslate nohighlight">\(z\)</span> axis in the negative direction.</p></li>
-<li><p><a class="reference internal" href="3.4_Screen_space.html#screen-space-section"><span class="std std-ref"><strong>Screen space</strong></span></a>: The camera space is projected onto a two-dimensional projection plane using perspective projection so that the further objects are from the camera the smaller they appear giving the illusion of depth.</p></li>
+<li><p><a class="reference internal" href="4.4_Screen_space.html#screen-space-section"><span class="std std-ref"><strong>Screen space</strong></span></a>: The camera space is projected onto a two-dimensional projection plane using perspective projection so that the further objects are from the camera the smaller they appear giving the illusion of depth.</p></li>
 <li><p><a class="reference internal" href="4.0_Clipping_and_HSD.html#clipping-and-hsd-section"><span class="std std-ref"><strong>Clipped screen space</strong></span></a>: Any objects in the screen space that are outside of the region that visible to the camera are removed and objects that lie partially outside are clipped to the edges. In addition, the surfaces that should not be visible to the viewer are removed so to give the appearance of solid surfaces.</p></li>
 <li><p><a class="reference internal" href="5.0_Rasterisation.html#rasterisation-section"><span class="std std-ref"><strong>Raster</strong></span></a>: The colours of the individual pixels on a display screen are determined from the information obtained about the virtual environment up to this point and any lighting conditions used. This information is stored in a <strong>raster array</strong> where each element corresponds to a pixel on the display.</p></li>
 <li><p><strong>Display</strong>: The raster array is sent to the display hardware.</p></li>
@@ -555,11 +570,11 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="2.3_Rotation.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="2.4_Transformations_exercises.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Rotation</p>
+            <p class="prev-next-title">Linear Transformations Exercises</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="3.1_Object_space.html" title="next page">
