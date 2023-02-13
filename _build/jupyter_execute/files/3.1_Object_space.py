@@ -243,7 +243,7 @@
 # 
 # ## MATLAB code
 # 
-# The following MATLAB code in defines the vertex and face matrices for the house object from {prf:ref}`object-space-example` and plots the object space. The vertex and face matrices are defined in `V` and `F` and the `patch()` command is then used to plot the object. Note that we only use the first three rows of the `V` array which has been transposed because MATLAB assumes the co-ordinates are listed in rows. The `FaceAlpha` is set to 0.5 so that the faces of the object are semi-transparent.
+# The following MATLAB code in defines the vertex and face matrices for the house object from {prf:ref}`object-space-example` and plots the object space. The vertex and face matrices are defined in `V` and `F` and the `patch()` command is then used to plot the object. Note that we only use the first three rows of the `V` array which has been transposed because MATLAB assumes the co-ordinates are listed in rows. The `FaceAlpha` is set to 0.75 so that the faces of the object are semi-transparent.
 # 
 # ```matlab
 # # Define object

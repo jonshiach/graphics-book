@@ -60,7 +60,7 @@
 # Combining the translation and change of basis matrix gives
 # 
 # \begin{align*}
-# 	A &= T(-\mathbf{p}) \cdot R_{E \to C} = 
+# 	A = T(-\mathbf{p}) \cdot R_{E \to C} &= 
 # 	\begin{pmatrix}
 # 		u_1 & u_2 & u_3 & 0 \\
 # 		v_1 & v_2 & v_2 & 0 \\

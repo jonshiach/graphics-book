@@ -137,7 +137,7 @@
 # :label: transformations-ex3-solution
 # :class: dropdown
 # 
-# (a) Since the side lengths are 2 then the height of the triangle is $h = \sqrt{3}$. The triangle is centred at $(3, 2)$ with a side parallel to the $x$-axis so if $(x_1,y_1)$, $(x_2,y_2)$ and $(x_3,y_3)$ are the vertex co-ordinates then $x_1 = 2$, $x_2 = 4$ and $x_3 = 3$ and 
+# (a) Since the side lengths are 2 then the height of the triangle is $h = \sqrt{3}$. Let $(x_1,y_1)$, $(x_2,y_2)$ and $(x_3,y_3)$ be the vertex co-ordinates then $x_1 = 2$, $x_2 = 4$, $x_3 = 3$, $y_2 = y_1$ and $y_3 = y_1 + h$. The triangle is centred at $(3, 2)$ with a side parallel to the $x$-axis so
 # 
 # \begin{align*}
 #     2 &= \frac{y_1 + y_2 + y_3}{3} = \frac{y_1 + y_1 + y_1 + h}{3} = \frac{3y_1 + \sqrt{3}}{3} \\
@@ -313,7 +313,7 @@
 # 
 #  (a) animate a square with side lengths 1 travelling with a centre at $\mathbf{p}$. (Hint: define the square vertices so it is centred at the origin).
 # 
-#  (b) the square from part (a) is scaled by $\mathbf{s} = (2+\cos(5t), 2+\cos(5*t)$ about its centre;
+#  (b) the square from part (a) is scaled by the scaling vector $\mathbf{s} = (2+\cos(5t), 2+\cos(5t))$ about its centre;
 # 
 #  (c) the square rotates in an clockwise direction about its centre so that the square performs 8 rotations per second.
 # 
