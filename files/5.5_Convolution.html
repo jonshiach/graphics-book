@@ -199,6 +199,11 @@ const thebe_selector_output = ".output, .cell_output"
      Rotation
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2.4_Transformations_exercises.html">
+     Linear Transformations Exercises
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
@@ -264,6 +269,11 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="4.4_Screen_space.html">
+     Screen space
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="4.5_Binary_space_partitioning.html">
      Binary space partitioning
     </a>
@@ -280,6 +290,11 @@ const thebe_selector_output = ".output, .cell_output"
    </i>
   </label>
   <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="5.1_Clipping.html">
+     Clipping
+    </a>
+   </li>
    <li class="toctree-l2">
     <a class="reference internal" href="5.1_Drawing_lines.html">
      Drawing lines
@@ -525,7 +540,7 @@ title="Print to PDF"
 <p><strong>Convolution</strong> is a common method used in image processing to apply blurring, sharpening, embossing and edge detection to an image. Given an input image we can apply convolution using a <strong>kernel</strong> (or filter) on the input to produce an output image that has the kernel applied.</p>
 <p>The convolution of an image array <span class="math notranslate nohighlight">\(X\)</span> and a kernel array <span class="math notranslate nohighlight">\(Y\)</span> is</p>
 <div class="math notranslate nohighlight" id="equation-convolution-equation">
-<span class="eqno">(37)<a class="headerlink" href="#equation-convolution-equation" title="Permalink to this equation">#</a></span>\[\begin{align*}
+<span class="eqno">(39)<a class="headerlink" href="#equation-convolution-equation" title="Permalink to this equation">#</a></span>\[\begin{align*}
 	Y(i,j) = K * X(i,j) = \sum_{p = -a}^{a} \sum_{q = -b}^{b} K(i-p,j-q) X(p,q) 
 \end{align*}\]</div>
 <p>where <span class="math notranslate nohighlight">\(Y\)</span> is the filtered image, <span class="math notranslate nohighlight">\(X\)</span> is the original image, <span class="math notranslate nohighlight">\(K\)</span> is a kernel filter. <span class="math notranslate nohighlight">\(K\)</span> is usually a square matrix with odd numbers of rows and columns. To calculate the filtered image we align the kernel filter with elements of <span class="math notranslate nohighlight">\(X\)</span>, multiply the corresponding elements together and sum the result. For example consider the convolution of the image using the kernel shown below.</p>
@@ -534,7 +549,7 @@ title="Print to PDF"
 <img alt="../_images/5.5_Convolution_1_1.png" src="../_images/5.5_Convolution_1_1.png" />
 </div>
 </figure>
-<p>Here the kernel is aligned to the first 3 rows and columns of the image. Calculating equation <a class="reference internal" href="#equation-convolution-equation">(37)</a></p>
+<p>Here the kernel is aligned to the first 3 rows and columns of the image. Calculating equation <a class="reference internal" href="#equation-convolution-equation">(39)</a></p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
     Y(1,1) &amp;= 4(0.06) + 5(0.12) + 2(0.06) + 5(0.12) + 4(0.3) \\
@@ -546,11 +561,11 @@ title="Print to PDF"
 <p>By applying diferrent kernel filters to images can we can process images. A common application is to blur an image which can be done by applying the following kernel filter which is an approximation of a two-dimensional Gaussian curve</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}K_{blur} = \frac{1}{16} \begin{pmatrix} 1 &amp; 2 &amp; 1 \\ 2 &amp; 4 &amp; 2 \\ 1 &amp; 2 &amp; 1 \end{pmatrix}\end{split}\]</div>
-<p>The affects of applying Gaussian blur to an image can be seen in <a class="reference internal" href="#blur-figure"><span class="std std-numref">Fig. 100</span></a>.</p>
+<p>The affects of applying Gaussian blur to an image can be seen in <a class="reference internal" href="#blur-figure"><span class="std std-numref">Fig. 110</span></a>.</p>
 <figure class="align-default" id="blur-figure">
 <img alt="../_images/cavendish_blur.png" src="../_images/cavendish_blur.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 100 </span><span class="caption-text">The original image (left) and with Gaussian blur applied (right).</span><a class="headerlink" href="#blur-figure" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 110 </span><span class="caption-text">The original image (left) and with Gaussian blur applied (right).</span><a class="headerlink" href="#blur-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
@@ -559,11 +574,11 @@ title="Print to PDF"
 <p>A common tool used in image manipulation software is the sharpen tool. Given a photograph that is slightly out of focus the edges around features in the photograph will appear blurred and blend into each other, sharpening is used to accentuate these edges giving the appearance of a sharper image (this is often the default ‘enhance’ filter). The unsharp masking kernel filter is</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}K_{sharpen} = \begin{pmatrix} 0 &amp; -1 &amp; 0 \\ -1 &amp; 5 &amp; -1 \\ 0 &amp; -1 &amp; 0 \end{pmatrix},\end{split}\]</div>
-<p>and the affect of sharpening an image can be seen in <a class="reference internal" href="#sharpen-figure"><span class="std std-numref">Fig. 101</span></a>.</p>
+<p>and the affect of sharpening an image can be seen in <a class="reference internal" href="#sharpen-figure"><span class="std std-numref">Fig. 111</span></a>.</p>
 <figure class="align-default" id="sharpen-figure">
 <img alt="../_images/cavendish_sharpen.png" src="../_images/cavendish_sharpen.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 101 </span><span class="caption-text">The original image (left) and with unsharp masking applied (right).</span><a class="headerlink" href="#sharpen-figure" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 111 </span><span class="caption-text">The original image (left) and with unsharp masking applied (right).</span><a class="headerlink" href="#sharpen-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
