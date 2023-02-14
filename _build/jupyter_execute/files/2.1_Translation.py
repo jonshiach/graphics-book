@@ -30,7 +30,7 @@
 # 
 # The homogeneous co-ordinates of a point $\mathbf{u}$ in $\mathbb{R}^3$ expressed using the Cartesian co-ordinates is the 4-tuple $(w x, w y, w z, w)$ where $w \in \mathbb{R}\backslash \{0\}$. 
 # 
-# Note that a point with homogeneous co-ordinates $(x, y, z, 1)$ has the Cartesian co-ordinates $(x, y, z)$$.
+# Note that a point with homogeneous co-ordinates $(x, y, z, 1)$ has the Cartesian co-ordinates $(x, y, z)$.
 # ```
 # 
 # If $\mathbf{u}= (u_x, u_x, u_y, 1)$ expressed using homogeneous co-ordinates then the translation by the translation vector $\mathbf{t} = (t_x, t_y, t_z)$ is

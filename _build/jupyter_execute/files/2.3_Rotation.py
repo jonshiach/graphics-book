@@ -258,7 +258,7 @@
 # :class: seealso
 # :label: rotation-example-2
 # 
-# Rotate the polygon from {prf:ref}`rotation-example-1` by $\theta = \pi/4$ about its centre.
+# Rotate the polygon from {prf:ref}`rotation-example-1` by $\theta = \pi/4$ around the $z$-axis about its centre.
 # 
 # ````{dropdown} Solution
 # The homogeneous co-ordinate matrix is 
@@ -374,7 +374,7 @@
 # \end{align*}
 # 
 # ```{figure} ../images/rotate_about_line_2.svg
-# :width: 300px
+# :width: 400px
 # :name: rotation-about-line-figure-2
 # 
 # The line is translated so that $\mathbf{p}$ is at the origin.
@@ -387,7 +387,7 @@
 #     \sin(\phi) &= \frac{|d_x|}{d_1},
 # \end{align*}
 # 
-# where $d_1 = \sqrt{d_x^2 + d_y^2}$. The transformation matrix is
+# where $d_1 = \sqrt{d_x^2 + d_y^2}$ is the hypotenuse of the right-angled triangle formed by projecting $\mathbf{d}$ onto the $xy$ plane. So the rotation matrix is
 # 
 # \begin{align*}
 #     R_z(\phi) &=
@@ -400,7 +400,7 @@
 # \end{align*}
 # 
 # ```{figure} ../images/rotate_about_line_3.svg
-# :width: 220px
+# :width: 250px
 # :name: rotation-about-line-figure-3
 # 
 # The line is rotated about the $z$-axis so that $\mathbf{d}$ is in the $yz$ plane.
@@ -410,7 +410,7 @@
 # 
 # \begin{align*}
 #     \cos(\psi) &= \frac{|d_z|}{|\mathbf{d}|}, &
-#     \sin(\psi) &= \frac{\sqrt{d_x^2 + d_y^2}}{|\mathbf{d}|},
+#     \sin(\psi) &= \frac{d_1}{|\mathbf{d}|},
 # \end{align*}
 # 
 # so the transformation matrix is
@@ -445,6 +445,7 @@
 # 
 # 
 # ```{figure} ../images/rotate_about_line_example_1.svg
+# :width: 180px
 # ```
 # 
 # First we translate by $-\mathbf{c}$ so that the centre of the plane is at the origin.
@@ -467,6 +468,7 @@
 # 
 # ```{figure} ../images/rotate_about_line_example_2.svg
 # :name: rotate-about-line-example-2
+# :width: 180px
 # 
 # Rotate $\mathbf{d}$ about the $z$-axis.
 # ```
@@ -512,6 +514,7 @@
 # Since $d_y = 0$ then the rotated $\mathbf{d}$ vector is now in the $xz$ plane. 
 # 
 # ```{figure} ../images/rotate_about_line_example_3.svg
+# :width: 180px
 # 
 # Rotate $\mathbf{d}$ about the $y$ axis.
 # ```
@@ -562,6 +565,7 @@
 # Since $d_y=0$, $d_z=0$ and $d_x > 0$ then $\mathbf{d}$ is now pointing along the $x$ axis. 
 # 
 # ```{figure} /images/rotate_about_line_example_4.svg
+# :width: 200px
 # 
 # Rotate $\mathbf{d}$ about the $x$ axis.
 # ```

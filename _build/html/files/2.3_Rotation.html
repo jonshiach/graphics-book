@@ -736,7 +736,7 @@ Solution<div class="sd-summary-down docutils">
 <div class="proof example seealso admonition" id="rotation-example-2">
 <p class="admonition-title"><span class="caption-number">Example 27 </span></p>
 <section class="example-content" id="proof-content">
-<p>Rotate the polygon from <a class="reference internal" href="#rotation-example-1">Example 26</a> by <span class="math notranslate nohighlight">\(\theta = \pi/4\)</span> about its centre.</p>
+<p>Rotate the polygon from <a class="reference internal" href="#rotation-example-1">Example 26</a> by <span class="math notranslate nohighlight">\(\theta = \pi/4\)</span> around the <span class="math notranslate nohighlight">\(z\)</span>-axis about its centre.</p>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
 Solution<div class="sd-summary-down docutils">
@@ -848,7 +848,7 @@ Solution<div class="sd-summary-down docutils">
     \end{pmatrix}.
 \end{align*}\]</div>
 <figure class="align-default" id="rotation-about-line-figure-2">
-<a class="reference internal image-reference" href="../_images/rotate_about_line_2.svg"><img alt="../_images/rotate_about_line_2.svg" src="../_images/rotate_about_line_2.svg" width="300px" /></a>
+<a class="reference internal image-reference" href="../_images/rotate_about_line_2.svg"><img alt="../_images/rotate_about_line_2.svg" src="../_images/rotate_about_line_2.svg" width="400px" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 38 </span><span class="caption-text">The line is translated so that <span class="math notranslate nohighlight">\(\mathbf{p}\)</span> is at the origin.</span><a class="headerlink" href="#rotation-about-line-figure-2" title="Permalink to this image">#</a></p>
 </figcaption>
@@ -859,7 +859,7 @@ Solution<div class="sd-summary-down docutils">
     \cos(\phi) &amp;= \frac{|d_y|}{d_1}, &amp;
     \sin(\phi) &amp;= \frac{|d_x|}{d_1},
 \end{align*}\]</div>
-<p>where <span class="math notranslate nohighlight">\(d_1 = \sqrt{d_x^2 + d_y^2}\)</span>. The transformation matrix is</p>
+<p>where <span class="math notranslate nohighlight">\(d_1 = \sqrt{d_x^2 + d_y^2}\)</span> is the hypotenuse of the right-angled triangle formed by projecting <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> onto the <span class="math notranslate nohighlight">\(xy\)</span> plane. So the rotation matrix is</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
     R_z(\phi) &amp;=
@@ -871,7 +871,7 @@ Solution<div class="sd-summary-down docutils">
     \end{pmatrix}.
 \end{align*}\]</div>
 <figure class="align-default" id="rotation-about-line-figure-3">
-<a class="reference internal image-reference" href="../_images/rotate_about_line_3.svg"><img alt="../_images/rotate_about_line_3.svg" src="../_images/rotate_about_line_3.svg" width="220px" /></a>
+<a class="reference internal image-reference" href="../_images/rotate_about_line_3.svg"><img alt="../_images/rotate_about_line_3.svg" src="../_images/rotate_about_line_3.svg" width="250px" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 39 </span><span class="caption-text">The line is rotated about the <span class="math notranslate nohighlight">\(z\)</span>-axis so that <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> is in the <span class="math notranslate nohighlight">\(yz\)</span> plane.</span><a class="headerlink" href="#rotation-about-line-figure-3" title="Permalink to this image">#</a></p>
 </figcaption>
@@ -880,7 +880,7 @@ Solution<div class="sd-summary-down docutils">
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
     \cos(\psi) &amp;= \frac{|d_z|}{|\mathbf{d}|}, &amp;
-    \sin(\psi) &amp;= \frac{\sqrt{d_x^2 + d_y^2}}{|\mathbf{d}|},
+    \sin(\psi) &amp;= \frac{d_1}{|\mathbf{d}|},
 \end{align*}\]</div>
 <p>so the transformation matrix is</p>
 <div class="amsmath math notranslate nohighlight">
@@ -914,7 +914,8 @@ Solution<div class="sd-summary-down docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
 <figure class="align-default">
-<img alt="../_images/rotate_about_line_example_1.svg" src="../_images/rotate_about_line_example_1.svg" /></figure>
+<a class="reference internal image-reference" href="../_images/rotate_about_line_example_1.svg"><img alt="../_images/rotate_about_line_example_1.svg" src="../_images/rotate_about_line_example_1.svg" width="180px" /></a>
+</figure>
 <p class="sd-card-text">First we translate by <span class="math notranslate nohighlight">\(-\mathbf{c}\)</span> so that the centre of the plane is at the origin.</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
@@ -933,7 +934,8 @@ Solution<div class="sd-summary-down docutils">
     \end{pmatrix}.
 \end{align*}\]</div>
 <figure class="align-default" id="rotate-about-line-example-2">
-<img alt="../_images/rotate_about_line_example_2.svg" src="../_images/rotate_about_line_example_2.svg" /><figcaption>
+<a class="reference internal image-reference" href="../_images/rotate_about_line_example_2.svg"><img alt="../_images/rotate_about_line_example_2.svg" src="../_images/rotate_about_line_example_2.svg" width="180px" /></a>
+<figcaption>
 <p><span class="caption-number">Fig. 41 </span><span class="caption-text">Rotate <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> about the <span class="math notranslate nohighlight">\(z\)</span>-axis.</span><a class="headerlink" href="#rotate-about-line-example-2" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
@@ -974,7 +976,8 @@ Solution<div class="sd-summary-down docutils">
 \end{align*}\]</div>
 <p class="sd-card-text">Since <span class="math notranslate nohighlight">\(d_y = 0\)</span> then the rotated <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> vector is now in the <span class="math notranslate nohighlight">\(xz\)</span> plane.</p>
 <figure class="align-default" id="id1">
-<img alt="../_images/rotate_about_line_example_3.svg" src="../_images/rotate_about_line_example_3.svg" /><figcaption>
+<a class="reference internal image-reference" href="../_images/rotate_about_line_example_3.svg"><img alt="../_images/rotate_about_line_example_3.svg" src="../_images/rotate_about_line_example_3.svg" width="180px" /></a>
+<figcaption>
 <p><span class="caption-number">Fig. 42 </span><span class="caption-text">Rotate <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> about the <span class="math notranslate nohighlight">\(y\)</span> axis.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
@@ -1020,7 +1023,8 @@ Solution<div class="sd-summary-down docutils">
 \end{align*}\]</div>
 <p class="sd-card-text">Since <span class="math notranslate nohighlight">\(d_y=0\)</span>, <span class="math notranslate nohighlight">\(d_z=0\)</span> and <span class="math notranslate nohighlight">\(d_x &gt; 0\)</span> then <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> is now pointing along the <span class="math notranslate nohighlight">\(x\)</span> axis.</p>
 <figure class="align-default" id="id2">
-<img alt="../_images/rotate_about_line_example_4.svg" src="../_images/rotate_about_line_example_4.svg" /><figcaption>
+<a class="reference internal image-reference" href="../_images/rotate_about_line_example_4.svg"><img alt="../_images/rotate_about_line_example_4.svg" src="../_images/rotate_about_line_example_4.svg" width="200px" /></a>
+<figcaption>
 <p><span class="caption-number">Fig. 43 </span><span class="caption-text">Rotate <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> about the <span class="math notranslate nohighlight">\(x\)</span> axis.</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>

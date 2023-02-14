@@ -311,7 +311,7 @@
 # 
 #  Copy this code into a MATLAB live script and edit it so that it does the following:
 # 
-#  (a) animate a square with side lengths 1 travelling with a centre at $\mathbf{p}$. (Hint: define the square vertices so it is centred at the origin).
+#  (a) animate a square with side lengths 1 travelling with a centre at $\mathbf{p}$. (Hint: define the square vertices so it is centred at the origin);
 # 
 #  (b) the square from part (a) is scaled by the scaling vector $\mathbf{s} = (2+\cos(5t), 2+\cos(5t))$ about its centre;
 # 
@@ -369,10 +369,8 @@
 # end
 # ```
 # 
-# ```{figure} /images/exercise_15.png
-# :width: 400px
+# ```{figure} /images/exercise_15.gif
+# :width: 500px
 # ```
-# 
-# <img src="/images/programming.gif" alt="Computer man" style="width:48px;height:48px;">
 # 
 # ````

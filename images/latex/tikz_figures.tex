@@ -456,8 +456,8 @@
 % \end{tikzpicture}
 
 % Rotation
-% \tikzmath{\a1=20; \a2=60; \l1=4; \l2=1;}
 % \begin{tikzpicture}
+%     \tikzmath{\a1=20; \a2=60; \l1=4; \l2=1;}
 %     \draw [axis] (0, 0) -- ++(5, 0) node at (0:5.2) {$x$};
 %     \draw [axis] (0, 0) -- ++(0, 4) node at (90:4.2) {$y$};
 %     \node [point, blue] at (\a1:\l1) (1) {};
@@ -478,6 +478,7 @@
 
 % 3D rotation
 % \begin{tikzpicture}
+%     \tikzmath{\a1=20; \a2=60; \l1=4; \l2=1;}
 %     \draw [axis] (150:2) -- (330:3) node at (330:3.2) {$x$};
 %     \draw [axis] (210:2) -- (30:3) node at (30:3.2) {$y$};
 %     \draw [axis] (270:2) -- (90:3) node at (90:3.2) {$z$};
@@ -517,121 +518,136 @@
 % \end{tikzpicture}
 
 % Rotation about line
-\tikzmath{\a1=20;\x=330;\y=30;\z=90;\l=2;}
 % \begin{tikzpicture}
+%     \tikzmath{\a=20;\x=330;\y=30;\z=90;\l=4;\al=2.5;}
 %     \coordinate (l) at (2,0);
-%     \coordinate (p) at ($(l)+(\a1:1)$);
-%     \coordinate (c) at ($(p)+(\a1:4)$);
-%     \draw [axis] (0,0) -- (\x:\l) node at (\x:\l+0.2) {$x$};
-%     \draw [axis] (0,0) -- (\y:\l) node at (\y:\l+0.2) {$y$};
-%     \draw [axis] (0,0) -- (\z:\l) node at (\z:\l+0.2) {$z$};
-%     \draw [red] (l) -- ++(\a1:6);
+%     \coordinate (p) at (1,2);
+%     \coordinate (d) at ($(p)+(\a:\l)$);
+%     \coordinate (c) at ($(p)+(\a:5)$);
+%     \draw [axis] (0,0) -- (\x:\al) node at (\x:\al+0.2) {$x$};
+%     \draw [axis] (0,0) -- (\y:\al) node at (\y:\al+0.2) {$y$};
+%     \draw [axis] (0,0) -- (\z:\al) node at (\z:\al+0.2) {$z$};
+%     \draw [red] ($(p)+(\a+180:2)$) -- ++(\a:8);
 %     \node [point,blue,label=below right:\color{blue}$\mathbf{p}$] at (p) {};
-%     \draw [bluevec] (p) -- ++(\a1:3) node [pos=0.5,below right] {$\mathbf{d}$};
-%     \draw[line width=1pt,red,-latex',rotate around={{\a1+90}:(c)}] (c) [partial ellipse=-80:260:0.5cm and 0.25cm];
+%     \draw [bluevec] (p) -- (d) node [pos=0.5,below right] {$\mathbf{d}$};
+%     \draw[line width=1pt,red,-latex',rotate around={{\a+90}:(c)}] (c) [partial ellipse=-80:260:0.5cm and 0.25cm];
 % \end{tikzpicture}
 
 % \begin{tikzpicture}
+%     \tikzmath{\a=20;\x=330;\y=30;\z=90;\al=2.5;\l=4;}
 %     \coordinate (l) at ($(0,0)+(\a1:-1)$);
 %     \coordinate (p) at (0,0);
-%     \coordinate (c) at ($(p)+(\a1:4.5)$);
-%     \draw [axis] (0,0) -- (\x:\l) node at (\x:\l+0.2) {$x$};
-%     \draw [axis] (0,0) -- (\y:\l) node at (\y:\l+0.2) {$y$};
-%     \draw [axis] (0,0) -- (\z:\l) node at (\z:\l+0.2) {$z$};
-%     \draw [red] (l) -- ++(\a1:6);
-%     \draw [bluevec] (p) -- ++(\a1:3) node [pos=1,above] {$\mathbf{d}$};
-%     \draw[line width=1pt,red,-latex',rotate around={{\a1+90}:(c)}] (c) [partial ellipse=-80:260:0.5cm and 0.25cm];
-%     \draw[line width=1pt,blue,-latex',rotate around={180:(90:1.25)}] (90:1.25) [partial ellipse=-80:260:0.5cm and 0.25cm];
-%     \draw [help lines] (\a1:3) -- node [above,rotate=-90] {$d_z$} ++(270:1)
-%         ($(\a1:3)+(270:1)$) -- node [below] {$d_1$} (0,0) 
-%         ($(\a1:3)+(270:1)$) -- node [pos=0.4,above,rotate=-30] {$d_x$} ++(150:1.6)
-%         -- (0,0) node [pos=0.5,above,rotate=30] {$d_y$};
-%     \draw [help lines] (30:1.45) -- ++(330:0.2) -- ++(30:0.2);
+%     \coordinate (c) at (\a:5);
+%     \coordinate (d) at (\a:\l);
+%     \draw [red] (l) -- ++(\a:7);
+%     \draw [bluevec] (p) -- (d) node [pos=1,above] {$\mathbf{d}$};
+%     \draw[line width=1pt,red,-latex',rotate around={{\a+90}:(c)}] (c) [partial ellipse=-80:260:0.5cm and 0.25cm];
+%     \draw[line width=1pt,blue,-latex',rotate around={180:(90:1.25)}] (90:1) [partial ellipse=-80:260:0.5cm and 0.25cm];
+%     \draw [help lines] (0,0) -- (0:{\l*cos(\a)}) coordinate (1)-- (d) (\y:{0.5*\l*cos(\a)/cos(y)}) coordinate (2) -- (0:{\l*cos(\a)});
+%     \draw [help lines] ($(2)+(\y+180:0.2)$) -- ++(\x:0.2) -- ++(\y:0.2);
 %     \node [gray] at (15:0.67) {$\phi$};
+%     \draw [axis] (0,0) -- (\x:\al) node at (\x:\al+0.2) {$x$};
+%     \draw [axis] (0,0) -- (\y:\al) node at (\y:\al+0.2) {$y$};
+%     \draw [axis] (0,0) -- (\z:\al) node at (\z:\al+0.2) {$z$};
+%     \draw [dblarrow,help lines] (270:0.2) -- ++(0:{\l*cos(\a)}) node [pos=0.5,below] {$d_1$};
+%     \draw [dblarrow,help lines] ($(2)+(\y:0.2)$) -- ($(1)+(\y:0.2)$) node [pos=0.5,above,rotate=\x] {$|d_x|$};
+%     \draw [dblarrow,help lines] (\x+180:0.2) -- ($(2)+(\x+180:0.2)$) node [pos=0.5,above,rotate=\y] {$|d_y|$};
+%     \node [point,blue,label=below left:\color{blue}$\mathbf{p}$] at (p) {};
 % \end{tikzpicture}
 
 % \begin{tikzpicture}
-%     \tikzmath{\a1=47;}
-%     \coordinate (l) at ($(0,0)+(\a1:-1)$);
+%     \tikzmath{\a=47;\x=330;\y=30;\z=90;\al=2.5;\l=4;}
+%     \coordinate (l) at ($(0,0)+(\a:-1)$);
 %     \coordinate (p) at (0,0);
-%     \coordinate (c) at ($(p)+(\a1:4.5)$);
-%     \draw [axis] (0,0) -- (\x:\l) node at (\x:\l+0.2) {$x$};
-%     \draw [axis] (0,0) -- (\y:\l) node at (\y:\l+0.2) {$y$};
-%     \draw [axis] (0,0) -- (\z:\l) node at (\z:\l+0.2) {$z$};
-%     \draw [red] (l) -- ++(\a1:6);
-%     \draw [bluevec] (p) -- ++(\a1:3) node [pos=0.8,below right] {$\mathbf{d}$};
-%     \draw[line width=1pt,red,-latex',rotate around={{\a1+90}:(c)}] (c) [partial ellipse=-80:260:0.5cm and 0.25cm];
+%     \coordinate (c) at ($(p)+(\a:5)$);
+%     \coordinate (d) at (\a:\l);
+%     \draw [red] (l) -- ++(\a:7);
+%     \draw [bluevec] (p) -- (d) node [pos=0.8,below right] {$\mathbf{d}$};
+%     \draw[line width=1pt,red,-latex',rotate around={{\a+90}:(c)}] (c) [partial ellipse=-80:260:0.5cm and 0.25cm];
 %     \draw[line width=1pt,blue,-latex',rotate around={60:(330:1.25)}] (330:1.25) [partial ellipse=-80:260:0.5cm and 0.25cm];
-%     \draw [help lines] (\a1:3) -- node [above,rotate=25] {$d_1$} ++(210:2.4);
-%     \node [gray,left] at (90:0.5) {$d_z$};
-%     \node [gray,rotate=\a1,below] at (\a1:1.5) {$|\mathbf{d}|$};
-%     \draw [help lines] (90:0.8) -- ++(30:0.2) -- ++(90:0.2);
-%     \node [gray] at ({(\a1 + 90)/2}:0.67) {$\psi$};
+%     \draw [help lines] (d) -- ++(270:{\l*sin(\a)-\l*cos(\a)*tan(\y))}) coordinate (1) -- (0,0);
+%     \draw [help lines] ($(1)+(\y+180:0.2)$) -- ++(\z:0.2) -- ++(\y:0.2);
+%     \node [help lines] at ({0.5*(\a+\y)}:1.25) {$\psi$};
+%     \draw [dblarrow,help lines] (\x:0.2) -- node [below,rotate=\y] {$d_1$} ($(1)+(\x:0.2)$);
+%     \draw [dblarrow,help lines] ($(1)+(\y:0.2)$) -- node [below,rotate=\z] {$|d_z|$} ($(d)+(\y:0.2)$);
+%     \draw [dblarrow,help lines] (\x+180:0.2) -- node [above,rotate=\a] {$|\mathbf{d}|$} ($(d)+(\x+180:0.2)$);
+%     \draw [axis] (0,0) -- (\x:\al) node at (\x:\al+0.2) {$x$};
+%     \draw [axis] (0,0) -- (\y:\al) node at (\y+5:\al+0.2) {$y$};
+%     \draw [axis] (0,0) -- (\z:\al) node at (\z:\al+0.2) {$z$};
+%     \node [point,blue,label=below left:\color{blue}$\mathbf{p}$] at (p) {};
 % \end{tikzpicture}
 
 % \begin{tikzpicture}
-%     \tikzmath{\a1=90;}
-%     \coordinate (l) at ($(0,0)+(\a1:-1)$);
+%     \tikzmath{\a=90;\x=330;\y=30;\z=90;\al=2.5;\l=4;}
+%     \coordinate (l) at ($(0,0)+(\a:-1)$);
 %     \coordinate (p) at (0,0);
-%     \coordinate (c) at ($(p)+(\a1:4.5)$);
-%     \draw [axis] (0,0) -- (\x:\l) node at (\x:\l+0.2) {$x$};
-%     \draw [axis] (0,0) -- (\y:\l) node at (\y:\l+0.2) {$y$};
-%     \draw [axis] (0,0) -- (\z:\l) node at (\z+5:\l+0.2) {$z$};
-%     \draw [red] (l) -- ++(\a1:5);
-%     \draw [bluevec] (p) -- ++(\a1:3) node [pos=0.5,below right] {$\mathbf{d}$};
-%     \draw[line width=1pt,red,-latex',rotate around={{\a1+90}:(90:3.5)}] (90:3.5) [partial ellipse=-80:260:0.5cm and 0.25cm];
+%     \coordinate (c) at ($(p)+(\a:5)$);
+%     \coordinate (d) at (\a:\l);
+%     \draw [axis] (0,0) -- (\x:\al) node at (\x:\al+0.2) {$x$};
+%     \draw [axis] (0,0) -- (\y:\al) node at (\y:\al+0.2) {$y$};
+%     \draw [axis] (0,0) -- (\z:\al) node at (\z+5:\al+0.2) {$z$};
+%     \draw [red] (l) -- ++(\a:7);
+%     \draw [bluevec] (p) -- (d) node [pos=0.9,below right] {$\mathbf{d}$};
+%     \draw[line width=1pt,red,-latex',rotate around={{\a+90}:(90:3.5)}] (c) [partial ellipse=-80:260:0.5cm and 0.25cm];
+%     \node [point,blue,label=below left:\color{blue}$\mathbf{p}$] at (p) {};
 % \end{tikzpicture}
 
 % Aeroplane example
 % \begin{tikzpicture}
-%     \tikzmath{\a1=290;\l=4;}
+%     \tikzmath{\a=290;\x=330;\y=30;\z=90;\al=2.5;\l=3;}
 %     \coordinate (c) at (60:3);
-%     \draw [axis] (0,0) -- (\x:\l) node at (\x:\l+0.2) {$x$};
-%     \draw [axis] (0,0) -- (\y:\l) node at (\y:\l+0.2) {$y$};
-%     \draw [axis] (0,0) -- (\z:\l) node at (\z:\l+0.2) {$z$};
-%     \draw [bluevec] (c) -- ++(\a1:3) node [pos=0.8,right] {$\mathbf{d}$};
-%     \node at ($(c)+(0,-0.1)$) [rotate={\a1-1}] {\includegraphics[width=2cm]{../plane.png}};
-%     \node [point,label=above right:$\mathbf{c}$] at (c) {};
+%     \draw [axis] (0,0) -- (\x:\al) node at (\x:\al+0.2) {$x$};
+%     \draw [axis] (0,0) -- (\y:\al) node at (\y:\al+0.2) {$y$};
+%     \draw [axis] (0,0) -- (\z:\al) node at (\z:\al+0.2) {$z$};
+%     \draw [bluevec] (c) -- ++(\a:\l) node [pos=0.8,right] {$\mathbf{d}$};
+%     \node at ($(c)+(0,-0.1)$) [rotate={\a-1}] {\includegraphics[width=2cm]{../plane.png}};
+%     \node [point,blue,label=above right:$\color{blue}\mathbf{c}$] at (c) {};
 %     \draw [redvec] (c) -- (0,0) node [left,pos=0.5] {$-\mathbf{c}$};
 % \end{tikzpicture}
 
 % \begin{tikzpicture}
+%     \tikzmath{\a=290;\x=330;\y=30;\z=90;\al=2.5;\l=3;}
 %     \coordinate (c) at (0,0);
-%     \tikzmath{\a1=290;\l=4;}
+%     \coordinate (d) at (\a:\l);
 %     \draw [axis] (0,0) -- (\x:\l) node at (\x:\l+0.2) {$x$};
 %     \draw [axis] (0,0) -- (\y:\l) node at (\y:\l+0.2) {$y$};
 %     \draw [axis] (0,0) -- (\z:\l) node at (\z:\l+0.2) {$z$};
-%     \draw [bluevec] (c) -- ++(\a1:3) node [pos=0.8,left] {$\mathbf{d}$};
-%     \node at ($(c)+(0,-0.1)$) [rotate={\a1-1}] {\includegraphics[width=2cm]{../plane.png}};
-%     \draw [help lines] ($(c)+(\a1:3)$) -- node [above,rotate=-90] {$d_z$} ++(90:1) -- node [rotate=30,above] {$d_y$} ++(30:1.2) --  node [rotate=-30,above] {$d_x$} (0,0) ($(c)+(\a1:3)+(90:1)$) -- node [above,rotate={\a1+10}] {$d_1$} (0,0);
-%     \draw[line width=1pt,red,-latex',rotate around={180:(0,2)}] (0,2) [partial ellipse=-80:260:0.5cm and 0.25cm];
+%     \draw [bluevec] (c) -- (d) node [pos=0.8,left] {$\mathbf{d}$};
+%     \node at ($(c)+(0,-0.1)$) [rotate={\a-1}] {\includegraphics[width=2cm]{../plane.png}};
+%     \draw [help lines] ($(c)+(\a:3)$) -- ++(90:1) coordinate (1) -- ++(30:1.2) coordinate (2);
+%     \draw [help lines] (0,0) -- (1);
+%     \draw [dblarrow,help lines] ($(1)+(\x:0.2)$) -- node [below,rotate=\y] {$|d_y|$} ($(2)+(\x:0.2)$);
+%     \draw [dblarrow,help lines] (\y:0.15) -- node [above,rotate=\x] {$|d_x|$} ($(2)+(\y:0.2)$);
+%     \draw[line width=1pt,blue,-latex',rotate around={180:(0,2)}] (0,2) [partial ellipse=-80:260:0.5cm and 0.25cm];
 %     \draw [help lines] (330:2.2) -- ++(210:0.2) -- ++(330:0.2);
 % \end{tikzpicture}
 
 % \begin{tikzpicture}
+%     \tikzmath{\a=290;\x=330;\y=30;\z=90;\al=2.5;\l=3;}
 %     \coordinate (c) at (0,0);    
 %     \tikzmath{\a1=313;\l=4;}
-%     \draw [axis] (0,0) -- (\x:\l) node at (\x:\l+0.2) {$x$};
-%     \draw [axis] (0,0) -- (\y:\l) node at (\y:\l+0.2) {$y$};
-%     \draw [axis] (0,0) -- (\z:\l) node at (\z:\l+0.2) {$z$};
-%     \draw [bluevec] (c) -- ++(\a1:3) node [pos=0.8,left] {$\mathbf{d}$};
+%     \draw [axis] (0,0) -- (\x:\al) node at (\x:\al+0.2) {$x$};
+%     \draw [axis] (0,0) -- (\y:\al) node at (\y:\al+0.2) {$y$};
+%     \draw [axis] (0,0) -- (\z:\al) node at (\z:\al+0.2) {$z$};
+%     \draw [bluevec] (c) -- ++(\a1:3) node [pos=0.8,below left] {$\mathbf{d}$};
 %     \node at ($(c)+(0,-0.1)$) [rotate={\a1-1}] {\includegraphics[width=2cm]{../plane.png}};
-%     \draw[line width=1pt,red,-latex',rotate around={-60:(30:2)}] (30:2) [partial ellipse=-80:260:0.5cm and 0.25cm];
-%     \draw [help lines] (\a1:3) -- node [rotate=-90,above] {$d_z$} ++(90:1);
+%     \draw[line width=1pt,blue,-latex',rotate around={-60:(30:2)}] (30:2) [partial ellipse=-80:260:0.5cm and 0.25cm];
+%     \draw [help lines] (\a1:3) -- node [rotate=90,below] {$|d_z|$} ++(90:1);
 %     \draw [help lines] (330:2.15) -- ++(270:0.2) -- ++(330:0.2);
 %     \node [gray,rotate=330,above] at (330:1.5) {$d_1$};
 % \end{tikzpicture}
 
-% \begin{tikzpicture}
-%     \coordinate (c) at (0,0);
-%     \tikzmath{\a1=330;\l=4;}
-%     \draw [axis] (0,0) -- (\x:\l) node at (\x:\l+0.2) {$x$};
-%     \draw [axis] (0,0) -- (\y:\l) node at (\y:\l+0.2) {$y$};
-%     \draw [axis] (0,0) -- (\z:\l) node at (\z:\l+0.2) {$z$};
-%     \draw [bluevec] (c) -- ++(\a1:3) node [below] {$\mathbf{d}$};
-%     \node at ($(c)+(0,-0.1)$) [rotate={\a1-1}] {\includegraphics[width=2cm]{../plane.png}};
-%     \draw[line width=1pt,red,-latex',rotate around={60:(330:2)}] (330:2) [partial ellipse=-80:260:0.5cm and 0.25cm];
-% \end{tikzpicture}
+\begin{tikzpicture}
+    \tikzmath{\a=290;\x=330;\y=30;\z=90;\al=2.5;\l=3;}
+    \coordinate (c) at (0,0);
+    \tikzmath{\a1=330;\l=4;}
+    \draw [axis] (0,0) -- (\x:\al) node at (\x:\al+0.2) {$x$};
+    \draw [axis] (0,0) -- (\y:\al) node at (\y:\al+0.2) {$y$};
+    \draw [axis] (0,0) -- (\z:\al) node at (\z:\al+0.2) {$z$};
+    \draw [bluevec] (c) -- ++(\a1:3) node [below] {$\mathbf{d}$};
+    \node at ($(c)+(0,-0.1)$) [rotate={\a1-1}] {\includegraphics[width=2cm]{../plane.png}};
+    \draw[line width=1pt,red,-latex',rotate around={60:(330:2)}] (330:2) [partial ellipse=-80:260:0.5cm and 0.25cm];
+\end{tikzpicture}
 
 % Scaling
 % \begin{tikzpicture}
@@ -675,15 +691,6 @@
 %     \node at ($(O2)+(1.5,-1.5)$) {scale about origin};
 %     \node at ($(O3)+(1.5,-1.5)$) {translate by $\mathbf{c}$};
 % \end{tikzpicture}
-
-% Transformation exercises
-\begin{tikzpicture}
-    \tikzmath{\l=4;}
-    \draw (0,0) -- ++(0:\l) -- ++(120:\l) -- cycle;
-    \draw [help lines] (\l/2,0) -- ++(90:{sqrt(3)/2*\l}) (\l/2-0.2,0) -- ++(0,0.2) -- ++(0.2,0);
-    \draw [dblarrow] (270:0.25) -- ++(0:\l/2) node [pos=0.5,fill=white] {$1$};
-    \draw [dblarrow] (150:0.25) -- ++(60:\l) node [pos=0.5,fill=white,rotate=60] {$2$};
-\end{tikzpicture}
 
 % Graphics pipeline
 % \begin{tikzpicture}[
