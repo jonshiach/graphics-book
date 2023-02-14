@@ -201,10 +201,17 @@
 #         5\sqrt{2}/2 & 7\sqrt{2}/2 & 4\sqrt{2} \\
 #         2 & 2 & 2 \\
 #         1 & 1 & 1
+#     \end{pmatrix} \\
+#     &\approx
+#     \begin{pmatrix}
+#         2.1213 & 3.5355 & 1.4142 \\
+#         3.5355 & 4.9497 & 5.6569 \\
+#         2 & 2 & 2 \\
+#         1 & 1 & 1 
 #     \end{pmatrix}.
 # \end{align*}
 # 
-# So the vertex co-ordinates fo the translated triangle are $(3\sqrt{2}, 5\sqrt{2}/2, 2) \approx (2.12, 3.54, 2)$, $(5\sqrt{2}/2, 7\sqrt{2}{2}, 2) \approx (3.54, 4.95, 2.00)$ and $(\sqrt{2}, 4\sqrt{2}, 2) \approx (1.41, 5.66, 2.00)$. The original triangle and the translated triangle are plotted below looking along the $z$ axis.
+# So the vertex co-ordinates fo the translated triangle are $(2.12, 3.54, 2)$, $(3.54, 4.95, 2)$ and $(1.41, 5.66, 2)$. The original triangle and the translated triangle are plotted below looking along the $z$ axis.
 # 
 # ```{figure} /images/rotation_example.png
 # :width: 400px
@@ -275,8 +282,12 @@
 # and since the polygon is a triangle the co-ordinates of the centre are the average of the vertices
 # 
 # \begin{align*}
-#     \mathbf{c} &= \frac{(4, 0, 1) + (6, 0, 1) + (5, 0, 3)}{3} = 
-#     \begin{pmatrix} 5 \\ 5/3 \\ 2 \end{pmatrix}.
+#     \mathbf{c} &= \frac{1}{3} \left( 
+#         \begin{pmatrix} 4 \\ 1 \\ 2 \end{pmatrix} + 
+#         \begin{pmatrix} 6 \\ 1 \\ 2 \end{pmatrix} + 
+#         \begin{pmatrix} 5 \\ 3 \\ 2 \end{pmatrix}
+#     \right)
+#     = \begin{pmatrix} 5 \\ 5/3 \\ 2 \end{pmatrix}.
 # \end{align*}
 # 
 # The individual transformation matrices are
@@ -339,10 +350,17 @@
 #         5/3 - 5\sqrt{2}/6 & 5/3 + \sqrt{2}/6 & 5/3 + 2 \sqrt{2}/3 \\
 #         2 & 2 & 2 \\
 #         1 & 1 & 1
+#     \end{pmatrix} \\
+#     &\approx
+#     \begin{pmatrix}
+#         4.7632 & 6.1785 & 4.0572 \\
+#         0.4882 & 1.9024 & 2.6095 \\
+#         2 & 2 & 2\\
+#         1 & 1 & 1 
 #     \end{pmatrix}.
 # \end{align*}
 # 
-# So the vertices of the rotated polygon are $(5 - \sqrt{2}/6, 5/3 - 5\sqrt{2}/6, 2) \approx (4.76, 0.49, 2.00)$, $(5 + 5\sqrt{2}/6, 5/3 + \sqrt{2}/6, 2) \approx (6.18, 1.90, 2.00)$ and $(5 - 2\sqrt{2}/3, 5/3 + 2\sqrt{2}/3, 2) \approx (4.06, 2.61, 2.00)$. The original polygon and the translated polygon are plotted below looking along the $z$ axis.
+# So the vertices of the rotated polygon are $(4.76, 0.49, 2)$, $(6.18, 1.90, 2)$ and $(4.06, 2.61, 2)$. The original polygon and the translated polygon are plotted below looking along the $z$ axis.
 # 
 # ```{figure} /images/rotation_about_centre_example.png
 # :width: 400px
@@ -380,7 +398,7 @@
 # The line is translated so that $\mathbf{p}$ is at the origin.
 # ```
 # 
-# {numref}`rotation-about-line-figure-2` shows that affect of translating by $-\mathbf{p}$. Now we need to rotate the line so that it lies in a plane the contains two of the three co-ordinate axes. If we rotate about the $z$ axis then the line will be in the $yz$ plane. The values of $\cos(\phi)$ and $\sin(\phi)$ in $R_z(\phi)$ are
+# {numref}`rotation-about-line-figure-2` shows that affect of translating by $-\mathbf{p}$. Now we need to rotate the line so that it lies in a plane the contains two of the three co-ordinate axes. The rotations required will depend on which of the eight directions $\mathbf{d}$ is pointing in. In this case $\mathbf{d}$ points towards the positive direction for all three axes, if we rotate about the $z$ axis anti-clockwise by angle $\phi$ then $\mathbf{d}$ (and therefore the line) will be in the $yz$ plane. The values of $\cos(\phi)$ and $\sin(\phi)$ in $R_z(\phi)$ are
 # 
 # \begin{align*}
 #     \cos(\phi) &= \frac{|d_y|}{d_1}, &
@@ -406,21 +424,21 @@
 # The line is rotated about the $z$-axis so that $\mathbf{d}$ is in the $yz$ plane.
 # ```
 # 
-# {numref}`rotation-about-line-figure-3` shows that affect of rotating about the $z$-axis. Now we need to rotate **clockwise** about the $x$ axis so that $\mathbf{d}$ points along the $z$ axis. The values of $\cos(\psi)$ and $\sin(\psi)$ are
+# {numref}`rotation-about-line-figure-3` shows that affect of rotating about the $z$-axis. Now we need to rotate clockwise about the $x$ axis so that $\mathbf{d}$ points along the $z$ axis. The values of $\cos(\psi)$ and $\sin(\psi)$ are
 # 
 # \begin{align*}
-#     \cos(\psi) &= \frac{|d_z|}{|\mathbf{d}|}, &
-#     \sin(\psi) &= \frac{d_1}{|\mathbf{d}|},
+#     \cos(\psi) &= \frac{d_1}{|\mathbf{d}|}, &
+#     \sin(\psi) &= \frac{|d_z|}{|\mathbf{d}|},
 # \end{align*}
 # 
-# so the transformation matrix is
+# so the transformation matrix is (note that the sign of the $\sin(\psi)$ terms are switched because we are rotating in the clockwise direction)
 # 
 # \begin{align*}
 #     R_x &=
 #     \begin{pmatrix}
 #         1 & 0 & 0 & 0 \\
-#         0 & |d_z|/|\mathbf{d}| & -d_1/|\mathbf{d}| & 0 \\
 #         0 & d_1/|\mathbf{d}| & |d_z|/|\mathbf{d}| & 0 \\
+#         0 & -|d_z|/|\mathbf{d}| & d_1/|\mathbf{d}| & 0 \\
 #         0 & 0 & 0 & 1
 #     \end{pmatrix}.
 # \end{align*}
@@ -432,7 +450,7 @@
 # The line is rotated about the $x$-axis so that $\mathbf{d}$ points along the $z$ axis.
 # ```
 # 
-# {numref}`rotation-about-line-figure-4` shows that affect of rotating about the $x$-axis. Now that the line is pointing along the $z$-axis we can perform the rotation about the line using $R_z(\theta)$ and reverse the two rotation and translation transformations. The composite transformation matrix is
+# {numref}`rotation-about-line-figure-4` shows that affect of rotating about the $x$-axis. Now that the line is pointing along the $z$-axis we can perform the rotation about the line using $R_z(\theta)$ and reverse the rotation in the $x$ and $z$ directions before finally reversing the translation. The composite transformation matrix is
 # 
 # $$A = T(\mathbf{p}) \cdot R_z(-\phi) \cdot R_x(-\psi) \cdot R_z(\theta) \cdot R_x(\psi) \cdot R_z(\phi) \cdot T(-\mathbf{p}).$$
 # 
@@ -443,9 +461,8 @@
 # 
 # ````{dropdown} Solution
 # 
-# 
 # ```{figure} ../images/rotate_about_line_example_1.svg
-# :width: 180px
+# :width: 40%
 # ```
 # 
 # First we translate by $-\mathbf{c}$ so that the centre of the plane is at the origin.
@@ -468,7 +485,7 @@
 # 
 # ```{figure} ../images/rotate_about_line_example_2.svg
 # :name: rotate-about-line-example-2
-# :width: 180px
+# :width: 50%
 # 
 # Rotate $\mathbf{d}$ about the $z$-axis.
 # ```
@@ -514,7 +531,7 @@
 # Since $d_y = 0$ then the rotated $\mathbf{d}$ vector is now in the $xz$ plane. 
 # 
 # ```{figure} ../images/rotate_about_line_example_3.svg
-# :width: 180px
+# :width: 50%
 # 
 # Rotate $\mathbf{d}$ about the $y$ axis.
 # ```
@@ -565,7 +582,7 @@
 # Since $d_y=0$, $d_z=0$ and $d_x > 0$ then $\mathbf{d}$ is now pointing along the $x$ axis. 
 # 
 # ```{figure} /images/rotate_about_line_example_4.svg
-# :width: 200px
+# :width: 50%
 # 
 # Rotate $\mathbf{d}$ about the $x$ axis.
 # ```
@@ -599,16 +616,16 @@
 # \begin{align*}
 #     R_{z}(-\phi) &= 
 #     \begin{pmatrix}
-#         2 / \sqrt{5} & 1 / \sqrt{5} & 0 & 0 \\
-#         -1 / \sqrt{5} & 2 / \sqrt{5} & 0 & 0 \\
+#         2\sqrt{5}/5 & \sqrt{5}/5 & 0 & 0 \\
+#         -\sqrt{5}/5 & 2\sqrt{5}/5 & 0 & 0 \\
 #         0 & 0 & 1 & 0 \\
 #         0 & 0 & 0 & 1
 #     \end{pmatrix}, \\
 #     R_y(-\psi) &= 
 #     \begin{pmatrix}
-#         \sqrt{5} / \sqrt{14} & 0 & -3 / \sqrt{14} & 0 \\
+#         \sqrt{5}\sqrt{14}/14 & 0 & 3\sqrt{14}/14 & 0 \\
 #         0 & 1 & 0 & 0 \\
-#         3 / \sqrt{14} & 0 & \sqrt{5} / \sqrt{14} & 0 \\
+#         -3\sqrt{14}/14 & 0 & \sqrt{5}\sqrt{14}/4 & 0 \\
 #         0 & 0 & 0 & 1
 #     \end{pmatrix}, \\
 #     T(\mathbf{c}) &= 

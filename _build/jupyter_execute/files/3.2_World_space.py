@@ -53,8 +53,8 @@
 # \begin{align*}
 #     R_z(\theta) &= 
 #     \begin{pmatrix}
-#         0 & 1 & 0 & 0 \\
-#         -1 & 0 & 0 & 0 \\
+#         0 & -1 & 0 & 0 \\
+#         1 & 0 & 0 & 0 \\
 #         0 & 0 & 1 & 0 \\
 #         0 & 0 & 0 & 1
 #     \end{pmatrix}, &
@@ -72,8 +72,8 @@
 # \begin{align*}
 #     A &= T(\mathbf{c}_1) \cdot R_z(\theta) = 
 #     \begin{pmatrix} 
-#         0 & 1 & 0 & 3 \\
-#         -1 & 0 & 0 & 3.5 \\
+#         0 & -1 & 0 & 3 \\
+#         1 & 0 & 0 & 3.5 \\
 #         0 & 0 & 1 & 0 \\
 #         0 & 0 & 0 & 1 
 #     \end{pmatrix}.
@@ -84,8 +84,8 @@
 # \begin{align*}
 #     V_{\text{world}} &=
 #     \begin{pmatrix} 
-#         0 & 1 & 0 & 3 \\
-#         -1 & 0 & 0 & 3.5 \\
+#         0 & -1 & 0 & 3 \\
+#         1 & 0 & 0 & 3.5 \\
 #         0 & 0 & 1 & 0 \\
 #         0 & 0 & 0 & 1 
 #     \end{pmatrix}
@@ -98,7 +98,7 @@
 #     &= 
 #     \begin{pmatrix}
 #         2 & 2 & 4 & 4 & 2 & 2 & 4 & 4 & 2 & 4 \\
-#         4 & 3 & 3 & 4 & 4 & 3 & 3 & 4 & 3.5 & 3.5 \\
+#         3 & 4 & 4 & 3 & 3 & 4 & 4 & 3 & 3.5 & 3.5 \\
 #         0 & 0 & 0 & 0 & 1 & 1 & 1 & 1 & 2 & 2 \\
 #         1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1
 #     \end{pmatrix},
@@ -121,7 +121,7 @@
 # \begin{align*}
 #     T \cdot S \cdot V_{\text{house}} = \begin{pmatrix}
 #         2 & 2 & 4 & 4 & 2 & 2 & 4 & 4 & 2 & 4 \\
-#         2 & 1 & 1 & 2 & 2 & 1 & 1 & 2 & 1.5 & 1.5 \\
+#         1 & 2 & 2 & 1 & 1 & 2 & 2 & 1 & 1.5 & 1.5 \\
 #         0 & 0 & 0 & 0 & 1 & 1 & 1 & 1 & 2 & 2 \\
 #         1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1
 #     \end{pmatrix},
@@ -134,13 +134,13 @@
 #     \begin{matrix}
 #         \left( \begin{matrix}
 #             2 & 2 & \cdots & 4 \\
-#             2 & 1 & \cdots & 3.5 \\
+#             1 & 2 & \cdots & 3.5 \\
 #             0 & 0 & \cdots & 2 \\
 #             1 & 1 & \cdots & 1
 #         \end{matrix} \right. & \quad 
 #         \left. \begin{matrix}
 #             2 & 2 & \cdots & 4 \\
-#             2 & 1 & \cdots & 1.5 \\
+#             1 & 2 & \cdots & 1.5 \\
 #             0 & 0 & \cdots & 2 \\
 #             1 & 1 & \cdots & 1 
 #         \end{matrix} \right) \\
@@ -285,8 +285,8 @@
 #            0,    0,    s(3), 0 ; 
 #            0,    0,    0,    1 ];
 # 
-# Rz = @(theta) [ cos(theta), sin(theta), 0, 0 ;
-#                -sin(theta), cos(theta), 0, 0 ;
+# Rz = @(theta) [ cos(theta), -sin(theta), 0, 0 ;
+#                 sin(theta), cos(theta), 0, 0 ;
 #                 0,           0,         1, 0 ;
 #                 0,           0,         0, 1 ];
 # 

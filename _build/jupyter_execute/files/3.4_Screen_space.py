@@ -256,14 +256,14 @@
 # :class: seealso
 # :label: screen-space-example
 # 
-# The camera space from {prf:ref}`camera-space-example` is projected onto the screen space defined by near and far projection plans located at distances $near = 1$ and $far = 9$ from the origin, a field of view angle of $fov = \pi/3$ and a width-to-height screen aspect ratio of $4/3$. Calculate the screen space co-ordinates of the virtual world.
+# The camera space from {prf:ref}`camera-space-example` is projected onto the screen space defined by near and far projection plans located at distances $near = 1$ and $far = 5$ from the origin, a field of view angle of $fov = \pi/2$ and a width-to-height screen aspect ratio of $4/3$. Calculate the screen space co-ordinates of the virtual world.
 # 
 # ````{dropdown} Solution
 # First we calculate the $r$ and $t$ co-ordinates
 # 
 # \begin{align*}
-#     r &= near \cdot \tan \left( \frac{fov}{2} \right) = 2 \tan\left(\frac{\pi}{6}\right) \approx 1.1547, \\
-#     t &= \frac{r \cdot height}{width} = \frac{1.1547(3)}{4} \approx 0.8660,
+#     r &= near \cdot \tan \left( \frac{fov}{2} \right) = 2 \tan\left(\frac{\pi}{4}\right) \approx 1, \\
+#     t &= \frac{r \cdot height}{width} = \frac{1\times 3}{4} \approx 0.75,
 # \end{align*}
 # 
 # so the projection matrix is
@@ -278,16 +278,16 @@
 # 	\end{pmatrix} \\
 #     &=
 #     \begin{pmatrix}
-# 		-\dfrac{2}{1.1547} & 0 & 0 & 0 \\
-# 		0 & -\dfrac{2}{0.8660} & 0 & 0 \\
-# 		0 & 0 & \dfrac{1 + 9}{1 - 9} & \dfrac{2 \cdot 1 \cdot 9}{1 - 9} \\
+# 		-1/1 & 0 & 0 & 0 \\
+# 		0 & -1/0.75 & 0 & 0 \\
+# 		0 & 0 & \dfrac{1+5}{1-5} & \dfrac{2 \cdot 1 \cdot 5}{1 - 5} \\
 # 		0 & 0 & 1 & 0 
 # 	\end{pmatrix} \\
 #     &=
 #     \begin{pmatrix}
-#         -1.8660 & 0 & 0 & 0 \\
-#         0 & -1.1547 & 0 & 0 \\
-#         0 & 0 & -1.2222 & -2.2222 \\
+#         -1 & 0 & 0 & 0 \\
+#         0 & -1.3333 & 0 & 0 \\
+#         0 & 0 & -1.5 & -2.5 \\
 #         0 & 0 & 1 & 0
 #     \end{pmatrix}.
 # \end{align*}
@@ -298,23 +298,23 @@
 # \begin{align*}
 #     V_{\text{screen}} &= P \cdot V_{\text{view}} \\
 #     &= 
-#     \begin{pmatrix}
-#         -1.8660 & 0 & 0 & 0 \\
-#         0 & -1.1547 & 0 & 0 \\
-#         0 & 0 & -1.2222 & -2.2222 \\
+# 	\begin{pmatrix}
+#         -1 & 0 & 0 & 0 \\
+#         0 & -1.3333 & 0 & 0 \\
+#         0 & 0 & -1.5 & -2.5 \\
 #         0 & 0 & 1 & 0
-#     \end{pmatrix} 
+#     \end{pmatrix}
 #     \begin{pmatrix}
-#         1.4142 &   0.7071 &  -0.7071 &        0 & \cdots \\
-#         -1.2309 &  -1.1078 &  -1.3540 &  -1.4771 & \cdots \\
-#         -3.0899 &  -3.7862 &  -2.3936 &  -1.6973 & \cdots \\
-#         1&   1&   1&   1& \cdots 
+#         -0.7071 & \cdots & 0.7071 \\
+#         -1.2309 & \cdots & 2.0926 \\
+#         -3.0899 & \cdots & -4.6566 \\
+#         1 & \cdots & 1 
 #     \end{pmatrix} \\
 #     &= \begin{pmatrix}
-#         -1.2247 &  -0.6124 &   0.6124 &        0  & \cdots \\
-#         1.4213 &   1.2792 &   1.5635 &   1.7056 & \cdots \\
-#         1.5543 &   2.4053 &   0.7032  & -0.1478 & \cdots \\
-#         -3.0899 &  -3.7862 &  -2.3936  & -1.6973 & \cdots 
+# 		0.7071 & \cdots & -0.7071 \\
+# 		1.8053 & \cdots & -2.7901 \\
+# 		1.0904 & \cdots & 4.4849 \\
+# 		-2.3936 & \cdots & -4.6566
 #     \end{pmatrix}.
 # \end{align*}
 # 
@@ -323,10 +323,10 @@
 # \begin{align*}
 #     V_{screen} &=
 #     \begin{pmatrix}
-#         0.3964 &   0.1617 &  -0.2558 &        0  & \cdots \\
-#        -0.4600 &  -0.3379 &  -0.6532 &  -1.0049 & \cdots \\
-#        -0.5030 &  -0.6353 &  -0.2938 &   0.0871 & \cdots \\
-#         1 &   1 &   1 &   1 & \cdots 
+#         -0.2954 & \cdots & 0.1519 \\
+# 		-0.7542 & \cdots & 0.5992 \\
+# 		-0.4555 & \cdots & -0.9631 \\
+# 		1 & \cdots & 1 \\
 #     \end{pmatrix}
 # \end{align*}
 # ````

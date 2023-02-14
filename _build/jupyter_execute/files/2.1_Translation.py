@@ -23,7 +23,7 @@
 #     T(\mathbf{t}) \begin{pmatrix} u_1 \\ u_2 \\ u_3 \end{pmatrix}  = \begin{pmatrix} u_1 + t_1 \\ u_2 + t_2 \\ u_3 + t_3 \end{pmatrix}.
 # \end{align*}
 # 
-# Unfornately the matrix $T(\mathbf{t})$ does not exist which is independent of $u_1$, $u_2$ and $u_3$ so we can use a trick which makes use of **homogeneous co-ordinates**.
+# Unfortunately the matrix $T(\mathbf{t})$ does not exist which is independent of $u_1$, $u_2$ and $u_3$ so we can use a trick which makes use of **homogeneous co-ordinates**.
 # 
 # ```{prf:definition} Homogeneous co-ordinates
 # :label: homogeneous-coordinates-definition
@@ -38,8 +38,7 @@
 # \begin{align*}
 #     v_x &= u_x + t_x, \\
 #     v_y &= u_y + t_y, \\
-#     v_z &= u_z + t_z, \\
-#     1 &= 1
+#     v_z &= u_z + t_z,
 # \end{align*}
 # 
 # which can be written as the matrix equation

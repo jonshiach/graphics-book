@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.10) (preloaded format=pdflatex 2023.2.7)  14 FEB 2023 10:53
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.10) (preloaded format=pdflatex 2023.2.7)  14 FEB 2023 15:32
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -511,27 +511,21 @@ Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
  (C:\Users\jonsh\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
-))
-<../plane.png, id=4, 1927.2pt x 808.01875pt>
-File: ../plane.png Graphic file (type png)
-<use ../plane.png>
-Package pdftex.def Info: ../plane.png  used on input line 648.
-(pdftex.def)             Requested size: 56.9055pt x 23.8573pt.
- [1
+)) [1
 
-{C:/Users/jonsh/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map} <../plane.png>] (tikz_figures.aux) ) 
+{C:/Users/jonsh/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}] (tikz_figures.aux) ) 
 Here is how much of TeX's memory you used:
- 24988 strings out of 475385
- 614955 string characters out of 2776908
+ 25015 strings out of 475385
+ 615333 string characters out of 2776908
  929550 words of memory out of 3000000
- 46014 multiletter control sequences out of 15000+600000
+ 46044 multiletter control sequences out of 15000+600000
  471401 words of font info for 34 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 115i,7n,118p,1698b,719s stack positions out of 10000i,1000n,20000p,200000b,80000s
+ 115i,7n,118p,1698b,714s stack positions out of 10000i,1000n,20000p,200000b,80000s
 <C:/Users/jonsh/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/jonsh/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb>
-Output written on tikz_figures.pdf (1 page, 135800 bytes).
+Output written on tikz_figures.pdf (1 page, 20899 bytes).
 PDF statistics:
- 21 PDF objects out of 1000 (max. 8388607)
+ 19 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 18 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 13 words of extra memory for PDF output out of 10000 (max. 10000000)
 
