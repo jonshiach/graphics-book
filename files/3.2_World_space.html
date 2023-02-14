@@ -556,8 +556,8 @@ Solution<div class="sd-summary-down docutils">
 \[\begin{align*}
     R_z(\theta) &amp;= 
     \begin{pmatrix}
-        0 &amp; 1 &amp; 0 &amp; 0 \\
-        -1 &amp; 0 &amp; 0 &amp; 0 \\
+        0 &amp; -1 &amp; 0 &amp; 0 \\
+        1 &amp; 0 &amp; 0 &amp; 0 \\
         0 &amp; 0 &amp; 1 &amp; 0 \\
         0 &amp; 0 &amp; 0 &amp; 1
     \end{pmatrix}, &amp;
@@ -574,8 +574,8 @@ Solution<div class="sd-summary-down docutils">
 \[\begin{align*}
     A &amp;= T(\mathbf{c}_1) \cdot R_z(\theta) = 
     \begin{pmatrix} 
-        0 &amp; 1 &amp; 0 &amp; 3 \\
-        -1 &amp; 0 &amp; 0 &amp; 3.5 \\
+        0 &amp; -1 &amp; 0 &amp; 3 \\
+        1 &amp; 0 &amp; 0 &amp; 3.5 \\
         0 &amp; 0 &amp; 1 &amp; 0 \\
         0 &amp; 0 &amp; 0 &amp; 1 
     \end{pmatrix}.
@@ -585,8 +585,8 @@ Solution<div class="sd-summary-down docutils">
 \[\begin{align*}
     V_{\text{world}} &amp;=
     \begin{pmatrix} 
-        0 &amp; 1 &amp; 0 &amp; 3 \\
-        -1 &amp; 0 &amp; 0 &amp; 3.5 \\
+        0 &amp; -1 &amp; 0 &amp; 3 \\
+        1 &amp; 0 &amp; 0 &amp; 3.5 \\
         0 &amp; 0 &amp; 1 &amp; 0 \\
         0 &amp; 0 &amp; 0 &amp; 1 
     \end{pmatrix}
@@ -599,7 +599,7 @@ Solution<div class="sd-summary-down docutils">
     &amp;= 
     \begin{pmatrix}
         2 &amp; 2 &amp; 4 &amp; 4 &amp; 2 &amp; 2 &amp; 4 &amp; 4 &amp; 2 &amp; 4 \\
-        4 &amp; 3 &amp; 3 &amp; 4 &amp; 4 &amp; 3 &amp; 3 &amp; 4 &amp; 3.5 &amp; 3.5 \\
+        3 &amp; 4 &amp; 4 &amp; 3 &amp; 3 &amp; 4 &amp; 4 &amp; 3 &amp; 3.5 &amp; 3.5 \\
         0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 2 &amp; 2 \\
         1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1
     \end{pmatrix},
@@ -620,7 +620,7 @@ Solution<div class="sd-summary-down docutils">
 \[\begin{align*}
     T \cdot S \cdot V_{\text{house}} = \begin{pmatrix}
         2 &amp; 2 &amp; 4 &amp; 4 &amp; 2 &amp; 2 &amp; 4 &amp; 4 &amp; 2 &amp; 4 \\
-        2 &amp; 1 &amp; 1 &amp; 2 &amp; 2 &amp; 1 &amp; 1 &amp; 2 &amp; 1.5 &amp; 1.5 \\
+        1 &amp; 2 &amp; 2 &amp; 1 &amp; 1 &amp; 2 &amp; 2 &amp; 1 &amp; 1.5 &amp; 1.5 \\
         0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 2 &amp; 2 \\
         1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1
     \end{pmatrix},
@@ -632,13 +632,13 @@ V_{\text{world}} &amp;=
     \begin{matrix}
         \left( \begin{matrix}
             2 &amp; 2 &amp; \cdots &amp; 4 \\
-            2 &amp; 1 &amp; \cdots &amp; 3.5 \\
+            1 &amp; 2 &amp; \cdots &amp; 3.5 \\
             0 &amp; 0 &amp; \cdots &amp; 2 \\
             1 &amp; 1 &amp; \cdots &amp; 1
         \end{matrix} \right. &amp; \quad 
         \left. \begin{matrix}
             2 &amp; 2 &amp; \cdots &amp; 4 \\
-            2 &amp; 1 &amp; \cdots &amp; 1.5 \\
+            1 &amp; 2 &amp; \cdots &amp; 1.5 \\
             0 &amp; 0 &amp; \cdots &amp; 2 \\
             1 &amp; 1 &amp; \cdots &amp; 1 
         \end{matrix} \right) \\
@@ -773,8 +773,8 @@ V_{\text{world}} &amp;=
 <span class="w">           </span><span class="mi">0</span><span class="p">,</span><span class="w">    </span><span class="mi">0</span><span class="p">,</span><span class="w">    </span><span class="n">s</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"> </span>
 <span class="w">           </span><span class="mi">0</span><span class="p">,</span><span class="w">    </span><span class="mi">0</span><span class="p">,</span><span class="w">    </span><span class="mi">0</span><span class="p">,</span><span class="w">    </span><span class="mi">1</span><span class="w"> </span><span class="p">];</span><span class="w"></span>
 
-<span class="n">Rz</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">@(</span><span class="n">theta</span><span class="p">)</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="nb">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span><span class="w"> </span><span class="nb">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
-<span class="w">               </span><span class="o">-</span><span class="nb">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span><span class="w"> </span><span class="nb">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="n">Rz</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">@(</span><span class="n">theta</span><span class="p">)</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="nb">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span><span class="w"> </span><span class="o">-</span><span class="nb">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="w">                </span><span class="nb">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span><span class="w"> </span><span class="nb">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
 <span class="w">                </span><span class="mi">0</span><span class="p">,</span><span class="w">           </span><span class="mi">0</span><span class="p">,</span><span class="w">         </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
 <span class="w">                </span><span class="mi">0</span><span class="p">,</span><span class="w">           </span><span class="mi">0</span><span class="p">,</span><span class="w">         </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">];</span><span class="w"></span>
 
