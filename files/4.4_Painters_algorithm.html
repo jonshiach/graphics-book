@@ -511,18 +511,18 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="painter-s-algorithm">
 <span id="painters-algorithm-section"></span><h1>Painter’s algorithm<a class="headerlink" href="#painter-s-algorithm" title="Permalink to this headline">#</a></h1>
-<p>We saw in the previous section that applying <span class="xref myst">backface culling</span> produces the view of the screen space shown in <a class="reference internal" href="#backface-culling-example-figure-2"><span class="std std-numref">Fig. 77</span></a>.</p>
+<p>We saw in the previous section that applying <span class="xref myst">backface culling</span> produces the view of the screen space shown in <a class="reference internal" href="#backface-culling-example-figure-2"><span class="std std-numref">Fig. 82</span></a>.</p>
 <figure class="align-default" id="backface-culling-example-figure-2">
 <a class="reference internal image-reference" href="../_images/backface_culling_example.png"><img alt="../_images/backface_culling_example.png" src="../_images/backface_culling_example.png" style="width: 400px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 77 </span><span class="caption-text">The screen space from <a class="reference internal" href="4.4_Screen_space.html#screen-space-example">Example 36</a> after <span class="xref myst">backface culling</span> has been applied.</span><a class="headerlink" href="#backface-culling-example-figure-2" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 82 </span><span class="caption-text">The screen space from <a class="reference internal" href="4.4_Screen_space.html#screen-space-example">Example 36</a> after <span class="xref myst">backface culling</span> has been applied.</span><a class="headerlink" href="#backface-culling-example-figure-2" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>Here the faces of the church object that should appear in the background partially obscure the faces of the house object in the foreground. To correct this we can apply <strong>painter’s algorithm</strong> which is named after the order of which an oil painter will paint a scene. This is to start with the background elements, followed by the middle ground elements and finishing with the foreground elements (<a class="reference internal" href="#painters-algorithm-figure"><span class="std std-numref">Fig. 78</span></a>).</p>
+<p>Here the faces of the church object that should appear in the background partially obscure the faces of the house object in the foreground. To correct this we can apply <strong>painter’s algorithm</strong> which is named after the order of which an oil painter will paint a scene. This is to start with the background elements, followed by the middle ground elements and finishing with the foreground elements (<a class="reference internal" href="#painters-algorithm-figure"><span class="std std-numref">Fig. 83</span></a>).</p>
 <figure class="align-default" id="painters-algorithm-figure">
 <img alt="https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Painter%27s_algorithm.svg/600px-Painter%27s_algorithm.svg.png" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Painter%27s_algorithm.svg/600px-Painter%27s_algorithm.svg.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 78 </span><span class="caption-text">The steps an oil painter uses to paint a scene <span id="id1">[<a class="reference internal" href="bibliography.html#id8" title="Zapyon. Painter's algorithm [online]. Wikipedia, 2011. URL: https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Painter%27s_algorithm.svg/600px-Painter%27s_algorithm.svg.png (visited on 2023-01-13).">Zapyon, 2011</a>]</span></span><a class="headerlink" href="#painters-algorithm-figure" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 83 </span><span class="caption-text">The steps an oil painter uses to paint a scene <span id="id1">[<a class="reference internal" href="bibliography.html#id8" title="Zapyon. Painter's algorithm [online]. Wikipedia, 2011. URL: https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Painter%27s_algorithm.svg/600px-Painter%27s_algorithm.svg.png (visited on 2023-01-13).">Zapyon, 2011</a>]</span></span><a class="headerlink" href="#painters-algorithm-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>The painter’s algorithm is simple. We order the polygons that are front facing in ascending order by the vertex with the largest <span class="math notranslate nohighlight">\(z\)</span> co-ordinate. This means that when we render the polygons in order, those polygons that are closest to the viewer are rendered last therefore obscuring any polygons that are further away from the viewer.</p>
@@ -559,11 +559,11 @@ title="Print to PDF"
 <span class="k">end</span><span class="w"></span>
 </pre></div>
 </div>
-<p>The affect of the painters algorithm is shown in <a class="reference internal" href="#painters-algorithm-example-figure"><span class="std std-numref">Fig. 79</span></a>.</p>
+<p>The affect of the painters algorithm is shown in <a class="reference internal" href="#painters-algorithm-example-figure"><span class="std std-numref">Fig. 84</span></a>.</p>
 <figure class="align-default" id="painters-algorithm-example-figure">
 <a class="reference internal image-reference" href="../_images/painters_example.png"><img alt="../_images/painters_example.png" src="../_images/painters_example.png" style="width: 400px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 79 </span><span class="caption-text">The polygons in the screen space are rendered in ascending order of their <span class="math notranslate nohighlight">\(z\)</span> distance</span><a class="headerlink" href="#painters-algorithm-example-figure" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 84 </span><span class="caption-text">The polygons in the screen space are rendered in ascending order of their <span class="math notranslate nohighlight">\(z\)</span> distance</span><a class="headerlink" href="#painters-algorithm-example-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>

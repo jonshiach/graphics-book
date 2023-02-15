@@ -448,12 +448,36 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#matlab-code">
+   MATLAB code
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
@@ -465,6 +489,19 @@ title="Print to PDF"
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#matlab-code">
+   MATLAB code
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -540,10 +577,10 @@ title="Print to PDF"
     \end{pmatrix}
 \end{align*}\end{split}\]</div>
 </section>
-</div><div class="proof example seealso admonition" id="example-2">
+</div><div class="proof example seealso admonition" id="translation-example">
 <p class="admonition-title"><span class="caption-number">Example 23 </span></p>
 <section class="example-content" id="proof-content">
-<p>A triangle is defined by three point with position vectors <span class="math notranslate nohighlight">\(\mathbf{p}_1 = (1, 0, 1)\)</span>, <span class="math notranslate nohighlight">\(\mathbf{p}_2 = (3, 0, 1)\)</span> and <span class="math notranslate nohighlight">\(\mathbf{p}_3 = (2, 0, 3)\)</span>. The triangle is translated by the translation vector <span class="math notranslate nohighlight">\(\mathbf{t} = (3, 0, 1)\)</span>. Calculate the positions of the triangle vertices of the translated triangle.</p>
+<p>A triangle is defined by three points with position vectors <span class="math notranslate nohighlight">\(\mathbf{p}_1 = (1, 0, 1)\)</span>, <span class="math notranslate nohighlight">\(\mathbf{p}_2 = (3, 0, 1)\)</span> and <span class="math notranslate nohighlight">\(\mathbf{p}_3 = (2, 0, 3)\)</span>. The triangle is translated by the translation vector <span class="math notranslate nohighlight">\(\mathbf{t} = (3, 0, 1)\)</span>. Calculate the positions of the triangle vertices of the translated triangle.</p>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
 Solution<div class="sd-summary-down docutils">
@@ -594,13 +631,47 @@ Solution<div class="sd-summary-down docutils">
         1 &amp; 1 &amp; 1 
     \end{pmatrix}.
 \end{align*}\]</div>
-<p class="sd-card-text">So the vertex co-ordinates of the translated triangle are <span class="math notranslate nohighlight">\((4,0,2)\)</span>, <span class="math notranslate nohighlight">\((6, 0, 2)\)</span> and <span class="math notranslate nohighlight">\((5, 0, 4)\)</span>. The original triangle and the translated triangle are plotted below looking along the <span class="math notranslate nohighlight">\(y\)</span>-axis.</p>
-<figure class="align-default">
-<a class="reference internal image-reference" href="../_images/translation_example.png"><img alt="../_images/translation_example.png" src="../_images/translation_example.png" style="width: 400px;" /></a>
-</figure>
+<p class="sd-card-text">So the vertex co-ordinates of the translated triangle are <span class="math notranslate nohighlight">\((4,0,2)\)</span>, <span class="math notranslate nohighlight">\((6, 0, 2)\)</span> and <span class="math notranslate nohighlight">\((5, 0, 4)\)</span>. The original triangle and the translated triangle are plotted in <a class="reference internal" href="#translation-example-figure"><span class="std std-numref">Fig. 32</span></a> looking along the <span class="math notranslate nohighlight">\(y\)</span>-axis.</p>
 </div>
 </details></section>
-</div></section>
+</div><section id="matlab-code">
+<h2>MATLAB code<a class="headerlink" href="#matlab-code" title="Permalink to this headline">#</a></h2>
+<p>The following MATLAB code applies the translation from <a class="reference internal" href="#translation-example">Example 23</a> and plots the original and translated polygons.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Define homogeneous co-ordinate matrix</span><span class="w"></span>
+<span class="n">P</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">];</span><span class="w"></span>
+
+<span class="c">% Define translation matrix </span><span class="w"></span>
+<span class="n">T</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">@(</span><span class="n">t</span><span class="p">)</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">;</span><span class="w"> </span>
+<span class="w">           </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="p">;</span><span class="w"> </span>
+<span class="w">           </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="p">;</span><span class="w"> </span>
+<span class="w">           </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">];</span><span class="w"></span>
+
+<span class="c">% Apply translation</span><span class="w"></span>
+<span class="n">t</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">3</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">0</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="mi">1</span><span class="p">];</span><span class="w"></span>
+<span class="n">P1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">T</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">P</span><span class="p">;</span><span class="w"></span>
+
+<span class="c">% Plot polygons</span><span class="w"></span>
+<span class="nb">figure</span><span class="w"></span>
+<span class="nb">patch</span><span class="p">(</span><span class="n">P</span><span class="p">(</span><span class="mi">1</span><span class="p">,:),</span><span class="w"> </span><span class="n">P</span><span class="p">(</span><span class="mi">3</span><span class="p">,:),</span><span class="w"> </span><span class="s">&#39;b&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">FaceAlpha</span><span class="p">=</span><span class="mf">0.5</span><span class="p">)</span><span class="w"></span>
+<span class="nb">patch</span><span class="p">(</span><span class="n">P1</span><span class="p">(</span><span class="mi">1</span><span class="p">,:),</span><span class="w"> </span><span class="n">P1</span><span class="p">(</span><span class="mi">3</span><span class="p">,:),</span><span class="w"> </span><span class="s">&#39;r&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">FaceAlpha</span><span class="p">=</span><span class="mf">0.5</span><span class="p">)</span><span class="w"></span>
+<span class="nb">axis</span><span class="w"> </span><span class="n">equal</span><span class="w"></span>
+<span class="nb">axis</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">])</span><span class="w"></span>
+<span class="nb">xlabel</span><span class="p">(</span><span class="s">&quot;$x$&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">FontSize</span><span class="p">=</span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="n">Interpreter</span><span class="p">=</span><span class="s">&quot;latex&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="nb">ylabel</span><span class="p">(</span><span class="s">&quot;$z$&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">FontSize</span><span class="p">=</span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="n">Interpreter</span><span class="p">=</span><span class="s">&quot;latex&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="nb">box</span><span class="w"> </span><span class="n">on</span><span class="w"></span>
+</pre></div>
+</div>
+<figure class="align-default" id="translation-example-figure">
+<a class="reference internal image-reference" href="../_images/translation_example.png"><img alt="../_images/translation_example.png" src="../_images/translation_example.png" style="width: 500px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 32 </span><span class="caption-text">Translating a polygon.</span><a class="headerlink" href="#translation-example-figure" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {

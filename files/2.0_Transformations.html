@@ -683,7 +683,7 @@ Solution<div class="sd-summary-down docutils">
 </div><div class="proof example seealso admonition" id="example-3">
 <p class="admonition-title"><span class="caption-number">Example 20 </span></p>
 <section class="example-content" id="proof-content">
-<p>Determine the transformation matrix <span class="math notranslate nohighlight">\(A\)</span> for the linear transformation <span class="math notranslate nohighlight">\(T\)</span> such that</p>
+<p>Determine the transformation matrix <span class="math notranslate nohighlight">\(A\)</span> for the linear transformation <span class="math notranslate nohighlight">\(T:\mathbb{R}^2 \to \mathbb{R}^2\)</span> such that</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
     T\begin{pmatrix} 1 \\ 1 \end{pmatrix} &amp;= \begin{pmatrix} 4 \\ 3 \end{pmatrix}, &amp;
@@ -741,7 +741,7 @@ Solution<div class="sd-summary-down docutils">
 <p>where <span class="math notranslate nohighlight">\(A^{-1}\)</span> is the transformation matrix for <span class="math notranslate nohighlight">\(T^{-1}\)</span>.</p>
 </section>
 </div><div class="proof example seealso admonition" id="example-5">
-<p class="admonition-title"><span class="caption-number">Example 21 </span> (6.4)</p>
+<p class="admonition-title"><span class="caption-number">Example 21 </span></p>
 <section class="example-content" id="proof-content">
 <p>Determine the inverse of the transformation <span class="math notranslate nohighlight">\(T: \mathbb{R}^2 \to \mathbb{R}^2\)</span> defined by <span class="math notranslate nohighlight">\(T(x, y) \mapsto (3 x + y, x + 2 y)\)</span> and calculate <span class="math notranslate nohighlight">\(T^{-1}(4, 3)\)</span>.</p>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
@@ -785,14 +785,14 @@ Solution<div class="sd-summary-down docutils">
 <div class="proof definition admonition" id="composite-transformation-definition">
 <p class="admonition-title"><span class="caption-number">Definition 16 </span> (Composite transformations)</p>
 <section class="definition-content" id="proof-content">
-<p>Let <span class="math notranslate nohighlight">\(S : V \to W\)</span> and <span class="math notranslate nohighlight">\(T: W \to X\)</span> be two linear transformations over the vector spaces <span class="math notranslate nohighlight">\(V, W\)</span> and <span class="math notranslate nohighlight">\(X\)</span>. The <strong>composition</strong> of <span class="math notranslate nohighlight">\(S\)</span> and <span class="math notranslate nohighlight">\(T\)</span> is the transformation <span class="math notranslate nohighlight">\(S \circ T: V \to X\)</span> defined by</p>
+<p>Let <span class="math notranslate nohighlight">\(T: V \to W\)</span> and <span class="math notranslate nohighlight">\(S : W \to X\)</span> be two linear transformations over the vector spaces <span class="math notranslate nohighlight">\(V, W\)</span> and <span class="math notranslate nohighlight">\(X\)</span>. The <strong>composition</strong> of <span class="math notranslate nohighlight">\(S\)</span> and <span class="math notranslate nohighlight">\(T\)</span> is the transformation <span class="math notranslate nohighlight">\(S \circ T: V \to X\)</span> defined by</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
     (S \circ T)(\mathbf{u}) = S(T(\mathbf{u})),
 \end{align*}\]</div>
 <p>for all vectors <span class="math notranslate nohighlight">\(\mathbf{u} \in V\)</span>.</p>
 </section>
-</div><p>As before we want to be able to represent composite linear transformations as a matrix. If <span class="math notranslate nohighlight">\(S\)</span> and <span class="math notranslate nohighlight">\(T\)</span> are two linear transformations with transformation matrices <span class="math notranslate nohighlight">\(B\)</span> and <span class="math notranslate nohighlight">\(A\)</span> respectively, then the composite transformation <span class="math notranslate nohighlight">\(S \circ T(\mathbf{u}\)</span> is</p>
+</div><p>As before we want to be able to represent composite linear transformations as a matrix. If <span class="math notranslate nohighlight">\(T\)</span> and <span class="math notranslate nohighlight">\(T\)</span> are two linear transformations with transformation matrices <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> respectively, then the composite transformation <span class="math notranslate nohighlight">\(S \circ T(\mathbf{u}\)</span> is</p>
 <div class="math notranslate nohighlight">
 \[ S \circ T(\mathbf{u}) = S(T(\mathbf{u})) = S(A\mathbf{u}) = B \cdot A \mathbf{u}.\]</div>
 <p>If we let <span class="math notranslate nohighlight">\(C = B \cdot A\)</span> then</p>
@@ -801,7 +801,7 @@ Solution<div class="sd-summary-down docutils">
 <div class="proof theorem admonition" id="composite-transformation-matrices-theorem">
 <p class="admonition-title"><span class="caption-number">Theorem 7 </span> (Composite transformation matrices)</p>
 <section class="theorem-content" id="proof-content">
-<p>Given two linear transformations <span class="math notranslate nohighlight">\(S:V \to W\)</span> and <span class="math notranslate nohighlight">\(T:W \to X\)</span> with transformation matrices <span class="math notranslate nohighlight">\(B\)</span> and <span class="math notranslate nohighlight">\(A\)</span> respectively then the composition <span class="math notranslate nohighlight">\(S \circ T\)</span> of the vector <span class="math notranslate nohighlight">\(\mathbf{u} \in V\)</span> is</p>
+<p>Given two linear transformations <span class="math notranslate nohighlight">\(T:V \to W\)</span> and <span class="math notranslate nohighlight">\(S:W \to X\)</span> with transformation matrices <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> respectively then the composition <span class="math notranslate nohighlight">\(S \circ T\)</span> of the vector <span class="math notranslate nohighlight">\(\mathbf{u} \in V\)</span> is</p>
 <div class="math notranslate nohighlight" id="equation-composite-transformation-matrices-theorem-equation">
 <span class="eqno">(21)<a class="headerlink" href="#equation-composite-transformation-matrices-theorem-equation" title="Permalink to this equation">#</a></span>\[S \circ T (\mathbf{u}) = C \mathbf{u}.\]</div>
 <p>where <span class="math notranslate nohighlight">\(C = B \cdot A\)</span>.</p>
@@ -810,7 +810,7 @@ Solution<div class="sd-summary-down docutils">
 <p class="admonition-title"><span class="caption-number">Example 22 </span></p>
 <section class="example-content" id="proof-content">
 <p>Two linear transformations is defined as <span class="math notranslate nohighlight">\(T:(x, y, z) \mapsto (2 x + 4 y, -x + 3 y, x + 2 y)\)</span> and <span class="math notranslate nohighlight">\(S:(x, y) \mapsto (2x + y - z, 3x + z, y - 2z)\)</span>.</p>
-<p>(i)   Determine the composite linear transformation <span class="math notranslate nohighlight">\(S \circ T(\mathbf{u})\)</span> for <span class="math notranslate nohighlight">\(\mathbf{u} = (x, y, z)\)</span>.</p>
+<p>(i) Determine the composite linear transformation <span class="math notranslate nohighlight">\(S \circ T(\mathbf{u})\)</span> for <span class="math notranslate nohighlight">\(\mathbf{u} = (x, y, z)\)</span>.</p>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
 Solution<div class="sd-summary-down docutils">
