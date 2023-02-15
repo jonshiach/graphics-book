@@ -269,11 +269,6 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="4.4_Screen_space.html">
-     Screen space
-    </a>
-   </li>
-   <li class="toctree-l2">
     <a class="reference internal" href="4.5_Binary_space_partitioning.html">
      Binary space partitioning
     </a>
@@ -536,48 +531,56 @@ title="Print to PDF"
 <p class="admonition-title">Solution to<a class="reference internal" href="#transformations-ex2"> Exercise 11</a></p>
 <section id="solution-content">
 <p>The transformation matrix is determined using equation <a class="reference internal" href="2.0_Transformations.html#equation-determining-the-transformation-matrix">(20)</a> which is</p>
-<div class="math notranslate nohighlight">
-\[A = (T(\mathbf{u}_1), T(\mathbf{u}_2), \ldots, T(\mathbf{u}_n)) \cdot (\mathbf{u}_1, \mathbf{u}_2, \ldots, \mathbf{u}_n)^{-1}.\]</div>
-<p>Using Gauss-Jordan elimination to calculate the inverse of <span class="math notranslate nohighlight">\((\mathbf{u}_1, \mathbf{u}_2, \mathbf{u}_3)^{-1}\)</span></p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
-    &amp; \left( \begin{array}{rrr|rrr}
-       1 &amp; 0 &amp; -1 &amp; 1 &amp; 0 &amp; 0 \\
-       -1 &amp; 1 &amp; 1 &amp; 0 &amp; 1 &amp; 0 \\
-       0 &amp; 2 &amp; 1 &amp; 0 &amp; 0 &amp; 1
-    \end{array} \right)
-    \begin{array}{l} \\ R_2 + R_1 \\ \phantom{x} \end{array} \\ \\ 
-    \longrightarrow \qquad 
-    &amp; \left( \begin{array}{rrr|rrr}
-       1 &amp; 0 &amp; -1 &amp; 1 &amp; 0 &amp; 0 \\
-       0 &amp; 1 &amp; 0 &amp; 1 &amp; 1 &amp; 0 \\
-       0 &amp; 2 &amp; 1 &amp; 0 &amp; 0 &amp; 1
-    \end{array} \right)
-    \begin{array}{l} \\ \\ R_3 - 2 R_2 \end{array} \\ \\ 
-    \longrightarrow \qquad  
-    &amp; \left( \begin{array}{rrr|rrr}
-       1 &amp; 0 &amp; -1 &amp; 1 &amp; 0 &amp; 0 \\
-       0 &amp; 1 &amp; 0 &amp; 1 &amp; 1 &amp; 0 \\
-       0 &amp; 0 &amp; 1 &amp; -2 &amp; -2 &amp; 1
-    \end{array} \right)
-    \begin{array}{l} R_1 + R_3 \\ \phantom{x} \\ \phantom{x} \end{array} \\ \\ 
-    \longrightarrow \qquad
-    &amp; \left( \begin{array}{rrr|rrr}
-       1 &amp; 0 &amp; 0 &amp; -1 &amp; -2 &amp; 1 \\
-       0 &amp; 1 &amp; 0 &amp; 1 &amp; 1 &amp; 0 \\
-       0 &amp; 0 &amp; 1 &amp; -2 &amp; -2 &amp; 1
-    \end{array} \right)
+    A &amp;= (T(\mathbf{u}_1), T(\mathbf{u}_2), \ldots, T(\mathbf{u}_n)) \cdot (\mathbf{u}_1, \mathbf{u}_2, \ldots, \mathbf{u}_n)^{-1}, \\
+    &amp;=
+    \begin{pmatrix} 
+        1 &amp; 6 &amp; 2 \\
+        -2 &amp; 5 &amp; 4 \\
+        -4 &amp; 10 &amp; 7
+    \end{pmatrix}
+    \begin{pmatrix}
+        1 &amp; 0 &amp; -1 \\
+        -1 &amp; 1 &amp; 1 \\
+        0 &amp; 2 &amp; 1 
+    \end{pmatrix}^{-1}
 \end{align*}\]</div>
-<p>So <span class="math notranslate nohighlight">\((\mathbf{u}_1, \mathbf{u}_2, \mathbf{u}_3)^{-1} = \begin{pmatrix}  -1 &amp; -2 &amp; 1 \\ 1 &amp; 1 &amp; 0 \\ -2 &amp; -2 &amp; 1 \end{pmatrix}\)</span> and</p>
+<p>The inverse of the right-hand matrix is</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
-    A &amp;= \begin{pmatrix} 1 &amp; 6 &amp; 2 \\ -2 &amp; 5 &amp; 4 \\ -4 &amp; 10 &amp; 7 \end{pmatrix}
+    \begin{pmatrix}
+        1 &amp; 0 &amp; -1 \\
+        -1 &amp; 1 &amp; 1 \\
+        0 &amp; 2 &amp; 1 
+    \end{pmatrix}^{-1}
+    = 
+    \begin{pmatrix}
+        -1 &amp; -2 &amp; 1 \\
+        1 &amp; 1 &amp; 0 \\
+        -2 &amp; -2 &amp; 1
+    \end{pmatrix}
+\end{align*}\]</div>
+<p>so</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    A &amp;= 
+    \begin{pmatrix} 
+        1 &amp; 6 &amp; 2 \\ 
+        -2 &amp; 5 &amp; 4 \\
+        -4 &amp; 10 &amp; 7 
+    \end{pmatrix}
     \begin{pmatrix} 
         -1 &amp; -2 &amp; 1 \\
         1 &amp; 1 &amp; 0 \\
         -2 &amp; -2 &amp; 1
     \end{pmatrix}
-    = \begin{pmatrix} 1 &amp; 0 &amp; 3 \\ -1 &amp; 1 &amp; 2 \\ 0 &amp; 4 &amp; 3 \end{pmatrix}.
+    = 
+    \begin{pmatrix} 
+        1 &amp; 0 &amp; 3 \\ 
+        -1 &amp; 1 &amp; 2 \\ 
+        0 &amp; 4 &amp; 3 
+    \end{pmatrix}.
 \end{align*}\]</div>
 <p>Checking <span class="math notranslate nohighlight">\(A\)</span></p>
 <div class="amsmath math notranslate nohighlight">
@@ -712,8 +715,8 @@ title="Print to PDF"
 <span class="n">c</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">mean</span><span class="p">(</span><span class="n">P1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span><span class="w"></span>
 
 <span class="c">% Define rotation matrix</span><span class="w"></span>
-<span class="n">R</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">@(</span><span class="n">th</span><span class="p">)</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="nb">cos</span><span class="p">(</span><span class="n">th</span><span class="p">),</span><span class="w"> </span><span class="o">-</span><span class="nb">sin</span><span class="p">(</span><span class="n">th</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
-<span class="w">            </span><span class="nb">sin</span><span class="p">(</span><span class="n">th</span><span class="p">),</span><span class="w"> </span><span class="nb">cos</span><span class="p">(</span><span class="n">th</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="n">R</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">@(</span><span class="n">th</span><span class="p">)</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="nb">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span><span class="w"> </span><span class="o">-</span><span class="nb">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="nb">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span><span class="w"> </span><span class="nb">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
 <span class="w">            </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">];</span><span class="w"></span>
 
 <span class="c">% Apply transformations (remembering to translate to and from origin)</span><span class="w"></span>
