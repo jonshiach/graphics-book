@@ -269,11 +269,6 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="4.4_Screen_space.html">
-     Screen space
-    </a>
-   </li>
-   <li class="toctree-l2">
     <a class="reference internal" href="4.5_Binary_space_partitioning.html">
      Binary space partitioning
     </a>
@@ -471,9 +466,21 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#matlab-code">
+   MATLAB code
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#rotation-about-polygon-centre">
    Rotation about polygon centre
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     MATLAB code
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#rotation-about-a-line">
@@ -500,9 +507,21 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#matlab-code">
+   MATLAB code
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#rotation-about-polygon-centre">
    Rotation about polygon centre
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     MATLAB code
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#rotation-about-a-line">
@@ -521,20 +540,20 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="rotation">
 <span id="rotation-section"></span><h1>Rotation<a class="headerlink" href="#rotation" title="Permalink to this headline">#</a></h1>
-<p><strong>Rotation</strong> in <span class="math notranslate nohighlight">\(\mathbb{R}^3\)</span> is a linear transformation that rotates a set of points by some angle about one of the <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(y\)</span> or <span class="math notranslate nohighlight">\(z\)</span>-axes. The direction of rotation is assumed to be <em>anti-clockwise</em> when viewed looking down the axis towards the origin (<a class="reference internal" href="#d-rotation-figure"><span class="std std-numref">Fig. 34</span></a>).</p>
+<p><strong>Rotation</strong> in <span class="math notranslate nohighlight">\(\mathbb{R}^3\)</span> is a linear transformation that rotates a set of points by some angle about one of the <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(y\)</span> or <span class="math notranslate nohighlight">\(z\)</span>-axes. The direction of rotation is assumed to be <em>anti-clockwise</em> when viewed looking down the axis towards the origin (<a class="reference internal" href="#d-rotation-figure"><span class="std std-numref">Fig. 37</span></a>).</p>
 <figure class="align-default" id="d-rotation-figure">
 <a class="reference internal image-reference" href="../_images/3D_rotation.svg"><img alt="../_images/3D_rotation.svg" src="../_images/3D_rotation.svg" width="250px" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 34 </span><span class="caption-text">The direction of rotation is assumed as anti-clockwise when viewed looking towards the origin.</span><a class="headerlink" href="#d-rotation-figure" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 37 </span><span class="caption-text">The direction of rotation is assumed as anti-clockwise when viewed looking towards the origin.</span><a class="headerlink" href="#d-rotation-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-default" id="rotation-figure">
 <a class="reference internal image-reference" href="../_images/rotation.svg"><img alt="../_images/rotation.svg" src="../_images/rotation.svg" width="300px" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 35 </span><span class="caption-text">Rotation of the vector <span class="math notranslate nohighlight">\(\mathbf{u}\)</span> anti-clockwise about the origin.</span><a class="headerlink" href="#rotation-figure" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 38 </span><span class="caption-text">Rotation of the vector <span class="math notranslate nohighlight">\(\mathbf{u}\)</span> anti-clockwise about the origin.</span><a class="headerlink" href="#rotation-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>Consider the diagram in <a class="reference internal" href="#rotation-figure"><span class="std std-numref">Fig. 35</span></a> that shows the axes from <a class="reference internal" href="#d-rotation-figure"><span class="std std-numref">Fig. 34</span></a> when viewed looking down the <span class="math notranslate nohighlight">\(x\)</span>-axis. The point with position vector <span class="math notranslate nohighlight">\(\mathbf{u}=(u_x, u_y, u_z)\)</span> is rotated anti-clockwise about the <span class="math notranslate nohighlight">\(x\)</span>-axis by the angle <span class="math notranslate nohighlight">\(\theta\)</span> to <span class="math notranslate nohighlight">\(\mathbf{v}=(v_x, v_y, v_z)\)</span>. To determine the linear transformation we first consider the rotation of a vector pointing along the <span class="math notranslate nohighlight">\(x\)</span>-axis which has the same magnitude of <span class="math notranslate nohighlight">\(\mathbf{u}\)</span>, i.e., <span class="math notranslate nohighlight">\(|\mathbf{u}| \mathbf{e}_1\)</span>, rotated by the angle <span class="math notranslate nohighlight">\(\phi\)</span>. Forming a right-angled triangle with the angle <span class="math notranslate nohighlight">\(\phi\)</span> and hypotenuse of length <span class="math notranslate nohighlight">\(|\mathbf{u}|\)</span> then</p>
+<p>Consider the diagram in <a class="reference internal" href="#rotation-figure"><span class="std std-numref">Fig. 38</span></a> that shows the axes from <a class="reference internal" href="#d-rotation-figure"><span class="std std-numref">Fig. 37</span></a> when viewed looking down the <span class="math notranslate nohighlight">\(x\)</span>-axis. The point with position vector <span class="math notranslate nohighlight">\(\mathbf{u}=(u_x, u_y, u_z)\)</span> is rotated anti-clockwise about the <span class="math notranslate nohighlight">\(x\)</span>-axis by the angle <span class="math notranslate nohighlight">\(\theta\)</span> to <span class="math notranslate nohighlight">\(\mathbf{v}=(v_x, v_y, v_z)\)</span>. To determine the linear transformation we first consider the rotation of a vector pointing along the <span class="math notranslate nohighlight">\(x\)</span>-axis which has the same magnitude of <span class="math notranslate nohighlight">\(\mathbf{u}\)</span>, i.e., <span class="math notranslate nohighlight">\(|\mathbf{u}| \mathbf{e}_1\)</span>, rotated by the angle <span class="math notranslate nohighlight">\(\phi\)</span>. Forming a right-angled triangle with the angle <span class="math notranslate nohighlight">\(\phi\)</span> and hypotenuse of length <span class="math notranslate nohighlight">\(|\mathbf{u}|\)</span> then</p>
 <div class="math notranslate nohighlight" id="equation-rotation-equation-1">
 <span class="eqno">(26)<a class="headerlink" href="#equation-rotation-equation-1" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align*}
     \cos(\phi) &amp;= \frac{u_x}{|\mathbf{u}|} &amp; \therefore u_x &amp;= |\mathbf{u}| \cos(\phi), \\
@@ -577,7 +596,7 @@ title="Print to PDF"
     \end{pmatrix}
     \begin{pmatrix} u_x \\ u_y \\ u_z \end{pmatrix}.
 \end{align*}\]</div>
-<p>The square matrix is the transformation matrix for rotation by the angle <span class="math notranslate nohighlight">\(\theta\)</span> anti-clockwise about the <span class="math notranslate nohighlight">\(z\)</span>-axis, i.e., in <a class="reference internal" href="#rotation-figure"><span class="std std-numref">Fig. 35</span></a> we are looking down the <span class="math notranslate nohighlight">\(z\)</span>-axis. Doing similar we can determine the equivalent matrices for rotating about the <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span>-axes.</p>
+<p>The square matrix is the transformation matrix for rotation by the angle <span class="math notranslate nohighlight">\(\theta\)</span> anti-clockwise about the <span class="math notranslate nohighlight">\(z\)</span>-axis, i.e., in <a class="reference internal" href="#rotation-figure"><span class="std std-numref">Fig. 38</span></a> we are looking down the <span class="math notranslate nohighlight">\(z\)</span>-axis. Doing similar we can determine the equivalent matrices for rotating about the <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span>-axes.</p>
 <div class="proof theorem admonition" id="rotation-in-R3-theorem">
 <p class="admonition-title"><span class="caption-number">Theorem 8 </span> (Rotation in <span class="math notranslate nohighlight">\(\mathbb{R}^3\)</span>)</p>
 <section class="theorem-content" id="proof-content">
@@ -632,7 +651,7 @@ title="Print to PDF"
     \end{pmatrix}.
 \end{align*}\end{split}\]</div>
 </section>
-</div><div class="proof example seealso admonition" id="rotation-example-1">
+</div><div class="proof example seealso admonition" id="rotation-example">
 <p class="admonition-title"><span class="caption-number">Example 26 </span></p>
 <section class="example-content" id="proof-content">
 <p>A triangular polygon has vertices located at <span class="math notranslate nohighlight">\(\mathbf{p}_1 = (4, 1, 2)\)</span>, <span class="math notranslate nohighlight">\(\mathbf{p}_2 = (6, 1, 2)\)</span> and <span class="math notranslate nohighlight">\(\mathbf{p}_3 = (5, 3, 2)\)</span>. The triangle is rotated by angle <span class="math notranslate nohighlight">\(\theta = \pi/4\)</span> anti-clockwise about the <span class="math notranslate nohighlight">\(z\)</span>-axis. Calculate the positions of the vertices of the rotated triangle.</p>
@@ -700,18 +719,53 @@ Solution<div class="sd-summary-down docutils">
         1 &amp; 1 &amp; 1 
     \end{pmatrix}.
 \end{align*}\]</div>
-<p class="sd-card-text">So the vertex co-ordinates fo the translated triangle are <span class="math notranslate nohighlight">\((2.12, 3.54, 2)\)</span>, <span class="math notranslate nohighlight">\((3.54, 4.95, 2)\)</span> and <span class="math notranslate nohighlight">\((1.41, 5.66, 2)\)</span>. The original triangle and the translated triangle are plotted below looking along the <span class="math notranslate nohighlight">\(z\)</span> axis.</p>
-<figure class="align-default">
-<a class="reference internal image-reference" href="../_images/rotation_example.png"><img alt="../_images/rotation_example.png" src="../_images/rotation_example.png" style="width: 400px;" /></a>
-</figure>
+<p class="sd-card-text">So the vertex co-ordinates fo the translated triangle are <span class="math notranslate nohighlight">\((2.12, 3.54, 2)\)</span>, <span class="math notranslate nohighlight">\((3.54, 4.95, 2)\)</span> and <span class="math notranslate nohighlight">\((1.41, 5.66, 2)\)</span>. The original triangle and the rotated triangle are plotted in <a class="reference internal" href="#rotation-example-figure"><span class="std std-numref">Fig. 39</span></a> looking along the <span class="math notranslate nohighlight">\(z\)</span> axis.</p>
 </div>
 </details></section>
-</div><section id="rotation-about-polygon-centre">
+</div><section id="matlab-code">
+<h2>MATLAB code<a class="headerlink" href="#matlab-code" title="Permalink to this headline">#</a></h2>
+<p>The following MATLAB code applies the translation from <a class="reference internal" href="#rotation-example">Example 26</a> and plots the original and rotated polygons.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Define homogeneous co-ordinate matrix</span><span class="w"></span>
+<span class="n">P</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">];</span><span class="w"></span>
+
+
+<span class="c">% Define rotation matrix</span><span class="w"></span>
+<span class="n">Rz</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">@(</span><span class="n">theta</span><span class="p">)</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="nb">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span><span class="w"> </span><span class="o">-</span><span class="nb">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"> </span>
+<span class="w">                </span><span class="nb">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span><span class="w"> </span><span class="nb">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="w">                </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="w">                </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">];</span><span class="w"></span>
+
+<span class="c">% Apply rotation</span><span class="w"></span>
+<span class="n">theta</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">pi</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w"></span>
+<span class="n">P1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Rz</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">P</span><span class="p">;</span><span class="w"></span>
+
+<span class="c">% Plot polygons</span><span class="w"></span>
+<span class="nb">figure</span><span class="w"></span>
+<span class="nb">patch</span><span class="p">(</span><span class="n">P</span><span class="p">(</span><span class="mi">1</span><span class="p">,:),</span><span class="w"> </span><span class="n">P</span><span class="p">(</span><span class="mi">2</span><span class="p">,:),</span><span class="w"> </span><span class="s">&#39;b&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">FaceAlpha</span><span class="p">=</span><span class="mf">0.5</span><span class="p">)</span><span class="w"></span>
+<span class="nb">patch</span><span class="p">(</span><span class="n">P1</span><span class="p">(</span><span class="mi">1</span><span class="p">,:),</span><span class="w"> </span><span class="n">P1</span><span class="p">(</span><span class="mi">2</span><span class="p">,:),</span><span class="w"> </span><span class="s">&#39;r&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">FaceAlpha</span><span class="p">=</span><span class="mf">0.5</span><span class="p">)</span><span class="w"></span>
+<span class="nb">axis</span><span class="w"> </span><span class="n">equal</span><span class="w"></span>
+<span class="nb">axis</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">])</span><span class="w"></span>
+<span class="nb">xlabel</span><span class="p">(</span><span class="s">&quot;$x$&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">FontSize</span><span class="p">=</span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="n">Interpreter</span><span class="p">=</span><span class="s">&quot;latex&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="nb">ylabel</span><span class="p">(</span><span class="s">&quot;$y$&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">FontSize</span><span class="p">=</span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="n">Interpreter</span><span class="p">=</span><span class="s">&quot;latex&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="nb">box</span><span class="w"> </span><span class="n">on</span><span class="w"></span>
+</pre></div>
+</div>
+<figure class="align-default" id="rotation-example-figure">
+<a class="reference internal image-reference" href="../_images/rotation_example.png"><img alt="../_images/rotation_example.png" src="../_images/rotation_example.png" style="width: 400px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 39 </span><span class="caption-text">Rotating a polygon about the origin.</span><a class="headerlink" href="#rotation-example-figure" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="rotation-about-polygon-centre">
 <h2>Rotation about polygon centre<a class="headerlink" href="#rotation-about-polygon-centre" title="Permalink to this headline">#</a></h2>
-<p>We saw in <a class="reference internal" href="#rotation-example-1">Example 26</a> that the polygon has shifted position because we rotate about the origin. If we wanted to rotate the polygon about its centre we first need to translate it so that its centre is at the origin, apply the rotation transformation and then translate the centre to the original position (<a class="reference internal" href="#rotate-about-centre-figure"><span class="std std-numref">Fig. 36</span></a>).</p>
+<p>We saw in <a class="reference internal" href="#rotation-example">Example 26</a> that the polygon has shifted position because we rotate about the origin. If we wanted to rotate the polygon about its centre we first need to translate it so that its centre is at the origin, apply the rotation transformation and then translate the centre to the original position (<a class="reference internal" href="#rotate-about-centre-figure"><span class="std std-numref">Fig. 40</span></a>).</p>
 <figure class="align-default" id="rotate-about-centre-figure">
 <img alt="../_images/rotate_about_centre.svg" src="../_images/rotate_about_centre.svg" /><figcaption>
-<p><span class="caption-number">Fig. 36 </span><span class="caption-text">Steps required to rotate a polygon by its centre.</span><a class="headerlink" href="#rotate-about-centre-figure" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 40 </span><span class="caption-text">Steps required to rotate a polygon by its centre.</span><a class="headerlink" href="#rotate-about-centre-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>If the centre of the polygon is at point <span class="math notranslate nohighlight">\(\mathbf{c}=(c_x, c_y, c_z)\)</span> then the first transformation is translation by <span class="math notranslate nohighlight">\(-\mathbf{c}\)</span> and the <a class="reference internal" href="2.1_Translation.html#translation-matrix-definition"> transformation matrix</a> is</p>
@@ -740,10 +794,10 @@ Solution<div class="sd-summary-down docutils">
     A = T(\mathbf{c}) \cdot R (\theta) \cdot T(-\mathbf{c}),
 \end{align*}\]</div>
 <p>where <span class="math notranslate nohighlight">\(R(\theta)\)</span> is either <span class="math notranslate nohighlight">\(R_x(\theta)\)</span>, <span class="math notranslate nohighlight">\(R_y(\theta)\)</span> or <span class="math notranslate nohighlight">\(R_z(\theta)\)</span>.</p>
-<div class="proof example seealso admonition" id="rotation-example-2">
+<div class="proof example seealso admonition" id="rotation-about-centre-example">
 <p class="admonition-title"><span class="caption-number">Example 27 </span></p>
 <section class="example-content" id="proof-content">
-<p>Rotate the polygon from <a class="reference internal" href="#rotation-example-1">Example 26</a> by <span class="math notranslate nohighlight">\(\theta = \pi/4\)</span> around the <span class="math notranslate nohighlight">\(z\)</span>-axis about its centre.</p>
+<p>Rotate the polygon from <a class="reference internal" href="#rotation-example">Example 26</a> by <span class="math notranslate nohighlight">\(\theta = \pi/4\)</span> around the <span class="math notranslate nohighlight">\(z\)</span>-axis about its centre.</p>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
 Solution<div class="sd-summary-down docutils">
@@ -838,20 +892,67 @@ Solution<div class="sd-summary-down docutils">
         1 &amp; 1 &amp; 1 
     \end{pmatrix}.
 \end{align*}\]</div>
-<p class="sd-card-text">So the vertices of the rotated polygon are <span class="math notranslate nohighlight">\((4.76, 0.49, 2)\)</span>, <span class="math notranslate nohighlight">\((6.18, 1.90, 2)\)</span> and <span class="math notranslate nohighlight">\((4.06, 2.61, 2)\)</span>. The original polygon and the translated polygon are plotted below looking along the <span class="math notranslate nohighlight">\(z\)</span> axis.</p>
-<figure class="align-default">
-<a class="reference internal image-reference" href="../_images/rotation_about_centre_example.png"><img alt="../_images/rotation_about_centre_example.png" src="../_images/rotation_about_centre_example.png" style="width: 400px;" /></a>
-</figure>
+<p class="sd-card-text">So the vertices of the rotated polygon are <span class="math notranslate nohighlight">\((4.76, 0.49, 2)\)</span>, <span class="math notranslate nohighlight">\((6.18, 1.90, 2)\)</span> and <span class="math notranslate nohighlight">\((4.06, 2.61, 2)\)</span>. The original polygon and the rotated polygon are plotted below looking along the <span class="math notranslate nohighlight">\(z\)</span> axis.</p>
 </div>
 </details></section>
-</div></section>
+</div><section id="id1">
+<h3>MATLAB code<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
+<p>The following MATLAB code applies the translation from <a class="reference internal" href="#rotation-about-centre-example">Example 27</a> and plots the original and rotated polygons.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Define homogeneous co-ordinate matrix</span><span class="w"></span>
+<span class="n">P</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">];</span><span class="w"></span>
+
+<span class="c">% Calculate polygon centre</span><span class="w"></span>
+<span class="n">c</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">mean</span><span class="p">(</span><span class="n">P</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span><span class="w"></span>
+
+<span class="c">% Define translation, scaling and rotation matrices</span><span class="w"></span>
+<span class="n">T</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">@(</span><span class="n">t</span><span class="p">)</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">;</span><span class="w"> </span>
+<span class="w">           </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="p">;</span><span class="w"> </span>
+<span class="w">           </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="p">;</span><span class="w"> </span>
+<span class="w">           </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">];</span><span class="w"></span>
+
+<span class="n">S</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">@(</span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="n">s</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"> </span>
+<span class="w">           </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"> </span>
+<span class="w">           </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"> </span>
+<span class="w">           </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">];</span><span class="w"></span>
+
+<span class="n">Rz</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">@(</span><span class="n">theta</span><span class="p">)</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="nb">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span><span class="w"> </span><span class="o">-</span><span class="nb">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w">  </span>
+<span class="w">                </span><span class="nb">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span><span class="w"> </span><span class="nb">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="w">                </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="w">                </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">];</span><span class="w"></span>
+
+<span class="c">% Apply transformations</span><span class="w"></span>
+<span class="n">theta</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">pi</span><span class="o">/</span><span class="mi">4</span><span class="p">;</span><span class="w"></span>
+<span class="n">P1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">T</span><span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Rz</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">T</span><span class="p">(</span><span class="o">-</span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">P</span><span class="p">;</span><span class="w"></span>
+
+<span class="c">% plot polygons</span><span class="w"></span>
+<span class="nb">figure</span><span class="w"></span>
+<span class="nb">patch</span><span class="p">(</span><span class="n">P</span><span class="p">(</span><span class="mi">1</span><span class="p">,:),</span><span class="w"> </span><span class="n">P</span><span class="p">(</span><span class="mi">2</span><span class="p">,:),</span><span class="w"> </span><span class="s">&#39;b&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">FaceAlpha</span><span class="p">=</span><span class="mf">0.5</span><span class="p">)</span><span class="w"></span>
+<span class="nb">patch</span><span class="p">(</span><span class="n">P1</span><span class="p">(</span><span class="mi">1</span><span class="p">,:),</span><span class="w"> </span><span class="n">P1</span><span class="p">(</span><span class="mi">2</span><span class="p">,:),</span><span class="w"> </span><span class="s">&#39;r&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">FaceAlpha</span><span class="p">=</span><span class="mf">0.5</span><span class="p">)</span><span class="w"></span>
+<span class="nb">axis</span><span class="w"> </span><span class="n">equal</span><span class="w"></span>
+<span class="nb">axis</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">])</span><span class="w"></span>
+<span class="nb">xlabel</span><span class="p">(</span><span class="s">&quot;$x$&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">FontSize</span><span class="p">=</span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="n">Interpreter</span><span class="p">=</span><span class="s">&quot;latex&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="nb">ylabel</span><span class="p">(</span><span class="s">&quot;$z$&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">FontSize</span><span class="p">=</span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="n">Interpreter</span><span class="p">=</span><span class="s">&quot;latex&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="nb">box</span><span class="w"> </span><span class="n">on</span><span class="w"></span>
+</pre></div>
+</div>
+<figure class="align-default" id="rotation-about-centre-figure">
+<a class="reference internal image-reference" href="../_images/rotation_about_centre_example.png"><img alt="../_images/rotation_about_centre_example.png" src="../_images/rotation_about_centre_example.png" style="width: 400px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 41 </span><span class="caption-text">Rotating a polygon about its centre.</span><a class="headerlink" href="#rotation-about-centre-figure" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+</section>
 <section id="rotation-about-a-line">
 <h2>Rotation about a line<a class="headerlink" href="#rotation-about-a-line" title="Permalink to this headline">#</a></h2>
-<p>Suppose we wish to rotate <span class="math notranslate nohighlight">\(\mathbb{R}^3\)</span> by an angle <span class="math notranslate nohighlight">\(\theta\)</span> about a general line that passes through the point <span class="math notranslate nohighlight">\(\mathbf{p}=(p_x,p_y,p_z)\)</span> with direction <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> that does not pass through the origin and <span class="math notranslate nohighlight">\(\mathbf{d}=(d_x,d_y,d_z)\)</span> is not parallel to any of the three co-ordinate axes (<a class="reference internal" href="#rotation-about-line-figure-1"><span class="std std-numref">Fig. 37</span></a>). To achieve this we first need to apply translation and rotation so that the line lies along one of the co-ordinate axes, preform the rotation about this axis before reversing the rotation and translation operations. Each of the individual transformations can be represented by a matrix so the composite transformation that achieves the rotation about the line is a product of the individual matrices.</p>
+<p>Suppose we wish to rotate <span class="math notranslate nohighlight">\(\mathbb{R}^3\)</span> by an angle <span class="math notranslate nohighlight">\(\theta\)</span> about a general line that passes through the point <span class="math notranslate nohighlight">\(\mathbf{p}=(p_x,p_y,p_z)\)</span> with direction <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> that does not pass through the origin and <span class="math notranslate nohighlight">\(\mathbf{d}=(d_x,d_y,d_z)\)</span> is not parallel to any of the three co-ordinate axes (<a class="reference internal" href="#rotation-about-line-figure-1"><span class="std std-numref">Fig. 42</span></a>). To achieve this we first need to apply translation and rotation so that the line lies along one of the co-ordinate axes, preform the rotation about this axis before reversing the rotation and translation operations. Each of the individual transformations can be represented by a matrix so the composite transformation that achieves the rotation about the line is a product of the individual matrices.</p>
 <figure class="align-default" id="rotation-about-line-figure-1">
 <a class="reference internal image-reference" href="../_images/rotate_about_line_1.svg"><img alt="../_images/rotate_about_line_1.svg" src="../_images/rotate_about_line_1.svg" width="400px" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 37 </span><span class="caption-text">Rotation about a line.</span><a class="headerlink" href="#rotation-about-line-figure-1" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 42 </span><span class="caption-text">Rotation about a line.</span><a class="headerlink" href="#rotation-about-line-figure-1" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>The first transformation is to translate by <span class="math notranslate nohighlight">\(-\mathbf{p}\)</span> so that the line passes through the origin so the transformation matrix is</p>
@@ -868,10 +969,10 @@ Solution<div class="sd-summary-down docutils">
 <figure class="align-default" id="rotation-about-line-figure-2">
 <a class="reference internal image-reference" href="../_images/rotate_about_line_2.svg"><img alt="../_images/rotate_about_line_2.svg" src="../_images/rotate_about_line_2.svg" width="400px" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 38 </span><span class="caption-text">The line is translated so that <span class="math notranslate nohighlight">\(\mathbf{p}\)</span> is at the origin.</span><a class="headerlink" href="#rotation-about-line-figure-2" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 43 </span><span class="caption-text">The line is rotated about the <span class="math notranslate nohighlight">\(z\)</span>-axis so that <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> is in the <span class="math notranslate nohighlight">\(yz\)</span> plane.</span><a class="headerlink" href="#rotation-about-line-figure-2" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p><a class="reference internal" href="#rotation-about-line-figure-2"><span class="std std-numref">Fig. 38</span></a> shows that affect of translating by <span class="math notranslate nohighlight">\(-\mathbf{p}\)</span>. Now we need to rotate the line so that it lies in a plane the contains two of the three co-ordinate axes. The rotations required will depend on which of the eight directions <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> is pointing in. In this case <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> points towards the positive direction for all three axes, if we rotate about the <span class="math notranslate nohighlight">\(z\)</span> axis anti-clockwise by angle <span class="math notranslate nohighlight">\(\phi\)</span> then <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> (and therefore the line) will be in the <span class="math notranslate nohighlight">\(yz\)</span> plane. The values of <span class="math notranslate nohighlight">\(\cos(\phi)\)</span> and <span class="math notranslate nohighlight">\(\sin(\phi)\)</span> in <span class="math notranslate nohighlight">\(R_z(\phi)\)</span> are</p>
+<p><a class="reference internal" href="#rotation-about-line-figure-2"><span class="std std-numref">Fig. 43</span></a> shows that affect of translating by <span class="math notranslate nohighlight">\(-\mathbf{p}\)</span>. Now we need to rotate the line so that it lies in a plane the contains two of the three co-ordinate axes. The rotations required will depend on which of the eight directions <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> is pointing in. In this case <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> points towards the positive direction for all three axes, if we rotate about the <span class="math notranslate nohighlight">\(z\)</span> axis anti-clockwise by angle <span class="math notranslate nohighlight">\(\phi\)</span> then <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> (and therefore the line) will be in the <span class="math notranslate nohighlight">\(yz\)</span> plane. The values of <span class="math notranslate nohighlight">\(\cos(\phi)\)</span> and <span class="math notranslate nohighlight">\(\sin(\phi)\)</span> in <span class="math notranslate nohighlight">\(R_z(\phi)\)</span> are</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
     \cos(\phi) &amp;= \frac{|d_y|}{d_1}, &amp;
@@ -889,12 +990,12 @@ Solution<div class="sd-summary-down docutils">
     \end{pmatrix}.
 \end{align*}\]</div>
 <figure class="align-default" id="rotation-about-line-figure-3">
-<a class="reference internal image-reference" href="../_images/rotate_about_line_3.svg"><img alt="../_images/rotate_about_line_3.svg" src="../_images/rotate_about_line_3.svg" width="250px" /></a>
+<a class="reference internal image-reference" href="../_images/rotate_about_line_3.svg"><img alt="../_images/rotate_about_line_3.svg" src="../_images/rotate_about_line_3.svg" width="300px" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 39 </span><span class="caption-text">The line is rotated about the <span class="math notranslate nohighlight">\(z\)</span>-axis so that <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> is in the <span class="math notranslate nohighlight">\(yz\)</span> plane.</span><a class="headerlink" href="#rotation-about-line-figure-3" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 44 </span><span class="caption-text">The line is rotated about the <span class="math notranslate nohighlight">\(x\)</span>-axis so that <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> points along the <span class="math notranslate nohighlight">\(y\)</span> axis.</span><a class="headerlink" href="#rotation-about-line-figure-3" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p><a class="reference internal" href="#rotation-about-line-figure-3"><span class="std std-numref">Fig. 39</span></a> shows that affect of rotating about the <span class="math notranslate nohighlight">\(z\)</span>-axis. Now we need to rotate clockwise about the <span class="math notranslate nohighlight">\(x\)</span> axis so that <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> points along the <span class="math notranslate nohighlight">\(z\)</span> axis. The values of <span class="math notranslate nohighlight">\(\cos(\psi)\)</span> and <span class="math notranslate nohighlight">\(\sin(\psi)\)</span> are</p>
+<p><a class="reference internal" href="#rotation-about-line-figure-3"><span class="std std-numref">Fig. 44</span></a> shows that affect of rotating about the <span class="math notranslate nohighlight">\(z\)</span>-axis. Now we need to rotate clockwise about the <span class="math notranslate nohighlight">\(x\)</span> axis so that <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> points along the <span class="math notranslate nohighlight">\(z\)</span> axis. The values of <span class="math notranslate nohighlight">\(\cos(\psi)\)</span> and <span class="math notranslate nohighlight">\(\sin(\psi)\)</span> are</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
     \cos(\psi) &amp;= \frac{d_1}{|\mathbf{d}|}, &amp;
@@ -912,12 +1013,12 @@ Solution<div class="sd-summary-down docutils">
     \end{pmatrix}.
 \end{align*}\]</div>
 <figure class="align-default" id="rotation-about-line-figure-4">
-<a class="reference internal image-reference" href="../_images/rotate_about_line_4.svg"><img alt="../_images/rotate_about_line_4.svg" src="../_images/rotate_about_line_4.svg" width="150px" /></a>
+<a class="reference internal image-reference" href="../_images/rotate_about_line_4.svg"><img alt="../_images/rotate_about_line_4.svg" src="../_images/rotate_about_line_4.svg" width="350px" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 40 </span><span class="caption-text">The line is rotated about the <span class="math notranslate nohighlight">\(x\)</span>-axis so that <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> points along the <span class="math notranslate nohighlight">\(z\)</span> axis.</span><a class="headerlink" href="#rotation-about-line-figure-4" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 45 </span><span class="caption-text">The line is rotated about the <span class="math notranslate nohighlight">\(x\)</span>-axis so that <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> points along the <span class="math notranslate nohighlight">\(z\)</span> axis.</span><a class="headerlink" href="#rotation-about-line-figure-4" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p><a class="reference internal" href="#rotation-about-line-figure-4"><span class="std std-numref">Fig. 40</span></a> shows that affect of rotating about the <span class="math notranslate nohighlight">\(x\)</span>-axis. Now that the line is pointing along the <span class="math notranslate nohighlight">\(z\)</span>-axis we can perform the rotation about the line using <span class="math notranslate nohighlight">\(R_z(\theta)\)</span> and reverse the rotation in the <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(z\)</span> directions before finally reversing the translation. The composite transformation matrix is</p>
+<p><a class="reference internal" href="#rotation-about-line-figure-4"><span class="std std-numref">Fig. 45</span></a> shows that affect of rotating about the <span class="math notranslate nohighlight">\(x\)</span>-axis. Now that the line is pointing along the <span class="math notranslate nohighlight">\(z\)</span>-axis we can perform the rotation about the line using <span class="math notranslate nohighlight">\(R_z(\theta)\)</span> and reverse the rotation in the <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(z\)</span> directions before finally reversing the translation. The composite transformation matrix is</p>
 <div class="math notranslate nohighlight">
 \[A = T(\mathbf{p}) \cdot R_z(-\phi) \cdot R_x(-\psi) \cdot R_z(\theta) \cdot R_x(\psi) \cdot R_z(\phi) \cdot T(-\mathbf{p}).\]</div>
 <div class="proof example seealso admonition" id="example-3">
@@ -954,10 +1055,10 @@ Solution<div class="sd-summary-down docutils">
 <figure class="align-default" id="rotate-about-line-example-2">
 <a class="reference internal image-reference" href="../_images/rotate_about_line_example_2.svg"><img alt="../_images/rotate_about_line_example_2.svg" src="../_images/rotate_about_line_example_2.svg" width="50%" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 41 </span><span class="caption-text">Rotate <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> about the <span class="math notranslate nohighlight">\(z\)</span>-axis.</span><a class="headerlink" href="#rotate-about-line-example-2" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 46 </span><span class="caption-text">Rotate <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> about the <span class="math notranslate nohighlight">\(z\)</span>-axis.</span><a class="headerlink" href="#rotate-about-line-example-2" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p class="sd-card-text">Now we need to consider which rotations we apply so that <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> points along one of the axes. This decision is arbitrary but in this case since <span class="math notranslate nohighlight">\(d_x\)</span> is positive then rotating so that <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> points along the <span class="math notranslate nohighlight">\(x\)</span> axis would require the fewest rotations. Looking at <a class="reference internal" href="#rotate-about-line-example-2"><span class="std std-numref">Fig. 41</span></a> this means can first rotate <strong>anti-clockwise</strong> about the <span class="math notranslate nohighlight">\(z\)</span> axis by angle <span class="math notranslate nohighlight">\(\phi\)</span> so that <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> is in the <span class="math notranslate nohighlight">\(xz\)</span> plane. The values of <span class="math notranslate nohighlight">\(\cos(\phi)\)</span> and <span class="math notranslate nohighlight">\(\sin(\phi)\)</span> are</p>
+<p class="sd-card-text">Now we need to consider which rotations we apply so that <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> points along one of the axes. This decision is arbitrary but in this case since <span class="math notranslate nohighlight">\(d_x\)</span> is positive then rotating so that <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> points along the <span class="math notranslate nohighlight">\(x\)</span> axis would require the fewest rotations. Looking at <a class="reference internal" href="#rotate-about-line-example-2"><span class="std std-numref">Fig. 46</span></a> this means can first rotate <strong>anti-clockwise</strong> about the <span class="math notranslate nohighlight">\(z\)</span> axis by angle <span class="math notranslate nohighlight">\(\phi\)</span> so that <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> is in the <span class="math notranslate nohighlight">\(xz\)</span> plane. The values of <span class="math notranslate nohighlight">\(\cos(\phi)\)</span> and <span class="math notranslate nohighlight">\(\sin(\phi)\)</span> are</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
     \cos(\phi) &amp;= \frac{|d_x|}{d_1} = \frac{2\sqrt{5}}{5}, &amp;
@@ -993,13 +1094,13 @@ Solution<div class="sd-summary-down docutils">
     \begin{pmatrix} \sqrt{5} \\ 0 \\ -3 \\ 1 \end{pmatrix}.
 \end{align*}\]</div>
 <p class="sd-card-text">Since <span class="math notranslate nohighlight">\(d_y = 0\)</span> then the rotated <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> vector is now in the <span class="math notranslate nohighlight">\(xz\)</span> plane.</p>
-<figure class="align-default" id="id1">
+<figure class="align-default" id="id2">
 <a class="reference internal image-reference" href="../_images/rotate_about_line_example_3.svg"><img alt="../_images/rotate_about_line_example_3.svg" src="../_images/rotate_about_line_example_3.svg" width="50%" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 42 </span><span class="caption-text">Rotate <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> about the <span class="math notranslate nohighlight">\(y\)</span> axis.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 47 </span><span class="caption-text">Rotate <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> about the <span class="math notranslate nohighlight">\(y\)</span> axis.</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p class="sd-card-text">Looking at <a class="reference internal" href="#rotate-about-line-example-2"><span class="std std-numref">Fig. 41</span></a> we need to rotate <strong>clockwise</strong> around the <span class="math notranslate nohighlight">\(y\)</span> axis by angle <span class="math notranslate nohighlight">\(\psi\)</span> so that <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> points along the <span class="math notranslate nohighlight">\(x\)</span> axis (remember that the direction of rotation is based on the view looking down the axis towards the origin). The values of <span class="math notranslate nohighlight">\(\cos(\psi)\)</span> and <span class="math notranslate nohighlight">\(\sin(\psi)\)</span> are</p>
+<p class="sd-card-text">Looking at <a class="reference internal" href="#rotate-about-line-example-2"><span class="std std-numref">Fig. 46</span></a> we need to rotate <strong>clockwise</strong> around the <span class="math notranslate nohighlight">\(y\)</span> axis by angle <span class="math notranslate nohighlight">\(\psi\)</span> so that <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> points along the <span class="math notranslate nohighlight">\(x\)</span> axis (remember that the direction of rotation is based on the view looking down the axis towards the origin). The values of <span class="math notranslate nohighlight">\(\cos(\psi)\)</span> and <span class="math notranslate nohighlight">\(\sin(\psi)\)</span> are</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
     \cos(\psi) &amp;= \frac{d_1}{|\mathbf{d}|} = \frac{\sqrt{5}}{\sqrt{14}}, &amp;
@@ -1040,10 +1141,10 @@ Solution<div class="sd-summary-down docutils">
     \begin{pmatrix} \sqrt{14} \\ 0 \\ 0 \\ 1 \end{pmatrix}.
 \end{align*}\]</div>
 <p class="sd-card-text">Since <span class="math notranslate nohighlight">\(d_y=0\)</span>, <span class="math notranslate nohighlight">\(d_z=0\)</span> and <span class="math notranslate nohighlight">\(d_x &gt; 0\)</span> then <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> is now pointing along the <span class="math notranslate nohighlight">\(x\)</span> axis.</p>
-<figure class="align-default" id="id2">
+<figure class="align-default" id="id3">
 <a class="reference internal image-reference" href="../_images/rotate_about_line_example_4.svg"><img alt="../_images/rotate_about_line_example_4.svg" src="../_images/rotate_about_line_example_4.svg" width="50%" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 43 </span><span class="caption-text">Rotate <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> about the <span class="math notranslate nohighlight">\(x\)</span> axis.</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 48 </span><span class="caption-text">Rotate <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> about the <span class="math notranslate nohighlight">\(x\)</span> axis.</span><a class="headerlink" href="#id3" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p class="sd-card-text">Now we perform the rotation anti-clockwise around the <span class="math notranslate nohighlight">\(x\)</span> axis by angle <span class="math notranslate nohighlight">\(\theta = \pi / 6\)</span> and the matrix for achieving this rotation is</p>

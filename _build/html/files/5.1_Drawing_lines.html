@@ -59,7 +59,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Drawing circles" href="5.2_Drawing_circles.html" />
-    <link rel="prev" title="Clipping" href="5.1_Clipping.html" />
+    <link rel="prev" title="Rasterisation" href="5.0_Rasterisation.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -269,11 +269,6 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="4.4_Screen_space.html">
-     Screen space
-    </a>
-   </li>
-   <li class="toctree-l2">
     <a class="reference internal" href="4.5_Binary_space_partitioning.html">
      Binary space partitioning
     </a>
@@ -290,11 +285,6 @@ const thebe_selector_output = ".output, .cell_output"
    </i>
   </label>
   <ul class="current">
-   <li class="toctree-l2">
-    <a class="reference internal" href="5.1_Clipping.html">
-     Clipping
-    </a>
-   </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
      Drawing lines
@@ -521,11 +511,11 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="drawing-lines">
 <span id="rasterising-lines-section"></span><h1>Drawing lines<a class="headerlink" href="#drawing-lines" title="Permalink to this headline">#</a></h1>
-<p>One of the fundamental tasks in computer graphics is the rendering of a straight line on a display. Consider the diagram in <a class="reference internal" href="#line-raster-figure"><span class="std std-numref">Fig. 101</span></a> showing the rasterisation of the straight line joining the two points with pixel co-ordinates <span class="math notranslate nohighlight">\((2, 2)\)</span> and <span class="math notranslate nohighlight">\((12, 6)\)</span>. The pixels that are closest to the line are shaded to create a rasterised approximation of the idealise image. This is a simple task for a human since we are able to view the idealised image and determine which pixels need to be shaded. Algorithms are required to determine which pixels to illuminate in order to rasterise straight lines</p>
+<p>One of the fundamental tasks in computer graphics is the rendering of a straight line on a display. Consider the diagram in <a class="reference internal" href="#line-raster-figure"><span class="std std-numref">Fig. 96</span></a> showing the rasterisation of the straight line joining the two points with pixel co-ordinates <span class="math notranslate nohighlight">\((2, 2)\)</span> and <span class="math notranslate nohighlight">\((12, 6)\)</span>. The pixels that are closest to the line are shaded to create a rasterised approximation of the idealise image. This is a simple task for a human since we are able to view the idealised image and determine which pixels need to be shaded. Algorithms are required to determine which pixels to illuminate in order to rasterise straight lines</p>
 <figure class="align-default" id="line-raster-figure">
 <a class="reference internal image-reference" href="../_images/rasterising_line.svg"><img alt="../_images/rasterising_line.svg" src="../_images/rasterising_line.svg" width="400px" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 101 </span><span class="caption-text">Rasterising a straight line</span><a class="headerlink" href="#line-raster-figure" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 96 </span><span class="caption-text">Rasterising a straight line</span><a class="headerlink" href="#line-raster-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <section id="bresenham-s-algorithm">
@@ -533,13 +523,13 @@ title="Print to PDF"
 <figure class="margin align-default" id="id2">
 <a class="reference internal image-reference" href="https://www.ithistory.org/sites/default/files/honor-roll/Jack%20E.%20Bresenham.jpg"><img alt="Jack Elton Bresenham" src="https://www.ithistory.org/sites/default/files/honor-roll/Jack%20E.%20Bresenham.jpg" style="width: 200px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 102 </span><span class="caption-text"><a class="reference external" href="https://en.wikipedia.org/wiki/Jack_Elton_Bresenham">Jack Elton Bresenham</a></span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 97 </span><span class="caption-text"><a class="reference external" href="https://en.wikipedia.org/wiki/Jack_Elton_Bresenham">Jack Elton Bresenham</a></span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p><strong>Bresenham’s algorithm</strong> developed by American computer scientist Jack <span id="id1">Bresenham [<a class="reference internal" href="bibliography.html#id2" title="Jack Elton Bresenham. Algorithm for computer control of a digital plotter. IBM Systems journal, 4(1):25–30, 1965.">1965</a>]</span> is a line drawing algorithm that uses integer only arithmetic and offers a vast improvement over other methods in terms of computational efficiency. Consider the <a href="https://en.wikipedia.org/wiki/Linear_equation" target="_blank">Cartesian equation of a straight line</a> joining two points with co-ordinates <span class="math notranslate nohighlight">\((x_0, y_0)\)</span> and <span class="math notranslate nohighlight">\((x_1, y_1)\)</span></p>
 <div class="math notranslate nohighlight" id="equation-cartesian-equation-of-a-straight-line">
-<span class="eqno">(37)<a class="headerlink" href="#equation-cartesian-equation-of-a-straight-line" title="Permalink to this equation">#</a></span>\[y = \frac{y_1 - y_0}{x_1 - x_0} x + c,\]</div>
-<p>where <span class="math notranslate nohighlight">\((x,y)\)</span> are the co-ordinates of a point on the line and <span class="math notranslate nohighlight">\(c\)</span> is the point of interception between the line and the <span class="math notranslate nohighlight">\(y\)</span>-axis. Let <span class="math notranslate nohighlight">\(\Delta y = y_1 - y_0\)</span> and <span class="math notranslate nohighlight">\(\Delta x = x_1 - x_0\)</span> into equation <a class="reference internal" href="#equation-cartesian-equation-of-a-straight-line">(37)</a> and rearranging gives</p>
+<span class="eqno">(35)<a class="headerlink" href="#equation-cartesian-equation-of-a-straight-line" title="Permalink to this equation">#</a></span>\[y = \frac{y_1 - y_0}{x_1 - x_0} x + c,\]</div>
+<p>where <span class="math notranslate nohighlight">\((x,y)\)</span> are the co-ordinates of a point on the line and <span class="math notranslate nohighlight">\(c\)</span> is the point of interception between the line and the <span class="math notranslate nohighlight">\(y\)</span>-axis. Let <span class="math notranslate nohighlight">\(\Delta y = y_1 - y_0\)</span> and <span class="math notranslate nohighlight">\(\Delta x = x_1 - x_0\)</span> into equation <a class="reference internal" href="#equation-cartesian-equation-of-a-straight-line">(35)</a> and rearranging gives</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
     y &amp;= \frac{\Delta y}{\Delta x} x + c \\
@@ -561,10 +551,10 @@ title="Print to PDF"
 <figure class="align-default" id="bresenham-figure">
 <a class="reference internal image-reference" href="../_images/bresenhams_algorithm.svg"><img alt="../_images/bresenhams_algorithm.svg" src="../_images/bresenhams_algorithm.svg" width="400px" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 103 </span><span class="caption-text">The sign of the decision variable <span class="math notranslate nohighlight">\(d\)</span> determines which pixel is closest to the line.</span><a class="headerlink" href="#bresenham-figure" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 98 </span><span class="caption-text">The sign of the decision variable <span class="math notranslate nohighlight">\(d\)</span> determines which pixel is closest to the line.</span><a class="headerlink" href="#bresenham-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>So the sign of <span class="math notranslate nohighlight">\(d\)</span> will tell use which of the candidate nodes to choose (<a class="reference internal" href="#bresenham-figure"><span class="std std-numref">Fig. 103</span></a>). When <span class="math notranslate nohighlight">\(d \leq 0\)</span> the pixel at <span class="math notranslate nohighlight">\((x_i+1,y_i)\)</span> is closer to the line and if <span class="math notranslate nohighlight">\(d &gt; 0\)</span> the pixel at <span class="math notranslate nohighlight">\((x_i+1,y_i+1)\)</span> is closest. The value of <span class="math notranslate nohighlight">\(d\)</span> will change as we proceed along the line, let <span class="math notranslate nohighlight">\(\Delta d = d_{i+1} - d_i\)</span> be the change in <span class="math notranslate nohighlight">\(d\)</span> from one pixel to the next then we can calculate <span class="math notranslate nohighlight">\(d = d + \Delta d\)</span> using</p>
+<p>So the sign of <span class="math notranslate nohighlight">\(d\)</span> will tell use which of the candidate nodes to choose (<a class="reference internal" href="#bresenham-figure"><span class="std std-numref">Fig. 98</span></a>). When <span class="math notranslate nohighlight">\(d \leq 0\)</span> the pixel at <span class="math notranslate nohighlight">\((x_i+1,y_i)\)</span> is closer to the line and if <span class="math notranslate nohighlight">\(d &gt; 0\)</span> the pixel at <span class="math notranslate nohighlight">\((x_i+1,y_i+1)\)</span> is closest. The value of <span class="math notranslate nohighlight">\(d\)</span> will change as we proceed along the line, let <span class="math notranslate nohighlight">\(\Delta d = d_{i+1} - d_i\)</span> be the change in <span class="math notranslate nohighlight">\(d\)</span> from one pixel to the next then we can calculate <span class="math notranslate nohighlight">\(d = d + \Delta d\)</span> using</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
     \Delta d &amp;= d_{i+1} - d_{i} \\
@@ -640,7 +630,7 @@ title="Print to PDF"
 </ul>
 </section>
 </div><div class="proof example seealso admonition" id="basic-bresenham-example">
-<p class="admonition-title"><span class="caption-number">Example 39 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 38 </span></p>
 <section class="example-content" id="proof-content">
 <p>Use the basic Bresenham’s algorithm to determine the co-ordinates of the pixels on the straight line joining the
 two pixels with co-ordinates <span class="math notranslate nohighlight">\((2, 2)\)</span> and <span class="math notranslate nohighlight">\((7, 5)\)</span></p>
@@ -722,7 +712,7 @@ Solution<div class="sd-summary-down docutils">
 </ul>
 </section>
 </div><div class="proof example seealso admonition" id="modified-bresenham-example">
-<p class="admonition-title"><span class="caption-number">Example 40 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 39 </span></p>
 <section class="example-content" id="proof-content">
 <p>Use Bresenham’s algorithm for drawing lines in any direction to determine the co-ordinates of
 the pixels on the lines joining the following points:</p>
@@ -839,11 +829,11 @@ Solution<div class="sd-summary-down docutils">
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="5.1_Clipping.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="5.0_Rasterisation.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Clipping</p>
+            <p class="prev-next-title">Rasterisation</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="5.2_Drawing_circles.html" title="next page">

@@ -130,7 +130,7 @@
 # 
 # ## Finding the transformation matrix from a set of images
 # 
-# The calculation of the transformation matrix in {prf:ref}`transformation-matrix-example` was straightforward as we knew what the transformation was. This will not always be a the case and we may know what the output (known as the image) of the transformation is but not the transformation itself. Consider a linear transformation $T: \mathbb{R}^n \to \mathbb{R}^m$ applied to vectors $u_1, u_2, \ldots, u_n$. If $A$ is the transformation matrix for $T$ then
+# The calculation of the transformation matrix in {prf:ref}`transformation-matrix-example` was straightforward as we knew what the transformation was. This will not always be a the case and we may know what the output (known as the image) of the transformation is but not the transformation itself. Consider a linear transformation $T: \mathbb{R}^n \to \mathbb{R}^m$ applied to vectors $\mathbf{u}_1, \mathbf{u}_2, \ldots, \mathbf{u}_n$. If $A$ is the transformation matrix for $T$ then
 # 
 # \begin{align*}
 #     A
@@ -177,7 +177,7 @@
 # ````{prf:example}
 # :class: seealso
 # 
-# Determine the transformation matrix $A$ for the linear transformation $T$ such that
+# Determine the transformation matrix $A$ for the linear transformation $T:\mathbb{R}^2 \to \mathbb{R}^2$ such that
 # 
 # \begin{align*}
 #     T\begin{pmatrix} 1 \\ 1 \end{pmatrix} &= \begin{pmatrix} 4 \\ 3 \end{pmatrix}, &
@@ -236,7 +236,7 @@
 # where $A^{-1}$ is the transformation matrix for $T^{-1}$.
 # ````
 # 
-# ````{prf:example} 6.4
+# ````{prf:example}
 # :class: seealso
 #     
 # Determine the inverse of the transformation $T: \mathbb{R}^2 \to \mathbb{R}^2$ defined by $T(x, y) \mapsto (3 x + y, x + 2 y)$ and calculate $T^{-1}(4, 3)$.
@@ -280,7 +280,7 @@
 # ````{prf:definition} Composite transformations
 # :label: composite-transformation-definition
 # 
-# Let $S : V \to W$ and $T: W \to X$ be two linear transformations over the vector spaces $V, W$ and $X$. The **composition** of $S$ and $T$ is the transformation $S \circ T: V \to X$ defined by
+# Let $T: V \to W$ and $S : W \to X$ be two linear transformations over the vector spaces $V, W$ and $X$. The **composition** of $S$ and $T$ is the transformation $S \circ T: V \to X$ defined by
 # 
 # \begin{align*}
 #     (S \circ T)(\mathbf{u}) = S(T(\mathbf{u})),
@@ -289,7 +289,7 @@
 # for all vectors $\mathbf{u} \in V$.
 # ````
 # 
-# As before we want to be able to represent composite linear transformations as a matrix. If $S$ and $T$ are two linear transformations with transformation matrices $B$ and $A$ respectively, then the composite transformation $S \circ T(\mathbf{u}$ is
+# As before we want to be able to represent composite linear transformations as a matrix. If $T$ and $T$ are two linear transformations with transformation matrices $A$ and $B$ respectively, then the composite transformation $S \circ T(\mathbf{u}$ is
 # 
 # $$ S \circ T(\mathbf{u}) = S(T(\mathbf{u})) = S(A\mathbf{u}) = B \cdot A \mathbf{u}.$$
 # 
@@ -300,7 +300,7 @@
 # ````{prf:theorem} Composite transformation matrices
 # :label: composite-transformation-matrices-theorem
 # 
-# Given two linear transformations $S:V \to W$ and $T:W \to X$ with transformation matrices $B$ and $A$ respectively then the composition $S \circ T$ of the vector $\mathbf{u} \in V$ is 
+# Given two linear transformations $T:V \to W$ and $S:W \to X$ with transformation matrices $A$ and $B$ respectively then the composition $S \circ T$ of the vector $\mathbf{u} \in V$ is 
 # 
 # ```{math}
 # :label: composite-transformation-matrices-theorem-equation
@@ -316,7 +316,7 @@
 # 
 # Two linear transformations is defined as $T:(x, y, z) \mapsto (2 x + 4 y, -x + 3 y, x + 2 y)$ and $S:(x, y) \mapsto (2x + y - z, 3x + z, y - 2z)$.
 # 
-# (i) &emsp; Determine the composite linear transformation $S \circ T(\mathbf{u})$ for $\mathbf{u} = (x, y, z)$.
+# (i) Determine the composite linear transformation $S \circ T(\mathbf{u})$ for $\mathbf{u} = (x, y, z)$.
 # 
 # ```{dropdown} Solution
 # \begin{align*}

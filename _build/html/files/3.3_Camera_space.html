@@ -269,11 +269,6 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="4.4_Screen_space.html">
-     Screen space
-    </a>
-   </li>
-   <li class="toctree-l2">
     <a class="reference internal" href="4.5_Binary_space_partitioning.html">
      Binary space partitioning
     </a>
@@ -290,11 +285,6 @@ const thebe_selector_output = ".output, .cell_output"
    </i>
   </label>
   <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="5.1_Clipping.html">
-     Clipping
-    </a>
-   </li>
    <li class="toctree-l2">
     <a class="reference internal" href="5.1_Drawing_lines.html">
      Drawing lines
@@ -513,11 +503,11 @@ title="Print to PDF"
 <span id="camera-space-section"></span><h1>Camera space<a class="headerlink" href="#camera-space" title="Permalink to this headline">#</a></h1>
 <figure class="margin align-default">
 <img alt="../_images/viewing_pipeline_camera_space.svg" src="../_images/viewing_pipeline_camera_space.svg" /></figure>
-<p>The next step in the <a class="reference internal" href="3.0_Virtual_environments.html#viewing-pipeline-section"><span class="std std-ref">viewing pipeline</span></a> is to align the world space to the camera space. Imagine you are viewing a virtual environment through a camera positioned in the world space at <span class="math notranslate nohighlight">\(\mathbf{p}\)</span> and pointed towards the point with position <span class="math notranslate nohighlight">\(\mathbf{c}\)</span> known as the <strong>centre of view</strong> (<a class="reference internal" href="#camera-space-figure"><span class="std std-numref">Fig. 54</span></a>). We want to transform the world space so that <span class="math notranslate nohighlight">\(\mathbf{p}\)</span> is at the origin of a new space with axes <span class="math notranslate nohighlight">\(x^\ast\)</span>, <span class="math notranslate nohighlight">\(y^\ast\)</span> and <span class="math notranslate nohighlight">\(z^\ast\)</span> where, from our point of view, <span class="math notranslate nohighlight">\(x^\ast\)</span> points to the right, <span class="math notranslate nohighlight">\(y^{\ast}\)</span> points up and <span class="math notranslate nohighlight">\(z^\ast\)</span> points towards us. The reason we want this new axes configuration is so that the <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> co-ordinates match the horizontal and vertical axes of the display.</p>
+<p>The next step in the <a class="reference internal" href="3.0_Virtual_environments.html#viewing-pipeline-section"><span class="std std-ref">viewing pipeline</span></a> is to align the world space to the camera space. Imagine you are viewing a virtual environment through a camera positioned in the world space at <span class="math notranslate nohighlight">\(\mathbf{p}\)</span> and pointed towards the point with position <span class="math notranslate nohighlight">\(\mathbf{c}\)</span> known as the <strong>centre of view</strong> (<a class="reference internal" href="#camera-space-figure"><span class="std std-numref">Fig. 59</span></a>). We want to transform the world space so that <span class="math notranslate nohighlight">\(\mathbf{p}\)</span> is at the origin of a new space with axes <span class="math notranslate nohighlight">\(x^\ast\)</span>, <span class="math notranslate nohighlight">\(y^\ast\)</span> and <span class="math notranslate nohighlight">\(z^\ast\)</span> where, from our point of view, <span class="math notranslate nohighlight">\(x^\ast\)</span> points to the right, <span class="math notranslate nohighlight">\(y^{\ast}\)</span> points up and <span class="math notranslate nohighlight">\(z^\ast\)</span> points towards us. The reason we want this new axes configuration is so that the <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> co-ordinates match the horizontal and vertical axes of the display.</p>
 <figure class="align-default" id="camera-space-figure">
 <a class="reference internal image-reference" href="../_images/camera_space.svg"><img alt="../_images/camera_space.svg" src="../_images/camera_space.svg" width="600px" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 54 </span><span class="caption-text">The world space is transformed so that the viewer <span class="math notranslate nohighlight">\(\mathbf{p}\)</span> is the origin of a new co-ordinate axes <span class="math notranslate nohighlight">\(x^\ast\)</span>, <span class="math notranslate nohighlight">\(y^\ast\)</span> and <span class="math notranslate nohighlight">\(z^\ast\)</span>.</span><a class="headerlink" href="#camera-space-figure" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 59 </span><span class="caption-text">The world space is transformed so that the viewer <span class="math notranslate nohighlight">\(\mathbf{p}\)</span> is the origin of a new co-ordinate axes <span class="math notranslate nohighlight">\(x^\ast\)</span>, <span class="math notranslate nohighlight">\(y^\ast\)</span> and <span class="math notranslate nohighlight">\(z^\ast\)</span>.</span><a class="headerlink" href="#camera-space-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>The first transformation is to translate the world space by <span class="math notranslate nohighlight">\(-\mathbf{p}\)</span> so that the viewer is positioned at the origin. The <a class="reference internal" href="2.1_Translation.html#translation-matrix-definition">matrix</a> that performs this translation is</p>
@@ -751,17 +741,17 @@ Solution<div class="sd-summary-down docutils">
 <span class="nb">box</span><span class="w"> </span><span class="n">on</span><span class="w"></span>
 </pre></div>
 </div>
-<p>The result of applying the alignment matrix to the world space co-ordinates to produce the camera space co-ordinates can be seen in <a class="reference internal" href="#camera-space-example-1-figure"><span class="std std-numref">Fig. 55</span></a> and the plot of the camera space when viewed looking down the <span class="math notranslate nohighlight">\(z\)</span>-axis is shown in <a class="reference internal" href="#camera-space-example-2-figure"><span class="std std-numref">Fig. 56</span></a>.</p>
+<p>The result of applying the alignment matrix to the world space co-ordinates to produce the camera space co-ordinates can be seen in <a class="reference internal" href="#camera-space-example-1-figure"><span class="std std-numref">Fig. 60</span></a> and the plot of the camera space when viewed looking down the <span class="math notranslate nohighlight">\(z\)</span>-axis is shown in <a class="reference internal" href="#camera-space-example-2-figure"><span class="std std-numref">Fig. 61</span></a>.</p>
 <figure class="align-default" id="camera-space-example-1-figure">
 <a class="reference internal image-reference" href="../_images/camera_space_example_1.png"><img alt="../_images/camera_space_example_1.png" src="../_images/camera_space_example_1.png" style="width: 400px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 55 </span><span class="caption-text">The camera space from <a class="reference internal" href="#camera-space-example">Example 31</a> viewed from an arbitrary point.</span><a class="headerlink" href="#camera-space-example-1-figure" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 60 </span><span class="caption-text">The camera space from <a class="reference internal" href="#camera-space-example">Example 31</a> viewed from an arbitrary point.</span><a class="headerlink" href="#camera-space-example-1-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-default" id="camera-space-example-2-figure">
 <a class="reference internal image-reference" href="../_images/camera_space_example_2.png"><img alt="../_images/camera_space_example_2.png" src="../_images/camera_space_example_2.png" style="width: 400px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 56 </span><span class="caption-text">The camera space from <a class="reference internal" href="#camera-space-example">Example 31</a> viewed looking down the <span class="math notranslate nohighlight">\(z\)</span>-axis.</span><a class="headerlink" href="#camera-space-example-2-figure" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 61 </span><span class="caption-text">The camera space from <a class="reference internal" href="#camera-space-example">Example 31</a> viewed looking down the <span class="math notranslate nohighlight">\(z\)</span>-axis.</span><a class="headerlink" href="#camera-space-example-2-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>

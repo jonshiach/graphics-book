@@ -62,55 +62,63 @@
 # 
 # The transformation matrix is determined using equation {eq}`determining-the-transformation-matrix` which is
 # 
-# $$A = (T(\mathbf{u}_1), T(\mathbf{u}_2), \ldots, T(\mathbf{u}_n)) \cdot (\mathbf{u}_1, \mathbf{u}_2, \ldots, \mathbf{u}_n)^{-1}.$$
-# 
-# Using Gauss-Jordan elimination to calculate the inverse of $(\mathbf{u}_1, \mathbf{u}_2, \mathbf{u}_3)^{-1}$ 
-# 
 # \begin{align*}
-#     & \left( \begin{array}{rrr|rrr}
-#        1 & 0 & -1 & 1 & 0 & 0 \\
-#        -1 & 1 & 1 & 0 & 1 & 0 \\
-#        0 & 2 & 1 & 0 & 0 & 1
-#     \end{array} \right)
-#     \begin{array}{l} \\ R_2 + R_1 \\ \phantom{x} \end{array} \\ \\ 
-#     \longrightarrow \qquad 
-#     & \left( \begin{array}{rrr|rrr}
-#        1 & 0 & -1 & 1 & 0 & 0 \\
-#        0 & 1 & 0 & 1 & 1 & 0 \\
-#        0 & 2 & 1 & 0 & 0 & 1
-#     \end{array} \right)
-#     \begin{array}{l} \\ \\ R_3 - 2 R_2 \end{array} \\ \\ 
-#     \longrightarrow \qquad  
-#     & \left( \begin{array}{rrr|rrr}
-#        1 & 0 & -1 & 1 & 0 & 0 \\
-#        0 & 1 & 0 & 1 & 1 & 0 \\
-#        0 & 0 & 1 & -2 & -2 & 1
-#     \end{array} \right)
-#     \begin{array}{l} R_1 + R_3 \\ \phantom{x} \\ \phantom{x} \end{array} \\ \\ 
-#     \longrightarrow \qquad
-#     & \left( \begin{array}{rrr|rrr}
-#        1 & 0 & 0 & -1 & -2 & 1 \\
-#        0 & 1 & 0 & 1 & 1 & 0 \\
-#        0 & 0 & 1 & -2 & -2 & 1
-#     \end{array} \right)
+#     A &= (T(\mathbf{u}_1), T(\mathbf{u}_2), \ldots, T(\mathbf{u}_n)) \cdot (\mathbf{u}_1, \mathbf{u}_2, \ldots, \mathbf{u}_n)^{-1}, \\
+#     &=
+#     \begin{pmatrix} 
+#         1 & 6 & 2 \\
+#         -2 & 5 & 4 \\
+#         -4 & 10 & 7
+#     \end{pmatrix}
+#     \begin{pmatrix}
+#         1 & 0 & -1 \\
+#         -1 & 1 & 1 \\
+#         0 & 2 & 1 
+#     \end{pmatrix}^{-1}
 # \end{align*}
 # 
-# So $(\mathbf{u}_1, \mathbf{u}_2, \mathbf{u}_3)^{-1} = \begin{pmatrix}  -1 & -2 & 1 \\ 1 & 1 & 0 \\ -2 & -2 & 1 \end{pmatrix}$ and
+# The inverse of the right-hand matrix is
 # 
 # \begin{align*}
-#     A &= \begin{pmatrix} 1 & 6 & 2 \\ -2 & 5 & 4 \\ -4 & 10 & 7 \end{pmatrix}
+#     \begin{pmatrix}
+#         1 & 0 & -1 \\
+#         -1 & 1 & 1 \\
+#         0 & 2 & 1 
+#     \end{pmatrix}^{-1}
+#     = 
+#     \begin{pmatrix}
+#         -1 & -2 & 1 \\
+#         1 & 1 & 0 \\
+#         -2 & -2 & 1
+#     \end{pmatrix}
+# \end{align*}
+# 
+# so
+# 
+# \begin{align*}
+#     A &= 
+#     \begin{pmatrix} 
+#         1 & 6 & 2 \\ 
+#         -2 & 5 & 4 \\
+#         -4 & 10 & 7 
+#     \end{pmatrix}
 #     \begin{pmatrix} 
 #         -1 & -2 & 1 \\
 #         1 & 1 & 0 \\
 #         -2 & -2 & 1
 #     \end{pmatrix}
-#     = \begin{pmatrix} 1 & 0 & 3 \\ -1 & 1 & 2 \\ 0 & 4 & 3 \end{pmatrix}.
+#     = 
+#     \begin{pmatrix} 
+#         1 & 0 & 3 \\ 
+#         -1 & 1 & 2 \\ 
+#         0 & 4 & 3 
+#     \end{pmatrix}.
 # \end{align*}
 # 
 # Checking $A$
 # 
 # \begin{align*}
-#     T\begin{pmatrix} 1 \\ 2 \\ 1 \end{pmatrix} &=
+#     T\begin{pmatrix} 1 \\ -1 \\ 0 \end{pmatrix} &=
 #     \begin{pmatrix} 1 & 0 & 3 \\ -1 & 1 & 2 \\ 0 & 4 & 3 \end{pmatrix}
 #     \begin{pmatrix}1 \\ -1 \\ 0 \end{pmatrix} 
 #     = \begin{pmatrix} 1 \\ -2 \\ - 4 \end{pmatrix} \quad \checkmark
@@ -254,8 +262,8 @@
 # c = mean(P1, 2);
 # 
 # % Define rotation matrix
-# R = @(th) [ cos(th), -sin(th), 0 ;
-#             sin(th), cos(th), 0 ;
+# R = @(th) [ cos(theta), -sin(theta), 0 ;
+#             sin(theta), cos(theta), 0 ;
 #             0, 0, 1 ];
 # 
 # % Apply transformations (remembering to translate to and from origin)
@@ -373,4 +381,116 @@
 # :width: 500px
 # ```
 # 
+# ````
+# 
+# ````{exercise}
+# :label: transformations-ex7
+# 
+# A set of co-ordinates is to be rotated by $\theta=\pi/6$ anti-clockwise about the line that passes through the point $(2, -4, -3)$ and has the direction vector $(-2, 3, 4)$. Determine the individual transformation matrices used to perform this rotation and write down an expression for calculating a single composite transformation matrix.
+# ````
+# 
+# ````{solution} transformations-ex7
+# :label: transformations-ex7-solution
+# :class: dropdown
+# 
+# First translate by $\mathbf{-p}$ so the translation matrix is
+# 
+# \begin{align*}
+#     T(-\mathbf{p}) &= 
+#     \begin{pmatrix}
+#         1 & 0 & 0 & -2 \\
+#         0 & 1 & 0 & 4 \\
+#         0 & 0 & 1 & 3 \\ 
+#         0 & 0 & 0 & 1
+#     \end{pmatrix}.
+# \end{align*}
+# 
+# Rotate the direction vector $\mathbf{d}=(-2,3,4)$ anti-clockwise about the $z$-axis by angle $\phi$ so that it is in the $xz$ plane. The sine and cosine of $\phi$ are
+# 
+# \begin{align*}
+#     \cos(\phi) &= \frac{|d_x|}{d_1} = \frac{2}{\sqrt{13}} = \frac{2\sqrt{13}}{13}, \\
+#     \sin(\phi) &= \frac{|d_y|}{d_1} = \frac{3}{\sqrt{13}} = \frac{3\sqrt{13}}{13}, 
+# \end{align*}
+# 
+# so the rotation matrix is
+# 
+# \begin{align*}
+#     R_z(\phi) &= 
+#     \begin{pmatrix}
+#         2\sqrt{13}/13 & -3\sqrt{13}/13 & 0 & 0 \\
+#         3\sqrt{13}/13 & 2\sqrt{13}/13 & 0 & 0 \\
+#         0 & 0 & 1 & 0 \\
+#         0 & 0 & 0 & 1 
+#     \end{pmatrix}.
+# \end{align*}
+# 
+# Rotate the direction vector anti-clockwise about the $y$ axis by angle $\psi$ so that it points along the $z$-axis. The sine and cosine of $\psi$ are
+# 
+# \begin{align*}
+#     \cos(\psi) &= \frac{|d_z|}{|\mathbf{d}|} = \frac{4}{\sqrt{29}} = \frac{4\sqrt{29}}{29}, \\
+#     \sin(\psi) &= \frac{d_1}{|\mathbf{d}|} = \frac{\sqrt{13}}{\sqrt{29}} = \frac{\sqrt{13}\sqrt{29}}{29},
+# \end{align*}
+# 
+# so the rotation matrix is
+# 
+# \begin{align*}
+#     R_y(\psi) &=
+#     \begin{pmatrix}
+#         4\sqrt{29}/29 & 0 & \sqrt{13}\sqrt{29}/29 & 0 \\
+#         0 & 1 & 0 & 0 \\
+#         -\sqrt{13}\sqrt{29}/29 & 0 & 4\sqrt{29}/29 & 0 \\
+#         0 & 0 & 0 & 1
+#     \end{pmatrix}.
+# \end{align*}
+# 
+# Now that the direction vector points along the $z$-axis, we perform the rotation by $\theta=\pi/6$ so the rotation matrix is
+# 
+# \begin{align*}
+#     R\left(\frac{\pi}{6}\right) &=
+#     \begin{pmatrix}
+#         \cos(\pi/6) & \sin(\pi/6) & 0 & 0 \\
+#         -\sin(\pi/6) & \cos\pi/6) & 0 & 0 \\
+#         0 & 0 & 1 & 0 \\
+#         0 & 0 & 0 & 1 
+#     \end{pmatrix} \\
+#     &= 
+#     \begin{pmatrix}
+#         \sqrt{3}/2 & -1/2 & 0 & 0 \\
+#         1/2 & \sqrt{3}/2 & 0 & 0 \\
+#         0 & 0 & 1 & 0 \\
+#         0 & 0 & 0 & 1
+#     \end{pmatrix}.
+# \end{align*}
+# 
+# The inverse transformations are
+# 
+# \begin{align*}
+#     R_y(-\psi) &=
+#     \begin{pmatrix}
+#         4\sqrt{29}/29 & 0 & -\sqrt{13}\sqrt{29}/29 & 0 \\
+#         0 & 1 & 0 & 0 \\
+#         \sqrt{13}\sqrt{29}/29 & 0 & 4\sqrt{29}/29 & 0 \\
+#         0 & 0 & 0 & 1
+#     \end{pmatrix}, \\
+#     R_z(-\phi) &= 
+#     \begin{pmatrix}
+#         2\sqrt{13}/13 & -3\sqrt{13}/13 & 0 & 0 \\
+#         3\sqrt{13}/13 & 2\sqrt{13}/13 & 0 & 0 \\
+#         0 & 0 & 1 & 0 \\
+#         0 & 0 & 0 & 1 
+#     \end{pmatrix}, \\
+#     T(\mathbf{p}) &= 
+#     \begin{pmatrix}
+#         1 & 0 & 0 & 2 \\
+#         0 & 1 & 0 & -4 \\
+#         0 & 0 & 1 & -3 \\ 
+#         0 & 0 & 0 & 1
+#     \end{pmatrix}
+# \end{align*}
+# 
+# and the composite transformation matrix is
+# 
+# \begin{align*}
+#     A &= T(\mathbf{p}) \cdot R_z(-\phi) \cdot R_y(-\psi) \cdot R_z\left(\frac{\pi}{6}\right) \cdot R_y(\psi) \cdot R_z(\phi) \cdot T(-\mathbf{p}).
+# \end{align*}
 # ````

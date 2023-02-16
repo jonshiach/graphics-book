@@ -269,11 +269,6 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="4.4_Screen_space.html">
-     Screen space
-    </a>
-   </li>
-   <li class="toctree-l2">
     <a class="reference internal" href="4.5_Binary_space_partitioning.html">
      Binary space partitioning
     </a>
@@ -471,8 +466,18 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#matlab-code">
+   MATLAB code
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#scaling-about-the-centre-of-a-shape">
    Scaling about the centre of a shape
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   MATLAB code
   </a>
  </li>
 </ul>
@@ -495,8 +500,18 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#matlab-code">
+   MATLAB code
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#scaling-about-the-centre-of-a-shape">
    Scaling about the centre of a shape
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   MATLAB code
   </a>
  </li>
 </ul>
@@ -511,11 +526,11 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="scaling">
 <span id="scaling-section"></span><h1>Scaling<a class="headerlink" href="#scaling" title="Permalink to this headline">#</a></h1>
-<p><strong>Scaling</strong> is a linear transformation that moves a point closer or further away from the origin by a certain <strong>scaling vector</strong>. Consider the diagram shown in <a class="reference internal" href="#scaling-figure"><span class="std std-numref">Fig. 32</span></a> where the point at position <span class="math notranslate nohighlight">\(\mathbf{u}= (u_x, u_y, u_z)\)</span> has been scaled by the scaling vector <span class="math notranslate nohighlight">\(\mathbf{s} = (s_x, s_y, s_z)\)</span>.</p>
+<p><strong>Scaling</strong> is a linear transformation that moves a point closer or further away from the origin by a certain <strong>scaling vector</strong>. Consider the diagram shown in <a class="reference internal" href="#scaling-figure"><span class="std std-numref">Fig. 33</span></a> where the point at position <span class="math notranslate nohighlight">\(\mathbf{u}= (u_x, u_y, u_z)\)</span> has been scaled by the scaling vector <span class="math notranslate nohighlight">\(\mathbf{s} = (s_x, s_y, s_z)\)</span>.</p>
 <figure class="align-default" id="scaling-figure">
 <a class="reference internal image-reference" href="../_images/scaling.svg"><img alt="../_images/scaling.svg" src="../_images/scaling.svg" width="300px" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 32 </span><span class="caption-text">Scaling of the point <span class="math notranslate nohighlight">\(\mathbf{u} = (u_x, u_y, u_z)\)</span> by the scaling vector <span class="math notranslate nohighlight">\(\mathbf{s} = (s_x, s_y, s_z)\)</span>.</span><a class="headerlink" href="#scaling-figure" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 33 </span><span class="caption-text">Scaling of the point <span class="math notranslate nohighlight">\(\mathbf{u} = (u_x, u_y, u_z)\)</span> by the scaling vector <span class="math notranslate nohighlight">\(\mathbf{s} = (s_x, s_y, s_z)\)</span>.</span><a class="headerlink" href="#scaling-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>The co-ordinates of the scaled point <span class="math notranslate nohighlight">\(\mathbf{v}\)</span> are easily calculated using</p>
@@ -617,18 +632,52 @@ Solution<div class="sd-summary-down docutils">
         1 &amp; 1 &amp; 1 
     \end{pmatrix}.
 \end{align*}\]</div>
-<p class="sd-card-text">So the vertex co-ordinates of the transformed polygon are <span class="math notranslate nohighlight">\((3, 0, 2)\)</span>, <span class="math notranslate nohighlight">\((9, 0, 2)\)</span> and <span class="math notranslate nohighlight">\((6, 0, 6)\)</span>. The original triangle and the translated triangle are plotted below look along the <span class="math notranslate nohighlight">\(y\)</span>-axis.</p>
-<figure class="align-default">
-<a class="reference internal image-reference" href="../_images/scaling_example.png"><img alt="../_images/scaling_example.png" src="../_images/scaling_example.png" style="width: 400px;" /></a>
-</figure>
+<p class="sd-card-text">So the vertex co-ordinates of the transformed polygon are <span class="math notranslate nohighlight">\((3, 0, 2)\)</span>, <span class="math notranslate nohighlight">\((9, 0, 2)\)</span> and <span class="math notranslate nohighlight">\((6, 0, 6)\)</span>. The original triangle and the scaled triangle are plotted in <a class="reference internal" href="#scaling-example-figure"><span class="std std-numref">Fig. 34</span></a> looking along the <span class="math notranslate nohighlight">\(y\)</span>-axis.</p>
 </div>
 </details></section>
-</div><section id="scaling-about-the-centre-of-a-shape">
+</div><section id="matlab-code">
+<h2>MATLAB code<a class="headerlink" href="#matlab-code" title="Permalink to this headline">#</a></h2>
+<p>The following MATLAB code applies the translation from <a class="reference internal" href="#scaling-example">Example 24</a> and plots the original and scaled polygons.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Define homogeneous co-ordinate matrix</span><span class="w"></span>
+<span class="n">P</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">];</span><span class="w"></span>
+
+<span class="c">% Define scaling matrix</span><span class="w"></span>
+<span class="n">S</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">@(</span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="n">s</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"> </span>
+<span class="w">           </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"> </span>
+<span class="w">           </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"> </span>
+<span class="w">           </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">];</span><span class="w"></span>
+
+<span class="c">% Apply scaling</span><span class="w"></span>
+<span class="n">s</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">3</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">1</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="mi">2</span><span class="p">];</span><span class="w"></span>
+<span class="n">P1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">S</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">P</span><span class="p">;</span><span class="w"></span>
+
+<span class="c">% Plot polygons</span><span class="w"></span>
+<span class="nb">figure</span><span class="w"></span>
+<span class="nb">patch</span><span class="p">(</span><span class="n">P</span><span class="p">(</span><span class="mi">1</span><span class="p">,:),</span><span class="w"> </span><span class="n">P</span><span class="p">(</span><span class="mi">3</span><span class="p">,:),</span><span class="w"> </span><span class="s">&#39;b&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">FaceAlpha</span><span class="p">=</span><span class="mf">0.5</span><span class="p">)</span><span class="w"></span>
+<span class="nb">patch</span><span class="p">(</span><span class="n">P1</span><span class="p">(</span><span class="mi">1</span><span class="p">,:),</span><span class="w"> </span><span class="n">P1</span><span class="p">(</span><span class="mi">3</span><span class="p">,:),</span><span class="w"> </span><span class="s">&#39;r&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">FaceAlpha</span><span class="p">=</span><span class="mf">0.5</span><span class="p">)</span><span class="w"></span>
+<span class="nb">axis</span><span class="w"> </span><span class="n">equal</span><span class="w"> </span>
+<span class="nb">axis</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">])</span><span class="w"></span>
+<span class="nb">xlabel</span><span class="p">(</span><span class="s">&quot;$x$&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">FontSize</span><span class="p">=</span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="n">Interpreter</span><span class="p">=</span><span class="s">&quot;latex&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="nb">ylabel</span><span class="p">(</span><span class="s">&quot;$z$&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">FontSize</span><span class="p">=</span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="n">Interpreter</span><span class="p">=</span><span class="s">&quot;latex&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="nb">box</span><span class="w"> </span><span class="n">on</span><span class="w"></span>
+</pre></div>
+</div>
+<figure class="align-default" id="scaling-example-figure">
+<a class="reference internal image-reference" href="../_images/scaling_example.png"><img alt="../_images/scaling_example.png" src="../_images/scaling_example.png" style="width: 500px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 34 </span><span class="caption-text">Scaling a polygon about the origin.</span><a class="headerlink" href="#scaling-example-figure" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="scaling-about-the-centre-of-a-shape">
 <h2>Scaling about the centre of a shape<a class="headerlink" href="#scaling-about-the-centre-of-a-shape" title="Permalink to this headline">#</a></h2>
-<p>We have seen in <a class="reference internal" href="#scaling-example">Example 24</a> that scaling the polygon resulted in the centre of the polygon shifting position and the aspect ratio of the polygon changed.. This was because scaling was applied to a shape whose centre was not at the origin. To preserve the position of the centre of a shape when scaling we first need to translate the points that define the shape to the origin, which means that the translation vector if <span class="math notranslate nohighlight">\(-\mathbf{c}\)</span> where <span class="math notranslate nohighlight">\(\mathbf{c}\)</span> is the centre of the shape. Then we can perform the scaling before using the inverse translation so that the centre of the shape is back at <span class="math notranslate nohighlight">\(\mathbf{c}\)</span> (<a class="reference internal" href="#scaling-about-centre-figure"><span class="std std-numref">Fig. 33</span></a>).</p>
+<p>We have seen in <a class="reference internal" href="#scaling-example">Example 24</a> that scaling the polygon resulted in the centre of the polygon shifting position and the aspect ratio of the polygon changed.. This was because scaling was applied to a shape whose centre was not at the origin. To preserve the position of the centre of a shape when scaling we first need to translate the points that define the shape to the origin, which means that the translation vector if <span class="math notranslate nohighlight">\(-\mathbf{c}\)</span> where <span class="math notranslate nohighlight">\(\mathbf{c}\)</span> is the centre of the shape. Then we can perform the scaling before using the inverse translation so that the centre of the shape is back at <span class="math notranslate nohighlight">\(\mathbf{c}\)</span> (<a class="reference internal" href="#scaling-about-centre-figure"><span class="std std-numref">Fig. 35</span></a>).</p>
 <figure class="align-default" id="scaling-about-centre-figure">
 <img alt="../_images/scaling_about_centre.svg" src="../_images/scaling_about_centre.svg" /><figcaption>
-<p><span class="caption-number">Fig. 33 </span><span class="caption-text">Steps required to rotate a polygon by its centre.</span><a class="headerlink" href="#scaling-about-centre-figure" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 35 </span><span class="caption-text">Steps required to rotate a polygon by its centre.</span><a class="headerlink" href="#scaling-about-centre-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>So we have the following composite transformation matrix</p>
@@ -636,7 +685,7 @@ Solution<div class="sd-summary-down docutils">
 \[\begin{align*}
     A = T^{-1} \cdot S \cdot T
 \end{align*}\]</div>
-<div class="proof example seealso admonition" id="example-2">
+<div class="proof example seealso admonition" id="scaling-about-centre-example">
 <p class="admonition-title"><span class="caption-number">Example 25 </span></p>
 <section class="example-content" id="proof-content">
 <p>Scale the polygon from <a class="reference internal" href="#scaling-example">Example 24</a> by a factor of 2 in all three directions.</p>
@@ -726,13 +775,55 @@ Solution<div class="sd-summary-down docutils">
         1 &amp; 1 &amp; 1 
     \end{pmatrix}.
 \end{align*}\]</div>
-<p class="sd-card-text">So the vertex co-ordinates of the translated polygon are <span class="math notranslate nohighlight">\((0, 0, 1/3) \approx (0, 0, 0.33)\)</span>, <span class="math notranslate nohighlight">\((4, 0, 1/3) \approx (4, 0, 0.33)\)</span> and <span class="math notranslate nohighlight">\((2, 0, 13/3) \approx (2, 0, 4.33)\)</span>. The original polygon and the translated polygon are plotted below looking along the <span class="math notranslate nohighlight">\(y\)</span> axis.</p>
-<figure class="align-default">
-<a class="reference internal image-reference" href="../_images/scaling_about_centre_example.png"><img alt="../_images/scaling_about_centre_example.png" src="../_images/scaling_about_centre_example.png" style="width: 400px;" /></a>
-</figure>
+<p class="sd-card-text">So the vertex co-ordinates of the translated polygon are <span class="math notranslate nohighlight">\((0, 0, 1/3) \approx (0, 0, 0.33)\)</span>, <span class="math notranslate nohighlight">\((4, 0, 1/3) \approx (4, 0, 0.33)\)</span> and <span class="math notranslate nohighlight">\((2, 0, 13/3) \approx (2, 0, 4.33)\)</span>. The original polygon and the scaled polygon are plotted in <a class="reference internal" href="#scaling-about-centre-example-figure"><span class="std std-numref">Fig. 36</span></a> looking along the <span class="math notranslate nohighlight">\(y\)</span> axis.</p>
 </div>
 </details></section>
 </div></section>
+<section id="id1">
+<h2>MATLAB code<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
+<p>The following MATLAB code applies the translation from <a class="reference internal" href="#scaling-about-centre-example">Example 25</a> and plots the original and scaled polygons.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Define homogeneous co-ordinate matrix</span><span class="w"></span>
+<span class="n">P</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">];</span><span class="w"></span>
+
+<span class="c">% Calculate polygon centre</span><span class="w"></span>
+<span class="n">c</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">mean</span><span class="p">(</span><span class="n">P</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span><span class="w"></span>
+
+<span class="c">% Define translation and scaling matrices</span><span class="w"></span>
+<span class="n">T</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">@(</span><span class="n">t</span><span class="p">)</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">;</span><span class="w"> </span>
+<span class="w">           </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="p">;</span><span class="w"> </span>
+<span class="w">           </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="p">;</span><span class="w"> </span>
+<span class="w">           </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">];</span><span class="w"></span>
+
+<span class="n">S</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">@(</span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="n">s</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"> </span>
+<span class="w">           </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"> </span>
+<span class="w">           </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"> </span>
+<span class="w">           </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">];</span><span class="w"></span>
+
+<span class="c">% Apply transformations</span><span class="w"></span>
+<span class="n">s</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">2</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">2</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="mi">2</span><span class="p">];</span><span class="w"></span>
+<span class="n">P1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">T</span><span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">S</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">T</span><span class="p">(</span><span class="o">-</span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">P</span><span class="p">;</span><span class="w"></span>
+
+<span class="c">% Plot polygons</span><span class="w"></span>
+<span class="nb">figure</span><span class="w"></span>
+<span class="nb">patch</span><span class="p">(</span><span class="n">P</span><span class="p">(</span><span class="mi">1</span><span class="p">,:),</span><span class="w"> </span><span class="n">P</span><span class="p">(</span><span class="mi">3</span><span class="p">,:),</span><span class="w"> </span><span class="s">&#39;b&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">FaceAlpha</span><span class="p">=</span><span class="mf">0.5</span><span class="p">)</span><span class="w"></span>
+<span class="nb">patch</span><span class="p">(</span><span class="n">P1</span><span class="p">(</span><span class="mi">1</span><span class="p">,:),</span><span class="w"> </span><span class="n">P1</span><span class="p">(</span><span class="mi">3</span><span class="p">,:),</span><span class="w"> </span><span class="s">&#39;r&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">FaceAlpha</span><span class="p">=</span><span class="mf">0.5</span><span class="p">)</span><span class="w"></span>
+<span class="nb">axis</span><span class="w"> </span><span class="n">equal</span><span class="w"></span>
+<span class="nb">axis</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">])</span><span class="w"></span>
+<span class="nb">xlabel</span><span class="p">(</span><span class="s">&quot;$x$&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">FontSize</span><span class="p">=</span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="n">Interpreter</span><span class="p">=</span><span class="s">&quot;latex&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="nb">ylabel</span><span class="p">(</span><span class="s">&quot;$z$&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">FontSize</span><span class="p">=</span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="n">Interpreter</span><span class="p">=</span><span class="s">&quot;latex&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="nb">box</span><span class="w"> </span><span class="n">on</span><span class="w"></span>
+</pre></div>
+</div>
+<figure class="align-default" id="scaling-about-centre-example-figure">
+<a class="reference internal image-reference" href="../_images/scaling_about_centre_example.png"><img alt="../_images/scaling_about_centre_example.png" src="../_images/scaling_about_centre_example.png" style="width: 500px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 36 </span><span class="caption-text">Scaling a polygon about its centre.</span><a class="headerlink" href="#scaling-about-centre-example-figure" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
 </section>
 
     <script type="text/x-thebe-config">

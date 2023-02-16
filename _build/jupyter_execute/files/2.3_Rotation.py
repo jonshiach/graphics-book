@@ -145,7 +145,7 @@
 # 
 # `````{prf:example} 
 # :class: seealso
-# :label: rotation-example-1
+# :label: rotation-example
 # 
 # A triangular polygon has vertices located at $\mathbf{p}_1 = (4, 1, 2)$, $\mathbf{p}_2 = (6, 1, 2)$ and $\mathbf{p}_3 = (5, 3, 2)$. The triangle is rotated by angle $\theta = \pi/4$ anti-clockwise about the $z$-axis. Calculate the positions of the vertices of the rotated triangle.
 # 
@@ -211,19 +211,54 @@
 #     \end{pmatrix}.
 # \end{align*}
 # 
-# So the vertex co-ordinates fo the translated triangle are $(2.12, 3.54, 2)$, $(3.54, 4.95, 2)$ and $(1.41, 5.66, 2)$. The original triangle and the translated triangle are plotted below looking along the $z$ axis.
+# So the vertex co-ordinates fo the translated triangle are $(2.12, 3.54, 2)$, $(3.54, 4.95, 2)$ and $(1.41, 5.66, 2)$. The original triangle and the rotated triangle are plotted in {numref}`rotation-example-figure` looking along the $z$ axis.
+# 
+# ````
+# `````
+# 
+# ### MATLAB code
+# 
+# The following MATLAB code applies the translation from {prf:ref}`rotation-example` and plots the original and rotated polygons.
+# 
+# ```matlab
+# % Define homogeneous co-ordinate matrix
+# P = [ 4, 6, 5 ;
+#       1, 1, 3 ;
+#       2, 2, 2 ;
+#       1, 1, 1 ];
+# 
+# 
+# % Define rotation matrix
+# Rz = @(theta) [ cos(theta), -sin(theta), 0, 0 ; 
+#                 sin(theta), cos(theta), 0, 0 ;
+#                 0, 0, 1, 0 ;
+#                 0, 0, 0, 1 ];
+# 
+# % Apply rotation
+# theta = pi / 4;
+# P1 = Rz(theta) * P;
+# 
+# % Plot polygons
+# figure
+# patch(P(1,:), P(2,:), 'b', FaceAlpha=0.5)
+# patch(P1(1,:), P1(2,:), 'r', FaceAlpha=0.5)
+# axis equal
+# axis([0, 7, 0, 7])
+# xlabel("$x$", FontSize=12, Interpreter="latex")
+# ylabel("$y$", FontSize=12, Interpreter="latex")
+# box on
+# ```
 # 
 # ```{figure} /images/rotation_example.png
 # :width: 400px
+# :name: rotation-example-figure
+# 
+# Rotating a polygon about the origin.
 # ```
-# 
-# ````
-# 
-# `````
 # 
 # ## Rotation about polygon centre
 # 
-# We saw in {prf:ref}`rotation-example-1` that the polygon has shifted position because we rotate about the origin. If we wanted to rotate the polygon about its centre we first need to translate it so that its centre is at the origin, apply the rotation transformation and then translate the centre to the original position ({numref}`rotate-about-centre-figure`).
+# We saw in {prf:ref}`rotation-example` that the polygon has shifted position because we rotate about the origin. If we wanted to rotate the polygon about its centre we first need to translate it so that its centre is at the origin, apply the rotation transformation and then translate the centre to the original position ({numref}`rotate-about-centre-figure`).
 # 
 # ```{figure} /images/rotate_about_centre.svg
 # :name: rotate-about-centre-figure
@@ -263,9 +298,9 @@
 # 
 # `````{prf:example} 
 # :class: seealso
-# :label: rotation-example-2
+# :label: rotation-about-centre-example
 # 
-# Rotate the polygon from {prf:ref}`rotation-example-1` by $\theta = \pi/4$ around the $z$-axis about its centre.
+# Rotate the polygon from {prf:ref}`rotation-example` by $\theta = \pi/4$ around the $z$-axis about its centre.
 # 
 # ````{dropdown} Solution
 # The homogeneous co-ordinate matrix is 
@@ -360,13 +395,62 @@
 #     \end{pmatrix}.
 # \end{align*}
 # 
-# So the vertices of the rotated polygon are $(4.76, 0.49, 2)$, $(6.18, 1.90, 2)$ and $(4.06, 2.61, 2)$. The original polygon and the translated polygon are plotted below looking along the $z$ axis.
+# So the vertices of the rotated polygon are $(4.76, 0.49, 2)$, $(6.18, 1.90, 2)$ and $(4.06, 2.61, 2)$. The original polygon and the rotated polygon are plotted below looking along the $z$ axis.
+# 
+# ````
+# `````
+# 
+# ### MATLAB code
+# 
+# The following MATLAB code applies the translation from {prf:ref}`rotation-about-centre-example` and plots the original and rotated polygons.
+# 
+# ```matlab
+# % Define homogeneous co-ordinate matrix
+# P = [ 4, 6, 5 ;
+#       1, 1, 3 ;
+#       2, 2, 2 ;
+#       1, 1, 1 ];
+# 
+# % Calculate polygon centre
+# c = mean(P, 2);
+# 
+# % Define translation, scaling and rotation matrices
+# T = @(t) [ 1, 0, 0, t(1) ; 
+#            0, 1, 0, t(2) ; 
+#            0, 0, 1, t(3) ; 
+#            0, 0, 0, 1 ];
+# 
+# S = @(s) [ s(1), 0, 0, 0 ; 
+#            0, s(2), 0, 0 ; 
+#            0, 0, s(3), 0 ; 
+#            0, 0, 0, 1 ];
+# 
+# Rz = @(theta) [ cos(theta), -sin(theta), 0, 0 ;  
+#                 sin(theta), cos(theta), 0, 0 ;
+#                 0, 0, 1, 0 ;
+#                 0, 0, 0, 1 ];
+# 
+# % Apply transformations
+# theta = pi/4;
+# P1 = T(c) * Rz(theta) * T(-c) * P;
+# 
+# % plot polygons
+# figure
+# patch(P(1,:), P(2,:), 'b', FaceAlpha=0.5)
+# patch(P1(1,:), P1(2,:), 'r', FaceAlpha=0.5)
+# axis equal
+# axis([0, 7, 0, 7])
+# xlabel("$x$", FontSize=12, Interpreter="latex")
+# ylabel("$z$", FontSize=12, Interpreter="latex")
+# box on
+# ```
 # 
 # ```{figure} /images/rotation_about_centre_example.png
 # :width: 400px
-# ````
+# :name: rotation-about-centre-figure
 # 
-# `````
+# Rotating a polygon about its centre.
+# ```
 # 
 # ## Rotation about a line
 # 
@@ -395,7 +479,7 @@
 # :width: 400px
 # :name: rotation-about-line-figure-2
 # 
-# The line is translated so that $\mathbf{p}$ is at the origin.
+# The line is rotated about the $z$-axis so that $\mathbf{d}$ is in the $yz$ plane.
 # ```
 # 
 # {numref}`rotation-about-line-figure-2` shows that affect of translating by $-\mathbf{p}$. Now we need to rotate the line so that it lies in a plane the contains two of the three co-ordinate axes. The rotations required will depend on which of the eight directions $\mathbf{d}$ is pointing in. In this case $\mathbf{d}$ points towards the positive direction for all three axes, if we rotate about the $z$ axis anti-clockwise by angle $\phi$ then $\mathbf{d}$ (and therefore the line) will be in the $yz$ plane. The values of $\cos(\phi)$ and $\sin(\phi)$ in $R_z(\phi)$ are
@@ -418,10 +502,10 @@
 # \end{align*}
 # 
 # ```{figure} ../images/rotate_about_line_3.svg
-# :width: 250px
+# :width: 300px
 # :name: rotation-about-line-figure-3
 # 
-# The line is rotated about the $z$-axis so that $\mathbf{d}$ is in the $yz$ plane.
+# The line is rotated about the $x$-axis so that $\mathbf{d}$ points along the $y$ axis.
 # ```
 # 
 # {numref}`rotation-about-line-figure-3` shows that affect of rotating about the $z$-axis. Now we need to rotate clockwise about the $x$ axis so that $\mathbf{d}$ points along the $z$ axis. The values of $\cos(\psi)$ and $\sin(\psi)$ are
@@ -444,7 +528,7 @@
 # \end{align*}
 # 
 # ```{figure} ../images/rotate_about_line_4.svg
-# :width: 150px
+# :width: 350px
 # :name: rotation-about-line-figure-4
 # 
 # The line is rotated about the $x$-axis so that $\mathbf{d}$ points along the $z$ axis.

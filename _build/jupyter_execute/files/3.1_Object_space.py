@@ -241,34 +241,40 @@
 # 
 # `````
 # 
+# (object-space-matlab-code-section)=
 # ## MATLAB code
 # 
-# The following MATLAB code in defines the vertex and face matrices for the house object from {prf:ref}`object-space-example` and plots the object space. The vertex and face matrices are defined in `V` and `F` and the `patch()` command is then used to plot the object. Note that we only use the first three rows of the `V` array which has been transposed because MATLAB assumes the co-ordinates are listed as rows in `V`. The `FaceAlpha` is set to 0.75 so that the faces of the object are semi-transparent.
+# The MATLAB code to define the vertex and face matrices for the house object from {prf:ref}`object-space-example` is shown below. The vertex and face matrices are defined in `Vhouse` and `Fhouse`.
 # 
 # ```matlab
-# # Define object
-# V = [-0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0, 0 ;
-#      -1,  -1,   1,    1,   -1,  -1,   1,    1,  -1, 1 ;
-#       0,   0,   0,    0,    1,   1,   1,    1,   2, 2 ;
-#       1,   1,   1,    1,    1,   1,   1,    1,   1, 1];
+# % Define house object
+# Vhouse = [-0.5,  0.5,  0.5, -0.5, -0.5,  0.5,  0.5, -0.5,  0,    0 ;
+#           -1,   -1,    1,    1,   -1,   -1,    1,    1,   -1,    1 ;
+#            0,    0,    0,    0,    1,    1,    1,    1,    2,    2 ;
+#            1,    1,    1,    1,    1,    1,    1,    1,    1,    1];
 # 
-# F = [4, 3, 2, 1, 1 ;    # base
-#      1, 2, 6, 9, 5 ;    # front wall
-#      2, 3, 7, 6, 6 ;    # right wall
-#      3, 4, 8, 10, 7 ;   # back wall
-#      1, 5, 8, 4, 4 ;    # left wall
-#      6, 7, 10, 9, 9 ;   # right roof
-#      5, 9, 10, 8, 8 ];  # left roof
+# Fhouse = [4,  3,  2,  1,  1 ;    % base
+#           1,  2,  6,  9,  5 ;    % front wall
+#           2,  3,  7,  6,  6 ;    % right wall
+#           3,  4,  8, 10,  7 ;    % back wall
+#           1,  5,  8,  4,  4 ;    % left wall
+#           6,  7, 10,  9,  9 ;    % right roof
+#           5,  9, 10,  8,  8 ];   % left roof
+# ```
 # 
-# # Plot object
-# patch('Vertices', V(1:3,:)', 'Faces', F, FaceColor='white', FaceAlpha=0.75, LineWidth=2)
-# xlabel('$x$', 'Interpreter', 'latex', 'FontSize', 18)
-# ylabel('$y$', 'Interpreter', 'latex', 'FontSize', 18)
-# zlabel('$z$', 'Interpreter', 'latex', 'FontSize', 18)
+# The MATLAB code below plots the object space. This uses the `patch()` command where we specify the vertex matrix `V` and face matrix `F` and MATLAB plots the polygons of the object. Note that we only use the first three rows and the array has been transposed because MATLAB assumes the co-ordinates are listed as rows in `V`. The `FaceAlpha` is set to 0.75 so that the faces of the object are semi-transparent.
+# 
+# ```matlab
+# % Plot object space
+# figure
+# patch("Vertices", Vhouse(1:3,:)', "Faces", Fhouse, FaceColor="w", FaceAlpha=0.75, LineWidth=1)
+# title('House object')
+# xlabel("$x$", "Interpreter", "latex", "FontSize", 12)
+# ylabel("$y$", "Interpreter", "latex", "FontSize", 12)
+# zlabel("$z$", "Interpreter", "latex", "FontSize", 12)
 # view(45, 30)
-# axis equal
-# axis([-2, 2, -2, 2, 0, 2])
-# grid on 
+# axis([-2, 2, -2, 2, 0, 3])
+# grid on
 # ```
 # 
 # ```{figure} /images/object_space_example.png

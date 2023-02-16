@@ -238,6 +238,11 @@ const thebe_selector_output = ".output, .cell_output"
      Screen space
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="files/3.5_Virtual_environments_exercises.html">
+     Virtual Environments Exercises
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
@@ -271,11 +276,6 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="files/4.4_Screen_space.html">
-     Screen space
-    </a>
-   </li>
-   <li class="toctree-l2">
     <a class="reference internal" href="files/4.5_Binary_space_partitioning.html">
      Binary space partitioning
     </a>
@@ -292,11 +292,6 @@ const thebe_selector_output = ".output, .cell_output"
    </i>
   </label>
   <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="files/5.1_Clipping.html">
-     Clipping
-    </a>
-   </li>
    <li class="toctree-l2">
     <a class="reference internal" href="files/5.1_Drawing_lines.html">
      Drawing lines
@@ -443,7 +438,6 @@ title="Fullscreen mode"
    <a href="#cap-definition-7"><strong>definition-7</strong></a> | 
    <a href="#cap-definition-8"><strong>definition-8</strong></a> | 
    <a href="#cap-example-1"><strong>example-1</strong></a> | 
-   <a href="#cap-example-2"><strong>example-2</strong></a> | 
    <a href="#cap-example-3"><strong>example-3</strong></a> | 
    <a href="#cap-example-4"><strong>example-4</strong></a> | 
    <a href="#cap-example-5"><strong>example-5</strong></a> | 
@@ -477,9 +471,10 @@ title="Fullscreen mode"
    <a href="#cap-point-line-distance-theorem"><strong>point-line-distance-theorem</strong></a> | 
    <a href="#cap-point-normal-definition"><strong>point-normal-definition</strong></a> | 
    <a href="#cap-raster-definition"><strong>raster-definition</strong></a> | 
-   <a href="#cap-rotation-example-1"><strong>rotation-example-1</strong></a> | 
-   <a href="#cap-rotation-example-2"><strong>rotation-example-2</strong></a> | 
+   <a href="#cap-rotation-about-centre-example"><strong>rotation-about-centre-example</strong></a> | 
+   <a href="#cap-rotation-example"><strong>rotation-example</strong></a> | 
    <a href="#cap-rotation-in-R3-theorem"><strong>rotation-in-R3-theorem</strong></a> | 
+   <a href="#cap-scaling-about-centre-example"><strong>scaling-about-centre-example</strong></a> | 
    <a href="#cap-scaling-example"><strong>scaling-example</strong></a> | 
    <a href="#cap-scanline-algorithm"><strong>scanline-algorithm</strong></a> | 
    <a href="#cap-screen-space-example"><strong>screen-space-example</strong></a> | 
@@ -489,6 +484,7 @@ title="Fullscreen mode"
    <a href="#cap-theorem-1"><strong>theorem-1</strong></a> | 
    <a href="#cap-theorem-4"><strong>theorem-4</strong></a> | 
    <a href="#cap-transformation-matrix-example"><strong>transformation-matrix-example</strong></a> | 
+   <a href="#cap-translation-example"><strong>translation-example</strong></a> | 
    <a href="#cap-translation-matrix-definition"><strong>translation-matrix-definition</strong></a> | 
    <a href="#cap-world-space-example"><strong>world-space-example</strong></a>
    </div>
@@ -604,7 +600,7 @@ title="Fullscreen mode"
      <tr>
        <td></td>
        <td>
-       <a href="files/2.2_Scaling.html#definition-0"><code class="xref">definition-0</code></a> <em>(files/2.2_Scaling)</em></td><td>
+       <a href="files/4.5_Binary_space_partitioning.html#definition-0"><code class="xref">definition-0</code></a> <em>(files/4.5_Binary_space_partitioning)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-definition-1"><td></td><td>
@@ -671,20 +667,12 @@ title="Fullscreen mode"
        <a href="files/1.5_Shortest_distance_problems.html#example-1"><code class="xref">example-1</code></a> <em>(files/1.5_Shortest_distance_problems)</em></td><td>
        <em>example</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-example-2"><td></td><td>
-       <strong>example-2</strong></td><td></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="files/2.1_Translation.html#example-2"><code class="xref">example-2</code></a> <em>(files/2.1_Translation)</em></td><td>
-       <em>example</em></td></tr>
-     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-example-3"><td></td><td>
        <strong>example-3</strong></td><td></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="files/2.3_Rotation.html#example-3"><code class="xref">example-3</code></a> <em>(files/2.3_Rotation)</em></td><td>
+       <a href="files/2.0_Transformations.html#example-3"><code class="xref">example-3</code></a> <em>(files/2.0_Transformations)</em></td><td>
        <em>example</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-example-4"><td></td><td>
@@ -943,20 +931,20 @@ title="Fullscreen mode"
        <a href="files/5.0_Rasterisation.html#raster-definition"><code class="xref">raster-definition</code></a> <em>(files/5.0_Rasterisation)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-rotation-example-1"><td></td><td>
-       <strong>rotation-example-1</strong></td><td></td></tr>
+     <tr class="cap" id="cap-rotation-about-centre-example"><td></td><td>
+       <strong>rotation-about-centre-example</strong></td><td></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="files/2.3_Rotation.html#rotation-example-1"><code class="xref">rotation-example-1</code></a> <em>(files/2.3_Rotation)</em></td><td>
+       <a href="files/2.3_Rotation.html#rotation-about-centre-example"><code class="xref">rotation-about-centre-example</code></a> <em>(files/2.3_Rotation)</em></td><td>
        <em>example</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-rotation-example-2"><td></td><td>
-       <strong>rotation-example-2</strong></td><td></td></tr>
+     <tr class="cap" id="cap-rotation-example"><td></td><td>
+       <strong>rotation-example</strong></td><td></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="files/2.3_Rotation.html#rotation-example-2"><code class="xref">rotation-example-2</code></a> <em>(files/2.3_Rotation)</em></td><td>
+       <a href="files/2.3_Rotation.html#rotation-example"><code class="xref">rotation-example</code></a> <em>(files/2.3_Rotation)</em></td><td>
        <em>example</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-rotation-in-R3-theorem"><td></td><td>
@@ -966,6 +954,14 @@ title="Fullscreen mode"
        <td>
        <a href="files/2.3_Rotation.html#rotation-in-R3-theorem"><code class="xref">rotation-in-R3-theorem</code></a> <em>(files/2.3_Rotation)</em></td><td>
        <em>theorem</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-scaling-about-centre-example"><td></td><td>
+       <strong>scaling-about-centre-example</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="files/2.2_Scaling.html#scaling-about-centre-example"><code class="xref">scaling-about-centre-example</code></a> <em>(files/2.2_Scaling)</em></td><td>
+       <em>example</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-scaling-example"><td></td><td>
        <strong>scaling-example</strong></td><td></td></tr>
@@ -1037,6 +1033,14 @@ title="Fullscreen mode"
        <td></td>
        <td>
        <a href="files/2.0_Transformations.html#transformation-matrix-example"><code class="xref">transformation-matrix-example</code></a> <em>(files/2.0_Transformations)</em></td><td>
+       <em>example</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-translation-example"><td></td><td>
+       <strong>translation-example</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="files/2.1_Translation.html#translation-example"><code class="xref">translation-example</code></a> <em>(files/2.1_Translation)</em></td><td>
        <em>example</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-translation-matrix-definition"><td></td><td>

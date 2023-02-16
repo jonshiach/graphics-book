@@ -92,8 +92,9 @@
 # 
 # `````{prf:example}
 # :class: seealso
+# :label: translation-example
 # 
-# A triangle is defined by three point with position vectors $\mathbf{p}_1 = (1, 0, 1)$, $\mathbf{p}_2 = (3, 0, 1)$ and $\mathbf{p}_3 = (2, 0, 3)$. The triangle is translated by the translation vector $\mathbf{t} = (3, 0, 1)$. Calculate the positions of the triangle vertices of the translated triangle.
+# A triangle is defined by three points with position vectors $\mathbf{p}_1 = (1, 0, 1)$, $\mathbf{p}_2 = (3, 0, 1)$ and $\mathbf{p}_3 = (2, 0, 3)$. The triangle is translated by the translation vector $\mathbf{t} = (3, 0, 1)$. Calculate the positions of the triangle vertices of the translated triangle.
 # 
 # ````{dropdown} Solution
 # 
@@ -143,11 +144,47 @@
 #     \end{pmatrix}.
 # \end{align*}
 # 
-# So the vertex co-ordinates of the translated triangle are $(4,0,2)$, $(6, 0, 2)$ and $(5, 0, 4)$. The original triangle and the translated triangle are plotted below looking along the $y$-axis.
+# So the vertex co-ordinates of the translated triangle are $(4,0,2)$, $(6, 0, 2)$ and $(5, 0, 4)$. The original triangle and the translated triangle are plotted in {numref}`translation-example-figure` looking along the $y$-axis.
 # 
-# ```{figure} /images/translation_example.png
-# :width: 400px
-# ```
 # ````
 # 
 # `````
+# 
+# ## MATLAB code
+# 
+# The following MATLAB code applies the translation from {prf:ref}`translation-example` and plots the original and translated polygons.
+# 
+# ```matlab
+# % Define homogeneous co-ordinate matrix
+# P = [ 1, 3, 2 ;
+#       0, 0, 0 ;
+#       1, 1, 3 ;
+#       1, 1, 1 ];
+# 
+# % Define translation matrix 
+# T = @(t) [ 1, 0, 0, t(1) ; 
+#            0, 1, 0, t(2) ; 
+#            0, 0, 1, t(3) ; 
+#            0, 0, 0, 1 ];
+# 
+# % Apply translation
+# t = [3 ; 0 ; 1];
+# P1 = T(t) * P;
+# 
+# % Plot polygons
+# figure
+# patch(P(1,:), P(3,:), 'b', FaceAlpha=0.5)
+# patch(P1(1,:), P1(3,:), 'r', FaceAlpha=0.5)
+# axis equal
+# axis([0, 7, 0, 5])
+# xlabel("$x$", FontSize=12, Interpreter="latex")
+# ylabel("$z$", FontSize=12, Interpreter="latex")
+# box on
+# ```
+# 
+# ```{figure} /images/translation_example.png
+# :width: 500px
+# :name: translation-example-figure
+# 
+# Translating a polygon.
+# ```

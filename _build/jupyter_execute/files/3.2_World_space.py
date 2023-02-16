@@ -237,23 +237,9 @@
 # 
 # ## MATLAB code
 # 
-# The MATLAB code in below builds the virtual world from {prf:ref}`world-space-example` and plots the world space.
+# The MATLAB code below defines the vertex and face matrix for a cube object as well as the world space objects, positions, scales and angles for the virtual world from {prf:ref}`world-space-example`.
 # 
 # ```matlab
-# % Define house object
-# Vhouse = [ -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0, 0 ;
-#            -1,  -1,   1,    1,   -1,  -1,   1,    1,  -1, 1 ;
-#             0,   0,   0,    0,    1,   1,   1,    1,   2, 2 ;
-#             1,   1,   1,    1,    1,   1,   1,    1,   1, 1 ];
-# 
-# Fhouse = [ 4, 3, 2, 1, 1 ;
-#            1, 2, 6, 9, 5 ;
-#            2, 3, 7, 6, 6 ;
-#            3, 4, 8, 10, 7 ;
-#            1, 5, 8, 4, 4 ;
-#            6, 7, 10, 9, 9 ;
-#            5, 9, 10, 8, 8 ];
-# 
 # % Define cube object
 # Vcube = [ -1,  1,  1, -1, -1,  1, 1, -1 ;
 #           -1, -1,  1,  1, -1, -1, 1,  1 ;
@@ -267,14 +253,23 @@
 #           4, 1, 5, 8, 8 ;
 #           5, 6, 7, 8, 8 ];
 # 
-# % Define transformation parmeters
-# theta = pi / 2;
-# c1 = [3, 3.5, 0];
-# c2 = [3, 1.5, 0];
-# c3 = [1.5, 1.5, 1.5];
-# s = [0.5, 0.5, 1.5];
+# % Define object types, positions, scaling and rotation angles
+# object = [ 2, 2, 1 ];        % object types (1 = cube, 2 = house)
+# pos = [ 3,   3.5, 0 ;        % object positions (x, y, z)
+#         3,   1.5, 0 ;
+#         1.5, 1.5, 1.5 ];
+# scale = [ 1,   1,   1 ;      % object scales (sx, sy, sz)
+#           1,   1,   1 ;
+#           0.5, 0.5, 1.5 ];
+# angle = [ 0, 0, pi/2 ;       % object angles (theta_x, theta_y, theta_z)
+#           0, 0, pi/2 ;
+#           0, 0, 0 ];
+# ```
 # 
-# % Define transformation functions
+# We will be using translation, scaling and rotation transformations on our objects so these are defined below.
+# 
+# ```matlab
+# % Define transformation matrices
 # T = @(t) [ 1, 0, 0, t(1) ; 
 #            0, 1, 0, t(2) ; 
 #            0, 0, 1, t(3) ; 
@@ -285,38 +280,59 @@
 #            0,    0,    s(3), 0 ; 
 #            0,    0,    0,    1 ];
 # 
+# Rx = @(theta) [ 1, 0, 0, 0 ;
+#                 0, cos(theta), -sin(theta), 0 ;
+#                 0, sin(theta), cos(theta), 0 ;
+#                 0, 0, 0, 1];
+# 
+# Ry = @(theta) [ cos(theta), 0, sin(theta), 0 ;
+#                 0, 1, 0, 0 ;
+#                 -sin(theta), 0, cos(theta), 0 ;
+#                 0, 0, 0, 1 ];
+# 
 # Rz = @(theta) [ cos(theta), -sin(theta), 0, 0 ;
 #                 sin(theta), cos(theta), 0, 0 ;
 #                 0,           0,         1, 0 ;
 #                 0,           0,         0, 1 ];
+# ```
 # 
-# % Add first house object
-# Vobj = T(c1) * Rz(theta) * Vhouse;
-# Fobj = Fhouse;
+# We can now build the world space. Here we loop through the three objects and depending on the value of `object(i)` we determine the vertex and face matrix for the object. It is then transformed using the values of the position `pos(i,:)`, rotation angles `angle(i,:)` and scales `scale(i,:)` for the object. We also add the number of vertices currently in the world space matrix `Vworld` to the face matrix. The transformed object vertices and face matrices are appended to `Vworld` and `Fworld`.
 # 
-# Vworld = Vobj;
-# F = Fobj;
+# ```matlab
+# % Add objects to world space
+# Vworld = [];
+# Fworld = [];
+# for i = 1 : 3
 # 
-# % Add second house object
-# Vobj = T(c2) * Rz(theta) * Vhouse;
-# Fobj = Fhouse + size(Vworld, 2); % add number of vertices in world space to face array
+#     % Get object vertices and face array
+#     if object(i) == 1  % cube object
+#         Vobj = Vcube;
+#         Fobj = Fcube + size(Vworld,2);  % add number of vertices in the world space to F
+#     elseif object(i) == 2  % house object
+#         Vobj = Vhouse;
+#         Fobj = Fhouse + size(Vworld,2);
+#     end
 # 
-# Vworld = [Vworld, Vobj];
-# F = [F ; Fobj];
+#     % Transform object
+#     Vobj = T(pos(i,:)) * Rx(angle(i,1)) * Ry(angle(i,2)) * Rz(angle(i,3)) * S(scale(i,:)) * Vobj;
 # 
-# % Add tower object
-# Vobj = T(c3) * S(s) * Vcube;
-# Fobj = Fcube + size(Vworld, 2); % add number of vertices in world space to face array
+#     % Add object to world space
+#     Vworld = [Vworld, Vobj];
+#     Fworld = [Fworld ; Fobj];
+# end
+# ```
 # 
-# Vworld = [Vworld, Vobj];
-# F = [F ; Fobj];
+# The MATLAB code below plots the world space. This is similar to the code used to plot the [object space](object-space-matlab-code-section). 
 # 
+# ```matlab
 # % Plot world space
-# patch('Vertices', Vworld(1:3,:)', 'Faces', F, FaceColor='w', FaceAlpha=0.75, LineWidth=2)
-# xlabel('$x$', 'Interpreter', 'latex', 'FontSize', 18)
-# ylabel('$y$', 'Interpreter', 'latex', 'FontSize', 18)
-# zlabel('$z$', 'Interpreter', 'latex', 'FontSize', 18)
-# view(45, 30)
+# figure
+# patch("Vertices", Vworld(1:3,:)', "Faces", Fworld, FaceColor="w", FaceAlpha=0.75, LineWidth=1)
+# title('World space')
+# xlabel("$x$", "Interpreter", "latex", "FontSize", 12)
+# ylabel("$y$", "Interpreter", "latex", "FontSize", 12)
+# zlabel("$z$", "Interpreter", "latex", "FontSize", 12)
+# view(60, 30)
 # axis([0, 5, 0, 5, 0, 4])
 # grid on
 # ```

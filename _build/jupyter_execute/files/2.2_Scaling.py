@@ -125,14 +125,50 @@
 #     \end{pmatrix}.
 # \end{align*}
 # 
-# So the vertex co-ordinates of the transformed polygon are $(3, 0, 2)$, $(9, 0, 2)$ and $(6, 0, 6)$. The original triangle and the translated triangle are plotted below look along the $y$-axis.
-# 
-# ```{figure} /images/scaling_example.png
-# :width: 400px
-# ```
+# So the vertex co-ordinates of the transformed polygon are $(3, 0, 2)$, $(9, 0, 2)$ and $(6, 0, 6)$. The original triangle and the scaled triangle are plotted in {numref}`scaling-example-figure` looking along the $y$-axis.
 # 
 # ````
 # `````
+# 
+# ## MATLAB code
+# 
+# The following MATLAB code applies the translation from {prf:ref}`scaling-example` and plots the original and scaled polygons.
+# 
+# ```matlab
+# % Define homogeneous co-ordinate matrix
+# P = [ 1, 3, 2 ;
+#       0, 0, 0 ;
+#       1, 1, 3 ;
+#       1, 1, 1 ];
+# 
+# % Define scaling matrix
+# S = @(s) [ s(1), 0, 0, 0 ; 
+#            0, s(2), 0, 0 ; 
+#            0, 0, s(3), 0 ; 
+#            0, 0, 0, 1 ];
+# 
+# % Apply scaling
+# s = [3 ; 1 ; 2];
+# P1 = S(s) * P;
+# 
+# % Plot polygons
+# figure
+# patch(P(1,:), P(3,:), 'b', FaceAlpha=0.5)
+# patch(P1(1,:), P1(3,:), 'r', FaceAlpha=0.5)
+# axis equal 
+# axis([0, 10, 0, 7])
+# xlabel("$x$", FontSize=12, Interpreter="latex")
+# ylabel("$z$", FontSize=12, Interpreter="latex")
+# box on
+# ```
+# 
+# ```{figure} /images/scaling_example.png
+# :width: 500px
+# :name: scaling-example-figure
+# 
+# Scaling a polygon about the origin.
+# ```
+# 
 # ## Scaling about the centre of a shape
 # 
 # We have seen in {prf:ref}`scaling-example` that scaling the polygon resulted in the centre of the polygon shifting position and the aspect ratio of the polygon changed.. This was because scaling was applied to a shape whose centre was not at the origin. To preserve the position of the centre of a shape when scaling we first need to translate the points that define the shape to the origin, which means that the translation vector if $-\mathbf{c}$ where $\mathbf{c}$ is the centre of the shape. Then we can perform the scaling before using the inverse translation so that the centre of the shape is back at $\mathbf{c}$ ({numref}`scaling-about-centre-figure`). 
@@ -150,6 +186,7 @@
 # 
 # `````{prf:example}
 # :class: seealso
+# :label: scaling-about-centre-example
 # 
 # Scale the polygon from {prf:ref}`scaling-example` by a factor of 2 in all three directions.
 # 
@@ -238,11 +275,53 @@
 # \end{align*}
 # 
 # 
-# So the vertex co-ordinates of the translated polygon are $(0, 0, 1/3) \approx (0, 0, 0.33)$, $(4, 0, 1/3) \approx (4, 0, 0.33)$ and $(2, 0, 13/3) \approx (2, 0, 4.33)$. The original polygon and the translated polygon are plotted below looking along the $y$ axis.
-# 
-# ```{figure} /images/scaling_about_centre_example.png
-# :width: 400px
-# ```
-# 
+# So the vertex co-ordinates of the translated polygon are $(0, 0, 1/3) \approx (0, 0, 0.33)$, $(4, 0, 1/3) \approx (4, 0, 0.33)$ and $(2, 0, 13/3) \approx (2, 0, 4.33)$. The original polygon and the scaled polygon are plotted in {numref}`scaling-about-centre-example-figure` looking along the $y$ axis.
 # ````
 # `````
+# 
+# ## MATLAB code
+# 
+# The following MATLAB code applies the translation from {prf:ref}`scaling-about-centre-example` and plots the original and scaled polygons.
+# 
+# ```matlab
+# % Define homogeneous co-ordinate matrix
+# P = [ 1, 3, 2 ;
+#       0, 0, 0 ;
+#       1, 1, 3 ;
+#       1, 1, 1 ];
+# 
+# % Calculate polygon centre
+# c = mean(P, 2);
+# 
+# % Define translation and scaling matrices
+# T = @(t) [ 1, 0, 0, t(1) ; 
+#            0, 1, 0, t(2) ; 
+#            0, 0, 1, t(3) ; 
+#            0, 0, 0, 1 ];
+# 
+# S = @(s) [ s(1), 0, 0, 0 ; 
+#            0, s(2), 0, 0 ; 
+#            0, 0, s(3), 0 ; 
+#            0, 0, 0, 1 ];
+# 
+# % Apply transformations
+# s = [2 ; 2 ; 2];
+# P1 = T(c) * S(s) * T(-c) * P;
+# 
+# % Plot polygons
+# figure
+# patch(P(1,:), P(3,:), 'b', FaceAlpha=0.5)
+# patch(P1(1,:), P1(3,:), 'r', FaceAlpha=0.5)
+# axis equal
+# axis([0, 6, 0, 5])
+# xlabel("$x$", FontSize=12, Interpreter="latex")
+# ylabel("$z$", FontSize=12, Interpreter="latex")
+# box on
+# ```
+# 
+# ```{figure} /images/scaling_about_centre_example.png
+# :width: 500px
+# :name: scaling-about-centre-example-figure
+# 
+# Scaling a polygon about its centre.
+# ```
