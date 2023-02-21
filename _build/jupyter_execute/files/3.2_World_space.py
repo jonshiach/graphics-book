@@ -45,7 +45,7 @@
 # :class: seealso
 # :label: world-space-example
 # 
-# The virtual world shown in {ref}`world-space-figure` is constructed using 2 house objects from {prf:ref}`object-space-example` and a cube object. The house objects are rotated by angle $\theta = \pi/2$ about the $z$ axis and translated so that the centre of the bases have position vectors $\mathbf{c}_1 = (3, 3.5, 0)$ and $\mathbf{c}_2 = (3, 1.5, 0)$. The cube object has side lengths 2 is scaled by a factor of $0.5$ in the $x$ and $y$ directions and $1.5$ in the $z$ direction so that it resembles a tower and translated so that the centre of the base is at $\mathbf{c}_3 = (1.5, 1.5, 0)$. Determine the vertex and face matrices for the world space.
+# The virtual world shown in figure {numref}`world-space-figure` is constructed using 2 house objects from {prf:ref}`object-space-example` and a cube object. The house objects are rotated by angle $\theta = \pi/2$ about the $z$ axis and translated so that the centre of the bases have position vectors $\mathbf{c}_1 = (3, 3.5, 0)$ and $\mathbf{c}_2 = (3, 1.5, 0)$. The cube object has side lengths 2 is scaled by a factor of $0.5$ in the $x$ and $y$ directions and $1.5$ in the $z$ direction so that it resembles a tower and translated so that the centre of the base is at $\mathbf{c}_3 = (1.5, 1.5, 0)$. Determine the vertex and face matrices for the world space.
 # 
 # ````{dropdown} Solution
 # Since $\cos(\pi/2) = 0$ and $\sin(\pi/2) = 1$ then the rotation and translation matrices for the first house object are
