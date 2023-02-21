@@ -637,17 +637,17 @@
 %     \node [gray,rotate=330,above] at (330:1.5) {$d_1$};
 % \end{tikzpicture}
 
-\begin{tikzpicture}
-    \tikzmath{\a=290;\x=330;\y=30;\z=90;\al=2.5;\l=3;}
-    \coordinate (c) at (0,0);
-    \tikzmath{\a1=330;\l=4;}
-    \draw [axis] (0,0) -- (\x:\al) node at (\x-10:\al+0.2) {$x$};
-    \draw [axis] (0,0) -- (\y:\al) node at (\y:\al+0.2) {$y$};
-    \draw [axis] (0,0) -- (\z:\al) node at (\z:\al+0.2) {$z$};
-    \draw [bluevec] (c) -- ++(\a1:3) node [below] {$\mathbf{d}$};
-    \node at ($(c)+(0,-0.1)$) [rotate={\a1-1}] {\includegraphics[width=2cm]{../plane.png}};
-    \draw[line width=1pt,red,-latex',rotate around={60:(330:2)}] (330:2) [partial ellipse=-80:260:0.5cm and 0.25cm];
-\end{tikzpicture}
+% \begin{tikzpicture}
+%     \tikzmath{\a=290;\x=330;\y=30;\z=90;\al=2.5;\l=3;}
+%     \coordinate (c) at (0,0);
+%     \tikzmath{\a1=330;\l=4;}
+%     \draw [axis] (0,0) -- (\x:\al) node at (\x-10:\al+0.2) {$x$};
+%     \draw [axis] (0,0) -- (\y:\al) node at (\y:\al+0.2) {$y$};
+%     \draw [axis] (0,0) -- (\z:\al) node at (\z:\al+0.2) {$z$};
+%     \draw [bluevec] (c) -- ++(\a1:3) node [below] {$\mathbf{d}$};
+%     \node at ($(c)+(0,-0.1)$) [rotate={\a1-1}] {\includegraphics[width=2cm]{../plane.png}};
+%     \draw[line width=1pt,red,-latex',rotate around={60:(330:2)}] (330:2) [partial ellipse=-80:260:0.5cm and 0.25cm];
+% \end{tikzpicture}
 
 % Scaling
 % \begin{tikzpicture}
@@ -1020,6 +1020,23 @@
 %     \node [point,label={90:$(x',y',-f)$}] at (q) {};
 %     \node at (180:2.5) [rotate=180] {\includegraphics[width=1cm]{../eye.png}};
 % \end{tikzpicture}
+
+
+% Virtual environments exercise
+\begin{tikzpicture}
+    \tikzmath{\w=3;}
+    \draw rectangle (\w,\w);
+    \draw (0,\w) -- (0.5*\w,1.5*\w) -- (\w,\w);
+    \draw (\w+2,0) rectangle (2*\w+2,\w);
+    \draw (\w+2,0) -- (2*\w+2,\w);
+    \draw (\w+2,\w) -- (2*\w+2,0);
+    \node at (0.5*\w,-0.5) {side view};
+    \node at (1.5*\w+2,-0.5) {plan view};
+    \draw [dblarrow,help lines] (\w+0.2,0) -- ++(0,\w) node [pos=0.5,right] {2};
+    \draw [dblarrow,help lines] (-0.2,0) -- ++(0,1.5*\w) node [pos=0.5,left] {3};
+    \draw [dblarrow,help lines] (\w+1.8,0) -- ++(0,\w) node [pos=0.5,left] {2};
+    \draw [dblarrow,help lines] (\w+2,\w+0.2) -- ++(\w,0) node [pos=0.5,above] {2};
+\end{tikzpicture}
 
 % Viewing frustum
 % \begin{tikzpicture}

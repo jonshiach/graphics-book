@@ -109,8 +109,8 @@
 # \begin{align*}
 #     T(\mathbf{c}_1) \cdot R_z(\theta) &= 
 #     \begin{pmatrix}
-#         0 & 1 & 0 & 3 \\
-#         -1 & 0 & 0 & 1.5 \\
+#         0 & -1 & 0 & 3 \\
+#         1 & 0 & 0 & 1.5 \\
 #         0 & 0 & 1 & 0 \\
 #         0 & 0 & 0 & 1
 #     \end{pmatrix}

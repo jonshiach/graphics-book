@@ -360,7 +360,6 @@
 # figure()
 # h1 = axes;
 # patch('Vertices', Vscreen([1,3,2],:)', 'Faces', F, FaceColor='w', FaceAlpha=0.75, LineWidth=1)
-# patch('Vertices', Vcube(1:3,:)', 'Faces', Ffrustum, FaceAlpha=0, EdgeColor="blue")
 # xlabel('$x$', 'Interpreter', 'latex', 'FontSize', 18)
 # ylabel('$z$', 'Interpreter', 'latex', 'FontSize', 18)
 # zlabel('$y$', 'Interpreter', 'latex', 'FontSize', 18)

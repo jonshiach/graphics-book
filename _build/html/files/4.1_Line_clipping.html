@@ -59,7 +59,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Polygon clipping" href="4.2_Polygon_clipping.html" />
-    <link rel="prev" title="Clipping &amp; hidden surface determination" href="4.0_Clipping_and_HSD.html" />
+    <link rel="prev" title="Clipping &amp; Hidden Surface Determination" href="4.0_Clipping_and_HSD.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -208,7 +208,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="3.0_Virtual_environments.html">
-   Virtual environments
+   Virtual Environments
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
   <label for="toctree-checkbox-3">
@@ -236,11 +236,16 @@ const thebe_selector_output = ".output, .cell_output"
      Screen space
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="3.5_Virtual_environments_exercises.html">
+     Virtual Environments Exercises
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="4.0_Clipping_and_HSD.html">
-   Clipping &amp; hidden surface determination
+   Clipping &amp; Hidden Surface Determination
   </a>
   <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
   <label for="toctree-checkbox-4">
@@ -285,11 +290,6 @@ const thebe_selector_output = ".output, .cell_output"
    </i>
   </label>
   <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="5.1_Clipping.html">
-     Clipping
-    </a>
-   </li>
    <li class="toctree-l2">
     <a class="reference internal" href="5.1_Drawing_lines.html">
      Drawing lines
@@ -535,7 +535,7 @@ title="Print to PDF"
 <p>The vector equation of the line <span class="math notranslate nohighlight">\(\mathbf{a} \to \mathbf{b}\)</span> is</p>
 <div class="math notranslate nohighlight" id="equation-cyrus-beck-q-equation">
 <span class="eqno">(31)<a class="headerlink" href="#equation-cyrus-beck-q-equation" title="Permalink to this equation">#</a></span>\[\mathbf{q} = \mathbf{a} + t(\mathbf{b} - \mathbf{a}),\]</div>
-<p>and substituting into equation <a class="reference internal" href="5.1_Clipping.html#equation-cyrus-beck-d-equation">(35)</a></p>
+<p>and substituting into equation <a class="reference internal" href="#equation-cyrus-beck-d-equation">(30)</a></p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
     d &amp;= (\mathbf{a} + t(\mathbf{b} - \mathbf{a}) - \mathbf{p}) \cdot \frac{\mathbf{n}}{|\mathbf{n}|}.
@@ -548,7 +548,7 @@ title="Print to PDF"
      t(\mathbf{a} - \mathbf{b}) \cdot \mathbf{n} &amp;= (\mathbf{a} - \mathbf{p}) \cdot \mathbf{n} \\
      t &amp;= \frac{(\mathbf{a} - \mathbf{p}) \cdot \mathbf{n}}{(\mathbf{a} - \mathbf{b}) \cdot \mathbf{n}}
 \end{align}\end{split}\]</div>
-<p>This expression for <span class="math notranslate nohighlight">\(t\)</span> can be substituted into equation <a class="reference internal" href="5.1_Clipping.html#equation-cyrus-beck-q-equation">(36)</a> to give <span class="math notranslate nohighlight">\(\mathbf{c}\)</span>.</p>
+<p>This expression for <span class="math notranslate nohighlight">\(t\)</span> can be substituted into equation <a class="reference internal" href="#equation-cyrus-beck-q-equation">(31)</a> to give <span class="math notranslate nohighlight">\(\mathbf{c}\)</span>.</p>
 <p>On visual inspection it is easy for us to see that in <a class="reference internal" href="#clip-to-edge-figure"><span class="std std-numref">Fig. 74</span></a> point <span class="math notranslate nohighlight">\(\mathbf{a}\)</span> is outside of the visible region and needs to be clipped to the left edge at <span class="math notranslate nohighlight">\(\mathbf{c}\)</span> and the line <span class="math notranslate nohighlight">\(\mathbf{a}\)</span> to <span class="math notranslate nohighlight">\(\mathbf{c}\)</span> is replaced by <span class="math notranslate nohighlight">\(\mathbf{c}\)</span> to <span class="math notranslate nohighlight">\(\mathbf{b}\)</span>. To get a computer to do this we can use the distance between the endpoints and the edges of the visible region. If the normal vectors of the edges of the visible region are pointing into the interior, then any point where the distance to the edge calculated using equation <a class="reference internal" href="1.5_Shortest_distance_problems.html#equation-point-plane-distance-equation">(18)</a> is negative is outside and needs to be clipped. So before calculating <span class="math notranslate nohighlight">\(t\)</span> we calculate the distances of <span class="math notranslate nohighlight">\(\mathbf{a}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> to the edge</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
@@ -695,7 +695,7 @@ Solution<div class="sd-summary-down docutils">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Clipping &amp; hidden surface determination</p>
+            <p class="prev-next-title">Clipping &amp; Hidden Surface Determination</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="4.2_Polygon_clipping.html" title="next page">

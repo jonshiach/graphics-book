@@ -2,7 +2,7 @@
 # coding: utf-8
 
 # (clipping-and-hsd-section)=
-# # Clipping & hidden surface determination
+# # Clipping & Hidden Surface Determination
 # 
 # ```{figure} /images/viewing_pipeline_clipped_screen_space.svg
 # :figclass: margin
