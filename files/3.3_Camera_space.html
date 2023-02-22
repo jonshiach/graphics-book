@@ -518,7 +518,7 @@ title="Print to PDF"
 <p>The first transformation is to translate the world space by <span class="math notranslate nohighlight">\(-\mathbf{p}\)</span> so that the viewer is positioned at the origin. The <a class="reference internal" href="2.1_Translation.html#translation-matrix-definition">matrix</a> that performs this translation is</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
-	T = \begin{pmatrix}
+	T(-\mathbf{p}) = \begin{pmatrix}
 		1 &amp; 0 &amp; 0 &amp; -p_x \\
 		0 &amp; 1 &amp; 0 &amp; -p_y \\
 		0 &amp; 0 &amp; 1 &amp; -p_z \\
@@ -627,9 +627,9 @@ Solution<div class="sd-summary-down docutils">
 \[\begin{align*}
     R_{E \to C} &amp;= 
     \begin{pmatrix}
-        u_1 &amp; u_2 &amp; u_3 &amp; -\mathbf{p} \cdot \mathbf{u} \\
-        v_1 &amp; v_2 &amp; v_2 &amp; -\mathbf{p} \cdot \mathbf{v} \\
-        w_1 &amp; w_2 &amp; w_3 &amp; -\mathbf{p} \cdot \mathbf{w}\\
+        u_1 &amp; u_2 &amp; u_3 &amp; 0 \\
+        v_1 &amp; v_2 &amp; v_2 &amp; 0 \\
+        w_1 &amp; w_2 &amp; w_3 &amp; 0 \\
         0 &amp; 0 &amp; 0 &amp; 1
     \end{pmatrix} \\
     &amp;=

@@ -538,7 +538,7 @@ title="Print to PDF"
 <div class="proof example seealso admonition" id="world-space-example">
 <p class="admonition-title"><span class="caption-number">Example 30 </span></p>
 <section class="example-content" id="proof-content">
-<p>The virtual world shown in figure <a class="reference internal" href="#world-space-figure"><span class="std std-numref">Fig. 57</span></a> is constructed using 2 house objects from <a class="reference internal" href="3.1_Object_space.html#object-space-example">Example 29</a> and a cube object. The house objects are rotated by angle <span class="math notranslate nohighlight">\(\theta = \pi/2\)</span> about the <span class="math notranslate nohighlight">\(z\)</span> axis and translated so that the centre of the bases have position vectors <span class="math notranslate nohighlight">\(\mathbf{c}_1 = (3, 3.5, 0)\)</span> and <span class="math notranslate nohighlight">\(\mathbf{c}_2 = (3, 1.5, 0)\)</span>. The cube object has side lengths 2 is scaled by a factor of <span class="math notranslate nohighlight">\(0.5\)</span> in the <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> directions and <span class="math notranslate nohighlight">\(1.5\)</span> in the <span class="math notranslate nohighlight">\(z\)</span> direction so that it resembles a tower and translated so that the centre of the base is at <span class="math notranslate nohighlight">\(\mathbf{c}_3 = (1.5, 1.5, 0)\)</span>. Determine the vertex and face matrices for the world space.</p>
+<p>The virtual world shown in figure <a class="reference internal" href="#world-space-figure"><span class="std std-numref">Fig. 57</span></a> is constructed using 2 house objects from <a class="reference internal" href="3.1_Object_space.html#object-space-example">Example 29</a> and a cube object. The house objects are rotated by angle <span class="math notranslate nohighlight">\(\theta = \pi/2\)</span> about the <span class="math notranslate nohighlight">\(z\)</span>-axis and translated so that the centre of the bases have position vectors <span class="math notranslate nohighlight">\(\mathbf{c}_1 = (3, 3.5, 0)\)</span> and <span class="math notranslate nohighlight">\(\mathbf{c}_2 = (3, 1.5, 0)\)</span>. The cube object has side lengths 2 is scaled by a factor of 0.5 in the <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> directions and 1.5 in the <span class="math notranslate nohighlight">\(z\)</span> direction so that it resembles a tower and translated so that the centre of the base is at <span class="math notranslate nohighlight">\(\mathbf{c}_3 = (1.5, 1.5, 0)\)</span>. Determine the vertex and face matrices for the world space.</p>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
 Solution<div class="sd-summary-down docutils">
@@ -675,7 +675,7 @@ V_{\text{world}} &amp;=
 <p class="sd-card-text">which gives the transformed vertex matrix</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
-    T(\mathbf{c}_1) \cdot S(\mathbf{s}) \cdot V_{\text{cube}} = 
+    T(\mathbf{c}_3) \cdot S(\mathbf{s}) \cdot V_{\text{cube}} = 
     \begin{pmatrix}
         1 &amp; 2 &amp; 2 &amp; 1 &amp; 1 &amp; 2 &amp; 2 &amp; 1 \\
         1 &amp; 1 &amp; 2 &amp; 2 &amp; 1 &amp; 1 &amp; 2 &amp; 2 \\
