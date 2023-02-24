@@ -373,17 +373,6 @@ title="Toggle navigation"
         
     </div>
     <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-    </ul>
-  </div>
-</div>
-
 <button onclick="toggleFullScreen()"
   class="headerbtn"
   data-toggle="tooltip"
@@ -406,7 +395,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/files/1.3_Points_lines_and_planes.ipynb"
+        <a href="../_sources/files/1.3_Points_lines_and_planes.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -417,7 +406,7 @@ title="Download source file"
 <span class="headerbtn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="headerbtn__text-container">.ipynb</span>
+<span class="headerbtn__text-container">.md</span>
 </a>
 
       </li>
@@ -549,13 +538,13 @@ title="Print to PDF"
 <p>Computer graphics uses points, line, planes and spheres to describe virtual environments. Euclid defined the first three of these in his works <em>The Elements</em> around 300 BCE which is considered the most important mathematical works ever written. It introduced mathematical concepts of Euclidean geometry, mathematical proofs, logic and number theory.</p>
 <section id="points">
 <span id="points-section"></span><h2>Points<a class="headerlink" href="#points" title="Permalink to this headline">#</a></h2>
-<p>Euclid described a <em>point</em> as <em>“that which has no part”</em>. A point has position only, it has no length, width or thickness, and thus no area or volume. As we have <span class="xref myst">already seen</span>, a typical point in <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span> is described by its co-ordinates <span class="math notranslate nohighlight">\((a_1,a_2,\dots,a_n)\)</span>, where the <span class="math notranslate nohighlight">\(a_i \in \mathbb{R}\)</span>.</p>
+<p>Euclid described a <em>point</em> as <em>“that which has no part”</em>. A point has position only, it has no length, width or thickness, and thus no area or volume. As we have <a class="reference internal" href="1.0_Vector_geometry.html#co-ordinate-systems-section"><span class="std std-ref">already seen</span></a>, a typical point in <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span> is described by its co-ordinates <span class="math notranslate nohighlight">\((a_1,a_2,\dots,a_n)\)</span>, where the <span class="math notranslate nohighlight">\(a_i \in \mathbb{R}\)</span>.</p>
 </section>
 <section id="lines">
 <span id="lines-section"></span><h2>Lines<a class="headerlink" href="#lines" title="Permalink to this headline">#</a></h2>
 <p>Euclid defined a line as having <em>“breadthless length”</em> which is another way of saying a line is a one dimensional object that has a length but no breadth or volume.</p>
-<div class="proof definition note admonition" id="definition-0">
-<p class="admonition-title"><span class="caption-number">Definition 9 </span> (Vector equation of a line)</p>
+<div class="proof definition admonition" id="vector-equation-of-a-line-definition">
+<p class="admonition-title"><span class="caption-number">Definition 9 </span> (Vector equation of a line )</p>
 <section class="definition-content" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(\mathbf{p} = (p_1, \ldots ,p_n)\)</span> be the position of a point in <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span> and <span class="math notranslate nohighlight">\(\mathbf{d} = (d_1, \ldots, d_n)\)</span> a non-zero vector in <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span>. The line <span class="math notranslate nohighlight">\(\ell\)</span> <a class="footnote-reference brackets" href="#id2" id="id1">1</a> which passes through <span class="math notranslate nohighlight">\(\mathbf{p}\)</span> in the direction of <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> has equation</p>
 <div class="math notranslate nohighlight" id="equation-line-vector-equation">
@@ -570,7 +559,7 @@ title="Print to PDF"
 </figcaption>
 </figure>
 <p>In practice one can determine the direction vector <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> of a line by taking any two distinct points <span class="math notranslate nohighlight">\(\mathbf{p}_1\)</span> and  <span class="math notranslate nohighlight">\(\mathbf{p}_2\)</span> on <span class="math notranslate nohighlight">\(\ell\)</span> and setting <span class="math notranslate nohighlight">\(\mathbf{d}=\mathbf{p}_2 - \mathbf{p}_1\)</span> and <span class="math notranslate nohighlight">\(\mathbf{p}\)</span> in the line equation to be any point on the line. In particular, <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{p}\)</span> are not unique.</p>
-<div class="proof example seealso admonition" id="example-1">
+<div class="proof example seealso admonition" id="line-example">
 <p class="admonition-title"><span class="caption-number">Example 7 </span></p>
 <section class="example-content" id="proof-content">
 <p>A line <span class="math notranslate nohighlight">\(\ell\)</span> in <span class="math notranslate nohighlight">\(\mathbb{R}^3\)</span> passes through the two points at <span class="math notranslate nohighlight">\(\mathbf{p}_1=(1,0,2)\)</span> and <span class="math notranslate nohighlight">\(\mathbf{p}_2 = (2, 2, 2)\)</span>.</p>
@@ -583,20 +572,20 @@ Solution<div class="sd-summary-down docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
 <p class="sd-card-text">Calculating the direction vector</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     \mathbf{d} &amp;= \mathbf{p}_2 - \mathbf{p}_1 =
     \begin{pmatrix} 2 \\ 2 \\ 2 \end{pmatrix} - 
     \begin{pmatrix} 1 \\ 0 \\ 2 \end{pmatrix}
     = \begin{pmatrix} 1 \\ 2 \\ 0 \end{pmatrix}.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p class="sd-card-text">Therefore the equation that describes <span class="math notranslate nohighlight">\(\ell\)</span> is</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     \mathbf{q} &amp;= \mathbf{p}_1 + t \mathbf{d} 
     = \begin{pmatrix} 1 \\ 0 \\ 2 \end{pmatrix} + t
     \begin{pmatrix} 1 \\ 2 \\ 0 \end{pmatrix}.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 </div>
 </details><p>(ii)   Find the position of the point one quarter of the way along the chord <span class="math notranslate nohighlight">\(\mathbf{p}_1 \to \mathbf{p}_2\)</span></p>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
@@ -606,13 +595,13 @@ Solution<div class="sd-summary-down docutils">
 <div class="sd-summary-up docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     \mathbf{q} &amp;= \mathbf{p}_1 + \frac{1}{4}\mathbf{d} = 
     \begin{pmatrix} 1 \\ 0 \\ 2 \end{pmatrix} + \frac{1}{4}
     \begin{pmatrix} 1 \\ 2 \\ 0 \end{pmatrix}
     = \begin{pmatrix} 5/4 \\ 1/2 \\ 2 \end{pmatrix}.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 </div>
 </details><p>(iii)   Does the line <span class="math notranslate nohighlight">\(\ell\)</span> pass through the point at <span class="math notranslate nohighlight">\(\mathbf{p}_3 = (2, 1, 2)\)</span>?</p>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
@@ -623,29 +612,34 @@ Solution<div class="sd-summary-down docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
 <p class="sd-card-text">If <span class="math notranslate nohighlight">\(\mathbf{p}_3\)</span> lies on <span class="math notranslate nohighlight">\(\ell\)</span> then the following system has a unique solution</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     \mathbf{p}_1 + t \mathbf{d} &amp;= \mathbf{p}_3, \\
     \begin{pmatrix} 1 \\ 0 \\ 2 \end{pmatrix} + t
     \begin{pmatrix} 1 \\ 2 \\ 0 \end{pmatrix}
     &amp;= \begin{pmatrix} 2 \\ 1 \\ 2 \end{pmatrix}
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p class="sd-card-text">So we have the system</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     1 + t &amp;= 2, \\
     2t &amp;= 1, \\
     2 &amp;= 2.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p class="sd-card-text">The second equation gives <span class="math notranslate nohighlight">\(t = 1/2\)</span> so substituting into the first equation gives <span class="math notranslate nohighlight">\(t = 3/2\)</span> which is a contradiction so the line <span class="math notranslate nohighlight">\(\ell\)</span> does not pass through <span class="math notranslate nohighlight">\(\mathbf{p}_3\)</span>.</p>
 </div>
 </details></section>
 </div></section>
 <section id="planes">
 <span id="planes-section"></span><h2>Planes<a class="headerlink" href="#planes" title="Permalink to this headline">#</a></h2>
-<p>A <strong>plane</strong> is a flat two-dimensional surface. The vector equation for a plane in <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span> is very similar to that of a line. We just need two direction vectors instead of just the one we needed for a line.</p>
-<div class="proof definition note admonition" id="definition-2">
-<p class="admonition-title"><span class="caption-number">Definition 10 </span> (Vector equation of a plane)</p>
+<div class="proof definition admonition" id="plane-definition">
+<p class="admonition-title"><span class="caption-number">Definition 10 </span> (Plane)</p>
+<section class="definition-content" id="proof-content">
+<p>A <strong>plane</strong> is an object of dimension 2 that has a length and width but no thickness.</p>
+</section>
+</div><p>A <strong>plane</strong> is a flat two-dimensional surface. The vector equation for a plane in <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span> is very similar to that of a line. We just need two direction vectors instead of just the one we needed for a line.</p>
+<div class="proof definition admonition" id="vector-equation-of-a-plane-definition">
+<p class="admonition-title"><span class="caption-number">Definition 11 </span> (Vector equation of a plane)</p>
 <section class="definition-content" id="proof-content">
 <p>The position of a point <span class="math notranslate nohighlight">\(\mathbf{p}\)</span> that lies on the plane <span class="math notranslate nohighlight">\(p\)</span> which passes through the three point <span class="math notranslate nohighlight">\(\mathbf{p}_1\)</span>, <span class="math notranslate nohighlight">\(\mathbf{p}_2\)</span> and <span class="math notranslate nohighlight">\(\mathbf{p}_3\)</span> is</p>
 <div class="math notranslate nohighlight">
@@ -663,8 +657,8 @@ Solution<div class="sd-summary-down docutils">
 <section id="the-normal-vector">
 <span id="normal-vector-section"></span><h2>The normal vector<a class="headerlink" href="#the-normal-vector" title="Permalink to this headline">#</a></h2>
 <p>A more convenient way of describing a plane uses the normal vector.</p>
-<div class="proof definition note admonition" id="normal-vector-definition">
-<p class="admonition-title"><span class="caption-number">Definition 11 </span> (The normal vector)</p>
+<div class="proof definition admonition" id="normal-vector-definition">
+<p class="admonition-title"><span class="caption-number">Definition 12 </span> (The normal vector)</p>
 <section class="definition-content" id="proof-content">
 <p>The <strong>normal vector</strong> to a plane is a vector that is perpendicular to that plane. If <span class="math notranslate nohighlight">\(\mathbf{a}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> are two vectors that lie on a plane then the normal vector is calculated using <span class="math notranslate nohighlight">\(\mathbf{n} = \mathbf{a} \times \mathbf{b}\)</span>.</p>
 </section>
@@ -674,7 +668,7 @@ Solution<div class="sd-summary-down docutils">
 <p><span class="caption-number">Fig. 13 </span><span class="caption-text">The normal vector <span class="math notranslate nohighlight">\(\mathbf{n}\)</span> is perpendicular to the plane <span class="math notranslate nohighlight">\(p\)</span>.</span><a class="headerlink" href="#normal-vector-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>Recall the <span class="xref myst">geometric definition of a dot product</span> which states</p>
+<p>Recall the <a class="reference internal" href="1.1_Vectors.html#geometric-dot-product-definition">geometric definition of a dot product</a> which states</p>
 <div class="math notranslate nohighlight">
 \[ \mathbf{a} \cdot \mathbf{b} = |\mathbf{a}| |\mathbf{b}| \cos(\theta),\]</div>
 <p>where <span class="math notranslate nohighlight">\(\theta\)</span> is the angle between <span class="math notranslate nohighlight">\(\mathbf{a}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{b}\)</span>. If the two vectors are perpendicular then <span class="math notranslate nohighlight">\(\theta = \pi / 2\)</span> and <span class="math notranslate nohighlight">\(\cos(\theta) = 0\)</span>. Therefore if <span class="math notranslate nohighlight">\(\mathbf{a} \cdot \mathbf{b}=0\)</span> then <span class="math notranslate nohighlight">\(\mathbf{a}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> are perpendicular. If <span class="math notranslate nohighlight">\(\mathbf{p}\)</span> lies on a plane with normal vector <span class="math notranslate nohighlight">\(\mathbf{n}\)</span> then if <span class="math notranslate nohighlight">\(\mathbf{q}\)</span> is another point that lies on the plane then the vector <span class="math notranslate nohighlight">\(\mathbf{p} - \mathbf{q}\)</span> must be perpendicular to <span class="math notranslate nohighlight">\(\mathbf{n}\)</span>, i.e.,</p>
@@ -685,14 +679,14 @@ Solution<div class="sd-summary-down docutils">
 \[ \mathbf{n} \cdot \mathbf{p} = \mathbf{n} \cdot \mathbf{q},\]</div>
 <p>which gives the point-normal equation of a plane.</p>
 <div class="proof definition admonition" id="point-normal-definition">
-<p class="admonition-title"><span class="caption-number">Definition 12 </span> (Point-normal equation of a plane)</p>
+<p class="admonition-title"><span class="caption-number">Definition 13 </span> (Point-normal equation of a plane)</p>
 <section class="definition-content" id="proof-content">
 <p>The <strong>point normal equation of a plane</strong> is</p>
 <div class="math notranslate nohighlight" id="equation-point-normal-equation">
 <span class="eqno">(9)<a class="headerlink" href="#equation-point-normal-equation" title="Permalink to this equation">#</a></span>\[\mathbf{n} \cdot \mathbf{p} = s\]</div>
 <p>where <span class="math notranslate nohighlight">\(\mathbf{n}\)</span> is the normal vector, <span class="math notranslate nohighlight">\(\mathbf{p}\)</span> is a point on the plane and <span class="math notranslate nohighlight">\(s\)</span> is a scalar.</p>
 </section>
-</div><div class="proof example seealso admonition" id="example-5">
+</div><div class="proof example seealso admonition" id="plane-example">
 <p class="admonition-title"><span class="caption-number">Example 8 </span></p>
 <section class="example-content" id="proof-content">
 <p>A plane passes through the three points <span class="math notranslate nohighlight">\(\mathbf{p}_1 = (1, 0, 3)\)</span>, <span class="math notranslate nohighlight">\(\mathbf{p}_2 = (2, 1, 1)\)</span> and <span class="math notranslate nohighlight">\(\mathbf{p}_3 = (0, 1, 3)\)</span>.</p>
@@ -705,8 +699,8 @@ Solution<div class="sd-summary-down docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
 <p class="sd-card-text">Calculate the normal vector</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     \mathbf{n} &amp;= (\mathbf{p}_2 - \mathbf{p}_1) \times (\mathbf{p}_3 - \mathbf{p}_1)
     = \begin{vmatrix}
         \mathbf{i} &amp; \mathbf{j} &amp; \mathbf{k} \\
@@ -714,20 +708,20 @@ Solution<div class="sd-summary-down docutils">
         -1 &amp; 1 &amp; 0 
     \end{vmatrix}
     = \begin{pmatrix} 2 \\ 2 \\ 2 \end{pmatrix}.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p class="sd-card-text">Calculate the scalar <span class="math notranslate nohighlight">\(s\)</span></p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     s &amp;= \mathbf{n} \cdot \mathbf{p}_1 = 
     \begin{pmatrix} 2 \\ 2 \\ 2 \end{pmatrix} \cdot
     \begin{pmatrix} 1 \\ 0 \\ 3 \end{pmatrix}
     = 2 + 0 + 6 = 8,
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p class="sd-card-text">therefore the point-normal equation of the plane is</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     \begin{pmatrix} 2 \\ 2 \\ 2 \end{pmatrix} \cdot \mathbf{r} = 8.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 </div>
 </details><p>(ii)   Does the point with position vector <span class="math notranslate nohighlight">\(\mathbf{p}_4 = (1, 2, 5)\)</span> lies on this plane?</p>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
@@ -738,12 +732,12 @@ Solution<div class="sd-summary-down docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
 <p class="sd-card-text">Calculate <span class="math notranslate nohighlight">\(\mathbf{n} \cdot \mathbf{p}_4\)</span></p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     \begin{pmatrix} 2 \\ 2 \\ 2 \end{pmatrix} \cdot 
     \begin{pmatrix} 1 \\ 2 \\ 5 \end{pmatrix}
     = 2 + 4 + 10 = 16 \neq 8,
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p class="sd-card-text">therefore <span class="math notranslate nohighlight">\(\mathbf{p}_4\)</span> does not lie on the plane.</p>
 </div>
 </details></section>
@@ -751,8 +745,8 @@ Solution<div class="sd-summary-down docutils">
 <section id="spheres">
 <span id="spheres-section"></span><h2>Spheres<a class="headerlink" href="#spheres" title="Permalink to this headline">#</a></h2>
 <p>A sphere is a three-dimensional geometric object where all points on the surface of the sphere are the same distance from its centre.</p>
-<div class="proof definition admonition" id="definition-6">
-<p class="admonition-title"><span class="caption-number">Definition 13 </span> (Equation of a sphere)</p>
+<div class="proof definition admonition" id="equation-of-a-sphere-definition">
+<p class="admonition-title"><span class="caption-number">Definition 14 </span> (Equation of a sphere)</p>
 <section class="definition-content" id="proof-content">
 <p>The <strong>Cartesian equation of a sphere</strong> centred at <span class="math notranslate nohighlight">\((x_0, y_0, z_0)\)</span> with radius <span class="math notranslate nohighlight">\(r\)</span> is</p>
 <div class="math notranslate nohighlight" id="equation-sphere-equation">

@@ -373,17 +373,6 @@ title="Toggle navigation"
         
     </div>
     <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-    </ul>
-  </div>
-</div>
-
 <button onclick="toggleFullScreen()"
   class="headerbtn"
   data-toggle="tooltip"
@@ -406,7 +395,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/files/5.1_Drawing_lines.ipynb"
+        <a href="../_sources/files/5.1_Drawing_lines.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -417,7 +406,7 @@ title="Download source file"
 <span class="headerbtn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="headerbtn__text-container">.ipynb</span>
+<span class="headerbtn__text-container">.md</span>
 </a>
 
       </li>
@@ -533,8 +522,8 @@ title="Print to PDF"
 </figure>
 <p><strong>Bresenham’s algorithm</strong> developed by American computer scientist Jack <span id="id1">Bresenham [<a class="reference internal" href="bibliography.html#id2" title="Jack Elton Bresenham. Algorithm for computer control of a digital plotter. IBM Systems journal, 4(1):25–30, 1965.">1965</a>]</span> is a line drawing algorithm that uses integer only arithmetic and offers a vast improvement over other methods in terms of computational efficiency. Consider the <a href="https://en.wikipedia.org/wiki/Linear_equation" target="_blank">Cartesian equation of a straight line</a> joining two points with co-ordinates <span class="math notranslate nohighlight">\((x_0, y_0)\)</span> and <span class="math notranslate nohighlight">\((x_1, y_1)\)</span></p>
 <div class="math notranslate nohighlight" id="equation-cartesian-equation-of-a-straight-line">
-<span class="eqno">(35)<a class="headerlink" href="#equation-cartesian-equation-of-a-straight-line" title="Permalink to this equation">#</a></span>\[y = \frac{y_1 - y_0}{x_1 - x_0} x + c,\]</div>
-<p>where <span class="math notranslate nohighlight">\((x,y)\)</span> are the co-ordinates of a point on the line and <span class="math notranslate nohighlight">\(c\)</span> is the point of interception between the line and the <span class="math notranslate nohighlight">\(y\)</span>-axis. Let <span class="math notranslate nohighlight">\(\Delta y = y_1 - y_0\)</span> and <span class="math notranslate nohighlight">\(\Delta x = x_1 - x_0\)</span> into equation <a class="reference internal" href="#equation-cartesian-equation-of-a-straight-line">(35)</a> and rearranging gives</p>
+<span class="eqno">(34)<a class="headerlink" href="#equation-cartesian-equation-of-a-straight-line" title="Permalink to this equation">#</a></span>\[y = \frac{y_1 - y_0}{x_1 - x_0} x + c,\]</div>
+<p>where <span class="math notranslate nohighlight">\((x,y)\)</span> are the co-ordinates of a point on the line and <span class="math notranslate nohighlight">\(c\)</span> is the point of interception between the line and the <span class="math notranslate nohighlight">\(y\)</span>-axis. Let <span class="math notranslate nohighlight">\(\Delta y = y_1 - y_0\)</span> and <span class="math notranslate nohighlight">\(\Delta x = x_1 - x_0\)</span> into equation <a class="reference internal" href="#equation-cartesian-equation-of-a-straight-line">(34)</a> and rearranging gives</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
     y &amp;= \frac{\Delta y}{\Delta x} x + c \\
@@ -762,7 +751,7 @@ Solution<div class="sd-summary-down docutils">
     y &amp;= 7.
 \end{align*}\]</div>
 <figure class="align-default" style="width: 300px">
-<img alt="../_images/bresenham_example_3_1.png" src="../_images/bresenham_example_3_1.png" />
+<img alt="../_images/bresenham_example_3i.png" src="../_images/bresenham_example_3i.png" />
 </figure>
 </div>
 </details><p>  (ii)   <span class="math notranslate nohighlight">\((6,1)\)</span> and <span class="math notranslate nohighlight">\((2,4)\)</span>.</p>
@@ -800,7 +789,7 @@ Solution<div class="sd-summary-down docutils">
     y &amp;= 5.
 \end{align*}\]</div>
 <figure class="align-default" style="width: 300px">
-<img alt="../_images/bresenham_example_3_2.png" src="../_images/bresenham_example_3_2.png" />
+<img alt="../_images/bresenham_example_3ii.png" src="../_images/bresenham_example_3ii.png" />
 </figure>
 </div>
 </details></section>

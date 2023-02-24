@@ -373,17 +373,6 @@ title="Toggle navigation"
         
     </div>
     <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-    </ul>
-  </div>
-</div>
-
 <button onclick="toggleFullScreen()"
   class="headerbtn"
   data-toggle="tooltip"
@@ -406,7 +395,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/files/4.3_Backface_culling.ipynb"
+        <a href="../_sources/files/4.3_Backface_culling.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -417,7 +406,7 @@ title="Download source file"
 <span class="headerbtn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="headerbtn__text-container">.ipynb</span>
+<span class="headerbtn__text-container">.md</span>
 </a>
 
       </li>
@@ -505,7 +494,7 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="backface-culling">
-<span id="back-face-culling-section"></span><h1>Backface culling<a class="headerlink" href="#backface-culling" title="Permalink to this headline">#</a></h1>
+<span id="backface-culling-section"></span><h1>Backface culling<a class="headerlink" href="#backface-culling" title="Permalink to this headline">#</a></h1>
 <p>The simplest hidden surface determination method is <strong>backface culling</strong> which, as the name suggests, we remove all polygons that have a normal vector facing away from the viewer, and therefore considered <strong>back facing</strong>. In doing this, when we only render the front facing polygons, objects appear solid.</p>
 <p>Consider the diagram in <a class="reference internal" href="#backface-culling-figure-1"><span class="std std-numref">Fig. 77</span></a> which shows a hexagonal object with face polygons <span class="math notranslate nohighlight">\(A\)</span> to <span class="math notranslate nohighlight">\(F\)</span> which have their normal vectors pointing away from the centre of the object (this is done when we define the <a class="reference internal" href="3.1_Object_space.html#object-space-section"><span class="std std-ref">object space</span></a>). When viewed from the viewer position on the left polygons <span class="math notranslate nohighlight">\(A\)</span>, <span class="math notranslate nohighlight">\(B\)</span> and <span class="math notranslate nohighlight">\(C\)</span> are <em>front facing</em> and polygons <span class="math notranslate nohighlight">\(D\)</span>, <span class="math notranslate nohighlight">\(E\)</span> and <span class="math notranslate nohighlight">\(F\)</span> are <em>back facing</em>.</p>
 <figure class="align-default" id="backface-culling-figure-1">
@@ -539,19 +528,19 @@ title="Print to PDF"
 </div>
 </div>
 <p>Recall that the <a class="reference internal" href="1.1_Vectors.html#geometric-dot-product-definition">geometric definition of the dot product</a> is</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[ \begin{align*}
     \mathbf{a} \cdot \mathbf{b} = |\mathbf{a}| |\mathbf{b}| \cos(\theta),
-\end{align*}\]</div>
+\end{align*} \]</div>
 <p>and since <span class="math notranslate nohighlight">\(\cos(\pi/2) = 0\)</span> then a polygon is front facing if <span class="math notranslate nohighlight">\(\mathbf{n} \cdot \mathbf{v} &lt; 0\)</span>.</p>
 <div class="proof definition admonition" id="front-facing-polygon-definition">
-<p class="admonition-title"><span class="caption-number">Definition 20 </span> (Front facing polygons)</p>
+<p class="admonition-title"><span class="caption-number">Definition 22 </span> (Front facing polygons)</p>
 <section class="definition-content" id="proof-content">
 <p>A polygon defined by a normal vector <span class="math notranslate nohighlight">\(\mathbf{n}\)</span> and point <span class="math notranslate nohighlight">\(\mathbf{c}\)</span> is front facing to the viewer if</p>
-<div class="amsmath math notranslate nohighlight" id="equation-4a38a6f6-89d9-4c37-9162-6a9cb185132e">
-<span class="eqno">(34)<a class="headerlink" href="#equation-4a38a6f6-89d9-4c37-9162-6a9cb185132e" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="math notranslate nohighlight">
+\[ \begin{align}
     (\mathbf{c} - \mathbf{p}) \cdot \mathbf{n} &lt; 0.
-\end{align}\]</div>
+\end{align} \]</div>
 </section>
 </div><div class="proof algorithm admonition" id="backface-culling-algorithm">
 <p class="admonition-title"><span class="caption-number">Algorithm 3 </span> (Backface culling)</p>
@@ -581,8 +570,8 @@ title="Print to PDF"
 <p class="admonition-title"><span class="caption-number">Example 35 </span></p>
 <section class="example-content" id="proof-content">
 <p>A tetrahedron object is defined by the following homogeneous screen space co-ordinates and face matrix</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     V &amp;= 
     \begin{pmatrix}
         1 &amp; 3 &amp; 2 &amp; 2 \\
@@ -597,7 +586,7 @@ title="Print to PDF"
         2 &amp; 3 &amp; 4 \\
         1 &amp; 4 &amp; 3
     \end{pmatrix}
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p>The object is viewed looking down the <span class="math notranslate nohighlight">\(z\)</span>-axis from the viewing position at <span class="math notranslate nohighlight">\((0, 0, 1)\)</span>. Determine which of the faces of the object are front facing.</p>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
@@ -607,8 +596,8 @@ Solution<div class="sd-summary-down docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
 <p class="sd-card-text">Face 1 :</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     \mathbf{n} &amp;= (\mathbf{v}_3 - \mathbf{v}_1) \times (\mathbf{v}_2 - \mathbf{v}_3) \\
     &amp;= \left(
         \begin{pmatrix} 2 \\ 2 \\ -3 \end{pmatrix} -
@@ -626,11 +615,11 @@ Solution<div class="sd-summary-down docutils">
     \mathbf{n} \cdot (\mathbf{v}_1 - \mathbf{p}) &amp;=
     \begin{pmatrix} 0 \\ 6 \\ 0 \end{pmatrix} \cdot
     \begin{pmatrix} 1 \\ 2 \\ -7 \end{pmatrix} = 12 &gt; 0,
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p class="sd-card-text">therefore face 1 is back facing.</p>
 <p class="sd-card-text">Face 2:</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     \mathbf{n} &amp;= (\mathbf{v}_3 - \mathbf{v}_1) \times (\mathbf{v}_2 - \mathbf{v}_3) \\
     &amp;= \left(
         \begin{pmatrix} 3 \\ 2 \\ -6 \end{pmatrix} -
@@ -648,11 +637,11 @@ Solution<div class="sd-summary-down docutils">
     \mathbf{n} \cdot (\mathbf{v}_1 - \mathbf{p}) &amp;=
     \begin{pmatrix} 0 \\ -2 \\ 4 \end{pmatrix} \cdot
     \begin{pmatrix} 1 \\ 2 \\ -6 \end{pmatrix} = -28 &lt; 0,
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p class="sd-card-text">therefore face 2 is front facing.</p>
 <p class="sd-card-text">Face 3:</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     \mathbf{n} &amp;= (\mathbf{v}_3 - \mathbf{v}_1) \times (\mathbf{v}_2 - \mathbf{v}_3) \\
     &amp;= \left(
         \begin{pmatrix} 2 \\ 2 \\ -3 \end{pmatrix} -
@@ -670,11 +659,11 @@ Solution<div class="sd-summary-down docutils">
     \mathbf{n} \cdot (\mathbf{v}_1 - \mathbf{p}) &amp;=
     \begin{pmatrix} -6 \\ -2 \\ -2 \end{pmatrix} \cdot
     \begin{pmatrix} 3 \\ 2 \\ -6 \end{pmatrix} = -10 &lt; 0,
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p class="sd-card-text">therefore face 3 is front facing.</p>
 <p class="sd-card-text">Face 4:</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     \mathbf{n} &amp;= (\mathbf{v}_3 - \mathbf{v}_1) \times (\mathbf{v}_2 - \mathbf{v}_3) \\
     &amp;= \left(
         \begin{pmatrix} 2 \\ 4 \\ -5 \end{pmatrix} -
@@ -692,7 +681,7 @@ Solution<div class="sd-summary-down docutils">
     \mathbf{n} \cdot (\mathbf{v}_1 - \mathbf{p}) &amp;=
     \begin{pmatrix} 6 \\ -2 \\ -2 \end{pmatrix} \cdot
     \begin{pmatrix} 1 \\ 2 \\ -6 \end{pmatrix} = 14 &gt; 0,
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p class="sd-card-text">therefore face 4 is back facing.</p>
 </div>
 </details></section>

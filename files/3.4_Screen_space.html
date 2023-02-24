@@ -373,17 +373,6 @@ title="Toggle navigation"
         
     </div>
     <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-    </ul>
-  </div>
-</div>
-
 <button onclick="toggleFullScreen()"
   class="headerbtn"
   data-toggle="tooltip"
@@ -406,7 +395,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/files/3.4_Screen_space.ipynb"
+        <a href="../_sources/files/3.4_Screen_space.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -417,7 +406,7 @@ title="Download source file"
 <span class="headerbtn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="headerbtn__text-container">.ipynb</span>
+<span class="headerbtn__text-container">.md</span>
 </a>
 
       </li>
@@ -560,18 +549,18 @@ title="Print to PDF"
 <h1>Orthographic projection<a class="headerlink" href="#orthographic-projection" title="Permalink to this headline">#</a></h1>
 <p>The simplest kind of projection is the <a href="https://en.wikipedia.org/wiki/Orthographic_projection" target="_blank"><strong>orthographic projection</strong></a>. This is where we simply ignore the <span class="math notranslate nohighlight">\(z\)</span> co-ordinate of each point in the camera space, and consider the positions of the points in the plane to be given by their <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> coordinates.</p>
 <p>An orthographic projection can often be carried out directly without the need for any real processing by simply neglecting the <span class="math notranslate nohighlight">\(z\)</span> co-ordinate of all the points. However to retain consistency with our previous matrix representations we could carry out this projection with the use of the transformation matrix (again using homogeneous coordinates) <span class="math notranslate nohighlight">\(P\)</span> given by</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
 	P = \begin{pmatrix}
 		1 &amp; 0 &amp; 0 &amp; 0 \\ 
 		0 &amp; 1 &amp; 0 &amp; 0 \\
 		0 &amp; 0 &amp; 0 &amp; 0 \\
 		0 &amp; 0 &amp; 0 &amp; 1
 	\end{pmatrix}.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p>A point with a position given by the homogeneous camera space co-ordinates <span class="math notranslate nohighlight">\((x, y, z, 1)\)</span> the orthographic screen space co-ordinates are calculated using</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
 	P \cdot 
     \begin{pmatrix} x \\ y \\ z \\ 1  \end{pmatrix}
     = \begin{pmatrix}
@@ -581,8 +570,8 @@ title="Print to PDF"
 		0 &amp; 0 &amp; 0 &amp; 1
 	\end{pmatrix}
 	\begin{pmatrix} x \\ y \\ z \\ 1  \end{pmatrix} =
-	\begin{pmatrix} x \\ y \\ 0 \\ 1  \end{pmatrix}
-\end{align*}\]</div>
+	\begin{pmatrix} x \\ y \\ 0 \\ 1  \end{pmatrix}.
+\end{align*} \end{split}\]</div>
 <p>The orthographic projection of the camera space from <a class="reference internal" href="3.3_Camera_space.html#camera-space-example">Example 31</a> is shown in <a class="reference internal" href="#orthographic-projection-figure"><span class="std std-numref">Fig. 63</span></a>. Note that the two house objects appear the same size even though the house object on the right is closer to the viewer.</p>
 <figure class="align-default" id="orthographic-projection-figure">
 <a class="reference internal image-reference" href="../_images/camera_space_example_2.png"><img alt="../_images/camera_space_example_2.png" src="../_images/camera_space_example_2.png" style="width: 400px;" /></a>
@@ -609,30 +598,30 @@ title="Print to PDF"
 </figcaption>
 </figure>
 <p>The triangle with sides <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(y\)</span> and <span class="math notranslate nohighlight">\(h\)</span> is similar to the triangle <span class="math notranslate nohighlight">\(x'\)</span>, <span class="math notranslate nohighlight">\(y'\)</span> and <span class="math notranslate nohighlight">\(h'\)</span> so</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[ \begin{align*}
 	\frac{x'}{-f} &amp;= \frac{x}{z}, &amp;
 	\frac{y'}{-f} &amp;= \frac{y}{z}, 
-\end{align*}\]</div>
+\end{align*} \]</div>
 <p>which gives the projected co-ordinates</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[ \begin{align*}
 	x' &amp;= -\frac{fx}{z}, &amp;
 	y' &amp;= -\frac{fy}{z}.
-\end{align*}\]</div>
+\end{align*} \]</div>
 <p>Both <span class="math notranslate nohighlight">\(x'\)</span> and <span class="math notranslate nohighlight">\(y'\)</span> are divided by <span class="math notranslate nohighlight">\(-z / f\)</span> so the homogeneous co-ordinates of the projected point is <span class="math notranslate nohighlight">\((x, y, z, -z/f)\)</span> (remember that we divide by the fourth co-ordinates to convert to Cartesian co-ordinates). Therefore the transformation matrix for perspective projection is</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
 	P = \begin{pmatrix}
 		1 &amp; 0 &amp; 0 &amp; 0 \\
 		0 &amp; 1 &amp; 0 &amp; 0 \\
 		0 &amp; 0 &amp; 1 &amp; 0 \\
 		0 &amp; 0 &amp; -1/f &amp; 0
 	\end{pmatrix}.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p>The screen space co-ordinates of a point with the homogeneous camera space co-ordinates <span class="math notranslate nohighlight">\((x, y, z, 1)\)</span> are calculated using</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
 	P \cdot \mathbf{x} =
 	\begin{pmatrix}
 		1 &amp; 0 &amp; 0 &amp; 0 \\
@@ -641,8 +630,8 @@ title="Print to PDF"
 		0 &amp; 0 &amp; -1/f &amp; 0
 	\end{pmatrix}
 	\begin{pmatrix} x \\ y \\ z \\ 1  \end{pmatrix} =
-	\begin{pmatrix} x \\ y \\ z \\ -z/f  \end{pmatrix}
-\end{align*}\]</div>
+	\begin{pmatrix} x \\ y \\ z \\ -z/f  \end{pmatrix}.
+\end{align*} \end{split}\]</div>
 <p>and dividing by the fourth co-ordinates gives <span class="math notranslate nohighlight">\((-fx/z, -fy/z, -f, 1)\)</span> which are the projected co-ordinates derived above.</p>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="the-viewing-frustum">
@@ -669,55 +658,55 @@ title="Print to PDF"
 </figcaption>
 </figure>
 <p>The co-ordinate of the right edge, <span class="math notranslate nohighlight">\(r\)</span>, is calculated using</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[ \begin{align*}
 	r &amp;= near \cdot \tan \left( \frac{fov}{2} \right),
-\end{align*}\]</div>
+\end{align*} \]</div>
 <p>and since the centre of the screen is on the <span class="math notranslate nohighlight">\(z\)</span> axis then <span class="math notranslate nohighlight">\(l = -r\)</span>. The co-ordinate of the top edge, <span class="math notranslate nohighlight">\(t\)</span>, is determined by the aspect ratio of the screen</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[ \begin{align*}
 	aspect = \frac{width}{height},
-\end{align*}\]</div>
+\end{align*} \]</div>
 <p>so</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
 	aspect &amp;= \frac{r - l}{t - b} = \frac{r - (-r)}{t - (-t)} = \frac{r}{t} \\
 	\therefore t &amp;= \frac{r}{aspect} = \frac{r \cdot height}{width},
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p>Common aspect ratios are 4/3 (for old televisions and computer monitors), 16/9 (modern televisions) and 2.35/1 (cinema screens).</p>
 <p>To transform the viewing frustum we need to transform the camera space so that the points within the viewing frustum have <span class="math notranslate nohighlight">\(x'\)</span>, <span class="math notranslate nohighlight">\(y'\)</span> and <span class="math notranslate nohighlight">\(z'\)</span> co-ordinates in the range <span class="math notranslate nohighlight">\(x',y',z' \in [-1,1]\)</span> and projected using perspective projection. The <span class="math notranslate nohighlight">\(x\)</span> camera space co-ordinate for a point that is on the near projection plane and within our screen will be in the range <span class="math notranslate nohighlight">\(l \leq x \leq r\)</span>. Since <span class="math notranslate nohighlight">\(l = -r\)</span> and dividing throughout by <span class="math notranslate nohighlight">\(r\)</span> we have</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[ \begin{align*}
 	-1 \leq \frac{x}{r} \leq 1,
-\end{align*}\]</div>
+\end{align*} \]</div>
 <p>and using perspective projection <span class="math notranslate nohighlight">\(x' = -near \cdot x / z\)</span> then</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[ \begin{align*}
 	-1 \leq -\frac{near \cdot x}{rz} \leq 1,
-\end{align*}\]</div>
+\end{align*} \]</div>
 <p>so</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[ \begin{align*}
 	x' = -\frac{near \cdot x}{rz}.
-\end{align*}\]</div>
+\end{align*} \]</div>
 <p>Doing similar for <span class="math notranslate nohighlight">\(y'\)</span> gives</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[ \begin{align*}
 	y' = -\frac{near \cdot y}{tz}.
-\end{align*}\]</div>
+\end{align*} \]</div>
 <p>Now <span class="math notranslate nohighlight">\(x'\)</span> and <span class="math notranslate nohighlight">\(y'\)</span> are perspective screen space co-ordinates that are in the range <span class="math notranslate nohighlight">\(-1 \leq x', y' \leq 1\)</span>. The matrix that performs this transformation is</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
 	P = \begin{pmatrix}
 		-\dfrac{near}{r} &amp; 0 &amp; 0 &amp; 0 \\
 		0 &amp; -\dfrac{near}{t} &amp; 0 &amp; 0 \\
 		0 &amp; 0 &amp; \alpha &amp; \beta \\
 		0 &amp; 0 &amp; 1 &amp; 0 
 	\end{pmatrix},
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> are some scalars. A point with the homogeneous camera space co-ordinates <span class="math notranslate nohighlight">\((x, y, z, 1)\)</span> the screen space co-ordinates are calculated using</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
 	P \cdot \mathbf{x} = \begin{pmatrix}
 		-\dfrac{near}{r} &amp; 0 &amp; 0 &amp; 0 \\
 		0 &amp; -\dfrac{near}{t} &amp; 0 &amp; 0 \\
@@ -726,35 +715,35 @@ title="Print to PDF"
 	\end{pmatrix}
 	\begin{pmatrix} x \\ y \\ z \\ 1 \end{pmatrix} =
 	\begin{pmatrix} -near \cdot x / r \\ -near \cdot y / t \\ \alpha z + \beta \\ z  \end{pmatrix},
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p>and dividing by the fourth co-ordinate to convert to Cartesian co-ordinates we have</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
 	\begin{pmatrix}
 		-near \cdot x / (r z) \\ -near \cdot y / (t z) \\ (\alpha z + \beta)/z \\ 1
 	\end{pmatrix}.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p>The <span class="math notranslate nohighlight">\(z\)</span> camera space co-ordinate for a point within the viewing frustum is in the range <span class="math notranslate nohighlight">\(-near \leq z \leq -far\)</span> so we need to transform <span class="math notranslate nohighlight">\(-near \mapsto 1\)</span> and <span class="math notranslate nohighlight">\(-far \mapsto -1\)</span>. So the minimum and maximum <span class="math notranslate nohighlight">\(z'\)</span> co-ordinates are</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
 	1 &amp;= \frac{-near \cdot \alpha + \beta}{-near}, \\
 	-1 &amp;= \frac{-far \cdot \alpha + \beta}{-far}.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p>Solving for <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> gives <span class="math notranslate nohighlight">\(\alpha = (near + far)/(near - far)\)</span> and <span class="math notranslate nohighlight">\(\beta = 2 \cdot near \cdot far / (near - far)\)</span> so the transformation matrix becomes</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
 	P = \begin{pmatrix}
 		-\dfrac{near}{r} &amp; 0 &amp; 0 &amp; 0 \\
 		0 &amp; -\dfrac{near}{t} &amp; 0 &amp; 0 \\
 		0 &amp; 0 &amp; \dfrac{near + far}{near - far} &amp; \dfrac{2 \cdot near \cdot far}{near - far} \\
 		0 &amp; 0 &amp; 1 &amp; 0 
 	\end{pmatrix}.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p>The transformation matrix <span class="math notranslate nohighlight">\(P\)</span> combines perspective projection and transformation of the viewing frustum to a cube. The screen space co-ordinates are calculated using</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[ \begin{align*}
 	V_{\text{screen}} = P \cdot V_{\text{camera}}.
-\end{align*}\]</div>
+\end{align*} \]</div>
 <p>Each column in <span class="math notranslate nohighlight">\(V_{\text{screen}}\)</span> is a homogeneous screen space co-ordinate where the fourth row contains the scaling factor. The Cartesian co-ordinates are calculated by dividing <span class="math notranslate nohighlight">\(V_{\text{screen}}\)</span> by the fourth row.</p>
 <div class="proof example seealso admonition" id="screen-space-example">
 <p class="admonition-title"><span class="caption-number">Example 32 </span></p>
@@ -768,14 +757,14 @@ Solution<div class="sd-summary-down docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
 <p class="sd-card-text">First we calculate the <span class="math notranslate nohighlight">\(r\)</span> and <span class="math notranslate nohighlight">\(t\)</span> co-ordinates</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     r &amp;= near \cdot \tan \left( \frac{fov}{2} \right) = 2 \tan\left(\frac{\pi}{4}\right) \approx 1, \\
     t &amp;= \frac{r \cdot height}{width} = \frac{1\times 3}{4} \approx 0.75,
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p class="sd-card-text">so the projection matrix is</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     P &amp;= 
     \begin{pmatrix}
 		-\dfrac{near}{r} &amp; 0 &amp; 0 &amp; 0 \\
@@ -797,11 +786,11 @@ Solution<div class="sd-summary-down docutils">
         0 &amp; 0 &amp; -1.5 &amp; -2.5 \\
         0 &amp; 0 &amp; 1 &amp; 0
     \end{pmatrix}.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p class="sd-card-text">Applying the perspective transformation matrix to the camera space co-ordinates from
 <a class="reference internal" href="3.3_Camera_space.html#camera-space-example">Example 31</a></p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     V_{\text{screen}} &amp;= P \cdot V_{\text{view}} \\
     &amp;= 
 	\begin{pmatrix}
@@ -822,18 +811,18 @@ Solution<div class="sd-summary-down docutils">
 		1.0904 &amp; \cdots &amp; 4.4849 \\
 		-2.3936 &amp; \cdots &amp; -4.6566
     \end{pmatrix}.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p class="sd-card-text">Since these are homogeneous co-ordinates we need to divide by the fourth row to give the Cartesian co-ordinates</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     V_{screen} &amp;=
     \begin{pmatrix}
         -0.2954 &amp; \cdots &amp; 0.1519 \\
 		-0.7542 &amp; \cdots &amp; 0.5992 \\
 		-0.4555 &amp; \cdots &amp; -0.9631 \\
 		1 &amp; \cdots &amp; 1 \\
-    \end{pmatrix}
-\end{align*}\]</div>
+    \end{pmatrix}.
+\end{align*} \end{split}\]</div>
 </div>
 </details></section>
 </div></section>

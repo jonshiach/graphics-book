@@ -373,17 +373,6 @@ title="Toggle navigation"
         
     </div>
     <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-    </ul>
-  </div>
-</div>
-
 <button onclick="toggleFullScreen()"
   class="headerbtn"
   data-toggle="tooltip"
@@ -406,7 +395,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/files/1.5_Shortest_distance_problems.ipynb"
+        <a href="../_sources/files/1.5_Shortest_distance_problems.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -417,7 +406,7 @@ title="Download source file"
 <span class="headerbtn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="headerbtn__text-container">.ipynb</span>
+<span class="headerbtn__text-container">.md</span>
 </a>
 
       </li>
@@ -540,10 +529,10 @@ title="Print to PDF"
 <section id="shortest-distance-between-two-points">
 <h2>Shortest distance between two points<a class="headerlink" href="#shortest-distance-between-two-points" title="Permalink to this headline">#</a></h2>
 <p>In <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span> the shortest distance, <span class="math notranslate nohighlight">\(d\)</span>, between two points <span class="math notranslate nohighlight">\(\mathbf{p}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{q}\)</span> is the length of a straight line segment connecting them. If we think about this segment as of a vector, then</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[ \begin{align*}
     d = |\mathbf{p} - \mathbf{q}| = \sqrt{\displaystyle\sum_{i=1}^n (p_i-q_i)^2},
-\end{align*}\]</div>
+\end{align*} \]</div>
 <p>where <span class="math notranslate nohighlight">\(\mathbf{p} = (p_1,p_2,\dots,p_n)\)</span> and <span class="math notranslate nohighlight">\(\mathbf{q} = (q_1,q_2,\dots,q_n)\)</span>.</p>
 </section>
 <section id="shortest-distance-between-a-line-and-a-point">
@@ -559,12 +548,12 @@ title="Print to PDF"
 <div class="math notranslate nohighlight" id="equation-point-line-distance-equation">
 <span class="eqno">(13)<a class="headerlink" href="#equation-point-line-distance-equation" title="Permalink to this equation">#</a></span>\[(\mathbf{q} - \mathbf{r}) \cdot \mathbf{d} = 0.\]</div>
 <p>Substituting <span class="math notranslate nohighlight">\(\mathbf{r} = \mathbf{p} + t\mathbf{d}\)</span> into equation <a class="reference internal" href="#equation-point-line-distance-equation">(13)</a> and rearranging to make <span class="math notranslate nohighlight">\(t\)</span> the subject gives</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     (\mathbf{q} - \mathbf{p} - t \mathbf{d}) \cdot \mathbf{d} &amp;= 0 \\
     (\mathbf{q} - \mathbf{p}) \cdot \mathbf{d} - t \mathbf{d} \cdot \mathbf{d} &amp;= 0 \\
     \therefore t &amp;= \frac{(\mathbf{q} - \mathbf{p}) \cdot \mathbf{d}}{ \mathbf{d} \cdot \mathbf{d}}.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p>This gives the value of the parameter <span class="math notranslate nohighlight">\(t\)</span> that can be used to calculate the co-ordinates of the point <span class="math notranslate nohighlight">\(\mathbf{r}\)</span> and therefore the shortest distance between the point <span class="math notranslate nohighlight">\(\mathbf{q}\)</span> and the line <span class="math notranslate nohighlight">\(\mathbf{p} + t\mathbf{d}\)</span> is <span class="math notranslate nohighlight">\(|\mathbf{q} - \mathbf{r}|\)</span>.</p>
 <div class="proof theorem admonition" id="point-line-distance-theorem">
 <p class="admonition-title"><span class="caption-number">Theorem 3 </span> (The shortest distance between a point and a line)</p>
@@ -573,7 +562,7 @@ title="Print to PDF"
 <div class="math notranslate nohighlight" id="equation-point-line-t-equation">
 <span class="eqno">(14)<a class="headerlink" href="#equation-point-line-t-equation" title="Permalink to this equation">#</a></span>\[t = \frac{(\mathbf{q} - \mathbf{p}) \cdot \mathbf{d}}{ \mathbf{d} \cdot \mathbf{d}}.\]</div>
 </section>
-</div><div class="proof example seealso admonition" id="example-1">
+</div><div class="proof example seealso admonition" id="point-line-distance-example">
 <p class="admonition-title"><span class="caption-number">Example 16 </span></p>
 <section class="example-content" id="proof-content">
 <p>Find the shortest distance between the point <span class="math notranslate nohighlight">\((2,2,2)\)</span> and the line <span class="math notranslate nohighlight">\((0, -2, 1) + t(1, 1, 1)\)</span>.</p>
@@ -585,8 +574,8 @@ Solution<div class="sd-summary-down docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
 <p class="sd-card-text">Here <span class="math notranslate nohighlight">\(\mathbf{q} = (2, 2, 2)\)</span>, <span class="math notranslate nohighlight">\(\mathbf{p} = (0, -2, 1)\)</span> and <span class="math notranslate nohighlight">\(\mathbf{d} = (1, 1, 1)\)</span>. Using equation <a class="reference internal" href="#equation-point-line-distance-equation">(13)</a></p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     t &amp;= \frac{ \left( \begin{pmatrix} 2 \\ 2 \\ 2 \end{pmatrix} - 
     \begin{pmatrix} 0 \\ -2 \\ 1 \end{pmatrix}\right) \cdot 
     \begin{pmatrix} 1 \\ 1 \\ 1 \end{pmatrix}}{
@@ -597,22 +586,22 @@ Solution<div class="sd-summary-down docutils">
     \begin{pmatrix} 1 \\ 1 \\ 1 \end{pmatrix}
     }{1 + 1 + 1} \\
     &amp;= \frac{2 + 4 + 1}{3} = \frac{7}{3}.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p class="sd-card-text">So the point on the line which is closest to <span class="math notranslate nohighlight">\(\mathbf{q}\)</span> is</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     \mathbf{r} &amp;= \begin{pmatrix} 0 \\ -2 \\ 1 \end{pmatrix} + \frac{7}{3} \begin{pmatrix} 1 \\ 1 \\ 1 \end{pmatrix}
     = \begin{pmatrix} 7/3 \\ 1/3 \\ 10/3 \end{pmatrix},
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p class="sd-card-text">and the shortest distance is <span class="math notranslate nohighlight">\(|\mathbf{q} - \mathbf{r}|\)</span> so</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     \mathbf{q} - \mathbf{r} &amp;= \begin{pmatrix} 7/3 \\ 1/3 \\ 10/3 \end{pmatrix} 
     - \begin{pmatrix} 2 \\ 2 \\ 2 \end{pmatrix} 
     = \begin{pmatrix} 1/3 \\ - 5/3 \\ 4/3 \end{pmatrix}, \\
     \therefore d &amp;= \sqrt{\left(\frac{1}{3}\right)^2 + \left(\frac{5}{3}\right)^2 + \left(\frac{4}{3}\right)^2}
     = \sqrt{\frac{14}{3}} \approx 2.16.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 </div>
 </details></section>
 </div></section>
@@ -634,8 +623,8 @@ Solution<div class="sd-summary-down docutils">
 <div class="math notranslate nohighlight" id="equation-line-line-distance-equation-1">
 <span class="eqno">(15)<a class="headerlink" href="#equation-line-line-distance-equation-1" title="Permalink to this equation">#</a></span>\[\mathbf{q}_2 - \mathbf{q}_1 = d (\mathbf{d}_1 \times \mathbf{d}_2),\]</div>
 <p>Let <span class="math notranslate nohighlight">\(\hat{\mathbf{n}} = \dfrac{\mathbf{d}_1 \times \mathbf{d}_2}{|\mathbf{d}_1 \times \mathbf{d}_2|}\)</span> and substituting the equations of <span class="math notranslate nohighlight">\(\mathbf{q}_1\)</span> and <span class="math notranslate nohighlight">\(\mathbf{q}_2\)</span> equation <a class="reference internal" href="#equation-line-line-distance-equation-1">(15)</a> gives</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     \mathbf{q}_2 - \mathbf{q}_1 &amp;= d \hat{\mathbf{n}}\\
     (\mathbf{p}_2 + t_2 \mathbf{d}_2) - (\mathbf{p}_1 + t_1 \mathbf{d}_1) 
     &amp;= d \hat{\mathbf{n}}\\
@@ -643,17 +632,17 @@ Solution<div class="sd-summary-down docutils">
     &amp;= d \hat{\mathbf{n}} \cdot \hat{\mathbf{n}} \\
     \mathbf{p}_2 \cdot \hat{\mathbf{n}} + t_2 \mathbf{d}_2 \cdot \hat{\mathbf{n}} - \mathbf{p}_1 \cdot \hat{\mathbf{n}} - t_1 \mathbf{d}_1 \cdot \hat{\mathbf{n}} 
     &amp;= d \hat{\mathbf{n}} \cdot \hat{\mathbf{n}}.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p>Since <span class="math notranslate nohighlight">\(\mathbf{n}\)</span> is perpendicular to both lines then <span class="math notranslate nohighlight">\(\mathbf{d}_1 \cdot \mathbf{n} = \mathbf{d}_2 \cdot \mathbf{n} = 0\)</span> and <span class="math notranslate nohighlight">\(\hat{\mathbf{n}} \cdot \hat{\mathbf{n}} = 1\)</span> then</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[ \begin{align*}
     \mathbf{p}_2 \cdot \hat{\mathbf{n}} - \mathbf{p}_1 \cdot \hat{\mathbf{n}} &amp;= d,
-\end{align*}\]</div>
+\end{align*} \]</div>
 <p>which simplifies to</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[ \begin{align*}
     d &amp;= (\mathbf{p}_2 - \mathbf{p}_1) \cdot \hat{\mathbf{n}}.
-\end{align*}\]</div>
+\end{align*} \]</div>
 <div class="proof theorem admonition" id="line-line-distance-theorem">
 <p class="admonition-title"><span class="caption-number">Theorem 4 </span> (The shortest distance between two skew lines)</p>
 <section class="theorem-content" id="proof-content">
@@ -662,7 +651,7 @@ Solution<div class="sd-summary-down docutils">
 <span class="eqno">(16)<a class="headerlink" href="#equation-line-line-distance-equation" title="Permalink to this equation">#</a></span>\[d = (\mathbf{p}_2 - \mathbf{p}_1) \cdot \hat{\mathbf{n}}.\]</div>
 <p>where <span class="math notranslate nohighlight">\(\mathbf{n} = \dfrac{\mathbf{d}_1 \times \mathbf{d}_2}{|\mathbf{d}_1 \times \mathbf{d}_2|}\)</span>.</p>
 </section>
-</div><div class="proof example seealso admonition" id="example-3">
+</div><div class="proof example seealso admonition" id="line-line-distance-example">
 <p class="admonition-title"><span class="caption-number">Example 17 </span></p>
 <section class="example-content" id="proof-content">
 <p>Find the shortest distance between the two lines <span class="math notranslate nohighlight">\((0, 1, 3) + t(1, 4, 2)\)</span> and <span class="math notranslate nohighlight">\((1, 1, 3) + t(0, 2, 4)\)</span>.</p>
@@ -674,8 +663,8 @@ Solution<div class="sd-summary-down docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
 <p class="sd-card-text">Let <span class="math notranslate nohighlight">\(\mathbf{p}_1 = (0, 1, 3)\)</span>, <span class="math notranslate nohighlight">\(\mathbf{p}_2 = (1, 1, 3)\)</span>, <span class="math notranslate nohighlight">\(\mathbf{d}_1 = (1, 4, 2)\)</span> and <span class="math notranslate nohighlight">\(\mathbf{d}_2 = (0, 2, 4)\)</span>. First we calculate <span class="math notranslate nohighlight">\(\hat{\mathbf{n}}\)</span></p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     \mathbf{n} &amp;= \mathbf{d}_1 \times \mathbf{d}_2
     = \begin{vmatrix} 
         \mathbf{i} &amp; \mathbf{j} &amp; \mathbf{k} \\
@@ -687,10 +676,10 @@ Solution<div class="sd-summary-down docutils">
     \therefore \hat{\mathbf{n}} &amp;= \frac{\mathbf{n}}{|\mathbf{n}|} = 
     \begin{pmatrix} 6/\sqrt{41} \\ -2/\sqrt{41} \\ 1/\sqrt{41} \end{pmatrix} 
     = \begin{pmatrix} 6\sqrt{41}/41 \\ -2\sqrt{41}/41 \\ \sqrt{41}/41 \end{pmatrix}.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p class="sd-card-text">Note that since <span class="math notranslate nohighlight">\(\mathbf{n}\)</span> is non-zero, these are skew lines. Using equation <a class="reference internal" href="#equation-line-line-distance-equation">(16)</a></p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     d &amp;= (\mathbf{p}_2 - \mathbf{p}_1) \cdot \hat{\mathbf{n}} \\
     &amp;= \left( \begin{pmatrix} 1 \\ 1 \\ 3 \end{pmatrix} -
     \begin{pmatrix} 0 \\ 1 \\ 3 \end{pmatrix} \right) \cdot 
@@ -698,7 +687,7 @@ Solution<div class="sd-summary-down docutils">
     &amp;= \begin{pmatrix} 1 \\ 0 \\ 0 \end{pmatrix} \cdot 
     \begin{pmatrix} 6\sqrt{41}/41 \\ -2\sqrt{41}/41 \\ \sqrt{41}/41 \end{pmatrix} \\
     &amp;= \frac{6 \sqrt{41}}{41} \approx 0.937.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 </div>
 </details></section>
 </div></section>
@@ -711,21 +700,19 @@ Solution<div class="sd-summary-down docutils">
 <p><span class="caption-number">Fig. 29 </span><span class="caption-text">The shortest distance between a point and a plane is the perpendicular distance from the point to the plane.</span><a class="headerlink" href="#point-plane-distance-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>The <span class="xref myst">geometric definition of the dot product</span> between the vectors <span class="math notranslate nohighlight">\(\mathbf{q} - \mathbf{p}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{n}\)</span> is</p>
+<p>The <a class="reference internal" href="1.1_Vectors.html#geometric-dot-product-definition">geometric definition of the dot product</a> between the vectors <span class="math notranslate nohighlight">\(\mathbf{q} - \mathbf{p}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{n}\)</span> is</p>
 <div class="math notranslate nohighlight" id="equation-point-plane-distance-equation-1">
-<span class="eqno">(17)<a class="headerlink" href="#equation-point-plane-distance-equation-1" title="Permalink to this equation">#</a></span>\[\begin{align}
-    (\mathbf{q} - \mathbf{p}) \cdot \mathbf{n} = |\mathbf{q} - \mathbf{p}| |\mathbf{n}| \cos(\theta).
-\end{align}\]</div>
+<span class="eqno">(17)<a class="headerlink" href="#equation-point-plane-distance-equation-1" title="Permalink to this equation">#</a></span>\[(\mathbf{q} - \mathbf{p}) \cdot \mathbf{n} = |\mathbf{q} - \mathbf{p}| |\mathbf{n}| \cos(\theta).\]</div>
 <p>If we consider the right-angled triangle with the hypotenuse <span class="math notranslate nohighlight">\(|\mathbf{q} - \mathbf{p}|\)</span> and adjacent side <span class="math notranslate nohighlight">\(d\)</span> then</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[ \begin{align*}
     \cos(\theta) = \frac{d}{|\mathbf{q} - \mathbf{p}|},
-\end{align*}\]</div>
+\end{align*} \]</div>
 <p>which substituted into <a class="reference internal" href="#equation-point-plane-distance-equation-1">(17)</a> gives</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[ \begin{align*}
     (\mathbf{q} - \mathbf{p}) \cdot \mathbf{n} &amp;= |\mathbf{q} - \mathbf{p}| |\mathbf{n}| \frac{d}{|\mathbf{q} - \mathbf{p}|} = |\mathbf{n}|d
-\end{align*}\]</div>
+\end{align*} \]</div>
 <p>therefore</p>
 <div class="math notranslate nohighlight">
 \[d = \frac{(\mathbf{q} - \mathbf{p}) \cdot \mathbf{n}}{|\mathbf{n}|}.\]</div>
@@ -736,7 +723,7 @@ Solution<div class="sd-summary-down docutils">
 <div class="math notranslate nohighlight" id="equation-point-plane-distance-equation">
 <span class="eqno">(18)<a class="headerlink" href="#equation-point-plane-distance-equation" title="Permalink to this equation">#</a></span>\[d = (\mathbf{q} - \mathbf{p}) \cdot \frac{\mathbf{n}}{|\mathbf{n}|}.\]</div>
 </section>
-</div><div class="proof example seealso admonition" id="example-5">
+</div><div class="proof example seealso admonition" id="point-plane-distance-example">
 <p class="admonition-title"><span class="caption-number">Example 18 </span></p>
 <section class="example-content" id="proof-content">
 <p>A plane is defined by the point <span class="math notranslate nohighlight">\(\mathbf{p} = (1, 1, 3)\)</span> and the normal vector <span class="math notranslate nohighlight">\(\mathbf{n} = (1, -1, 1)\)</span>. Calculate the distance from the point <span class="math notranslate nohighlight">\(\mathbf{q} = (4, -3, 2)\)</span> to the plane.</p>
@@ -748,16 +735,16 @@ Solution<div class="sd-summary-down docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
 <p class="sd-card-text">Normalise the normal vector</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     |\mathbf{n}| &amp;= \sqrt{1 + 1 + 1} = \sqrt{3}, \\
     \therefore \hat{\mathbf{n}} &amp;= \frac{1}{\sqrt{3}}
     \begin{pmatrix} 1 \\ -1 \\ 1 \end{pmatrix} 
     = \begin{pmatrix} \sqrt{3}/3 \\ -\sqrt{3}/3 \\ \sqrt{3}/3 \end{pmatrix}.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p class="sd-card-text">therefore</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     d &amp;= \left( \begin{pmatrix} 4 \\ -3 \\ 2 \end{pmatrix} - 
     \begin{pmatrix} 1 \\ 1 \\ 3 \end{pmatrix} \right) \cdot
     \begin{pmatrix} \sqrt{3}/3 \\ -\sqrt{3}/3 \\ \sqrt{3}/3 \end{pmatrix} \\
@@ -765,7 +752,7 @@ Solution<div class="sd-summary-down docutils">
     \begin{pmatrix} \sqrt{3}/3 \\ -\sqrt{3}/3 \\ \sqrt{3}/3 \end{pmatrix} \\
     &amp;= \sqrt{3} + \frac{4\sqrt{3}}{3} - \frac{\sqrt{3}}{3} 
     = 2\sqrt{3} \approx 3.46.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 </div>
 </details></section>
 </div></section>

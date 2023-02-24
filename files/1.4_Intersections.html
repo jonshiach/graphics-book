@@ -373,17 +373,6 @@ title="Toggle navigation"
         
     </div>
     <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-    </ul>
-  </div>
-</div>
-
 <button onclick="toggleFullScreen()"
   class="headerbtn"
   data-toggle="tooltip"
@@ -406,7 +395,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/files/1.4_Intersections.ipynb"
+        <a href="../_sources/files/1.4_Intersections.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -417,7 +406,7 @@ title="Download source file"
 <span class="headerbtn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="headerbtn__text-container">.ipynb</span>
+<span class="headerbtn__text-container">.md</span>
 </a>
 
       </li>
@@ -594,7 +583,7 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="intersections-between-objects">
 <span id="intersections-section"></span><h1>Intersections between objects<a class="headerlink" href="#intersections-between-objects" title="Permalink to this headline">#</a></h1>
-<p>In computer graphics it is useful to be able to determine where objects intersect or collide. Examples of where this is used in practice is finding out where polygons intersect with planes in <span class="xref myst">binary space partitioning</span> and the calculations of collisions of moving elements in a computer game. Here we will look some of the most common object-on-object intersections.</p>
+<p>In computer graphics it is useful to be able to determine where objects intersect or collide. Examples of where this is used in practice is finding out where polygons intersect with planes in <a class="reference internal" href="4.5_Binary_space_partitioning.html#binary-space-partitioning-section"><span class="std std-ref">binary space partitioning</span></a> and the calculations of collisions of moving elements in a computer game. Here we will look some of the most common object-on-object intersections.</p>
 <section id="intersection-of-two-lines">
 <span id="intersecting-lines-section"></span><h2>Intersection of two lines<a class="headerlink" href="#intersection-of-two-lines" title="Permalink to this headline">#</a></h2>
 <p>Consider the intersection of two lines defined by the vector equations  <span class="math notranslate nohighlight">\(\mathbf{p}_1 + t_1\mathbf{d}_1\)</span> and <span class="math notranslate nohighlight">\(\mathbf{p}_2 + t_2\mathbf{d}_2\)</span>.</p>
@@ -625,36 +614,36 @@ Solution<div class="sd-summary-down docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
 <p class="sd-card-text">Let <span class="math notranslate nohighlight">\(\mathbf{p}_1 = (1, -3, 0)\)</span>, <span class="math notranslate nohighlight">\(\mathbf{p}_2 = (6, -5, -1)\)</span>, <span class="math notranslate nohighlight">\(\mathbf{p}_3 = (6, -11, -2)\)</span>, <span class="math notranslate nohighlight">\(\mathbf{d}_1 = (1, 2, 1)\)</span>, <span class="math notranslate nohighlight">\(\mathbf{d}_2 = (-1, 2, 1)\)</span> and <span class="math notranslate nohighlight">\(\mathbf{d}_3 = (2, 2, -1)\)</span>. Equating the first two lines gives</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     1 + t_1 &amp;= 6 - t_2, \\
     -3 + 2t_1 &amp;= -5 + 2t_2, \\
     t_1 &amp;= -1 + t_2.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p class="sd-card-text">The third equation is <span class="math notranslate nohighlight">\(t_1 = t_2 - 1\)</span> and substituting into the first equation gives <span class="math notranslate nohighlight">\(t_2 = 3\)</span> so <span class="math notranslate nohighlight">\(t_1 = 2\)</span>. Substituting these into the second equation gives <span class="math notranslate nohighlight">\(-3 + 2(2) = -5 + 2(3)\)</span> which is <span class="math notranslate nohighlight">\(1 = 1\)</span> so <span class="math notranslate nohighlight">\(\ell_1\)</span> and <span class="math notranslate nohighlight">\(\ell_2\)</span> intersect. To find the point of intersection we substitute <span class="math notranslate nohighlight">\(t_1\)</span> or <span class="math notranslate nohighlight">\(t_2\)</span> into the vector equations gives</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     \mathbf{p}_1 + t_1 \mathbf{d}_1 &amp;= \begin{pmatrix} 1 \\ -3 \\ 0 \end{pmatrix} + 2\begin{pmatrix} 1 \\ 2 \\ 1 \end{pmatrix} 
     = \begin{pmatrix} 3 \\ 1 \\ 2 \end{pmatrix}, \\
     \mathbf{p}_2 + t_2 \mathbf{d}_2 &amp;= \begin{pmatrix} 6 \\ -5 \\ -1 \end{pmatrix} + 3\begin{pmatrix} -1 \\ 2 \\ 1 \end{pmatrix} 
     = \begin{pmatrix} 3 \\ 1 \\ 2 \end{pmatrix}.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p class="sd-card-text">So the first two lines intersect at <span class="math notranslate nohighlight">\((3, 1, 2)\)</span>.</p>
 <p class="sd-card-text">Equating the first and third lines gives</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     1 + t_1 &amp;= 6 + 2t_3, \\
     -3 + 2t_1 &amp;= -11 + 2t_3, \\
     t_1 &amp;= -2 - t_3.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p class="sd-card-text">Substituting the third equation into the first equation gives <span class="math notranslate nohighlight">\(t_3 = -\frac{7}{3}\)</span> which substituted into the third equation gives <span class="math notranslate nohighlight">\(t_1 = -\frac{14}{3}\)</span>. Substituting these into the second equation gives <span class="math notranslate nohighlight">\(-24 = -18\)</span> which is a contradiction so no values of <span class="math notranslate nohighlight">\(t_1\)</span> or <span class="math notranslate nohighlight">\(t_3\)</span> satisfy all co-ordinates so these lines do not intersect.</p>
 <p class="sd-card-text">Equating the second and third lines gives the system</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     6 - t_2 &amp;= 6 + t_3, \\
     -5 + 2t_2 &amp;= -11 + 2t_3, \\
     -1 + t_2 &amp;= -2 - t_3.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p class="sd-card-text">The third equations give <span class="math notranslate nohighlight">\(t_2 = -1 - t_3\)</span> which substituted into the first equation gives <span class="math notranslate nohighlight">\(7+t_3 = 6 + t_3\)</span> which is a contradiction so these lines do not intersect.</p>
 </div>
 </details></section>
@@ -679,8 +668,8 @@ Solution<div class="sd-summary-down docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
 <p class="sd-card-text">Two lines are parallel  <span class="math notranslate nohighlight">\(\mathbf{d}_1 = k\mathbf{d}_2\)</span></p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     \begin{pmatrix} 1 \\ 0 \\ 1 \end{pmatrix} &amp;= k
     \begin{pmatrix} 1 \\ 0 \\ -1 \end{pmatrix}
     \qquad \implies \qquad 
@@ -688,7 +677,7 @@ Solution<div class="sd-summary-down docutils">
         k = 1, \\
         k = -1
     \end{matrix}
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p class="sd-card-text">Here we have a contradiction so no value of <span class="math notranslate nohighlight">\(k\)</span> exists to satisfy <span class="math notranslate nohighlight">\(\mathbf{d}_1 = k\mathbf{d}_2\)</span> so <span class="math notranslate nohighlight">\(\ell_1\)</span> and <span class="math notranslate nohighlight">\(\ell_2\)</span> are not parallel.</p>
 </div>
 </details></section>
@@ -713,13 +702,13 @@ Solution<div class="sd-summary-down docutils">
 <div class="sd-summary-up docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
-<p class="sd-card-text">We have shown in <span class="xref myst">example 4.3</span> that <span class="math notranslate nohighlight">\(\ell_1\)</span> and <span class="math notranslate nohighlight">\(\ell_2\)</span> are not parallel. Therefore to we need to show that they do not intersect. Equating <span class="math notranslate nohighlight">\(\ell_1\)</span> and <span class="math notranslate nohighlight">\(\ell_2\)</span> gives</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<p class="sd-card-text">We have shown in <a class="reference internal" href="#parallel-lines-example">Example 10</a> that <span class="math notranslate nohighlight">\(\ell_1\)</span> and <span class="math notranslate nohighlight">\(\ell_2\)</span> are not parallel. Therefore to we need to show that they do not intersect. Equating <span class="math notranslate nohighlight">\(\ell_1\)</span> and <span class="math notranslate nohighlight">\(\ell_2\)</span> gives</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     t_1 &amp;= t_2, \\
     0 &amp;= 3, \\
     -1 &amp;= -1 - t_2.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p class="sd-card-text">Here the second equation is a contradiction so this system is inconsistent and the lines <span class="math notranslate nohighlight">\(\ell_1\)</span> and <span class="math notranslate nohighlight">\(\ell_2\)</span> do not intersect. Since <span class="math notranslate nohighlight">\(\ell_1\)</span> and <span class="math notranslate nohighlight">\(\ell_2\)</span> are not parallel and do not intersect then they must be skew.</p>
 </div>
 </details></section>
@@ -755,39 +744,39 @@ Solution<div class="sd-summary-down docutils">
 </figcaption>
 </figure>
 <p>An intersection will occur when the distance between the centre of the sphere and point on the line is equal to the radius of the sphere</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[ \begin{align*}
     r = | \mathbf{r} - \mathbf{c} |.
-\end{align*}\]</div>
+\end{align*} \]</div>
 <p>Substituting in the equation of the line <span class="math notranslate nohighlight">\(\mathbf{r} = \mathbf{p} + t\mathbf{d}\)</span> and rearranging gives</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     r &amp;= | \mathbf{p} + t \mathbf{d} - \mathbf{c} | \\
     r^2 &amp;= | t \mathbf{d} + (\mathbf{p} - \mathbf{c}) |^2 \\
     0 &amp;= t^2 \mathbf{d}^2 + 2 t (\mathbf{p} - \mathbf{c}) + (\mathbf{p} - \mathbf{c})^2 - r^2. 
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p>This is a quadratic equation where the roots give the value of the parameter <span class="math notranslate nohighlight">\(t\)</span> where the intersection(s) occur (note that <span class="math notranslate nohighlight">\(\mathbf{d}^2 = \mathbf{d} \cdot \mathbf{d}\)</span>). Let</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     a &amp;= \mathbf{d}^2, \\
     b &amp;= 2 \mathbf{d} \cdot (\mathbf{p} - \mathbf{c}), \\
     c &amp;= (\mathbf{p} - \mathbf{c})^2 - r^2,
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p>then the solution is given by the <a href="https://en.wikipedia.org/wiki/Quadratic_formula" target="_blank">quadratic formula</a></p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[ \begin{align*}
     t &amp;= \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}.
-\end{align*}\]</div>
+\end{align*} \]</div>
 <p>A quadratic equation can have two, one or no real roots depending on the value of the discriminant <span class="math notranslate nohighlight">\(b^2 - 4ac\)</span> which correspond to the three scenarios presented above</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     b^2 - 4ac 
     \begin{cases}
         &gt; 0, &amp; \text{line intersects sphere twice,} \\
         = 0, &amp; \text{line intersects the sphere once,} \\
         &lt; 0, &amp; \text{line does not intersect the sphere.}
     \end{cases}
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <div class="proof example seealso admonition" id="line-sphere-intersection-example">
 <p class="admonition-title"><span class="caption-number">Example 12 </span></p>
 <section class="example-content" id="proof-content">
@@ -800,8 +789,8 @@ Solution<div class="sd-summary-down docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
 <p class="sd-card-text">Let <span class="math notranslate nohighlight">\(\mathbf{p} = (1,0,2)\)</span>, <span class="math notranslate nohighlight">\(\mathbf{d} = (2,1,0)\)</span> and <span class="math notranslate nohighlight">\(\mathbf{c}=(5,3,1)\)</span> then at the point of intersection the value of <span class="math notranslate nohighlight">\(t\)</span> satisfies <span class="math notranslate nohighlight">\(0 = t^2 \mathbf{d}^2 + 2 t (\mathbf{p} - \mathbf{c}) + (\mathbf{p} - \mathbf{c})^2 - r^2\)</span>. Let</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     a &amp;= \mathbf{d}^2 = 
     \begin{pmatrix} 2 \\ 1 \\ 0 \end{pmatrix} \cdot
     \begin{pmatrix} 2 \\ 1 \\ 0 \end{pmatrix}
@@ -818,16 +807,16 @@ Solution<div class="sd-summary-down docutils">
         \begin{pmatrix} 1 \\ 0 \\ 2 \end{pmatrix} -
         \begin{pmatrix} 5 \\ 3 \\ 1 \end{pmatrix}
     \right) - 2^2 = 22,
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p class="sd-card-text">then <span class="math notranslate nohighlight">\(b^2 - 4ac = 22^2 - 4(5)(22) = 44\)</span> which is greater than zero so there are two intersection points. The values of <span class="math notranslate nohighlight">\(t\)</span> are</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     t &amp;= \frac{22 \pm \sqrt{44}}{10}, \\
     \therefore t &amp;\approx 1.5367, 2.8633,
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p class="sd-card-text">so the intersection points are at</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     \mathbf{r}_1 &amp;= 
     \begin{pmatrix} 1 \\ 0 \\ 2 \end{pmatrix} + 1.5367
     \begin{pmatrix} 2 \\ 1 \\ 0 \end{pmatrix} = 
@@ -836,7 +825,7 @@ Solution<div class="sd-summary-down docutils">
     \begin{pmatrix} 1 \\ 0 \\ 2 \end{pmatrix} + 2.8633
     \begin{pmatrix} 2 \\ 1 \\ 0 \end{pmatrix} = 
     \begin{pmatrix} 6.7266 \\ 2.8633 \\ 2 \end{pmatrix}.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 </div>
 </details></section>
 </div></section>
@@ -864,17 +853,17 @@ Solution<div class="sd-summary-down docutils">
 <div class="math notranslate nohighlight">
 \[ \mathbf{d} \cdot \mathbf{n} = 0. \]</div>
 <p>If the line is not perpendicular then we can determine the point of intersection <span class="math notranslate nohighlight">\(\mathbf{r}\)</span> by using the fact that the normal vector <span class="math notranslate nohighlight">\(\mathbf{n}\)</span> is perpendicular to the vector <span class="math notranslate nohighlight">\(\mathbf{r} - \mathbf{p}\)</span>, i.e.,</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[ \begin{align*}
     (\mathbf{r} - \mathbf{p}) \cdot \mathbf{n} = 0.
-\end{align*}\]</div>
+\end{align*} \]</div>
 <p>Substituting <span class="math notranslate nohighlight">\(\mathbf{r} = \mathbf{q} + t\mathbf{d}\)</span> and rearranging gives</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     (\mathbf{q} + t\mathbf{d} - \mathbf{p}) \cdot \mathbf{n} &amp;= 0 \\
     (\mathbf{q} - \mathbf{p}) \cdot \mathbf{n} + t \mathbf{d} \cdot \mathbf{n} &amp;= 0, \\
     \therefore t &amp;= \frac{(\mathbf{p} - \mathbf{q}) \cdot \mathbf{n}}{\mathbf{d} \cdot \mathbf{n}}.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <div class="proof theorem admonition" id="line-plane-intersection">
 <p class="admonition-title"><span class="caption-number">Theorem 2 </span> (Intersection between a line and a plane)</p>
 <section class="theorem-content" id="proof-content">
@@ -882,7 +871,7 @@ Solution<div class="sd-summary-down docutils">
 <div class="math notranslate nohighlight" id="equation-line-plane-intersection-equation">
 <span class="eqno">(11)<a class="headerlink" href="#equation-line-plane-intersection-equation" title="Permalink to this equation">#</a></span>\[t = \frac{(\mathbf{p} - \mathbf{q}) \cdot \mathbf{n}}{\mathbf{d} \cdot \mathbf{n}}.\]</div>
 </section>
-</div><div class="proof example seealso admonition" id="example-5">
+</div><div class="proof example seealso admonition" id="line-plane-intersection-example">
 <p class="admonition-title"><span class="caption-number">Example 13 </span></p>
 <section class="example-content" id="proof-content">
 <p>A line defined by the equation <span class="math notranslate nohighlight">\((0, 1, 1) + t(3, 1, -2)\)</span> intersects a plane with the normal vector <span class="math notranslate nohighlight">\((-3, -1, 1)\)</span> and which passes through the point <span class="math notranslate nohighlight">\((8, 2, 3)\)</span>. Calculate the co-ordinates of the point of intersection between the line and the plane.</p>
@@ -894,8 +883,8 @@ Solution<div class="sd-summary-down docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
 <p class="sd-card-text">Here <span class="math notranslate nohighlight">\(\mathbf{q} = (0, 1, 1)\)</span>, <span class="math notranslate nohighlight">\(\mathbf{d} = (3, 1, -2)\)</span>, <span class="math notranslate nohighlight">\(\mathbf{n} = (-3, -1, 1)\)</span> and <span class="math notranslate nohighlight">\(\mathbf{p} = (8, 2, 3)\)</span>. Calculating <span class="math notranslate nohighlight">\(t\)</span></p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     t &amp;= \frac{(\mathbf{p} - \mathbf{q}) \cdot \mathbf{n}}{\mathbf{d} \cdot \mathbf{n}}
     = \frac{\left( 
         \begin{pmatrix} 8 \\ 2 \\ 3 \end{pmatrix} -
@@ -906,15 +895,15 @@ Solution<div class="sd-summary-down docutils">
         \begin{pmatrix} -3 \\ -1 \\ 1 \end{pmatrix}
       } 
     = \frac{23}{12}.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p class="sd-card-text">Calculating the intersection point</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     \mathbf{r} &amp;= \mathbf{q} + t \mathbf{d} = 
     \begin{pmatrix} 0 \\ 1 \\ 1 \end{pmatrix} + \frac{23}{12} 
     \begin{pmatrix} 3 \\ 1 \\ -2 \end{pmatrix} = 
     \begin{pmatrix} 23/4 \\ 35/12 \\ -17/6 \end{pmatrix}.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 </div>
 </details></section>
 </div></section>
@@ -950,28 +939,28 @@ Solution<div class="sd-summary-down docutils">
 <div class="math notranslate nohighlight">
 \[\mathbf{d} = \mathbf{n}_1 \times \mathbf{n}_2.\]</div>
 <p>To describe the line we also need the co-ordinates of a single point, <span class="math notranslate nohighlight">\(\mathbf{r}\)</span> along the line, i.e., a point that satisfies both</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     \mathbf{n}_1 \cdot \mathbf{r} &amp;= s_1, \\
     \mathbf{n}_2 \cdot \mathbf{r} &amp;= s_2.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p>Subtracting one from the other and rearranging gives</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     \mathbf{n}_1 \cdot \mathbf{r} - \mathbf{n}_2 \cdot \mathbf{r} &amp;= s_1 - s_2 \\
     (\mathbf{n}_1 - \mathbf{n}_2) \cdot \mathbf{r} &amp;= s_1 - s_2.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p>Let <span class="math notranslate nohighlight">\(\mathbf{r} = (x,y,z)\)</span> then</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     (\mathbf{n}_1 - \mathbf{n}_2) \cdot \begin{pmatrix} x \\ y \\ z \end{pmatrix} &amp;= s_1 - s_2.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p>So we have an expression with three unknowns, <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(y\)</span> and <span class="math notranslate nohighlight">\(z\)</span>. For simplicity let <span class="math notranslate nohighlight">\(y=z=0\)</span> then</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     (n_{1x} - n_{2x}) x &amp;= s_1 - s_2 \\
     \therefore x &amp;= \frac{s_1 - s_2}{n_{1x} - n_{2x}},
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p>so <span class="math notranslate nohighlight">\(\mathbf{r} = ((s_1 - s_2) / (n_{1x} - n_{2x}), 0, 0)\)</span>.</p>
 <div class="proof example seealso admonition" id="intersecting-planes-example">
 <p class="admonition-title"><span class="caption-number">Example 14 </span></p>
@@ -985,19 +974,19 @@ Solution<div class="sd-summary-down docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
 <p class="sd-card-text">The normal vectors for these planes are <span class="math notranslate nohighlight">\(\mathbf{n}_1 = (3, -4, 1)\)</span> and <span class="math notranslate nohighlight">\(\mathbf{n}_2 = (1, 1, -1)\)</span> respectively. Calculate the direction vector for the line of intersection</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     \mathbf{d} = 
     \begin{pmatrix} 3 \\ -4 \\ 1 \end{pmatrix} \times
     \begin{pmatrix} 1 \\ 1 \\ -1 \end{pmatrix} =
     \begin{vmatrix} \mathbf{i} &amp; \mathbf{j} &amp; \mathbf{k} \\ 3 &amp; -4 &amp; 1 \\ 1 &amp; 1 &amp; -1 \end{vmatrix} =
     \begin{pmatrix} 3 \\ 4 \\ 7 \end{pmatrix}.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p class="sd-card-text">Calculate a point which is on the line of intersection</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[ \begin{align*}
     x &amp;= \frac{s_1 - s_2}{n_{1x} - n_{2x}} = \frac{5 - 2}{3 - 1} = \frac{3}{2},
-\end{align*}\]</div>
+\end{align*} \]</div>
 <p class="sd-card-text">therefore <span class="math notranslate nohighlight">\(\mathbf{r} = (3/2, 0, 0)\)</span> so the intersection of the two planes is along the line <span class="math notranslate nohighlight">\((3/2, 0, 0) + t(3, 4, 7)\)</span>.</p>
 </div>
 </details></section>
@@ -1012,19 +1001,19 @@ Solution<div class="sd-summary-down docutils">
 </figcaption>
 </figure>
 <p>A collision occurs when the distance between the centre at <span class="math notranslate nohighlight">\(\mathbf{c} + t\mathbf{d}\)</span> and the plane is equal to the radius of the sphere. This distance is given by equation <a class="reference internal" href="1.5_Shortest_distance_problems.html#equation-point-plane-distance-equation">(18)</a> which is written below</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[ \begin{align*}
     d = (\mathbf{q} - \mathbf{p}) \cdot \frac{\mathbf{n}}{|\mathbf{n}|}.
-\end{align*}\]</div>
+\end{align*} \]</div>
 <p>where <span class="math notranslate nohighlight">\(\mathbf{q}\)</span> is a point not on the plane. In our case <span class="math notranslate nohighlight">\(\mathbf{q} = \mathbf{c} + t \mathbf{d}\)</span></p>
 <p>so</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     r &amp;= (\mathbf{c} + t \mathbf{d} - \mathbf{p}) \cdot \frac{\mathbf{n}}{|\mathbf{n}|} \\
     |\mathbf{n}| r &amp;= (\mathbf{c} - \mathbf{p}) \cdot \mathbf{n} + t \mathbf{d} \cdot \mathbf{n} \\
     |\mathbf{n}| r + (\mathbf{p} - \mathbf{c}) \cdot \mathbf{n} &amp;= t \mathbf{d} \cdot \mathbf{n} \\
     \therefore t &amp;= \frac{|\mathbf{n}|r + (\mathbf{p} - \mathbf{c}) \cdot \mathbf{n}}{\mathbf{d} \cdot \mathbf{n}}.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p>This formula gives that value of <span class="math notranslate nohighlight">\(t\)</span> where a collision occurs. However, this assumes that a collision will occur, there are two other scenarios we need to consider:</p>
 <ul class="simple">
 <li><p>the sphere is moving parallel to the plane;</p></li>
@@ -1045,10 +1034,10 @@ Solution<div class="sd-summary-down docutils">
 </figcaption>
 </figure>
 <p>When the sphere is moving parallel to the plane this angle is <span class="math notranslate nohighlight">\(\pi/2\)</span>, using the <a class="reference internal" href="1.1_Vectors.html#geometric-dot-product-definition">geometric definition of the dot product</a></p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[ \begin{align*}
 	\mathbf{a} \cdot \mathbf{b} = |\mathbf{a}| |\mathbf{b}| \cos(\theta),
-\end{align*}\]</div>
+\end{align*} \]</div>
 <p>and since <span class="math notranslate nohighlight">\(\cos(\pi/2) = 0\)</span> then if <span class="math notranslate nohighlight">\(\mathbf{d} \cdot \mathbf{n} = 0\)</span> then we know that the sphere is moving parallel to the plane. For the scenario where the sphere is moving away from the plane we need to consider whether the sphere is in relation to the normal vector. If the sphere is in the space that the normal vector is pointing towards, known as being <strong>in front</strong> of the plane, then the distance between <span class="math notranslate nohighlight">\(\mathbf{c}\)</span> and the plane will be positive, i.e.,</p>
 <div class="math notranslate nohighlight">
 \[\begin{split} (\mathbf{c} - \mathbf{p}) \cdot \mathbf{n} 
@@ -1060,7 +1049,7 @@ Solution<div class="sd-summary-down docutils">
 <div class="math notranslate nohighlight" id="equation-sphere-plane-intersection-equation">
 <span class="eqno">(12)<a class="headerlink" href="#equation-sphere-plane-intersection-equation" title="Permalink to this equation">#</a></span>\[t = \frac{\operatorname{sign}((\mathbf{c} - \mathbf{p}) \cdot \mathbf{n} )|\mathbf{n}|r + (\mathbf{p} - \mathbf{c}) \cdot \mathbf{n}}{\mathbf{d} \cdot \mathbf{n}}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\operatorname{sign}(x)\)</span> returns <span class="math notranslate nohighlight">\(1\)</span> if <span class="math notranslate nohighlight">\(x&gt;0\)</span> or <span class="math notranslate nohighlight">\(-1\)</span> is <span class="math notranslate nohighlight">\(x&lt;0\)</span>. If equation <a class="reference internal" href="#equation-sphere-plane-intersection-equation">(12)</a> returns a negative value then the sphere is moving away from the plane.</p>
-<div class="proof example seealso admonition" id="example-7">
+<div class="proof example seealso admonition" id="sphere-plane-intersection-example">
 <p class="admonition-title"><span class="caption-number">Example 15 </span></p>
 <section class="example-content" id="proof-content">
 <p>A sphere centred at <span class="math notranslate nohighlight">\((-2, 3, 0)\)</span> with radius 1 is traveling along a straight line in the direction <span class="math notranslate nohighlight">\((1, -1, -1)\)</span>. A plane passes through the point <span class="math notranslate nohighlight">\((1, -4, 2)\)</span> with a normal vector <span class="math notranslate nohighlight">\((2, -1, 2)\)</span>. Does the sphere collide with the plane and if so, what is the co-ordinates of the centre of the sphere at the point of collision?</p>
@@ -1072,18 +1061,18 @@ Solution<div class="sd-summary-down docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
 <p class="sd-card-text">In this case <span class="math notranslate nohighlight">\(\mathbf{c} = (-2,3,0)\)</span>, <span class="math notranslate nohighlight">\(r=1\)</span>, <span class="math notranslate nohighlight">\(\mathbf{d} = (1, -1, -1)\)</span>, <span class="math notranslate nohighlight">\(\mathbf{p} = (1, -4, 2)\)</span> and <span class="math notranslate nohighlight">\(\mathbf{n} = (2, -1, 2)\)</span>. First we check whether the sphere is traveling parallel to the plane</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     (\mathbf{c} - \mathbf{p}) \cdot \mathbf{n} &amp; \left( 
         \begin{pmatrix} -2 \\ 3 \\ 0 \end{pmatrix} - 
         \begin{pmatrix} 1 \\ -4 \\ 2 \end{pmatrix}
     \right) \cdot
     \begin{pmatrix} 2 \\ -1 \\ 2 \end{pmatrix}
     = -17,
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p class="sd-card-text">so the sphere is not moving parallel to the plane. Using equation <a class="reference internal" href="#equation-sphere-plane-intersection-equation">(12)</a> to calculate <span class="math notranslate nohighlight">\(t\)</span></p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     t &amp;= \frac{\operatorname{sign}((\mathbf{c} - \mathbf{p}) \cdot \mathbf{n} )|\mathbf{n}|r + (\mathbf{p} - \mathbf{c}) \cdot \mathbf{n}}{\mathbf{d} \cdot \mathbf{n}} \\
     &amp;= \frac{(-1) \left| 
         \begin{pmatrix} 2 \\ -1 \\ 2 \end{pmatrix}
@@ -1096,15 +1085,15 @@ Solution<div class="sd-summary-down docutils">
     \begin{pmatrix} 2 \\ -1 \\ 2 \end{pmatrix}
     } \\
     &amp;= \frac{-3 + 17}{1} = 14.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p class="sd-card-text">So <span class="math notranslate nohighlight">\(t\)</span> is positive so the sphere does collide with the plane. The centre of the sphere at the point of collision is</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     \mathbf{c} + t \mathbf{d} = 
     \begin{pmatrix} -2 \\ 3 \\ 0 \end{pmatrix} + 14
     \begin{pmatrix} 1 \\ -1 \\ -1 \end{pmatrix} =
     \begin{pmatrix} 12 \\ -11 \\ -14 \end{pmatrix}.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 </div>
 </details></section>
 </div></section>

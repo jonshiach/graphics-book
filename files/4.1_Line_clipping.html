@@ -373,17 +373,6 @@ title="Toggle navigation"
         
     </div>
     <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-    </ul>
-  </div>
-</div>
-
 <button onclick="toggleFullScreen()"
   class="headerbtn"
   data-toggle="tooltip"
@@ -406,7 +395,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/files/4.1_Line_clipping.ipynb"
+        <a href="../_sources/files/4.1_Line_clipping.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -417,7 +406,7 @@ title="Download source file"
 <span class="headerbtn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="headerbtn__text-container">.ipynb</span>
+<span class="headerbtn__text-container">.md</span>
 </a>
 
       </li>
@@ -536,10 +525,10 @@ title="Print to PDF"
 <div class="math notranslate nohighlight" id="equation-cyrus-beck-q-equation">
 <span class="eqno">(31)<a class="headerlink" href="#equation-cyrus-beck-q-equation" title="Permalink to this equation">#</a></span>\[\mathbf{q} = \mathbf{a} + t(\mathbf{b} - \mathbf{a}),\]</div>
 <p>and substituting into equation <a class="reference internal" href="#equation-cyrus-beck-d-equation">(30)</a></p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[ \begin{align*}
     d &amp;= (\mathbf{a} + t(\mathbf{b} - \mathbf{a}) - \mathbf{p}) \cdot \frac{\mathbf{n}}{|\mathbf{n}|}.
-\end{align*}\]</div>
+\end{align*} \]</div>
 <p>The intersection point <span class="math notranslate nohighlight">\(\mathbf{c}\)</span> is where the distance to the plane is zero so setting <span class="math notranslate nohighlight">\(d=0\)</span> and rearranging to make <span class="math notranslate nohighlight">\(t\)</span> the subject gives</p>
 <div class="math notranslate nohighlight" id="equation-cyrus-beck-t-equation-1">
 <span class="eqno">(32)<a class="headerlink" href="#equation-cyrus-beck-t-equation-1" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align}
@@ -550,22 +539,22 @@ title="Print to PDF"
 \end{align}\end{split}\]</div>
 <p>This expression for <span class="math notranslate nohighlight">\(t\)</span> can be substituted into equation <a class="reference internal" href="#equation-cyrus-beck-q-equation">(31)</a> to give <span class="math notranslate nohighlight">\(\mathbf{c}\)</span>.</p>
 <p>On visual inspection it is easy for us to see that in <a class="reference internal" href="#clip-to-edge-figure"><span class="std std-numref">Fig. 74</span></a> point <span class="math notranslate nohighlight">\(\mathbf{a}\)</span> is outside of the visible region and needs to be clipped to the left edge at <span class="math notranslate nohighlight">\(\mathbf{c}\)</span> and the line <span class="math notranslate nohighlight">\(\mathbf{a}\)</span> to <span class="math notranslate nohighlight">\(\mathbf{c}\)</span> is replaced by <span class="math notranslate nohighlight">\(\mathbf{c}\)</span> to <span class="math notranslate nohighlight">\(\mathbf{b}\)</span>. To get a computer to do this we can use the distance between the endpoints and the edges of the visible region. If the normal vectors of the edges of the visible region are pointing into the interior, then any point where the distance to the edge calculated using equation <a class="reference internal" href="1.5_Shortest_distance_problems.html#equation-point-plane-distance-equation">(18)</a> is negative is outside and needs to be clipped. So before calculating <span class="math notranslate nohighlight">\(t\)</span> we calculate the distances of <span class="math notranslate nohighlight">\(\mathbf{a}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> to the edge</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
-    d_\mathbf{a} &amp;= (\mathbf{a} - \mathbf{p}) \cdot \mathbf{n}, \\
-    d_\mathbf{b} &amp;= (\mathbf{b} - \mathbf{p}) \cdot \mathbf{n}
-\end{align*}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
+    d(\mathbf{a}) &amp;= (\mathbf{a} - \mathbf{p}) \cdot \mathbf{n}, \\
+    d(\mathbf{b}) &amp;= (\mathbf{b} - \mathbf{p}) \cdot \mathbf{n}
+\end{align*} \end{split}\]</div>
 <p>There are four possible situations to consider</p>
 <ul class="simple">
-<li><p>If <span class="math notranslate nohighlight">\(d_\mathbf{a} &lt; 0\)</span> and <span class="math notranslate nohighlight">\(d_\mathbf{b} &gt; 0\)</span> then <span class="math notranslate nohighlight">\(\mathbf{a}\)</span> is outside and <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> is inside and we clip <span class="math notranslate nohighlight">\(\mathbf{a}\)</span> to <span class="math notranslate nohighlight">\(\mathbf{c}\)</span>;</p></li>
-<li><p>Else if <span class="math notranslate nohighlight">\(d_\mathbf{a} &gt; 0\)</span> and <span class="math notranslate nohighlight">\(d_\mathbf{b} &lt; 0\)</span> then <span class="math notranslate nohighlight">\(\mathbf{a}\)</span> is inside and <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> is outside and we clip <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> to <span class="math notranslate nohighlight">\(\mathbf{c}\)</span>;</p></li>
-<li><p>Else if <span class="math notranslate nohighlight">\(d_\mathbf{a} &gt; 0\)</span> and <span class="math notranslate nohighlight">\(d_\mathbf{b} &gt; 0\)</span> then both <span class="math notranslate nohighlight">\(\mathbf{a} \to \mathbf{b}\)</span> are inside so we don’t need to clip the line joining <span class="math notranslate nohighlight">\(\mathbf{a} \to \mathbf{b}\)</span>;</p></li>
-<li><p>Else if <span class="math notranslate nohighlight">\(d_\mathbf{a} &lt; 0\)</span> and <span class="math notranslate nohighlight">\(d_\mathbf{b} &lt; 0\)</span> then both <span class="math notranslate nohighlight">\(\mathbf{a} \to \mathbf{b}\)</span> are outside so we ignore the line joining <span class="math notranslate nohighlight">\(\mathbf{a} \to \mathbf{b}\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(d(\mathbf{a}) &lt; 0\)</span> and <span class="math notranslate nohighlight">\(d(\mathbf{b}) &gt; 0\)</span> then <span class="math notranslate nohighlight">\(\mathbf{a}\)</span> is outside and <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> is inside and we clip <span class="math notranslate nohighlight">\(\mathbf{a}\)</span> to <span class="math notranslate nohighlight">\(\mathbf{c}\)</span>;</p></li>
+<li><p>Else if <span class="math notranslate nohighlight">\(d(\mathbf{a}) &gt; 0\)</span> and <span class="math notranslate nohighlight">\(d(\mathbf{b}) &lt; 0\)</span> then <span class="math notranslate nohighlight">\(\mathbf{a}\)</span> is inside and <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> is outside and we clip <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> to <span class="math notranslate nohighlight">\(\mathbf{c}\)</span>;</p></li>
+<li><p>Else if <span class="math notranslate nohighlight">\(d(\mathbf{a}) &gt; 0\)</span> and <span class="math notranslate nohighlight">\(d(\mathbf{b}) &gt; 0\)</span> then both <span class="math notranslate nohighlight">\(\mathbf{a} \to \mathbf{b}\)</span> are inside so we don’t need to clip the line joining <span class="math notranslate nohighlight">\(\mathbf{a} \to \mathbf{b}\)</span>;</p></li>
+<li><p>Else if <span class="math notranslate nohighlight">\(d(\mathbf{a}) &lt; 0\)</span> and <span class="math notranslate nohighlight">\(d(\mathbf{b}) &lt; 0\)</span> then both <span class="math notranslate nohighlight">\(\mathbf{a} \to \mathbf{b}\)</span> are outside so we ignore the line joining <span class="math notranslate nohighlight">\(\mathbf{a} \to \mathbf{b}\)</span>.</p></li>
 </ul>
-<p>Since we have calculated <span class="math notranslate nohighlight">\(d_\mathbf{a}\)</span> and <span class="math notranslate nohighlight">\(d_\mathbf{b}\)</span> to determine whether clipping is required, it makes sense to use these values to calculate <span class="math notranslate nohighlight">\(t\)</span>. Rearranging equation <a class="reference internal" href="#equation-cyrus-beck-t-equation-1">(32)</a> gives</p>
+<p>Since we have calculated <span class="math notranslate nohighlight">\(d(\mathbf{a})\)</span> and <span class="math notranslate nohighlight">\(d(\mathbf{b})\)</span> to determine whether clipping is required, it makes sense to use these values to calculate <span class="math notranslate nohighlight">\(t\)</span>. Rearranging equation <a class="reference internal" href="#equation-cyrus-beck-t-equation-1">(32)</a> gives</p>
 <div class="math notranslate nohighlight" id="equation-cyrus-beck-t-equation-2">
 <span class="eqno">(33)<a class="headerlink" href="#equation-cyrus-beck-t-equation-2" title="Permalink to this equation">#</a></span>\[\begin{align}
-    t &amp;= \frac{d_\mathbf{a}}{d_\mathbf{a} - d_\mathbf{b}}.
+    t &amp;= \frac{d(\mathbf{a})}{d(\mathbf{a}) - d(\mathbf{b})}.
 \end{align}\]</div>
 <div class="proof algorithm admonition" id="cyrus-beck-algorithm">
 <p class="admonition-title"><span class="caption-number">Algorithm 1 </span> (Cyrus-Beck algorithm)</p>
@@ -573,19 +562,19 @@ title="Print to PDF"
 <p><strong>Inputs</strong> An edge of the visible region defined by its inwardly pointing normal vector <span class="math notranslate nohighlight">\(\mathbf{n}\)</span> and a point on the edge <span class="math notranslate nohighlight">\(\mathbf{p}\)</span> and a line with endpoint <span class="math notranslate nohighlight">\(\mathbf{a} \to \mathbf{b}\)</span>.</p>
 <p><strong>Outputs</strong> Two endpoints of a line <span class="math notranslate nohighlight">\(\mathbf{a} \to \mathbf{b}\)</span>.</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(d_\mathbf{a} \gets (\mathbf{a} - \mathbf{p}) \cdot \mathbf{n}\)</span> and <span class="math notranslate nohighlight">\(d_\mathbf{b} \gets (\mathbf{b} - \mathbf{p}) \cdot \mathbf{n}\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(t \gets \dfrac{d_\mathbf{a}}{d_\mathbf{a} - d_\mathbf{b}}\)</span></p></li>
-<li><p>If <span class="math notranslate nohighlight">\(d_\mathbf{a} &lt; 0\)</span> and <span class="math notranslate nohighlight">\(d_\mathbf{b} &gt; 0\)</span></p>
+<li><p><span class="math notranslate nohighlight">\(d(\mathbf{a}) \gets (\mathbf{a} - \mathbf{p}) \cdot \mathbf{n}\)</span> and <span class="math notranslate nohighlight">\(d(\mathbf{b}) \gets (\mathbf{b} - \mathbf{p}) \cdot \mathbf{n}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(t \gets \dfrac{d(\mathbf{a})}{d(\mathbf{a}) - d(\mathbf{b})}\)</span></p></li>
+<li><p>If <span class="math notranslate nohighlight">\(d(\mathbf{a}) &lt; 0\)</span> and <span class="math notranslate nohighlight">\(d(\mathbf{b}) &gt; 0\)</span></p>
 <ul>
 <li><p><span class="math notranslate nohighlight">\(\mathbf{a} \gets \mathbf{a} + t (\mathbf{b} - \mathbf{a})\)</span></p></li>
 </ul>
 </li>
-<li><p>Else if <span class="math notranslate nohighlight">\(d_\mathbf{a} &gt; 0\)</span> and <span class="math notranslate nohighlight">\(d_\mathbf{b} &lt; 0\)</span></p>
+<li><p>Else if <span class="math notranslate nohighlight">\(d(\mathbf{a}) &gt; 0\)</span> and <span class="math notranslate nohighlight">\(d(\mathbf{b}) &lt; 0\)</span></p>
 <ul>
 <li><p><span class="math notranslate nohighlight">\(\mathbf{b} \gets \mathbf{a} + t (\mathbf{b} - \mathbf{a})\)</span></p></li>
 </ul>
 </li>
-<li><p>Else if <span class="math notranslate nohighlight">\(d_\mathbf{a} &lt; 0\)</span> and <span class="math notranslate nohighlight">\(d_\mathbf{b} &lt; 0\)</span></p>
+<li><p>Else if <span class="math notranslate nohighlight">\(d(\mathbf{a}) &lt; 0\)</span> and <span class="math notranslate nohighlight">\(d(\mathbf{b}) &lt; 0\)</span></p>
 <ul>
 <li><p><span class="math notranslate nohighlight">\(\mathbf{b} \gets \mathbf{a}\)</span>   (creates a line of zero length)</p></li>
 </ul>
@@ -607,57 +596,57 @@ Solution<div class="sd-summary-down docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
 <p class="sd-card-text">The normal vectors for the four edges are:</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     \mathbf{n}_{left} &amp;= \begin{pmatrix} 1 \\ 0 \end{pmatrix}, &amp;
     \mathbf{n}_{bottom} &amp;= \begin{pmatrix} 0 \\ 1 \end{pmatrix}, \\
     \mathbf{n}_{right} &amp;= \begin{pmatrix} -1 \\ 0 \end{pmatrix}, &amp;
     \mathbf{n}_{top} &amp;= \begin{pmatrix} 0 \\ -1 \end{pmatrix}.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p class="sd-card-text">Line <span class="math notranslate nohighlight">\(\mathbf{a} \to \mathbf{b}\)</span>: considering each edge in turn</p>
 <ul class="simple">
-<li><p class="sd-card-text">bottom: <span class="math notranslate nohighlight">\(d_\mathbf{a} = 1 &gt; 0\)</span> and <span class="math notranslate nohighlight">\(d_\mathbf{b} = 3 &gt; 0\)</span> so do not clip <span class="math notranslate nohighlight">\(\mathbf{a} \to \mathbf{b}\)</span></p></li>
-<li><p class="sd-card-text">right: <span class="math notranslate nohighlight">\(d_\mathbf{a} = 5 &gt; 0\)</span> and <span class="math notranslate nohighlight">\(d_\mathbf{d} = 4 &gt; 0\)</span> so do not clip <span class="math notranslate nohighlight">\(\mathbf{a} \to \mathbf{b}\)</span></p></li>
-<li><p class="sd-card-text">top: <span class="math notranslate nohighlight">\(d_\mathbf{a} = 3 &gt; 0\)</span> and <span class="math notranslate nohighlight">\(d_\mathbf{d} = 1 &gt; 0\)</span> so do not clip <span class="math notranslate nohighlight">\(\mathbf{a} \to \mathbf{b}\)</span></p></li>
-<li><p class="sd-card-text">left: <span class="math notranslate nohighlight">\(d_\mathbf{a} = 1 &gt; 0\)</span> and <span class="math notranslate nohighlight">\(d_\mathbf{d} = 2 &gt; 0\)</span> so do not clip <span class="math notranslate nohighlight">\(\mathbf{a} \to \mathbf{b}\)</span></p></li>
+<li><p class="sd-card-text">bottom: <span class="math notranslate nohighlight">\(d(\mathbf{a}) = 1 &gt; 0\)</span> and <span class="math notranslate nohighlight">\(d(\mathbf{b}) = 3 &gt; 0\)</span> so do not clip <span class="math notranslate nohighlight">\(\mathbf{a} \to \mathbf{b}\)</span></p></li>
+<li><p class="sd-card-text">right: <span class="math notranslate nohighlight">\(d(\mathbf{a}) = 5 &gt; 0\)</span> and <span class="math notranslate nohighlight">\(d(\mathbf{d}) = 4 &gt; 0\)</span> so do not clip <span class="math notranslate nohighlight">\(\mathbf{a} \to \mathbf{b}\)</span></p></li>
+<li><p class="sd-card-text">top: <span class="math notranslate nohighlight">\(d(\mathbf{a}) = 3 &gt; 0\)</span> and <span class="math notranslate nohighlight">\(d(\mathbf{d}) = 1 &gt; 0\)</span> so do not clip <span class="math notranslate nohighlight">\(\mathbf{a} \to \mathbf{b}\)</span></p></li>
+<li><p class="sd-card-text">left: <span class="math notranslate nohighlight">\(d(\mathbf{a}) = 1 &gt; 0\)</span> and <span class="math notranslate nohighlight">\(d(\mathbf{d}) = 2 &gt; 0\)</span> so do not clip <span class="math notranslate nohighlight">\(\mathbf{a} \to \mathbf{b}\)</span></p></li>
 </ul>
 <p class="sd-card-text">Line <span class="math notranslate nohighlight">\(\mathbf{c} \to \mathbf{d}\)</span>:</p>
 <ul class="simple">
-<li><p class="sd-card-text">bottom: <span class="math notranslate nohighlight">\(d_\mathbf{c} = 5 &gt; 0\)</span> and <span class="math notranslate nohighlight">\(d_\mathbf{d} = 3 &gt; 0\)</span> so do not clip <span class="math notranslate nohighlight">\(\mathbf{c} \to \mathbf{d}\)</span></p></li>
-<li><p class="sd-card-text">right: <span class="math notranslate nohighlight">\(d_\mathbf{c} = 3 &gt; 0\)</span> and <span class="math notranslate nohighlight">\(d_\mathbf{d} = 2 &gt; 0\)</span> so do not clip <span class="math notranslate nohighlight">\(\mathbf{c} \to \mathbf{d}\)</span></p></li>
-<li><p class="sd-card-text">top: <span class="math notranslate nohighlight">\(d_\mathbf{c} = -1 &lt; 0\)</span> and <span class="math notranslate nohighlight">\(d_\mathbf{d} = 1 &gt; 0\)</span> so clip <span class="math notranslate nohighlight">\(\mathbf{c}\)</span> to the top edge</p></li>
+<li><p class="sd-card-text">bottom: <span class="math notranslate nohighlight">\(d(\mathbf{c}) = 5 &gt; 0\)</span> and <span class="math notranslate nohighlight">\(d(\mathbf{d}) = 3 &gt; 0\)</span> so do not clip <span class="math notranslate nohighlight">\(\mathbf{c} \to \mathbf{d}\)</span></p></li>
+<li><p class="sd-card-text">right: <span class="math notranslate nohighlight">\(d(\mathbf{c}) = 3 &gt; 0\)</span> and <span class="math notranslate nohighlight">\(d(\mathbf{d}) = 2 &gt; 0\)</span> so do not clip <span class="math notranslate nohighlight">\(\mathbf{c} \to \mathbf{d}\)</span></p></li>
+<li><p class="sd-card-text">top: <span class="math notranslate nohighlight">\(d(\mathbf{c}) = -1 &lt; 0\)</span> and <span class="math notranslate nohighlight">\(d(\mathbf{d}) = 1 &gt; 0\)</span> so clip <span class="math notranslate nohighlight">\(\mathbf{c}\)</span> to the top edge</p></li>
 </ul>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
-    t &amp;= \frac{d_\mathbf{c}}{d_\mathbf{c} - d_\mathbf{d}} = \frac{-1}{-1 - 1} = \frac{1}{2},  \\
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
+    t &amp;= \frac{d(\mathbf{c})}{d(\mathbf{c}) - d(\mathbf{d})} = \frac{-1}{-1 - 1} = \frac{1}{2},  \\
     \mathbf{c}' &amp;= \mathbf{c} + t(\mathbf{d} - \mathbf{c}), 
     = \begin{pmatrix} 6 \\ 7 \end{pmatrix} + \frac{1}{2} \left(
         \begin{pmatrix} 7 \\ 5 \end{pmatrix} -
         \begin{pmatrix} 6 \\ 7 \end{pmatrix}
     \right)
     = \begin{pmatrix} 13/2 \\ 6 \end{pmatrix}.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <ul class="simple">
-<li><p class="sd-card-text">left: <span class="math notranslate nohighlight">\(d_{\mathbf{c}'} = 0\)</span> and <span class="math notranslate nohighlight">\(d_\mathbf{d} &gt; 0\)</span> so do not clip <span class="math notranslate nohighlight">\(\mathbf{c}' \to \mathbf{d}\)</span></p></li>
+<li><p class="sd-card-text">left: <span class="math notranslate nohighlight">\(d(\mathbf{c}') = 0\)</span> and <span class="math notranslate nohighlight">\(d(\mathbf{d}) &gt; 0\)</span> so do not clip <span class="math notranslate nohighlight">\(\mathbf{c}' \to \mathbf{d}\)</span></p></li>
 </ul>
 <p class="sd-card-text">Line <span class="math notranslate nohighlight">\(\mathbf{e} \to \mathbf{f}\)</span>:</p>
 <ul class="simple">
-<li><p class="sd-card-text">bottom: <span class="math notranslate nohighlight">\(d_\mathbf{e} = 3 &gt; 0\)</span> and <span class="math notranslate nohighlight">\(d_\mathbf{f} = 5 &gt; 0\)</span> so do not clip <span class="math notranslate nohighlight">\(\mathbf{e} \to \mathbf{f}\)</span></p></li>
-<li><p class="sd-card-text">right: <span class="math notranslate nohighlight">\(d_\mathbf{e} = 8 &gt; 0\)</span> and <span class="math notranslate nohighlight">\(d_\mathbf{f} = 7 &gt; 0\)</span> so do not clip <span class="math notranslate nohighlight">\(\mathbf{e} \to \mathbf{f}\)</span></p></li>
-<li><p class="sd-card-text">top: <span class="math notranslate nohighlight">\(d_\mathbf{e} = 1 &gt; 0\)</span> and <span class="math notranslate nohighlight">\(d_\mathbf{f} = -1 &lt; 0\)</span> so clip <span class="math notranslate nohighlight">\(\mathbf{f}\)</span> to the top edge</p></li>
+<li><p class="sd-card-text">bottom: <span class="math notranslate nohighlight">\(d(\mathbf{e}) = 3 &gt; 0\)</span> and <span class="math notranslate nohighlight">\(d(\mathbf{f}) = 5 &gt; 0\)</span> so do not clip <span class="math notranslate nohighlight">\(\mathbf{e} \to \mathbf{f}\)</span></p></li>
+<li><p class="sd-card-text">right: <span class="math notranslate nohighlight">\(d(\mathbf{e}) = 8 &gt; 0\)</span> and <span class="math notranslate nohighlight">\(d(\mathbf{f}) = 7 &gt; 0\)</span> so do not clip <span class="math notranslate nohighlight">\(\mathbf{e} \to \mathbf{f}\)</span></p></li>
+<li><p class="sd-card-text">top: <span class="math notranslate nohighlight">\(d(\mathbf{e}) = 1 &gt; 0\)</span> and <span class="math notranslate nohighlight">\(d(\mathbf{f}) = -1 &lt; 0\)</span> so clip <span class="math notranslate nohighlight">\(\mathbf{f}\)</span> to the top edge</p></li>
 </ul>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
-    t &amp;= \frac{d_{\mathbf{e}}}{d_{\mathbf{e}} - d_{\mathbf{f}}} = \frac{1}{1 -(-1)} = \frac{1}{2}, \\
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
+    t &amp;= \frac{d(\mathbf{e})}{d(\mathbf{e}) - d_{\mathbf{f}}} = \frac{1}{1 -(-1)} = \frac{1}{2}, \\
     \mathbf{f}' &amp;= \mathbf{e} + t(\mathbf{f} - \mathbf{e})
     = \begin{pmatrix} 1 \\ 5 \end{pmatrix} + \frac{1}{2} \left(
         \begin{pmatrix} 2 \\ 7 \end{pmatrix} -
         \begin{pmatrix} 1 \\ 5 \end{pmatrix}
     \right)
     = \begin{pmatrix} 3 / 2 \\ 6 \end{pmatrix}
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <ul class="simple">
-<li><p class="sd-card-text">left: <span class="math notranslate nohighlight">\(d_{\mathbf{e}} = -2 &lt; 0\)</span> and <span class="math notranslate nohighlight">\(d_{\mathbf{f}'} = -3/2 &lt; 0\)</span> so do not draw line <span class="math notranslate nohighlight">\(\mathbf{e} \to \mathbf{f}'\)</span>.</p></li>
+<li><p class="sd-card-text">left: <span class="math notranslate nohighlight">\(d(\mathbf{e}) = -2 &lt; 0\)</span> and <span class="math notranslate nohighlight">\(d(\mathbf{f}') = -3/2 &lt; 0\)</span> so do not draw line <span class="math notranslate nohighlight">\(\mathbf{e} \to \mathbf{f}'\)</span>.</p></li>
 </ul>
 </div>
 </details></section>

@@ -373,17 +373,6 @@ title="Toggle navigation"
         
     </div>
     <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-    </ul>
-  </div>
-</div>
-
 <button onclick="toggleFullScreen()"
   class="headerbtn"
   data-toggle="tooltip"
@@ -406,7 +395,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/files/3.2_World_space.ipynb"
+        <a href="../_sources/files/3.2_World_space.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -417,7 +406,7 @@ title="Download source file"
 <span class="headerbtn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="headerbtn__text-container">.ipynb</span>
+<span class="headerbtn__text-container">.md</span>
 </a>
 
       </li>
@@ -516,29 +505,29 @@ title="Print to PDF"
 </figcaption>
 </figure>
 <p>The transformations applied to the objects is done in the order scaling followed by rotation followed by translation so that the shape of the object is preserved. Therefore the world space vertices of each object vertices are calculated using</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[ \begin{align*}
 	V_{\text{object}} = T \cdot R_z \cdot R_y \cdot R_x \cdot S \cdot V.
-\end{align*}\]</div>
+\end{align*} \]</div>
 <p>The object vertex co-ordinates are then appended to a vertex matrix containing all of the objects in the virtual environment, i.e.,</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[ \begin{align*}
 	V_{\text{world}} = \begin{pmatrix} V_{\text{object 1}} &amp; V_{\text{object 2}} &amp; V_{\text{object 3}} &amp; \cdots &amp;\end{pmatrix}.
-\end{align*}\]</div>
+\end{align*} \]</div>
 <p>So <span class="math notranslate nohighlight">\(V_{\text{world}}\)</span> is a <span class="math notranslate nohighlight">\(4 \times N_{verts}\)</span> matrix where <span class="math notranslate nohighlight">\(N_{verts}\)</span> is the total number of vertices that define the virtual environment. The face array for each object is also appended to the bottom of a face matrix containing all faces for the objects that make up the virtual environment, i.e.,</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
 	F_{\text{world}} = \begin{pmatrix}
 		F_{\text{obj1}} \\
 		F_{\text{obj2}} \\
 		\vdots
 	\end{pmatrix}.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p>So <span class="math notranslate nohighlight">\(F_{\text{world}}\)</span> is an <span class="math notranslate nohighlight">\(N_{faces} \times N_{sides}\)</span> matrix where <span class="math notranslate nohighlight">\(N_{faces}\)</span> is the total number of faces in the virtual environment and <span class="math notranslate nohighlight">\(N_{sides}\)</span> is the maximum number of sides of the faces. Since <span class="math notranslate nohighlight">\(F_{\text{world}}\)</span> links to <span class="math notranslate nohighlight">\(V_{\text{world}}\)</span> then when adding a new face to <span class="math notranslate nohighlight">\(F_{\text{world}}\)</span> we need to add the number of columns currently in <span class="math notranslate nohighlight">\(V_{\text{world}}\)</span> to <span class="math notranslate nohighlight">\(F_{\text{object}}\)</span>.</p>
 <div class="proof example seealso admonition" id="world-space-example">
 <p class="admonition-title"><span class="caption-number">Example 30 </span></p>
 <section class="example-content" id="proof-content">
-<p>The virtual world shown in figure <a class="reference internal" href="#world-space-figure"><span class="std std-numref">Fig. 57</span></a> is constructed using 2 house objects from <a class="reference internal" href="3.1_Object_space.html#object-space-example">Example 29</a> and a cube object. The house objects are rotated by angle <span class="math notranslate nohighlight">\(\theta = \pi/2\)</span> about the <span class="math notranslate nohighlight">\(z\)</span>-axis and translated so that the centre of the bases have position vectors <span class="math notranslate nohighlight">\(\mathbf{c}_1 = (3, 3.5, 0)\)</span> and <span class="math notranslate nohighlight">\(\mathbf{c}_2 = (3, 1.5, 0)\)</span>. The cube object has side lengths 2 is scaled by a factor of 0.5 in the <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> directions and 1.5 in the <span class="math notranslate nohighlight">\(z\)</span> direction so that it resembles a tower and translated so that the centre of the base is at <span class="math notranslate nohighlight">\(\mathbf{c}_3 = (1.5, 1.5, 0)\)</span>. Determine the vertex and face matrices for the world space.</p>
+<p>The virtual world shown in figure <a class="reference internal" href="#world-space-figure"><span class="std std-numref">Fig. 57</span></a> is constructed using 2 house objects from <a class="reference internal" href="3.1_Object_space.html#object-space-example">Example 29</a> and a cube object. The house objects are rotated by angle <span class="math notranslate nohighlight">\(\theta = \pi/2\)</span> about the <span class="math notranslate nohighlight">\(z\)</span> axis and translated so that the centre of the bases have position vectors <span class="math notranslate nohighlight">\(\mathbf{c}_1 = (3, 3.5, 0)\)</span> and <span class="math notranslate nohighlight">\(\mathbf{c}_2 = (3, 1.5, 0)\)</span>. The cube object has side lengths 2 is scaled by a factor of <span class="math notranslate nohighlight">\(0.5\)</span> in the <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> directions and <span class="math notranslate nohighlight">\(1.5\)</span> in the <span class="math notranslate nohighlight">\(z\)</span> direction so that it resembles a tower and translated so that the centre of the base is at <span class="math notranslate nohighlight">\(\mathbf{c}_3 = (1.5, 1.5, 0)\)</span>. Determine the vertex and face matrices for the world space.</p>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
 Solution<div class="sd-summary-down docutils">
@@ -547,8 +536,8 @@ Solution<div class="sd-summary-down docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
 <p class="sd-card-text">Since <span class="math notranslate nohighlight">\(\cos(\pi/2) = 0\)</span> and <span class="math notranslate nohighlight">\(\sin(\pi/2) = 1\)</span> then the rotation and translation matrices for the first house object are</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     R_z(\theta) &amp;= 
     \begin{pmatrix}
         0 &amp; -1 &amp; 0 &amp; 0 \\
@@ -563,10 +552,10 @@ Solution<div class="sd-summary-down docutils">
         0 &amp; 0 &amp; 1 &amp; 0 \\
         0 &amp; 0 &amp; 0 &amp; 1
     \end{pmatrix}
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p class="sd-card-text">so the composite transformation matrix is</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     A &amp;= T(\mathbf{c}_1) \cdot R_z(\theta) = 
     \begin{pmatrix} 
         0 &amp; -1 &amp; 0 &amp; 3 \\
@@ -574,10 +563,10 @@ Solution<div class="sd-summary-down docutils">
         0 &amp; 0 &amp; 1 &amp; 0 \\
         0 &amp; 0 &amp; 0 &amp; 1 
     \end{pmatrix}.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p class="sd-card-text">Applying the composite transformation to <span class="math notranslate nohighlight">\(V_{\text{house}}\)</span> from <a class="reference internal" href="3.1_Object_space.html#object-space-example">Example 29</a> gives</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     V_{\text{world}} &amp;=
     \begin{pmatrix} 
         0 &amp; -1 &amp; 0 &amp; 3 \\
@@ -598,10 +587,10 @@ Solution<div class="sd-summary-down docutils">
         0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 2 &amp; 2 \\
         1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1
     \end{pmatrix},
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p class="sd-card-text">and since this is the first object added to the world space then <span class="math notranslate nohighlight">\(F_{\text{world}} = F_{\text{house}}\)</span>. Doing similar for the second house object gives the following composite transformation matrix</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     T(\mathbf{c}_1) \cdot R_z(\theta) &amp;= 
     \begin{pmatrix}
         0 &amp; -1 &amp; 0 &amp; 3 \\
@@ -609,20 +598,20 @@ Solution<div class="sd-summary-down docutils">
         0 &amp; 0 &amp; 1 &amp; 0 \\
         0 &amp; 0 &amp; 0 &amp; 1
     \end{pmatrix}
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p class="sd-card-text">which applied to the object co-ordinates for the house object gives</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     T \cdot S \cdot V_{\text{house}} = \begin{pmatrix}
         2 &amp; 2 &amp; 4 &amp; 4 &amp; 2 &amp; 2 &amp; 4 &amp; 4 &amp; 2 &amp; 4 \\
         1 &amp; 2 &amp; 2 &amp; 1 &amp; 1 &amp; 2 &amp; 2 &amp; 1 &amp; 1.5 &amp; 1.5 \\
         0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 2 &amp; 2 \\
         1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1
     \end{pmatrix},
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p class="sd-card-text">These are appended to the end of the world space vertex matrix</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
 V_{\text{world}} &amp;= 
     \begin{matrix}
         \left( \begin{matrix}
@@ -639,10 +628,10 @@ V_{\text{world}} &amp;=
         \end{matrix} \right) \\
         \textsf{house 1} &amp; \textsf{house 2}
     \end{matrix}.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p class="sd-card-text">Since the the number of vertices was <span class="math notranslate nohighlight">\(N_{verts} = 10\)</span> prior to appending the second house object then we need to add 10 to <span class="math notranslate nohighlight">\(F_{\text{house}}\)</span> and append it to <span class="math notranslate nohighlight">\(F_{\text{world}}\)</span></p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     F_{\text{world}} &amp;= \begin{pmatrix}
         1 &amp; 4 &amp; 3 &amp; 2 &amp; 2 \\
         1 &amp; 2 &amp; 6 &amp; 9 &amp; 5 \\
@@ -652,11 +641,11 @@ V_{\text{world}} &amp;=
         11 &amp; 12 &amp; 16 &amp; 19 &amp; 15 \\
         \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots \\
         15 &amp; 19 &amp; 20 &amp; 18 &amp; 18
-    \end{pmatrix}
-\end{align*}\]</div>
+    \end{pmatrix}.
+\end{align*} \end{split}\]</div>
 <p class="sd-card-text">The scaling and translation matrices for the cube (tower) object are</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     S &amp;= 
     \begin{pmatrix}
         0.5 &amp; 0 &amp; 0 &amp; 0 \\
@@ -671,10 +660,10 @@ V_{\text{world}} &amp;=
         0 &amp; 0 &amp; 1 &amp; 1.5 \\
         0 &amp; 0 &amp; 0 &amp; 1
     \end{pmatrix},
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p class="sd-card-text">which gives the transformed vertex matrix</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     T(\mathbf{c}_3) \cdot S(\mathbf{s}) \cdot V_{\text{cube}} = 
     \begin{pmatrix}
         1 &amp; 2 &amp; 2 &amp; 1 &amp; 1 &amp; 2 &amp; 2 &amp; 1 \\
@@ -682,10 +671,10 @@ V_{\text{world}} &amp;=
         0 &amp; 0 &amp; 0 &amp; 0 &amp; 3 &amp; 3 &amp; 3 &amp; 3 \\
         1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1
     \end{pmatrix}.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p class="sd-card-text">Appending these to <span class="math notranslate nohighlight">\(V_{\text{world}}\)</span> gives</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     V_{\text{world}} &amp;=
     \begin{matrix}
         \left( \begin{matrix}
@@ -702,12 +691,11 @@ V_{\text{world}} &amp;=
         \end{matrix} \right) \\
         \textsf{world space} &amp; &amp; \textsf{tower object} 
     \end{matrix}.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p class="sd-card-text">There were <span class="math notranslate nohighlight">\(N_{verts}=20\)</span> vertices in the world space prior to appending the cube object so we need to add 20 to <span class="math notranslate nohighlight">\(F_{\text{cube}}\)</span> and append it to <span class="math notranslate nohighlight">\(F_{\text{world}}\)</span></p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
-    F_{\text{world}} &amp;=
-    \begin{pmatrix}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
+    F_{\text{world}} = \begin{pmatrix}
         1 &amp; 4 &amp; 3 &amp; 2 &amp; 2 \\
         1 &amp; 2 &amp; 6 &amp; 9 &amp; 5 \\
         \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots \\
@@ -716,8 +704,8 @@ V_{\text{world}} &amp;=
         21 &amp; 22 &amp; 26 &amp; 25 &amp; 25 \\
         \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots \\
         25 &amp; 26 &amp; 27 &amp; 28 &amp; 28
-    \end{pmatrix}
-\end{align*}\]</div>
+    \end{pmatrix}.
+\end{align*} \end{split}\]</div>
 <p class="sd-card-text">After the 3 objects have been added to the world space the virtual world is described by 20 polygons defined by 28 vertices.</p>
 </div>
 </details></section>

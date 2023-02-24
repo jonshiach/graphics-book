@@ -373,17 +373,6 @@ title="Toggle navigation"
         
     </div>
     <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-    </ul>
-  </div>
-</div>
-
 <button onclick="toggleFullScreen()"
   class="headerbtn"
   data-toggle="tooltip"
@@ -406,7 +395,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/files/2.4_Transformations_exercises.ipynb"
+        <a href="../_sources/files/2.4_Transformations_exercises.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -417,7 +406,7 @@ title="Download source file"
 <span class="headerbtn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="headerbtn__text-container">.ipynb</span>
+<span class="headerbtn__text-container">.md</span>
 </a>
 
       </li>
@@ -480,27 +469,27 @@ title="Print to PDF"
 
 <p class="admonition-title">Solution to<a class="reference internal" href="#transformations-ex1"> Exercise 10</a></p>
 <section id="solution-content">
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     T(\mathbf{e}_1) &amp;= T \begin{pmatrix} 1 \\ 0 \\ 0 \end{pmatrix} = 
     \begin{pmatrix} 1 \\ 3 \\ 2 \end{pmatrix}, \\
     T(\mathbf{e}_2) &amp;= T \begin{pmatrix} 0 \\ 1 \\ 0 \end{pmatrix} =
     \begin{pmatrix} 2 \\ 0 \\ -1 \end{pmatrix}, \\
     T(\mathbf{e}_3) &amp;= T \begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix} =
     \begin{pmatrix} -1 \\ 1 \\ 3 \end{pmatrix},
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p>therefore the transformation matrix is</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     A &amp;= \begin{pmatrix}
         1 &amp; 2 &amp; -1 \\
         3 &amp; 0 &amp; 1 \\
         2 &amp; -1 &amp; 3
     \end{pmatrix}.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p>Calculating <span class="math notranslate nohighlight">\(T(2, 5, 1)\)</span></p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     T\begin{pmatrix} 2 \\ 5 \\ 1 \end{pmatrix} &amp;= 
     \begin{pmatrix}
         1 &amp; 2 &amp; -1 \\
@@ -509,7 +498,7 @@ title="Print to PDF"
     \end{pmatrix}
     \begin{pmatrix} 2 \\ 5 \\ 1 \end{pmatrix} =
     \begin{pmatrix} 11 \\ 7 \\ 2 \end{pmatrix}.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 </section>
 </div>
 <div class="exercise admonition" id="transformations-ex2">
@@ -517,12 +506,12 @@ title="Print to PDF"
 <p class="admonition-title"><span class="caption-number">Exercise 11 </span></p>
 <section id="exercise-content">
 <p><span class="math notranslate nohighlight">\(T: \mathbb{R}^3 \to \mathbb{R}^3\)</span> is a linear transformation such that</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     T\begin{pmatrix} 1 \\ -1 \\ 0 \end{pmatrix} &amp;= \begin{pmatrix} 1 \\ -2 \\ -4 \end{pmatrix}, &amp;
     T\begin{pmatrix} 0 \\ 1 \\ 2 \end{pmatrix} &amp;= \begin{pmatrix} 6 \\ 5 \\ 10 \end{pmatrix}, &amp;
     T\begin{pmatrix} -1 \\ 1 \\ 1 \end{pmatrix} &amp;= \begin{pmatrix} 2 \\ 4 \\ 7 \end{pmatrix}.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p>Find the transformation matrix for <span class="math notranslate nohighlight">\(T\)</span>.</p>
 </section>
 </div>
@@ -531,8 +520,8 @@ title="Print to PDF"
 <p class="admonition-title">Solution to<a class="reference internal" href="#transformations-ex2"> Exercise 11</a></p>
 <section id="solution-content">
 <p>The transformation matrix is determined using equation <a class="reference internal" href="2.0_Transformations.html#equation-determining-the-transformation-matrix">(20)</a> which is</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     A &amp;= (T(\mathbf{u}_1), T(\mathbf{u}_2), \ldots, T(\mathbf{u}_n)) \cdot (\mathbf{u}_1, \mathbf{u}_2, \ldots, \mathbf{u}_n)^{-1}, \\
     &amp;=
     \begin{pmatrix} 
@@ -545,10 +534,10 @@ title="Print to PDF"
         -1 &amp; 1 &amp; 1 \\
         0 &amp; 2 &amp; 1 
     \end{pmatrix}^{-1}
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p>The inverse of the right-hand matrix is</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     \begin{pmatrix}
         1 &amp; 0 &amp; -1 \\
         -1 &amp; 1 &amp; 1 \\
@@ -560,10 +549,10 @@ title="Print to PDF"
         1 &amp; 1 &amp; 0 \\
         -2 &amp; -2 &amp; 1
     \end{pmatrix}
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p>so</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     A &amp;= 
     \begin{pmatrix} 
         1 &amp; 6 &amp; 2 \\ 
@@ -581,15 +570,15 @@ title="Print to PDF"
         -1 &amp; 1 &amp; 2 \\ 
         0 &amp; 4 &amp; 3 
     \end{pmatrix}.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p>Checking <span class="math notranslate nohighlight">\(A\)</span></p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     T\begin{pmatrix} 1 \\ -1 \\ 0 \end{pmatrix} &amp;=
     \begin{pmatrix} 1 &amp; 0 &amp; 3 \\ -1 &amp; 1 &amp; 2 \\ 0 &amp; 4 &amp; 3 \end{pmatrix}
     \begin{pmatrix}1 \\ -1 \\ 0 \end{pmatrix} 
     = \begin{pmatrix} 1 \\ -2 \\ - 4 \end{pmatrix} \quad \checkmark
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 </section>
 </div>
 <div class="exercise admonition" id="transformations-ex3">
@@ -608,18 +597,18 @@ title="Print to PDF"
 <p class="admonition-title">Solution to<a class="reference internal" href="#transformations-ex3"> Exercise 12</a></p>
 <section id="solution-content">
 <p>(a) Since the side lengths are 2 then the height of the triangle is <span class="math notranslate nohighlight">\(h = \sqrt{3}\)</span>. Let <span class="math notranslate nohighlight">\((x_1,y_1)\)</span>, <span class="math notranslate nohighlight">\((x_2,y_2)\)</span> and <span class="math notranslate nohighlight">\((x_3,y_3)\)</span> be the vertex co-ordinates then <span class="math notranslate nohighlight">\(x_1 = 2\)</span>, <span class="math notranslate nohighlight">\(x_2 = 4\)</span>, <span class="math notranslate nohighlight">\(x_3 = 3\)</span>, <span class="math notranslate nohighlight">\(y_2 = y_1\)</span> and <span class="math notranslate nohighlight">\(y_3 = y_1 + h\)</span>. The triangle is centred at <span class="math notranslate nohighlight">\((3, 2)\)</span> with a side parallel to the <span class="math notranslate nohighlight">\(x\)</span>-axis so</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     2 &amp;= \frac{y_1 + y_2 + y_3}{3} = \frac{y_1 + y_1 + y_1 + h}{3} = \frac{3y_1 + \sqrt{3}}{3} \\
     \therefore y_1 &amp;= 2 - \frac{\sqrt{3}}{3} \approx 1.4226,
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p>so the vertex co-ordinates are</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     &amp;\begin{pmatrix} 2 \\ 2 - \sqrt{3}/3 \end{pmatrix}, &amp;
     &amp;\begin{pmatrix} 4 \\ 2 - \sqrt{3}/3 \end{pmatrix}, &amp;
     &amp;\begin{pmatrix} 3 \\ 2 + 2\sqrt{3}/3 \end{pmatrix}.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p>(b) <span class="math notranslate nohighlight">\( T \begin{pmatrix} 3 \\ 1 \end{pmatrix} = \begin{pmatrix} 1 &amp; 0 &amp; 3 \\ 0 &amp; 1 &amp; 1 \\ 0 &amp; 0 &amp; 1 \end{pmatrix}\)</span></p>
 <p>(c)</p>
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">clear</span><span class="w"></span>
@@ -840,8 +829,8 @@ title="Print to PDF"
 <p class="admonition-title">Solution to<a class="reference internal" href="#transformations-ex7"> Exercise 16</a></p>
 <section id="solution-content">
 <p>First translate by <span class="math notranslate nohighlight">\(\mathbf{-p}\)</span> so the translation matrix is</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     T(-\mathbf{p}) &amp;= 
     \begin{pmatrix}
         1 &amp; 0 &amp; 0 &amp; -2 \\
@@ -849,16 +838,16 @@ title="Print to PDF"
         0 &amp; 0 &amp; 1 &amp; 3 \\ 
         0 &amp; 0 &amp; 0 &amp; 1
     \end{pmatrix}.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p>Rotate the direction vector <span class="math notranslate nohighlight">\(\mathbf{d}=(-2,3,4)\)</span> anti-clockwise about the <span class="math notranslate nohighlight">\(z\)</span>-axis by angle <span class="math notranslate nohighlight">\(\phi\)</span> so that it is in the <span class="math notranslate nohighlight">\(xz\)</span> plane. The sine and cosine of <span class="math notranslate nohighlight">\(\phi\)</span> are</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     \cos(\phi) &amp;= \frac{|d_x|}{d_1} = \frac{2}{\sqrt{13}} = \frac{2\sqrt{13}}{13}, \\
     \sin(\phi) &amp;= \frac{|d_y|}{d_1} = \frac{3}{\sqrt{13}} = \frac{3\sqrt{13}}{13}, 
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p>so the rotation matrix is</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     R_z(\phi) &amp;= 
     \begin{pmatrix}
         2\sqrt{13}/13 &amp; -3\sqrt{13}/13 &amp; 0 &amp; 0 \\
@@ -866,16 +855,16 @@ title="Print to PDF"
         0 &amp; 0 &amp; 1 &amp; 0 \\
         0 &amp; 0 &amp; 0 &amp; 1 
     \end{pmatrix}.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p>Rotate the direction vector anti-clockwise about the <span class="math notranslate nohighlight">\(y\)</span> axis by angle <span class="math notranslate nohighlight">\(\psi\)</span> so that it points along the <span class="math notranslate nohighlight">\(z\)</span>-axis. The sine and cosine of <span class="math notranslate nohighlight">\(\psi\)</span> are</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     \cos(\psi) &amp;= \frac{|d_z|}{|\mathbf{d}|} = \frac{4}{\sqrt{29}} = \frac{4\sqrt{29}}{29}, \\
     \sin(\psi) &amp;= \frac{d_1}{|\mathbf{d}|} = \frac{\sqrt{13}}{\sqrt{29}} = \frac{\sqrt{13}\sqrt{29}}{29},
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p>so the rotation matrix is</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     R_y(\psi) &amp;=
     \begin{pmatrix}
         4\sqrt{29}/29 &amp; 0 &amp; \sqrt{13}\sqrt{29}/29 &amp; 0 \\
@@ -883,10 +872,10 @@ title="Print to PDF"
         -\sqrt{13}\sqrt{29}/29 &amp; 0 &amp; 4\sqrt{29}/29 &amp; 0 \\
         0 &amp; 0 &amp; 0 &amp; 1
     \end{pmatrix}.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p>Now that the direction vector points along the <span class="math notranslate nohighlight">\(z\)</span>-axis, we perform the rotation by <span class="math notranslate nohighlight">\(\theta=\pi/6\)</span> so the rotation matrix is</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     R\left(\frac{\pi}{6}\right) &amp;=
     \begin{pmatrix}
         \cos(\pi/6) &amp; \sin(\pi/6) &amp; 0 &amp; 0 \\
@@ -901,10 +890,10 @@ title="Print to PDF"
         0 &amp; 0 &amp; 1 &amp; 0 \\
         0 &amp; 0 &amp; 0 &amp; 1
     \end{pmatrix}.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p>The inverse transformations are</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     R_y(-\psi) &amp;=
     \begin{pmatrix}
         4\sqrt{29}/29 &amp; 0 &amp; -\sqrt{13}\sqrt{29}/29 &amp; 0 \\
@@ -926,12 +915,12 @@ title="Print to PDF"
         0 &amp; 0 &amp; 1 &amp; -3 \\ 
         0 &amp; 0 &amp; 0 &amp; 1
     \end{pmatrix}
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p>and the composite transformation matrix is</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[ \begin{align*}
     A &amp;= T(\mathbf{p}) \cdot R_z(-\phi) \cdot R_y(-\psi) \cdot R_z\left(\frac{\pi}{6}\right) \cdot R_y(\psi) \cdot R_z(\phi) \cdot T(-\mathbf{p}).
-\end{align*}\]</div>
+\end{align*} \]</div>
 </section>
 </div>
 </section>

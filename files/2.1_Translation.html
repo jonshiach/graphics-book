@@ -373,17 +373,6 @@ title="Toggle navigation"
         
     </div>
     <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-    </ul>
-  </div>
-</div>
-
 <button onclick="toggleFullScreen()"
   class="headerbtn"
   data-toggle="tooltip"
@@ -406,7 +395,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/files/2.1_Translation.ipynb"
+        <a href="../_sources/files/2.1_Translation.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -417,7 +406,7 @@ title="Download source file"
 <span class="headerbtn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="headerbtn__text-container">.ipynb</span>
+<span class="headerbtn__text-container">.md</span>
 </a>
 
       </li>
@@ -517,27 +506,27 @@ title="Print to PDF"
 <div class="math notranslate nohighlight">
 \[\mathbf{v} = \mathbf{u} + \mathbf{t}.\]</div>
 <p>To represent translation using a single transformation matrix we need a matrix <span class="math notranslate nohighlight">\(T(\mathbf{t})\)</span> that satisfies</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     T(\mathbf{t}) \begin{pmatrix} u_1 \\ u_2 \\ u_3 \end{pmatrix}  = \begin{pmatrix} u_1 + t_1 \\ u_2 + t_2 \\ u_3 + t_3 \end{pmatrix}.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p>Unfortunately the matrix <span class="math notranslate nohighlight">\(T(\mathbf{t})\)</span> does not exist which is independent of <span class="math notranslate nohighlight">\(u_1\)</span>, <span class="math notranslate nohighlight">\(u_2\)</span> and <span class="math notranslate nohighlight">\(u_3\)</span> so we can use a trick which makes use of <strong>homogeneous co-ordinates</strong>.</p>
 <div class="proof definition admonition" id="homogeneous-coordinates-definition">
-<p class="admonition-title"><span class="caption-number">Definition 17 </span> (Homogeneous co-ordinates)</p>
+<p class="admonition-title"><span class="caption-number">Definition 19 </span> (Homogeneous co-ordinates)</p>
 <section class="definition-content" id="proof-content">
 <p>The homogeneous co-ordinates of a point <span class="math notranslate nohighlight">\(\mathbf{u}\)</span> in <span class="math notranslate nohighlight">\(\mathbb{R}^3\)</span> expressed using the Cartesian co-ordinates is the 4-tuple <span class="math notranslate nohighlight">\((w x, w y, w z, w)\)</span> where <span class="math notranslate nohighlight">\(w \in \mathbb{R}\backslash \{0\}\)</span>.</p>
 <p>Note that a point with homogeneous co-ordinates <span class="math notranslate nohighlight">\((x, y, z, 1)\)</span> has the Cartesian co-ordinates <span class="math notranslate nohighlight">\((x, y, z)\)</span>.</p>
 </section>
 </div><p>If <span class="math notranslate nohighlight">\(\mathbf{u}= (u_x, u_x, u_y, 1)\)</span> expressed using homogeneous co-ordinates then the translation by the translation vector <span class="math notranslate nohighlight">\(\mathbf{t} = (t_x, t_y, t_z)\)</span> is</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     v_x &amp;= u_x + t_x, \\
     v_y &amp;= u_y + t_y, \\
     v_z &amp;= u_z + t_z,
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p>which can be written as the matrix equation</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     \begin{pmatrix} v_x \\ v_y \\ v_z \\ 1 \end{pmatrix} &amp;= 
     \begin{pmatrix}
         1 &amp; 0 &amp; 0 &amp; t_x \\
@@ -546,31 +535,27 @@ title="Print to PDF"
         0 &amp; 0 &amp; 0 &amp; 1
     \end{pmatrix}
     \begin{pmatrix} u_x \\ u_y \\ u_z \\ 1 \end{pmatrix}.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p>The square matrix is the transformation matrix for translating a point of set of points by the translation vector <span class="math notranslate nohighlight">\(\mathbf{t}\)</span>.</p>
 <div class="proof definition admonition" id="translation-matrix-definition">
-<p class="admonition-title"><span class="caption-number">Definition 18 </span> (Translation matrix)</p>
+<p class="admonition-title"><span class="caption-number">Definition 20 </span> (Translation matrix)</p>
 <section class="definition-content" id="proof-content">
 <p>The transformation matrix for the translation of a vector in <span class="math notranslate nohighlight">\(\mathbb{R}^3\)</span> expressed using homogeneous co-ordinates by the translation vector <span class="math notranslate nohighlight">\(\mathbf{t} = (t_x, t_y, t_z)\)</span> is</p>
 <div class="math notranslate nohighlight" id="equation-translation-matrix-equation">
-<span class="eqno">(22)<a class="headerlink" href="#equation-translation-matrix-equation" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align*}
-    T(\mathbf{t}) = \begin{pmatrix}
-        1 &amp; 0 &amp; 0 &amp; t_x \\
-        0 &amp; 1 &amp; 0 &amp; t_y \\
-        0 &amp; 0 &amp; 1 &amp; t_z \\
-        0 &amp; 0 &amp; 0 &amp; 1
-    \end{pmatrix}
-\end{align*}\end{split}\]</div>
+<span class="eqno">(22)<a class="headerlink" href="#equation-translation-matrix-equation" title="Permalink to this equation">#</a></span>\[\begin{split}T(\mathbf{t}) = \begin{pmatrix}
+    1 &amp; 0 &amp; 0 &amp; t_x \\
+    0 &amp; 1 &amp; 0 &amp; t_y \\
+    0 &amp; 0 &amp; 1 &amp; t_z \\
+    0 &amp; 0 &amp; 0 &amp; 1
+\end{pmatrix}\end{split}\]</div>
 <p>The transformation matrix for inverse translation is</p>
 <div class="math notranslate nohighlight" id="equation-inverse-translation-matrix-equation">
-<span class="eqno">(23)<a class="headerlink" href="#equation-inverse-translation-matrix-equation" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align*}
-    T^{-1}(\mathbf{t}) = T(\mathbf{-t}) = \begin{pmatrix}
-        1 &amp; 0 &amp; 0 &amp; -t_x \\
-        0 &amp; 1 &amp; 0 &amp; -t_y \\
-        0 &amp; 0 &amp; 1 &amp; -t_z \\
-        0 &amp; 0 &amp; 0 &amp; 1
-    \end{pmatrix}
-\end{align*}\end{split}\]</div>
+<span class="eqno">(23)<a class="headerlink" href="#equation-inverse-translation-matrix-equation" title="Permalink to this equation">#</a></span>\[\begin{split}T^{-1}(\mathbf{t}) = T(\mathbf{-t}) = \begin{pmatrix}
+    1 &amp; 0 &amp; 0 &amp; -t_x \\
+    0 &amp; 1 &amp; 0 &amp; -t_y \\
+    0 &amp; 0 &amp; 1 &amp; -t_z \\
+    0 &amp; 0 &amp; 0 &amp; 1
+\end{pmatrix}\end{split}\]</div>
 </section>
 </div><div class="proof example seealso admonition" id="translation-example">
 <p class="admonition-title"><span class="caption-number">Example 23 </span></p>
@@ -584,28 +569,28 @@ Solution<div class="sd-summary-down docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
 <p class="sd-card-text">The homogeneous co-ordinate matrix is</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     P = \begin{pmatrix}
         1 &amp; 3 &amp; 2 \\
         0 &amp; 0 &amp; 0 \\
         1 &amp; 1 &amp; 3 \\
         1 &amp; 1 &amp; 1 
     \end{pmatrix},
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p class="sd-card-text">and the translation matrix is</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     T(3, 0, 1) &amp;= \begin{pmatrix} 
         1 &amp; 0 &amp; 0 &amp; 3 \\
         0 &amp; 1 &amp; 0 &amp; 0 \\
         0 &amp; 0 &amp; 1 &amp; 1 \\
         0 &amp; 0 &amp; 0 &amp; 1
     \end{pmatrix}.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p class="sd-card-text">Applying the transformation</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     T(3,0,1) \cdot P &amp;= 
     \begin{pmatrix} 
         1 &amp; 0 &amp; 0 &amp; 3 \\
@@ -625,7 +610,7 @@ Solution<div class="sd-summary-down docutils">
         2 &amp; 2 &amp; 4 \\
         1 &amp; 1 &amp; 1 
     \end{pmatrix}.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p class="sd-card-text">So the vertex co-ordinates of the translated triangle are <span class="math notranslate nohighlight">\((4,0,2)\)</span>, <span class="math notranslate nohighlight">\((6, 0, 2)\)</span> and <span class="math notranslate nohighlight">\((5, 0, 4)\)</span>. The original triangle and the translated triangle are plotted in <a class="reference internal" href="#translation-example-figure"><span class="std std-numref">Fig. 32</span></a> looking along the <span class="math notranslate nohighlight">\(y\)</span>-axis.</p>
 </div>
 </details></section>

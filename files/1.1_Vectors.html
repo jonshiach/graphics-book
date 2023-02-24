@@ -373,17 +373,6 @@ title="Toggle navigation"
         
     </div>
     <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-    </ul>
-  </div>
-</div>
-
 <button onclick="toggleFullScreen()"
   class="headerbtn"
   data-toggle="tooltip"
@@ -406,7 +395,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/files/1.1_Vectors.ipynb"
+        <a href="../_sources/files/1.1_Vectors.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -417,7 +406,7 @@ title="Download source file"
 <span class="headerbtn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="headerbtn__text-container">.ipynb</span>
+<span class="headerbtn__text-container">.md</span>
 </a>
 
       </li>
@@ -557,10 +546,10 @@ title="Print to PDF"
   <section class="tex2jax_ignore mathjax_ignore" id="vectors">
 <span id="vectors-section"></span><h1>Vectors<a class="headerlink" href="#vectors" title="Permalink to this headline">#</a></h1>
 <p>A <strong>vector</strong> is an object that has length and direction. In mathematical notation vectors are denoted in print using a boldface character or as an arrow over a character and underlined when handwritten</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[ \begin{align*}
     \mathbf{a}, \qquad \vec{a}, \qquad \underline{a}.
-\end{align*}\]</div>
+\end{align*} \]</div>
 <p>A vector in <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span> is defined by the signed distance along each axis by an <span class="math notranslate nohighlight">\(n\)</span>-tuple. For example, let <span class="math notranslate nohighlight">\(\mathbf{a}\)</span> be a vector in <span class="math notranslate nohighlight">\(\mathbb{R}^3\)</span> defined by the 3-tuple <span class="math notranslate nohighlight">\(\mathbf{a} = (a_x, a_y, a_z)\)</span> where <span class="math notranslate nohighlight">\(a_x,a_y,a_z \in \mathbb{R}\)</span>, then <span class="math notranslate nohighlight">\(\mathbf{a}\)</span> can be represented geometrically as shown in <a class="reference internal" href="#r3-vector-figure"><span class="std std-numref">Fig. 5</span></a>.</p>
 <figure class="align-default" id="r3-vector-figure">
 <a class="reference internal image-reference" href="../_images/vector.svg"><img alt="../_images/vector.svg" src="../_images/vector.svg" width="400" /></a>
@@ -569,15 +558,15 @@ title="Print to PDF"
 </figcaption>
 </figure>
 <p>The tuple representing a vector can be written as either a matrix consisting of a single row or a single column. So a vector in <span class="math notranslate nohighlight">\(\mathbb{R}^3\)</span> can be represented as</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     \mathbf{a} = (a_x, a_y, a_z) = \begin{pmatrix} a_x \\ a_y \\ a_z \end{pmatrix}.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p>These representations are called <strong>row vector</strong> and <strong>column vector</strong> respectively.</p>
 <section id="vector-magnitude">
 <h2>Vector magnitude<a class="headerlink" href="#vector-magnitude" title="Permalink to this headline">#</a></h2>
 <p>The length of a vector <span class="math notranslate nohighlight">\(\mathbf{a}\)</span> is known as the <strong>magnitude</strong> and is denoted using <span class="math notranslate nohighlight">\(|\mathbf{a}|\)</span>.</p>
-<div class="proof definition note admonition" id="magnitude-definition">
+<div class="proof definition admonition" id="magnitude-definition">
 <p class="admonition-title"><span class="caption-number">Definition 1 </span> (Vector magnitude)</p>
 <section class="definition-content" id="proof-content">
 <p>The magnitude of a vector in <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span>, <span class="math notranslate nohighlight">\(\mathbf{a} = (a_1, a_2, \ldots, a_n)\)</span>, is calculated using</p>
@@ -585,7 +574,7 @@ title="Print to PDF"
 <span class="eqno">(1)<a class="headerlink" href="#equation-magnitude-equation" title="Permalink to this equation">#</a></span>\[|\mathbf{a}| = \sqrt{ \sum_{i=1}^n a_i^2 } = \sqrt{a_1^2 + a_2^2 + \cdots + a_n^2}.\]</div>
 <p>Note <span class="math notranslate nohighlight">\(|\mathbf{a}| &gt; 0\)</span>.</p>
 </section>
-</div><div class="proof example seealso admonition" id="example-1">
+</div><div class="proof example seealso admonition" id="vector-magnitude-example">
 <p class="admonition-title"><span class="caption-number">Example 1 </span></p>
 <section class="example-content" id="proof-content">
 <p>Calculate the magnitude of the vector <span class="math notranslate nohighlight">\(\mathbf{a} = (3, 4, 0)\)</span>.</p>
@@ -596,27 +585,25 @@ Solution<div class="sd-summary-down docutils">
 <div class="sd-summary-up docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[ \begin{align*}
     |\mathbf{a}| = \sqrt{3^2 + 4^2 + 0} = \sqrt{25} = 5.
-\end{align*}\]</div>
+\end{align*} \]</div>
 </div>
 </details></section>
 </div></section>
 <section id="unit-vectors">
 <h2>Unit vectors<a class="headerlink" href="#unit-vectors" title="Permalink to this headline">#</a></h2>
 <p>A <strong>unit vector</strong> is denoted by <span class="math notranslate nohighlight">\(\hat{\mathbf{a}}\)</span> (referred to as ‘<span class="math notranslate nohighlight">\(\mathbf{a}\)</span> hat’) is a vector parallel to <span class="math notranslate nohighlight">\(\mathbf{a}\)</span> with a magnitude of 1.</p>
-<div class="proof definition admonition" id="definition-2">
+<div class="proof definition admonition" id="normalising-a-vector-definition">
 <p class="admonition-title"><span class="caption-number">Definition 2 </span> (Normalising a vector)</p>
 <section class="definition-content" id="proof-content">
 <p>The unit vector <span class="math notranslate nohighlight">\(\hat{\mathbf{a}}\)</span> that is parallel to the vector <span class="math notranslate nohighlight">\(\mathbf{a}\)</span> can be calculated using</p>
 <div class="math notranslate nohighlight" id="equation-normalising-vector-equation">
-<span class="eqno">(2)<a class="headerlink" href="#equation-normalising-vector-equation" title="Permalink to this equation">#</a></span>\[\begin{align}
-    \hat{\mathbf{a}} = \frac{\mathbf{a}}{|\mathbf{a}|}.
-\end{align}\]</div>
+<span class="eqno">(2)<a class="headerlink" href="#equation-normalising-vector-equation" title="Permalink to this equation">#</a></span>\[\hat{\mathbf{a}} = \frac{\mathbf{a}}{|\mathbf{a}|}.\]</div>
 <p>This is known as <strong>normalising a vector</strong>.</p>
 </section>
-</div><div class="proof example seealso admonition" id="example-3">
+</div><div class="proof example seealso admonition" id="normalising-vector-example">
 <p class="admonition-title"><span class="caption-number">Example 2 </span></p>
 <section class="example-content" id="proof-content">
 <p>Calculate a unit vector that is parallel to <span class="math notranslate nohighlight">\(\mathbf{a} = (3, 4, 0)\)</span>.</p>
@@ -627,26 +614,26 @@ Solution<div class="sd-summary-down docutils">
 <div class="sd-summary-up docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[ \begin{align*}
     \hat{\mathbf{a}} = \frac{(3, 4, 0)}{5} = \left( \frac{3}{5}, \frac{4}{5}, 0 \right).
-\end{align*}\]</div>
+\end{align*} \]</div>
 <p class="sd-card-text">Checking that <span class="math notranslate nohighlight">\(|\hat{\mathbf{a}}|=1\)</span></p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     |\hat{\mathbf{a}}| &amp;= \sqrt{\left(\frac{3}{5}\right)^2 + \left(\frac{4}{5}\right)^2 + 0^2} \\
     &amp;= \sqrt{\frac{9}{25} + \frac{16}{25}} = \sqrt{\frac{25}{25}} = 1. \qquad \checkmark
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 </div>
 </details></section>
 </div></section>
 <section id="scalar-multiplication-of-a-vector">
 <h2>Scalar multiplication of a vector<a class="headerlink" href="#scalar-multiplication-of-a-vector" title="Permalink to this headline">#</a></h2>
 <p>The scalar multiple of a vector <span class="math notranslate nohighlight">\(\mathbf{a}=(a_1, a_2, a_3)\)</span> by the scalar <span class="math notranslate nohighlight">\(k\)</span> is defined by</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     k\mathbf{a} = \begin{pmatrix} k a_1 \\ k a_2 \\ k a_3 \end{pmatrix}.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p>The effect of multiplying a vector by a scalar is that the magnitude of the vector is scaled by the value of the scalar. If <span class="math notranslate nohighlight">\(k&gt;0\)</span> then the direction of the vector <span class="math notranslate nohighlight">\(k\mathbf{a}\)</span> is the same as <span class="math notranslate nohighlight">\(\mathbf{a}\)</span> whereas if <span class="math notranslate nohighlight">\(k&lt;0\)</span> then the vector <span class="math notranslate nohighlight">\(k\mathbf{a}\)</span> points in the opposite direction to <span class="math notranslate nohighlight">\(\mathbf{a}\)</span> (<a class="reference internal" href="#scalar-vector-multiplication-figure"><span class="std std-numref">Fig. 6</span></a>).</p>
 <figure class="align-default" id="scalar-vector-multiplication-figure">
 <a class="reference internal image-reference" href="../_images/vector_scalar_multiplication.svg"><img alt="../_images/vector_scalar_multiplication.svg" src="../_images/vector_scalar_multiplication.svg" width="400" /></a>
@@ -658,21 +645,21 @@ Solution<div class="sd-summary-down docutils">
 <section id="vector-addition-and-subtraction">
 <h2>Vector addition and subtraction<a class="headerlink" href="#vector-addition-and-subtraction" title="Permalink to this headline">#</a></h2>
 <p>The addition of two vectors is achieved by adding the corresponding elements in the tuples. Let <span class="math notranslate nohighlight">\(\mathbf{a}=(a_1,a_2,a_3)\)</span> and <span class="math notranslate nohighlight">\(\mathbf{b}=(b_1,b_2,b_3)\)</span> then the sum <span class="math notranslate nohighlight">\(\mathbf{a}+\mathbf{b}\)</span> is calculated by</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
 	\mathbf{a} + \mathbf{b} &amp;= 
     \begin{pmatrix} a_1 \\ a_2 \\ a_3 \end{pmatrix} + 
     \begin{pmatrix} b_1 \\ b_2 \\ b_3 \end{pmatrix} = 
     \begin{pmatrix} a_1 + b_1 \\ a_2 + b_2 \\ a_3 + b_3 \end{pmatrix}.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p>Similarly the subtraction of two vectors is achieved by subtracting the corresponding element in the tuples, i.e.,</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
 	\mathbf{a} - \mathbf{b} &amp;= 
     \begin{pmatrix} a_1 \\ a_2 \\ a_3 \end{pmatrix} -
     \begin{pmatrix} b_1 \\ b_2 \\ b_3 \end{pmatrix} = 
     \begin{pmatrix} a_1 - b_1 \\ a_2 - b_2 \\ a_3 - b_3 \end{pmatrix}.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p>Thinking about this in a geometrical sence, the vector addition <span class="math notranslate nohighlight">\(\mathbf{a} + \mathbf{b}\)</span> is achieved by placing the tail of <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> at the head of <span class="math notranslate nohighlight">\(\mathbf{a}\)</span>. The resulting vector points from the tail of <span class="math notranslate nohighlight">\(\mathbf{a}\)</span> to the head of <span class="math notranslate nohighlight">\(\mathbf{b}\)</span>. The vector subtraction <span class="math notranslate nohighlight">\(\mathbf{a} - \mathbf{b}\)</span> is achieved by reversing the direction of <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> and placing the tail at the head of <span class="math notranslate nohighlight">\(\mathbf{a}\)</span>.</p>
 <figure class="align-default" id="vector-addition-figure">
 <a class="reference internal image-reference" href="../_images/vector_addition.svg"><img alt="../_images/vector_addition.svg" src="../_images/vector_addition.svg" width="400" /></a>
@@ -684,14 +671,12 @@ Solution<div class="sd-summary-down docutils">
 <section id="the-dot-product">
 <span id="dot-product-section"></span><h2>The dot product<a class="headerlink" href="#the-dot-product" title="Permalink to this headline">#</a></h2>
 <p>The product of two vectors can be calculated in two ways: the <strong>dot product</strong> and the <strong>cross product</strong>. The dot product of two vectors <span class="math notranslate nohighlight">\(\mathbf{a}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> is denoted by <span class="math notranslate nohighlight">\(\mathbf{a}\cdot \mathbf{b}\)</span> and returns a scalar quantity and the dot product is often referred to as the <strong>scalar product</strong>.</p>
-<div class="proof definition note admonition" id="geometric-dot-product-definition">
+<div class="proof definition admonition" id="geometric-dot-product-definition">
 <p class="admonition-title"><span class="caption-number">Definition 3 </span> (Geometric definition of the dot product)</p>
 <section class="definition-content" id="proof-content">
 <p>The geometric definition of the dot product of two vectors, <span class="math notranslate nohighlight">\(\mathbf{a}, \mathbf{b} \in \mathbb{R}^n\)</span>, is</p>
 <div class="math notranslate nohighlight" id="equation-geometric-dot-product-equation">
-<span class="eqno">(3)<a class="headerlink" href="#equation-geometric-dot-product-equation" title="Permalink to this equation">#</a></span>\[\begin{align}
-	\mathbf{a} \cdot \mathbf{b} = |\mathbf{a}| |\mathbf{b}| \cos(\theta),
-\end{align}	\]</div>
+<span class="eqno">(3)<a class="headerlink" href="#equation-geometric-dot-product-equation" title="Permalink to this equation">#</a></span>\[\mathbf{a} \cdot \mathbf{b} = |\mathbf{a}| |\mathbf{b}| \cos(\theta),\]</div>
 <p>where <span class="math notranslate nohighlight">\(\theta\)</span> is the angle between the two vectors (<a class="reference internal" href="#angle-between-vectors-figure"><span class="std std-numref">Fig. 8</span></a>).</p>
 <figure class="align-default" id="angle-between-vectors-figure">
 <a class="reference internal image-reference" href="../_images/angle_between_vectors.svg"><img alt="../_images/angle_between_vectors.svg" src="../_images/angle_between_vectors.svg" width="200px" /></a>
@@ -701,14 +686,12 @@ Solution<div class="sd-summary-down docutils">
 </figure>
 </section>
 </div><p>The value of a dot product can be computed using the algebraic definition of the dot product.</p>
-<div class="proof definition admonition" id="definition-5">
+<div class="proof definition admonition" id="algebraic-dot-product-definition">
 <p class="admonition-title"><span class="caption-number">Definition 4 </span> (Algebraic definition of the dot product)</p>
 <section class="definition-content" id="proof-content">
 <p>The dot product of two vectors <span class="math notranslate nohighlight">\(\mathbf{a}=(a_1, a_2, \ldots, a_n)\)</span> and <span class="math notranslate nohighlight">\(\mathbf{b}= (b_1, b_2, \ldots, b_n)\)</span> in <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span> can be calculated using</p>
 <div class="math notranslate nohighlight" id="equation-dot-product-equation">
-<span class="eqno">(4)<a class="headerlink" href="#equation-dot-product-equation" title="Permalink to this equation">#</a></span>\[\begin{align}
-    \mathbf{a} \cdot \mathbf{b} = \sum_{i=1}^n a_i b_i = a_1b_1 + a_2b_2 + \cdots + a_n b_n.
-\end{align}\]</div>
+<span class="eqno">(4)<a class="headerlink" href="#equation-dot-product-equation" title="Permalink to this equation">#</a></span>\[\mathbf{a} \cdot \mathbf{b} = \sum_{i=1}^n a_i b_i = a_1b_1 + a_2b_2 + \cdots + a_n b_n.\]</div>
 </section>
 </div><p>For vectors <span class="math notranslate nohighlight">\(\mathbf{a}\)</span>, <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{c} \in \mathbb{R}^n\)</span> the dot product has the following properties</p>
 <ul class="simple">
@@ -716,7 +699,7 @@ Solution<div class="sd-summary-down docutils">
 <li><p>distributive: <span class="math notranslate nohighlight">\(\mathbf{a} \cdot (\mathbf{b} + \mathbf{c}) = \mathbf{a} \cdot \mathbf{b} + \mathbf{a} \cdot \mathbf{c}\)</span>;</p></li>
 <li><p>orthogonal: the non-zero vectors <span class="math notranslate nohighlight">\(\mathbf{a}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> are orthogonal (perpendicular) if <span class="math notranslate nohighlight">\(\mathbf{a} \cdot \mathbf{b} = 0\)</span>.</p></li>
 </ul>
-<div class="proof example seealso admonition" id="example-6">
+<div class="proof example seealso admonition" id="dot-product-example">
 <p class="admonition-title"><span class="caption-number">Example 3 </span></p>
 <section class="example-content" id="proof-content">
 <p>(i)   Calculate the dot product of the two vectors <span class="math notranslate nohighlight">\(\mathbf{a}=(3,4,0)\)</span> and <span class="math notranslate nohighlight">\(\mathbf{b}=(5, 12, 0)\)</span>.</p>
@@ -727,13 +710,13 @@ Solution<div class="sd-summary-down docutils">
 <div class="sd-summary-up docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     \mathbf{a}\cdot \mathbf{b} = 
     \begin{pmatrix} 3 \\ 4 \\ 0 \end{pmatrix} \cdot
     \begin{pmatrix} 5 \\ 12 \\ 0 \end{pmatrix} 
     = 3 \times 5 + 4 \times 12 + 0 \times 0 = 15 + 48 = 63.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 </div>
 </details><p>(ii)   Calculate the angle between the two vectors <span class="math notranslate nohighlight">\(\mathbf{a}=(3,4,0)\)</span> and <span class="math notranslate nohighlight">\(\mathbf{b}=(5, 12, 0)\)</span>.</p>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
@@ -743,11 +726,11 @@ Solution<div class="sd-summary-down docutils">
 <div class="sd-summary-up docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     \mathbf{a}\cdot \mathbf{b} &amp;= |\mathbf{a}||\mathbf{b}|\cos(\theta)\\
     \therefore \theta &amp;= \cos^{-1}\left( \frac{\mathbf{a} \cdot \mathbf{b}}{|\mathbf{a}||\mathbf{b}|}\right) = \cos^{-1}\left(\frac{63}{5 \cdot 13}\right) = 0.2487.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 </div>
 </details><p>(iii)   Two orthogonal vectors are <span class="math notranslate nohighlight">\(\mathbf{a}=(1,2,3)\)</span> and <span class="math notranslate nohighlight">\(\mathbf{b}=(4, x, 6)\)</span>. Determine the value of <span class="math notranslate nohighlight">\(x\)</span>.</p>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
@@ -757,12 +740,12 @@ Solution<div class="sd-summary-down docutils">
 <div class="sd-summary-up docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     0 &amp;= \begin{pmatrix} 1 \\ 2 \\ 3 \end{pmatrix} \cdot
     \begin{pmatrix} 4 \\ x \\ 6 \end{pmatrix} = 4 + 2x + 18, \\
     \therefore x &amp;= -11.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 </div>
 </details></section>
 </div></section>
@@ -775,7 +758,7 @@ Solution<div class="sd-summary-down docutils">
 <p><span class="caption-number">Fig. 9 </span><span class="caption-text">The cross product <span class="math notranslate nohighlight">\(\mathbf{a} \times \mathbf{b}\)</span> is a vector perpendicular to both <span class="math notranslate nohighlight">\(\mathbf{a}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{b}\)</span>.</span><a class="headerlink" href="#cross-product-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<div class="proof definition note admonition" id="definition-7">
+<div class="proof definition admonition" id="geometric-cross-product-definition">
 <p class="admonition-title"><span class="caption-number">Definition 5 </span> (Geometric definition of the cross product)</p>
 <section class="definition-content" id="proof-content">
 <p>The cross product of two vectors, <span class="math notranslate nohighlight">\(\mathbf{a}, \mathbf{b} \in \mathbb{R}^3\)</span>, is defined by</p>
@@ -784,15 +767,13 @@ Solution<div class="sd-summary-down docutils">
 <p>where <span class="math notranslate nohighlight">\(\theta\)</span> is the angle between <span class="math notranslate nohighlight">\(\mathbf{a}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> and <span class="math notranslate nohighlight">\(\hat{\mathbf{n}}\)</span> is a unit vector perpendicular to both <span class="math notranslate nohighlight">\(\mathbf{a}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{b}\)</span>.</p>
 </section>
 </div><p>The cross product of two vectors in <span class="math notranslate nohighlight">\(\mathbb{R}^3\)</span> can be computed using the determinant formula.</p>
-<div class="proof definition admonition" id="definition-8">
+<div class="proof definition admonition" id="cross-product-calculation-definition">
 <p class="admonition-title"><span class="caption-number">Definition 6 </span> (Determinant formula for computing a cross product)</p>
 <section class="definition-content" id="proof-content">
 <p>The cross product of two vectors, <span class="math notranslate nohighlight">\(\mathbf{a}=(a_x, a_y, a_z)\)</span> and <span class="math notranslate nohighlight">\(\mathbf{b}= (b_x, b_y, b_z)\)</span>, is computed using</p>
 <div class="math notranslate nohighlight" id="equation-cross-product-equation">
-<span class="eqno">(6)<a class="headerlink" href="#equation-cross-product-equation" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align}
-	\mathbf{a} \times \mathbf{b} = \begin{vmatrix} \mathbf{i} &amp; \mathbf{j} &amp; \mathbf{k} \\ a_x &amp; a_y &amp; a_z \\ b_x &amp; b_y &amp; b_z \end{vmatrix} = 
-    \begin{pmatrix} a_y b_z - a_z b_y \\ a_z b_x - a_x b_z \\ a_x b_y - a_y b_z \end{pmatrix}.
-\end{align}\end{split}\]</div>
+<span class="eqno">(6)<a class="headerlink" href="#equation-cross-product-equation" title="Permalink to this equation">#</a></span>\[\begin{split}\mathbf{a} \times \mathbf{b} = \begin{vmatrix} \mathbf{i} &amp; \mathbf{j} &amp; \mathbf{k} \\ a_x &amp; a_y &amp; a_z \\ b_x &amp; b_y &amp; b_z \end{vmatrix} = 
+\begin{pmatrix} a_y b_z - a_z b_y \\ a_z b_x - a_x b_z \\ a_x b_y - a_y b_z \end{pmatrix}.\end{split}\]</div>
 </section>
 </div><p>For vectors <span class="math notranslate nohighlight">\(\mathbf{a}\)</span>, <span class="math notranslate nohighlight">\(\mathbf{b}\)</span>, <span class="math notranslate nohighlight">\(\mathbf{c} \in \mathbb{R}^3\)</span> and <span class="math notranslate nohighlight">\(k \in \mathbb{R}\)</span> the cross product has the following properties:</p>
 <ul class="simple">
@@ -802,7 +783,7 @@ Solution<div class="sd-summary-down docutils">
 <li><p>distributive: <span class="math notranslate nohighlight">\(\mathbf{a} \times (\mathbf{b} + \mathbf{c}) = \mathbf{a} \times \mathbf{b} + \mathbf{a} \times \mathbf{c}\)</span>;</p></li>
 <li><p>scalar multiplication: <span class="math notranslate nohighlight">\(k\mathbf{a} \times \mathbf{b} = \mathbf{a} \times k\mathbf{b} = k(\mathbf{a} \times \mathbf{b})\)</span>.</p></li>
 </ul>
-<div class="proof example seealso admonition" id="example-9">
+<div class="proof example seealso admonition" id="cross-product-example">
 <p class="admonition-title"><span class="caption-number">Example 4 </span></p>
 <section class="example-content" id="proof-content">
 <p>Calculate the cross product of the two vectors <span class="math notranslate nohighlight">\(\mathbf{a}=(3,4,0)\)</span> and <span class="math notranslate nohighlight">\(\mathbf{b}=(1, 2, 3)\)</span>.</p>
@@ -813,23 +794,23 @@ Solution<div class="sd-summary-down docutils">
 <div class="sd-summary-up docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     \mathbf{a} \times \mathbf{b} &amp;= \begin{vmatrix} \mathbf{i} &amp; \mathbf{j} &amp; \mathbf{k} \\ 3 &amp; 4 &amp; 0 \\ 1 &amp; 2 &amp; 3 \end{vmatrix} 
     = \mathbf{i} \begin{vmatrix} 4 &amp; 0 \\ 2 &amp; 3 \end{vmatrix} - \mathbf{j}
     \begin{vmatrix} 3 &amp; 0 \\ 1 &amp; 3 \end{vmatrix} + \mathbf{k}
     \begin{vmatrix} 3 &amp; 4 \\ 1 &amp; 2 \end{vmatrix} \\ 
     &amp;= (4\cdot 3 - 0 \cdot 2)\mathbf{i} - (3 \cdot 3 - 0 \cdot 1)\mathbf{j} + (3 \cdot 2 - 4 \cdot 1)\mathbf{k} \\
     &amp;= \begin{pmatrix} 12 \\ -9 \\ 2 \end{pmatrix}.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p class="sd-card-text">We can check that this vector is perpendicular to <span class="math notranslate nohighlight">\(\mathbf{a}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> using the dot product, e.g.,</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     (\mathbf{a} \times \mathbf{b}) \cdot \mathbf{a} &amp;= \begin{pmatrix} 12 \\ -9 \\ 2 \end{pmatrix} \cdot
     \begin{pmatrix} 3 \\ 4 \\ 0 \end{pmatrix} = 36 - 36 + 0 = 0, \\
     (\mathbf{a} \times \mathbf{b}) \cdot \mathbf{b} &amp;= \begin{pmatrix} 12 \\ -9 \\ 2 \end{pmatrix} \cdot
     \begin{pmatrix} 1 \\ 2 \\ 3 \end{pmatrix} = 12 - 18 + 6 = 0.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 </div>
 </details></section>
 </div></section>
