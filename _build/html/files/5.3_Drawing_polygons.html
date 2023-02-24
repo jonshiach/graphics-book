@@ -373,17 +373,6 @@ title="Toggle navigation"
         
     </div>
     <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-    </ul>
-  </div>
-</div>
-
 <button onclick="toggleFullScreen()"
   class="headerbtn"
   data-toggle="tooltip"
@@ -406,7 +395,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/files/5.3_Drawing_polygons.ipynb"
+        <a href="../_sources/files/5.3_Drawing_polygons.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -417,7 +406,7 @@ title="Download source file"
 <span class="headerbtn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="headerbtn__text-container">.ipynb</span>
+<span class="headerbtn__text-container">.md</span>
 </a>
 
       </li>
@@ -592,14 +581,14 @@ Solution<div class="sd-summary-down docutils">
 <div class="math notranslate nohighlight">
 \[Q = \{ (5, 4), (3, 4), (4, 5), (6, 3), (4, 3), \textcolor{blue}{(5, 4)}, \textcolor{red}{(5, 2)} \}.\]</div>
 <p class="sd-card-text">We proceed in the same way that results in the the following queue.</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     Q &amp;= \{ (5, 4), \ldots, (4, 3), (6, 4), (4, 4), \textcolor{blue}{(5, 5)}, \textcolor{red}{(5, 3)} \}, \\
     Q &amp;= \{ (5, 4), \ldots, (4, 4), (6, 5), \textcolor{blue}{(4, 5)}, \textcolor{red}{(5, 6)}, \textcolor{red}{(5, 4)} \}, \\
     Q &amp;= \{ (5, 4), \ldots, (6, 5), (5, 5), \textcolor{blue}{(3, 5)}, \textcolor{red}{(4, 6)}, \textcolor{red}{(4, 4)} \}, \\
     Q &amp;= \{ (5, 4), \ldots, (5, 5), (4, 5), (2, 5), (3, 6), \textcolor{blue}{(3, 4)} \}, \\
     Q &amp;= \emptyset.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <figure class="align-default" style="width: 250px">
 <img alt="../_images/floodfill_example_9.png" src="../_images/floodfill_example_9.png" />
 </figure>
@@ -619,50 +608,48 @@ Solution<div class="sd-summary-down docutils">
 <span id="scanline-algorithm-section"></span><h3>The scanline algorithm<a class="headerlink" href="#the-scanline-algorithm" title="Permalink to this headline">#</a></h3>
 <p>The <strong>scanline algorithm</strong> is a method of rendering a polygon without drawing the edges beforehand unlike the <a class="reference internal" href="#flood-fill-algorithm-section"><span class="std std-ref">flood fill algorithm</span></a> that requires pixels to be plotted to form an outline. Instead of testing pixels one by one, the scanline filling algorithm loops through horizontal rows of pixels (known as a <strong>scanline</strong>) starting from <span class="math notranslate nohighlight">\(y=0\)</span> and going down the raster to <span class="math notranslate nohighlight">\(y = N_y\)</span>. If the scanline intersects with an edge of the polygon the intersection points which are known as <strong>span extrema</strong>, are calculated, sorted into ascending order and all pixels between pairs of intersection points are filled.</p>
 <div class="proof definition admonition" id="definition-2">
-<p class="admonition-title"><span class="caption-number">Definition 26 </span> (Scanline)</p>
+<p class="admonition-title"><span class="caption-number">Definition 28 </span> (Scanline)</p>
 <section class="definition-content" id="proof-content">
 <p>A horizontal row of pixels.</p>
 </section>
 </div><div class="proof definition admonition" id="definition-3">
-<p class="admonition-title"><span class="caption-number">Definition 27 </span> (Span extrema)</p>
+<p class="admonition-title"><span class="caption-number">Definition 29 </span> (Span extrema)</p>
 <section class="definition-content" id="proof-content">
 <p>A pixel where a scanline intersects with the edge of a polygons.</p>
 </section>
-</div><figure class="align-default" id="span-extrema-figure" style="width: 300px">
-<div class="cell_output docutils container">
-<img alt="../_images/5.3_Drawing_polygons_1_0.png" src="../_images/5.3_Drawing_polygons_1_0.png" />
-</div>
+</div><figure class="align-default" id="span-extrema-figure">
+<a class="reference internal image-reference" href="../_images/span_extrema.svg"><img alt="../_images/span_extrema.svg" src="../_images/span_extrema.svg" width="300px" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 102 </span><span class="caption-text">Calculating span extrema co-ordinates.</span><a class="headerlink" href="#span-extrema-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Consider <a class="reference internal" href="#span-extrema-figure"><span class="std std-numref">Fig. 102</span></a> where the co-ordinates of the span extrema on the left edge of a polygon are <span class="math notranslate nohighlight">\((x_i, y_i)\)</span> and <span class="math notranslate nohighlight">\((x_{i+1}, y_{i+1})\)</span>. If <span class="math notranslate nohighlight">\((x_i, y_i)\)</span> are known then the next value <span class="math notranslate nohighlight">\(y_{i+1}\)</span> is easily calculated using <span class="math notranslate nohighlight">\(y_{i+1} = y_i + 1\)</span>. The values of the <span class="math notranslate nohighlight">\(x\)</span> span extrema co-ordinates are calculated using the <a href="https://en.wikipedia.org/wiki/Linear_equation#Slope%E2%80%93intercept_form_or_Gradient-intercept_form" target="_blank">slope intercept equation of a line</a>.</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[ \begin{align*}
     y = \frac{\Delta y}{\Delta x} x + c,
-\end{align*}\]</div>
+\end{align*} \]</div>
 <p>where <span class="math notranslate nohighlight">\(y\)</span> and <span class="math notranslate nohighlight">\(x\)</span> are the co-ordinates of a point on the line, <span class="math notranslate nohighlight">\(\Delta y / \Delta x\)</span> is the gradient of the line and <span class="math notranslate nohighlight">\(c\)</span> is where the line intercepts the <span class="math notranslate nohighlight">\(y\)</span>-axis. Rearranging this to make <span class="math notranslate nohighlight">\(x\)</span> the subject gives</p>
 <div class="math notranslate nohighlight" id="equation-span-extrema-x-equation">
-<span class="eqno">(36)<a class="headerlink" href="#equation-span-extrema-x-equation" title="Permalink to this equation">#</a></span>\[x = \frac{\Delta x}{\Delta y} (y - c). \]</div>
-<p>To derive an expression for calculating <span class="math notranslate nohighlight">\(x_{i+1}\)</span> we let <span class="math notranslate nohighlight">\(x_{i+1} =x \)</span> and rearrange equation <a class="reference internal" href="#equation-span-extrema-x-equation">(36)</a> and substitute <span class="math notranslate nohighlight">\(y_{i+1} = y_i + 1\)</span></p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<span class="eqno">(35)<a class="headerlink" href="#equation-span-extrema-x-equation" title="Permalink to this equation">#</a></span>\[x = \frac{\Delta x}{\Delta y} (y - c). \]</div>
+<p>To derive an expression for calculating <span class="math notranslate nohighlight">\(x_{i+1}\)</span> we let <span class="math notranslate nohighlight">\(x_{i+1} =x \)</span> and rearrange equation <a class="reference internal" href="#equation-span-extrema-x-equation">(35)</a> and substitute <span class="math notranslate nohighlight">\(y_{i+1} = y_i + 1\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     x_{i+1} &amp;= \frac{\Delta x}{\Delta y} (y_{i+1} - c) \\
     &amp;= \frac{\Delta x}{\Delta y} (y_i + 1 - c) \\
     &amp;= \frac{\Delta x}{\Delta y} (y_i - c) + \frac{\Delta x}{\Delta y}.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p>Since <span class="math notranslate nohighlight">\(x_i = \dfrac{\Delta x}{\Delta y} (y_i - c)\)</span> then</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[ \begin{align*}
     x_{i+1} &amp;= x_i + \frac{\Delta x}{\Delta y}.
-\end{align*}\]</div>
+\end{align*} \]</div>
 <p>So calculating the values of <span class="math notranslate nohighlight">\(y_{i+1}\)</span> and <span class="math notranslate nohighlight">\(x_{i+1}\)</span> is simply a matter of adding 1 to <span class="math notranslate nohighlight">\(y_i\)</span> and <span class="math notranslate nohighlight">\(\Delta x / \Delta y\)</span> to <span class="math notranslate nohighlight">\(x_i\)</span>. However since <span class="math notranslate nohighlight">\(\Delta x/ \Delta y\)</span> is not an integer number this method is slower than if we were only dealing with integer numbers. We can convert the calculations for <span class="math notranslate nohighlight">\(x_{i+1}\)</span> so that they only use integers by realising that whenever we add <span class="math notranslate nohighlight">\(\Delta x / \Delta y\)</span> we are only adding <span class="math notranslate nohighlight">\(\Delta x\)</span> to the numerator of the fraction, i.e.,</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     x_{i+1} &amp;= x_i + \frac{\Delta x}{\Delta y}, \\
     x_{i+2} &amp;= x_i + \frac{\Delta x}{\Delta y} + \frac{\Delta x}{\Delta y} = x_i + \frac{\Delta x + \Delta x}{\Delta y}, \\
     &amp; \vdots
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p>So we can add <span class="math notranslate nohighlight">\(\Delta x\)</span> to the value of the numerator, <span class="math notranslate nohighlight">\(N\)</span> say, and change the value of the <span class="math notranslate nohighlight">\(x\)</span> co-ordinate by <span class="math notranslate nohighlight">\(\pm 1\)</span> when the value fo the fraction exceeds 1 which would be when <span class="math notranslate nohighlight">\(N \geq \Delta y\)</span>. At this point <span class="math notranslate nohighlight">\(N\)</span> is reset be subtracting <span class="math notranslate nohighlight">\(\Delta y\)</span> from <span class="math notranslate nohighlight">\(N\)</span>. In the case where <span class="math notranslate nohighlight">\(\Delta x &gt; n \Delta y\)</span>, i.e., we have a very shallow edge, we need to subtract <span class="math notranslate nohighlight">\(n \Delta y\)</span> from <span class="math notranslate nohighlight">\(N\)</span> and change <span class="math notranslate nohighlight">\(x\)</span> by <span class="math notranslate nohighlight">\(\pm n\)</span>.</p>
 <p>We only want to perform the span extrema calculations on polygon edges that intersect a scanline, known as <strong>active edges</strong> and ignore the rest. To do this we use an <strong>Edge Table (ET)</strong> to store information for all edges of a polygon and an <strong>Active Edge Table (AET)</strong> that only contains information for the active edges. The information that is stored in ET and AET is:</p>
 <ul class="simple">
@@ -725,12 +712,12 @@ Solution<div class="sd-summary-down docutils">
 <li><p>return <span class="math notranslate nohighlight">\(R\)</span></p></li>
 </ul>
 </section>
-</div><div class="proof example seealso admonition" id="example-5">
+</div><div class="proof example seealso admonition" id="scanline-example">
 <p class="admonition-title"><span class="caption-number">Example 42 </span></p>
 <section class="example-content" id="proof-content">
 <p>Use the scanline algorithm to draw the polygon defined below</p>
 <figure class="align-default">
-<a class="reference internal image-reference" href="../_images/scanline_example_1.png"><img alt="../_images/scanline_example_1.png" src="../_images/scanline_example_1.png" style="width: 300px;" /></a>
+<a class="reference internal image-reference" href="../_images/scanline_example_0.png"><img alt="../_images/scanline_example_0.png" src="../_images/scanline_example_0.png" style="width: 300px;" /></a>
 </figure>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
@@ -740,212 +727,254 @@ Solution<div class="sd-summary-down docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
 <ul class="simple">
-<li><p class="sd-card-text">Start by forming the edge table ET (since edge e2 is a horizontal edge it is not included in ET)</p></li>
+<li><p class="sd-card-text">Start by forming the edge table ET (since edge e1 is a horizontal edge it is not included in ET)</p></li>
 </ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ET</span>         <span class="n">x</span>   <span class="n">N</span>  <span class="n">xstep</span>  <span class="n">Dx</span>   <span class="n">Dy</span>  <span class="n">ymin</span>  <span class="n">ymax</span>
-    <span class="n">e1</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">4</span>   <span class="mi">0</span>   <span class="o">-</span><span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">7</span>    <span class="mi">2</span>     <span class="mi">9</span>  <span class="p">]</span>
-    <span class="n">e3</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">8</span>   <span class="mi">0</span>    <span class="mi">1</span>    <span class="mi">1</span>    <span class="mi">5</span>    <span class="mi">4</span>     <span class="mi">9</span>  <span class="p">]</span>
-    <span class="n">e4</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">8</span>   <span class="mi">0</span>   <span class="o">-</span><span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">3</span>    <span class="mi">4</span>     <span class="mi">7</span>  <span class="p">]</span>
-    <span class="n">e5</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">4</span>   <span class="mi">0</span>    <span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">5</span>    <span class="mi">2</span>     <span class="mi">7</span>  <span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ET</span>
+       <span class="n">x</span>    <span class="n">N</span>  <span class="n">xstep</span>  <span class="n">dx</span>   <span class="n">dy</span>  <span class="n">ymin</span> <span class="n">ymax</span> 
+<span class="n">e2</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">8</span>    <span class="mi">0</span>    <span class="mi">1</span>    <span class="mi">1</span>    <span class="mi">5</span>    <span class="mi">4</span>    <span class="mi">9</span>  <span class="p">]</span>
+<span class="n">e3</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">8</span>    <span class="mi">0</span>   <span class="o">-</span><span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">3</span>    <span class="mi">4</span>    <span class="mi">7</span>  <span class="p">]</span>
+<span class="n">e4</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">4</span>    <span class="mi">0</span>    <span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">5</span>    <span class="mi">2</span>    <span class="mi">7</span>  <span class="p">]</span>
+<span class="n">e5</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">4</span>    <span class="mi">0</span>   <span class="o">-</span><span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">7</span>    <span class="mi">2</span>    <span class="mi">9</span>  <span class="p">]</span>
 </pre></div>
 </div>
 <ul class="simple">
-<li><p class="sd-card-text">Starting with <span class="math notranslate nohighlight">\(y=0\)</span> none of the edges in ET have <span class="math notranslate nohighlight">\(y_{\min} = 1\)</span> so increment <span class="math notranslate nohighlight">\(y= 1 + 1 = 2\)</span></p></li>
-<li><p class="sd-card-text">Edges e1 and e5 have <span class="math notranslate nohighlight">\(y_{\min} = 2\)</span> so are moved to the AET</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(y =1\)</span></p></li>
+<li><p class="sd-card-text">None of the edges in ET have <span class="math notranslate nohighlight">\(y_{\min}=1\)</span> znc AET is empty so update <span class="math notranslate nohighlight">\(y = 2\)</span></p></li>
+<li><p class="sd-card-text">Edges e4 and e5 hve <span class="math notranslate nohighlight">\(y_{\min}=2\)</span> so are moved from ET to AET</p></li>
 </ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ET</span>         <span class="n">x</span>   <span class="n">N</span>  <span class="n">xstep</span>  <span class="n">Dx</span>   <span class="n">Dy</span>  <span class="n">ymin</span>  <span class="n">ymax</span>
-    <span class="n">e3</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">8</span>   <span class="mi">0</span>    <span class="mi">1</span>    <span class="mi">1</span>    <span class="mi">5</span>    <span class="mi">4</span>     <span class="mi">9</span>  <span class="p">]</span>
-    <span class="n">e4</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">8</span>   <span class="mi">0</span>   <span class="o">-</span><span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">3</span>    <span class="mi">4</span>     <span class="mi">7</span>  <span class="p">]</span>
-    
-<span class="n">AET</span>        <span class="n">x</span>   <span class="n">N</span>  <span class="n">xstep</span>  <span class="n">Dx</span>   <span class="n">Dy</span>  <span class="n">ymin</span>  <span class="n">ymax</span>
-    <span class="n">e1</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">4</span>   <span class="mi">0</span>   <span class="o">-</span><span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">7</span>    <span class="mi">2</span>     <span class="mi">9</span>  <span class="p">]</span>
-    <span class="n">e5</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">4</span>   <span class="mi">0</span>    <span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">5</span>    <span class="mi">2</span>     <span class="mi">7</span>  <span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ET</span>
+       <span class="n">x</span>    <span class="n">N</span>  <span class="n">xstep</span>  <span class="n">dx</span>   <span class="n">dy</span>  <span class="n">ymin</span> <span class="n">ymax</span> 
+<span class="n">e2</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">8</span>    <span class="mi">0</span>    <span class="mi">1</span>    <span class="mi">1</span>    <span class="mi">5</span>    <span class="mi">4</span>    <span class="mi">9</span>  <span class="p">]</span>
+<span class="n">e3</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">8</span>    <span class="mi">0</span>   <span class="o">-</span><span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">3</span>    <span class="mi">4</span>    <span class="mi">7</span>  <span class="p">]</span>
+
+<span class="n">AET</span>
+       <span class="n">x</span>    <span class="n">N</span>  <span class="n">xstep</span>  <span class="n">dx</span>   <span class="n">dy</span>  <span class="n">ymin</span> <span class="n">ymax</span> 
+<span class="n">e4</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">4</span>    <span class="mi">0</span>    <span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">5</span>    <span class="mi">2</span>    <span class="mi">7</span>  <span class="p">]</span>
+<span class="n">e5</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">4</span>    <span class="mi">0</span>   <span class="o">-</span><span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">7</span>    <span class="mi">2</span>    <span class="mi">9</span>  <span class="p">]</span>
 </pre></div>
 </div>
 <ul class="simple">
-<li><p class="sd-card-text">None of the edges in AET have <span class="math notranslate nohighlight">\(y_{\max}=2\)</span> and it is already sorted by <span class="math notranslate nohighlight">\(x\)</span> value so fill pixel <span class="math notranslate nohighlight">\((4, 2)\)</span></p></li>
+<li><p class="sd-card-text">AET is already sorted by <span class="math notranslate nohighlight">\(x\)</span> value so we fill the pixel at <span class="math notranslate nohighlight">\((4,2)\)</span></p></li>
 </ul>
 <figure class="align-default">
-<a class="reference internal image-reference" href="../_images/scanline_example_2.png"><img alt="../_images/scanline_example_2.png" src="../_images/scanline_example_2.png" style="width: 300px;" /></a>
-</figure>
-<ul class="simple">
-<li><p class="sd-card-text">Add <span class="math notranslate nohighlight">\(\Delta x\)</span> to <span class="math notranslate nohighlight">\(N\)</span> for all edges in AET</p></li>
-<li><p class="sd-card-text">Increment <span class="math notranslate nohighlight">\(y = 2 + 1 = 3\)</span></p></li>
-</ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AET</span>        <span class="n">x</span>   <span class="n">N</span>  <span class="n">xstep</span>  <span class="n">Dx</span>   <span class="n">Dy</span>  <span class="n">ymin</span>  <span class="n">ymax</span>
-    <span class="n">e1</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">4</span>   <span class="mi">2</span>   <span class="o">-</span><span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">7</span>    <span class="mi">2</span>     <span class="mi">9</span>  <span class="p">]</span>
-    <span class="n">e5</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">4</span>   <span class="mi">2</span>    <span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">5</span>    <span class="mi">2</span>     <span class="mi">7</span>  <span class="p">]</span>
-</pre></div>
-</div>
-<ul class="simple">
-<li><p class="sd-card-text">None of the edges in ET have <span class="math notranslate nohighlight">\(y_{\min} = 3\)</span> and so fill pixel <span class="math notranslate nohighlight">\((4, 3)\)</span></p></li>
-</ul>
-<figure class="align-default">
-<a class="reference internal image-reference" href="../_images/scanline_example_3.png"><img alt="../_images/scanline_example_3.png" src="../_images/scanline_example_3.png" style="width: 300px;" /></a>
-</figure>
-<ul class="simple">
-<li><p class="sd-card-text">Add <span class="math notranslate nohighlight">\(\Delta x\)</span> to <span class="math notranslate nohighlight">\(N\)</span> for all edges in AET</p></li>
-<li><p class="sd-card-text">Increment <span class="math notranslate nohighlight">\(y = 3 + 1 = 4\)</span></p></li>
-</ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AET</span>        <span class="n">x</span>   <span class="n">N</span>  <span class="n">xstep</span>  <span class="n">Dx</span>   <span class="n">Dy</span>  <span class="n">ymin</span>  <span class="n">ymax</span>
-    <span class="n">e1</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">4</span>   <span class="mi">4</span>   <span class="o">-</span><span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">7</span>    <span class="mi">2</span>     <span class="mi">9</span>  <span class="p">]</span>
-    <span class="n">e5</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">4</span>   <span class="mi">4</span>    <span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">5</span>    <span class="mi">2</span>     <span class="mi">7</span>  <span class="p">]</span>
-</pre></div>
-</div>
-<ul class="simple">
-<li><p class="sd-card-text">Edges e3 and e4 in ET both have <span class="math notranslate nohighlight">\(y_{\min} = 4\)</span> so are moved to AET</p></li>
-<li><p class="sd-card-text">ET is now empty and ignored from now on</p></li>
-</ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AET</span>        <span class="n">x</span>   <span class="n">N</span>  <span class="n">xstep</span>  <span class="n">Dx</span>   <span class="n">Dy</span>  <span class="n">ymin</span>  <span class="n">ymax</span>
-    <span class="n">e1</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">4</span>   <span class="mi">4</span>   <span class="o">-</span><span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">7</span>    <span class="mi">2</span>     <span class="mi">9</span>  <span class="p">]</span>
-    <span class="n">e5</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">4</span>   <span class="mi">4</span>    <span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">5</span>    <span class="mi">2</span>     <span class="mi">7</span>  <span class="p">]</span>
-    <span class="n">e3</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">8</span>   <span class="mi">0</span>    <span class="mi">1</span>    <span class="mi">1</span>    <span class="mi">5</span>    <span class="mi">4</span>     <span class="mi">9</span>  <span class="p">]</span>
-    <span class="n">e4</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">8</span>   <span class="mi">0</span>   <span class="o">-</span><span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">3</span>    <span class="mi">4</span>     <span class="mi">7</span>  <span class="p">]</span>
-</pre></div>
-</div>
-<ul class="simple">
-<li><p class="sd-card-text">Fill pixels <span class="math notranslate nohighlight">\((4, 4)\)</span> and <span class="math notranslate nohighlight">\((8, 4)\)</span></p></li>
-</ul>
-<figure class="align-default">
-<a class="reference internal image-reference" href="../_images/scanline_example_4.png"><img alt="../_images/scanline_example_4.png" src="../_images/scanline_example_4.png" style="width: 300px;" /></a>
-</figure>
-<ul class="simple">
-<li><p class="sd-card-text">We add <span class="math notranslate nohighlight">\(\Delta x\)</span> to <span class="math notranslate nohighlight">\(N\)</span> for all edges in AET</p></li>
-</ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AET</span>        <span class="n">x</span>   <span class="n">N</span>  <span class="n">xstep</span>  <span class="n">Dx</span>   <span class="n">Dy</span>  <span class="n">ymin</span>  <span class="n">ymax</span>
-    <span class="n">e1</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">4</span>   <span class="mi">6</span>   <span class="o">-</span><span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">7</span>    <span class="mi">2</span>     <span class="mi">9</span>  <span class="p">]</span>
-    <span class="n">e5</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">4</span>   <span class="mi">6</span>    <span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">5</span>    <span class="mi">2</span>     <span class="mi">7</span>  <span class="p">]</span>
-    <span class="n">e3</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">8</span>   <span class="mi">1</span>    <span class="mi">1</span>    <span class="mi">1</span>    <span class="mi">5</span>    <span class="mi">4</span>     <span class="mi">9</span>  <span class="p">]</span>
-    <span class="n">e4</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">8</span>   <span class="mi">2</span>   <span class="o">-</span><span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">3</span>    <span class="mi">4</span>     <span class="mi">7</span>  <span class="p">]</span>
-</pre></div>
-</div>
-<ul class="simple">
-<li><p class="sd-card-text">Edge e5 has <span class="math notranslate nohighlight">\(N = 6 \geq \Delta y = 7\)</span> so subtract <span class="math notranslate nohighlight">\(\Delta y\)</span> from <span class="math notranslate nohighlight">\(N\)</span> to give <span class="math notranslate nohighlight">\(N = 6 - 5 = 1\)</span> which is less than <span class="math notranslate nohighlight">\(\Delta y\)</span> and add <span class="math notranslate nohighlight">\(x_{step} = 1\)</span> to <span class="math notranslate nohighlight">\(x\)</span> to give <span class="math notranslate nohighlight">\(x = 4 + 1 = 5\)</span></p></li>
-<li><p class="sd-card-text">Increment <span class="math notranslate nohighlight">\(y = 4 + 1 = 5\)</span>.</p></li>
-</ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AET</span>        <span class="n">x</span>   <span class="n">N</span>  <span class="n">xstep</span>  <span class="n">Dx</span>   <span class="n">Dy</span>  <span class="n">ymin</span>  <span class="n">ymax</span>
-    <span class="n">e1</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">4</span>   <span class="mi">6</span>   <span class="o">-</span><span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">7</span>    <span class="mi">2</span>     <span class="mi">9</span>  <span class="p">]</span>
-    <span class="n">e5</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">5</span>   <span class="mi">1</span>    <span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">5</span>    <span class="mi">2</span>     <span class="mi">7</span>  <span class="p">]</span>
-    <span class="n">e3</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">8</span>   <span class="mi">1</span>    <span class="mi">1</span>    <span class="mi">1</span>    <span class="mi">5</span>    <span class="mi">4</span>     <span class="mi">9</span>  <span class="p">]</span>
-    <span class="n">e4</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">8</span>   <span class="mi">2</span>   <span class="o">-</span><span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">3</span>    <span class="mi">4</span>     <span class="mi">7</span>  <span class="p">]</span>
-</pre></div>
-</div>
-<ul class="simple">
-<li><p class="sd-card-text">We fill pixels <span class="math notranslate nohighlight">\((4, 5)\)</span>, <span class="math notranslate nohighlight">\((5, 5)\)</span> and <span class="math notranslate nohighlight">\((8, 5)\)</span></p></li>
-</ul>
-<figure class="align-default">
-<a class="reference internal image-reference" href="../_images/scanline_example_6.png"><img alt="../_images/scanline_example_6.png" src="../_images/scanline_example_6.png" style="width: 300px;" /></a>
+<a class="reference internal image-reference" href="../_images/scanline_example_1.png"><img alt="../_images/scanline_example_1.png" src="../_images/scanline_example_1.png" style="width: 250px;" /></a>
 </figure>
 <ul class="simple">
 <li><p class="sd-card-text">Add <span class="math notranslate nohighlight">\(\Delta x\)</span> to <span class="math notranslate nohighlight">\(N\)</span> for all edges in AET</p></li>
 </ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AET</span>        <span class="n">x</span>   <span class="n">N</span>  <span class="n">xstep</span>  <span class="n">Dx</span>   <span class="n">Dy</span>  <span class="n">ymin</span>  <span class="n">ymax</span>
-    <span class="n">e1</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">4</span>   <span class="mi">8</span>   <span class="o">-</span><span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">7</span>    <span class="mi">2</span>     <span class="mi">9</span>  <span class="p">]</span>
-    <span class="n">e5</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">5</span>   <span class="mi">3</span>    <span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">5</span>    <span class="mi">2</span>     <span class="mi">7</span>  <span class="p">]</span>
-    <span class="n">e3</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">8</span>   <span class="mi">2</span>    <span class="mi">1</span>    <span class="mi">1</span>    <span class="mi">5</span>    <span class="mi">4</span>     <span class="mi">9</span>  <span class="p">]</span>
-    <span class="n">e4</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">8</span>   <span class="mi">4</span>   <span class="o">-</span><span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">3</span>    <span class="mi">4</span>     <span class="mi">7</span>  <span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ET</span>
+       <span class="n">x</span>    <span class="n">N</span>  <span class="n">xstep</span>  <span class="n">dx</span>   <span class="n">dy</span>  <span class="n">ymin</span> <span class="n">ymax</span> 
+<span class="n">e2</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">8</span>    <span class="mi">0</span>    <span class="mi">1</span>    <span class="mi">1</span>    <span class="mi">5</span>    <span class="mi">4</span>    <span class="mi">9</span>  <span class="p">]</span>
+<span class="n">e3</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">8</span>    <span class="mi">0</span>   <span class="o">-</span><span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">3</span>    <span class="mi">4</span>    <span class="mi">7</span>  <span class="p">]</span>
+
+<span class="n">AET</span>
+       <span class="n">x</span>    <span class="n">N</span>  <span class="n">xstep</span>  <span class="n">dx</span>   <span class="n">dy</span>  <span class="n">ymin</span> <span class="n">ymax</span> 
+<span class="n">e4</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">4</span>    <span class="mi">2</span>    <span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">5</span>    <span class="mi">2</span>    <span class="mi">7</span>  <span class="p">]</span>
+<span class="n">e5</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">4</span>    <span class="mi">2</span>   <span class="o">-</span><span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">7</span>    <span class="mi">2</span>    <span class="mi">9</span>  <span class="p">]</span>
 </pre></div>
 </div>
 <ul class="simple">
-<li><p class="sd-card-text">Edge e1 has <span class="math notranslate nohighlight">\(N = 8 \geq \Delta y = 7\)</span> so subtract <span class="math notranslate nohighlight">\(\Delta y\)</span> from <span class="math notranslate nohighlight">\(N\)</span> to give <span class="math notranslate nohighlight">\(N = 8 - 7 = 1\)</span> which is less than <span class="math notranslate nohighlight">\(\Delta y\)</span> and add <span class="math notranslate nohighlight">\(x_{step} = -1\)</span> to <span class="math notranslate nohighlight">\(x\)</span> to give <span class="math notranslate nohighlight">\(x = 4 - 1 = 3\)</span></p></li>
-<li><p class="sd-card-text">Edge e4 has <span class="math notranslate nohighlight">\(N=4 \geq \Delta y = 3\)</span> so subtract <span class="math notranslate nohighlight">\(\Delta y\)</span> from <span class="math notranslate nohighlight">\(N\)</span> to give <span class="math notranslate nohighlight">\(N = 4 - 3 = 1\)</span> which is less than <span class="math notranslate nohighlight">\(\Delta y\)</span> and add <span class="math notranslate nohighlight">\(x_{step} = -1\)</span> to <span class="math notranslate nohighlight">\(x\)</span> to give <span class="math notranslate nohighlight">\(x = 8 - 1 = 7\)</span></p></li>
-<li><p class="sd-card-text">Increment <span class="math notranslate nohighlight">\(y = 5 + 1 = 6\)</span></p></li>
-</ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AET</span>        <span class="n">x</span>   <span class="n">N</span>  <span class="n">xstep</span>  <span class="n">Dx</span>   <span class="n">Dy</span>  <span class="n">ymin</span>  <span class="n">ymax</span>
-    <span class="n">e1</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">3</span>   <span class="mi">1</span>   <span class="o">-</span><span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">7</span>    <span class="mi">2</span>     <span class="mi">9</span>  <span class="p">]</span>
-    <span class="n">e5</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">5</span>   <span class="mi">3</span>    <span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">5</span>    <span class="mi">2</span>     <span class="mi">7</span>  <span class="p">]</span>
-    <span class="n">e3</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">8</span>   <span class="mi">2</span>    <span class="mi">1</span>    <span class="mi">1</span>    <span class="mi">5</span>    <span class="mi">4</span>     <span class="mi">9</span>  <span class="p">]</span>
-    <span class="n">e4</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">7</span>   <span class="mi">1</span>   <span class="o">-</span><span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">3</span>    <span class="mi">4</span>     <span class="mi">7</span>  <span class="p">]</span>
-</pre></div>
-</div>
-<ul class="simple">
-<li><p class="sd-card-text">AET is sorted by the <span class="math notranslate nohighlight">\(x\)</span> values</p></li>
-</ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AET</span>        <span class="n">x</span>   <span class="n">N</span>  <span class="n">xstep</span>  <span class="n">Dx</span>   <span class="n">Dy</span>  <span class="n">ymin</span>  <span class="n">ymax</span>
-    <span class="n">e1</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">3</span>   <span class="mi">1</span>   <span class="o">-</span><span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">7</span>    <span class="mi">2</span>     <span class="mi">9</span>  <span class="p">]</span>
-    <span class="n">e5</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">5</span>   <span class="mi">3</span>    <span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">5</span>    <span class="mi">2</span>     <span class="mi">7</span>  <span class="p">]</span>
-    <span class="n">e4</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">7</span>   <span class="mi">1</span>   <span class="o">-</span><span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">3</span>    <span class="mi">4</span>     <span class="mi">7</span>  <span class="p">]</span>
-    <span class="n">e3</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">8</span>   <span class="mi">2</span>    <span class="mi">1</span>    <span class="mi">1</span>    <span class="mi">5</span>    <span class="mi">4</span>     <span class="mi">9</span>  <span class="p">]</span>
-</pre></div>
-</div>
-<ul class="simple">
-<li><p class="sd-card-text">Fill pixels <span class="math notranslate nohighlight">\((3, 6)\)</span> to <span class="math notranslate nohighlight">\((5, 6)\)</span>, <span class="math notranslate nohighlight">\((7, 6)\)</span> and <span class="math notranslate nohighlight">\((8, 6)\)</span></p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(y = 3\)</span></p></li>
+<li><p class="sd-card-text">AET is already sorted by <span class="math notranslate nohighlight">\(x\)</span> value so we fill the pixel at <span class="math notranslate nohighlight">\((4,3)\)</span></p></li>
 </ul>
 <figure class="align-default">
-<a class="reference internal image-reference" href="../_images/scanline_example_6.png"><img alt="../_images/scanline_example_6.png" src="../_images/scanline_example_6.png" style="width: 300px;" /></a>
+<a class="reference internal image-reference" href="../_images/scanline_example_2.png"><img alt="../_images/scanline_example_2.png" src="../_images/scanline_example_2.png" style="width: 250px;" /></a>
 </figure>
 <ul class="simple">
 <li><p class="sd-card-text">Add <span class="math notranslate nohighlight">\(\Delta x\)</span> to <span class="math notranslate nohighlight">\(N\)</span> for all edges in AET</p></li>
 </ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AET</span>        <span class="n">x</span>   <span class="n">N</span>  <span class="n">xstep</span>  <span class="n">Dx</span>   <span class="n">Dy</span>  <span class="n">ymin</span>  <span class="n">ymax</span>
-    <span class="n">e1</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">3</span>   <span class="mi">3</span>   <span class="o">-</span><span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">7</span>    <span class="mi">2</span>     <span class="mi">9</span>  <span class="p">]</span>
-    <span class="n">e5</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">5</span>   <span class="mi">5</span>    <span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">5</span>    <span class="mi">2</span>     <span class="mi">7</span>  <span class="p">]</span>
-    <span class="n">e4</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">7</span>   <span class="mi">3</span>   <span class="o">-</span><span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">3</span>    <span class="mi">4</span>     <span class="mi">7</span>  <span class="p">]</span>
-    <span class="n">e3</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">8</span>   <span class="mi">3</span>    <span class="mi">1</span>    <span class="mi">1</span>    <span class="mi">5</span>    <span class="mi">4</span>     <span class="mi">9</span>  <span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ET</span>
+       <span class="n">x</span>    <span class="n">N</span>  <span class="n">xstep</span>  <span class="n">dx</span>   <span class="n">dy</span>  <span class="n">ymin</span> <span class="n">ymax</span> 
+<span class="n">e2</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">8</span>    <span class="mi">0</span>    <span class="mi">1</span>    <span class="mi">1</span>    <span class="mi">5</span>    <span class="mi">4</span>    <span class="mi">9</span>  <span class="p">]</span>
+<span class="n">e3</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">8</span>    <span class="mi">0</span>   <span class="o">-</span><span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">3</span>    <span class="mi">4</span>    <span class="mi">7</span>  <span class="p">]</span>
+
+<span class="n">AET</span>
+       <span class="n">x</span>    <span class="n">N</span>  <span class="n">xstep</span>  <span class="n">dx</span>   <span class="n">dy</span>  <span class="n">ymin</span> <span class="n">ymax</span> 
+<span class="n">e4</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">4</span>    <span class="mi">4</span>    <span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">5</span>    <span class="mi">2</span>    <span class="mi">7</span>  <span class="p">]</span>
+<span class="n">e5</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">4</span>    <span class="mi">4</span>   <span class="o">-</span><span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">7</span>    <span class="mi">2</span>    <span class="mi">9</span>  <span class="p">]</span>
 </pre></div>
 </div>
 <ul class="simple">
-<li><p class="sd-card-text">Edge e5 has <span class="math notranslate nohighlight">\(N = 5 \geq \Delta y = 5\)</span> so subtract <span class="math notranslate nohighlight">\(\Delta y\)</span> from <span class="math notranslate nohighlight">\(N\)</span> to give <span class="math notranslate nohighlight">\(N = 5 - 5 = 0\)</span> which is less than <span class="math notranslate nohighlight">\(\Delta y\)</span> and add <span class="math notranslate nohighlight">\(x_{step} = 1\)</span> to <span class="math notranslate nohighlight">\(x\)</span> to give <span class="math notranslate nohighlight">\(x = 5 + 1 = 6\)</span></p></li>
-<li><p class="sd-card-text">Edge e4 has <span class="math notranslate nohighlight">\(N = 3 \geq \Delta y = 3\)</span> so subtract <span class="math notranslate nohighlight">\(\Delta y\)</span> from <span class="math notranslate nohighlight">\(N\)</span> to give <span class="math notranslate nohighlight">\(N = 3 - 3 = 0\)</span> which is less than <span class="math notranslate nohighlight">\(\Delta y\)</span> and add <span class="math notranslate nohighlight">\(x_{step} = -1\)</span> to <span class="math notranslate nohighlight">\(x\)</span> to give <span class="math notranslate nohighlight">\(x = 7 - 1 = 6\)</span></p></li>
-<li><p class="sd-card-text">Increment <span class="math notranslate nohighlight">\(y = 6 + 1 = 7\)</span></p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(y = 4\)</span></p></li>
+<li><p class="sd-card-text">Edges e2 and e3 in ET have <span class="math notranslate nohighlight">\(y_{\min} = 4\)</span> so we move these from ET to AET.</p></li>
 </ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AET</span>        <span class="n">x</span>   <span class="n">N</span>  <span class="n">xstep</span>  <span class="n">Dx</span>   <span class="n">Dy</span>  <span class="n">ymin</span>  <span class="n">ymax</span>
-    <span class="n">e1</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">3</span>   <span class="mi">3</span>   <span class="o">-</span><span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">7</span>    <span class="mi">2</span>     <span class="mi">9</span>  <span class="p">]</span>
-    <span class="n">e5</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">6</span>   <span class="mi">0</span>    <span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">5</span>    <span class="mi">2</span>     <span class="mi">7</span>  <span class="p">]</span>
-    <span class="n">e4</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">6</span>   <span class="mi">0</span>   <span class="o">-</span><span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">3</span>    <span class="mi">4</span>     <span class="mi">7</span>  <span class="p">]</span>
-    <span class="n">e3</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">8</span>   <span class="mi">3</span>    <span class="mi">1</span>    <span class="mi">1</span>    <span class="mi">5</span>    <span class="mi">4</span>     <span class="mi">9</span>  <span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AET</span>
+       <span class="n">x</span>    <span class="n">N</span>  <span class="n">xstep</span>  <span class="n">dx</span>   <span class="n">dy</span>  <span class="n">ymin</span> <span class="n">ymax</span> 
+<span class="n">e4</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">4</span>    <span class="mi">4</span>    <span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">5</span>    <span class="mi">2</span>    <span class="mi">7</span>  <span class="p">]</span>
+<span class="n">e5</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">4</span>    <span class="mi">4</span>   <span class="o">-</span><span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">7</span>    <span class="mi">2</span>    <span class="mi">9</span>  <span class="p">]</span>
+<span class="n">e2</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">8</span>    <span class="mi">0</span>    <span class="mi">1</span>    <span class="mi">1</span>    <span class="mi">5</span>    <span class="mi">4</span>    <span class="mi">9</span>  <span class="p">]</span>
+<span class="n">e3</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">8</span>    <span class="mi">0</span>   <span class="o">-</span><span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">3</span>    <span class="mi">4</span>    <span class="mi">7</span>  <span class="p">]</span>
 </pre></div>
 </div>
 <ul class="simple">
-<li><p class="sd-card-text">Fill pixels <span class="math notranslate nohighlight">\((3, 7)\)</span> to <span class="math notranslate nohighlight">\((6, 7)\)</span> and <span class="math notranslate nohighlight">\((6, 7)\)</span> to <span class="math notranslate nohighlight">\((8, 7)\)</span></p></li>
+<li><p class="sd-card-text">AET is already sorted by <span class="math notranslate nohighlight">\(x\)</span> value so we fill the pixels at <span class="math notranslate nohighlight">\((4,4)\)</span> and <span class="math notranslate nohighlight">\((8,4)\)</span></p></li>
 </ul>
 <figure class="align-default">
-<a class="reference internal image-reference" href="../_images/scanline_example_7.png"><img alt="../_images/scanline_example_7.png" src="../_images/scanline_example_7.png" style="width: 300px;" /></a>
+<a class="reference internal image-reference" href="../_images/scanline_example_3.png"><img alt="../_images/scanline_example_3.png" src="../_images/scanline_example_3.png" style="width: 250px;" /></a>
 </figure>
 <ul class="simple">
-<li><p class="sd-card-text">Edges e5 and e4 have <span class="math notranslate nohighlight">\(y_{\max} = y\)</span> so are removed from AET</p></li>
+<li><p class="sd-card-text">Add <span class="math notranslate nohighlight">\(\Delta x\)</span> to <span class="math notranslate nohighlight">\(N\)</span> for all edges in AET.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AET</span>
+       <span class="n">x</span>    <span class="n">N</span>  <span class="n">xstep</span>  <span class="n">dx</span>   <span class="n">dy</span>  <span class="n">ymin</span> <span class="n">ymax</span> 
+<span class="n">e4</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">4</span>    <span class="mi">6</span>    <span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">5</span>    <span class="mi">2</span>    <span class="mi">7</span>  <span class="p">]</span>
+<span class="n">e5</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">4</span>    <span class="mi">6</span>   <span class="o">-</span><span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">7</span>    <span class="mi">2</span>    <span class="mi">9</span>  <span class="p">]</span>
+<span class="n">e2</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">8</span>    <span class="mi">1</span>    <span class="mi">1</span>    <span class="mi">1</span>    <span class="mi">5</span>    <span class="mi">4</span>    <span class="mi">9</span>  <span class="p">]</span>
+<span class="n">e3</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">8</span>    <span class="mi">2</span>   <span class="o">-</span><span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">3</span>    <span class="mi">4</span>    <span class="mi">7</span>  <span class="p">]</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p class="sd-card-text">Edge e4 has <span class="math notranslate nohighlight">\(N &gt; \Delta y\)</span> so <span class="math notranslate nohighlight">\(x=x+x_\text{step}=4+1=5\)</span> and <span class="math notranslate nohighlight">\(N = N - \Delta y = 6 - 5 = 1\)</span></p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AET</span>
+       <span class="n">x</span>    <span class="n">N</span>  <span class="n">xstep</span>  <span class="n">dx</span>   <span class="n">dy</span>  <span class="n">ymin</span> <span class="n">ymax</span> 
+<span class="n">e4</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">5</span>    <span class="mi">1</span>    <span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">5</span>    <span class="mi">2</span>    <span class="mi">7</span>  <span class="p">]</span>
+<span class="n">e5</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">4</span>    <span class="mi">6</span>   <span class="o">-</span><span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">7</span>    <span class="mi">2</span>    <span class="mi">9</span>  <span class="p">]</span>
+<span class="n">e2</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">8</span>    <span class="mi">1</span>    <span class="mi">1</span>    <span class="mi">1</span>    <span class="mi">5</span>    <span class="mi">4</span>    <span class="mi">9</span>  <span class="p">]</span>
+<span class="n">e3</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">8</span>    <span class="mi">2</span>   <span class="o">-</span><span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">3</span>    <span class="mi">4</span>    <span class="mi">7</span>  <span class="p">]</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(y = 5\)</span></p></li>
+<li><p class="sd-card-text">Sort AET by the <span class="math notranslate nohighlight">\(x\)</span> value</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AET</span>
+       <span class="n">x</span>    <span class="n">N</span>  <span class="n">xstep</span>  <span class="n">dx</span>   <span class="n">dy</span>  <span class="n">ymin</span> <span class="n">ymax</span> 
+<span class="n">e5</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">4</span>    <span class="mi">6</span>   <span class="o">-</span><span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">7</span>    <span class="mi">2</span>    <span class="mi">9</span>  <span class="p">]</span>
+<span class="n">e4</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">5</span>    <span class="mi">1</span>    <span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">5</span>    <span class="mi">2</span>    <span class="mi">7</span>  <span class="p">]</span>
+<span class="n">e2</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">8</span>    <span class="mi">1</span>    <span class="mi">1</span>    <span class="mi">1</span>    <span class="mi">5</span>    <span class="mi">4</span>    <span class="mi">9</span>  <span class="p">]</span>
+<span class="n">e3</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">8</span>    <span class="mi">2</span>   <span class="o">-</span><span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">3</span>    <span class="mi">4</span>    <span class="mi">7</span>  <span class="p">]</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p class="sd-card-text">We fill pixels <span class="math notranslate nohighlight">\((4,5)\)</span>, <span class="math notranslate nohighlight">\((5,5)\)</span> and <span class="math notranslate nohighlight">\((8,5)\)</span></p></li>
+</ul>
+<figure class="align-default">
+<a class="reference internal image-reference" href="../_images/scanline_example_4.png"><img alt="../_images/scanline_example_4.png" src="../_images/scanline_example_4.png" style="width: 250px;" /></a>
+</figure>
+<ul class="simple">
+<li><p class="sd-card-text">Add <span class="math notranslate nohighlight">\(\Delta x\)</span> to <span class="math notranslate nohighlight">\(N\)</span> for all edges in AET.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AET</span>
+       <span class="n">x</span>    <span class="n">N</span>  <span class="n">xstep</span>  <span class="n">dx</span>   <span class="n">dy</span>  <span class="n">ymin</span> <span class="n">ymax</span> 
+<span class="n">e5</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">4</span>    <span class="mi">8</span>   <span class="o">-</span><span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">7</span>    <span class="mi">2</span>    <span class="mi">9</span>  <span class="p">]</span>
+<span class="n">e4</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">5</span>    <span class="mi">3</span>    <span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">5</span>    <span class="mi">2</span>    <span class="mi">7</span>  <span class="p">]</span>
+<span class="n">e2</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">8</span>    <span class="mi">2</span>    <span class="mi">1</span>    <span class="mi">1</span>    <span class="mi">5</span>    <span class="mi">4</span>    <span class="mi">9</span>  <span class="p">]</span>
+<span class="n">e3</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">8</span>    <span class="mi">4</span>   <span class="o">-</span><span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">3</span>    <span class="mi">4</span>    <span class="mi">7</span>  <span class="p">]</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p class="sd-card-text">Edge e5 has <span class="math notranslate nohighlight">\(N &gt; \Delta y\)</span> so <span class="math notranslate nohighlight">\(x = x + x_\text{step} = 4 - 1 = 3\)</span> and <span class="math notranslate nohighlight">\(N = N - \Delta y = 8 - 7 = 1\)</span></p></li>
+<li><p class="sd-card-text">Edge e3 has <span class="math notranslate nohighlight">\(N &gt; \Delta y\)</span> so <span class="math notranslate nohighlight">\(x = x + x_\text{step} = 8 - 1 = 7\)</span> and <span class="math notranslate nohighlight">\(N = N - \Delta y = 4 - 3 = 1\)</span></p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AET</span>
+       <span class="n">x</span>    <span class="n">N</span>  <span class="n">xstep</span>  <span class="n">dx</span>   <span class="n">dy</span>  <span class="n">ymin</span> <span class="n">ymax</span> 
+<span class="n">e5</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">3</span>    <span class="mi">1</span>   <span class="o">-</span><span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">7</span>    <span class="mi">2</span>    <span class="mi">9</span>  <span class="p">]</span>
+<span class="n">e4</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">5</span>    <span class="mi">3</span>    <span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">5</span>    <span class="mi">2</span>    <span class="mi">7</span>  <span class="p">]</span>
+<span class="n">e2</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">8</span>    <span class="mi">2</span>    <span class="mi">1</span>    <span class="mi">1</span>    <span class="mi">5</span>    <span class="mi">4</span>    <span class="mi">9</span>  <span class="p">]</span>
+<span class="n">e3</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">7</span>    <span class="mi">1</span>   <span class="o">-</span><span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">3</span>    <span class="mi">4</span>    <span class="mi">7</span>  <span class="p">]</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(y = 6\)</span></p></li>
+<li><p class="sd-card-text">Sort AET by <span class="math notranslate nohighlight">\(x\)</span> value</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AET</span>
+       <span class="n">x</span>    <span class="n">N</span>  <span class="n">xstep</span>  <span class="n">dx</span>   <span class="n">dy</span>  <span class="n">ymin</span> <span class="n">ymax</span> 
+<span class="n">e5</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">3</span>    <span class="mi">1</span>   <span class="o">-</span><span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">7</span>    <span class="mi">2</span>    <span class="mi">9</span>  <span class="p">]</span>
+<span class="n">e4</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">5</span>    <span class="mi">3</span>    <span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">5</span>    <span class="mi">2</span>    <span class="mi">7</span>  <span class="p">]</span>
+<span class="n">e3</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">7</span>    <span class="mi">1</span>   <span class="o">-</span><span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">3</span>    <span class="mi">4</span>    <span class="mi">7</span>  <span class="p">]</span>
+<span class="n">e2</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">8</span>    <span class="mi">2</span>    <span class="mi">1</span>    <span class="mi">1</span>    <span class="mi">5</span>    <span class="mi">4</span>    <span class="mi">9</span>  <span class="p">]</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p class="sd-card-text">We fill <span class="math notranslate nohighlight">\((3,6)\)</span> to <span class="math notranslate nohighlight">\((5,6)\)</span>, <span class="math notranslate nohighlight">\((7,6)\)</span> and <span class="math notranslate nohighlight">\((8,6)\)</span></p></li>
+</ul>
+<figure class="align-default">
+<a class="reference internal image-reference" href="../_images/scanline_example_5.png"><img alt="../_images/scanline_example_5.png" src="../_images/scanline_example_5.png" style="width: 250px;" /></a>
+</figure>
+<ul class="simple">
 <li><p class="sd-card-text">Add <span class="math notranslate nohighlight">\(\Delta x\)</span> to <span class="math notranslate nohighlight">\(N\)</span> for all edges in AET</p></li>
-<li><p class="sd-card-text">Increment <span class="math notranslate nohighlight">\(y = 7 + 1 = 8\)</span></p></li>
 </ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AET</span>        <span class="n">x</span>   <span class="n">N</span>  <span class="n">xstep</span>  <span class="n">Dx</span>   <span class="n">Dy</span>  <span class="n">ymin</span>  <span class="n">ymax</span>
-    <span class="n">e1</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">3</span>   <span class="mi">5</span>   <span class="o">-</span><span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">7</span>    <span class="mi">2</span>     <span class="mi">9</span>  <span class="p">]</span>
-    <span class="n">e3</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">8</span>   <span class="mi">4</span>    <span class="mi">1</span>    <span class="mi">1</span>    <span class="mi">5</span>    <span class="mi">4</span>     <span class="mi">9</span>  <span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AET</span>
+       <span class="n">x</span>    <span class="n">N</span>  <span class="n">xstep</span>  <span class="n">dx</span>   <span class="n">dy</span>  <span class="n">ymin</span> <span class="n">ymax</span> 
+<span class="n">e5</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">3</span>    <span class="mi">3</span>   <span class="o">-</span><span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">7</span>    <span class="mi">2</span>    <span class="mi">9</span>  <span class="p">]</span>
+<span class="n">e4</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">5</span>    <span class="mi">5</span>    <span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">5</span>    <span class="mi">2</span>    <span class="mi">7</span>  <span class="p">]</span>
+<span class="n">e3</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">7</span>    <span class="mi">3</span>   <span class="o">-</span><span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">3</span>    <span class="mi">4</span>    <span class="mi">7</span>  <span class="p">]</span>
+<span class="n">e2</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">8</span>    <span class="mi">3</span>    <span class="mi">1</span>    <span class="mi">1</span>    <span class="mi">5</span>    <span class="mi">4</span>    <span class="mi">9</span>  <span class="p">]</span>
 </pre></div>
 </div>
 <ul class="simple">
-<li><p class="sd-card-text">Fill pixels <span class="math notranslate nohighlight">\((3, 8)\)</span> to <span class="math notranslate nohighlight">\((8, 8)\)</span></p></li>
+<li><p class="sd-card-text">Edge e3 has <span class="math notranslate nohighlight">\(N \geq \Delta y\)</span> so <span class="math notranslate nohighlight">\(x = x + x_\text{step} = 7 - 1 = 6\)</span> and <span class="math notranslate nohighlight">\(N = N - \Delta y = 3 - 3 = 0\)</span></p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AET</span>
+       <span class="n">x</span>    <span class="n">N</span>  <span class="n">xstep</span>  <span class="n">dx</span>   <span class="n">dy</span>  <span class="n">ymin</span> <span class="n">ymax</span> 
+<span class="n">e5</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">3</span>    <span class="mi">3</span>   <span class="o">-</span><span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">7</span>    <span class="mi">2</span>    <span class="mi">9</span>  <span class="p">]</span>
+<span class="n">e4</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">6</span>    <span class="mi">0</span>    <span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">5</span>    <span class="mi">2</span>    <span class="mi">7</span>  <span class="p">]</span>
+<span class="n">e3</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">6</span>    <span class="mi">0</span>   <span class="o">-</span><span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">3</span>    <span class="mi">4</span>    <span class="mi">7</span>  <span class="p">]</span>
+<span class="n">e2</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">8</span>    <span class="mi">3</span>    <span class="mi">1</span>    <span class="mi">1</span>    <span class="mi">5</span>    <span class="mi">4</span>    <span class="mi">9</span>  <span class="p">]</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(y = 7\)</span></p></li>
+<li><p class="sd-card-text">We fill pixels <span class="math notranslate nohighlight">\((3,7)\)</span> to <span class="math notranslate nohighlight">\((8,7)\)</span></p></li>
 </ul>
 <figure class="align-default">
-<a class="reference internal image-reference" href="../_images/scanline_example_8.png"><img alt="../_images/scanline_example_8.png" src="../_images/scanline_example_8.png" style="width: 300px;" /></a>
+<a class="reference internal image-reference" href="../_images/scanline_example_6.png"><img alt="../_images/scanline_example_6.png" src="../_images/scanline_example_6.png" style="width: 250px;" /></a>
+</figure>
+<ul class="simple">
+<li><p class="sd-card-text">Edges e3 and e4 both have <span class="math notranslate nohighlight">\(y_{\max}=7\)</span> so remove these from AET</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AET</span>
+       <span class="n">x</span>    <span class="n">N</span>  <span class="n">xstep</span>  <span class="n">dx</span>   <span class="n">dy</span>  <span class="n">ymin</span> <span class="n">ymax</span> 
+<span class="n">e5</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">3</span>    <span class="mi">3</span>   <span class="o">-</span><span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">7</span>    <span class="mi">2</span>    <span class="mi">9</span>  <span class="p">]</span>
+<span class="n">e2</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">8</span>    <span class="mi">3</span>    <span class="mi">1</span>    <span class="mi">1</span>    <span class="mi">5</span>    <span class="mi">4</span>    <span class="mi">9</span>  <span class="p">]</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p class="sd-card-text">Add <span class="math notranslate nohighlight">\(\Delta x\)</span> to <span class="math notranslate nohighlight">\(N\)</span> for all edges in AET</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AET</span>
+       <span class="n">x</span>    <span class="n">N</span>  <span class="n">xstep</span>  <span class="n">dx</span>   <span class="n">dy</span>  <span class="n">ymin</span> <span class="n">ymax</span> 
+<span class="n">e5</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">3</span>    <span class="mi">5</span>   <span class="o">-</span><span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">7</span>    <span class="mi">2</span>    <span class="mi">9</span>  <span class="p">]</span>
+<span class="n">e2</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">8</span>    <span class="mi">4</span>    <span class="mi">1</span>    <span class="mi">1</span>    <span class="mi">5</span>    <span class="mi">4</span>    <span class="mi">9</span>  <span class="p">]</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(y = 8\)</span></p></li>
+<li><p class="sd-card-text">We fill pixels <span class="math notranslate nohighlight">\((3,8)\)</span> to <span class="math notranslate nohighlight">\((8,8)\)</span></p></li>
+</ul>
+<figure class="align-default">
+<a class="reference internal image-reference" href="../_images/scanline_example_7.png"><img alt="../_images/scanline_example_7.png" src="../_images/scanline_example_7.png" style="width: 250px;" /></a>
 </figure>
 <ul class="simple">
 <li><p class="sd-card-text">Add <span class="math notranslate nohighlight">\(\Delta x\)</span> to <span class="math notranslate nohighlight">\(N\)</span> for all edges in AET</p></li>
-<li><p class="sd-card-text">Increment <span class="math notranslate nohighlight">\(y = 7 + 1 = 8\)</span></p></li>
 </ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AET</span>        <span class="n">x</span>   <span class="n">N</span>  <span class="n">xstep</span>  <span class="n">Dx</span>   <span class="n">Dy</span>  <span class="n">ymin</span>  <span class="n">ymax</span>
-    <span class="n">e1</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">3</span>   <span class="mi">7</span>   <span class="o">-</span><span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">7</span>    <span class="mi">2</span>     <span class="mi">9</span>  <span class="p">]</span>
-    <span class="n">e3</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">8</span>   <span class="mi">5</span>    <span class="mi">1</span>    <span class="mi">1</span>    <span class="mi">5</span>    <span class="mi">4</span>     <span class="mi">9</span>  <span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AET</span>
+       <span class="n">x</span>    <span class="n">N</span>  <span class="n">xstep</span>  <span class="n">dx</span>   <span class="n">dy</span>  <span class="n">ymin</span> <span class="n">ymax</span> 
+<span class="n">e5</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">3</span>    <span class="mi">7</span>   <span class="o">-</span><span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">7</span>    <span class="mi">2</span>    <span class="mi">9</span>  <span class="p">]</span>
+<span class="n">e2</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">8</span>    <span class="mi">5</span>    <span class="mi">1</span>    <span class="mi">1</span>    <span class="mi">5</span>    <span class="mi">4</span>    <span class="mi">9</span>  <span class="p">]</span>
 </pre></div>
 </div>
 <ul class="simple">
-<li><p class="sd-card-text">Edge e1 has <span class="math notranslate nohighlight">\(N = 7 \geq \Delta y = 7\)</span> so subtract <span class="math notranslate nohighlight">\(\Delta y\)</span> from <span class="math notranslate nohighlight">\(N\)</span> to give <span class="math notranslate nohighlight">\(N = 7 - 7 = 0\)</span> which is less than <span class="math notranslate nohighlight">\(\Delta y\)</span> so add <span class="math notranslate nohighlight">\(x_{step} = -1\)</span> to <span class="math notranslate nohighlight">\(x\)</span> to give <span class="math notranslate nohighlight">\(x = 3 - 1 = 2\)</span></p></li>
-<li><p class="sd-card-text">Edge e3 has <span class="math notranslate nohighlight">\(N = 5 \geq \Delta y = 5\)</span> so subtract <span class="math notranslate nohighlight">\(\Delta y\)</span> from <span class="math notranslate nohighlight">\(N\)</span> to give <span class="math notranslate nohighlight">\(N = 5 - 5 = 0\)</span> which is less than <span class="math notranslate nohighlight">\(\Delta y\)</span> so add <span class="math notranslate nohighlight">\(x_{step} = 1\)</span> to <span class="math notranslate nohighlight">\(x\)</span> to give <span class="math notranslate nohighlight">\(x = 8 + 1 = 9\)</span></p></li>
-<li><p class="sd-card-text">Increment <span class="math notranslate nohighlight">\(y = 7 + 1 = 8\)</span></p></li>
+<li><p class="sd-card-text">Edge e5 has <span class="math notranslate nohighlight">\(N \geq \Delta y\)</span> to <span class="math notranslate nohighlight">\(x = x + x_\text{step} = 3 - 1 = 2\)</span> and <span class="math notranslate nohighlight">\(N = N - \Delta y = 7 - 7 = 0\)</span></p></li>
+<li><p class="sd-card-text">Edge e2 has <span class="math notranslate nohighlight">\(N \geq \Delta y\)</span> so <span class="math notranslate nohighlight">\(x = x + x_\text{step} = 8 + 1 = 9\)</span> and <span class="math notranslate nohighlight">\(N = N - \Delta y = 5 - 5 = 0\)</span></p></li>
 </ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AET</span>        <span class="n">x</span>   <span class="n">N</span>  <span class="n">xstep</span>  <span class="n">Dx</span>   <span class="n">Dy</span>  <span class="n">ymin</span>  <span class="n">ymax</span>
-    <span class="n">e1</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">2</span>   <span class="mi">0</span>   <span class="o">-</span><span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">7</span>    <span class="mi">2</span>     <span class="mi">9</span>  <span class="p">]</span>
-    <span class="n">e3</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">9</span>   <span class="mi">0</span>    <span class="mi">1</span>    <span class="mi">1</span>    <span class="mi">5</span>    <span class="mi">4</span>     <span class="mi">9</span>  <span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AET</span>
+       <span class="n">x</span>    <span class="n">N</span>  <span class="n">xstep</span>  <span class="n">dx</span>   <span class="n">dy</span>  <span class="n">ymin</span> <span class="n">ymax</span> 
+<span class="n">e5</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">2</span>    <span class="mi">0</span>   <span class="o">-</span><span class="mi">1</span>    <span class="mi">2</span>    <span class="mi">7</span>    <span class="mi">2</span>    <span class="mi">9</span>  <span class="p">]</span>
+<span class="n">e2</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">9</span>    <span class="mi">0</span>    <span class="mi">1</span>    <span class="mi">1</span>    <span class="mi">5</span>    <span class="mi">4</span>    <span class="mi">9</span>  <span class="p">]</span>
 </pre></div>
 </div>
 <ul class="simple">
-<li><p class="sd-card-text">Fill pixels <span class="math notranslate nohighlight">\((2, 9)\)</span> to <span class="math notranslate nohighlight">\((9, 9)\)</span>.</p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(y = 9\)</span></p></li>
+<li><p class="sd-card-text">We fill pixels <span class="math notranslate nohighlight">\((2,9)\)</span> to <span class="math notranslate nohighlight">\((9,9)\)</span></p></li>
 </ul>
 <figure class="align-default">
-<a class="reference internal image-reference" href="../_images/scanline_example_9.png"><img alt="../_images/scanline_example_9.png" src="../_images/scanline_example_9.png" style="width: 300px;" /></a>
+<a class="reference internal image-reference" href="../_images/scanline_example_8.png"><img alt="../_images/scanline_example_8.png" src="../_images/scanline_example_8.png" style="width: 250px;" /></a>
 </figure>
 <ul class="simple">
-<li><p class="sd-card-text">Both edges e1 and e3 have <span class="math notranslate nohighlight">\(y_{\max} = y\)</span> so are removed from AET</p></li>
-<li><p class="sd-card-text">AET is now empty so the algorithm terminates</p></li>
+<li><p class="sd-card-text">Edges e2 and e5 both have <span class="math notranslate nohighlight">\(y_{\max} = 9\)</span> so remove these from AET. AET is now empty so the algorithm terminates.</p></li>
 </ul>
 </div>
 </details></section>

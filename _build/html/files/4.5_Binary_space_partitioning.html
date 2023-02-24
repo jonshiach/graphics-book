@@ -373,17 +373,6 @@ title="Toggle navigation"
         
     </div>
     <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-    </ul>
-  </div>
-</div>
-
 <button onclick="toggleFullScreen()"
   class="headerbtn"
   data-toggle="tooltip"
@@ -406,7 +395,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/files/4.5_Binary_space_partitioning.ipynb"
+        <a href="../_sources/files/4.5_Binary_space_partitioning.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -417,7 +406,7 @@ title="Download source file"
 <span class="headerbtn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="headerbtn__text-container">.ipynb</span>
+<span class="headerbtn__text-container">.md</span>
 </a>
 
       </li>
@@ -529,8 +518,8 @@ title="Print to PDF"
 <p><span class="caption-number">Fig. 86 </span><span class="caption-text"><em>Doom</em> by id Software was the first computer game to use binary space partitioning for removing hidden surfaces</span><a class="headerlink" href="#doom-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<div class="proof definition admonition" id="definition-0">
-<p class="admonition-title"><span class="caption-number">Definition 21 </span> (Convex set of polygons)</p>
+<div class="proof definition admonition" id="convex-set-definition">
+<p class="admonition-title"><span class="caption-number">Definition 23 </span> (Convex set of polygons)</p>
 <section class="definition-content" id="proof-content">
 <p>A <strong>convex set</strong> of polygons is a set of polygons where each polygon is front facing to every other polygon.</p>
 </section>
@@ -552,8 +541,8 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-<div class="proof definition admonition" id="definition-1">
-<p class="admonition-title"><span class="caption-number">Definition 22 </span> (Hyperplane)</p>
+<div class="proof definition admonition" id="hyperplane-definition">
+<p class="admonition-title"><span class="caption-number">Definition 24 </span> (Hyperplane)</p>
 <section class="definition-content" id="proof-content">
 <p>A <strong>hyperplane</strong> is a subspace with a dimension one less than that of its vector space.</p>
 </section>
@@ -718,11 +707,11 @@ Solution<div class="sd-summary-down docutils">
 <li><p class="sd-card-text"><span class="math notranslate nohighlight">\(\color{red}\{A_1,T\}\)</span> is a leaf node so we render it</p></li>
 </ul>
 <p class="sd-card-text">All nodes have been rendered so the tree traversal terminates. The rendering order is</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     &amp; \{ J, K\}, \{H, L\}, \{G,M\}, \{F,N\}, \{O_1\}, \{E,I\}, \{A_2, B, C\}, \\
     &amp; \{D\}, \{O_2,P\}, \{Q\}, \{R\}, \{S\}, \{A_1,T\}
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 </div>
 </details><p>(ii)   <span class="math notranslate nohighlight">\(\mathbf{q}\)</span></p>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
@@ -757,11 +746,11 @@ Solution<div class="sd-summary-down docutils">
 <li><p class="sd-card-text"><span class="math notranslate nohighlight">\(\color{red}\{J,K\}\)</span> is a leaf node so render it.</p></li>
 </ul>
 <p class="sd-card-text">All nodes have been rendered so the tree traversal terminates. The rendering order is</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     &amp; \{A_1, T\}, \{S\}, \{R\}, \{Q\}, \{O_2, P\}, \{D\}, \{A_2, B, C\}, \\
     &amp; \{E, I\}, \{O_1\}, \{F,N\} \{G, M\}, \{H, L\}, \{J, K\}
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 </div>
 </details></section>
 </div></section>

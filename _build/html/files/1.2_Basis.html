@@ -373,17 +373,6 @@ title="Toggle navigation"
         
     </div>
     <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-    </ul>
-  </div>
-</div>
-
 <button onclick="toggleFullScreen()"
   class="headerbtn"
   data-toggle="tooltip"
@@ -406,7 +395,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/files/1.2_Basis.ipynb"
+        <a href="../_sources/files/1.2_Basis.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -417,7 +406,7 @@ title="Download source file"
 <span class="headerbtn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="headerbtn__text-container">.ipynb</span>
+<span class="headerbtn__text-container">.md</span>
 </a>
 
       </li>
@@ -507,7 +496,7 @@ title="Print to PDF"
   <section class="tex2jax_ignore mathjax_ignore" id="basis">
 <span id="basis-section"></span><h1>Basis<a class="headerlink" href="#basis" title="Permalink to this headline">#</a></h1>
 <p>Imagine that we have a <a class="reference internal" href="3.0_Virtual_environments.html#virtual-environments-section"><span class="std std-ref">virtual environment</span></a> and we need to view it from a given point within the environment. To represent the environment as it should be seen from this point will require us to calculate the co-ordinates of objects in the environment in relation to where we are viewing it from (known as the <a class="reference internal" href="3.3_Camera_space.html#camera-space-section"><span class="std std-ref">camera space</span></a>). To do this we make use of vector basis and the <a class="reference internal" href="#change-of-basis-section"><span class="std std-ref">change of basis</span></a>.</p>
-<div class="proof definition note admonition" id="definition-0">
+<div class="proof definition admonition" id="linear-independence-definition">
 <p class="admonition-title"><span class="caption-number">Definition 7 </span> (Linear independence)</p>
 <section class="definition-content" id="proof-content">
 <p>A set of vectors <span class="math notranslate nohighlight">\(\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_n\)</span> in a vector space <span class="math notranslate nohighlight">\(V\)</span> are <strong>linearly independent</strong> if the only solution to the equation</p>
@@ -521,28 +510,28 @@ title="Print to PDF"
 <p>A set of vectors are linearly independent if <span class="math notranslate nohighlight">\(\det (\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_n) \neq 0\)</span>.</p>
 </section>
 </div><p>A <strong>basis</strong> of a vector space <span class="math notranslate nohighlight">\(V\)</span> is the set of vectors <span class="math notranslate nohighlight">\(\{ \mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_n \}\)</span> which are linearly independent (i.e., no vector in the basis can be represented as a linear combination of the other vectors in the basis) and span <span class="math notranslate nohighlight">\(V\)</span>. Every other vector <span class="math notranslate nohighlight">\(\mathbf{u}\)</span> in <span class="math notranslate nohighlight">\(V\)</span> can be expressed as a unique linear combination of the vectors in the basis, i.e.,</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[ \begin{align*}
     \mathbf{u} = \alpha_1 \mathbf{v}_1 + \alpha_2 \mathbf{v}_2 + \cdots + \alpha_n \mathbf{v}_n.
-\end{align*}\]</div>
+\end{align*} \]</div>
 <p>where <span class="math notranslate nohighlight">\(\alpha_i \in \mathbb{R}\)</span>. The <strong>dimension</strong> of a vector space <span class="math notranslate nohighlight">\(V\)</span> is the number of vectors in the basis. For example, the basis for the Euclidean space <span class="math notranslate nohighlight">\(\mathbb{R}^3\)</span> is commonly denoted as <span class="math notranslate nohighlight">\(\{ \mathbf{i}, \mathbf{j}, \mathbf{k} \}\)</span> where</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     \mathbf{i} &amp;= \begin{pmatrix} 1 \\ 0 \\ 0 \end{pmatrix}, &amp;
     \mathbf{j} &amp;= \begin{pmatrix} 0 \\ 1 \\ 0 \end{pmatrix}, &amp;
     \mathbf{k} &amp;= \begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix},
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p>so <span class="math notranslate nohighlight">\(\mathbb{R}^3\)</span> is known as a three-dimensional Euclidean space. The basis <span class="math notranslate nohighlight">\(\{ \mathbf{i}, \mathbf{j}, \mathbf{k} \}\)</span> is the simplest basis for <span class="math notranslate nohighlight">\(\mathbb{R^3}\)</span> in that it has the smallest number of non-zero values and those values are 1s. This basis is known as the standard basis.</p>
-<div class="proof definition note admonition" id="definition-2">
+<div class="proof definition admonition" id="standard-basis-definition">
 <p class="admonition-title"><span class="caption-number">Definition 8 </span> (The standard basis)</p>
 <section class="definition-content" id="proof-content">
 <p>The <strong>standard basis</strong> for a vector space <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span> is <span class="math notranslate nohighlight">\(E = \{ \mathbf{e}_1, \mathbf{e}_2, \ldots, \mathbf{e}_n \}\)</span> where <span class="math notranslate nohighlight">\(\mathbf{e}_i\)</span> is column <span class="math notranslate nohighlight">\(i\)</span> of the identity matrix, i.e.,</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     \mathbf{e}_1 &amp;= \begin{pmatrix} 1  \\ 0 \\ \vdots \\ 0 \end{pmatrix}, &amp;
     \mathbf{e}_2 &amp;= \begin{pmatrix} 0 \\ 1 \\ \vdots \\ 0 \end{pmatrix}, &amp; \ldots, &amp;&amp;
     \mathbf{e}_n &amp;= \begin{pmatrix} 0 \\ \vdots \\ 0 \\ 1 \end{pmatrix}.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p>Note that in <span class="math notranslate nohighlight">\(\mathbb{R}^3\)</span> it is common to use <span class="math notranslate nohighlight">\(\mathbf{i} = \mathbf{e}_1\)</span>, <span class="math notranslate nohighlight">\(\mathbf{j} = \mathbf{e}_2\)</span> and <span class="math notranslate nohighlight">\(\mathbf{k} = \mathbf{e}_3\)</span>.</p>
 </section>
 </div><section id="change-of-basis">
@@ -554,13 +543,13 @@ title="Print to PDF"
 </figcaption>
 </figure>
 <p>Sometimes it is useful to write a vector with respect to a different basis which is known as the <strong>change of basis</strong>. Consider <a class="reference internal" href="#change-of-basis-figure"><span class="std std-numref">Fig. 10</span></a> where the vector <span class="math notranslate nohighlight">\(\mathbf{v} = (v_1,v_2)\)</span> is represented with respect to the standard basis <span class="math notranslate nohighlight">\(E=\{\mathbf{e}_1, \mathbf{e}_2\}\)</span> which is denoted by the subscript notation <span class="math notranslate nohighlight">\([(v_1,v_2)]_E\)</span>. The same vector can be represent with respect to a different basis <span class="math notranslate nohighlight">\(U = \{\mathbf{u}_1, \mathbf{u}_2\}\)</span> by the vector <span class="math notranslate nohighlight">\([(a_1, a_2)]_U\)</span>. Changing the basis from <span class="math notranslate nohighlight">\(E\)</span> to <span class="math notranslate nohighlight">\(U\)</span> requires us to calculate the values of <span class="math notranslate nohighlight">\(a_1\)</span> and <span class="math notranslate nohighlight">\(a_2\)</span>, i.e., in <span class="math notranslate nohighlight">\(\mathbb{R}^3\)</span> we solve</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[ \begin{align*}
     a_1 \mathbf{u}_1 + a_2 \mathbf{u}_2 + a_3 \mathbf{u}_3 = [\mathbf{v}]_E 
-\end{align*}\]</div>
+\end{align*} \]</div>
 <p>This is a system of linear equations which we can write as a matrix equation</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     \begin{pmatrix}
         \uparrow &amp; \uparrow &amp; &amp; \uparrow \\
         \mathbf{u}_1 &amp; \mathbf{u}_2 &amp; \cdots &amp; \mathbf{u}_n \\
@@ -568,19 +557,19 @@ title="Print to PDF"
     \end{pmatrix}
     \begin{pmatrix} a_1 \\ \vdots \\ a_n \end{pmatrix} =
     \begin{pmatrix} v_1 \\ \vdots \\ v_n \end{pmatrix}.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p>We can solve this system by inverting the coefficient matrix. Using <a href="https://jonshiach.github.io/LA-book/2_Systems_of_Linear_Equations/2.6_Gauss_Jordan_elimination.html" target="_blank">Gauss-Jordan elimination</a> we form the augmented matrix</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     \left( \begin{array}{cccc|cccc}
         \uparrow &amp; \uparrow &amp; &amp; \uparrow &amp; \uparrow &amp; \uparrow &amp; &amp; \uparrow \\
         \mathbf{u}_1 &amp; \mathbf{u}_2 &amp; \cdots &amp; \mathbf{u}_n &amp; \mathbf{e}_1 &amp; \mathbf{e}_2 &amp; \cdots &amp; \mathbf{e}_n \\
         \downarrow &amp; \downarrow &amp; &amp; \downarrow &amp; \downarrow &amp; \downarrow &amp; &amp; \downarrow
     \end{array} \right)
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p>and row reduce to reduced row echelon form. Note that the matrix to the right hand side of the partition is the identity matrix. Then <span class="math notranslate nohighlight">\([\mathbf{v}]_U\)</span> can be calculated using</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     [\mathbf{v}]_U &amp;= 
     \begin{pmatrix}
         \uparrow &amp; \uparrow &amp; &amp; \uparrow \\
@@ -588,7 +577,7 @@ title="Print to PDF"
         \downarrow &amp; \downarrow &amp; &amp; \downarrow
     \end{pmatrix}^{-1}
     [\mathbf{v}]_E.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p>The square matrix here is known as the <strong>change of basis matrix</strong> that changes the basis from <span class="math notranslate nohighlight">\(E\)</span> to <span class="math notranslate nohighlight">\(U\)</span> and is denoted by <span class="math notranslate nohighlight">\(A_{E \to U}\)</span>.</p>
 <div class="proof example seealso admonition" id="change-of-basis-example-1">
 <p class="admonition-title"><span class="caption-number">Example 5 </span></p>
@@ -602,16 +591,16 @@ Solution<div class="sd-summary-down docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
 <p class="sd-card-text">We need to solve the system</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     \alpha_1 \begin{pmatrix} 1 \\ 1 \\ 0 \end{pmatrix} + 
     \alpha_2 \begin{pmatrix} 1 \\ -1 \\ 1 \end{pmatrix} +
     \alpha_3 \begin{pmatrix} 1 \\ -1 \\ -2 \end{pmatrix} =
     \begin{pmatrix} 4 \\ 0 \\ 5 \end{pmatrix},
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p class="sd-card-text">which can be written as the matrix equation</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     \begin{pmatrix}
         1 &amp; 1 &amp; 1 \\
         1 &amp; -1 &amp; -1 \\
@@ -619,10 +608,10 @@ Solution<div class="sd-summary-down docutils">
     \end{pmatrix}
     \begin{pmatrix} \alpha_1 \\ \alpha_2 \\ \alpha_3 \end{pmatrix} =
     \begin{pmatrix} 4 \\ 0 \\ 5 \end{pmatrix},
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p class="sd-card-text">where <span class="math notranslate nohighlight">\([\mathbf{a}]_U = (\alpha_1, \alpha_2, \alpha_3)\)</span>. Calculating the inverse of the coefficient matrix using Gauss-Jordan elimination</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     &amp; \left( \begin{array}{ccc|ccc}
         1 &amp;  1 &amp;  1 &amp;  1 &amp;  0 &amp;  0 \\
         1 &amp; -1 &amp; -1 &amp;  0 &amp;  1 &amp;  0 \\
@@ -663,11 +652,11 @@ Solution<div class="sd-summary-down docutils">
         0 &amp;  1 &amp;  0 &amp;  1/3 &amp; -1/3 &amp;  1/3 \\
         0 &amp;  0 &amp;  1 &amp;  1/6 &amp; -1/6 &amp; -1/3
     \end{array} \right) 
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p class="sd-card-text">therefore the change of basis matrix is <span class="math notranslate nohighlight">\(A_{E \to U} = \begin{pmatrix} 1/2 &amp; 1/2 &amp; 0 \\ 1/3 &amp; -1/3 &amp; 1/3 \\ 1/6 &amp; -1/6 &amp; -1/3 \end{pmatrix}\)</span></p>
 <p class="sd-card-text">so</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     [\mathbf{a}]_U &amp;= A_{E \to U} \mathbf{v} \\
     &amp;=
     \begin{pmatrix} 
@@ -677,39 +666,37 @@ Solution<div class="sd-summary-down docutils">
     \end{pmatrix}
     \begin{pmatrix} 4 \\ 0 \\ 5 \end{pmatrix} =
     \begin{pmatrix} 2 \\ 3 \\ -1 \end{pmatrix}.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 </div>
 </details></section>
 </div><p>The change of basis calculation shown in <a class="reference internal" href="#change-of-basis-example-1">Example 5</a> was relatively straightforward as it involved changing from the standard basis. We can extend this method to change between two arbitrary basis. Let <span class="math notranslate nohighlight">\(U = \{ \mathbf{u}_1, \mathbf{u}_2, \ldots, \mathbf{u}_n\}\)</span> and <span class="math notranslate nohighlight">\(W = \{ \mathbf{w}_1, \mathbf{w}_2, \ldots, \mathbf{w}_n \}\)</span> be two basis for the vector space <span class="math notranslate nohighlight">\(V\)</span> then the basis <span class="math notranslate nohighlight">\(U\)</span> can be represnted with respect to <span class="math notranslate nohighlight">\(W\)</span>, i.e.,</p>
 <div class="math notranslate nohighlight" id="equation-u-w-equation">
-<span class="eqno">(7)<a class="headerlink" href="#equation-u-w-equation" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align}
-    \mathbf{u}_1 &amp;= a_{11} \mathbf{w}_1 + a_{21} \mathbf{w}_2 + \cdots + a_{n1} \mathbf{w}_n, \\
-    \mathbf{u}_2 &amp;= a_{12} \mathbf{w}_1 + a_{22} \mathbf{w}_2 + \cdots + a_{n2} \mathbf{w}_n, \\
-    &amp; \vdots \\
-    \mathbf{u}_n &amp;= a_{1n} \mathbf{w}_1 + a_{2n} \mathbf{w}_2 + \cdots + a_{nn} \mathbf{w}_n,
-\end{align}\end{split}\]</div>
+<span class="eqno">(7)<a class="headerlink" href="#equation-u-w-equation" title="Permalink to this equation">#</a></span>\[\begin{split}\mathbf{u}_1 &amp;= a_{11} \mathbf{w}_1 + a_{21} \mathbf{w}_2 + \cdots + a_{n1} \mathbf{w}_n, \\
+\mathbf{u}_2 &amp;= a_{12} \mathbf{w}_1 + a_{22} \mathbf{w}_2 + \cdots + a_{n2} \mathbf{w}_n, \\
+&amp; \vdots \\
+\mathbf{u}_n &amp;= a_{1n} \mathbf{w}_1 + a_{2n} \mathbf{w}_2 + \cdots + a_{nn} \mathbf{w}_n,\end{split}\]</div>
 <p>where <span class="math notranslate nohighlight">\(a_{ij}\)</span> are scalars. Given a vector <span class="math notranslate nohighlight">\(\mathbf{v} = (v_1, v_2, \ldots, v_n) \in V\)</span> expressed with respect to the basis <span class="math notranslate nohighlight">\(U\)</span> then</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[ \begin{align*}
     \mathbf{v} &amp;= v_1 \mathbf{u}_1 + v_2 \mathbf{u}_2 + \cdots + v_n \mathbf{u}_n,
-\end{align*}\]</div>
+\end{align*} \]</div>
 <p>and substituting the expressions for <span class="math notranslate nohighlight">\(\mathbf{u}_i\)</span> from equation <a class="reference internal" href="#equation-u-w-equation">(7)</a> then</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     \mathbf{v} &amp;= v_1 (a_{11} \mathbf{w}_1 + a_{21} \mathbf{w}_2 + \cdots + a_{n1} \mathbf{w}_n) \\
     &amp; \quad + v_2 (a_{12} \mathbf{w}_1 + a_{22} \mathbf{w}_2 + \cdots + a_{n2} \mathbf{w}_n) + \cdots \\
     &amp; \quad + v_n (a_{1n} \mathbf{w}_1 + a_{2n} \mathbf{w}_2 + \cdots + a_{nn} \mathbf{w}_n).
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p>Factorising out the <span class="math notranslate nohighlight">\(\mathbf{w}_i\)</span> vectors we can write this as</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     \mathbf{v} &amp;=  (a_{11} v_1 + a_{12} v_2 + \cdots + a_{1n} v_n) \mathbf{w}_1 \\
     &amp; \quad + (a_{21} v_1 + a_{22} v_2 + \cdots + a_{2n} v_n) \mathbf{w}_2 + \cdots \\
     &amp; \quad + (a_{n1} v_1 + a_{n2} v_2 + \cdots + a_{nn} v_n) \mathbf{w}_n.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p>So we know that <span class="math notranslate nohighlight">\(\mathbf{v}\)</span> represented with respect to the basis <span class="math notranslate nohighlight">\(W\)</span> is</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     [\mathbf{v}]_W = \begin{pmatrix} 
         a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1n} \\
         a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2n} \\
@@ -717,33 +704,33 @@ Solution<div class="sd-summary-down docutils">
         a_{n1} &amp; a_{n2} &amp; \cdots &amp; a_{nn}
     \end{pmatrix}
     \begin{pmatrix} v_1 \\ v_2 \\ \vdots \\ v_n \end{pmatrix}.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p>To calculate the change of basis matrix <span class="math notranslate nohighlight">\(A_{U \to W}\)</span> such that <span class="math notranslate nohighlight">\([\mathbf{v}]_W = A_{U \to W} [\mathbf{v}]_U\)</span> we need to solve the system</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     a_{11} \mathbf{w}_1 + a_{21} \mathbf{w}_2 + \cdots + a_{n1} \mathbf{w}_n &amp;= \mathbf{u}_1, \\
     a_{12} \mathbf{w}_1 + a_{22} \mathbf{w}_2 + \cdots + a_{n2} \mathbf{w}_n &amp;= \mathbf{u}_2, \\
     &amp; \vdots \\
     a_{1n} \mathbf{w}_1 + a_{2n} \mathbf{w}_2 + \cdots + a_{nn} \mathbf{w}_n &amp;= \mathbf{u}_n.
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p>We can do this by row reducing the augmented matrix</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\left( 
+\[\begin{split}\left(
 \begin{array}{cccc|cccc} 
     \uparrow &amp; \uparrow &amp; &amp; \uparrow &amp; \uparrow &amp; \uparrow &amp; &amp; \uparrow \\
     \mathbf{w}_1 &amp; \mathbf{w}_2 &amp; \ldots &amp; \mathbf{w}_n &amp; \mathbf{u}_1 &amp; \mathbf{u}_2 &amp; \ldots &amp; \mathbf{u}_n \\
     \downarrow &amp; \downarrow &amp; &amp; \downarrow &amp; \downarrow &amp; \downarrow &amp;  &amp; \downarrow 
 \end{array} \right)\end{split}\]</div>
 <p>to reduced row echelon form where <span class="math notranslate nohighlight">\(A_{U\to W}\)</span> is the matrix to the right of the partition. Note that this is what was done in the solution to <a class="reference internal" href="#change-of-basis-example-1">Example 5</a> where the matrix to the right-hand side of the partition of the augmented matrix was the identity matrix, i.e., the standard basis.</p>
-<div class="proof example seealso admonition" id="example-4">
+<div class="proof example seealso admonition" id="change-of-basis-example-2">
 <p class="admonition-title"><span class="caption-number">Example 6 </span></p>
 <section class="example-content" id="proof-content">
 <p><span class="math notranslate nohighlight">\(U\)</span> and <span class="math notranslate nohighlight">\(W\)</span> are two basis of <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span> given by</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     U &amp;= \left\{ \begin{pmatrix} 1 \\ 0 \end{pmatrix}, \begin{pmatrix} 1 \\ 1 \end{pmatrix} \right\}, \\
     W &amp;= \left\{ \begin{pmatrix} 0 \\ 1 \end{pmatrix}, \begin{pmatrix} -1 \\ 1 \end{pmatrix} \right\}
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p>(i)   Calculate the change of basis matrix <span class="math notranslate nohighlight">\(A_{U \to W}\)</span></p>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
@@ -753,8 +740,8 @@ Solution<div class="sd-summary-down docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
 <p class="sd-card-text">To calculate <span class="math notranslate nohighlight">\(A_{U \to W}\)</span> we need to reduce the following augmented matrix to reduced row echelon form</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     &amp; \left( \begin{array}{cc|cc}
         0 &amp; -1 &amp; 1 &amp; 1 \\
         1 &amp; 1 &amp; 0 &amp; 1
@@ -777,7 +764,7 @@ Solution<div class="sd-summary-down docutils">
         1 &amp; 0 &amp; 1 &amp; 2 \\
         0 &amp; 1 &amp; -1 &amp; -1
     \end{array} \right) 
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 <p class="sd-card-text">therefore <span class="math notranslate nohighlight">\(A_{U\to W} = \begin{pmatrix} 1 &amp; 2 \\ -1 &amp; -1 \end{pmatrix}\)</span>.</p>
 </div>
 </details><p>(ii)   If <span class="math notranslate nohighlight">\(\mathbf{v} \in \mathbb{R}^2\)</span> where <span class="math notranslate nohighlight">\([\mathbf{v}]_U = (1,2)\)</span>, calculate <span class="math notranslate nohighlight">\([\mathbf{v}]_W\)</span></p>
@@ -788,13 +775,13 @@ Solution<div class="sd-summary-down docutils">
 <div class="sd-summary-up docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
     [\mathbf{v}]_W &amp;= A_{U \to W} [\mathbf{v}]_U = 
     \begin{pmatrix} 1 &amp; 2 \\ -1 &amp; -1 \end{pmatrix}
     \begin{pmatrix} 1 \\ 2 \end{pmatrix} 
     = \begin{pmatrix} 5 \\ -3 \end{pmatrix}
-\end{align*}\]</div>
+\end{align*} \end{split}\]</div>
 </div>
 </details></section>
 </div></section>

@@ -1023,20 +1023,20 @@
 
 
 % Virtual environments exercise
-\begin{tikzpicture}
-    \tikzmath{\w=3;}
-    \draw rectangle (\w,\w);
-    \draw (0,\w) -- (0.5*\w,1.5*\w) -- (\w,\w);
-    \draw (\w+2,0) rectangle (2*\w+2,\w);
-    \draw (\w+2,0) -- (2*\w+2,\w);
-    \draw (\w+2,\w) -- (2*\w+2,0);
-    \node at (0.5*\w,-0.5) {side view};
-    \node at (1.5*\w+2,-0.5) {plan view};
-    \draw [dblarrow,help lines] (\w+0.2,0) -- ++(0,\w) node [pos=0.5,right] {2};
-    \draw [dblarrow,help lines] (-0.2,0) -- ++(0,1.5*\w) node [pos=0.5,left] {3};
-    \draw [dblarrow,help lines] (\w+1.8,0) -- ++(0,\w) node [pos=0.5,left] {2};
-    \draw [dblarrow,help lines] (\w+2,\w+0.2) -- ++(\w,0) node [pos=0.5,above] {2};
-\end{tikzpicture}
+% \begin{tikzpicture}
+%     \tikzmath{\w=3;}
+%     \draw rectangle (\w,\w);
+%     \draw (0,\w) -- (0.5*\w,1.5*\w) -- (\w,\w);
+%     \draw (\w+2,0) rectangle (2*\w+2,\w);
+%     \draw (\w+2,0) -- (2*\w+2,\w);
+%     \draw (\w+2,\w) -- (2*\w+2,0);
+%     \node at (0.5*\w,-0.5) {side view};
+%     \node at (1.5*\w+2,-0.5) {plan view};
+%     \draw [dblarrow,help lines] (\w+0.2,0) -- ++(0,\w) node [pos=0.5,right] {2};
+%     \draw [dblarrow,help lines] (-0.2,0) -- ++(0,1.5*\w) node [pos=0.5,left] {3};
+%     \draw [dblarrow,help lines] (\w+1.8,0) -- ++(0,\w) node [pos=0.5,left] {2};
+%     \draw [dblarrow,help lines] (\w+2,\w+0.2) -- ++(\w,0) node [pos=0.5,above] {2};
+% \end{tikzpicture}
 
 % Viewing frustum
 % \begin{tikzpicture}
@@ -1822,6 +1822,136 @@
 %     \draw [->,shorten >= 2pt] (x-1/2) to (2,0);
 %     \draw [line width=1.5pt] (2,2.75) -- ++(0,0.5);
 %     \draw [line width=1.5pt] (2,0.75) -- ++(0,0.5);
+% \end{tikzpicture}
+
+% FLood fill
+% \begin{tikzpicture}
+%     \foreach \i/\j in {4/2,5/2,6/2,3/3,6/3,2/4,6/4,2/5,6/5,2/6,3/6,4/6,5/6,6/6} {
+%         \fill [gray] (-1+\i,7-\j) rectangle ++(1,1);
+%     }
+%     \foreach \i/\j in {4/4,4/3,5/3,5/4,5/5,4/5,3/5} {
+%         \fill [blue!50] (-1+\i,7-\j) rectangle ++(1,1);
+%     }
+%     \fill [blue] (-1+3,7-4) rectangle ++(1,1);
+%     \draw (0,0) grid (7,7);
+%     \foreach \i in {1, ..., 7}{
+%         \node [below] at (-0.5+\i,0) {\i};
+%         \node [left] at (0,7.5-\i) {\i};
+%     }
+% \end{tikzpicture}
+
+% Flood fill tight corners
+% \begin{tikzpicture}
+%     \foreach \i/\j in {5/2,6/2,7/2,8/2,9/2,5/3,9/3,5/4,9/4,2/5,3/5,4/5,5/5,9/5,2/6,6/6,7/6,8/6,9/6,2/7,6/7,2/8,6/8,2/9,3/9,4/9,5/9,6/9} {
+%         \fill [gray] (-1+\i,10-\j) rectangle ++(1,1);
+%     }
+%     \foreach \i/\j in {6/3,7/3,8/3,6/4,7/4,8/4,6/5,7/5,8/5} {
+%         \fill [blue!50] (-1+\i,10-\j) rectangle ++(1,1);
+%     }
+%     \draw (0,0) grid (10,10);
+%     \foreach \i in {1, ..., 10}{
+%         \node [below] at (-0.5+\i,0) {\i};
+%         \node [left] at (0,10.5-\i) {\i};
+%     }
+% \end{tikzpicture}
+
+% Span extrema
+% \begin{tikzpicture}
+%     \draw [line width=1pt] (0,0) -- (4,1) -- (2, 4) -- cycle;
+%     \draw [dashed] (-1,3) -- ++(6,0);
+%     \draw [dashed] (-1,2) -- ++(6,0);
+%     \node [point,label=below:{$(x_{\max},y_{\max})$}] at (0,0) {};
+%     \node [point,label=above:{$(x_{\min},y_{\min})$}] at (2,4) {};
+%     \node [point,label=above left:{$(x_i,y_i$}] at (1.5,3) {};
+%     \node [point,label=above left:{$(x_{i+1},y_{i+1})$}] at (1,2) {};
+% \end{tikzpicture}
+
+% Scanline example
+% \begin{tikzpicture}
+%     \tikzmath{\x1=2;\x2=9;\x3=8;\x4=6;\x5=4;\y1=9;\y2=9;\y3=4;\y4=7;\y5=2;}
+%     \draw (0,0) grid (10,10);
+%     \draw [line width=2pt] (-0.5+\x1,10.5-\y1) 
+%         -- (-0.5+\x2,10.5-\y2) 
+%         -- (-0.5+\x3,10.5-\y3) 
+%         -- (-0.5+\x4,10.5-\y4) 
+%         -- (-0.5+\x5,10.5-\y5) -- cycle;
+%     \foreach \i in {1, ..., 10}{
+%         \node [below] at (-0.5+\i,0) {\i};
+%         \node [left] at (0,10.5-\i) {\i};
+%     }
+%     \node [fill=white,minimum width=1.2cm] at (-0.5+\x1,10-\y1) {$(\x1,\y1)$};
+%     \node [fill=white,minimum width=1.2cm] at (-0.5+\x2,10-\y2) {$(\x2,\y2)$};
+%     \node [fill=white,minimum width=1.2cm] at (-0.5+\x3,11-\y3) {$(\x3,\y3)$};
+%     \node [fill=white,minimum width=1.2cm] at (-0.5+\x4,10-\y4) {$(\x4,\y4)$};
+%     \node [fill=white,minimum width=1.2cm] at (-0.5+\x5,11-\y5) {$(\x5,\y5)$};
+%     \node [fill=white] at ({0.5*(\x1+\x2)-0.5},{10-0.5*(\y1+\y2)}) {e1};
+%     \node [fill=white] at ({0.5*(\x2+\x3)},{10.5-0.5*(\y2+\y3)}) {e2};
+%     \node [fill=white] at ({0.5*(\x3+\x4)-1},{10.5-0.5*(\y3+\y4)}) {e3};
+%     \node [fill=white] at ({0.5*(\x4+\x5)},{10.5-0.5*(\y4+\y5)}) {e4};
+%     \node [fill=white] at ({0.5*(\x5+\x1)-1},{10.5-0.5*(\y5+\y1)}) {e5};
+% \end{tikzpicture}
+
+% Antialiasing
+\begin{tikzpicture}
+    \tikzmath{\w=2.5;}
+    \draw [fill=black!0] (0,0) rectangle ++(\w,\w);
+    \draw [fill=black!50] (\w,0) rectangle ++(\w,\w);
+    \draw [fill=black!25] (0,\w) rectangle ++(\w,\w);
+    \draw [fill=black!100] (\w,\w) rectangle ++(\w,\w);
+    \draw [fill=black!44] (2*\w+2,0) rectangle ++(2*\w,2*\w);
+    \node at (\w,-0.5) {$\times 2$ super sample};
+    \node at (3*\w+2,-0.5) {display pixel};
+    \node at (0.5*\w,0.5*\w) {$(255,255,255)$};
+    \node at (1.5*\w,0.5*\w) {$(128,128,128)$};
+    \node at (0.5*\w,1.5*\w) {$(192,192,192)$};
+    \node [white] at (1.5*\w,1.5*\w) {$(0,0,0)$};
+    \node at (3*\w+2,\w) {$(144,144,144)$};
+\end{tikzpicture}
+
+% Convolution
+% \begin{tikzpicture}
+%     \draw grid ++(5,5);
+%     \draw [line width=2pt] (0,2) grid ++(3,3);
+%     \draw (7,1) grid ++(3,3);
+%     \draw (12,1) grid ++(3,3);
+%     \node at (2.5,-0.5) {image};
+%     \node at (8.5,0.5) {kernel};
+%     \node at (13.5,0.5) {filtered image};
+%     \node at (0.5,0.5) {1};
+%     \node at (1.5,0.5) {2};
+%     \node at (2.5,0.5) {1};
+%     \node at (3.5,0.5) {4};
+%     \node at (4.5,0.5) {4};
+%     \node at (0.5,1.5) {3};
+%     \node at (1.5,1.5) {5};
+%     \node at (2.5,1.5) {5};
+%     \node at (3.5,1.5) {1};
+%     \node at (4.5,1.5) {1};
+%     \node at (0.5,2.5) {2};
+%     \node at (1.5,2.5) {1};
+%     \node at (2.5,2.5) {2};
+%     \node at (3.5,2.5) {2};
+%     \node at (4.5,2.5) {5};
+%     \node at (0.5,3.5) {5};
+%     \node at (1.5,3.5) {4};
+%     \node at (2.5,3.5) {3};
+%     \node at (3.5,3.5) {4};
+%     \node at (4.5,3.5) {2};
+%     \node at (0.5,4.5) {4};
+%     \node at (1.5,4.5) {5};
+%     \node at (2.5,4.5) {2};
+%     \node at (3.5,4.5) {3};
+%     \node at (4.5,4.5) {3};
+%     \node at (7.5,1.5) {0};
+%     \node at (8.5,1.5) {-1};
+%     \node at (9.5,1.5) {0};
+%     \node at (7.5,2.5) {-1};
+%     \node at (8.5,2.5) {5};
+%     \node at (9.5,2.5) {-1};
+%     \node at (7.5,3.5) {0};
+%     \node at (8.5,3.5) {-1};
+%     \node at (9.5,3.5) {0};
+%     \node at (12.5,3.5) {6};
 % \end{tikzpicture}
 
 \end{document}
