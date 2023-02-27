@@ -592,13 +592,25 @@ title="Print to PDF"
 </li>
 </ul>
 </section>
-</div><p>Note that inserting a hyperplane into a space may result in the hyperplane intersecting with polygons (this is usually unavoidable).</p>
+</div><p>Note that inserting a hyperplane into a space may result in the hyperplane intersecting with polygons (this is usually unavoidable). To demonstrate the binary space partitioning procedure consider the diagram below that shows a simple space containing the five polygons <span class="math notranslate nohighlight">\(A\)</span> through <span class="math notranslate nohighlight">\(E\)</span>.</p>
+<figure class="align-default">
+<img alt="../_images/bsp_example_1a.svg" src="../_images/bsp_example_1a.svg" /></figure>
+<p>We can choose any polygon which to insert a hyperplane so here we will choose <span class="math notranslate nohighlight">\(D\)</span> which is the root node of the BSP tree. Polygons <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(C\)</span> are in the front subspace of <span class="math notranslate nohighlight">\(D\)</span> so are listed in the left child node. Polygon <span class="math notranslate nohighlight">\(B\)</span> is in the back subspace of <span class="math notranslate nohighlight">\(D\)</span> so is listed in the right child node. Poylgon <span class="math notranslate nohighlight">\(E\)</span> is split by the hyperplane so we label the two polygons <span class="math notranslate nohighlight">\(E_1\)</span> and <span class="math notranslate nohighlight">\(E_2\)</span>. Polygon <span class="math notranslate nohighlight">\(E_1\)</span> is in the front subspace of <span class="math notranslate nohighlight">\(D\)</span> so is listed in the left child node and <span class="math notranslate nohighlight">\(E_2\)</span> is in the back subspace of <span class="math notranslate nohighlight">\(D\)</span> so is listed in the right child node.</p>
+<figure class="align-default">
+<img alt="../_images/bsp_example_1b.svg" src="../_images/bsp_example_1b.svg" /></figure>
+<p>Both child nodes of <span class="math notranslate nohighlight">\(D\)</span> do not contain convex sets so we need to subdivide each of these. Considering the left child node we need to choose a polygon from <span class="math notranslate nohighlight">\(A\)</span>, <span class="math notranslate nohighlight">\(C\)</span> and <span class="math notranslate nohighlight">\(E_1\)</span> in which to insert a hyperplane, here we will choose <span class="math notranslate nohighlight">\(C\)</span>. Polygon <span class="math notranslate nohighlight">\(A\)</span> is in the back subspace so is listed in the right child node and <span class="math notranslate nohighlight">\(E_1\)</span> is in the front subspace so is listed in the left child node.</p>
+<figure class="align-default">
+<img alt="../_images/bsp_example_1c.svg" src="../_images/bsp_example_1c.svg" /></figure>
+<p>All of the nodes in the left sub-tree contain convex sets (a polygon on its own must form a convex set) so we now consider the right child node of <span class="math notranslate nohighlight">\(D\)</span>. Choosing to insert a hyperplane along <span class="math notranslate nohighlight">\(B\)</span> then <span class="math notranslate nohighlight">\(E_2\)</span> is in the back subspace so is listed in the right child node. There are no polygons in the front subspace of <span class="math notranslate nohighlight">\(B\)</span> so it does not have a left child node. Note that it is important that when we have a single child node it appears as a left or right child node.</p>
+<figure class="align-default">
+<img alt="../_images/bsp_example_1d.svg" src="../_images/bsp_example_1d.svg" /></figure>
+<p>All nodes in the BSP tree contain convex sets so the process terminates.</p>
 <div class="proof example seealso admonition" id="example-3">
 <p class="admonition-title"><span class="caption-number">Example 36 </span></p>
 <section class="example-content" id="proof-content">
 <p>The plan view of a world space is shown in the diagram below. The polygons labelled <span class="math notranslate nohighlight">\(A\)</span> to <span class="math notranslate nohighlight">\(T\)</span> have norm vectors pointing into the interior. Construct a BSP tree for this world space.</p>
 <figure class="align-default">
-<img alt="../_images/bsp_example_1.svg" src="../_images/bsp_example_1.svg" /></figure>
+<img alt="../_images/bsp_example_2a.svg" src="../_images/bsp_example_2a.svg" /></figure>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
 Solution<div class="sd-summary-down docutils">
@@ -608,22 +620,22 @@ Solution<div class="sd-summary-down docutils">
 </summary><div class="sd-summary-content sd-card-body docutils">
 <p class="sd-card-text">Let’s choose <span class="math notranslate nohighlight">\(D\)</span> as the first parent node. This choice is completely arbitrary and we could have selected any other polygon as the parent node. The hyperplane bisects <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(O\)</span> so we label the new polygons <span class="math notranslate nohighlight">\(A_1\)</span>, <span class="math notranslate nohighlight">\(A_2\)</span>, <span class="math notranslate nohighlight">\(O_1\)</span> and <span class="math notranslate nohighlight">\(O_2\)</span>. Polygons <span class="math notranslate nohighlight">\(A_1\)</span> and <span class="math notranslate nohighlight">\(O_2\)</span> to <span class="math notranslate nohighlight">\(T\)</span> are in the front subspace of <span class="math notranslate nohighlight">\(R\)</span> so are listed in the left child node and <span class="math notranslate nohighlight">\(A_2\)</span> to <span class="math notranslate nohighlight">\(O_2\)</span> are in the back subspace of <span class="math notranslate nohighlight">\(R\)</span> and are listed in the right child node.</p>
 <figure class="align-default">
-<img alt="../_images/bsp_example_2.svg" src="../_images/bsp_example_2.svg" /></figure>
+<img alt="../_images/bsp_example_2b.svg" src="../_images/bsp_example_2b.svg" /></figure>
 <p class="sd-card-text">We now repeat the process with the left child node. Choosing <span class="math notranslate nohighlight">\(S\)</span> as the parent node we have <span class="math notranslate nohighlight">\(A_1\)</span> and <span class="math notranslate nohighlight">\(T\)</span> in the front subspace so we list these in the left child node and <span class="math notranslate nohighlight">\(O_2\)</span> to <span class="math notranslate nohighlight">\(R\)</span> in the back subspace so we list these in the right child node. Note that the other polygons do not exist in this subspace.</p>
 <figure class="align-default">
-<img alt="../_images/bsp_example_3.svg" src="../_images/bsp_example_3.svg" /></figure>
+<img alt="../_images/bsp_example_2c.svg" src="../_images/bsp_example_2c.svg" /></figure>
 <p class="sd-card-text">The left child node contains <span class="math notranslate nohighlight">\(\{ A_1, T \}\)</span> which is a convex set so we move to the right child node <span class="math notranslate nohighlight">\(\{ O_2, P, Q, R \}\)</span>. Choosing <span class="math notranslate nohighlight">\(Q\)</span> as the next parent node we have <span class="math notranslate nohighlight">\(O_2\)</span> and <span class="math notranslate nohighlight">\(P\)</span> in the front subspace so we list these in the left child node and <span class="math notranslate nohighlight">\(R\)</span> is in the back subspace so we list these in the right child node.</p>
 <figure class="align-default">
-<img alt="../_images/bsp_example_4.svg" src="../_images/bsp_example_4.svg" /></figure>
+<img alt="../_images/bsp_example_2d.svg" src="../_images/bsp_example_2d.svg" /></figure>
 <p class="sd-card-text">All nodes on a the left subtree of the root node <span class="math notranslate nohighlight">\(D\)</span> contain convex sets so we node move to the right child node of <span class="math notranslate nohighlight">\(D\)</span>. Choosing <span class="math notranslate nohighlight">\(E\)</span> and <span class="math notranslate nohighlight">\(I\)</span> as the parent node we have <span class="math notranslate nohighlight">\(F\)</span>, <span class="math notranslate nohighlight">\(G\)</span>, <span class="math notranslate nohighlight">\(H\)</span> and <span class="math notranslate nohighlight">\(J\)</span> to <span class="math notranslate nohighlight">\(O_1\)</span> in the front subspace so we list these in the left child node and <span class="math notranslate nohighlight">\(A_2\)</span>, <span class="math notranslate nohighlight">\(B\)</span> and <span class="math notranslate nohighlight">\(C\)</span> in the back subspace so we list these in the right child node.</p>
 <figure class="align-default">
-<img alt="../_images/bsp_example_5.svg" src="../_images/bsp_example_5.svg" /></figure>
+<img alt="../_images/bsp_example_2e.svg" src="../_images/bsp_example_2e.svg" /></figure>
 <p class="sd-card-text">Moving to the left child node and choosing <span class="math notranslate nohighlight">\(H\)</span> and <span class="math notranslate nohighlight">\(L\)</span> as the parent node we have <span class="math notranslate nohighlight">\(J\)</span> and <span class="math notranslate nohighlight">\(K\)</span> in the front subspace so we list these in the left child node and <span class="math notranslate nohighlight">\(F\)</span>, <span class="math notranslate nohighlight">\(G\)</span>, <span class="math notranslate nohighlight">\(M\)</span>, <span class="math notranslate nohighlight">\(N\)</span> and <span class="math notranslate nohighlight">\(O_1\)</span> in the back subspace so we list these in the right child node.</p>
 <figure class="align-default">
-<img alt="../_images/bsp_example_6.svg" src="../_images/bsp_example_6.svg" /></figure>
+<img alt="../_images/bsp_example_2f.svg" src="../_images/bsp_example_2f.svg" /></figure>
 <p class="sd-card-text">The left child node contains <span class="math notranslate nohighlight">\(\{ J, K \}\)</span> which is a convex set so we move to the right child node contains <span class="math notranslate nohighlight">\(\{ F,G,M,N,O_2\}\)</span>. Choosing <span class="math notranslate nohighlight">\(F\)</span> and <span class="math notranslate nohighlight">\(N\)</span> as the parent node we have <span class="math notranslate nohighlight">\(O_1\)</span> in the front subspace so we list this in the left child node and <span class="math notranslate nohighlight">\(G\)</span> and <span class="math notranslate nohighlight">\(M\)</span> in the back subspace so we list this in the right child node.</p>
 <figure class="align-default">
-<img alt="../_images/bsp_example_7.svg" src="../_images/bsp_example_7.svg" /></figure>
+<img alt="../_images/bsp_example_2g.svg" src="../_images/bsp_example_2g.svg" /></figure>
 <p class="sd-card-text">All subspaces now contain convex sets so the algorithm terminates.</p>
 </div>
 </details></section>
@@ -668,12 +680,28 @@ the distances of each polygon have to be recalculated. Therefore it is not a sui
 </li>
 </ul>
 </section>
-</div><div class="proof example seealso admonition" id="example-5">
+</div><p>To demonstrate the traversal of a BSP consider the diagram below showing the space that was partitioned earlier and viewed from the point <span class="math notranslate nohighlight">\(\mathbf{p}\)</span>.</p>
+<figure class="align-default">
+<img alt="../_images/bsp_vsd_example_1.svg" src="../_images/bsp_vsd_example_1.svg" /></figure>
+<ul class="simple">
+<li><p>Starting at the root node <span class="math notranslate nohighlight">\(D\)</span>, <span class="math notranslate nohighlight">\(\mathbf{p}\)</span> is in the front subspace of <span class="math notranslate nohighlight">\(D\)</span> so we move to the right child node <span class="math notranslate nohighlight">\(B\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{p}\)</span> is in the back subspace of <span class="math notranslate nohighlight">\(B\)</span> so we move to the left child node</p></li>
+<li><p><span class="math notranslate nohighlight">\(B\)</span> does not have a left child node so we return to <span class="math notranslate nohighlight">\(\color{red}B\)</span> and render it before moving to the right child node <span class="math notranslate nohighlight">\(E_2\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\color{red}E_2\)</span> is a leaf node so we render it and return to the parent node <span class="math notranslate nohighlight">\(B\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(B\)</span> has already been rendered so we return to the parent node <span class="math notranslate nohighlight">\(\color{red}D\)</span> and render it before moving to the left child node <span class="math notranslate nohighlight">\(C\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{p}\)</span> is in the front subspace of <span class="math notranslate nohighlight">\(C\)</span> so we move to the right child node <span class="math notranslate nohighlight">\(A\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\color{red}A\)</span> is a leaf node so we render it and return to the parent node <span class="math notranslate nohighlight">\(\color{red}C\)</span> and render it before moving to the left child node <span class="math notranslate nohighlight">\(E_1\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\color{red}E_1\)</span> is a leaf node so we render it.</p></li>
+</ul>
+<p>All nodes have node been rendered and the rendering order is</p>
+<div class="math notranslate nohighlight">
+\[ \{B\}, \{E_2\}, \{D\}, \{A\}, \{C\}, \{E_1\} \]</div>
+<div class="proof example seealso admonition" id="example-5">
 <p class="admonition-title"><span class="caption-number">Example 37 </span></p>
 <section class="example-content" id="proof-content">
 <p>Using the BSP given below, determine the rendering order for visible surface detection if the viewer is at position</p>
 <figure class="align-default">
-<img alt="../_images/bsp_vsd_example.svg" src="../_images/bsp_vsd_example.svg" /></figure>
+<img alt="../_images/bsp_vsd_example_2.svg" src="../_images/bsp_vsd_example_2.svg" /></figure>
 <p>(i)   <span class="math notranslate nohighlight">\(\mathbf{p}\)</span></p>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
