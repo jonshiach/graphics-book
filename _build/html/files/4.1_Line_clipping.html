@@ -587,7 +587,7 @@ title="Print to PDF"
 <section class="example-content" id="proof-content">
 <p>Use the Cyrus-Beck algorithm to clip the lines <span class="math notranslate nohighlight">\(\mathbf{a} \to \mathbf{b}\)</span>, <span class="math notranslate nohighlight">\(\mathbf{c} \to \mathbf{d}\)</span>, <span class="math notranslate nohighlight">\(\mathbf{e} \to \mathbf{f}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{g} \to \mathbf{h}\)</span> in the diagram below.</p>
 <figure class="align-default">
-<img alt="../_images/cyrus_beck_example.svg" src="../_images/cyrus_beck_example.svg" /></figure>
+<img alt="../_images/cyrus_beck_example_1.svg" src="../_images/cyrus_beck_example_1.svg" /></figure>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
 Solution<div class="sd-summary-down docutils">
@@ -620,34 +620,67 @@ Solution<div class="sd-summary-down docutils">
 \[\begin{split} \begin{align*}
     t &amp;= \frac{d(\mathbf{c})}{d(\mathbf{c}) - d(\mathbf{d})} = \frac{-1}{-1 - 1} = \frac{1}{2},  \\
     \mathbf{c}' &amp;= \mathbf{c} + t(\mathbf{d} - \mathbf{c}), 
-    = \begin{pmatrix} 6 \\ 7 \end{pmatrix} + \frac{1}{2} \left(
-        \begin{pmatrix} 7 \\ 5 \end{pmatrix} -
-        \begin{pmatrix} 6 \\ 7 \end{pmatrix}
+    = \begin{pmatrix} 3 \\ 5 \end{pmatrix} + \frac{1}{2} \left(
+        \begin{pmatrix} 4 \\ 3 \end{pmatrix} -
+        \begin{pmatrix} 3 \\ 5 \end{pmatrix}
     \right)
-    = \begin{pmatrix} 13/2 \\ 6 \end{pmatrix}.
+    = \begin{pmatrix} 7/2 \\ 4 \end{pmatrix}.
 \end{align*} \end{split}\]</div>
 <ul class="simple">
-<li><p class="sd-card-text">left: <span class="math notranslate nohighlight">\(d(\mathbf{c}') = 0\)</span> and <span class="math notranslate nohighlight">\(d(\mathbf{d}) &gt; 0\)</span> so do not clip <span class="math notranslate nohighlight">\(\mathbf{c}' \to \mathbf{d}\)</span></p></li>
+<li><p class="sd-card-text">left: <span class="math notranslate nohighlight">\(d(\mathbf{c}') = 7/2 &gt; 0\)</span> and <span class="math notranslate nohighlight">\(d(\mathbf{d}) &gt; 4\)</span> so do not clip <span class="math notranslate nohighlight">\(\mathbf{c}' \to \mathbf{d}\)</span></p></li>
 </ul>
 <p class="sd-card-text">Line <span class="math notranslate nohighlight">\(\mathbf{e} \to \mathbf{f}\)</span>:</p>
 <ul class="simple">
 <li><p class="sd-card-text">bottom: <span class="math notranslate nohighlight">\(d(\mathbf{e}) = 3 &gt; 0\)</span> and <span class="math notranslate nohighlight">\(d(\mathbf{f}) = 5 &gt; 0\)</span> so do not clip <span class="math notranslate nohighlight">\(\mathbf{e} \to \mathbf{f}\)</span></p></li>
-<li><p class="sd-card-text">right: <span class="math notranslate nohighlight">\(d(\mathbf{e}) = 8 &gt; 0\)</span> and <span class="math notranslate nohighlight">\(d(\mathbf{f}) = 7 &gt; 0\)</span> so do not clip <span class="math notranslate nohighlight">\(\mathbf{e} \to \mathbf{f}\)</span></p></li>
+<li><p class="sd-card-text">right: <span class="math notranslate nohighlight">\(d(\mathbf{e}) = 7 &gt; 0\)</span> and <span class="math notranslate nohighlight">\(d(\mathbf{f}) = 6 &gt; 0\)</span> so do not clip <span class="math notranslate nohighlight">\(\mathbf{e} \to \mathbf{f}\)</span></p></li>
 <li><p class="sd-card-text">top: <span class="math notranslate nohighlight">\(d(\mathbf{e}) = 1 &gt; 0\)</span> and <span class="math notranslate nohighlight">\(d(\mathbf{f}) = -1 &lt; 0\)</span> so clip <span class="math notranslate nohighlight">\(\mathbf{f}\)</span> to the top edge</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[\begin{split} \begin{align*}
     t &amp;= \frac{d(\mathbf{e})}{d(\mathbf{e}) - d_{\mathbf{f}}} = \frac{1}{1 -(-1)} = \frac{1}{2}, \\
     \mathbf{f}' &amp;= \mathbf{e} + t(\mathbf{f} - \mathbf{e})
-    = \begin{pmatrix} 1 \\ 5 \end{pmatrix} + \frac{1}{2} \left(
-        \begin{pmatrix} 2 \\ 7 \end{pmatrix} -
-        \begin{pmatrix} 1 \\ 5 \end{pmatrix}
+    = \begin{pmatrix} -1 \\ 3 \end{pmatrix} + \frac{1}{2} \left(
+        \begin{pmatrix} 0 \\ 5 \end{pmatrix} -
+        \begin{pmatrix} -1 \\ 3 \end{pmatrix}
     \right)
-    = \begin{pmatrix} 3 / 2 \\ 6 \end{pmatrix}
+    = \begin{pmatrix} -1/2 \\ 4 \end{pmatrix}
 \end{align*} \end{split}\]</div>
 <ul class="simple">
-<li><p class="sd-card-text">left: <span class="math notranslate nohighlight">\(d(\mathbf{e}) = -2 &lt; 0\)</span> and <span class="math notranslate nohighlight">\(d(\mathbf{f}') = -3/2 &lt; 0\)</span> so do not draw line <span class="math notranslate nohighlight">\(\mathbf{e} \to \mathbf{f}'\)</span>.</p></li>
+<li><p class="sd-card-text">left: <span class="math notranslate nohighlight">\(d(\mathbf{e}) = -1 &lt; 0\)</span> and <span class="math notranslate nohighlight">\(d(\mathbf{f}') = -1/2 &lt; 0\)</span> so do not draw line <span class="math notranslate nohighlight">\(\mathbf{e} \to \mathbf{f}'\)</span>.</p></li>
 </ul>
+<p class="sd-card-text">Line <span class="math notranslate nohighlight">\(\mathbf{g} \to \mathbf{h}\)</span>:</p>
+<ul class="simple">
+<li><p class="sd-card-text">bottom: <span class="math notranslate nohighlight">\(d(\mathbf{g}) = -1 &lt; 0\)</span> and <span class="math notranslate nohighlight">\(d(\mathbf{h}) = 2 &gt; 0\)</span> so clip <span class="math notranslate nohighlight">\(\mathbf{g}\)</span> to bottom edge</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
+    t &amp;= \frac{d(\mathbf{g})}{d(\mathbf{g}) - d(\mathbf{h})} = \frac{-1}{-1 -2} = \frac{1}{3}, \\
+    \mathbf{f}' &amp;= \mathbf{g} + t(\mathbf{h} - \mathbf{g})
+    = \begin{pmatrix} 3 \\ -1 \end{pmatrix} + \frac{1}{2} \left(
+        \begin{pmatrix} 7 \\ 2 \end{pmatrix} -
+        \begin{pmatrix} 3 \\ -1 \end{pmatrix}
+    \right)
+    = \begin{pmatrix} 13/3 \\ 0 \end{pmatrix}
+\end{align*} \end{split}\]</div>
+<ul class="simple">
+<li><p class="sd-card-text">left: <span class="math notranslate nohighlight">\(d(\mathbf{g}') = 5/3 &gt; 0\)</span> and <span class="math notranslate nohighlight">\(d(\mathbf{h}) = -1 &lt; 0\)</span> so clip <span class="math notranslate nohighlight">\(\mathbf{h}\)</span> to left edge</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
+    t &amp;= \frac{d(\mathbf{g}')}{d(\mathbf{g}') - d(\mathbf{h})} = \frac{\frac{5}{3}}{\frac{5}{3} - (-1)} = \frac{5}{8}, \\
+    \mathbf{h}' &amp;= \mathbf{g}' + t(\mathbf{h} - \mathbf{g})
+    = \begin{pmatrix} 13/3 \\ 0 \end{pmatrix} + \frac{5}{8} \left(
+        \begin{pmatrix} 7 \\ 2 \end{pmatrix} -
+        \begin{pmatrix} 13/3 \\ 0 \end{pmatrix}
+    \right)
+    = \begin{pmatrix} 6 \\ 5/4 \end{pmatrix}
+\end{align*} \end{split}\]</div>
+<ul class="simple">
+<li><p class="sd-card-text">top: <span class="math notranslate nohighlight">\(d(\mathbf{g}') = 4 &gt; 0\)</span> and <span class="math notranslate nohighlight">\(d(\mathbf{h}') = 11/4 &gt; 0\)</span> so do not clip <span class="math notranslate nohighlight">\(\mathbf{g}' \to \mathbf{h}'\)</span></p></li>
+<li><p class="sd-card-text">left: <span class="math notranslate nohighlight">\(d(\mathbf{g}') = 13/3 &gt; 0\)</span> and <span class="math notranslate nohighlight">\(d(\mathbf{h}') = 6 &gt; 0\)</span> so do not clip <span class="math notranslate nohighlight">\(\mathbf{g}' \to \mathbf{h}'\)</span></p></li>
+</ul>
+<figure class="align-default">
+<img alt="../_images/cyrus_beck_example_2.svg" src="../_images/cyrus_beck_example_2.svg" /></figure>
 </div>
 </details></section>
 </div></section>

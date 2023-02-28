@@ -1171,26 +1171,33 @@
 % \end{tikzpicture}
 
 % Cyrus beck example
-% \begin{tikzpicture}
-%     \draw [gray!50] (0, 0) grid (12, 8);
-%     \draw [line width=2pt] (3,2) -- ++(6,0) -- ++(0,4) -- ++(-6,0) -- cycle;
-%     \node [point,label=below left:$\mathbf{a}$] (a) at (4,3) {};
-%     \node [point,label=above right:$\mathbf{b}$] (b) at (5,5) {};
-%     \node [point,label=above left:$\mathbf{c}$] (c) at (6,7) {};
-%     \node [point,label=below right:$\mathbf{d}$] (d) at (7,5) {};
-%     \node [point,label=below left:$\mathbf{e}$] (e) at (1,5) {};
-%     \node [point,label=above right:$\mathbf{f}$] (f) at (2,7) {};
-%     \node [point,label=below left:$\mathbf{g}$] (g) at (6,1) {};
-%     \node [point,label=above right:$\mathbf{h}$] (h) at (10,4) {};
-%     \node [text width=1cm] at (6,4) {visible region};
-%     \draw (a) -- (b) (c) -- (d) (e) -- (f) (g) -- (h);
-%     \foreach \x in {0, ..., 12}{
-%         \node [below] at (\x,0) {$\x$};
-%     }
-%     \foreach \y in {0, ..., 8}{
-%         \node [left] at (0,\y) {$\y$};
-%     }
-% \end{tikzpicture}
+\begin{tikzpicture}
+    \draw [gray!50] (0, 0) grid (12, 8);
+    \draw [line width=2pt] (3,2) -- ++(6,0) -- ++(0,4) -- ++(-6,0) -- cycle;
+    \node [point,blue,label=below left:$\mathbf{a}$] (a) at (4,3) {};
+    \node [point,blue,label=above right:$\mathbf{b}$] (b) at (5,5) {};
+    \node [point,blue,label=above left:$\mathbf{c}$] (c) at (6,7) {};
+    \node [point,blue,label=below right:$\mathbf{d}$] (d) at (7,5) {};
+    \node [point,blue,label=below left:$\mathbf{e}$] (e) at (1,5) {};
+    \node [point,blue,label=above right:$\mathbf{f}$] (f) at (2,7) {};
+    \node [point,blue,label=below left:$\mathbf{g}$] (g) at (6,1) {};
+    \node [point,blue,label=above right:$\mathbf{h}$] (h) at (10,4) {};
+    \node [text width=1cm] at (6,4) {visible region};
+    \draw [blue] (a) -- (b) (c) -- (d) (e) -- (f) (g) -- (h);
+    \foreach \x in {0, ..., 12}{
+        \node [below] at (\x,0) {$\x$};
+    }
+    \foreach \y in {0, ..., 8}{
+        \node [left] at (0,\y) {$\y$};
+    }
+    \coordinate (cdash) at ($(c)!1/2!(d)$);
+    \coordinate (gdash) at ($(g)!1/3!(h)$);
+    \coordinate (hdash) at ($(gdash)!5/8!(h)$);
+    \draw [red] (cdash) -- (d) (gdash) -- (hdash);
+    \node [point,red,label=below left:$\mathbf{c}'$] at (cdash) {};
+    \node [point,red,label=above left:$\mathbf{g}'$] at (gdash) {};
+    \node [point,red,label=above left:$\mathbf{h}'$] at (hdash) {};
+\end{tikzpicture}
 
 % Sutherland hodgman example
 % \begin{tikzpicture}  
@@ -1369,6 +1376,125 @@
 % \end{tikzpicture}
 
 % BSP example
+\tikzmath{\l=1.5;\aa=30;\ab=20;\ac=340;\ad=60;\ae=330;}
+% \begin{tikzpicture}
+%     \coordinate (A) at (1,1);
+%     \coordinate (B) at (6,2);
+%     \coordinate (C) at (1,5);
+%     \coordinate (D) at (3.5,2);
+%     \coordinate (E) at ($(D)+(60:3)+(140:0.5*\l)$);
+%     \draw rectangle (8,6);
+%     \draw [line width=2pt] (A) -- ++(\aa:\l) node [pos=0.5,above left] {$A$};
+%     \draw [line width=2pt] (B) -- ++(\ab:\l) node [pos=0.5,above left] {$B$}; 
+%     \draw [line width=2pt] (C) -- ++(\ac:\l) node [pos=0.6,below left] {$C$}; 
+%     \draw [line width=2pt] (D) -- ++(\ad:\l) node [pos=0.55,below right] {$D$}; 
+%     \draw [line width=2pt] (E) -- ++(\ae:\l) node [pos=0.5,below left] {$E$}; 
+%     \draw [bluevec] ($(A)+(\aa:0.5*\l)$) -- ++(\aa-90:1); 
+%     \draw [bluevec] ($(B)+(\ab:0.5*\l)$) -- ++(\ab-90:1);
+%     \draw [bluevec] ($(C)+(\ac:0.5*\l)$) -- ++(\ac+90:1);
+%     \draw [bluevec] ($(D)+(\ad:0.5*\l)$) -- ++(\ad+90:1);
+%     \draw [bluevec] ($(E)+(\ae:0.5*\l)$) -- ++(\ae+90:1);
+% \end{tikzpicture}
+
+% \begin{tikzpicture}[
+%         level 1/.style={sibling distance=3cm},
+%     ]
+%     \coordinate (A) at (1,1);
+%     \coordinate (B) at (6,2);
+%     \coordinate (C) at (1,5);
+%     \coordinate (D) at (3.5,2);
+%     \coordinate (E) at ($(D)+(60:3)+(140:0.5*\l)$);
+%     \begin{scope}
+%         \clip rectangle (8,6);
+%         \draw [hyperplane] ($(D)+(\ad+180:5)$) -- ++(\ad:10);
+%     \end{scope}
+%     \draw rectangle (8,6);
+%     \draw [line width=2pt] (A) -- ++(\aa:\l) node [pos=0.5,above left] {$A$};
+%     \draw [line width=2pt] (B) -- ++(\ab:\l) node [pos=0.5,above left] {$B$}; 
+%     \draw [line width=2pt] (C) -- ++(\ac:\l) node [pos=0.6,below left] {$C$}; 
+%     \draw [line width=2pt] (D) -- ++(\ad:\l) node [pos=0.55,below right] {$D$}; 
+%     \draw [line width=2pt] (E) -- ++(\ae:\l) node [pos=0.3,below left] {$E_1$} node [pos=0.9,below left] {$E_2$}; 
+%     \draw [bluevec] ($(A)+(\aa:0.5*\l)$) -- ++(\aa-90:1); 
+%     \draw [bluevec] ($(B)+(\ab:0.5*\l)$) -- ++(\ab-90:1);
+%     \draw [bluevec] ($(C)+(\ac:0.5*\l)$) -- ++(\ac+90:1);
+%     \draw [bluevec] ($(D)+(\ad:0.5*\l)$) -- ++(\ad+90:1);
+%     \draw [bluevec] ($(E)+(\ae:0.25*\l)$) -- ++(\ae+90:1);
+%     \draw [bluevec] ($(E)+(\ae:0.75*\l)$) -- ++(\ae+90:1);
+%     \node [convex] at (12,5) {$D$}
+%         child {node [convex] {$A,C,E_1$}}
+%         child {node [convex] {$B,E_2$}};
+% \end{tikzpicture}
+
+% \begin{tikzpicture}[
+%         level 1/.style={sibling distance=3cm},
+%         level 2/.style={sibling distance=2cm},
+%     ]
+%     \coordinate (A) at (1,1);
+%     \coordinate (B) at (6,2);
+%     \coordinate (C) at (1,5);
+%     \coordinate (D) at (3.5,2);
+%     \coordinate (E) at ($(D)+(60:3)+(140:0.5*\l)$);
+%     \begin{scope}
+%         \clip rectangle (8,6);
+%         \draw [hyperplane] ($(D)+(\ad+180:5)$) -- ++(\ad:10);
+%         \draw [hyperplane] ($(C)+(\ac+180:5)$) -- ++(\ac:8.7);
+%     \end{scope}
+%     \draw rectangle (8,6);
+%     \draw [line width=2pt] (A) -- ++(\aa:\l) node [pos=0.5,above left] {$A$};
+%     \draw [line width=2pt] (B) -- ++(\ab:\l) node [pos=0.5,above left] {$B$}; 
+%     \draw [line width=2pt] (C) -- ++(\ac:\l) node [pos=0.6,below left] {$C$}; 
+%     \draw [line width=2pt] (D) -- ++(\ad:\l) node [pos=0.55,below right] {$D$}; 
+%     \draw [line width=2pt] (E) -- ++(\ae:\l) node [pos=0.3,below left] {$E_1$} node [pos=0.9,below left] {$E_2$}; 
+%     \draw [bluevec] ($(A)+(\aa:0.5*\l)$) -- ++(\aa-90:1); 
+%     \draw [bluevec] ($(B)+(\ab:0.5*\l)$) -- ++(\ab-90:1);
+%     \draw [bluevec] ($(C)+(\ac:0.5*\l)$) -- ++(\ac+90:1);
+%     \draw [bluevec] ($(D)+(\ad:0.5*\l)$) -- ++(\ad+90:1);
+%     \draw [bluevec] ($(E)+(\ae:0.25*\l)$) -- ++(\ae+90:1);
+%     \draw [bluevec] ($(E)+(\ae:0.75*\l)$) -- ++(\ae+90:1);
+%     \node [convex] at (12,5) {$D$}
+%         child {node [convex] {$C$}
+%             child {node [convex] {$E_1$}}
+%             child {node [convex] {$A$}}}
+%         child {node [convex] {$B, E_2$}};
+% \end{tikzpicture}
+
+% \begin{tikzpicture}[
+%     level 1/.style={sibling distance=3cm},
+%     level 2/.style={sibling distance=2cm},
+%     ]
+%     \coordinate (A) at (1,1);
+%     \coordinate (B) at (6,2);
+%     \coordinate (C) at (1,5);
+%     \coordinate (D) at (3.5,2);
+%     \coordinate (E) at ($(D)+(60:3)+(140:0.5*\l)$);
+%     \begin{scope}
+%         \clip rectangle (8,6);
+%         \draw [hyperplane] ($(D)+(\ad+180:5)$) -- ++(\ad:10);
+%         \draw [hyperplane] ($(C)+(\ac+180:5)$) -- ++(\ac:8.7);
+%         \draw [hyperplane] ($(B)+(\ab+180:3.4)$) -- ++(\ab:10);
+%     \end{scope}
+%     \draw rectangle (8,6);
+%     \draw [line width=2pt] (A) -- ++(\aa:\l) node [pos=0.5,above left] {$A$};
+%     \draw [line width=2pt] (B) -- ++(\ab:\l) node [pos=0.5,above left] {$B$}; 
+%     \draw [line width=2pt] (C) -- ++(\ac:\l) node [pos=0.6,below left] {$C$}; 
+%     \draw [line width=2pt] (D) -- ++(\ad:\l) node [pos=0.55,below right] {$D$}; 
+%     \draw [line width=2pt] (E) -- ++(\ae:\l) node [pos=0.3,below left] {$E_1$} node [pos=0.9,below left] {$E_2$}; 
+%     \draw [bluevec] ($(A)+(\aa:0.5*\l)$) -- ++(\aa-90:1); 
+%     \draw [bluevec] ($(B)+(\ab:0.5*\l)$) -- ++(\ab-90:1);
+%     \draw [bluevec] ($(C)+(\ac:0.5*\l)$) -- ++(\ac+90:1);
+%     \draw [bluevec] ($(D)+(\ad:0.5*\l)$) -- ++(\ad+90:1);
+%     \draw [bluevec] ($(E)+(\ae:0.25*\l)$) -- ++(\ae+90:1);
+%     \draw [bluevec] ($(E)+(\ae:0.75*\l)$) -- ++(\ae+90:1);
+%     \node [convex] at (12,5) {$D$}
+%         child {node [convex] {$C$}
+%             child {node [convex] {$E_1$}}
+%             child {node [convex] {$A$}}}
+%         child {node [convex] {$B$}
+%             child {node [convex,xshift=1cm] {$E_2$}}
+%         };
+% \end{tikzpicture}
+
+% BSP worked example
 % \begin{tikzpicture}[auto]
 %     \draw [fill=gray!50] (0,0) rectangle ++(8,-8);
 %     \draw [fill=white]
@@ -1658,6 +1784,44 @@
 % \end{tikzpicture}
 
 % VSD using BSP trees
+% \begin{tikzpicture}[
+%     level 1/.style={sibling distance=3cm},
+%     level 2/.style={sibling distance=2cm},
+%     ]
+%     \coordinate (A) at (1,1);
+%     \coordinate (B) at (6,2);
+%     \coordinate (C) at (1,5);
+%     \coordinate (D) at (3.5,2);
+%     \coordinate (E) at ($(D)+(60:3)+(140:0.5*\l)$);
+%     \begin{scope}
+%         \clip rectangle (8,6);
+%         \draw [hyperplane] ($(D)+(\ad+180:5)$) -- ++(\ad:10);
+%         \draw [hyperplane] ($(C)+(\ac+180:5)$) -- ++(\ac:8.7);
+%         \draw [hyperplane] ($(B)+(\ab+180:3.4)$) -- ++(\ab:10);
+%     \end{scope}
+%     \draw rectangle (8,6);
+%     \draw [line width=2pt] (A) -- ++(\aa:\l) node [pos=0.5,above left] {$A$};
+%     \draw [line width=2pt] (B) -- ++(\ab:\l) node [pos=0.5,above left] {$B$}; 
+%     \draw [line width=2pt] (C) -- ++(\ac:\l) node [pos=0.6,below left] {$C$}; 
+%     \draw [line width=2pt] (D) -- ++(\ad:\l) node [pos=0.55,below right] {$D$}; 
+%     \draw [line width=2pt] (E) -- ++(\ae:\l) node [pos=0.3,below left] {$E_1$} node [pos=0.9,below left] {$E_2$}; 
+%     \draw [bluevec] ($(A)+(\aa:0.5*\l)$) -- ++(\aa-90:1); 
+%     \draw [bluevec] ($(B)+(\ab:0.5*\l)$) -- ++(\ab-90:1);
+%     \draw [bluevec] ($(C)+(\ac:0.5*\l)$) -- ++(\ac+90:1);
+%     \draw [bluevec] ($(D)+(\ad:0.5*\l)$) -- ++(\ad+90:1);
+%     \draw [bluevec] ($(E)+(\ae:0.25*\l)$) -- ++(\ae+90:1);
+%     \draw [bluevec] ($(E)+(\ae:0.75*\l)$) -- ++(\ae+90:1);
+%     \node [convex] at (12,5) {$D$}
+%         child {node [convex] {$C$}
+%             child {node [convex] {$E_1$}}
+%             child {node [convex] {$A$}}}
+%         child {node [convex] {$B$}
+%             child {node [convex,xshift=1cm] {$E_2$}}
+%         };
+%     \node [point,label=below:$\mathbf{p}$] at (3, 5) {};
+% \end{tikzpicture}
+
+% VSD using BSP trees worked example
 % \begin{tikzpicture}
 %     \node [convex] {$A$}
 %         child {node [convex] {$B$}}
@@ -1892,21 +2056,21 @@
 % \end{tikzpicture}
 
 % Antialiasing
-\begin{tikzpicture}
-    \tikzmath{\w=2.5;}
-    \draw [fill=black!0] (0,0) rectangle ++(\w,\w);
-    \draw [fill=black!50] (\w,0) rectangle ++(\w,\w);
-    \draw [fill=black!25] (0,\w) rectangle ++(\w,\w);
-    \draw [fill=black!100] (\w,\w) rectangle ++(\w,\w);
-    \draw [fill=black!44] (2*\w+2,0) rectangle ++(2*\w,2*\w);
-    \node at (\w,-0.5) {$\times 2$ super sample};
-    \node at (3*\w+2,-0.5) {display pixel};
-    \node at (0.5*\w,0.5*\w) {$(255,255,255)$};
-    \node at (1.5*\w,0.5*\w) {$(128,128,128)$};
-    \node at (0.5*\w,1.5*\w) {$(192,192,192)$};
-    \node [white] at (1.5*\w,1.5*\w) {$(0,0,0)$};
-    \node at (3*\w+2,\w) {$(144,144,144)$};
-\end{tikzpicture}
+% \begin{tikzpicture}
+%     \tikzmath{\w=2.5;}
+%     \draw [fill=black!0] (0,0) rectangle ++(\w,\w);
+%     \draw [fill=black!50] (\w,0) rectangle ++(\w,\w);
+%     \draw [fill=black!25] (0,\w) rectangle ++(\w,\w);
+%     \draw [fill=black!100] (\w,\w) rectangle ++(\w,\w);
+%     \draw [fill=black!44] (2*\w+2,0) rectangle ++(2*\w,2*\w);
+%     \node at (\w,-0.5) {$\times 2$ super sample};
+%     \node at (3*\w+2,-0.5) {display pixel};
+%     \node at (0.5*\w,0.5*\w) {$(255,255,255)$};
+%     \node at (1.5*\w,0.5*\w) {$(128,128,128)$};
+%     \node at (0.5*\w,1.5*\w) {$(192,192,192)$};
+%     \node [white] at (1.5*\w,1.5*\w) {$(0,0,0)$};
+%     \node at (3*\w+2,\w) {$(144,144,144)$};
+% \end{tikzpicture}
 
 % Convolution
 % \begin{tikzpicture}

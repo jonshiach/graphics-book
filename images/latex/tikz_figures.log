@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.10) (preloaded format=pdflatex 2023.2.7)  24 FEB 2023 12:14
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.10) (preloaded format=pdflatex 2023.2.7)  28 FEB 2023 14:48
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -515,15 +515,15 @@ File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 
 {C:/Users/jonsh/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}] (tikz_figures.aux) ) 
 Here is how much of TeX's memory you used:
- 24879 strings out of 475385
- 612617 string characters out of 2776908
- 929550 words of memory out of 3000000
- 45911 multiletter control sequences out of 15000+600000
- 470474 words of font info for 31 fonts, out of 8000000 for 9000
+ 25029 strings out of 475385
+ 615205 string characters out of 2776908
+ 948550 words of memory out of 3000000
+ 46058 multiletter control sequences out of 15000+600000
+ 471401 words of font info for 34 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 115i,7n,118p,1698b,614s stack positions out of 10000i,1000n,20000p,200000b,80000s
-{C:/Users/jonsh/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/cm-super/cm-super-t1.enc}<C:/Users/jonsh/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/jonsh/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/jonsh/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/jonsh/AppData/Local/Programs/MiKTeX/fonts/type1/public/cm-super/sfss1000.pfb>
-Output written on tikz_figures.pdf (1 page, 39136 bytes).
+ 115i,7n,118p,1698b,645s stack positions out of 10000i,1000n,20000p,200000b,80000s
+{C:/Users/jonsh/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/cm-super/cm-super-t1.enc}<C:/Users/jonsh/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/jonsh/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/jonsh/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/jonsh/AppData/Local/Programs/MiKTeX/fonts/type1/public/cm-super/sfss1000.pfb>
+Output written on tikz_figures.pdf (1 page, 41746 bytes).
 PDF statistics:
  30 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
