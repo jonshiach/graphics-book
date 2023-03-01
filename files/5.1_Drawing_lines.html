@@ -579,7 +579,7 @@ title="Print to PDF"
     &amp;= x_0 \Delta y + \Delta y - y_0 \Delta x - \tfrac{1}{2} \Delta x - x_0 \Delta y - y_0 \Delta x \\
     &amp;= \Delta y - \tfrac{1}{2} \Delta x.
 \end{align*}\]</div>
-<p>The expression for calculating includes a floating point number <span class="math notranslate nohighlight">\(\tfrac{1}{2}\)</span>. Floating point numbers have a much larger computational cost than integer numbers so it would be beneficial if we can only use integer numbers. Since we are only concerned with the sign of <span class="math notranslate nohighlight">\(d\)</span> and not its value we can multiply the expressions for calculating the initial value of <span class="math notranslate nohighlight">\(d\)</span> and <span class="math notranslate nohighlight">\(\Delta d\)</span> by 2 to give</p>
+<p>The expression for calculating includes a floating point number <span class="math notranslate nohighlight">\(1/2\)</span>. Floating point numbers have a much larger computational cost than integer numbers so it would be beneficial if we can only use integer numbers. Since we are only concerned with the sign of <span class="math notranslate nohighlight">\(d\)</span> and not its value we can multiply the expressions for calculating the initial value of <span class="math notranslate nohighlight">\(d\)</span> and <span class="math notranslate nohighlight">\(\Delta d\)</span> by 2 to give</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
     d &amp;= 2 \Delta y - \Delta x, \\
