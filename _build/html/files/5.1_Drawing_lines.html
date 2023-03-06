@@ -505,7 +505,7 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="drawing-lines">
 <span id="rasterising-lines-section"></span><h1>Drawing lines<a class="headerlink" href="#drawing-lines" title="Permalink to this headline">#</a></h1>
-<p>One of the fundamental tasks in computer graphics is the rendering of a straight line on a display. Consider the diagram in <a class="reference internal" href="#line-raster-figure"><span class="std std-numref">Fig. 96</span></a> showing the rasterisation of the straight line joining the two points with pixel co-ordinates <span class="math notranslate nohighlight">\((2, 2)\)</span> and <span class="math notranslate nohighlight">\((12, 6)\)</span>. The pixels that are closest to the line are shaded to create a rasterised approximation of the idealise image. This is a simple task for a human since we are able to view the idealised image and determine which pixels need to be shaded. Algorithms are required to determine which pixels to illuminate in order to rasterise straight lines</p>
+<p>One of the fundamental tasks in computer graphics is the rendering of a straight line on a display. Consider the diagram in <a class="reference internal" href="#line-raster-figure"><span class="std std-numref">Fig. 96</span></a> showing the rasterisation of the straight line joining the two points with pixel co-ordinates <span class="math notranslate nohighlight">\((2, 2)\)</span> and <span class="math notranslate nohighlight">\((11,7)\)</span>. The pixels that are closest to the line are shaded to create a rasterised approximation of the idealised image. This is a simple task for a human since we are able to view the idealised image and determine which pixels need to be shaded. Algorithms are required to determine which pixels to illuminate in order to rasterise straight lines</p>
 <figure class="align-default" id="line-raster-figure">
 <a class="reference internal image-reference" href="../_images/rasterising_line.svg"><img alt="../_images/rasterising_line.svg" src="../_images/rasterising_line.svg" width="400px" /></a>
 <figcaption>
@@ -579,7 +579,7 @@ title="Print to PDF"
     &amp;= x_0 \Delta y + \Delta y - y_0 \Delta x - \tfrac{1}{2} \Delta x - x_0 \Delta y - y_0 \Delta x \\
     &amp;= \Delta y - \tfrac{1}{2} \Delta x.
 \end{align*}\]</div>
-<p>The expression for calculating includes a floating point number <span class="math notranslate nohighlight">\(\tfrac{1}{2}\)</span>. Floating point numbers have a much larger computational cost than integer numbers so it would be beneficial if we can only use integer numbers. Since we are only concerned with the sign of <span class="math notranslate nohighlight">\(d\)</span> and not its value we can multiply the expressions for calculating the initial value of <span class="math notranslate nohighlight">\(d\)</span> and <span class="math notranslate nohighlight">\(\Delta d\)</span> by 2 to give</p>
+<p>The expression for calculating includes a floating point number <span class="math notranslate nohighlight">\(1/2\)</span>. Floating point numbers have a much larger computational cost than integer numbers so it would be beneficial if we can only use integer numbers. Since we are only concerned with the sign of <span class="math notranslate nohighlight">\(d\)</span> and not its value we can multiply the expressions for calculating the initial value of <span class="math notranslate nohighlight">\(d\)</span> and <span class="math notranslate nohighlight">\(\Delta d\)</span> by 2 to give</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
     d &amp;= 2 \Delta y - \Delta x, \\
@@ -589,7 +589,7 @@ title="Print to PDF"
         2 \Delta y - 2 \Delta x, &amp; d &gt; 0.
     \end{cases}
 \end{align*}\]</div>
-<p>The basic Bresenham’s algorithm is written using <a class="reference external" href="https://en.wikipedia.org/wiki/Pseudocode">pseudocode</a> in <a class="reference internal" href="#basic-bresenhams-algorithm">Algorithm 7</a>.</p>
+<p>The basic Bresenham’s algorithm is written using <a href="https://en.wikipedia.org/wiki/Pseudocode" target="_blank">pseudocode</a> in <a class="reference internal" href="#basic-bresenhams-algorithm">Algorithm 7</a>.</p>
 <div class="proof algorithm admonition" id="basic-bresenhams-algorithm">
 <p class="admonition-title"><span class="caption-number">Algorithm 7 </span> (Bresenham’s algorithm)</p>
 <section class="algorithm-content" id="proof-content">
@@ -601,7 +601,7 @@ title="Print to PDF"
 <li><p><span class="math notranslate nohighlight">\(d \gets 2 \Delta y - \Delta x\)</span></p></li>
 <li><p>While true do</p>
 <ul>
-<li><p><span class="math notranslate nohighlight">\(R(y,x) \gets colour\)</span> (change the colour of the pixel <span class="math notranslate nohighlight">\((x, y)\)</span>)</p></li>
+<li><p><span class="math notranslate nohighlight">\(R(x,y) \gets colour\)</span></p></li>
 <li><p>If <span class="math notranslate nohighlight">\(x = x_1\)</span> and <span class="math notranslate nohighlight">\(y = y_1\)</span> then</p>
 <ul>
 <li><p>Terminate algorithm and return <span class="math notranslate nohighlight">\(R\)</span></p></li>

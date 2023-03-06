@@ -1171,33 +1171,33 @@
 % \end{tikzpicture}
 
 % Cyrus beck example
-\begin{tikzpicture}
-    \draw [gray!50] (0, 0) grid (12, 8);
-    \draw [line width=2pt] (3,2) -- ++(6,0) -- ++(0,4) -- ++(-6,0) -- cycle;
-    \node [point,blue,label=below left:$\mathbf{a}$] (a) at (4,3) {};
-    \node [point,blue,label=above right:$\mathbf{b}$] (b) at (5,5) {};
-    \node [point,blue,label=above left:$\mathbf{c}$] (c) at (6,7) {};
-    \node [point,blue,label=below right:$\mathbf{d}$] (d) at (7,5) {};
-    \node [point,blue,label=below left:$\mathbf{e}$] (e) at (1,5) {};
-    \node [point,blue,label=above right:$\mathbf{f}$] (f) at (2,7) {};
-    \node [point,blue,label=below left:$\mathbf{g}$] (g) at (6,1) {};
-    \node [point,blue,label=above right:$\mathbf{h}$] (h) at (10,4) {};
-    \node [text width=1cm] at (6,4) {visible region};
-    \draw [blue] (a) -- (b) (c) -- (d) (e) -- (f) (g) -- (h);
-    \foreach \x in {0, ..., 12}{
-        \node [below] at (\x,0) {$\x$};
-    }
-    \foreach \y in {0, ..., 8}{
-        \node [left] at (0,\y) {$\y$};
-    }
-    \coordinate (cdash) at ($(c)!1/2!(d)$);
-    \coordinate (gdash) at ($(g)!1/3!(h)$);
-    \coordinate (hdash) at ($(gdash)!5/8!(h)$);
-    \draw [red] (cdash) -- (d) (gdash) -- (hdash);
-    \node [point,red,label=below left:$\mathbf{c}'$] at (cdash) {};
-    \node [point,red,label=above left:$\mathbf{g}'$] at (gdash) {};
-    \node [point,red,label=above left:$\mathbf{h}'$] at (hdash) {};
-\end{tikzpicture}
+% \begin{tikzpicture}
+%     \draw [gray!50] (0, 0) grid (12, 8);
+%     \draw [line width=2pt] (3,2) -- ++(6,0) -- ++(0,4) -- ++(-6,0) -- cycle;
+%     \node [point,blue,label=below left:$\mathbf{a}$] (a) at (4,3) {};
+%     \node [point,blue,label=above right:$\mathbf{b}$] (b) at (5,5) {};
+%     \node [point,blue,label=above left:$\mathbf{c}$] (c) at (6,7) {};
+%     \node [point,blue,label=below right:$\mathbf{d}$] (d) at (7,5) {};
+%     \node [point,blue,label=below left:$\mathbf{e}$] (e) at (1,5) {};
+%     \node [point,blue,label=above right:$\mathbf{f}$] (f) at (2,7) {};
+%     \node [point,blue,label=below left:$\mathbf{g}$] (g) at (6,1) {};
+%     \node [point,blue,label=above right:$\mathbf{h}$] (h) at (10,4) {};
+%     \node [text width=1cm] at (6,4) {visible region};
+%     \draw [blue] (a) -- (b) (c) -- (d) (e) -- (f) (g) -- (h);
+%     \foreach \x in {0, ..., 12}{
+%         \node [below] at (\x,0) {$\x$};
+%     }
+%     \foreach \y in {0, ..., 8}{
+%         \node [left] at (0,\y) {$\y$};
+%     }
+%     \coordinate (cdash) at ($(c)!1/2!(d)$);
+%     \coordinate (gdash) at ($(g)!1/3!(h)$);
+%     \coordinate (hdash) at ($(gdash)!5/8!(h)$);
+%     \draw [red] (cdash) -- (d) (gdash) -- (hdash);
+%     \node [point,red,label=below left:$\mathbf{c}'$] at (cdash) {};
+%     \node [point,red,label=above left:$\mathbf{g}'$] at (gdash) {};
+%     \node [point,red,label=above left:$\mathbf{h}'$] at (hdash) {};
+% \end{tikzpicture}
 
 % Sutherland hodgman example
 % \begin{tikzpicture}  
@@ -1890,24 +1890,6 @@
 %     \node [point,label=below:$\mathbf{q}$] at (6,-6) {};
 % \end{tikzpicture}
 
-% Rasterising a straight line
-% \begin{tikzpicture}
-%     \fill [blue!10] (1,6) rectangle ++(1,1);
-%     \fill [blue!10] (2,5) rectangle ++(2,1);
-%     \fill [blue!10] (4,4) rectangle ++(2,1);
-%     \fill [blue!10] (6,3) rectangle ++(2,1);
-%     \fill [blue!10] (8,2) rectangle ++(2,1);
-%     \fill [blue!10] (10,1) rectangle ++(1,1);
-%     \draw (0,0) grid (12,8);
-%     \draw [line width=1.5pt,line cap=round] (1.5,6.5) -- (10.5,1.5);
-%     \foreach \i in {1,...,12} {
-%         \node at (-0.5+\i,-0.25) {\i};
-%     }
-%     \foreach \i in {1,...,8} {
-%         \node at (-0.25,8.5-\i) {\i};
-%     }
-% \end{tikzpicture}
-
 % Bresenham's algorithm
 % \begin{tikzpicture}
 %     \fill [blue!10] (0,2) rectangle ++(4,2);
@@ -2117,5 +2099,264 @@
 %     \node at (9.5,3.5) {0};
 %     \node at (12.5,3.5) {6};
 % \end{tikzpicture}
+
+% Cyrus-Beck exercise
+% \begin{tikzpicture}
+%     \draw [gray!50] (-2, -2) grid (6, 5);
+%     \draw (0, 0) rectangle ++(4,3);
+%     \foreach \i in {-2,...,6}{
+%         \node at (\i,-2.5) {\i};
+%     }
+%     \foreach \i in {-2,...,5}{
+%         \node at (-2.5,\i) {\i};
+%     }
+%     \coordinate (a) at (2,-1);
+%     \coordinate (b) at (2,1);
+%     \coordinate (c) at (5,2);
+%     \coordinate (d) at (3,1);
+%     \coordinate (e) at (-1,1);
+%     \coordinate (f) at (3,4);
+%     \node [point,blue,label=below right:$\mathbf{a}$] at (a) {};
+%     \node [point,blue,label=below right:$\mathbf{b}$] at (b) {};
+%     \node [point,blue,label=below right:$\mathbf{c}$] at (c) {};
+%     \node [point,blue,label=below right:$\mathbf{d}$] at (d) {};
+%     \node [point,blue,label=below right:$\mathbf{e}$] at (e) {};
+%     \node [point,blue,label=below right:$\mathbf{f}$] at (f) {};
+%     \draw [blue] (a) -- (b) (c) -- (d) (e) -- (f);
+% \end{tikzpicture}
+
+% Sutherland-Hodgman algorithm exercise
+% \begin{tikzpicture}
+%     \coordinate (1) at (-1,-2);
+%     \coordinate (2) at (3,2);
+%     \coordinate (3) at (-2,5);
+%     \draw [fill=blue!10] (1) -- (2) -- (3) -- cycle;
+%     \draw [line width=2pt] (0,0) rectangle (6, 4);
+%     \node [point,label=left:$\mathbf{v}_1$] at (1) {};
+%     \node [point,label=right:$\mathbf{v}_2$] at (2) {};
+%     \node [point,label=left:$\mathbf{v}_3$] at (3) {};
+% \end{tikzpicture}
+
+% \begin{tikzpicture}
+%     \coordinate (1) at (-1,-2);
+%     \coordinate (2) at (3,2);
+%     \coordinate (3) at (-2,5);
+%     \coordinate (i1) at ($(3)!5/7!(1)$);
+%     \coordinate (i2) at ($(1)!1/2!(2)$);
+%     \draw [dashed] (1) -- (2) -- (3) -- cycle;
+%     \draw [fill=blue!10] (i1) -- (i2) -- (2) -- (3) -- cycle;
+%     \draw [line width=2pt] (0,0) rectangle (6, 4);
+%     \node [point,label=left:$\mathbf{v}_1$] at (1) {};
+%     \node [point,label=right:$\mathbf{v}_2$] at (2) {};
+%     \node [point,label=left:$\mathbf{v}_3$] at (3) {};
+%     \node [point,label=left:$\mathbf{i}_1$] at (i1) {};
+%     \node [point,label=below right:$\mathbf{i}_2$] at (i2) {};
+% \end{tikzpicture}
+
+% \begin{tikzpicture}
+%     \coordinate (1) at (-1,-2);
+%     \coordinate (2) at (3,2);
+%     \coordinate (3) at (-2,5);
+%     \coordinate (i1) at ($(3)!5/7!(1)$);
+%     \coordinate (i2) at ($(1)!1/2!(2)$);
+%     \coordinate (i3) at ($(3)!1/7!(1)$);
+%     \coordinate (i4) at ($(2)!2/3!(3)$);
+%     \draw [dashed] (1) -- (2) -- (3) -- cycle;
+%     \draw [fill=blue!10] (i1) -- (i2) -- (2) -- (i4) --(i3) -- cycle;
+%     \draw [line width=2pt] (0,0) rectangle (6, 4);
+%     \node [point,label=left:$\mathbf{v}_1$] at (1) {};
+%     \node [point,label=right:$\mathbf{v}_2$] at (2) {};
+%     \node [point,label=left:$\mathbf{v}_3$] at (3) {};
+%     \node [point,label=left:$\mathbf{i}_1$] at (i1) {};
+%     \node [point,label=below right:$\mathbf{i}_2$] at (i2) {};
+%     \node [point,label=left:$\mathbf{i}_3$] at (i3) {};
+%     \node [point,label=above:$\mathbf{i}_4$] at (i4) {};
+% \end{tikzpicture}
+
+% \begin{tikzpicture}
+%     \coordinate (1) at (-1,-2);
+%     \coordinate (2) at (3,2);
+%     \coordinate (3) at (-2,5);
+%     \coordinate (i1) at ($(3)!5/7!(1)$);
+%     \coordinate (i2) at ($(1)!1/2!(2)$);
+%     \coordinate (i3) at ($(2)!2/3!(3)$);
+%     \coordinate (i4) at ($(3)!1/7!(1)$);
+%     \coordinate (i5) at ($(2)!3/5!(3)$);
+%     \coordinate (i6) at (0,0);
+%     \draw [dashed] (1) -- (2) -- (3) -- cycle;
+%     \draw [fill=blue!10] (i6) -- (i2) -- (2) -- (i5) --(i6) -- cycle;
+%     \draw [line width=2pt] (0,0) rectangle (6, 4);
+%     \node [point,label=left:$\mathbf{v}_1$] at (1) {};
+%     \node [point,label=right:$\mathbf{v}_2$] at (2) {};
+%     \node [point,label=left:$\mathbf{v}_3$] at (3) {};
+%     % \node [point,label=left:$\mathbf{i}_1$] at (i1) {};
+%     \node [point,label=below right:$\mathbf{i}_2$] at (i2) {};
+%     % \node [point,label=above:$\mathbf{i}_3$] at (i3) {};
+%     % \node [point,label=left:$\mathbf{i}_4$] at (i4) {};
+%     \node [point,label=left:$\mathbf{i}_6$] at (i5) {};
+%     \node [point,label=left:$\mathbf{i}_5$] at (i6) {};
+% \end{tikzpicture}
+
+% BSP exercise
+% \begin{tikzpicture}[auto]
+%     \draw [fill=gray!50] (0,0) rectangle ++(16,-12);
+%     \draw [fill=white] (1,-4)
+%         -- node {$A$} ++(0,-5)
+%         -- node {$B$} ++(4,0)
+%         -- node {$C$} ++(0,4)
+%         -- node {$D$} ++(2,0)
+%         -- node {$E$} ++(0,-3)
+%         -- node {$F$} ++(-1,0)
+%         -- node {$G$} ++(0,-3)
+%         -- node {$H$} ++(4,0)
+%         -- node {$I$} ++(0,3)
+%         -- node {$J$} ++(-2,0)
+%         -- node {$K$} ++(0,1)
+%         -- node {$L$} ++(3,0)
+%         -- node {$M$} ++(0,-4)
+%         -- node {$N$} ++(4,0)
+%         -- node {$O$} ++(0,6)
+%         -- node {$P$} ++(-4,0)
+%         -- node {$Q$} ++(0,-1)
+%         -- node {$R$} ++(-3,0)
+%         -- node {$S$} ++(0,3)
+%         -- node {$T$} ++(3,0)
+%         -- node {$U$} ++(0,-1)
+%         -- node {$V$} ++(4,0)
+%         -- node {$W$} ++(0,3) 
+%         -- node {$X$} ++(-8,0)
+%         -- node {$Y$} ++(0,-3)
+%         -- node {$Z$} ++(-6,0);
+% \end{tikzpicture}
+
+% \begin{tikzpicture}[auto]
+%     \draw [fill=gray!50] (0,0) rectangle ++(16,-12);
+%     \draw [fill=white] (1,-4)
+%         -- node {$A_1$} ++(0,-1)
+%         -- node {$A_2$} ++(0,-4)
+%         -- node {$B$} ++(4,0)
+%         -- node {$C$} ++(0,4)
+%         -- node {$D$} ++(2,0)
+%         -- node {$E$} ++(0,-3)
+%         -- node {$F$} ++(-1,0)
+%         -- node {$G$} ++(0,-3)
+%         -- node {$H_1$} ++(2,0)
+%         -- node {$H_2$} ++(2,0)
+%         -- node {$I$} ++(0,3)
+%         -- node {$J$} ++(-2,0)
+%         -- node {$K$} ++(0,1)
+%         -- node {$L$} ++(3,0)
+%         -- node {$M$} ++(0,-4)
+%         -- node {$N$} ++(4,0)
+%         -- node {$O_1$} ++(0,5)
+%         -- node {$O_2$} ++(0,1)
+%         -- node {$P$} ++(-4,0)
+%         -- node {$Q$} ++(0,-1)
+%         -- node {$R$} ++(-3,0)
+%         -- node {$S$} ++(0,3)
+%         -- node {$T$} ++(3,0)
+%         -- node {$U$} ++(0,-1)
+%         -- node {$V$} ++(4,0)
+%         -- node {$W_2$} ++(0,1)
+%         -- node {$W_1$} ++(0,2) 
+%         -- node {$X_2$} ++(-7,0)
+%         -- node {$X_1$} ++(-1,0)
+%         -- node {$Y$} ++(0,-3)
+%         -- node {$Z$} ++(-6,0);
+%     \draw [hyperplane] (8,0) -- ++(0,-12) node [above right] {(1)};
+%     \draw [hyperplane] (0,-5) -- ++(8,0) node [pos=0,below right] {(2)};
+%     \draw [hyperplane] (7,0) -- ++(0,-5) node [pos=0,below left] {(3)};
+%     \draw [hyperplane] (5,-12) -- ++(0,7) node [pos=0,above left] {(4)};
+%     \draw [hyperplane] (5,-8) -- ++(3,0) node [pos=0,above right] {(5)};
+%     \draw [hyperplane] (8,-6) -- ++(8,0) node [above left] {(6)};
+%     \draw [hyperplane] (11,-12) -- ++(0,6) node [pos=0,above right] {(7)};
+%     \draw [hyperplane] (8,-8) -- ++(3,0) node [above left] {(9)};
+%     \draw [hyperplane] (8,-3) -- ++(8,0) node [above left] {(9)};
+%     \draw [hyperplane] (8,-4) -- ++(8,0) node [below left] {(10)};
+%     % \draw [help lines] grid (0,0) grid (16,-12);
+% \end{tikzpicture}
+
+% \begin{tikzpicture}[
+%     level 1/.style={sibling distance=8cm},
+%     level 2/.style={sibling distance=4cm},
+%     level 3/.style={sibling distance=2cm},
+%     level 4/.style={sibling distance=2cm},
+% ]
+%     \node [convex] {$K,S$}
+%         child { node [convex] {$D$} 
+%             child { node [convex] {$Y$} 
+%                 child { node [convex] {$X_1$} }
+%                 child { node [convex] {$A_1, Z$} }
+%             }
+%             child { node [convex] {$C$}
+%                 child { node [convex] {$A_2, B$} }
+%                 child { node [convex] {$F$}
+%                     child { node [convex] {$G, H_1$} }
+%                     child { node [convex] {$E$} }
+%                 }
+%             }
+%         }
+%         child { node [convex] {$R$} 
+%             child { node [convex] {$M$} 
+%                 child { node [convex] {$N, O_1$} }
+%                 child { node [convex] {$J$} 
+%                     child { node [convex] {$H_2,I$} }
+%                     child { node [convex] {$L$} }
+%                 }
+%             }
+%             child { node [convex] {$T$} 
+%                 child { node [convex] {$W_1, X_2$} }
+%                 child { node [convex] {$V$} 
+%                     child { node [convex] {$U,W_2$} }
+%                     child { node [convex] {$O_2,P,Q$} }
+%                 }
+%             }
+%         };
+% \end{tikzpicture}
+
+\begin{tikzpicture}[auto]
+    \draw [fill=gray!50] (0,0) rectangle ++(16,-12);
+    \draw [fill=white] (1,-4)
+        -- node {$A_1$} ++(0,-1)
+        -- node {$A_2$} ++(0,-4)
+        -- node {$B$} ++(4,0)
+        -- node {$C$} ++(0,4)
+        -- node {$D$} ++(2,0)
+        -- node {$E$} ++(0,-3)
+        -- node {$F$} ++(-1,0)
+        -- node {$G$} ++(0,-3)
+        -- node {$H_1$} ++(2,0)
+        -- node {$H_2$} ++(2,0)
+        -- node {$I$} ++(0,3)
+        -- node {$J$} ++(-2,0)
+        -- node {$K$} ++(0,1)
+        -- node {$L$} ++(3,0)
+        -- node {$M$} ++(0,-4)
+        -- node {$N$} ++(4,0)
+        -- node {$O_1$} ++(0,5)
+        -- node {$O_2$} ++(0,1)
+        -- node {$P$} ++(-4,0)
+        -- node {$Q$} ++(0,-1)
+        -- node {$R$} ++(-3,0)
+        -- node {$S$} ++(0,3)
+        -- node {$T$} ++(3,0)
+        -- node {$U$} ++(0,-1)
+        -- node {$V$} ++(4,0)
+        -- node {$W_2$} ++(0,1)
+        -- node {$W_1$} ++(0,2) 
+        -- node {$X_2$} ++(-7,0)
+        -- node {$X_1$} ++(-1,0)
+        -- node {$Y$} ++(0,-3)
+        -- node {$Z$} ++(-6,0);
+    \node [point,label=below:$\mathbf{p}$] at (3, -7.5) {};
+    \node [point,label=below:$\mathbf{q}$] at (7.5, -9.5) {};
+    \node [point,label=below:$\mathbf{r}$] at (13, -2) {};
+    \draw (0.75,-6) -- ++(0.5,0);
+    \draw (8,-11.25) -- ++(0,0.5);
+    \draw (14.75,-6) -- ++(0.5,0);
+    \draw (14.75,-3) -- ++(0.5,0);
+    \draw (8,-1.25) -- ++(0,0.5);
+\end{tikzpicture}
+
 
 \end{document}
