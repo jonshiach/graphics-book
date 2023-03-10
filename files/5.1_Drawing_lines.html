@@ -320,6 +320,11 @@ const thebe_selector_output = ".output, .cell_output"
      Image processing
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="5.6_Rasterising_exercises.html">
+     Rasterising Exercises
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toctree-l1">
@@ -640,24 +645,50 @@ Solution<div class="sd-summary-down docutils">
 <div class="sd-summary-up docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
-<p class="sd-card-text">First we need to calculate <span class="math notranslate nohighlight">\(\Delta x\)</span>, <span class="math notranslate nohighlight">\(\Delta y\)</span> and <span class="math notranslate nohighlight">\(d\)</span></p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
-    \Delta x &amp;= x_1 - x_0 = 7 - 2 = 5, \\
-    \Delta y &amp;= y_1 - y_0 = 5 - 2 = 3, \\
-    d &amp;= 2 \Delta y - \Delta x = 2(3) - 5 = 1.
-\end{align*}\]</div>
+<p class="sd-card-text">First we calculate <span class="math notranslate nohighlight">\(\Delta x = 7 - 2 = 5\)</span>, <span class="math notranslate nohighlight">\(\Delta y = 5 - 2 = 3\)</span>, <span class="math notranslate nohighlight">\(d = 2(3) - 5 = 1\)</span>.</p>
 <p class="sd-card-text">Stepping through the pixels:</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
-    x &amp;= 2, &amp; y &amp;= 2, &amp; d &amp;= 1 &gt; 0 &amp; \therefore d &amp;= 1 + 2(3) - 2(5) = -3, \\
-    x &amp;= 3, &amp; y &amp;= 3, &amp; d &amp;= -3 \leq 0 &amp; \therefore d &amp;= -3 + 2(3) = 3, \\
-    x &amp;= 4, &amp; y &amp;= 3, &amp; d &amp;= 3 &gt; 0 &amp; \therefore d &amp;= 3 + 2(3) - 2(5) = -1, \\
-    x &amp;= 5, &amp; y &amp;= 4, &amp; d &amp;= -1 &lt; 0 &amp; \therefore d &amp;= -1 + 2(3) = 5, \\
-    x &amp;= 6, &amp; y &amp;= 4, &amp; d &amp;= 5 &gt; 0 &amp; \therefore d &amp;= 5 + 2(3) - 2(5) = 1, \\
-    x &amp;= 7, &amp; y &amp;= 5.
-\end{align*}\]</div>
-<p class="sd-card-text">So the pixels at <span class="math notranslate nohighlight">\((2, 2)\)</span>, <span class="math notranslate nohighlight">\((3, 3)\)</span>, <span class="math notranslate nohighlight">\((4, 3)\)</span>, <span class="math notranslate nohighlight">\((5, 4)\)</span>, <span class="math notranslate nohighlight">\((6, 4)\)</span> and <span class="math notranslate nohighlight">\((7, 5)\)</span> are plotted.</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:center head"><p class="sd-card-text"><span class="math notranslate nohighlight">\(x\)</span></p></th>
+<th class="text-align:center head"><p class="sd-card-text"><span class="math notranslate nohighlight">\(y\)</span></p></th>
+<th class="text-align:center head"><p class="sd-card-text"><span class="math notranslate nohighlight">\(d\)</span></p></th>
+<th class="text-align:left head"><p class="sd-card-text">decision</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:center"><p class="sd-card-text"><span class="math notranslate nohighlight">\(2\)</span></p></td>
+<td class="text-align:center"><p class="sd-card-text"><span class="math notranslate nohighlight">\(2\)</span></p></td>
+<td class="text-align:center"><p class="sd-card-text"><span class="math notranslate nohighlight">\(1\)</span></p></td>
+<td class="text-align:left"><p class="sd-card-text">update <span class="math notranslate nohighlight">\(y\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p class="sd-card-text"><span class="math notranslate nohighlight">\(3\)</span></p></td>
+<td class="text-align:center"><p class="sd-card-text"><span class="math notranslate nohighlight">\(3\)</span></p></td>
+<td class="text-align:center"><p class="sd-card-text"><span class="math notranslate nohighlight">\(1 + 2(3) - 2(5) = -3\)</span></p></td>
+<td class="text-align:left"><p class="sd-card-text"></p></td>
+</tr>
+<tr class="row-even"><td class="text-align:center"><p class="sd-card-text"><span class="math notranslate nohighlight">\(4\)</span></p></td>
+<td class="text-align:center"><p class="sd-card-text"><span class="math notranslate nohighlight">\(3\)</span></p></td>
+<td class="text-align:center"><p class="sd-card-text"><span class="math notranslate nohighlight">\(-3 + 2(3) = 3\)</span></p></td>
+<td class="text-align:left"><p class="sd-card-text">update <span class="math notranslate nohighlight">\(y\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p class="sd-card-text"><span class="math notranslate nohighlight">\(5\)</span></p></td>
+<td class="text-align:center"><p class="sd-card-text"><span class="math notranslate nohighlight">\(4\)</span></p></td>
+<td class="text-align:center"><p class="sd-card-text"><span class="math notranslate nohighlight">\(3 + 2(3) - 2(5) = -1\)</span></p></td>
+<td class="text-align:left"><p class="sd-card-text"></p></td>
+</tr>
+<tr class="row-even"><td class="text-align:center"><p class="sd-card-text"><span class="math notranslate nohighlight">\(6\)</span></p></td>
+<td class="text-align:center"><p class="sd-card-text"><span class="math notranslate nohighlight">\(4\)</span></p></td>
+<td class="text-align:center"><p class="sd-card-text"><span class="math notranslate nohighlight">\(-1 + 2(3) = 5\)</span></p></td>
+<td class="text-align:left"><p class="sd-card-text">update <span class="math notranslate nohighlight">\(y\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p class="sd-card-text"><span class="math notranslate nohighlight">\(7\)</span></p></td>
+<td class="text-align:center"><p class="sd-card-text"><span class="math notranslate nohighlight">\(5\)</span></p></td>
+<td class="text-align:center"><p class="sd-card-text"></p></td>
+<td class="text-align:left"><p class="sd-card-text">terminate algorithm</p></td>
+</tr>
+</tbody>
+</table>
+<p class="sd-card-text">So we plot pixels at <span class="math notranslate nohighlight">\((2, 2)\)</span>, <span class="math notranslate nohighlight">\((3, 3)\)</span>, <span class="math notranslate nohighlight">\((4, 3)\)</span>, <span class="math notranslate nohighlight">\((5, 4)\)</span>, <span class="math notranslate nohighlight">\((6, 4)\)</span> and <span class="math notranslate nohighlight">\((7, 5)\)</span> are plotted.</p>
 <figure class="align-default" style="width: 300px">
 <img alt="../_images/bresenham_example_2.png" src="../_images/bresenham_example_2.png" />
 </figure>
@@ -666,7 +697,7 @@ Solution<div class="sd-summary-down docutils">
 </div></section>
 <section id="modified-bresenham-s-algorithm">
 <h2>Modified Bresenham’s algorithm<a class="headerlink" href="#modified-bresenham-s-algorithm" title="Permalink to this headline">#</a></h2>
-<p>In deriving the algorithm presented in <a class="reference internal" href="#basic-bresenhams-algorithm">Algorithm 7</a> we made the assumption that the line was drawn from left-to-right and top-to-bottom. To modify the algorithm so that it can draw lines in any direction we repeat the derivation considering steps in the <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> directions separately. This results in the modified Bresenham’s algorithm shown in <a class="reference internal" href="#bresenhams-algorithm">Algorithm 8</a>. Note that in the modified algorithm we introduce a new decision variable <span class="math notranslate nohighlight">\(e\)</span> which is used tests to determine whether the <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> co-ordinates are incremented.</p>
+<p>In deriving the algorithm presented in <a class="reference internal" href="#basic-bresenhams-algorithm">Algorithm 7</a> we made the assumption that the line was drawn from left-to-right and top-to-bottom. To modify the algorithm so that it can draw lines in any direction we repeat the derivation considering steps in the <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> directions separately. This results in the modified Bresenham’s algorithm shown in <a class="reference internal" href="#bresenhams-algorithm">Algorithm 8</a>.</p>
 <div class="proof algorithm admonition" id="bresenhams-algorithm">
 <p class="admonition-title"><span class="caption-number">Algorithm 8 </span> (Modified Bresenham’s algorithm)</p>
 <section class="algorithm-content" id="proof-content">
@@ -674,38 +705,41 @@ Solution<div class="sd-summary-down docutils">
 <p><strong>Output</strong> A raster array <span class="math notranslate nohighlight">\(R\)</span>.</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(x \gets x_0\)</span> and <span class="math notranslate nohighlight">\(y \gets y_0\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(\Delta x \gets |x_1 - x|\)</span> and <span class="math notranslate nohighlight">\(\Delta y \gets |y_1 - y|\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(d \gets \Delta x - \Delta y\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\Delta x \gets |x_1 - x_0|\)</span> and <span class="math notranslate nohighlight">\(\Delta y \gets |y_1 - y_0|\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(d \gets 2 \Delta x - 2 \Delta y\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(x_{step} \gets 1\)</span> and <span class="math notranslate nohighlight">\(y_{step} \gets 1\)</span></p></li>
-<li><p>If <span class="math notranslate nohighlight">\(x &gt; x_1\)</span> then</p>
+<li><p>If <span class="math notranslate nohighlight">\(x_0 &gt; x_1\)</span> then</p>
 <ul>
 <li><p><span class="math notranslate nohighlight">\(x_{step} \gets -1\)</span></p></li>
 </ul>
 </li>
-<li><p>If <span class="math notranslate nohighlight">\(y &gt; y_1\)</span> then</p>
+<li><p>If <span class="math notranslate nohighlight">\(y_0 &gt; y_1\)</span> then</p>
 <ul>
 <li><p><span class="math notranslate nohighlight">\(y_{step} \gets -1\)</span></p></li>
 </ul>
 </li>
 <li><p>While true do</p>
 <ul>
-<li><p><span class="math notranslate nohighlight">\(R(y,x) \gets colour\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(R(x,y) \gets colour\)</span></p></li>
 <li><p>If <span class="math notranslate nohighlight">\(x = x_1\)</span> and <span class="math notranslate nohighlight">\(y = y_1\)</span> then</p>
 <ul>
 <li><p>Terminate algorithm and return <span class="math notranslate nohighlight">\(R\)</span></p></li>
 </ul>
 </li>
-<li><p><span class="math notranslate nohighlight">\(e \gets 2d\)</span></p></li>
-<li><p>If <span class="math notranslate nohighlight">\(e \geq -\Delta y\)</span> then</p>
+<li><p><span class="math notranslate nohighlight">\(\Delta d \gets 0\)</span></p></li>
+<li><p>If <span class="math notranslate nohighlight">\(d \geq -\Delta y\)</span></p>
 <ul>
-<li><p><span class="math notranslate nohighlight">\(x \gets x + x_{step}\)</span> and <span class="math notranslate nohighlight">\(d \gets d - \Delta y\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(x \gets x + x_{step}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\Delta d = \Delta d - 2 \Delta y\)</span></p></li>
 </ul>
 </li>
-<li><p>If <span class="math notranslate nohighlight">\(e \leq \Delta x\)</span> then</p>
+<li><p>If <span class="math notranslate nohighlight">\(d \leq \Delta x\)</span></p>
 <ul>
-<li><p><span class="math notranslate nohighlight">\(y \gets y + y_{step}\)</span> and <span class="math notranslate nohighlight">\(d \gets d + \Delta x\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(y \gets y + y_{step}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\Delta d = \Delta d + 2 \Delta x\)</span></p></li>
 </ul>
 </li>
+<li><p><span class="math notranslate nohighlight">\(d \gets d + \Delta d\)</span></p></li>
 </ul>
 </li>
 </ul>
@@ -715,7 +749,7 @@ Solution<div class="sd-summary-down docutils">
 <section class="example-content" id="proof-content">
 <p>Use Bresenham’s algorithm for drawing lines in any direction to determine the co-ordinates of
 the pixels on the lines joining the following points:</p>
-<p>  (i)   <span class="math notranslate nohighlight">\((0,0)\)</span> and <span class="math notranslate nohighlight">\((4,6)\)</span>;</p>
+<p>(i)   <span class="math notranslate nohighlight">\((1,1)\)</span> and <span class="math notranslate nohighlight">\((5,7)\)</span>;</p>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
 Solution<div class="sd-summary-down docutils">
@@ -723,43 +757,60 @@ Solution<div class="sd-summary-down docutils">
 <div class="sd-summary-up docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
-    \Delta x &amp;= |4 - 0| = 4, \\
-    \Delta y &amp;= |6 - 0| = 6, \\
-    x_{step} &amp;= 1, \\
-    y_{step} &amp;= 1, \\
-    d &amp;= 4 - 6 = -2.
-\end{align*}\]</div>
+<p class="sd-card-text">First calculate <span class="math notranslate nohighlight">\(\Delta x = |5 - 1| = 4\)</span>, <span class="math notranslate nohighlight">\(\Delta y = |7 - 1| = 6\)</span>, <span class="math notranslate nohighlight">\(x_{step}=1\)</span>, <span class="math notranslate nohighlight">\(y_{step}=1\)</span> and <span class="math notranslate nohighlight">\(d=2(4) - 2(6)= -4\)</span>. So we update <span class="math notranslate nohighlight">\(x\)</span> if <span class="math notranslate nohighlight">\(d \geq -6\)</span> and update <span class="math notranslate nohighlight">\(y\)</span> if <span class="math notranslate nohighlight">\(d \leq 4\)</span>.</p>
 <p class="sd-card-text">Stepping through the algorithm:</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
-    e &amp;= -4, \\
-    x &amp;= 1, &amp; e &amp;\geq -\Delta y &amp; \therefore x &amp;= 0 + 1 = 1, &amp; d &amp;= -2 - 6 = -8, \\
-    y &amp;= 1, &amp; e &amp;\leq \Delta x &amp; \therefore y &amp;= 0 + 1 = 1, &amp; d &amp;= -8 + 4 = -4, \\ \\
-    e &amp;= -8, \\
-    x &amp;= 2, &amp; e &amp;&lt; -\Delta y, \\
-    y &amp;= 2, &amp; e &amp;\leq \Delta x &amp; \therefore y &amp;= 1 + 1 = 2, &amp; d &amp;= -4 + 4 = 0, \\ \\
-    e &amp;= 0, \\
-    x &amp;= 2, &amp; e &amp;\geq -\Delta y &amp; \therefore x &amp;= 1 + 1 = 2, &amp; d &amp;= 0 - 6 = -6, \\
-    y &amp;= 3, &amp; e &amp;\leq \Delta x &amp; \therefore y &amp;= 2 + 1 = 3, &amp; d &amp;= -6 + 4 = -2, \\ \\
-    e &amp;= -4, \\
-    x &amp;= 3, &amp; e &amp;\geq -\Delta y &amp; \therefore x &amp;= 2 + 1 = 3, &amp; d &amp;= -2 - 6 = -8, \\
-    y &amp;= 4, &amp; e &amp;\leq \Delta x &amp; \therefore y &amp;= 3 + 1 = 4, &amp; d &amp;= -8 + 4 = -4, \\ \\
-    e &amp;= -8, \\
-    x &amp;= 4, &amp; e &amp;&lt; -\Delta y, \\
-    y &amp;= 5, &amp; e &amp;\leq \Delta x &amp; \therefore y &amp;= 4 + 1 = 5, &amp; d &amp;= -4 + 4 = 0, \\ \\
-    e &amp;= 0, \\
-    x &amp;= 4, &amp; e &amp;\geq -\Delta y &amp; \therefore x &amp;= 3 + 1 = 4, &amp; d &amp;= 0 - 6 = -6, \\
-    y &amp;= 6, &amp; e &amp;\leq \Delta x &amp; \therefore y &amp;= 5 + 1 = 6, &amp; d &amp;= -6 + 4 = -2, \\ \\
-    x &amp;= 5, \\
-    y &amp;= 7.
-\end{align*}\]</div>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:center head"><p class="sd-card-text"><span class="math notranslate nohighlight">\(x\)</span></p></th>
+<th class="text-align:center head"><p class="sd-card-text"><span class="math notranslate nohighlight">\(y\)</span></p></th>
+<th class="text-align:center head"><p class="sd-card-text"><span class="math notranslate nohighlight">\(d\)</span></p></th>
+<th class="text-align:left head"><p class="sd-card-text">decision</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:center"><p class="sd-card-text"><span class="math notranslate nohighlight">\(1\)</span></p></td>
+<td class="text-align:center"><p class="sd-card-text"><span class="math notranslate nohighlight">\(1\)</span></p></td>
+<td class="text-align:center"><p class="sd-card-text"><span class="math notranslate nohighlight">\(-4\)</span></p></td>
+<td class="text-align:left"><p class="sd-card-text">update <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p class="sd-card-text"><span class="math notranslate nohighlight">\(2\)</span></p></td>
+<td class="text-align:center"><p class="sd-card-text"><span class="math notranslate nohighlight">\(2\)</span></p></td>
+<td class="text-align:center"><p class="sd-card-text"><span class="math notranslate nohighlight">\(-4-2(6)+2(4)=-8\)</span></p></td>
+<td class="text-align:left"><p class="sd-card-text">only update <span class="math notranslate nohighlight">\(y\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-align:center"><p class="sd-card-text"><span class="math notranslate nohighlight">\(2\)</span></p></td>
+<td class="text-align:center"><p class="sd-card-text"><span class="math notranslate nohighlight">\(3\)</span></p></td>
+<td class="text-align:center"><p class="sd-card-text"><span class="math notranslate nohighlight">\(-8+2(4)=0\)</span></p></td>
+<td class="text-align:left"><p class="sd-card-text">update <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p class="sd-card-text"><span class="math notranslate nohighlight">\(3\)</span></p></td>
+<td class="text-align:center"><p class="sd-card-text"><span class="math notranslate nohighlight">\(4\)</span></p></td>
+<td class="text-align:center"><p class="sd-card-text"><span class="math notranslate nohighlight">\(0-2(6)+2(4)=-4\)</span></p></td>
+<td class="text-align:left"><p class="sd-card-text">update <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-align:center"><p class="sd-card-text"><span class="math notranslate nohighlight">\(4\)</span></p></td>
+<td class="text-align:center"><p class="sd-card-text"><span class="math notranslate nohighlight">\(5\)</span></p></td>
+<td class="text-align:center"><p class="sd-card-text"><span class="math notranslate nohighlight">\(-4-2(6)+2(4)=-8\)</span></p></td>
+<td class="text-align:left"><p class="sd-card-text">so only update <span class="math notranslate nohighlight">\(y\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p class="sd-card-text"><span class="math notranslate nohighlight">\(4\)</span></p></td>
+<td class="text-align:center"><p class="sd-card-text"><span class="math notranslate nohighlight">\(6\)</span></p></td>
+<td class="text-align:center"><p class="sd-card-text"><span class="math notranslate nohighlight">\(-8+2(4)=0\)</span></p></td>
+<td class="text-align:left"><p class="sd-card-text">update <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-align:center"><p class="sd-card-text"><span class="math notranslate nohighlight">\(5\)</span></p></td>
+<td class="text-align:center"><p class="sd-card-text"><span class="math notranslate nohighlight">\(7\)</span></p></td>
+<td class="text-align:center"><p class="sd-card-text"></p></td>
+<td class="text-align:left"><p class="sd-card-text">terminate algorithm</p></td>
+</tr>
+</tbody>
+</table>
+<p class="sd-card-text">So we plot pixels at <span class="math notranslate nohighlight">\((1,1)\)</span>, <span class="math notranslate nohighlight">\((2,2)\)</span>, <span class="math notranslate nohighlight">\((2,3)\)</span>, <span class="math notranslate nohighlight">\((3,4)\)</span>, <span class="math notranslate nohighlight">\((4,5)\)</span>, <span class="math notranslate nohighlight">\((4,6)\)</span> and <span class="math notranslate nohighlight">\((5,7)\)</span>.</p>
 <figure class="align-default" style="width: 300px">
 <img alt="../_images/bresenham_example_3i.png" src="../_images/bresenham_example_3i.png" />
 </figure>
 </div>
-</details><p>  (ii)   <span class="math notranslate nohighlight">\((6,1)\)</span> and <span class="math notranslate nohighlight">\((2,4)\)</span>.</p>
+</details><p>(ii)   <span class="math notranslate nohighlight">\((7,2)\)</span> and <span class="math notranslate nohighlight">\((3,5)\)</span>.</p>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
 Solution<div class="sd-summary-down docutils">
@@ -767,32 +818,45 @@ Solution<div class="sd-summary-down docutils">
 <div class="sd-summary-up docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
-    \Delta x &amp;= |2 - 6| = 4, \\
-    \Delta y &amp;= |4 - 1| = 3, \\
-    x_{step} &amp;= -1, \\
-    y_{step} &amp;= 1, \\
-    d &amp;= 4 - 3 = 1.
-\end{align*}\]</div>
+<p class="sd-card-text">First calculate <span class="math notranslate nohighlight">\(\Delta x = |3 - 7| = 4\)</span>, <span class="math notranslate nohighlight">\(\Delta y = |5 - 2| = 3\)</span>, <span class="math notranslate nohighlight">\(x_{step}=-1\)</span>, <span class="math notranslate nohighlight">\(y_{step}=1\)</span> and <span class="math notranslate nohighlight">\(d = 2(4) - 2(3) = 2\)</span>. So we update <span class="math notranslate nohighlight">\(x\)</span> if <span class="math notranslate nohighlight">\(d \geq -3\)</span> and update <span class="math notranslate nohighlight">\(y\)</span> if <span class="math notranslate nohighlight">\(d \leq 4\)</span>.</p>
 <p class="sd-card-text">Stepping through the algorithm:</p>
-<div class="amsmath math notranslate nohighlight">
-\[\begin{align*}
-    e &amp;= 2, \\
-    x &amp;= 7, &amp; e &amp;\geq -\Delta y &amp; \therefore x &amp;= 6 - 1 = 5, &amp; d &amp;= 1 - 3 = -2, \\
-    y &amp;= 2, &amp; e &amp;\leq \Delta x &amp; \therefore y &amp;= 1 + 1 = 2, &amp; d &amp;= -2 + 4 = 2, \\ \\
-    e &amp;= 4, \\
-    x &amp;= 6, &amp; e &amp;\geq -\Delta y &amp; \therefore x &amp;= 5 - 1 = 4, &amp; d &amp;= 2 - 3 = -1, \\
-    y &amp;= 3, &amp; e &amp;\leq \Delta x &amp; \therefore y &amp;= 2 + 1 = 3, &amp; d &amp;= -1 + 4 = 3, \\ \\
-    e &amp;= 6, \\
-    x &amp;= 5, &amp; e &amp;\geq -\Delta y &amp; \therefore x &amp;= 4 - 1 = 3, &amp; d &amp;= 3 - 3 = 0, \\
-    y &amp;= 4, &amp; e &amp;&gt; \Delta x \\ \\
-    e &amp;= 0, \\
-    x &amp;= 4, &amp; e &amp;\geq -\Delta y &amp; \therefore x &amp;= 3 - 1 = 2, \\
-    y &amp;= 4, &amp; e &amp;\leq \Delta x &amp; \therefore y &amp;= 3 + 1 = 4, \\ \\
-    x &amp;= 3, \\
-    y &amp;= 5.
-\end{align*}\]</div>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:center head"><p class="sd-card-text"><span class="math notranslate nohighlight">\(x\)</span></p></th>
+<th class="text-align:center head"><p class="sd-card-text"><span class="math notranslate nohighlight">\(y\)</span></p></th>
+<th class="text-align:center head"><p class="sd-card-text"><span class="math notranslate nohighlight">\(d\)</span></p></th>
+<th class="text-align:left head"><p class="sd-card-text">decision</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:center"><p class="sd-card-text"><span class="math notranslate nohighlight">\(7\)</span></p></td>
+<td class="text-align:center"><p class="sd-card-text"><span class="math notranslate nohighlight">\(2\)</span></p></td>
+<td class="text-align:center"><p class="sd-card-text"><span class="math notranslate nohighlight">\(2\)</span></p></td>
+<td class="text-align:left"><p class="sd-card-text">update <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p class="sd-card-text"><span class="math notranslate nohighlight">\(6\)</span></p></td>
+<td class="text-align:center"><p class="sd-card-text"><span class="math notranslate nohighlight">\(3\)</span></p></td>
+<td class="text-align:center"><p class="sd-card-text"><span class="math notranslate nohighlight">\(2-2(3)+2(2)=4\)</span></p></td>
+<td class="text-align:left"><p class="sd-card-text">update <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-align:center"><p class="sd-card-text"><span class="math notranslate nohighlight">\(5\)</span></p></td>
+<td class="text-align:center"><p class="sd-card-text"><span class="math notranslate nohighlight">\(4\)</span></p></td>
+<td class="text-align:center"><p class="sd-card-text"><span class="math notranslate nohighlight">\(4-2(3)+2(2)=6\)</span></p></td>
+<td class="text-align:left"><p class="sd-card-text">only update <span class="math notranslate nohighlight">\(x\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p class="sd-card-text"><span class="math notranslate nohighlight">\(4\)</span></p></td>
+<td class="text-align:center"><p class="sd-card-text"><span class="math notranslate nohighlight">\(4\)</span></p></td>
+<td class="text-align:center"><p class="sd-card-text"><span class="math notranslate nohighlight">\(6-2(3)=0\)</span></p></td>
+<td class="text-align:left"><p class="sd-card-text">update <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-align:center"><p class="sd-card-text"><span class="math notranslate nohighlight">\(3\)</span></p></td>
+<td class="text-align:center"><p class="sd-card-text"><span class="math notranslate nohighlight">\(5\)</span></p></td>
+<td class="text-align:center"><p class="sd-card-text"><span class="math notranslate nohighlight">\(0-2(3)+2(3)=2\)</span></p></td>
+<td class="text-align:left"><p class="sd-card-text">terminate algorithm</p></td>
+</tr>
+</tbody>
+</table>
+<p class="sd-card-text">So we plot pixels at <span class="math notranslate nohighlight">\((7,2)\)</span>, <span class="math notranslate nohighlight">\((6,3)\)</span>, <span class="math notranslate nohighlight">\((5,4)\)</span>, <span class="math notranslate nohighlight">\((4,4)\)</span> and <span class="math notranslate nohighlight">\((3,5)\)</span>.</p>
 <figure class="align-default" style="width: 300px">
 <img alt="../_images/bresenham_example_3ii.png" src="../_images/bresenham_example_3ii.png" />
 </figure>
