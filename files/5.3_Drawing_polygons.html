@@ -474,9 +474,21 @@ title="Print to PDF"
      Use of the flood fill algorithm
     </a>
    </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-scanline-algorithm">
+   The scanline algorithm
+  </a>
+  <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-scanline-algorithm">
-     The scanline algorithm
+    <a class="reference internal nav-link" href="#calculating-the-span-extrema">
+     Calculating the span extrema
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#edge-tables">
+     Edge tables
     </a>
    </li>
   </ul>
@@ -510,9 +522,21 @@ title="Print to PDF"
      Use of the flood fill algorithm
     </a>
    </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-scanline-algorithm">
+   The scanline algorithm
+  </a>
+  <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-scanline-algorithm">
-     The scanline algorithm
+    <a class="reference internal nav-link" href="#calculating-the-span-extrema">
+     Calculating the span extrema
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#edge-tables">
+     Edge tables
     </a>
    </li>
   </ul>
@@ -614,9 +638,10 @@ Solution<div class="sd-summary-down docutils">
 </figcaption>
 </figure>
 </section>
+</section>
 <section id="the-scanline-algorithm">
-<span id="scanline-algorithm-section"></span><h3>The scanline algorithm<a class="headerlink" href="#the-scanline-algorithm" title="Permalink to this headline">#</a></h3>
-<p>The <strong>scanline algorithm</strong> is a method of rendering a polygon without drawing the edges beforehand unlike the <a class="reference internal" href="#flood-fill-algorithm-section"><span class="std std-ref">flood fill algorithm</span></a> that requires pixels to be plotted to form an outline. Instead of testing pixels one by one, the scanline filling algorithm loops through horizontal rows of pixels (known as a <strong>scanline</strong>) starting from <span class="math notranslate nohighlight">\(y=0\)</span> and going down the raster to <span class="math notranslate nohighlight">\(y = N_y\)</span>. If the scanline intersects with an edge of the polygon the intersection points which are known as <strong>span extrema</strong>, are calculated, sorted into ascending order and all pixels between pairs of intersection points are filled.</p>
+<span id="scanline-algorithm-section"></span><h2>The scanline algorithm<a class="headerlink" href="#the-scanline-algorithm" title="Permalink to this headline">#</a></h2>
+<p>The <strong>scanline algorithm</strong> is a method of rendering a polygon without drawing the edges beforehand unlike the <a class="reference internal" href="#flood-fill-algorithm-section"><span class="std std-ref">flood fill algorithm</span></a> that requires pixels to be plotted to form an outline. Instead of testing pixels one by one, the scanline filling algorithm loops through horizontal rows of pixels, known as a <strong>scanline</strong> starting at the top of the raster and finishing at the bottom. If the scanline intersects with an edge of the polygon the intersection points, which are known as <strong>span extrema</strong>, are calculated and sorted into ascending order and all pixels between pairs of intersection points are filled.</p>
 <div class="proof definition admonition" id="definition-2">
 <p class="admonition-title"><span class="caption-number">Definition 28 </span> (Scanline)</p>
 <section class="definition-content" id="proof-content">
@@ -627,7 +652,9 @@ Solution<div class="sd-summary-down docutils">
 <section class="definition-content" id="proof-content">
 <p>A pixel where a scanline intersects with the edge of a polygons.</p>
 </section>
-</div><figure class="align-default" id="span-extrema-figure">
+</div><section id="calculating-the-span-extrema">
+<h3>Calculating the span extrema<a class="headerlink" href="#calculating-the-span-extrema" title="Permalink to this headline">#</a></h3>
+<figure class="align-default" id="span-extrema-figure">
 <a class="reference internal image-reference" href="../_images/span_extrema.svg"><img alt="../_images/span_extrema.svg" src="../_images/span_extrema.svg" width="300px" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 102 </span><span class="caption-text">Calculating span extrema co-ordinates.</span><a class="headerlink" href="#span-extrema-figure" title="Permalink to this image">#</a></p>
@@ -636,93 +663,69 @@ Solution<div class="sd-summary-down docutils">
 <p>Consider <a class="reference internal" href="#span-extrema-figure"><span class="std std-numref">Fig. 102</span></a> where the co-ordinates of the span extrema on the left edge of a polygon are <span class="math notranslate nohighlight">\((x_i, y_i)\)</span> and <span class="math notranslate nohighlight">\((x_{i+1}, y_{i+1})\)</span>. If <span class="math notranslate nohighlight">\((x_i, y_i)\)</span> are known then the next value <span class="math notranslate nohighlight">\(y_{i+1}\)</span> is easily calculated using <span class="math notranslate nohighlight">\(y_{i+1} = y_i + 1\)</span>. The values of the <span class="math notranslate nohighlight">\(x\)</span> span extrema co-ordinates are calculated using the <a href="https://en.wikipedia.org/wiki/Linear_equation#Slope%E2%80%93intercept_form_or_Gradient-intercept_form" target="_blank">slope intercept equation of a line</a>.</p>
 <div class="math notranslate nohighlight">
 \[ \begin{align*}
-    y = \frac{\Delta y}{\Delta x} x + c,
+    y = m x + c,
 \end{align*} \]</div>
-<p>where <span class="math notranslate nohighlight">\(y\)</span> and <span class="math notranslate nohighlight">\(x\)</span> are the co-ordinates of a point on the line, <span class="math notranslate nohighlight">\(\Delta y / \Delta x\)</span> is the gradient of the line and <span class="math notranslate nohighlight">\(c\)</span> is where the line intercepts the <span class="math notranslate nohighlight">\(y\)</span>-axis. Rearranging this to make <span class="math notranslate nohighlight">\(x\)</span> the subject gives</p>
+<p>where <span class="math notranslate nohighlight">\(y\)</span> and <span class="math notranslate nohighlight">\(x\)</span> are the co-ordinates of a point on the line, <span class="math notranslate nohighlight">\(m = (x_{\min} - x_{\max}) / (y_{\min} - y_{\max})\)</span> is the gradient of the line and <span class="math notranslate nohighlight">\(c\)</span> is where the line intercepts the <span class="math notranslate nohighlight">\(y\)</span>-axis. Rearranging this to make <span class="math notranslate nohighlight">\(x\)</span> the subject gives</p>
 <div class="math notranslate nohighlight" id="equation-span-extrema-x-equation">
-<span class="eqno">(35)<a class="headerlink" href="#equation-span-extrema-x-equation" title="Permalink to this equation">#</a></span>\[x = \frac{\Delta x}{\Delta y} (y - c). \]</div>
+<span class="eqno">(35)<a class="headerlink" href="#equation-span-extrema-x-equation" title="Permalink to this equation">#</a></span>\[x = \frac{1}{m} (y - c).\]</div>
 <p>To derive an expression for calculating <span class="math notranslate nohighlight">\(x_{i+1}\)</span> we let <span class="math notranslate nohighlight">\(x_{i+1} =x \)</span> and rearrange equation <a class="reference internal" href="#equation-span-extrema-x-equation">(35)</a> and substitute <span class="math notranslate nohighlight">\(y_{i+1} = y_i + 1\)</span></p>
 <div class="math notranslate nohighlight">
 \[\begin{split} \begin{align*}
-    x_{i+1} &amp;= \frac{\Delta x}{\Delta y} (y_{i+1} - c) \\
-    &amp;= \frac{\Delta x}{\Delta y} (y_i + 1 - c) \\
-    &amp;= \frac{\Delta x}{\Delta y} (y_i - c) + \frac{\Delta x}{\Delta y}.
+    x_{i+1} &amp;= \frac{1}{m} (y_{i+1} - c) \\
+    &amp;= \frac{1}{m} (y_i + 1 - c) \\
+    &amp;= \frac{1}{m} + \frac{1}{m}(y_i - c).
 \end{align*} \end{split}\]</div>
-<p>Since <span class="math notranslate nohighlight">\(x_i = \dfrac{\Delta x}{\Delta y} (y_i - c)\)</span> then</p>
+<p>Since <span class="math notranslate nohighlight">\(x_i = \dfrac{1}{m} (y_i - c)\)</span> then</p>
 <div class="math notranslate nohighlight">
 \[ \begin{align*}
-    x_{i+1} &amp;= x_i + \frac{\Delta x}{\Delta y}.
+    x_{i+1} &amp;= x_i + \frac{1}{m}.
 \end{align*} \]</div>
-<p>So calculating the values of <span class="math notranslate nohighlight">\(y_{i+1}\)</span> and <span class="math notranslate nohighlight">\(x_{i+1}\)</span> is simply a matter of adding 1 to <span class="math notranslate nohighlight">\(y_i\)</span> and <span class="math notranslate nohighlight">\(\Delta x / \Delta y\)</span> to <span class="math notranslate nohighlight">\(x_i\)</span>. However since <span class="math notranslate nohighlight">\(\Delta x/ \Delta y\)</span> is not an integer number this method is slower than if we were only dealing with integer numbers. We can convert the calculations for <span class="math notranslate nohighlight">\(x_{i+1}\)</span> so that they only use integers by realising that whenever we add <span class="math notranslate nohighlight">\(\Delta x / \Delta y\)</span> we are only adding <span class="math notranslate nohighlight">\(\Delta x\)</span> to the numerator of the fraction, i.e.,</p>
-<div class="math notranslate nohighlight">
-\[\begin{split} \begin{align*}
-    x_{i+1} &amp;= x_i + \frac{\Delta x}{\Delta y}, \\
-    x_{i+2} &amp;= x_i + \frac{\Delta x}{\Delta y} + \frac{\Delta x}{\Delta y} = x_i + \frac{\Delta x + \Delta x}{\Delta y}, \\
-    &amp; \vdots
-\end{align*} \end{split}\]</div>
-<p>So we can add <span class="math notranslate nohighlight">\(\Delta x\)</span> to the value of the numerator, <span class="math notranslate nohighlight">\(N\)</span> say, and change the value of the <span class="math notranslate nohighlight">\(x\)</span> co-ordinate by <span class="math notranslate nohighlight">\(\pm 1\)</span> when the value fo the fraction exceeds 1 which would be when <span class="math notranslate nohighlight">\(N \geq \Delta y\)</span>. At this point <span class="math notranslate nohighlight">\(N\)</span> is reset be subtracting <span class="math notranslate nohighlight">\(\Delta y\)</span> from <span class="math notranslate nohighlight">\(N\)</span>. In the case where <span class="math notranslate nohighlight">\(\Delta x &gt; n \Delta y\)</span>, i.e., we have a very shallow edge, we need to subtract <span class="math notranslate nohighlight">\(n \Delta y\)</span> from <span class="math notranslate nohighlight">\(N\)</span> and change <span class="math notranslate nohighlight">\(x\)</span> by <span class="math notranslate nohighlight">\(\pm n\)</span>.</p>
-<p>We only want to perform the span extrema calculations on polygon edges that intersect a scanline, known as <strong>active edges</strong> and ignore the rest. To do this we use an <strong>Edge Table (ET)</strong> to store information for all edges of a polygon and an <strong>Active Edge Table (AET)</strong> that only contains information for the active edges. The information that is stored in ET and AET is:</p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(x\)</span> - the <span class="math notranslate nohighlight">\(x\)</span> co-ordinate of the current span extrema</p></li>
-<li><p><span class="math notranslate nohighlight">\(N\)</span> - the value of the numerator</p></li>
-<li><p><span class="math notranslate nohighlight">\(x_{step}\)</span> - the change in the value of <span class="math notranslate nohighlight">\(x\)</span> (<span class="math notranslate nohighlight">\(\operatorname{sign}(\Delta x)\)</span>)</p></li>
-<li><p><span class="math notranslate nohighlight">\(y_{\min}\)</span> and <span class="math notranslate nohighlight">\(y_{\max}\)</span> - the minimum and maximum values of the <span class="math notranslate nohighlight">\(y\)</span> endpoint co-ordinates</p></li>
-<li><p><span class="math notranslate nohighlight">\(\Delta x = |x_{\min} - x_{\max}|\)</span> and <span class="math notranslate nohighlight">\(\Delta y = |y_{\min} - y_{\max}|\)</span></p></li>
-</ul>
-<p>To start with we initialise ET so that it contains are edges of a polygon and AET is empty. Then as the scanline moves down the raster, any edge in ET which has <span class="math notranslate nohighlight">\(y_{\min}=y\)</span> becomes active and is moved from ET to AET. AET is sorted into ascending order by <span class="math notranslate nohighlight">\(x\)</span> value and we fill in the pixels between pairs of <span class="math notranslate nohighlight">\(x\)</span> values. Any edge in AET which has <span class="math notranslate nohighlight">\(y_{\max}=y\)</span> has become non-active so is removed from AET. We then move the scanline down one row of pixels by incrementing <span class="math notranslate nohighlight">\(y = y + 1\)</span> and calculate the new span extrema values by adding <span class="math notranslate nohighlight">\(1/m\)</span> to <span class="math notranslate nohighlight">\(x\)</span> for all remaining edges in AET. When ET and AET are empty all edges have been calculated and the polygon has been drawn.</p>
+<p>So calculating the values of <span class="math notranslate nohighlight">\(y_{i+1}\)</span> and <span class="math notranslate nohighlight">\(x_{i+1}\)</span> is simply a matter of adding 1 to <span class="math notranslate nohighlight">\(y_i\)</span> and <span class="math notranslate nohighlight">\(1/m\)</span> to <span class="math notranslate nohighlight">\(x_i\)</span>.</p>
+</section>
+<section id="edge-tables">
+<h3>Edge tables<a class="headerlink" href="#edge-tables" title="Permalink to this headline">#</a></h3>
+<p>We only want to perform the span extrema calculations on polygon edges that intersect a scanline, known as <em>active edges</em> and ignore the rest. To do this we use an <strong>Edge Table (ET)</strong> to store information for all edges of a polygon and an <strong>Active Edge Table (AET)</strong> that only contains information for the active edges. The information that is stored in the ET is the <span class="math notranslate nohighlight">\(x\)</span> co-ordinate of the current span extrema, <span class="math notranslate nohighlight">\(1/m\)</span>, <span class="math notranslate nohighlight">\(y_{\min}\)</span> and <span class="math notranslate nohighlight">\(y_{\max}\)</span></p>
+<figure class="align-default" id="active-edges-figure">
+<a class="reference internal image-reference" href="../_images/active_edges.svg"><img alt="../_images/active_edges.svg" src="../_images/active_edges.svg" width="500px" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 103 </span><span class="caption-text">As the scanline moves down the polygon different edges become active.</span><a class="headerlink" href="#active-edges-figure" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>To start with we initialise ET so that it contains all of edges of a polygon and the AET is empty. Then as we move down the scanlines some of the polygon edges will become active edges and some of the active edges will become non active (<a class="reference internal" href="#active-edges-figure"><span class="std std-numref">Fig. 103</span></a>). Any edge in the ET that has <span class="math notranslate nohighlight">\(y_{\min}=y\)</span> has become active so are moved to the AET. The AET table contains <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(1/m\)</span> and <span class="math notranslate nohighlight">\(y_{\max}\)</span> (we don’t need <span class="math notranslate nohighlight">\(y_{\min}\)</span> from now on).</p>
+<figure class="align-default" id="scanline-fill-figure">
+<a class="reference internal image-reference" href="../_images/scanline_fill.svg"><img alt="../_images/scanline_fill.svg" src="../_images/scanline_fill.svg" width="300px" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 104 </span><span class="caption-text">The pixels between pairs of span extrema are filled.</span><a class="headerlink" href="#scanline-fill-figure" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The <span class="math notranslate nohighlight">\(x\)</span> values in the AET contain the <span class="math notranslate nohighlight">\(x\)</span> co-ordinate of the span extrema. The AET is sorted in ascending order by the <span class="math notranslate nohighlight">\(x\)</span> values and then all pixels between pairs of span extrema are filled (<a class="reference internal" href="#scanline-fill-figure"><span class="std std-numref">Fig. 104</span></a>). Once a scanline has been filled, any edge in the AET that has <span class="math notranslate nohighlight">\(y_{\max} =y\)</span> will become non-active and is removed from the AET. When both the ET and AET are empty the polygon has been drawn and the algorithm terminates.</p>
 <div class="proof algorithm admonition" id="scanline-algorithm">
 <p class="admonition-title"><span class="caption-number">Algorithm 11 </span> (The scanline algorithm)</p>
 <section class="algorithm-content" id="proof-content">
-<p><strong>Inputs:</strong> An <span class="math notranslate nohighlight">\(N_y \times N_x \times 3\)</span> raster array <span class="math notranslate nohighlight">\(R\)</span>, two lists containing the pixel co-ordinates of the polygon vertices <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> and <span class="math notranslate nohighlight">\(colour\)</span> the colour of the polygon</p>
-<p><strong>Outputs:</strong> A raster array <span class="math notranslate nohighlight">\(R\)</span></p>
+<p><strong>Inputs:</strong> A raster array, the pixel co-ordinates of the polygon vertices and the colour of the polygon</p>
+<p><strong>Outputs:</strong> A raster array</p>
 <ul class="simple">
 <li><p>ET <span class="math notranslate nohighlight">\(\gets \emptyset\)</span> and AET <span class="math notranslate nohighlight">\(\gets \emptyset\)</span></p></li>
-<li><p>For each edge of the polygon with endpoints <span class="math notranslate nohighlight">\((x_0, y_0)\)</span> and <span class="math notranslate nohighlight">\((x_1, y_1)\)</span></p>
-<ul>
-<li><p>If <span class="math notranslate nohighlight">\(y_0 &lt; y_1\)</span> the</p>
-<ul>
-<li><p><span class="math notranslate nohighlight">\(x_{\min} \gets x_0\)</span>, <span class="math notranslate nohighlight">\(x_{\max} \gets x_1\)</span>, <span class="math notranslate nohighlight">\(y_{\min} \gets y_0\)</span> and <span class="math notranslate nohighlight">\(y_{\max} \gets y_1\)</span></p></li>
-</ul>
-</li>
-<li><p>Else if <span class="math notranslate nohighlight">\(y_0 &gt; y_1\)</span> then</p>
-<ul>
-<li><p><span class="math notranslate nohighlight">\(x_{\min} \gets x_1\)</span>, <span class="math notranslate nohighlight">\(x_{\max} \gets x_0\)</span>, <span class="math notranslate nohighlight">\(y_{\min} \gets y_1\)</span> and <span class="math notranslate nohighlight">\(y_{\max} \gets y_0\)</span></p></li>
-</ul>
-</li>
-<li><p>Else</p>
-<ul>
-<li><p>Move to next edge (the current edge is horizontal)</p></li>
-</ul>
-</li>
-<li><p>Calculate <span class="math notranslate nohighlight">\(\Delta x \gets |x_{\min} - x_{\max}|\)</span>, <span class="math notranslate nohighlight">\(\Delta y \gets |y_{\min} - y_{\max}|\)</span>, <span class="math notranslate nohighlight">\(x_{step} \gets \operatorname{sign}(x_{\max} - x_{\min})\)</span> and <span class="math notranslate nohighlight">\(N \gets 0\)</span></p></li>
-<li><p>Add <span class="math notranslate nohighlight">\([ x_{\min}, N, x_{step}, \Delta x, \Delta y, y_{\min}, y_{\min} ]\)</span> to ET</p></li>
-</ul>
-</li>
+<li><p>For each edge of the polygon add <span class="math notranslate nohighlight">\([x, 1/m, y_{\min}, y_{\max}]\)</span> to ET</p></li>
 <li><p><span class="math notranslate nohighlight">\(y \gets 0\)</span></p></li>
 <li><p>While ET or AET are not empty</p>
 <ul>
-<li><p>For each edge in ET if <span class="math notranslate nohighlight">\(y_{\min} = y\)</span> then move edge from ET to AET</p></li>
+<li><p>Move edges in ET that have <span class="math notranslate nohighlight">\(y_{\min} = y\)</span> to AET</p></li>
 <li><p>Sort AET by <span class="math notranslate nohighlight">\(x\)</span> in ascending order</p></li>
-<li><p>Fill pixels between every pair of <span class="math notranslate nohighlight">\(x\)</span> co-ordinates with the colour <span class="math notranslate nohighlight">\(colour\)</span></p></li>
-<li><p>For each edge in AET</p>
-<ul>
-<li><p>If <span class="math notranslate nohighlight">\(y_{\max} = y\)</span> remove edge from AET.</p></li>
-<li><p><span class="math notranslate nohighlight">\(N \gets N + \Delta x\)</span></p></li>
-<li><p>While <span class="math notranslate nohighlight">\(N &gt; \Delta y\)</span> do</p>
-<ul>
-<li><p><span class="math notranslate nohighlight">\(x \gets x + x_{step}\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(N \gets N - \Delta y\)</span></p></li>
-</ul>
-</li>
-</ul>
-</li>
+<li><p>Fill pixels between every pair of <span class="math notranslate nohighlight">\(x\)</span> co-ordinates (rounding the left co-ordinate up and the right co-ordinate down) with the colour of the polygon</p></li>
+<li><p>Remove edges in AET that have <span class="math notranslate nohighlight">\(y_{\max} = y\)</span></p></li>
+<li><p>Add <span class="math notranslate nohighlight">\(1/m\)</span> to <span class="math notranslate nohighlight">\(x\)</span> to the edges in AET</p></li>
 <li><p><span class="math notranslate nohighlight">\(y \gets y + 1\)</span></p></li>
 </ul>
 </li>
 <li><p>return <span class="math notranslate nohighlight">\(R\)</span></p></li>
 </ul>
 </section>
-</div><div class="proof example seealso admonition" id="scanline-example">
+</div><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The scanline algorithm presented here uses floating point numbers for <span class="math notranslate nohighlight">\(1/m\)</span> and the span extrema co-ordinates. In practice the scanline algorithm uses a method similar to <a class="reference internal" href="5.1_Drawing_lines.html#rasterising-lines-section"><span class="std std-ref">Bresenham’s algorithm</span></a> so that we are only dealing with integer numbers.</p>
+</div>
+<div class="proof example seealso admonition" id="scanline-example">
 <p class="admonition-title"><span class="caption-number">Example 42 </span></p>
 <section class="example-content" id="proof-content">
 <p>Use the scanline algorithm to draw the polygon defined below</p>
@@ -737,96 +740,157 @@ Solution<div class="sd-summary-down docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
 <p class="sd-card-text">The edge table ET is</p>
-<figure class="align-default">
-<a class="reference internal image-reference" href="../_images/scanline_example_tables_00.svg"><img alt="../_images/scanline_example_tables_00.svg" src="../_images/scanline_example_tables_00.svg" width="200px" /></a>
-</figure>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ET</span> 
+      <span class="n">x</span>       <span class="mi">1</span><span class="o">/</span><span class="n">m</span>    <span class="n">ymin</span>    <span class="n">ymax</span>
+<span class="n">e1</span> <span class="o">|</span>  <span class="mi">2</span>    <span class="o">|</span>  <span class="mi">7</span>    <span class="o">|</span>   <span class="mi">8</span>   <span class="o">|</span>   <span class="mi">9</span>   <span class="o">|</span>
+<span class="n">e2</span> <span class="o">|</span>  <span class="mi">8</span>    <span class="o">|</span>  <span class="mf">0.2</span>  <span class="o">|</span>   <span class="mi">4</span>   <span class="o">|</span>   <span class="mi">9</span>   <span class="o">|</span>
+<span class="n">e3</span> <span class="o">|</span>  <span class="mi">8</span>    <span class="o">|</span> <span class="o">-</span><span class="mi">1</span>    <span class="o">|</span>   <span class="mi">4</span>   <span class="o">|</span>   <span class="mi">6</span>   <span class="o">|</span>
+<span class="n">e4</span> <span class="o">|</span>  <span class="mi">4</span>    <span class="o">|</span>  <span class="mf">0.5</span>  <span class="o">|</span>   <span class="mi">2</span>   <span class="o">|</span>   <span class="mi">6</span>   <span class="o">|</span>
+<span class="n">e5</span> <span class="o">|</span>  <span class="mi">4</span>    <span class="o">|</span> <span class="o">-</span><span class="mf">0.33</span> <span class="o">|</span>   <span class="mi">2</span>   <span class="o">|</span>   <span class="mi">8</span>   <span class="o">|</span>
+</pre></div>
+</div>
 <p class="sd-card-text">Starting with the minimum <span class="math notranslate nohighlight">\(y\)</span> co-ordinate which is <span class="math notranslate nohighlight">\(y=2\)</span> we have edges e4 and e5 with <span class="math notranslate nohighlight">\(y_{\min} = 2\)</span> so we move these to the AET.</p>
-<figure class="align-default">
-<a class="reference internal image-reference" href="../_images/scanline_example_tables_01.svg"><img alt="../_images/scanline_example_tables_01.svg" src="../_images/scanline_example_tables_01.svg" width="400px" /></a>
-</figure>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ET</span>                                              <span class="n">AET</span>
+      <span class="n">x</span>       <span class="mi">1</span><span class="o">/</span><span class="n">m</span>    <span class="n">ymin</span>    <span class="n">ymax</span>                     <span class="n">x</span>       <span class="mi">1</span><span class="o">/</span><span class="n">m</span>     <span class="n">ymax</span>
+<span class="n">e1</span> <span class="o">|</span>  <span class="mi">2</span>    <span class="o">|</span>  <span class="mi">7</span>    <span class="o">|</span>   <span class="mi">8</span>   <span class="o">|</span>   <span class="mi">9</span>   <span class="o">|</span>            <span class="n">e4</span> <span class="o">|</span>  <span class="mi">4</span>    <span class="o">|</span>  <span class="mf">0.5</span>  <span class="o">|</span>   <span class="mi">6</span>   <span class="o">|</span>
+<span class="n">e2</span> <span class="o">|</span>  <span class="mi">8</span>    <span class="o">|</span>  <span class="mf">0.2</span>  <span class="o">|</span>   <span class="mi">4</span>   <span class="o">|</span>   <span class="mi">9</span>   <span class="o">|</span>            <span class="n">e5</span> <span class="o">|</span>  <span class="mi">4</span>    <span class="o">|</span> <span class="o">-</span><span class="mf">0.33</span> <span class="o">|</span>   <span class="mi">8</span>   <span class="o">|</span>
+<span class="n">e3</span> <span class="o">|</span>  <span class="mi">8</span>    <span class="o">|</span> <span class="o">-</span><span class="mi">1</span>    <span class="o">|</span>   <span class="mi">4</span>   <span class="o">|</span>   <span class="mi">6</span>   <span class="o">|</span>
+</pre></div>
+</div>
 <p class="sd-card-text">AET is already in ascending order by <span class="math notranslate nohighlight">\(x\)</span> so we fill pixel <span class="math notranslate nohighlight">\((4,2)\)</span>.</p>
 <figure class="align-default">
 <a class="reference internal image-reference" href="../_images/scanline_example_1.png"><img alt="../_images/scanline_example_1.png" src="../_images/scanline_example_1.png" style="width: 300px;" /></a>
 </figure>
 <p class="sd-card-text">We increment <span class="math notranslate nohighlight">\(y = 2 + 1 = 3\)</span> and add <span class="math notranslate nohighlight">\(1/m\)</span> to the <span class="math notranslate nohighlight">\(x\)</span> values in AET.</p>
-<figure class="align-default">
-<a class="reference internal image-reference" href="../_images/scanline_example_tables_02.svg"><img alt="../_images/scanline_example_tables_02.svg" src="../_images/scanline_example_tables_02.svg" width="400px" /></a>
-</figure>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ET</span>                                              <span class="n">AET</span>
+      <span class="n">x</span>       <span class="mi">1</span><span class="o">/</span><span class="n">m</span>    <span class="n">ymin</span>    <span class="n">ymax</span>                     <span class="n">x</span>       <span class="mi">1</span><span class="o">/</span><span class="n">m</span>     <span class="n">ymax</span>
+<span class="n">e1</span> <span class="o">|</span>  <span class="mi">2</span>    <span class="o">|</span>  <span class="mi">7</span>    <span class="o">|</span>   <span class="mi">8</span>   <span class="o">|</span>   <span class="mi">9</span>   <span class="o">|</span>            <span class="n">e4</span> <span class="o">|</span>  <span class="mf">4.5</span>  <span class="o">|</span>  <span class="mf">0.5</span>  <span class="o">|</span>   <span class="mi">6</span>   <span class="o">|</span>
+<span class="n">e2</span> <span class="o">|</span>  <span class="mi">8</span>    <span class="o">|</span>  <span class="mf">0.2</span>  <span class="o">|</span>   <span class="mi">4</span>   <span class="o">|</span>   <span class="mi">9</span>   <span class="o">|</span>            <span class="n">e5</span> <span class="o">|</span>  <span class="mf">3.67</span> <span class="o">|</span> <span class="o">-</span><span class="mf">0.33</span> <span class="o">|</span>   <span class="mi">8</span>   <span class="o">|</span>
+<span class="n">e3</span> <span class="o">|</span>  <span class="mi">8</span>    <span class="o">|</span> <span class="o">-</span><span class="mi">1</span>    <span class="o">|</span>   <span class="mi">4</span>   <span class="o">|</span>   <span class="mi">6</span>   <span class="o">|</span>
+</pre></div>
+</div>
 <p class="sd-card-text">None of the edges in ET have <span class="math notranslate nohighlight">\(y_{\min} = 3\)</span> and none of the edges in AET have <span class="math notranslate nohighlight">\(y_{\max} = 3\)</span> so ET and AET are unchanged. Sort AET by <span class="math notranslate nohighlight">\(x\)</span> value.</p>
-<figure class="align-default">
-<a class="reference internal image-reference" href="../_images/scanline_example_tables_03.svg"><img alt="../_images/scanline_example_tables_03.svg" src="../_images/scanline_example_tables_03.svg" width="400px" /></a>
-</figure>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ET</span>                                              <span class="n">AET</span>
+      <span class="n">x</span>       <span class="mi">1</span><span class="o">/</span><span class="n">m</span>    <span class="n">ymin</span>    <span class="n">ymax</span>                     <span class="n">x</span>       <span class="mi">1</span><span class="o">/</span><span class="n">m</span>     <span class="n">ymax</span>
+<span class="n">e1</span> <span class="o">|</span>  <span class="mi">2</span>    <span class="o">|</span>  <span class="mi">7</span>    <span class="o">|</span>   <span class="mi">8</span>   <span class="o">|</span>   <span class="mi">9</span>   <span class="o">|</span>            <span class="n">e5</span> <span class="o">|</span>  <span class="mf">3.67</span> <span class="o">|</span> <span class="o">-</span><span class="mf">0.33</span> <span class="o">|</span>   <span class="mi">8</span>   <span class="o">|</span>
+<span class="n">e2</span> <span class="o">|</span>  <span class="mi">8</span>    <span class="o">|</span>  <span class="mf">0.2</span>  <span class="o">|</span>   <span class="mi">4</span>   <span class="o">|</span>   <span class="mi">9</span>   <span class="o">|</span>            <span class="n">e4</span> <span class="o">|</span>  <span class="mf">4.5</span>  <span class="o">|</span>  <span class="mf">0.5</span>  <span class="o">|</span>   <span class="mi">6</span>   <span class="o">|</span>
+<span class="n">e3</span> <span class="o">|</span>  <span class="mi">8</span>    <span class="o">|</span> <span class="o">-</span><span class="mi">1</span>    <span class="o">|</span>   <span class="mi">4</span>   <span class="o">|</span>   <span class="mi">6</span>   <span class="o">|</span>
+</pre></div>
+</div>
 <p class="sd-card-text">We round the left-hand span extrema co-ordinate up and the right-hand coordinate down so we fill pixel <span class="math notranslate nohighlight">\((4,3)\)</span>.</p>
 <figure class="align-default">
 <a class="reference internal image-reference" href="../_images/scanline_example_2.png"><img alt="../_images/scanline_example_2.png" src="../_images/scanline_example_2.png" style="width: 300px;" /></a>
 </figure>
 <p class="sd-card-text">Increment <span class="math notranslate nohighlight">\(y = 3 + 1 = 4\)</span> and add <span class="math notranslate nohighlight">\(1/m\)</span> to the <span class="math notranslate nohighlight">\(x\)</span> values in AET.</p>
-<figure class="align-default">
-<a class="reference internal image-reference" href="../_images/scanline_example_tables_04.svg"><img alt="../_images/scanline_example_tables_04.svg" src="../_images/scanline_example_tables_04.svg" width="400px" /></a>
-</figure>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ET</span>                                              <span class="n">AET</span>
+      <span class="n">x</span>       <span class="mi">1</span><span class="o">/</span><span class="n">m</span>    <span class="n">ymin</span>    <span class="n">ymax</span>                     <span class="n">x</span>       <span class="mi">1</span><span class="o">/</span><span class="n">m</span>     <span class="n">ymax</span>
+<span class="n">e1</span> <span class="o">|</span>  <span class="mi">2</span>    <span class="o">|</span>  <span class="mi">7</span>    <span class="o">|</span>   <span class="mi">8</span>   <span class="o">|</span>   <span class="mi">9</span>   <span class="o">|</span>            <span class="n">e5</span> <span class="o">|</span>  <span class="mf">3.33</span> <span class="o">|</span> <span class="o">-</span><span class="mf">0.33</span> <span class="o">|</span>   <span class="mi">8</span>   <span class="o">|</span>
+<span class="n">e2</span> <span class="o">|</span>  <span class="mi">8</span>    <span class="o">|</span>  <span class="mf">0.2</span>  <span class="o">|</span>   <span class="mi">4</span>   <span class="o">|</span>   <span class="mi">9</span>   <span class="o">|</span>            <span class="n">e4</span> <span class="o">|</span>  <span class="mi">5</span>    <span class="o">|</span>  <span class="mf">0.5</span>  <span class="o">|</span>   <span class="mi">6</span>   <span class="o">|</span>
+<span class="n">e3</span> <span class="o">|</span>  <span class="mi">8</span>    <span class="o">|</span> <span class="o">-</span><span class="mi">1</span>    <span class="o">|</span>   <span class="mi">4</span>   <span class="o">|</span>   <span class="mi">6</span>   <span class="o">|</span>
+</pre></div>
+</div>
 <p class="sd-card-text">Edges e2 and e3 have <span class="math notranslate nohighlight">\(y_{\min} = 4\)</span> so we move these to AET.</p>
-<figure class="align-default">
-<a class="reference internal image-reference" href="../_images/scanline_example_tables_05.svg"><img alt="../_images/scanline_example_tables_05.svg" src="../_images/scanline_example_tables_05.svg" width="400px" /></a>
-</figure>
-<p class="sd-card-text">None of the edges in AET have <span class="math notranslate nohighlight">\(y_{\max} = 4\)</span> so we fill pixels <span class="math notranslate nohighlight">\((4,4)\)</span>, <span class="math notranslate nohighlight">\((5,4)\)</span> and <span class="math notranslate nohighlight">\((8,4)\)</span>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ET</span>                                              <span class="n">AET</span>
+      <span class="n">x</span>       <span class="mi">1</span><span class="o">/</span><span class="n">m</span>    <span class="n">ymin</span>    <span class="n">ymax</span>                     <span class="n">x</span>       <span class="mi">1</span><span class="o">/</span><span class="n">m</span>     <span class="n">ymax</span>
+<span class="n">e1</span> <span class="o">|</span>  <span class="mi">2</span>    <span class="o">|</span>  <span class="mi">7</span>    <span class="o">|</span>   <span class="mi">8</span>   <span class="o">|</span>   <span class="mi">9</span>   <span class="o">|</span>            <span class="n">e5</span> <span class="o">|</span>  <span class="mf">3.33</span> <span class="o">|</span> <span class="o">-</span><span class="mf">0.33</span> <span class="o">|</span>   <span class="mi">8</span>   <span class="o">|</span>
+                                                <span class="n">e4</span> <span class="o">|</span>  <span class="mi">5</span>    <span class="o">|</span>  <span class="mf">0.5</span>  <span class="o">|</span>   <span class="mi">6</span>   <span class="o">|</span>
+                                                <span class="n">e2</span> <span class="o">|</span>  <span class="mi">8</span>    <span class="o">|</span>  <span class="mf">0.2</span>  <span class="o">|</span>   <span class="mi">9</span>   <span class="o">|</span>
+                                                <span class="n">e3</span> <span class="o">|</span>  <span class="mi">8</span>    <span class="o">|</span> <span class="o">-</span><span class="mi">1</span>    <span class="o">|</span>   <span class="mi">6</span>   <span class="o">|</span>
+</pre></div>
+</div>
+<p class="sd-card-text">None of the edges in AET have <span class="math notranslate nohighlight">\(y_{\max} = 4\)</span> so we fill pixels <span class="math notranslate nohighlight">\((4,4) \to (5,4)\)</span> and <span class="math notranslate nohighlight">\((8,4)\)</span>.</p>
 <figure class="align-default">
 <a class="reference internal image-reference" href="../_images/scanline_example_3.png"><img alt="../_images/scanline_example_3.png" src="../_images/scanline_example_3.png" style="width: 300px;" /></a>
 </figure>
 <p class="sd-card-text">Increment <span class="math notranslate nohighlight">\(y = 4 + 1 = 5\)</span> and add <span class="math notranslate nohighlight">\(1/m\)</span> to the <span class="math notranslate nohighlight">\(x\)</span> values in AET</p>
-<figure class="align-default">
-<a class="reference internal image-reference" href="../_images/scanline_example_tables_06.svg"><img alt="../_images/scanline_example_tables_06.svg" src="../_images/scanline_example_tables_06.svg" width="400px" /></a>
-</figure>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ET</span>                                              <span class="n">AET</span>
+      <span class="n">x</span>       <span class="mi">1</span><span class="o">/</span><span class="n">m</span>    <span class="n">ymin</span>    <span class="n">ymax</span>                     <span class="n">x</span>       <span class="mi">1</span><span class="o">/</span><span class="n">m</span>     <span class="n">ymax</span>
+<span class="n">e1</span> <span class="o">|</span>  <span class="mi">2</span>    <span class="o">|</span>  <span class="mi">7</span>    <span class="o">|</span>   <span class="mi">8</span>   <span class="o">|</span>   <span class="mi">9</span>   <span class="o">|</span>            <span class="n">e5</span> <span class="o">|</span>  <span class="mi">3</span>    <span class="o">|</span> <span class="o">-</span><span class="mf">0.33</span> <span class="o">|</span>   <span class="mi">8</span>   <span class="o">|</span>
+                                                <span class="n">e4</span> <span class="o">|</span>  <span class="mf">5.5</span>  <span class="o">|</span>  <span class="mf">0.5</span>  <span class="o">|</span>   <span class="mi">6</span>   <span class="o">|</span>
+                                                <span class="n">e2</span> <span class="o">|</span>  <span class="mf">8.2</span>  <span class="o">|</span>  <span class="mf">0.2</span>  <span class="o">|</span>   <span class="mi">9</span>   <span class="o">|</span>
+                                                <span class="n">e3</span> <span class="o">|</span>  <span class="mi">7</span>    <span class="o">|</span> <span class="o">-</span><span class="mi">1</span>    <span class="o">|</span>   <span class="mi">6</span>   <span class="o">|</span>
+</pre></div>
+</div>
 <p class="sd-card-text">None of the edges in ET have <span class="math notranslate nohighlight">\(y_{\min} = 5\)</span> and none of the edges in AET have <span class="math notranslate nohighlight">\(y_{\max} = 5\)</span> so ET and AET are unchanged. Sort AET by <span class="math notranslate nohighlight">\(x\)</span> value.</p>
-<figure class="align-default">
-<a class="reference internal image-reference" href="../_images/scanline_example_tables_07.svg"><img alt="../_images/scanline_example_tables_07.svg" src="../_images/scanline_example_tables_07.svg" width="400px" /></a>
-</figure>
-<p class="sd-card-text">Fill pixels <span class="math notranslate nohighlight">\((3,5)\)</span> to <span class="math notranslate nohighlight">\((5,5)\)</span> and <span class="math notranslate nohighlight">\((7,5)\)</span> and <span class="math notranslate nohighlight">\((8,5)\)</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ET</span>                                              <span class="n">AET</span>
+      <span class="n">x</span>       <span class="mi">1</span><span class="o">/</span><span class="n">m</span>    <span class="n">ymin</span>    <span class="n">ymax</span>                     <span class="n">x</span>       <span class="mi">1</span><span class="o">/</span><span class="n">m</span>     <span class="n">ymax</span>
+<span class="n">e1</span> <span class="o">|</span>  <span class="mi">2</span>    <span class="o">|</span>  <span class="mi">7</span>    <span class="o">|</span>   <span class="mi">8</span>   <span class="o">|</span>   <span class="mi">9</span>   <span class="o">|</span>            <span class="n">e5</span> <span class="o">|</span>  <span class="mi">3</span>    <span class="o">|</span> <span class="o">-</span><span class="mf">0.33</span> <span class="o">|</span>   <span class="mi">8</span>   <span class="o">|</span>
+                                                <span class="n">e4</span> <span class="o">|</span>  <span class="mf">5.5</span>  <span class="o">|</span>  <span class="mf">0.5</span>  <span class="o">|</span>   <span class="mi">6</span>   <span class="o">|</span>
+                                                <span class="n">e3</span> <span class="o">|</span>  <span class="mi">7</span>    <span class="o">|</span> <span class="o">-</span><span class="mi">1</span>    <span class="o">|</span>   <span class="mi">6</span>   <span class="o">|</span>
+                                                <span class="n">e2</span> <span class="o">|</span>  <span class="mf">8.2</span>  <span class="o">|</span>  <span class="mf">0.2</span>  <span class="o">|</span>   <span class="mi">9</span>   <span class="o">|</span>
+</pre></div>
+</div>
+<p class="sd-card-text">Fill pixels <span class="math notranslate nohighlight">\((3,5) \to (5,5)\)</span> and <span class="math notranslate nohighlight">\((7,5) \to (8,5)\)</span></p>
 <figure class="align-default">
 <a class="reference internal image-reference" href="../_images/scanline_example_4.png"><img alt="../_images/scanline_example_4.png" src="../_images/scanline_example_4.png" style="width: 300px;" /></a>
 </figure>
 <p class="sd-card-text">Increment <span class="math notranslate nohighlight">\(y = 5 + 1 = 6\)</span> and add <span class="math notranslate nohighlight">\(1/m\)</span> to the <span class="math notranslate nohighlight">\(x\)</span> values in AET</p>
-<figure class="align-default">
-<a class="reference internal image-reference" href="../_images/scanline_example_tables_08.svg"><img alt="../_images/scanline_example_tables_08.svg" src="../_images/scanline_example_tables_08.svg" width="400px" /></a>
-</figure>
-<p class="sd-card-text">None of the edges in ET have <span class="math notranslate nohighlight">\(y_{\min} = 5\)</span> but edge  e3 and e4 in AET have <span class="math notranslate nohighlight">\(y_{\max} = 5\)</span> so we remove these from AET.</p>
-<figure class="align-default">
-<a class="reference internal image-reference" href="../_images/scanline_example_tables_09.svg"><img alt="../_images/scanline_example_tables_09.svg" src="../_images/scanline_example_tables_09.svg" width="400px" /></a>
-</figure>
-<p class="sd-card-text">Fill pixels <span class="math notranslate nohighlight">\((3,6)\)</span> to <span class="math notranslate nohighlight">\((8,6)\)</span>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ET</span>                                              <span class="n">AET</span>
+      <span class="n">x</span>       <span class="mi">1</span><span class="o">/</span><span class="n">m</span>    <span class="n">ymin</span>    <span class="n">ymax</span>                     <span class="n">x</span>       <span class="mi">1</span><span class="o">/</span><span class="n">m</span>     <span class="n">ymax</span>
+<span class="n">e1</span> <span class="o">|</span>  <span class="mi">2</span>    <span class="o">|</span>  <span class="mi">7</span>    <span class="o">|</span>   <span class="mi">8</span>   <span class="o">|</span>   <span class="mi">9</span>   <span class="o">|</span>            <span class="n">e5</span> <span class="o">|</span>  <span class="mf">2.67</span> <span class="o">|</span> <span class="o">-</span><span class="mf">0.33</span> <span class="o">|</span>   <span class="mi">8</span>   <span class="o">|</span>
+                                                <span class="n">e4</span> <span class="o">|</span>  <span class="mi">6</span>    <span class="o">|</span>  <span class="mf">0.5</span>  <span class="o">|</span>   <span class="mi">6</span>   <span class="o">|</span>
+                                                <span class="n">e3</span> <span class="o">|</span>  <span class="mi">6</span>    <span class="o">|</span> <span class="o">-</span><span class="mi">1</span>    <span class="o">|</span>   <span class="mi">6</span>   <span class="o">|</span>
+                                                <span class="n">e2</span> <span class="o">|</span>  <span class="mf">8.4</span>  <span class="o">|</span>  <span class="mf">0.2</span>  <span class="o">|</span>   <span class="mi">9</span>   <span class="o">|</span>
+</pre></div>
+</div>
+<p class="sd-card-text">None of the edges in ET have <span class="math notranslate nohighlight">\(y_{\min} = 5\)</span> but edge e3 and e4 in AET have <span class="math notranslate nohighlight">\(y_{\max} = 5\)</span> so we remove these from AET.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ET</span>                                              <span class="n">AET</span>
+      <span class="n">x</span>       <span class="mi">1</span><span class="o">/</span><span class="n">m</span>    <span class="n">ymin</span>    <span class="n">ymax</span>                     <span class="n">x</span>       <span class="mi">1</span><span class="o">/</span><span class="n">m</span>     <span class="n">ymax</span>
+<span class="n">e1</span> <span class="o">|</span>  <span class="mi">2</span>    <span class="o">|</span>  <span class="mi">7</span>    <span class="o">|</span>   <span class="mi">8</span>   <span class="o">|</span>   <span class="mi">9</span>   <span class="o">|</span>            <span class="n">e5</span> <span class="o">|</span>  <span class="mf">2.67</span> <span class="o">|</span> <span class="o">-</span><span class="mf">0.33</span> <span class="o">|</span>   <span class="mi">8</span>   <span class="o">|</span>
+                                                <span class="n">e2</span> <span class="o">|</span>  <span class="mf">8.4</span>  <span class="o">|</span>  <span class="mf">0.2</span>  <span class="o">|</span>   <span class="mi">9</span>   <span class="o">|</span>
+</pre></div>
+</div>
+<p class="sd-card-text">Fill pixels <span class="math notranslate nohighlight">\((3,6) \to (8,6)\)</span>.</p>
 <figure class="align-default">
 <a class="reference internal image-reference" href="../_images/scanline_example_5.png"><img alt="../_images/scanline_example_5.png" src="../_images/scanline_example_5.png" style="width: 300px;" /></a>
 </figure>
 <p class="sd-card-text">Increment <span class="math notranslate nohighlight">\(y = 6 + 1 = 7\)</span> and add <span class="math notranslate nohighlight">\(1/m\)</span> to the <span class="math notranslate nohighlight">\(x\)</span> values in AET</p>
-<figure class="align-default">
-<a class="reference internal image-reference" href="../_images/scanline_example_tables_10.svg"><img alt="../_images/scanline_example_tables_10.svg" src="../_images/scanline_example_tables_10.svg" width="400px" /></a>
-</figure>
-<p class="sd-card-text">None of the edges in ET have <span class="math notranslate nohighlight">\(y_{\min} = 5\)</span> and none of the edges in AET have <span class="math notranslate nohighlight">\(y_{\max} = 5\)</span> so ET and AET are unchanged. Fill pixels <span class="math notranslate nohighlight">\((3,7)\)</span> to <span class="math notranslate nohighlight">\((8,7)\)</span>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ET</span>                                              <span class="n">AET</span>
+      <span class="n">x</span>       <span class="mi">1</span><span class="o">/</span><span class="n">m</span>    <span class="n">ymin</span>    <span class="n">ymax</span>                     <span class="n">x</span>       <span class="mi">1</span><span class="o">/</span><span class="n">m</span>     <span class="n">ymax</span>
+<span class="n">e1</span> <span class="o">|</span>  <span class="mi">2</span>    <span class="o">|</span>  <span class="mi">7</span>    <span class="o">|</span>   <span class="mi">8</span>   <span class="o">|</span>   <span class="mi">9</span>   <span class="o">|</span>            <span class="n">e5</span> <span class="o">|</span>  <span class="mf">2.33</span> <span class="o">|</span> <span class="o">-</span><span class="mf">0.33</span> <span class="o">|</span>   <span class="mi">8</span>   <span class="o">|</span>
+                                                <span class="n">e2</span> <span class="o">|</span>  <span class="mf">8.6</span>  <span class="o">|</span>  <span class="mf">0.2</span>  <span class="o">|</span>   <span class="mi">9</span>   <span class="o">|</span>
+</pre></div>
+</div>
+<p class="sd-card-text">None of the edges in ET have <span class="math notranslate nohighlight">\(y_{\min} = 5\)</span> and none of the edges in AET have <span class="math notranslate nohighlight">\(y_{\max} = 5\)</span> so ET and AET are unchanged. Fill pixels <span class="math notranslate nohighlight">\((3,7) \to (8,7)\)</span>.</p>
 <figure class="align-default">
 <a class="reference internal image-reference" href="../_images/scanline_example_6.png"><img alt="../_images/scanline_example_6.png" src="../_images/scanline_example_6.png" style="width: 300px;" /></a>
 </figure>
 <p class="sd-card-text">Increment <span class="math notranslate nohighlight">\(y = 7 + 1 = 8\)</span> and add <span class="math notranslate nohighlight">\(1/m\)</span> to the <span class="math notranslate nohighlight">\(x\)</span> values in AET</p>
-<figure class="align-default">
-<a class="reference internal image-reference" href="../_images/scanline_example_tables_11.svg"><img alt="../_images/scanline_example_tables_11.svg" src="../_images/scanline_example_tables_11.svg" width="400px" /></a>
-</figure>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ET</span>                                              <span class="n">AET</span>
+      <span class="n">x</span>       <span class="mi">1</span><span class="o">/</span><span class="n">m</span>    <span class="n">ymin</span>    <span class="n">ymax</span>                     <span class="n">x</span>       <span class="mi">1</span><span class="o">/</span><span class="n">m</span>     <span class="n">ymax</span>
+<span class="n">e1</span> <span class="o">|</span>  <span class="mi">2</span>    <span class="o">|</span>  <span class="mi">7</span>    <span class="o">|</span>   <span class="mi">8</span>   <span class="o">|</span>   <span class="mi">9</span>   <span class="o">|</span>            <span class="n">e5</span> <span class="o">|</span>  <span class="mi">2</span>    <span class="o">|</span> <span class="o">-</span><span class="mf">0.33</span> <span class="o">|</span>   <span class="mi">8</span>   <span class="o">|</span>
+                                                <span class="n">e2</span> <span class="o">|</span>  <span class="mf">8.8</span>  <span class="o">|</span>  <span class="mf">0.2</span>  <span class="o">|</span>   <span class="mi">9</span>   <span class="o">|</span>
+</pre></div>
+</div>
 <p class="sd-card-text">Edge e1 in ET has <span class="math notranslate nohighlight">\(y_{\min} = 8\)</span> so is moved to AET and edge e5 in AET has <span class="math notranslate nohighlight">\(y_{\max} = 8\)</span> so is removed from AET.</p>
-<figure class="align-default">
-<a class="reference internal image-reference" href="../_images/scanline_example_tables_12.svg"><img alt="../_images/scanline_example_tables_12.svg" src="../_images/scanline_example_tables_12.svg" width="400px" /></a>
-</figure>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AET</span>
+      <span class="n">x</span>       <span class="mi">1</span><span class="o">/</span><span class="n">m</span>     <span class="n">ymax</span>
+<span class="n">e2</span> <span class="o">|</span>  <span class="mf">8.8</span>  <span class="o">|</span>  <span class="mf">0.2</span>  <span class="o">|</span>   <span class="mi">9</span>   <span class="o">|</span>
+<span class="n">e1</span> <span class="o">|</span>  <span class="mi">2</span>    <span class="o">|</span>  <span class="mi">7</span>    <span class="o">|</span>   <span class="mi">9</span>   <span class="o">|</span>
+</pre></div>
+</div>
 <p class="sd-card-text">Sort AET by <span class="math notranslate nohighlight">\(x\)</span> values</p>
-<figure class="align-default">
-<a class="reference internal image-reference" href="../_images/scanline_example_tables_01.svg"><img alt="../_images/scanline_example_tables_01.svg" src="../_images/scanline_example_tables_01.svg" width="400px" /></a>
-</figure>
-<p class="sd-card-text">Fill pixels <span class="math notranslate nohighlight">\((2,8)\)</span> to <span class="math notranslate nohighlight">\((8,8)\)</span>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AET</span>
+      <span class="n">x</span>       <span class="mi">1</span><span class="o">/</span><span class="n">m</span>     <span class="n">ymax</span>
+<span class="n">e1</span> <span class="o">|</span>  <span class="mi">2</span>    <span class="o">|</span>  <span class="mi">7</span>    <span class="o">|</span>   <span class="mi">9</span>   <span class="o">|</span>
+<span class="n">e2</span> <span class="o">|</span>  <span class="mf">8.8</span>  <span class="o">|</span>  <span class="mf">0.2</span>  <span class="o">|</span>   <span class="mi">9</span>   <span class="o">|</span>
+</pre></div>
+</div>
+<p class="sd-card-text">Fill pixels <span class="math notranslate nohighlight">\((2,8) \to (8,8)\)</span>.</p>
 <figure class="align-default">
 <a class="reference internal image-reference" href="../_images/scanline_example_7.png"><img alt="../_images/scanline_example_7.png" src="../_images/scanline_example_7.png" style="width: 300px;" /></a>
 </figure>
 <p class="sd-card-text">Increment <span class="math notranslate nohighlight">\(y = 8 + 1 = 9\)</span> and add <span class="math notranslate nohighlight">\(1/m\)</span> to the <span class="math notranslate nohighlight">\(x\)</span> values in AET</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AET</span>
-       <span class="n">x</span>     <span class="mi">1</span><span class="o">/</span><span class="n">m</span>   <span class="n">ymax</span>
-<span class="n">e1</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">9</span>     <span class="mi">7</span>      <span class="mi">9</span> <span class="p">]</span>
-<span class="n">e2</span> <span class="p">:</span> <span class="p">[</span> <span class="mi">9</span>     <span class="mf">0.2</span>    <span class="mi">9</span> <span class="p">]</span>
+      <span class="n">x</span>       <span class="mi">1</span><span class="o">/</span><span class="n">m</span>     <span class="n">ymax</span>
+<span class="n">e1</span> <span class="o">|</span>  <span class="mi">9</span>    <span class="o">|</span>  <span class="mi">7</span>    <span class="o">|</span>   <span class="mi">9</span>   <span class="o">|</span>
+<span class="n">e2</span> <span class="o">|</span>  <span class="mi">9</span>    <span class="o">|</span>  <span class="mf">0.2</span>  <span class="o">|</span>   <span class="mi">9</span>   <span class="o">|</span>
 </pre></div>
 </div>
+<p class="sd-card-text">Fill pixel <span class="math notranslate nohighlight">\((9,9)\)</span>.</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="../_images/scanline_example_8.png"><img alt="../_images/scanline_example_8.png" src="../_images/scanline_example_8.png" style="width: 300px;" /></a>
+</figure>
 <p class="sd-card-text">Both edges e1 and e2 have <span class="math notranslate nohighlight">\(y_{\max} = 9\)</span> so are removed from AET. ET and AET are now empty so the algorithm terminates.</p>
 </div>
 </details></section>

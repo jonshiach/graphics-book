@@ -511,20 +511,20 @@ title="Print to PDF"
 <p><strong>Super sampling antialiasing (SSAA)</strong> uses a raster which has <span class="math notranslate nohighlight">\(\times 2\)</span> or <span class="math notranslate nohighlight">\(\times 4\)</span> the number of pixels in the horizontal and vertical directions as the display which is known as a <strong>super sample</strong>. The scene that is to be rendered is calculated using the super sample and the colours of each pixel on the display raster is then calculated by averaging the pixels of the super-sample raster that correspond to the pixel on the display raster.</p>
 <figure class="align-default" id="ssaa-figure">
 <img alt="../_images/antialiasing.svg" src="../_images/antialiasing.svg" /><figcaption>
-<p><span class="caption-number">Fig. 103 </span><span class="caption-text">Super sampling antialiasing.</span><a class="headerlink" href="#ssaa-figure" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 105 </span><span class="caption-text">Super sampling antialiasing.</span><a class="headerlink" href="#ssaa-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>Consider the diagram in <a class="reference internal" href="#ssaa-figure"><span class="std std-numref">Fig. 103</span></a> where four pixels from a <span class="math notranslate nohighlight">\(\times 2\)</span> super sample are combined to produce the display pixel. Averaging the colour triplets gives</p>
+<p>Consider the diagram in <a class="reference internal" href="#ssaa-figure"><span class="std std-numref">Fig. 105</span></a> where four pixels from a <span class="math notranslate nohighlight">\(\times 2\)</span> super sample are combined to produce the display pixel. Averaging the colour triplets gives</p>
 <div class="math notranslate nohighlight">
 \[\begin{split} \begin{align*}
     \text{display pixel colour} &amp;= \frac{(255, 255, 255) + (128, 128, 128) + (192,192,192) + (0,0,0)}{4}\\
     &amp;= (144, 144, 144).
 \end{align*} \end{split}\]</div>
-<p>The affects of applying a <span class="math notranslate nohighlight">\(\times 2\)</span> super sample antialiasing can be seen in <a class="reference internal" href="#antialiased-circle-figure"><span class="std std-numref">Fig. 104</span></a>.</p>
+<p>The affects of applying a <span class="math notranslate nohighlight">\(\times 2\)</span> super sample antialiasing can be seen in <a class="reference internal" href="#antialiased-circle-figure"><span class="std std-numref">Fig. 106</span></a>.</p>
 <figure class="align-default" id="antialiased-circle-figure">
 <a class="reference internal image-reference" href="../_images/antialiasing_example.png"><img alt="../_images/antialiasing_example.png" src="../_images/antialiasing_example.png" style="width: 500px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 104 </span><span class="caption-text">Filled circle with (left) and without (right) <span class="math notranslate nohighlight">\(\times 2\)</span> super sampling antialiasing applied.</span><a class="headerlink" href="#antialiased-circle-figure" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 106 </span><span class="caption-text">Filled circle with (left) and without (right) <span class="math notranslate nohighlight">\(\times 2\)</span> super sampling antialiasing applied.</span><a class="headerlink" href="#antialiased-circle-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
