@@ -1368,7 +1368,7 @@
 %     \draw [line width=2pt] ($(1)+(0.5,2)$) coordinate (A)-- ++(0:2) node [pos=0.5,below] {$A$};
 %     \draw [line width=2pt] ($(1)+(3.5,2)$) coordinate (B) -- ++(0:2) node [pos=0.5,below] {$B$};
 %     \draw [line width=2pt] ($(1)+(2,2.5)$) coordinate (C) -- ++(30:2) node [pos=0.5,below right] {$C$};
-%     \draw [line width=2pt] ($(1)+(2,1.5)$) coordinate (D) -- ++(330:2) node [pos=0.5,below left] {$C$};
+%     \draw [line width=2pt] ($(1)+(2,1.5)$) coordinate (D) -- ++(330:2) node [pos=0.5,below left] {$D$};
 %     \draw [bluevec] ($(A)+(0:1)$) -- ++(90:1);
 %     \draw [bluevec] ($(B)+(0:1)$) -- ++(90:1);
 %     \draw [bluevec] ($(C)+(30:1)$) -- ++(120:1);
@@ -1975,10 +1975,10 @@
 %     \foreach \i/\j in {4/2,5/2,6/2,3/3,6/3,2/4,6/4,2/5,6/5,2/6,3/6,4/6,5/6,6/6} {
 %         \fill [gray] (-1+\i,7-\j) rectangle ++(1,1);
 %     }
-%     \foreach \i/\j in {4/4,4/3,5/3,5/4,5/5,4/5,3/5} {
-%         \fill [blue!50] (-1+\i,7-\j) rectangle ++(1,1);
-%     }
-%     \fill [blue] (-1+3,7-4) rectangle ++(1,1);
+%     % \foreach \i/\j in {4/4,4/3,5/3,5/4,5/5,4/5,3/5} {
+%     %     \fill [blue!50] (-1+\i,7-\j) rectangle ++(1,1);
+%     % }
+%     % \fill [blue] (-1+3,7-4) rectangle ++(1,1);
 %     \draw (0,0) grid (7,7);
 %     \foreach \i in {1, ..., 7}{
 %         \node [below] at (-0.5+\i,0) {\i};
@@ -2012,9 +2012,34 @@
 %     \node [point,label=above left:{$(x_{i+1},y_{i+1})$}] at (1,2) {};
 % \end{tikzpicture}
 
+% \begin{tikzpicture}
+%     \draw [line width=1pt] (0,0) -- node [below right] {non-active edge} (4,1);
+%     \draw [line width=2pt,red] (4,1) -- node [above right] {active edge} (2,4) -- node [pos=0.4,above left] {active edge} (0,0);
+%     \draw [line width=1pt,dashed] (-1,2) -- ++(6,0);
+
+%     \draw [line width=1pt] (11,1) -- node [above right] {non-active edge} (9,4);
+%     \draw [line width=2pt,red] (9,4) -- node [pos=0.4,above left] {active edge} (7,0) -- node [below right] {active edge} (11,1);
+%     \draw [line width=1pt,dashed] (6,0.5) -- ++(6,0);
+% \end{tikzpicture}
+
+\begin{tikzpicture}
+    \tikzmath{\x1=2;\x2=9;\x3=8;\x4=6;\x5=4;\y1=2;\y2=1;\y3=6;\y4=4;\y5=8;}
+    \draw [line width=1pt] (\x1,\y1) 
+        -- (\x2,\y2) 
+        -- (\x3,\y3) 
+        -- (\x4,\y4) 
+        -- (\x5,\y5) -- cycle;
+    \draw [dashed,line width=1pt] (1,5) -- ++(9,0);
+    \node [point,label=above right:{$x_4$}] (4) at ({\x2+0.8*(\x3-\x2)}, {\y2+0.8*(\y3-\y2)}) {};
+    \node [point,label=above left:{$x_3$}] (3) at ({\x3+0.5*(\x4-\x3)}, {\y3+0.5*(\y4-\y3)}) {};
+    \node [point,label=above right:{$x_2$}] (2) at ({\x4+0.25*(\x5-\x4)}, {\y4+0.25*(\y5-\y4)}) {};
+    \node [point,label=above left:{$x_1$}] (1) at ({\x5+0.5*(\x1-\x5)}, {\y5+0.5*(\y1-\y5)}) {};
+    \draw [blue,line width=2pt] (1) -- (2) (3) -- (4);
+\end{tikzpicture}
+
 % Scanline example
 % \begin{tikzpicture}
-%     \tikzmath{\x1=2;\x2=9;\x3=8;\x4=6;\x5=4;\y1=9;\y2=9;\y3=4;\y4=7;\y5=2;}
+%     \tikzmath{\x1=2;\x2=9;\x3=8;\x4=6;\x5=4;\y1=8;\y2=9;\y3=4;\y4=6;\y5=2;}
 %     \draw (0,0) grid (10,10);
 %     \draw [line width=2pt] (-0.5+\x1,10.5-\y1) 
 %         -- (-0.5+\x2,10.5-\y2) 
@@ -2035,6 +2060,429 @@
 %     \node [fill=white] at ({0.5*(\x3+\x4)-1},{10.5-0.5*(\y3+\y4)}) {e3};
 %     \node [fill=white] at ({0.5*(\x4+\x5)},{10.5-0.5*(\y4+\y5)}) {e4};
 %     \node [fill=white] at ({0.5*(\x5+\x1)-1},{10.5-0.5*(\y5+\y1)}) {e5};
+% \end{tikzpicture}
+
+% \begin{tikzpicture}[every node/.style={draw,minimum width=1cm,minimum height=0.8cm}]
+%     \node at (0,3.2) {2};
+%     \node at (1,3.2) {7};
+%     \node at (2,3.2) {8};
+%     \node at (3,3.2) {9};
+%     \node at (0,2.4) {8};
+%     \node at (1,2.4) {0.2};
+%     \node at (2,2.4) {4};
+%     \node at (3,2.4) {9};
+%     \node at (0,1.6) {8};
+%     \node at (1,1.6) {-1};
+%     \node at (2,1.6) {4};
+%     \node at (3,1.6) {6};
+%     \node at (0,0.8) {4};
+%     \node at (1,0.8) {0.5};
+%     \node at (2,0.8) {2};
+%     \node at (3,0.8) {6};    
+%     \node at (0,0) {4};
+%     \node at (1,0) {-0.33};
+%     \node at (2,0) {2};
+%     \node at (3,0) {8};
+%     \node [draw=none] at (1.5,-1) {ET};
+%     \foreach \i in {1,...,5}{
+%         \node [draw=none] at (-1,4-\i*0.8) {e\i};
+%     }
+%     \node [draw=none] at (0,4) {$x$};
+%     \node [draw=none] at (1,4) {$1/m$};
+%     \node [draw=none] at (2,4) {$y_{\min}$};
+%     \node [draw=none] at (3,4) {$y_{\max}$};
+% \end{tikzpicture}
+
+% \begin{tikzpicture}[every node/.style={draw,minimum width=1cm,minimum height=0.8cm}]
+%     \node at (0,1.6) {2};
+%     \node at (1,1.6) {7};
+%     \node at (2,1.6) {8};
+%     \node at (3,1.6) {9};
+%     \node at (0,0.8) {8};
+%     \node at (1,0.8) {0.2};
+%     \node at (2,0.8) {4};
+%     \node at (3,0.8) {9};
+%     \node at (0,0) {8};
+%     \node at (1,0) {-1};
+%     \node at (2,0) {4};
+%     \node at (3,0) {6};
+%     \node [draw=none] at (1.5,-1) {ET};
+%     \node [draw=none] at (-1,1.6) {e1};
+%     \node [draw=none] at (-1,0.8) {e2};
+%     \node [draw=none] at (-1,0) {e3};
+%     \node [draw=none] at (0,2.4) {$x$};
+%     \node [draw=none] at (1,2.4) {$1/m$};
+%     \node [draw=none] at (2,2.4) {$y_{\min}$};
+%     \node [draw=none] at (3,2.4) {$y_{\max}$};
+%     \node at (6,0.8) {4};
+%     \node at (7,0.8) {0.5};
+%     \node at (8,0.8) {6};
+%     \node at (6,0) {4};
+%     \node at (7,0) {-0.33};
+%     \node at (8,0) {8};
+%     \node [draw=none] at (7,-1) {AET};
+%     \node [draw=none] at (5,0) {e4};
+%     \node [draw=none] at (5,0.8) {e5};
+%     \node [draw=none] at (6,1.6) {$x$};
+%     \node [draw=none] at (7,1.6) {$1/m$};
+%     \node [draw=none] at (8,1.6) {$y_{\max}$};
+% \end{tikzpicture}
+
+% \begin{tikzpicture}[every node/.style={draw,minimum width=1cm,minimum height=0.8cm}]
+%     \node at (0,1.6) {2};
+%     \node at (1,1.6) {7};
+%     \node at (2,1.6) {8};
+%     \node at (3,1.6) {9};
+%     \node at (0,0.8) {8};
+%     \node at (1,0.8) {0.2};
+%     \node at (2,0.8) {4};
+%     \node at (3,0.8) {9};
+%     \node at (0,0) {8};
+%     \node at (1,0) {-1};
+%     \node at (2,0) {4};
+%     \node at (3,0) {6};
+%     \node [draw=none] at (1.5,-1) {ET};
+%     \node [draw=none] at (-1,1.6) {e1};
+%     \node [draw=none] at (-1,0.8) {e2};
+%     \node [draw=none] at (-1,0) {e3};
+%     \node [draw=none] at (0,2.4) {$x$};
+%     \node [draw=none] at (1,2.4) {$1/m$};
+%     \node [draw=none] at (2,2.4) {$y_{\min}$};
+%     \node [draw=none] at (3,2.4) {$y_{\max}$};
+%     \node at (6,0.8) {\color{red}4.5};
+%     \node at (7,0.8) {0.5};
+%     \node (1) at (8,0.8) {6};
+%     \node at (6,0) {\color{red}3.67};
+%     \node at (7,0) {-0.33};
+%     \node (2) at (8,0) {8};
+%     \node [draw=none] at (7,-1) {AET};
+%     \node [draw=none] at (5,0) {e4};
+%     \node [draw=none] at (5,0.8) {e5};
+%     \node [draw=none] at (6,1.6) {$x$};
+%     \node [draw=none] at (7,1.6) {$1/m$};
+%     \node [draw=none] at (8,1.6) {$y_{\max}$};
+% \end{tikzpicture}
+
+% \begin{tikzpicture}[every node/.style={draw,minimum width=1cm,minimum height=0.8cm}]
+%     \node at (0,1.6) {2};
+%     \node at (1,1.6) {7};
+%     \node at (2,1.6) {8};
+%     \node at (3,1.6) {9};
+%     \node at (0,0.8) {8};
+%     \node at (1,0.8) {0.2};
+%     \node at (2,0.8) {4};
+%     \node at (3,0.8) {9};
+%     \node at (0,0) {8};
+%     \node at (1,0) {-1};
+%     \node at (2,0) {4};
+%     \node at (3,0) {6};
+%     \node [draw=none] at (1.5,-1) {ET};
+%     \node [draw=none] at (-1,1.6) {e1};
+%     \node [draw=none] at (-1,0.8) {e2};
+%     \node [draw=none] at (-1,0) {e3};
+%     \node [draw=none] at (0,2.4) {$x$};
+%     \node [draw=none] at (1,2.4) {$1/m$};
+%     \node [draw=none] at (2,2.4) {$y_{\min}$};
+%     \node [draw=none] at (3,2.4) {$y_{\max}$};
+%     \node at (6,0.8) {3.67};
+%     \node at (7,0.8) {-0.33};
+%     \node at (8,0.8) {8};
+%     \node at (6,0) {4.5};
+%     \node at (7,0) {0.5};
+%     \node at (8,0) {6};
+%     \node [draw=none] at (7,-1) {AET};
+%     \node [draw=none] at (5,0) {e4};
+%     \node [draw=none] at (5,0.8) {e5};
+%     \node [draw=none] at (6,1.6) {$x$};
+%     \node [draw=none] at (7,1.6) {$1/m$};
+%     \node [draw=none] at (8,1.6) {$y_{\max}$};
+% \end{tikzpicture}
+
+% \begin{tikzpicture}[every node/.style={draw,minimum width=1cm,minimum height=0.8cm}]
+%     \node at (0,1.6) {2};
+%     \node at (1,1.6) {7};
+%     \node at (2,1.6) {8};
+%     \node at (3,1.6) {9};
+%     \node at (0,0.8) {8};
+%     \node at (1,0.8) {0.2};
+%     \node at (2,0.8) {4};
+%     \node at (3,0.8) {9};
+%     \node at (0,0) {8};
+%     \node at (1,0) {-1};
+%     \node at (2,0) {4};
+%     \node at (3,0) {6};
+%     \node [draw=none] at (1.5,-1) {ET};
+%     \node [draw=none] at (-1,1.6) {e1};
+%     \node [draw=none] at (-1,0.8) {e2};
+%     \node [draw=none] at (-1,0) {e3};
+%     \node [draw=none] at (0,2.4) {$x$};
+%     \node [draw=none] at (1,2.4) {$1/m$};
+%     \node [draw=none] at (2,2.4) {$y_{\min}$};
+%     \node [draw=none] at (3,2.4) {$y_{\max}$};
+%     \node at (6,0.8) {\color{red}3.33};
+%     \node at (7,0.8) {-0.33};
+%     \node at (8,0.8) {8};
+%     \node at (6,0) {\color{red}5.0};
+%     \node at (7,0) {0.5};
+%     \node at (8,0) {6};
+%     \node [draw=none] at (7,-1) {AET};
+%     \node [draw=none] at (5,0) {e4};
+%     \node [draw=none] at (5,0.8) {e5};
+%     \node [draw=none] at (6,1.6) {$x$};
+%     \node [draw=none] at (7,1.6) {$1/m$};
+%     \node [draw=none] at (8,1.6) {$y_{\max}$};
+% \end{tikzpicture}
+
+% \begin{tikzpicture}[every node/.style={draw,minimum width=1cm,minimum height=0.8cm}]
+%     \node at (0,0) {2};
+%     \node at (1,0) {7};
+%     \node at (2,0) {8};
+%     \node at (3,0) {9};
+%     \node [draw=none] at (1.5,-1) {ET};
+%     \node [draw=none] at (-1,0) {e1};
+%     \node [draw=none] at (0,0.8) {$x$};
+%     \node [draw=none] at (1,0.8) {$1/m$};
+%     \node [draw=none] at (2,0.8) {$y_{\min}$};
+%     \node [draw=none] at (3,0.8) {$y_{\max}$};
+%     \node at (6,2.4) {3.33};
+%     \node at (7,2.4) {-0.33};
+%     \node at (8,2.4) {8};
+%     \node at (6,1.6) {5.0};
+%     \node at (7,1.6) {0.5};
+%     \node at (8,1.6) {6};
+%     \node at (6,0.8) {8};
+%     \node at (7,0.8) {0.2};
+%     \node at (8,0.8) {9};
+%     \node at (6,0) {8};
+%     \node at (7,0) {-1};
+%     \node at (8,0) {6};
+%     \node [draw=none] at (7,-1) {AET};
+%     \node [draw=none] at (5,2.4) {e4};
+%     \node [draw=none] at (5,1.6) {e5};
+%     \node [draw=none] at (5,0.8) {e2};
+%     \node [draw=none] at (5,0) {e3};
+%     \node [draw=none] at (6,3.2) {$x$};
+%     \node [draw=none] at (7,3.2) {$1/m$};
+%     \node [draw=none] at (8,3.2) {$y_{\max}$};
+% \end{tikzpicture}
+
+% \begin{tikzpicture}[every node/.style={draw,minimum width=1cm,minimum height=0.8cm}]
+%     \node at (0,0) {2};
+%     \node at (1,0) {7};
+%     \node at (2,0) {8};
+%     \node at (3,0) {9};
+%     \node [draw=none] at (1.5,-1) {ET};
+%     \node [draw=none] at (-1,0) {e1};
+%     \node [draw=none] at (0,0.8) {$x$};
+%     \node [draw=none] at (1,0.8) {$1/m$};
+%     \node [draw=none] at (2,0.8) {$y_{\min}$};
+%     \node [draw=none] at (3,0.8) {$y_{\max}$};
+%     \node at (6,2.4) {\color{red}3.0};
+%     \node at (7,2.4) {-0.33};
+%     \node at (8,2.4) {8};
+%     \node at (6,1.6) {\color{red}5.5};
+%     \node at (7,1.6) {0.5};
+%     \node at (8,1.6) {6};
+%     \node at (6,0.8) {\color{red}8.2};
+%     \node at (7,0.8) {0.2};
+%     \node at (8,0.8) {9};
+%     \node at (6,0) {\color{red}7.0};
+%     \node at (7,0) {-1};
+%     \node at (8,0) {6};
+%     \node [draw=none] at (7,-1) {AET};
+%     \node [draw=none] at (5,2.4) {e4};
+%     \node [draw=none] at (5,1.6) {e5};
+%     \node [draw=none] at (5,0.8) {e2};
+%     \node [draw=none] at (5,0) {e3};
+%     \node [draw=none] at (6,3.2) {$x$};
+%     \node [draw=none] at (7,3.2) {$1/m$};
+%     \node [draw=none] at (8,3.2) {$y_{\max}$};
+% \end{tikzpicture}
+
+% \begin{tikzpicture}[every node/.style={draw,minimum width=1cm,minimum height=0.8cm}]
+%     \node at (0,0) {2};
+%     \node at (1,0) {7};
+%     \node at (2,0) {8};
+%     \node at (3,0) {9};
+%     \node [draw=none] at (1.5,-1) {ET};
+%     \node [draw=none] at (-1,0) {e1};
+%     \node [draw=none] at (0,0.8) {$x$};
+%     \node [draw=none] at (1,0.8) {$1/m$};
+%     \node [draw=none] at (2,0.8) {$y_{\min}$};
+%     \node [draw=none] at (3,0.8) {$y_{\max}$};
+%     \node at (6,2.4) {3.0};
+%     \node at (7,2.4) {-0.33};
+%     \node at (8,2.4) {8};
+%     \node at (6,1.6) {5.5};
+%     \node at (7,1.6) {0.5};
+%     \node at (8,1.6) {6};
+%     \node at (6,0.8) {7.0};
+%     \node at (7,0.8) {-1};
+%     \node at (8,0.8) {6};
+%     \node at (6,0) {8.2};
+%     \node at (7,0) {0.2};
+%     \node at (8,0) {9};
+%     \node [draw=none] at (7,-1) {AET};
+%     \node [draw=none] at (5,2.4) {e4};
+%     \node [draw=none] at (5,1.6) {e5};
+%     \node [draw=none] at (5,0.8) {e3};
+%     \node [draw=none] at (5,0) {e2};
+%     \node [draw=none] at (6,3.2) {$x$};
+%     \node [draw=none] at (7,3.2) {$1/m$};
+%     \node [draw=none] at (8,3.2) {$y_{\max}$};
+% \end{tikzpicture}
+
+% \begin{tikzpicture}[every node/.style={draw,minimum width=1cm,minimum height=0.8cm}]
+%     \node at (0,0) {2};
+%     \node at (1,0) {7};
+%     \node at (2,0) {8};
+%     \node at (3,0) {9};
+%     \node [draw=none] at (1.5,-1) {ET};
+%     \node [draw=none] at (-1,0) {e1};
+%     \node [draw=none] at (0,0.8) {$x$};
+%     \node [draw=none] at (1,0.8) {$1/m$};
+%     \node [draw=none] at (2,0.8) {$y_{\min}$};
+%     \node [draw=none] at (3,0.8) {$y_{\max}$};
+%     \node at (6,2.4) {\color{red}2.67};
+%     \node at (7,2.4) {-0.33};
+%     \node at (8,2.4) {8};
+%     \node at (6,1.6) {\color{red}6.0};
+%     \node at (7,1.6) {0.5};
+%     \node at (8,1.6) {6};
+%     \node at (6,0.8) {\color{red}6.0};
+%     \node at (7,0.8) {-1};
+%     \node at (8,0.8) {6};
+%     \node at (6,0) {\color{red}8.4};
+%     \node at (7,0) {0.2};
+%     \node at (8,0) {9};
+%     \node [draw=none] at (7,-1) {AET};
+%     \node [draw=none] at (5,2.4) {e4};
+%     \node [draw=none] at (5,1.6) {e5};
+%     \node [draw=none] at (5,0.8) {e3};
+%     \node [draw=none] at (5,0) {e2};
+%     \node [draw=none] at (6,3.2) {$x$};
+%     \node [draw=none] at (7,3.2) {$1/m$};
+%     \node [draw=none] at (8,3.2) {$y_{\max}$};
+% \end{tikzpicture}
+
+% \begin{tikzpicture}[every node/.style={draw,minimum width=1cm,minimum height=0.8cm}]
+%     \node at (0,0) {2};
+%     \node at (1,0) {7};
+%     \node at (2,0) {8};
+%     \node at (3,0) {9};
+%     \node [draw=none] at (1.5,-1) {ET};
+%     \node [draw=none] at (-1,0) {e1};
+%     \node [draw=none] at (0,0.8) {$x$};
+%     \node [draw=none] at (1,0.8) {$1/m$};
+%     \node [draw=none] at (2,0.8) {$y_{\min}$};
+%     \node [draw=none] at (3,0.8) {$y_{\max}$};
+%     \node at (6,0.8) {2.67};
+%     \node at (7,0.8) {-0.33};
+%     \node at (8,0.8) {8};
+%     \node at (6,0) {8.4};
+%     \node at (7,0) {0.2};
+%     \node at (8,0) {9};
+%     \node [draw=none] at (7,-1) {AET};
+%     \node [draw=none] at (5,0.8) {e5};
+%     \node [draw=none] at (5,0) {e2};
+%     \node [draw=none] at (6,1.6) {$x$};
+%     \node [draw=none] at (7,1.6) {$1/m$};
+%     \node [draw=none] at (8,1.6) {$y_{\max}$};
+% \end{tikzpicture}
+
+% \begin{tikzpicture}[every node/.style={draw,minimum width=1cm,minimum height=0.8cm}]
+%     \node at (0,0) {2};
+%     \node at (1,0) {7};
+%     \node at (2,0) {8};
+%     \node at (3,0) {9};
+%     \node [draw=none] at (1.5,-1) {ET};
+%     \node [draw=none] at (-1,0) {e1};
+%     \node [draw=none] at (0,0.8) {$x$};
+%     \node [draw=none] at (1,0.8) {$1/m$};
+%     \node [draw=none] at (2,0.8) {$y_{\min}$};
+%     \node [draw=none] at (3,0.8) {$y_{\max}$};
+%     \node at (6,0.8) {\color{red}2.33};
+%     \node at (7,0.8) {-0.33};
+%     \node at (8,0.8) {8};
+%     \node at (6,0) {\color{red}8.6};
+%     \node at (7,0) {0.2};
+%     \node at (8,0) {9};
+%     \node [draw=none] at (7,-1) {AET};
+%     \node [draw=none] at (5,0.8) {e5};
+%     \node [draw=none] at (5,0) {e2};
+%     \node [draw=none] at (6,1.6) {$x$};
+%     \node [draw=none] at (7,1.6) {$1/m$};
+%     \node [draw=none] at (8,1.6) {$y_{\max}$};
+% \end{tikzpicture}
+
+% \begin{tikzpicture}[every node/.style={draw,minimum width=1cm,minimum height=0.8cm}]
+%     \node at (0,0) {2};
+%     \node at (1,0) {7};
+%     \node at (2,0) {8};
+%     \node at (3,0) {9};
+%     \node [draw=none] at (1.5,-1) {ET};
+%     \node [draw=none] at (-1,0) {e1};
+%     \node [draw=none] at (0,0.8) {$x$};
+%     \node [draw=none] at (1,0.8) {$1/m$};
+%     \node [draw=none] at (2,0.8) {$y_{\min}$};
+%     \node [draw=none] at (3,0.8) {$y_{\max}$};
+%     \node at (6,0.8) {\color{red}2.0};
+%     \node at (7,0.8) {-0.33};
+%     \node at (8,0.8) {8};
+%     \node at (6,0) {\color{red}8.8};
+%     \node at (7,0) {0.2};
+%     \node at (8,0) {9};
+%     \node [draw=none] at (7,-1) {AET};
+%     \node [draw=none] at (5,0.8) {e5};
+%     \node [draw=none] at (5,0) {e2};
+%     \node [draw=none] at (6,1.6) {$x$};
+%     \node [draw=none] at (7,1.6) {$1/m$};
+%     \node [draw=none] at (8,1.6) {$y_{\max}$};
+% \end{tikzpicture}
+
+% \begin{tikzpicture}[every node/.style={draw,minimum width=1cm,minimum height=0.8cm}]
+%     \node at (6,0.8) {8.8};
+%     \node at (7,0.8) {0.2};
+%     \node at (8,0.8) {9};
+%     \node at (6,0) {2};
+%     \node at (7,0) {7};
+%     \node at (8,0) {9};
+%     \node [draw=none] at (7,-1) {AET};
+%     \node [draw=none] at (5,0.8) {e2};
+%     \node [draw=none] at (5,0) {e1};
+%     \node [draw=none] at (6,1.6) {$x$};
+%     \node [draw=none] at (7,1.6) {$1/m$};
+%     \node [draw=none] at (8,1.6) {$y_{\max}$};
+% \end{tikzpicture}
+
+% \begin{tikzpicture}[every node/.style={draw,minimum width=1cm,minimum height=0.8cm}]
+%     \node at (6,0) {8.8};
+%     \node at (7,0) {0.2};
+%     \node at (8,0) {9};
+%     \node at (6,0.8) {2};
+%     \node at (7,0.8) {7};
+%     \node at (8,0.8) {9};
+%     \node [draw=none] at (7,-1) {AET};
+%     \node [draw=none] at (5,0.8) {e1};
+%     \node [draw=none] at (5,0) {e2};
+%     \node [draw=none] at (6,1.6) {$x$};
+%     \node [draw=none] at (7,1.6) {$1/m$};
+%     \node [draw=none] at (8,1.6) {$y_{\max}$};
+% \end{tikzpicture}
+
+% \begin{tikzpicture}[every node/.style={draw,minimum width=1cm,minimum height=0.8cm}]
+%     \node at (6,0) {\color{red}9.0};
+%     \node at (7,0) {0.2};
+%     \node at (8,0) {9};
+%     \node at (6,0.8) {\color{red}9.0};
+%     \node at (7,0.8) {7};
+%     \node at (8,0.8) {9};
+%     \node [draw=none] at (7,-1) {AET};
+%     \node [draw=none] at (5,0.8) {e1};
+%     \node [draw=none] at (5,0) {e2};
+%     \node [draw=none] at (6,1.6) {$x$};
+%     \node [draw=none] at (7,1.6) {$1/m$};
+%     \node [draw=none] at (8,1.6) {$y_{\max}$};
 % \end{tikzpicture}
 
 % Antialiasing
@@ -2314,49 +2762,49 @@
 %         };
 % \end{tikzpicture}
 
-\begin{tikzpicture}[auto]
-    \draw [fill=gray!50] (0,0) rectangle ++(16,-12);
-    \draw [fill=white] (1,-4)
-        -- node {$A_1$} ++(0,-1)
-        -- node {$A_2$} ++(0,-4)
-        -- node {$B$} ++(4,0)
-        -- node {$C$} ++(0,4)
-        -- node {$D$} ++(2,0)
-        -- node {$E$} ++(0,-3)
-        -- node {$F$} ++(-1,0)
-        -- node {$G$} ++(0,-3)
-        -- node {$H_1$} ++(2,0)
-        -- node {$H_2$} ++(2,0)
-        -- node {$I$} ++(0,3)
-        -- node {$J$} ++(-2,0)
-        -- node {$K$} ++(0,1)
-        -- node {$L$} ++(3,0)
-        -- node {$M$} ++(0,-4)
-        -- node {$N$} ++(4,0)
-        -- node {$O_1$} ++(0,5)
-        -- node {$O_2$} ++(0,1)
-        -- node {$P$} ++(-4,0)
-        -- node {$Q$} ++(0,-1)
-        -- node {$R$} ++(-3,0)
-        -- node {$S$} ++(0,3)
-        -- node {$T$} ++(3,0)
-        -- node {$U$} ++(0,-1)
-        -- node {$V$} ++(4,0)
-        -- node {$W_2$} ++(0,1)
-        -- node {$W_1$} ++(0,2) 
-        -- node {$X_2$} ++(-7,0)
-        -- node {$X_1$} ++(-1,0)
-        -- node {$Y$} ++(0,-3)
-        -- node {$Z$} ++(-6,0);
-    \node [point,label=below:$\mathbf{p}$] at (3, -7.5) {};
-    \node [point,label=below:$\mathbf{q}$] at (7.5, -9.5) {};
-    \node [point,label=below:$\mathbf{r}$] at (13, -2) {};
-    \draw (0.75,-6) -- ++(0.5,0);
-    \draw (8,-11.25) -- ++(0,0.5);
-    \draw (14.75,-6) -- ++(0.5,0);
-    \draw (14.75,-3) -- ++(0.5,0);
-    \draw (8,-1.25) -- ++(0,0.5);
-\end{tikzpicture}
+% \begin{tikzpicture}[auto]
+%     \draw [fill=gray!50] (0,0) rectangle ++(16,-12);
+%     \draw [fill=white] (1,-4)
+%         -- node {$A_1$} ++(0,-1)
+%         -- node {$A_2$} ++(0,-4)
+%         -- node {$B$} ++(4,0)
+%         -- node {$C$} ++(0,4)
+%         -- node {$D$} ++(2,0)
+%         -- node {$E$} ++(0,-3)
+%         -- node {$F$} ++(-1,0)
+%         -- node {$G$} ++(0,-3)
+%         -- node {$H_1$} ++(2,0)
+%         -- node {$H_2$} ++(2,0)
+%         -- node {$I$} ++(0,3)
+%         -- node {$J$} ++(-2,0)
+%         -- node {$K$} ++(0,1)
+%         -- node {$L$} ++(3,0)
+%         -- node {$M$} ++(0,-4)
+%         -- node {$N$} ++(4,0)
+%         -- node {$O_1$} ++(0,5)
+%         -- node {$O_2$} ++(0,1)
+%         -- node {$P$} ++(-4,0)
+%         -- node {$Q$} ++(0,-1)
+%         -- node {$R$} ++(-3,0)
+%         -- node {$S$} ++(0,3)
+%         -- node {$T$} ++(3,0)
+%         -- node {$U$} ++(0,-1)
+%         -- node {$V$} ++(4,0)
+%         -- node {$W_2$} ++(0,1)
+%         -- node {$W_1$} ++(0,2) 
+%         -- node {$X_2$} ++(-7,0)
+%         -- node {$X_1$} ++(-1,0)
+%         -- node {$Y$} ++(0,-3)
+%         -- node {$Z$} ++(-6,0);
+%     \node [point,label=below:$\mathbf{p}$] at (3, -7.5) {};
+%     \node [point,label=below:$\mathbf{q}$] at (7.5, -9.5) {};
+%     \node [point,label=below:$\mathbf{r}$] at (13, -2) {};
+%     \draw (0.75,-6) -- ++(0.5,0);
+%     \draw (8,-11.25) -- ++(0,0.5);
+%     \draw (14.75,-6) -- ++(0.5,0);
+%     \draw (14.75,-3) -- ++(0.5,0);
+%     \draw (8,-1.25) -- ++(0,0.5);
+% \end{tikzpicture}
 
 
 \end{document}
