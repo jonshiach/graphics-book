@@ -1,0 +1,21 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+options:
+  numbered: true
+
+parts:
+- caption:
+  numbered: true
+  chapters:
+  - glob: pages/0*
+  - glob: pages/1*
+
+- caption: Appendices
+  # numbered: true
+  chapters:
+  - glob: pages/A*
+  - glob: pages/B*
+  - glob: pages/C*
