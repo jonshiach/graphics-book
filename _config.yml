@@ -3,10 +3,10 @@
 
 # ghp-import -n -p -f _build/html
 
-title: Computer Graphics Labs
+title: Computer Graphics
 author: Dr Jon Shiach
 copyright: "2024"
-logo: images/logo.svg
+logo: _images/logo.svg
 
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
@@ -43,3 +43,6 @@ sphinx:
       tex:
         macros:
           "vec": ["\\mathbf{#1}", 1]
+          "model" : ["M\\!odel"]
+          "view" : ["V\\!iew"]
+          "mvp" : ["MV\\!P"]
