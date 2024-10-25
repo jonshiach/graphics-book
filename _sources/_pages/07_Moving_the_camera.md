@@ -27,7 +27,16 @@ $$ \begin{align*}
     \end{pmatrix},
 \end{align*} $$
 
-where $\vec{right} = (r_x, r_y, r_z)$, $\vec{up} = (u_x, u_y, u_z)$ and $\vec{front} = (f_x, f_y, f_z)$. Since these three vectors point to the right, up and to the front of the camera we can use these to move the camera in those directions. For example, to move the camera forwards and backwards we simply add and subtract the $\vec{front}$ vector to the camera position which is the $\vec{eye}$ vector ({numref}`camera-movement-figure`).
+where $\vec{right} = (r_x, r_y, r_z)$, $\vec{up} = (u_x, u_y, u_z)$, $\vec{front} = (f_x, f_y, f_z)$ and $\vec{eye}$ are the camera vectors seen in {numref}`camera-vectors-figure`.
+
+```{figure} ../_images/06_View_space_alignment.svg
+:width: 400
+:name: camera-vectors-figure
+
+Camera vectors
+```
+
+Since these three vectors point to the right, up and to the front of the camera we can use these to move the camera in those directions. For example, to move the camera forwards and backwards we simply add and subtract the $\vec{front}$ vector to the camera position which is the $\vec{eye}$ vector ({numref}`camera-movement-figure`).
 
 ```{figure} ../_images/07_camera_movement.svg
 :width: 500

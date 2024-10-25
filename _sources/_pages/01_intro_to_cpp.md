@@ -265,6 +265,8 @@ The Collatz sequence took 6 steps to reach 1.
 
 ---
 
+(arrays-section)= 
+
 ### Arrays
 
 An **array** is a collection of multiple values of the same type that can be stored in a single variable. For example, we could store the co-ordinates of multiple points in an array and access all of the co-ordinates at once instead of creating separate variables for each one. The values of an array are stored in consecutive memory locations. The C++ syntax for declaring an array is to use square brackets after the array name, the values of each element in the array is then written in curly brackets. For example, define an array called `indices` with the following.

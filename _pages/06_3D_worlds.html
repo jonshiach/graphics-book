@@ -496,17 +496,18 @@ document.write(`
 <ul class="simple">
 <li><p>the model matrix - a transformation matrix that combines scaling, rotation and translation transformations that is unique for each object in the world space</p></li>
 <li><p>the view matrix - a transformation matrix that combines translation and rotation transformations that is applied to every object in the world space</p></li>
-<li><p>the projection matrix - a transformation matrix that combines projection and scalingg that is applied to every object in the world space</p></li>
+<li><p>the projection matrix - a transformation matrix that combines projection and scaling that is applied to every object in the world space</p></li>
 </ul>
 <section id="the-model-matrix">
 <span id="model-matrix-section"></span><h3><span class="section-number">6.3.1. </span>The Model matrix<a class="headerlink" href="#the-model-matrix" title="Permalink to this heading">#</a></h3>
-<p>In <a class="reference internal" href="05_transformations.html#transformations-section"><span class="std std-ref">5. Transformations</span></a> we saw that we can combine transformations such as translation, scaling and rotation by multiplying the individual transformation matrices together. Lets compute a model matrix for our cube where it is scaled down by a factor of 0.5 in each co-ordinate direction, rotated about the <span class="math notranslate nohighlight">\(y\)</span>-axis using the time of the current frame as the rotation angle and translated backwards down the <span class="math notranslate nohighlight">\(z\)</span>-axis so that its centre is at <span class="math notranslate nohighlight">\((0, 0, -4)\)</span>. Add the following code inside the rendering loop before we call the <code class="docutils literal notranslate"><span class="pre">glDrawArrays()</span></code> function.</p>
+<p>In <a class="reference internal" href="05_transformations.html#transformations-section"><span class="std std-ref">5. Transformations</span></a> we saw that we can combine transformations such as translation, scaling and rotation by multiplying the individual transformation matrices together. Lets compute a model matrix for our cube where it is scaled down by a factor of 0.5 in each co-ordinate direction, rotated about the <span class="math notranslate nohighlight">\(y\)</span>-axis using the time of the current frame as the rotation angle and translated backwards down the <span class="math notranslate nohighlight">\(z\)</span>-axis so that its centre is at <span class="math notranslate nohighlight">\((0, 0, -4)\)</span>. Add the following code inside the rendering loop before we call the <code class="docutils literal notranslate"><span class="pre">glDrawElements()</span></code> function.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Calculate the model matrix</span>
 <span class="n">rotationAngle</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">deltaTime</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Maths</span><span class="o">::</span><span class="n">radians</span><span class="p">(</span><span class="mf">0.25</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">360.0f</span><span class="p">);</span>
-<span class="n">mat4</span><span class="w"> </span><span class="n">translate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Maths</span><span class="o">::</span><span class="n">translate</span><span class="p">(</span><span class="n">vec3</span><span class="p">(</span><span class="mf">0.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">-4.0f</span><span class="p">));</span>
-<span class="n">mat4</span><span class="w"> </span><span class="n">scale</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="n">Maths</span><span class="o">::</span><span class="n">scale</span><span class="p">(</span><span class="n">vec3</span><span class="p">(</span><span class="mf">0.5f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5f</span><span class="p">));</span>
-<span class="n">mat4</span><span class="w"> </span><span class="n">rotate</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="n">Maths</span><span class="o">::</span><span class="n">rotate</span><span class="p">(</span><span class="n">rotationAngle</span><span class="p">,</span><span class="w"> </span><span class="n">vec3</span><span class="p">(</span><span class="mf">0.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">));</span>
-<span class="n">mat4</span><span class="w"> </span><span class="n">model</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="n">translate</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">rotate</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">scale</span><span class="p">;</span>
+<span class="n">glm</span><span class="o">::</span><span class="n">mat4</span><span class="w"> </span><span class="n">translate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Maths</span><span class="o">::</span><span class="n">translate</span><span class="p">(</span><span class="n">glm</span><span class="o">::</span><span class="n">vec3</span><span class="p">(</span><span class="mf">0.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">-4.0f</span><span class="p">));</span>
+<span class="n">glm</span><span class="o">::</span><span class="n">mat4</span><span class="w"> </span><span class="n">scale</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="n">Maths</span><span class="o">::</span><span class="n">scale</span><span class="p">(</span><span class="n">glm</span><span class="o">::</span><span class="n">vec3</span><span class="p">(</span><span class="mf">0.5f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5f</span><span class="p">));</span>
+<span class="n">glm</span><span class="o">::</span><span class="n">mat4</span><span class="w"> </span><span class="n">rotate</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="n">Maths</span><span class="o">::</span><span class="n">rotate</span><span class="p">(</span><span class="n">rotationAngle</span><span class="p">,</span>
+<span class="w">                                    </span><span class="n">glm</span><span class="o">::</span><span class="n">vec3</span><span class="p">(</span><span class="mf">0.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">));</span>
+<span class="n">glm</span><span class="o">::</span><span class="n">mat4</span><span class="w"> </span><span class="n">model</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="n">translate</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">rotate</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">scale</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>Here we have calculated the individual transformation matrices for translation, scaling and rotation and multiply them together to create the model matrix. Note that the <code class="docutils literal notranslate"><span class="pre">rotationAngle</span></code> variable has been declared before and <code class="docutils literal notranslate"><span class="pre">main()</span></code> function and here it is updated so the cube performs one rotation every 4 seconds.</p>
@@ -532,18 +533,18 @@ document.write(`
 <p><span class="caption-number">Fig. 6.6 </span><span class="caption-text">The vectors used in the transformation to the view space.</span><a class="headerlink" href="#view-space-alignment-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>The <span class="math notranslate nohighlight">\(\vec{eye}\)</span> and <span class="math notranslate nohighlight">\(\vec{target}\)</span> vectors are either determined by the user through keyboard, mouse or controller inputs or through some predetermined routine. To determine the view space transformation we first translate the camera position to <span class="math notranslate nohighlight">\((0,0,0)\)</span> using the following translation matrix</p>
+<p>The <span class="math notranslate nohighlight">\(\vec{eye}\)</span> and <span class="math notranslate nohighlight">\(\vec{target}\)</span> vectors are either determined by the user through keyboard, mouse or controller inputs or through some predetermined routine. To determine the view space transformation we first translate the camera position to <span class="math notranslate nohighlight">\((0,0,0)\)</span> using the following translation matrix (transposed because of the <a class="reference internal" href="04_vectors_and_matrices.html#column-major-order-section"><span class="std std-ref">column-major order issue</span></a>)</p>
 <div class="math notranslate nohighlight">
 \[\begin{split} \begin{align*}
-    Translate =
+    Translate^\mathsf{T} =
     \begin{pmatrix}
-        1 &amp; 0 &amp; 0 &amp; -e_x \\
-        0 &amp; 1 &amp; 0 &amp; -e_y \\
-        0 &amp; 0 &amp; 1 &amp; -e_z \\
-        0 &amp; 0 &amp; 0 &amp; 1
+        1 &amp; 0 &amp; 0 &amp; 0 \\
+        0 &amp; 1 &amp; 0 &amp; 0 \\
+        0 &amp; 0 &amp; 1 &amp; 0 \\
+        -e_x &amp; -e_y &amp; -e_z &amp; 1
     \end{pmatrix}
 \end{align*}, \end{split}\]</div>
-<p>where <span class="math notranslate nohighlight">\(\vec{eye} = (e_x, e_y, e_z)\)</span>. The next step is to align the world space so that the direction vector is pointing down the <span class="math notranslate nohighlight">\(z\)</span>-axis. To do this we use vectors <span class="math notranslate nohighlight">\(\vec{right}\)</span>, <span class="math notranslate nohighlight">\(\vec{up}\)</span> and <span class="math notranslate nohighlight">\(\vec{front}\)</span> which are unit vectors at right-angles to each other the point in directions relative to the camera (<a class="reference internal" href="#view-space-alignment-figure"><span class="std std-numref">Fig. 6.6</span></a>).</p>
+<p>The next step is to align the world space so that the direction vector is pointing down the <span class="math notranslate nohighlight">\(z\)</span>-axis. To do this we use vectors <span class="math notranslate nohighlight">\(\vec{right}\)</span>, <span class="math notranslate nohighlight">\(\vec{up}\)</span> and <span class="math notranslate nohighlight">\(\vec{front}\)</span> which are unit vectors at right-angles to each other the point in directions relative to the camera (<a class="reference internal" href="#view-space-alignment-figure"><span class="std std-numref">Fig. 6.6</span></a>).</p>
 <p>The <span class="math notranslate nohighlight">\(\vec{front}\)</span> vector points directly forward of the camera and is calculated using</p>
 <div class="math notranslate nohighlight">
 \[ \vec{front} = \operatorname{normalise}(\vec{target} - \vec{eye}).\]</div>
@@ -555,61 +556,53 @@ document.write(`
 \[ \vec{up} = \vec{right} \times \vec{front}.\]</div>
 <p>Once these vectors have been calculated the transformation matrix to rotate the <span class="math notranslate nohighlight">\(\vec{front}\)</span> vector so that it points down the <span class="math notranslate nohighlight">\(z\)</span>-axis is</p>
 <div class="math notranslate nohighlight">
-\[\begin{split} Rotate = \begin{pmatrix}
-    r_x  &amp; r_y  &amp; r_z &amp; 0 \\
-    u_x  &amp; u_y  &amp; u_z &amp; 0 \\
-    -f_x &amp; -f_y &amp; -f_z &amp; 0 \\
+\[\begin{split} Rotate^\mathsf{T} = \begin{pmatrix}
+    \vec{right}_x &amp; \vec{up}_x &amp; -\vec{front}_x &amp; 0 \\
+    \vec{right}_y &amp; \vec{up}_y &amp; -\vec{front}_y &amp; 0 \\
+    \vec{right}_z &amp; \vec{up}_z &amp; -\vec{front}_z &amp; 0 \\
     0 &amp; 0 &amp; 0 &amp; 1
 \end{pmatrix}.\end{split}\]</div>
-<p>where <span class="math notranslate nohighlight">\(\vec{right} = (r_x, r_y, r_z)\)</span>, <span class="math notranslate nohighlight">\(\vec{up} = (u_x, u_y, u_z)\)</span> and <span class="math notranslate nohighlight">\(\vec{front} = (f_x, f_y, f_z)\)</span>. The translation matrix and rotation matrix are multiplied together to form the view matrix which transforms the world space co-ordinates to the view space.</p>
+<p>The translation matrix and rotation matrix are multiplied together to form the view matrix which transforms the world space co-ordinates to the view space.</p>
 <div class="math notranslate nohighlight">
 \[\begin{split} \begin{align*}
-    \view &amp;= Rotate \cdot Translate \\
+    \view^\mathsf{T} &amp;=  Translate^\mathsf{T} \cdot Rotate^\mathsf{T} \\
     &amp;=
     \begin{pmatrix}
-        r_x  &amp; r_y  &amp; r_z &amp; 0 \\
-        u_x  &amp; u_y  &amp; u_z &amp; 0 \\
-        -f_x &amp; -f_y &amp; -f_z &amp; 0 \\
-        0 &amp; 0 &amp; 0 &amp; 1
+        1 &amp; 0 &amp; 0 &amp; 0 \\
+        0 &amp; 1 &amp; 0 &amp; 0 \\
+        0 &amp; 0 &amp; 1 &amp; 0 \\
+        -e_x &amp; -e_y &amp; -e_z &amp; 1
     \end{pmatrix}
     \begin{pmatrix}
-        1 &amp; 0 &amp; 0 &amp; -e_x \\
-        0 &amp; 1 &amp; 0 &amp; -e_y \\
-        0 &amp; 0 &amp; 1 &amp; -e_z \\
-        0 &amp; 0 &amp; 0 &amp; 1
+      \vec{right}_x &amp; \vec{up}_x &amp; -\vec{front}_x &amp; 0 \\
+      \vec{right}_y &amp; \vec{up}_y &amp; -\vec{front}_y &amp; 0 \\
+      \vec{right}_z &amp; \vec{up}_z &amp; -\vec{front}_z &amp; 0 \\
+      0 &amp; 0 &amp; 0 &amp; 1
     \end{pmatrix} \\
     &amp;=
     \begin{pmatrix}
-         r_x &amp;  r_y  &amp;  r_z &amp; - e_xr_x - e_yr_y - e_zr_z \\
-         u_x &amp;  u_y  &amp;  u_z &amp; - e_xu_x - e_yu_y - e_zu_z \\
-        -f_x &amp; -f_y  &amp;  f_z &amp;   e_xf_x + e_yf_y + e_zf_z \\
-        0 &amp; 0 &amp; 0 &amp; 1
-    \end{pmatrix} \\
-    &amp;=
-    \begin{pmatrix}
-         r_x &amp;  r_y  &amp;  r_z &amp; -\vec{eye} \cdot \vec{right} \\
-         u_x &amp;  u_y  &amp;  u_z &amp; -\vec{eye} \cdot \vec{up} \\
-        -f_x &amp; -f_y  &amp; -f_z &amp;  \vec{eye} \cdot \vec{front} \\
-        0 &amp; 0 &amp; 0 &amp; 1
+         \vec{right}_x &amp;  \vec{right}_y  &amp;  \vec{right}_z &amp; 0 \\
+         \vec{up}_x &amp;  \vec{up}_y  &amp;  \vec{up}_z &amp; 0 \\
+        -\vec{front}_x &amp; -\vec{front}_y  &amp; -\vec{front}_z &amp; 0 \\
+        -\vec{eye} \cdot \vec{right} &amp; -\vec{eye} \cdot \vec{up} &amp; \vec{eye} \cdot \vec{front} &amp; 1 \\
     \end{pmatrix}
 \end{align*} \end{split}\]</div>
 <p>Lets move the camera back a bit to look at our cube from the position <span class="math notranslate nohighlight">\((1,1,0)\)</span> looking towards the center of the cube at <span class="math notranslate nohighlight">\((0,0,-4)\)</span>. Add the following code after we have calculated the model matrix.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Calculate the view matrix</span>
-<span class="n">vec3</span><span class="w"> </span><span class="n">eye</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="n">vec3</span><span class="p">(</span><span class="mf">1.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">,</span><span class="w">  </span><span class="mf">0.0f</span><span class="p">);</span>
-<span class="n">vec3</span><span class="w"> </span><span class="n">target</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">vec3</span><span class="p">(</span><span class="mf">0.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">-4.0f</span><span class="p">);</span>
-<span class="n">vec3</span><span class="w"> </span><span class="n">worldUp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vec3</span><span class="p">(</span><span class="mf">0.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">,</span><span class="w">  </span><span class="mf">0.0f</span><span class="p">);</span>
-<span class="n">vec3</span><span class="w"> </span><span class="n">front</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">target</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">eye</span><span class="p">).</span><span class="n">normalise</span><span class="p">();</span>
-<span class="n">vec3</span><span class="w"> </span><span class="n">right</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="n">front</span><span class="p">.</span><span class="n">cross</span><span class="p">(</span><span class="n">worldUp</span><span class="p">).</span><span class="n">normalise</span><span class="p">();</span>
-<span class="n">vec3</span><span class="w"> </span><span class="n">up</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="n">right</span><span class="p">.</span><span class="n">cross</span><span class="p">(</span><span class="n">front</span><span class="p">);</span>
+<span class="n">glm</span><span class="o">::</span><span class="n">vec3</span><span class="w"> </span><span class="n">eye</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="n">glm</span><span class="o">::</span><span class="n">vec3</span><span class="p">(</span><span class="mf">1.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">);</span>
+<span class="n">glm</span><span class="o">::</span><span class="n">vec3</span><span class="w"> </span><span class="n">target</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">glm</span><span class="o">::</span><span class="n">vec3</span><span class="p">(</span><span class="mf">0.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">-4.0f</span><span class="p">);</span>
+<span class="n">glm</span><span class="o">::</span><span class="n">vec3</span><span class="w"> </span><span class="n">worldUp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">glm</span><span class="o">::</span><span class="n">vec3</span><span class="p">(</span><span class="mf">0.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">);</span>
+<span class="n">glm</span><span class="o">::</span><span class="n">vec3</span><span class="w"> </span><span class="n">front</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="n">glm</span><span class="o">::</span><span class="n">normalize</span><span class="p">(</span><span class="n">target</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">eye</span><span class="p">);</span>
+<span class="n">glm</span><span class="o">::</span><span class="n">vec3</span><span class="w"> </span><span class="n">right</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="n">glm</span><span class="o">::</span><span class="n">normalize</span><span class="p">(</span><span class="n">glm</span><span class="o">::</span><span class="n">cross</span><span class="p">(</span><span class="n">front</span><span class="p">,</span><span class="w"> </span><span class="n">worldUp</span><span class="p">));</span>
+<span class="n">glm</span><span class="o">::</span><span class="n">vec3</span><span class="w"> </span><span class="n">up</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="n">glm</span><span class="o">::</span><span class="n">cross</span><span class="p">(</span><span class="n">right</span><span class="p">,</span><span class="w"> </span><span class="n">front</span><span class="p">);</span>
 
-<span class="n">mat4</span><span class="w"> </span><span class="n">view</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mat4</span><span class="p">(</span><span class="mf">1.0f</span><span class="p">);</span>
-<span class="n">view</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w">   </span><span class="o">=</span><span class="w">   </span><span class="n">right</span><span class="p">.</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">view</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w">   </span><span class="n">right</span><span class="p">.</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">view</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span><span class="w">  </span><span class="o">=</span><span class="w">   </span><span class="n">right</span><span class="p">.</span><span class="n">z</span><span class="p">;</span>
-<span class="n">view</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w">   </span><span class="o">=</span><span class="w">   </span><span class="n">up</span><span class="p">.</span><span class="n">x</span><span class="p">,</span><span class="w">    </span><span class="n">view</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w">   </span><span class="n">up</span><span class="p">.</span><span class="n">y</span><span class="p">,</span><span class="w">    </span><span class="n">view</span><span class="p">[</span><span class="mi">9</span><span class="p">]</span><span class="w">  </span><span class="o">=</span><span class="w">   </span><span class="n">up</span><span class="p">.</span><span class="n">z</span><span class="p">;</span>
-<span class="n">view</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">front</span><span class="p">.</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">view</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">front</span><span class="p">.</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">view</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">front</span><span class="p">.</span><span class="n">z</span><span class="p">;</span>
-<span class="n">view</span><span class="p">[</span><span class="mi">12</span><span class="p">]</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">eye</span><span class="p">.</span><span class="n">dot</span><span class="p">(</span><span class="n">right</span><span class="p">);</span>
-<span class="n">view</span><span class="p">[</span><span class="mi">13</span><span class="p">]</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">eye</span><span class="p">.</span><span class="n">dot</span><span class="p">(</span><span class="n">up</span><span class="p">);</span>
-<span class="n">view</span><span class="p">[</span><span class="mi">14</span><span class="p">]</span><span class="w">  </span><span class="o">=</span><span class="w">   </span><span class="n">eye</span><span class="p">.</span><span class="n">dot</span><span class="p">(</span><span class="n">front</span><span class="p">);</span>
-<span class="n">view</span><span class="p">[</span><span class="mi">15</span><span class="p">]</span><span class="w">  </span><span class="o">=</span><span class="w">   </span><span class="mf">1.0f</span><span class="p">;</span><span class="w"> </span>
+<span class="n">glm</span><span class="o">::</span><span class="n">mat4</span><span class="w"> </span><span class="n">view</span><span class="p">;</span>
+<span class="n">view</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">right</span><span class="p">.</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">view</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">up</span><span class="p">.</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">view</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">front</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
+<span class="n">view</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">right</span><span class="p">.</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">view</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">up</span><span class="p">.</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">view</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">front</span><span class="p">.</span><span class="n">y</span><span class="p">;</span>
+<span class="n">view</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">right</span><span class="p">.</span><span class="n">z</span><span class="p">,</span><span class="w"> </span><span class="n">view</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">up</span><span class="p">.</span><span class="n">z</span><span class="p">,</span><span class="w"> </span><span class="n">view</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">front</span><span class="p">.</span><span class="n">z</span><span class="p">;</span>
+<span class="n">view</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">glm</span><span class="o">::</span><span class="n">dot</span><span class="p">(</span><span class="n">eye</span><span class="p">,</span><span class="w"> </span><span class="n">right</span><span class="p">);</span>
+<span class="n">view</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">glm</span><span class="o">::</span><span class="n">dot</span><span class="p">(</span><span class="n">eye</span><span class="p">,</span><span class="w"> </span><span class="n">up</span><span class="p">);</span>
+<span class="n">view</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="n">glm</span><span class="o">::</span><span class="n">dot</span><span class="p">(</span><span class="n">eye</span><span class="p">,</span><span class="w"> </span><span class="n">front</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>Here we have specified the <span class="math notranslate nohighlight">\(\vec{eye}\)</span>, <span class="math notranslate nohighlight">\(\vec{target}\)</span> and <span class="math notranslate nohighlight">\(\vec{worldUp}\)</span> vectors and use them to calculate the <span class="math notranslate nohighlight">\(\vec{front}\)</span>, <span class="math notranslate nohighlight">\(\vec{right}\)</span> and <span class="math notranslate nohighlight">\(\vec{up}\)</span> camera vectors using methods from our <code class="docutils literal notranslate"><span class="pre">vec3</span></code> class. We then use these to calculate the view matrix.</p>
@@ -624,18 +617,18 @@ document.write(`
 <p><span class="caption-number">Fig. 6.7 </span><span class="caption-text">Orthographic projection.</span><a class="headerlink" href="#orthographic-projection-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>Here <span class="math notranslate nohighlight">\(l\)</span>, <span class="math notranslate nohighlight">\(r\)</span>, <span class="math notranslate nohighlight">\(b\)</span>, <span class="math notranslate nohighlight">\(t\)</span>, <span class="math notranslate nohighlight">\(n\)</span> and <span class="math notranslate nohighlight">\(f\)</span> are the left, right, bottom, top, near and far co-ordinates respectively, The <strong>orthographic projection matrix</strong> is calculated using</p>
+<p>The <strong>orthographic projection matrix</strong> is calculated using</p>
 <div class="math notranslate nohighlight">
 \[\begin{split} \begin{align*}
-    Projection_{orth} =
+    Projection_{orthographic}^\mathsf{T} =
     \begin{pmatrix}
-        \dfrac{2}{r - l} &amp; 0 &amp; 0 &amp; -\dfrac{r + l}{r - l} \\
-        0 &amp; \dfrac{2}{t - b} &amp; 0 &amp; -\dfrac{t + b}{t - b} \\
-        0 &amp; 0 &amp; \dfrac{2}{n - f} &amp;  \dfrac{n + f}{n - f} \\
-        0 &amp; 0 &amp; 0 &amp; 1
+        \dfrac{2}{right - left} &amp; 0 &amp; 0 &amp; 0 \\
+        0 &amp; \dfrac{2}{top - bottom} &amp; 0 &amp; 0 \\
+        0 &amp; 0 &amp; \dfrac{2}{near - far} &amp; 0 \\
+        -\dfrac{right + left}{right - left} &amp; -\dfrac{top + bottom}{top - bottom} &amp; \dfrac{near + far}{near - far} &amp; 1
     \end{pmatrix}
-\end{align*}. \end{split}\]</div>
-<p>You don’t really need to know how this matrix is derived but if you are interested click on the dropdown link below.</p>
+\end{align*}, \end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(left\)</span>, <span class="math notranslate nohighlight">\(right\)</span>, <span class="math notranslate nohighlight">\(bottom\)</span>, <span class="math notranslate nohighlight">\(top\)</span>, <span class="math notranslate nohighlight">\(near\)</span> and <span class="math notranslate nohighlight">\(far\)</span> are the co-ordinates of the edges of the visible space. You don’t really need to know how this matrix is derived but if you are interested click on the dropdown link below.</p>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
 Derivation of the orthographic projection matrix<div class="sd-summary-down docutils">
@@ -643,55 +636,54 @@ Derivation of the orthographic projection matrix<div class="sd-summary-down docu
 <div class="sd-summary-up docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
-<p class="sd-card-text">To derive the orthographic projection we first need to translate the co-ordinates so that the centre of the cuboid that represents the clipping volume to <span class="math notranslate nohighlight">\((0,0,0)\)</span>. The centre co-ordinates are calculated using the average of the edge co-ordinates, e.g., for the <span class="math notranslate nohighlight">\(x\)</span> co-ordinate this would be <span class="math notranslate nohighlight">\(\dfrac{r + l}{2}\)</span>, so the translation matrix is</p>
+<p class="sd-card-text">To derive the orthographic projection we first need to translate the co-ordinates so that the centre of the cuboid that represents the clipping volume to <span class="math notranslate nohighlight">\((0,0,0)\)</span>. The centre co-ordinates are calculated using the average of the edge co-ordinates, e.g., for the <span class="math notranslate nohighlight">\(x\)</span> co-ordinate this would be <span class="math notranslate nohighlight">\(\dfrac{right + left}{2}\)</span>, so the translation matrix is</p>
 <div class="math notranslate nohighlight">
 \[\begin{split} \begin{align*}
     Translate = 
     \begin{pmatrix}
-        1 &amp; 0 &amp; 0 &amp; -\dfrac{r + l}{2} \\
-        0 &amp; 1 &amp; 0 &amp; -\dfrac{t + b}{2} \\
-        0 &amp; 0 &amp; 1 &amp;  \dfrac{n + f}{2}  \\
+        1 &amp; 0 &amp; 0 &amp; -\dfrac{right + left}{2} \\
+        0 &amp; 1 &amp; 0 &amp; -\dfrac{top + bottom}{2} \\
+        0 &amp; 0 &amp; 1 &amp;  \dfrac{near + far}{2}  \\
         0 &amp; 0 &amp; 0 &amp; 1
     \end{pmatrix}
 \end{align*} \end{split}\]</div>
-<p class="sd-card-text">The second step is to scale the clipping volume so that the co-ordinates are between <span class="math notranslate nohighlight">\(-1\)</span> and <span class="math notranslate nohighlight">\(1\)</span>. This is done by dividing the distance between the edges of the screen space by the distance between the clipping planes, e.g., for the <span class="math notranslate nohighlight">\(x\)</span> co-ordinate this would be <span class="math notranslate nohighlight">\(\dfrac{1 - (-1)}{r - l}=\dfrac{2}{r - l}\)</span>, so the scaling matrix is</p>
+<p class="sd-card-text">The second step is to scale the clipping volume so that the co-ordinates are between <span class="math notranslate nohighlight">\(-1\)</span> and <span class="math notranslate nohighlight">\(1\)</span>. This is done by dividing the distance between the edges of the screen space by the distance between the clipping planes, e.g., for the <span class="math notranslate nohighlight">\(x\)</span> co-ordinate this would be <span class="math notranslate nohighlight">\(\dfrac{1 - (-1)}{right - left}=\dfrac{2}{right - left}\)</span>, so the scaling matrix is</p>
 <div class="math notranslate nohighlight">
 \[\begin{split} \begin{align*}
     Scale = 
     \begin{pmatrix}
-        \dfrac{2}{r - l} &amp; 0 &amp; 0 &amp; 0 \\
-        0 &amp; \dfrac{2}{t - b} &amp; 0 &amp; 0 \\
-        0 &amp; 0 &amp; \dfrac{2}{n - f} &amp; 0 \\
+        \dfrac{2}{right - left} &amp; 0 &amp; 0 &amp; 0 \\
+        0 &amp; \dfrac{2}{top - bottom} &amp; 0 &amp; 0 \\
+        0 &amp; 0 &amp; \dfrac{2}{near - far} &amp; 0 \\
         0 &amp; 0 &amp; 0 &amp; 1
     \end{pmatrix}.
 \end{align*} \end{split}\]</div>
 <p class="sd-card-text">Combining the translation and scaling matrices gives the orthographic projection matrix</p>
 <div class="math notranslate nohighlight">
 \[\begin{split} \begin{align*}
-    Projection_{orth} &amp;= Scale \cdot Translate \\
+    Projection_{orthographic} &amp;= Scale \cdot Translate \\
     &amp;=
     \begin{pmatrix}
-        \dfrac{2}{r - l} &amp; 0 &amp; 0 &amp; -\dfrac{r + l}{r - l} \\
-        0 &amp; \dfrac{2}{t - b} &amp; 0 &amp; -\dfrac{t + b}{t - b} \\
-        0 &amp; 0 &amp; \dfrac{2}{n - f} &amp;  \dfrac{n + f}{n - f} \\
+        \dfrac{2}{right - left} &amp; 0 &amp; 0 &amp; -\dfrac{right + left}{right - left} \\
+        0 &amp; \dfrac{2}{top - bottom} &amp; 0 &amp; -\dfrac{top + bottom}{top - bottom} \\
+        0 &amp; 0 &amp; \dfrac{2}{near - far} &amp;  \dfrac{near + far}{near - far} \\
         0 &amp; 0 &amp; 0 &amp; 1
     \end{pmatrix}
 \end{align*} \end{split}\]</div>
 </div>
 </details><p>Lets calculate the orthographic projection matrix using <span class="math notranslate nohighlight">\(l = -2\)</span>, <span class="math notranslate nohighlight">\(r = 2\)</span>, <span class="math notranslate nohighlight">\(b = -2\)</span>, <span class="math notranslate nohighlight">\(t = 2\)</span>, <span class="math notranslate nohighlight">\(n = 0\)</span>, <span class="math notranslate nohighlight">\(f = 10\)</span>. Add the following code after we have calculated the view matrix.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Calculate orthographic projection matrix</span>
-<span class="kt">float</span><span class="w"> </span><span class="n">l</span><span class="p">,</span><span class="w"> </span><span class="n">r</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="p">;</span>
-<span class="n">l</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">2.0f</span><span class="p">,</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.0f</span><span class="p">;</span>
-<span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">2.0f</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.0f</span><span class="p">;</span>
-<span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w">   </span><span class="mf">0.0f</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">10.0f</span><span class="p">;</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">left</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="mf">-2.0f</span><span class="p">,</span><span class="w"> </span><span class="n">right_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.0f</span><span class="p">;</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">bottom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">-2.0f</span><span class="p">,</span><span class="w"> </span><span class="n">top</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="mf">2.0f</span><span class="p">;</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">near</span><span class="w">   </span><span class="o">=</span><span class="w">  </span><span class="mf">0.0f</span><span class="p">,</span><span class="w"> </span><span class="n">far</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="mf">10.0f</span><span class="p">;</span>
 
-<span class="n">mat4</span><span class="w"> </span><span class="n">projection</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mat4</span><span class="p">(</span><span class="mf">1.0f</span><span class="p">);</span>
-<span class="n">projection</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w">  </span><span class="o">=</span><span class="w">   </span><span class="mf">2.0f</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">r</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">l</span><span class="p">);</span>
-<span class="n">projection</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="w">  </span><span class="o">=</span><span class="w">   </span><span class="mf">2.0f</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">t</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">b</span><span class="p">);</span>
-<span class="n">projection</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w">   </span><span class="mf">2.0f</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">f</span><span class="p">);</span>
-<span class="n">projection</span><span class="p">[</span><span class="mi">12</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">(</span><span class="n">r</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">l</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">r</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">l</span><span class="p">);</span>
-<span class="n">projection</span><span class="p">[</span><span class="mi">13</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">(</span><span class="n">t</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">t</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">b</span><span class="p">);</span>
-<span class="n">projection</span><span class="p">[</span><span class="mi">14</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w">   </span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">f</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">f</span><span class="p">);</span>
+<span class="n">glm</span><span class="o">::</span><span class="n">mat4</span><span class="w"> </span><span class="n">projection</span><span class="p">;</span>
+<span class="n">projection</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.0f</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">right_</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">left</span><span class="p">);</span>
+<span class="n">projection</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.0f</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">top</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">bottom</span><span class="p">);</span>
+<span class="n">projection</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.0f</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">near</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">far</span><span class="p">);</span>
+<span class="n">projection</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="p">(</span><span class="n">right_</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">left</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">right_</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">left</span><span class="p">);</span>
+<span class="n">projection</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="p">(</span><span class="n">top</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">bottom</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">top</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">bottom</span><span class="p">);</span>
+<span class="n">projection</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="p">(</span><span class="n">near</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">far</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">near</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">far</span><span class="p">);</span>
 </pre></div>
 </div>
 </section>
@@ -702,10 +694,10 @@ Derivation of the orthographic projection matrix<div class="sd-summary-down docu
 <div class="math notranslate nohighlight">
 \[ \mvp = Projection \cdot \view \cdot \model. \]</div>
 <p>We need a way to send the MVP matrix to the vertex shader. We do this using a uniform in the same way as we did for the texture locations in <a class="reference internal" href="03_textures.html#uniforms-section"><span class="std std-ref">3. Textures</span></a>, enter the following code after we have calculated the projection matrix.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">//Calculate the MVP matrix and send it to the vertex shader</span>
-<span class="n">mat4</span><span class="w"> </span><span class="n">mvp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">projection</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">view</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">model</span><span class="p">;</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Calculate the MVP matrix and send it to the vertex shader</span>
+<span class="n">glm</span><span class="o">::</span><span class="n">mat4</span><span class="w"> </span><span class="n">mvp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">projection</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">view</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">model</span><span class="p">;</span>
 <span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">mvpID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">glGetUniformLocation</span><span class="p">(</span><span class="n">shaderID</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;mvp&quot;</span><span class="p">);</span>
-<span class="n">glUniformMatrix4fv</span><span class="p">(</span><span class="n">mvpID</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">GL_FALSE</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">mvp</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+<span class="n">glUniformMatrix4fv</span><span class="p">(</span><span class="n">mvpID</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">GL_FALSE</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">mvp</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]);</span>
 </pre></div>
 </div>
 <p>Here after calculating the <code class="docutils literal notranslate"><span class="pre">mvp</span></code> matrix we get the location of the uniform and point OpenGL to the first element of the matrix using the <a href="https://registry.khronos.org/OpenGL-Refpages/gl4/html/glUniform.xhtml" target="_blank"><code class="docutils literal notranslate"><span class="pre">glUniformMatrix4fv()</span></code></a> function.</p>
@@ -723,7 +715,7 @@ Derivation of the orthographic projection matrix<div class="sd-summary-down docu
 <span class="p">{</span>
 <span class="w">    </span><span class="c1">// Output vertex position</span>
 <span class="w">    </span><span class="n">gl_Position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mvp</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">vec4</span><span class="p">(</span><span class="n">position</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">);</span>
-<span class="w">    </span>
+
 <span class="w">    </span><span class="c1">// Output texture co-ordinates</span>
 <span class="w">    </span><span class="n">uv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UV</span><span class="p">;</span>
 <span class="p">}</span>
@@ -753,9 +745,9 @@ Derivation of the orthographic projection matrix<div class="sd-summary-down docu
 <span class="n">glEnable</span><span class="p">(</span><span class="n">GL_DEPTH_TEST</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>We also need to clear the depth buffer at the start of each frame, change <code class="docutils literal notranslate"><span class="pre">glClear(GL_COLOR_BUFFER_BIT);</span></code> to the following.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Clear the window</span>
-<span class="n">glClear</span><span class="p">(</span><span class="n">GL_COLOR_BUFFER_BIT</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">GL_DEPTH_BUFFER_BIT</span><span class="p">);</span>
+<p>We also need to clear the depth buffer at the start of each frame, change <code class="docutils literal notranslate"><span class="pre">glClear(GL_COLO\vec{right}_BUFFE\vec{right}_BIT);</span></code> to the following.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>// Clear the window
+glClear(GL_COLO\vec{right}_BUFFE\vec{right}_BIT | GL_DEPTH_BUFFE\vec{right}_BIT);
 </pre></div>
 </div>
 <p>Make these changes to your code and you should get a much better result.</p>
@@ -778,23 +770,23 @@ Derivation of the orthographic projection matrix<div class="sd-summary-down docu
 </figure>
 <p>The shape of the viewing frustum is determined by four factors:</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(n\)</span> – the distance from <span class="math notranslate nohighlight">\((0,0,0)\)</span> to the near clipping plane</p></li>
-<li><p><span class="math notranslate nohighlight">\(f\)</span> – the distance from <span class="math notranslate nohighlight">\((0,0,0)\)</span> to the far clipping plane</p></li>
+<li><p><span class="math notranslate nohighlight">\(near\)</span> – the distance from <span class="math notranslate nohighlight">\((0,0,0)\)</span> to the near clipping plane</p></li>
+<li><p><span class="math notranslate nohighlight">\(far\)</span> – the distance from <span class="math notranslate nohighlight">\((0,0,0)\)</span> to the far clipping plane</p></li>
 <li><p><span class="math notranslate nohighlight">\(fov\)</span> – the <strong>field of view</strong> angle between the bottom and top clipping planes (used to determine how much of the view space is visible)</p></li>
 <li><p><span class="math notranslate nohighlight">\(aspect\)</span> – the width-to-height <strong>aspect ratio</strong> of the window</p></li>
 </ul>
 <p>Given these four factors we can calculate the <strong>perspective projection matrix</strong> using</p>
 <div class="math notranslate nohighlight">
 \[\begin{split} \begin{align*}
-    Projection_{pers} =
+    Projection_{perspective}^\mathsf{T} =
     \begin{pmatrix}
-        \dfrac{n}{r} &amp; 0 &amp; 0 &amp; 0 \\
-        0 &amp; \dfrac{n}{t} &amp; 0 &amp; 0 \\
-        0 &amp; 0 &amp; -\dfrac{f + n}{f - n} &amp; - \dfrac{2fn}{f - n} \\
-        0 &amp; 0 &amp; -1 &amp; 0
+        \dfrac{near}{right} &amp; 0 &amp; 0 &amp; 0 \\
+        0 &amp; \dfrac{near}{top} &amp; 0 &amp; 0 \\
+        0 &amp; 0 &amp; -\dfrac{far + near}{far - near} &amp; -1 \\
+        0 &amp; 0 &amp; - \dfrac{2\times far \times near}{far - near} &amp; 0
     \end{pmatrix},
 \end{align*} \end{split}\]</div>
-<p>where <span class="math notranslate nohighlight">\(t = n \cdot \tan\left(\dfrac{fov}{2}\right)\)</span> and <span class="math notranslate nohighlight">\(r = \textsf{aspect} \cdot t\)</span>. You don’t really need to know how this is derived but it you are interested click on the dropdown below.</p>
+<p>where <span class="math notranslate nohighlight">\(top = near \times \tan\left(\dfrac{fov}{2}\right)\)</span> and <span class="math notranslate nohighlight">\(right = \textsf{aspect} \cdot top\)</span>. You don’t really need to know how this is derived but it you are interested click on the dropdown below.</p>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
 Derivation of the perspective projection matrix<div class="sd-summary-down docutils">
@@ -802,22 +794,22 @@ Derivation of the perspective projection matrix<div class="sd-summary-down docut
 <div class="sd-summary-up docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
-<p class="sd-card-text">The mapping of a point in the view space with co-ordinates <span class="math notranslate nohighlight">\((x, y, z)\)</span> onto the near clipping plane to the point <span class="math notranslate nohighlight">\((x', y', -n)\)</span> is shown in <a class="reference internal" href="#perspective-mapping-figure"><span class="std std-numref">Fig. 6.10</span></a>.</p>
+<p class="sd-card-text">The mapping of a point in the view space with co-ordinates <span class="math notranslate nohighlight">\((x, y, z)\)</span> onto the near clipping plane to the point <span class="math notranslate nohighlight">\((x', y', -near)\)</span> is shown in <a class="reference internal" href="#perspective-mapping-figure"><span class="std std-numref">Fig. 6.10</span></a>.</p>
 <figure class="align-default" id="perspective-mapping-figure">
 <a class="reference internal image-reference" href="../_images/06_perspective_projection_mapping.svg"><img alt="../_images/06_perspective_projection_mapping.svg" src="../_images/06_perspective_projection_mapping.svg" width="500" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 6.10 </span><span class="caption-text">Mapping of the point at <span class="math notranslate nohighlight">\((x,y,z)\)</span> onto the near plane using perspective.</span><a class="headerlink" href="#perspective-mapping-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p class="sd-card-text">The ratio of <span class="math notranslate nohighlight">\(x\)</span> to <span class="math notranslate nohighlight">\(-z\)</span> distance is the same as the ratio of <span class="math notranslate nohighlight">\(x'\)</span> to <span class="math notranslate nohighlight">\(n\)</span> distance (and similar for <span class="math notranslate nohighlight">\(y'\)</span>) so</p>
+<p class="sd-card-text">The ratio of <span class="math notranslate nohighlight">\(x\)</span> to <span class="math notranslate nohighlight">\(-z\)</span> distance is the same as the ratio of <span class="math notranslate nohighlight">\(x'\)</span> to <span class="math notranslate nohighlight">\(near\)</span> distance (and similar for <span class="math notranslate nohighlight">\(y'\)</span>) so</p>
 <div class="math notranslate nohighlight">
 \[\begin{split} \begin{align*}
-    \dfrac{x}{-z} &amp;= \dfrac{x'}{n} &amp;\implies
+    \dfrac{x}{-z} &amp;= \dfrac{x'}{near} &amp;\implies
     x' &amp;= -\frac{nx}{z}, \\
-    \dfrac{y}{-z} &amp;= \dfrac{y'}{n} &amp;\implies
+    \dfrac{y}{-z} &amp;= \dfrac{y'}{near} &amp;\implies
     y' &amp;= -\frac{ny}{z},
 \end{align*} \end{split}\]</div>
-<p class="sd-card-text">So we are mapping <span class="math notranslate nohighlight">\((x, y)\)</span> to <span class="math notranslate nohighlight">\(\left( -\dfrac{nx}{z}, -\dfrac{ny}{z} \right)\)</span>. As well as the perspective mapping we also need to ensure that the mapped co-ordinates <span class="math notranslate nohighlight">\((x', y', z')\)</span> are between <span class="math notranslate nohighlight">\(-1\)</span> and <span class="math notranslate nohighlight">\(1\)</span>. Consider the mapping of the <span class="math notranslate nohighlight">\(x\)</span> co-ordinate</p>
+<p class="sd-card-text">So we are mapping <span class="math notranslate nohighlight">\((x, y)\)</span> to <span class="math notranslate nohighlight">\(\left( -near \times \dfrac{x}{z}, -near \times \dfrac{y}{z} \right)\)</span>. As well as the perspective mapping we also need to ensure that the mapped co-ordinates <span class="math notranslate nohighlight">\((x', y', z')\)</span> are between <span class="math notranslate nohighlight">\(-1\)</span> and <span class="math notranslate nohighlight">\(1\)</span>. Consider the mapping of the <span class="math notranslate nohighlight">\(x\)</span> co-ordinate</p>
 <div class="math notranslate nohighlight">
 \[\begin{split} \begin{align*}
     l &amp;\leq x' \leq r \\
