@@ -59,11 +59,12 @@ const float uv[] = {
 
 // Define indices
 unsigned int indices[] = {
-    // front
-    0, 1, 2, 3, 4, 5,
-    // right
-    6, 7, 8, 9, 10, 11,
-    // etc.
+    0,   1,  2,  3,  4,  5,     // front
+    6,   7,  8,  9, 10, 11,     // right
+    12, 13, 14, 15, 16, 17,     // back
+    18, 19, 20, 21, 22, 23,     // left
+    24, 25, 26, 27, 28, 29,     // bottom
+    30, 31, 32, 33, 34, 35      // top
 };
 ```
 
@@ -106,26 +107,26 @@ Transformations between the model, world, view and screen spaces.
 
 We saw in [Lab 5](transformations-section) that we apply a transformation by multiplying the object co-ordinates by a transformation matrix. Since we are transforming between difference co-ordinate spaces we have 3 main transformation matrices
 
-- the model matrix - a transformation matrix that combines scaling, rotation and translation transformations that is unique for each object in the world space
-- the view matrix - a transformation matrix that combines translation and rotation transformations that is applied to every object in the world space
-- the projection matrix - a transformation matrix that combines projection and scalingg that is applied to every object in the world space
+- **Model matrix** - transforms the model space co-ordinates for the objects to the world space
+- **View matrix** - transforms the world space co-ordinates to the view space co-ordinates
+- **Projection matrix** - transforms the view space co-ordinates to the screen space NDC co-ordinates
 
 (model-matrix-section)=
 
 ### The Model matrix
 
-In [5. Transformations](transformations-section) we saw that we can combine transformations such as translation, scaling and rotation by multiplying the individual transformation matrices together. Lets compute a model matrix for our cube where it is scaled down by a factor of 0.5 in each co-ordinate direction, rotated about the $y$-axis using the time of the current frame as the rotation angle and translated backwards down the $z$-axis so that its centre is at $(0, 0, -4)$. Add the following code inside the rendering loop before we call the `glDrawArrays()` function.
+In [5. Transformations](transformations-section) we saw that we can combine transformations such as translation, scaling and rotation by multiplying the individual transformation matrices together. Lets compute a model matrix for our cube where it is scaled down by a factor of 0.5 in each co-ordinate direction, rotated about the $y$-axis using the time of the current frame as the rotation angle and translated backwards down the $z$-axis so that its centre is at $(0, 0, -4)$. Add the following code inside the rendering loop before we call the `glDrawElements()` function.
 
 ```cpp
 // Calculate the model matrix
-rotationAngle += deltaTime * Maths::radians(0.25 * 360.0f);
-mat4 translate = Maths::translate(vec3(0.0f, 0.0f, -4.0f));
-mat4 scale     = Maths::scale(vec3(0.5f, 0.5f, 0.5f));
-mat4 rotate    = Maths::rotate(rotationAngle, vec3(0.0f, 1.0f, 0.0f));
-mat4 model     = translate * rotate * scale;
+float angle         = Maths::radians(glfwGetTime() * 360.0f / 3.0f);
+glm::mat4 translate = Maths::translate(glm::vec3(0.0f, 0.0f, -4.0f));
+glm::mat4 scale     = Maths::scale(glm::vec3(0.5f, 0.5f, 0.5f));
+glm::mat4 rotate    = Maths::rotate(angle, glm::vec3(0.0f, 1.0f, 0.0f));
+glm::mat4 model     = translate * rotate * scale;
 ```
 
-Here we have calculated the individual transformation matrices for translation, scaling and rotation and multiply them together to create the model matrix. Note that the `rotationAngle` variable has been declared before and `main()` function and here it is updated so the cube performs one rotation every 4 seconds.
+Here we have calculated the individual transformation matrices for translation, scaling and rotation and multiply them together to create the model matrix. The rotation angle has been calculated using the time of the current frame so that the cube will perform one full rotation every 3 seconds.
 
 (view-matrix-section)=
 
@@ -142,9 +143,9 @@ The view space.
 
 To calculate the world space to view space transformation we require three vectors
 
-- $\vec{eye}$ - the co-ordinates of the camera position
-- $\vec{target}$ - the co-ordinates of the target point that the camera is pointing
-- $\vec{worldUp}$ - a vector pointing straight up in the world space which allows us to orientate the camera, this is usually $(0,1,0)$
+- $\mathbf{eye}$ - the co-ordinates of the camera position
+- $\mathbf{target}$ - the co-ordinates of the target point that the camera is pointing
+- $\mathbf{worldUp}$ - a vector pointing straight up in the world space which allows us to orientate the camera, this is usually $(0,1,0)$
 
 ```{figure} ../_images/06_view_space_alignment.svg
 :width: 400
@@ -153,146 +154,178 @@ To calculate the world space to view space transformation we require three vecto
 The vectors used in the transformation to the view space.
 ```
 
-The $\vec{eye}$ and $\vec{target}$ vectors are either determined by the user through keyboard, mouse or controller inputs or through some predetermined routine. To determine the view space transformation we first translate the camera position to $(0,0,0)$ using the following translation matrix
+The $\mathbf{eye}$ and $\mathbf{target}$ vectors are either determined by the user through keyboard, mouse or controller inputs or through some predetermined routine. To determine the view space transformation we first translate the camera position by the vector $-\mathbf{eye}$ so that it is at $(0,0,0)$ using the following translation matrix
 
 $$ \begin{align*}
     Translate =
     \begin{pmatrix}
-        1 & 0 & 0 & -e_x \\
-        0 & 1 & 0 & -e_y \\
-        0 & 0 & 1 & -e_z \\
+        1 & 0 & 0 & -\mathbf{eye}_x \\
+        0 & 1 & 0 & -\mathbf{eye}_y \\
+        0 & 0 & 1 & -\mathbf{eye}_z \\
         0 & 0 & 0 & 1
     \end{pmatrix}
 \end{align*}, $$
 
-where $\vec{eye} = (e_x, e_y, e_z)$. The next step is to align the world space so that the direction vector is pointing down the $z$-axis. To do this we use vectors $\vec{right}$, $\vec{up}$ and $\vec{front}$ which are unit vectors at right-angles to each other the point in directions relative to the camera ({numref}`view-space-alignment-figure`).
+The next step is to align the world space so that the direction vector is pointing down the $z$-axis. To do this we use vectors $\mathbf{right}$, $\mathbf{up}$ and $\mathbf{front}$ which are unit vectors at right-angles to each other the point in directions relative to the camera ({numref}`view-space-alignment-figure`).
 
-The $\vec{front}$ vector points directly forward of the camera and is calculated using
+The $\mathbf{front}$ vector points directly forward of the camera and is calculated using
 
-$$ \vec{front} = \operatorname{normalise}(\vec{target} - \vec{eye}).$$
+$$ \mathbf{front} = \frac{\mathbf{target} - \mathbf{eye}}{\| \mathbf{target} - \mathbf{eye}\|}.$$
 
-The $\vec{right}$ vector points to the right of the camera so is at right-angles to both the $\vec{front}$ and $\vec{worldUp}$ vectors. We can use the [cross product](cross-product-section) between the two vectors to calculate this (note that the order of the vectors is important).
+The $\mathbf{right}$ vector points to the right of the camera so is at right-angles to both the $\mathbf{front}$ and $\mathbf{worldUp}$ vectors. We can use the [cross product](cross-product-section) between the two vectors to calculate this (note that the order of the vectors is important).
 
-$$ \vec{right} = \operatorname{normalise}(\vec{front} \times \vec{worldUp}) .$$
+$$ \mathbf{right} = \frac{\mathbf{front} \times \mathbf{worldUp}}{\| \mathbf{front} \times \mathbf{worldUp} \|}.$$
 
-The $\vec{up}$ vector points in the up direction of the camera and is at right-angles to the $\vec{front}$ and $\vec{right}$ vectors we have already calculated. So this can be calculated using another cross product (we don't need to normalise this this both $\vec{right}$ and $\vec{front}$ are unit vectors).
+The $\mathbf{up}$ vector points in the up direction of the camera and is at right-angles to the $\mathbf{front}$ and $\mathbf{right}$ vectors we have already calculated. So this can be calculated using another cross product (we don't need to normalise this this both $\mathbf{right}$ and $\mathbf{front}$ are unit vectors).
 
-$$ \vec{up} = \vec{right} \times \vec{front}.$$
+$$ \mathbf{up} = \mathbf{right} \times \mathbf{front}.$$
 
-Once these vectors have been calculated the transformation matrix to rotate the $\vec{front}$ vector so that it points down the $z$-axis is
+Once these vectors have been calculated the transformation matrix to rotate the $\mathbf{front}$ vector so that it points down the $z$-axis is
+
+<!-- $$ Rotate = \begin{pmatrix}
+    \mathbf{right}_x & \mathbf{up}_x & -\mathbf{front}_x & 0 \\
+    \mathbf{right}_y & \mathbf{up}_y & -\mathbf{front}_y & 0 \\
+    \mathbf{right}_z & \mathbf{up}_z & -\mathbf{front}_z & 0 \\
+    0 & 0 & 0 & 1
+\end{pmatrix}.$$ -->
 
 $$ Rotate = \begin{pmatrix}
-    r_x  & r_y  & r_z & 0 \\
-    u_x  & u_y  & u_z & 0 \\
-    -f_x & -f_y & -f_z & 0 \\
+    \mathbf{right}_x & \mathbf{right}_y & \mathbf{right}_z & 0 \\
+    \mathbf{up}_x & \mathbf{up}_y & \mathbf{up}_z & 0 \\
+    -\mathbf{front}_x & -\mathbf{front}_y & -\mathbf{front}_z & 0 \\
     0 & 0 & 0 & 1
 \end{pmatrix}.$$
 
-where $\vec{right} = (r_x, r_y, r_z)$, $\vec{up} = (u_x, u_y, u_z)$ and $\vec{front} = (f_x, f_y, f_z)$. The translation matrix and rotation matrix are multiplied together to form the view matrix which transforms the world space co-ordinates to the view space.
+The translation matrix and rotation matrix are multiplied together to form the view matrix which transforms the world space co-ordinates to the view space.
+
+<!-- $$ \begin{align*}
+    \view &=  Translate \cdot Rotate \\
+    &=
+    \begin{pmatrix}
+        1 & 0 & 0 & 0 \\
+        0 & 1 & 0 & 0 \\
+        0 & 0 & 1 & 0 \\
+        -\mathbf{eye}_x & -\mathbf{eye}_y & -\mathbf{eye}_z & 1
+    \end{pmatrix} 
+    \begin{pmatrix}
+      \mathbf{right}_x & \mathbf{up}_x & -\mathbf{front}_x & 0 \\
+      \mathbf{right}_y & \mathbf{up}_y & -\mathbf{front}_y & 0 \\
+      \mathbf{right}_z & \mathbf{up}_z & -\mathbf{front}_z & 0 \\
+      0 & 0 & 0 & 1
+    \end{pmatrix} \\
+    &=
+    \begin{pmatrix}
+        \mathbf{right}_x & \mathbf{up}_x & -\mathbf{front}_x & 0 \\
+        \mathbf{right}_y & \mathbf{up}_y & -\mathbf{front}_y & 0 \\
+        \mathbf{right}_z & \mathbf{up}_z & -\mathbf{front}_z & 0 \\
+        -\mathbf{eye} \cdot \mathbf{right} & -\mathbf{eye} \cdot \mathbf{up} & \mathbf{eye} \cdot \mathbf{front} & 1 \\
+    \end{pmatrix}
+\end{align*} $$ -->
 
 $$ \begin{align*}
     \view &= Rotate \cdot Translate \\
     &=
     \begin{pmatrix}
-        r_x  & r_y  & r_z & 0 \\
-        u_x  & u_y  & u_z & 0 \\
-        -f_x & -f_y & -f_z & 0 \\
+        \mathbf{right}_x  & \mathbf{right}_y  & \mathbf{right}_z  & 0 \\
+        \mathbf{up}_x     & \mathbf{up}_y     & \mathbf{up}_z     & 0 \\
+        -\mathbf{front}_x & -\mathbf{front}_y & -\mathbf{front}_z & 0 \\
         0 & 0 & 0 & 1
     \end{pmatrix}
     \begin{pmatrix}
-        1 & 0 & 0 & -e_x \\
-        0 & 1 & 0 & -e_y \\
-        0 & 0 & 1 & -e_z \\
+        1 & 0 & 0 & -\mathbf{eye}_x \\
+        0 & 1 & 0 & -\mathbf{eye}_y \\
+        0 & 0 & 1 & -\mathbf{eye}_z \\
         0 & 0 & 0 & 1
     \end{pmatrix} \\
     &=
     \begin{pmatrix}
-         r_x &  r_y  &  r_z & - e_xr_x - e_yr_y - e_zr_z \\
-         u_x &  u_y  &  u_z & - e_xu_x - e_yu_y - e_zu_z \\
-        -f_x & -f_y  &  f_z &   e_xf_x + e_yf_y + e_zf_z \\
-        0 & 0 & 0 & 1
-    \end{pmatrix} \\
-    &=
-    \begin{pmatrix}
-         r_x &  r_y  &  r_z & -\vec{eye} \cdot \vec{right} \\
-         u_x &  u_y  &  u_z & -\vec{eye} \cdot \vec{up} \\
-        -f_x & -f_y  & -f_z &  \vec{eye} \cdot \vec{front} \\
+        \mathbf{right}_x  & \mathbf{right}_y  & \mathbf{right}_z  & -\mathbf{eye}_x \cdot \mathbf{right} \\
+        \mathbf{up}_x     & \mathbf{up}_y     & \mathbf{up}_z     & -\mathbf{eye}_y \cdot \mathbf{up} \\
+        -\mathbf{front}_x & -\mathbf{front}_y & -\mathbf{front}_z &  \mathbf{eye}_z \cdot \mathbf{front} \\
         0 & 0 & 0 & 1
     \end{pmatrix}
 \end{align*} $$
 
-Lets move the camera back a bit to look at our cube from the position $(1,1,0)$ looking towards the center of the cube at $(0,0,-4)$. Add the following code after we have calculated the model matrix.
+So the transposed view matrix is
+
+$$ \view = \begin{pmatrix}
+        \mathbf{right}_x & \mathbf{up}_x & -\mathbf{front}_x & 0 \\
+        \mathbf{right}_y & \mathbf{up}_y & -\mathbf{front}_y & 0 \\
+        \mathbf{right}_z & \mathbf{up}_z & -\mathbf{front}_z & 0 \\
+        -\mathbf{eye} \cdot \mathbf{right} & -\mathbf{eye} \cdot \mathbf{up} & \mathbf{eye} \cdot \mathbf{front} & 1 \\
+    \end{pmatrix} $$(lookat-matrix-equation)
+
+Lets move the camera back a bit to look at our cube from the position $\mathbf{eye}=(1,1,0)$ looking towards the center of the cube at $\mathbf{target} = (0,0,-4)$. Add the following code after we have calculated the model matrix.
 
 ```cpp
 // Calculate the view matrix
-vec3 eye     = vec3(1.0f, 1.0f,  0.0f);
-vec3 target  = vec3(0.0f, 0.0f, -4.0f);
-vec3 worldUp = vec3(0.0f, 1.0f,  0.0f);
-vec3 front   = (target - eye).normalise();
-vec3 right   = front.cross(worldUp).normalise();
-vec3 up      = right.cross(front);
+glm::vec3 eye     = glm::vec3(1.0f, 1.0f, 0.0f);
+glm::vec3 target  = glm::vec3(0.0f, 0.0f, -4.0f);
+glm::vec3 worldUp = glm::vec3(0.0f, 1.0f, 0.0f);
+glm::vec3 front   = glm::normalize(target - eye);
+glm::vec3 right   = glm::normalize(glm::cross(front, worldUp));
+glm::vec3 up      = glm::cross(right, front);
 
-mat4 view = mat4(1.0f);
-view[0]   =   right.x, view[4] =   right.y, view[8]  =   right.z;
-view[1]   =   up.x,    view[5] =   up.y,    view[9]  =   up.z;
-view[2]   = - front.x, view[6] = - front.y, view[10] = - front.z;
-view[12]  = - eye.dot(right);
-view[13]  = - eye.dot(up);
-view[14]  =   eye.dot(front);
-view[15]  =   1.0f; 
+glm::mat4 view;
+view[0][0] = right.x, view[0][1] = up.x, view[0][2] = -front.x;
+view[1][0] = right.y, view[1][1] = up.y, view[1][2] = -front.y;
+view[2][0] = right.z, view[2][1] = up.z, view[2][2] = -front.z;
+view[3][0] = -glm::dot(eye, right);
+view[3][1] = -glm::dot(eye, up);
+view[3][2] =  glm::dot(eye, front);
 ```
 
-Here we have specified the $\vec{eye}$, $\vec{target}$ and $\vec{worldUp}$ vectors and use them to calculate the $\vec{front}$, $\vec{right}$ and $\vec{up}$ camera vectors using methods from our `vec3` class. We then use these to calculate the view matrix.
+Here we have specified the $\mathbf{eye}$, $\mathbf{target}$ and $\mathbf{worldUp}$ vectors and use them to calculate the $\mathbf{front}$, $\mathbf{right}$ and $\mathbf{up}$ camera vectors. We then use these to calculate the view matrix.
 
 ### The Projection matrix
 
-The next step is to project the view space onto the screen space. Any fragments with co-ordinates outside of the range $-1$ to $1$ are **clipped** and ignored by the shaders. The simplest type of projection is **orthographic projection** where the co-ordinates in the view space are transformed to the screen space by simple translation and scaling transformations.
+The next step is to project the view space onto the screen space. The simplest type of projection is **orthographic projection** where the co-ordinates in the view space are transformed to the screen space by simple translation and scaling transformations.
 
 The region of the view space that will form the screen space is defined by a cuboid bounded by a left, right, bottom, top, near and far clipping planes. Any objects outside of the cuboid are clipped ({numref}`orthographic-projection-figure`).
 
 ```{figure} ../_images/06_orthographic_projection.svg
-:width: 600
+:width: 700
 :name: orthographic-projection-figure
 
 Orthographic projection.
 ```
 
-Here $l$, $r$, $b$, $t$, $n$ and $f$ are the left, right, bottom, top, near and far co-ordinates respectively, The **orthographic projection matrix** is calculated using
+The transpose of the orthographic projection matrix is calculated using
 
 $$ \begin{align*}
     Projection_{orth} =
     \begin{pmatrix}
-        \dfrac{2}{r - l} & 0 & 0 & -\dfrac{r + l}{r - l} \\
-        0 & \dfrac{2}{t - b} & 0 & -\dfrac{t + b}{t - b} \\
-        0 & 0 & \dfrac{2}{n - f} &  \dfrac{n + f}{n - f} \\
-        0 & 0 & 0 & 1
+        \dfrac{2}{right - left} & 0 & 0 & 0 \\
+        0 & \dfrac{2}{top - bottom} & 0 & 0 \\
+        0 & 0 & \dfrac{2}{near - far} & 0 \\
+        -\dfrac{right + left}{right - left} & -\dfrac{top + bottom}{top - bottom} & \dfrac{near + far}{near - far} & 1
     \end{pmatrix}
-\end{align*}. $$
+\end{align*}, $$
 
-You don't really need to know how this matrix is derived but if you are interested click on the dropdown link below.
+where $left$, $right$, $bottom$, $top$, $near$ and $far$ are the co-ordinates of the edges of the visible space. You don't really need to know how this matrix is derived but if you are interested click on the dropdown link below.
 
 ```{dropdown} Derivation of the orthographic projection matrix
 
-To derive the orthographic projection we first need to translate the co-ordinates so that the centre of the cuboid that represents the clipping volume to $(0,0,0)$. The centre co-ordinates are calculated using the average of the edge co-ordinates, e.g., for the $x$ co-ordinate this would be $\dfrac{r + l}{2}$, so the translation matrix is
+To derive the orthographic projection we first need to translate the co-ordinates so that the centre of the cuboid that represents the clipping volume to $(0,0,0)$. The centre co-ordinates are calculated using the average of the edge co-ordinates, e.g., for the $x$ co-ordinate this would be $\dfrac{right + left}{2}$, so the translation matrix is
 
 $$ \begin{align*}
-    Translate = 
+    Translate =
     \begin{pmatrix}
-        1 & 0 & 0 & -\dfrac{r + l}{2} \\
-        0 & 1 & 0 & -\dfrac{t + b}{2} \\
-        0 & 0 & 1 &  \dfrac{n + f}{2}  \\
+        1 & 0 & 0 & -\dfrac{right + left}{2}  \\
+        0 & 1 & 0 & -\dfrac{top + bottom}{2} \\
+        0 & 0 & 1 &  \dfrac{near + far}{2}  \\
         0 & 0 & 0 & 1
     \end{pmatrix}
 \end{align*} $$
 
-The second step is to scale the clipping volume so that the co-ordinates are between $-1$ and $1$. This is done by dividing the distance between the edges of the screen space by the distance between the clipping planes, e.g., for the $x$ co-ordinate this would be $\dfrac{1 - (-1)}{r - l}=\dfrac{2}{r - l}$, so the scaling matrix is
+The second step is to scale the clipping volume so that the co-ordinates are between $-1$ and $1$. This is done by dividing the distance between the edges of the screen space by the distance between the clipping planes, e.g., for the $x$ co-ordinate this would be $\dfrac{1 - (-1)}{right - left}=\dfrac{2}{right - left}$, so the scaling matrix is
 
 $$ \begin{align*}
-    Scale = 
+    Scale =
     \begin{pmatrix}
-        \dfrac{2}{r - l} & 0 & 0 & 0 \\
-        0 & \dfrac{2}{t - b} & 0 & 0 \\
-        0 & 0 & \dfrac{2}{n - f} & 0 \\
+        \dfrac{2}{right - left} & 0 & 0 & 0 \\
+        0 & \dfrac{2}{top - bottom} & 0 & 0 \\
+        0 & 0 & \dfrac{2}{near - far} & 0 \\
         0 & 0 & 0 & 1
     \end{pmatrix}.
 \end{align*} $$
@@ -300,33 +333,32 @@ $$ \begin{align*}
 Combining the translation and scaling matrices gives the orthographic projection matrix
 
 $$ \begin{align*}
-    Projection_{orth} &= Scale \cdot Translate \\
+    Projection_{orth} &= Translate \cdot Scale \\
     &=
     \begin{pmatrix}
-        \dfrac{2}{r - l} & 0 & 0 & -\dfrac{r + l}{r - l} \\
-        0 & \dfrac{2}{t - b} & 0 & -\dfrac{t + b}{t - b} \\
-        0 & 0 & \dfrac{2}{n - f} &  \dfrac{n + f}{n - f} \\
+        \dfrac{2}{right - left} & 0 & 0 & -\dfrac{right + left}{right - left} \\
+        0 & \dfrac{2}{top - bottom} & 0 & -\dfrac{top + bottom}{top - bottom} \\
+        0 & 0 & \dfrac{2}{near - far}   &  \dfrac{near + far}{near - far} \\
         0 & 0 & 0 & 1
     \end{pmatrix}
 \end{align*} $$
 ```
 
-Lets calculate the orthographic projection matrix using $l = -2$, $r = 2$, $b = -2$, $t = 2$, $n = 0$, $f = 10$. Add the following code after we have calculated the view matrix.
+Lets calculate the orthographic projection matrix using $left = -2$, $right = 2$, $bottom = -2$, $top = 2$, $near = 0$, $far = 10$. Add the following code after we have calculated the view matrix.
 
 ```cpp
 // Calculate orthographic projection matrix
-float l, r, b, t, n, f;
-l = - 2.0f, r = 2.0f;
-b = - 2.0f, t = 2.0f;
-n =   0.0f, f = 10.0f;
+float left   = -2.0f, right_ = 2.0f;
+float bottom = -2.0f, top    = 2.0f;
+float near   =  0.0f, far    = 10.0f;
 
-mat4 projection = mat4(1.0f);
-projection[0]  =   2.0f / (r - l);
-projection[5]  =   2.0f / (t - b);
-projection[10] =   2.0f / (n - f);
-projection[12] = - (r + l) / (r - l);
-projection[13] = - (t + b) / (t - b);
-projection[14] =   (n + f) / (n - f);
+glm::mat4 projection;
+projection[0][0] = 2.0f / (right_ - left);
+projection[1][1] = 2.0f / (top - bottom);
+projection[2][2] = 2.0f / (near - far);
+projection[3][0] = -(right_ + left) / (right_ - left);
+projection[3][1] = -(top + bottom) / (top - bottom);
+projection[3][2] =  (near + far) / (near - far);
 ```
 
 ### The MVP matrix
@@ -340,10 +372,10 @@ $$ \mvp = Projection \cdot \view \cdot \model. $$
 We need a way to send the MVP matrix to the vertex shader. We do this using a uniform in the same way as we did for the texture locations in [3. Textures](uniforms-section), enter the following code after we have calculated the projection matrix.
 
 ```cpp
-//Calculate the MVP matrix and send it to the vertex shader
-mat4 mvp = projection * view * model;
+// Calculate the MVP matrix and send it to the vertex shader
+glm::mat4 mvp = projection * view * model;
 unsigned int mvpID = glGetUniformLocation(shaderID, "mvp");
-glUniformMatrix4fv(mvpID, 1, GL_FALSE, &mvp[0]);
+glUniformMatrix4fv(mvpID, 1, GL_FALSE, &mvp[0][0]);
 ```
 
 Here after calculating the `mvp` matrix we get the location of the uniform and point OpenGL to the first element of the matrix using the <a href="https://registry.khronos.org/OpenGL-Refpages/gl4/html/glUniform.xhtml" target="_blank">`glUniformMatrix4fv()`</a> function.
@@ -364,7 +396,7 @@ void main()
 {
     // Output vertex position
     gl_Position = mvp * vec4(position, 1.0);
-    
+
     // Output texture co-ordinates
     uv = UV;
 }
@@ -432,28 +464,28 @@ Perspective projection.
 
 The shape of the viewing frustum is determined by four factors:
 
-- $n$ -- the distance from $(0,0,0)$ to the near clipping plane
-- $f$ -- the distance from $(0,0,0)$ to the far clipping plane
+- $near$ -- the distance from $(0,0,0)$ to the near clipping plane
+- $far$ -- the distance from $(0,0,0)$ to the far clipping plane
 - $fov$ -- the **field of view** angle between the bottom and top clipping planes (used to determine how much of the view space is visible)
 - $aspect$ -- the width-to-height **aspect ratio** of the window
 
-Given these four factors we can calculate the **perspective projection matrix** using
+Given these four factors we can calculate the transpose of the perspective projection matrix using
 
 $$ \begin{align*}
     Projection_{pers} =
     \begin{pmatrix}
-        \dfrac{n}{r} & 0 & 0 & 0 \\
-        0 & \dfrac{n}{t} & 0 & 0 \\
-        0 & 0 & -\dfrac{f + n}{f - n} & - \dfrac{2fn}{f - n} \\
-        0 & 0 & -1 & 0
+        \dfrac{near}{right} & 0 & 0 & 0 \\
+        0 & \dfrac{near}{top} & 0 & 0 \\
+        0 & 0 & -\dfrac{far + near}{far - near} & -1 \\
+        0 & 0 & - \dfrac{2\times far \times near}{far - near} & 0
     \end{pmatrix},
 \end{align*} $$
 
-where $t = n \cdot \tan\left(\dfrac{fov}{2}\right)$ and $r = \textsf{aspect} \cdot t$. You don't really need to know how this is derived but it you are interested click on the dropdown below.
+where $top = near \times \tan\left(\dfrac{fov}{2}\right)$ and $right = aspect \times top$. You don't really need to know how this is derived but it you are interested click on the dropdown below.
 
 ````{dropdown} Derivation of the perspective projection matrix
 
-The mapping of a point in the view space with co-ordinates $(x, y, z)$ onto the near clipping plane to the point $(x', y', -n)$ is shown in {numref}`perspective-mapping-figure`.
+The mapping of a point in the view space with co-ordinates $(x, y, z)$ onto the near clipping plane to the point $(x', y', -near)$ is shown in {numref}`perspective-mapping-figure`.
 
 ```{figure} ../_images/06_perspective_projection_mapping.svg
 :width: 500
@@ -462,59 +494,62 @@ The mapping of a point in the view space with co-ordinates $(x, y, z)$ onto the 
 Mapping of the point at $(x,y,z)$ onto the near plane using perspective.
 ```
 
-The ratio of $x$ to $-z$ distance is the same as the ratio of $x'$ to $n$ distance (and similar for $y'$) so
+The ratio of $x$ to $-z$ distance is the same as the ratio of $x'$ to $near$ distance (and similar for $y'$) so
 
 $$ \begin{align*}
-    \dfrac{x}{-z} &= \dfrac{x'}{n} &\implies
-    x' &= -\frac{nx}{z}, \\
-    \dfrac{y}{-z} &= \dfrac{y'}{n} &\implies
-    y' &= -\frac{ny}{z},
+    \dfrac{x}{-z} &= \dfrac{x'}{near} &\implies
+    x' &= -near \frac{x}{z}, \\
+    \dfrac{y}{-z} &= \dfrac{y'}{near} &\implies
+    y' &= -near \frac{y}{z},
 \end{align*} $$
 
-So we are mapping $(x, y)$ to $\left( -\dfrac{nx}{z}, -\dfrac{ny}{z} \right)$. As well as the perspective mapping we also need to ensure that the mapped co-ordinates $(x', y', z')$ are between $-1$ and $1$. Consider the mapping of the $x$ co-ordinate
+So we are mapping $(x, y)$ to $\left( -near \dfrac{x}{z}, -near \dfrac{y}{z} \right)$. As well as the perspective mapping we also need to ensure that the mapped co-ordinates $(x', y', z')$ are between $-1$ and $1$. Consider the mapping of the $x$ co-ordinate
 
 $$ \begin{align*}
-    l &\leq x' \leq r \\
-    -r &\leq x' \leq r  && \textsf{(since $l= -r$)} \\
-    -1 &\leq \frac{x'}{r} \leq 1 && \textsf{(divide by $r$)}
+    left &\leq x' \leq right \\
+    -right &\leq x' \leq right  && \textsf{(since $left = -right$)} \\
+    -1 &\leq \frac{x'}{right} \leq 1 && \textsf{(divide by $right$)}
 \end{align*} $$
 
-Since $x' = -\dfrac{nx}{z}$ then
+Since $x' = -near\dfrac{x}{z}$ then
 
 $$ \begin{align*}
-    -1 &\leq -\frac{nx}{rz}\leq 1
+    -1 &\leq -\frac{near}{right}\frac{x}{z}\leq 1
 \end{align*} $$
 
 and doing similar for $y$ we get
 
 $$ \begin{align*}
-    -1 &\leq -\frac{ny}{tz}\leq 1
+    -1 &\leq -\frac{near}{top}\frac{y}{z}\leq 1
 \end{align*} $$
 
 If we use [homogeneous co-ordinates](homogeneous-coordinates-section) then this mapping can be represented by the matrix equation
 
 $$ \begin{align*}
     \begin{pmatrix}
-        \dfrac{n}{r} & 0 & 0 & 0 \\
-        0 & \dfrac{n}{t} & 0 & 0 \\
+        \dfrac{near}{right} & 0 & 0 & 0 \\
+        0 & \dfrac{near}{top} & 0 & 0 \\
         0 & 0 & A & B \\
         0 & 0 & -1 & 0
     \end{pmatrix}
     \begin{pmatrix} x \\ y \\ z \\ 1 \end{pmatrix}
     =
-    \begin{pmatrix} 
-        \dfrac{nx}{r} \\ 
-        \dfrac{ny}{t} \\ 
-        Az + B \\ 
-        -z 
-    \end{pmatrix}
+    \begin{pmatrix} \dfrac{near}{right}x \\ \dfrac{near}{top}y \\ Az + B \\ -z \end{pmatrix}
 \end{align*} $$
 
-where $A$ and $B$ are placeholder variables for now. Since we divide homogeneous co-ordinates by the fourth element then
+where $A$ and $B$ are placeholder variables for now. Since we divide homogeneous co-ordinates by the fourth element then the projected co-ordinates are
 
-$$ \left( -\dfrac{nx}{rz}, -\dfrac{ny}{tz}, \dfrac{Az + B}{-z}, 1 \right)^\mathsf{T}, $$
+$$ \begin{align*}
+    \begin{pmatrix} x' \\ y' \\ z' \\ 1 \end{pmatrix} =
+    \begin{pmatrix}
+        -\dfrac{near}{right}\dfrac{x}{z} \\
+        -\dfrac{near}{top}\dfrac{y}{z} \\
+        \dfrac{Az + B}{-z} \\
+        1
+    \end{pmatrix}.
+\end{align*} $$
 
-so the mapping for $x'$ and $y'$ is correct. We need $z'$ to be between $-1$ and $1$ so $A$ and $B$ must satisfy
+So the mapping for $x'$ and $y'$ is correct. We need $z'$ to be between $-1$ and $1$ so $A$ and $B$ must satisfy
 
 $$ \begin{align*}
     \textsf{near plane:} &&\frac{Az + B}{-z} &= -1, & \implies  Az + B &= z, \\
@@ -524,34 +559,34 @@ $$ \begin{align*}
 At the near clipping plane $z = -n$ and at the far clipping plane $z = -f$ so
 
 $$ \begin{align*}
-    -A n + B &= -n, \\
-    -A f + B &= f.
+    -A \times near + B &= -near, \\
+    -A \times far + B &= far.
 \end{align*} $$
 
 Subtracting the first equation from the second gives
 
 $$ \begin{align*}
-    -A (f - n) &= f + n \\
-    \therefore A &= -\frac{f + n}{f - n}.
+    -A (far - near) &= far + near \\
+    \therefore A &= -\frac{far + near}{far - near}.
 \end{align*} $$
 
 Substituting $A$ in the second equation gives
 
 $$ \begin{align*}
-    \left(\frac{f + n}{f - n}\right) n + B &= -n \\
-    B &= -n \left( 1 +  \frac{f + n}{f - n}\right) \\
-    &= -n \left( \frac{f - n + f + n}{f - n}\right) \\
-    &= - \frac{2 \cdot f \cdot n}{f - n}.
+    \left(\frac{far + near}{far - near}\right) near + B &= -near \\
+    B &= -near \left( 1 +  \frac{far + near}{far - near}\right) \\
+    &= -near \left( \frac{far - near + far + near}{far - near}\right) \\
+    &= - \frac{2 \times far \times near}{far - near}.
 \end{align*} $$
 
 So the perspective projection matrix is
 
 $$ \begin{align*}
-    Projection_{pers} = 
+    Projection_{pers} =
     \begin{pmatrix}
-        \dfrac{n}{r} & 0 & 0 & 0 \\
-        0 & \dfrac{n}{t} & 0 & 0 \\
-        0 & 0 & -\dfrac{f + n}{f - n} & - \dfrac{2fn}{f - n} \\
+        \dfrac{near}{right} & 0 & 0 & 0 \\
+        0 & \dfrac{near}{top} & 0 & 0 \\
+        0 & 0 & -\dfrac{far + near}{far - near} & - \dfrac{2\times far \times near}{far - near} \\
         0 & 0 & -1 & 0
     \end{pmatrix}.
 \end{align*} $$
@@ -560,36 +595,35 @@ We now need to calculate the values of $r$ and $t$. The $t$ co-ordinate is the o
 
 $$ \begin{align*}
     \tan \left( \frac{fov}{2} \right) 
-    &= \frac{t}{n} \\
-    t &= n \tan \left( \frac{fov}{2} \right).
+    &= \frac{top}{near} \\
+    t &= near \tan \left( \frac{fov}{2} \right).
 \end{align*} $$
 
-Since $\textsf{aspect}$ with the width of the window divided by the height and $l = -r$ and $b = -t$ then
+Since $aspect$ with the width of the window divided by the height and $l = -r$ and $b = -t$ then
 
 $$ \begin{align*}
-    aspect &= \frac{r - l}{t - b} = \frac{2r}{2t} \\
-    \therefore r &= aspect \times t.
+    aspect &= \frac{right - left}{top - bottom} = \frac{2 \times right}{2 \times top} \\
+    \therefore right &= aspect \times top.
 \end{align*} $$
 ````
 
-Lets apply perspective projection to our cube using a near and far clipping planes at $n=0.2$ and $f=10$ respectively and a field of view angle of $fov = 45^\circ$. Comment out the code use to calculate the orthogonal projection matrix and add the following code.
+Lets apply perspective projection to our cube using a near and far clipping planes at $n=0.2$ and $f=10$ respectively and a field of view angle of $fov = 45^\circ$. Comment out the code use to calculate the orthogonal projection matrix and add the following code (note that here we use `right_` because we've already used `right` to calculate the view matrix).
 
 ```cpp
 // Calculate perspective projection matrix
-float r, t, n, f, fov, aspect;
-fov = Maths::radians(45.0f);
-aspect = 1024.0f / 768.0f;
-n = 0.2f;
-f = 100.0f;
-t = n * tan(fov / 2.0f);
-r = aspect * t;
+float fov    = Maths::radians(45.0f);
+float aspect = 1024.0f / 768.0f;
+float near   = 0.2f;
+float far    = 100.0f;
+float top    = near * tan(fov / 2.0f);
+float right_ = aspect * top;
 
-mat4 projection;
-projection[0]  =   n / r;
-projection[5]  =   n / t;
-projection[10] = - (f + n) / (f - n);
-projection[11] = - 1.0f;
-projection[14] = - 2.0f * f * n / (f - n);
+glm::mat4 projection;
+projection[0][0] = near / right_;
+projection[1][1] = near / top;
+projection[2][2] = -(far + near) / (far - near);
+projection[2][3] = -1.0f;
+projection[3][2] = -2.0f * far * near / (far - near);
 ```
 
 Run your program and you should see the following.
@@ -634,7 +668,6 @@ Our render loop is starting to look a bit messy so we are going to create a `Cam
 #pragma once
 
 #include <iostream>
-using namespace std;
 
 #include <common/maths.hpp>
 
@@ -648,31 +681,31 @@ public:
     float far    = 100.0f;
     
     // Camera vectors
-    vec3 eye;
-    vec3 target;
-    vec3 up;
-    vec3 worldUp = vec3(0.0f, 1.0f, 0.0f);
+    glm::vec3 eye;
+    glm::vec3 target;
+    glm::vec3 worldUp = glm::vec3(0.0f, 1.0f, 0.0f);
     
     // Transformation matrices
-    mat4 view;
-    mat4 projection;
+    glm::mat4 view;
+    glm::mat4 projection;
     
     // Constructor
-    Camera(const vec3 &position);
+    Camera(const glm::vec3 &position);
     
     // Methods
     void calculateMatrices();
 };
+
 ```
 
-You should be familiar with class declarations by now. Here we have declared a `Camera` class with attributes of the float variables, `vec3` and `mat4` objects used above. We also have a constructor method and a method to calculate the view and projection matrices.
+You should be familiar with class declarations by now. Here we have declared a `Camera` class with attributes of the floats for the projection parameters, glm vector objects for the camera vectors and glm matrix objects for the view and projection matrices.
 
 In the **camera.cpp** file add the following code.
 
 ```cpp
 #include <common/camera.hpp>
 
-Camera::Camera(const vec3 &position)
+Camera::Camera(const glm::vec3 &position)
 {
     eye = position;
 }
@@ -687,66 +720,47 @@ void Camera::calculateMatrices()
 }
 ```
 
-The `Camera()` constructor takes in a single input of a `vec3` object containing the co-ordinates of the camera position and instantiates the $\vec{eye}$ vector. The `calculateMatrices()` method calculates the view and projection matrices. These both use functions from the `Maths` class which we haven't yet defined so lets do this now. In the `Maths` class declare the following functions.
+The `Camera()` constructor takes in a single input of a `glm::vec3` object containing the co-ordinates of the camera position and instantiates the $\mathbf{eye}$ vector. The `calculateMatrices()` method calculates the view and projection matrices. These both use functions from the `Maths` class which we haven't yet defined so lets do this now. In the `Maths` class declare the following functions.
 
 ```cpp
 // View and projection matrices
-static mat4 lookAt(vec3 eye, vec3 target, vec3 worldUp);
-static mat4 orthographic(const float l,   const float r,
-                         const float b,   const float t,
-                         const float n,   const float f);
-static mat4 perspective( const float fov, const float aspect,
-                         const float n,   const float f);
+static glm::mat4 lookAt(glm::vec3 eye, glm::vec3 target, glm::vec3 worldUp);
+static glm::mat4 perspective( const float fov,  const float aspect,
+                              const float near, const float far);
 ```
 
 Then define these functions in the **maths.cpp** file.
 
 ```cpp
-mat4 Maths::lookAt(vec3 eye, vec3 target, vec3 worldUp)
+glm::mat4 Maths::lookAt(glm::vec3 eye, glm::vec3 target, glm::vec3 worldUp)
 {
-    vec3 front = (target - eye).normalise();
-    vec3 right = front.cross(worldUp).normalise();
-    vec3 up    = right.cross(front);
+    glm::vec3 front = glm::normalize(target - eye);
+    glm::vec3 right = glm::normalize(glm::cross(front, worldUp));
+    glm::vec3 up    = glm::cross(right, front);
     
-    mat4 view;
-    view[0]  =   right.x, view[4] =   right.y, view[8]  =   right.z;
-    view[1]  =   up.x,    view[5] =   up.y,    view[9]  =   up.z;
-    view[2]  = - front.x, view[6] = - front.y, view[10] = - front.z;
-    view[12] = - eye.dot(right);
-    view[13] = - eye.dot(up);
-    view[14] =   eye.dot(front);
-    view[15] =   1.0f;
+    glm::mat4 view;
+    view[0][0] = right.x, view[0][1] = up.x, view[0][2] = -front.x;
+    view[1][0] = right.y, view[1][1] = up.y, view[1][2] = -front.y;
+    view[2][0] = right.z, view[2][1] = up.z, view[2][2] = -front.z;
+    view[3][0] = -glm::dot(eye, right);
+    view[3][1] = -glm::dot(eye, up);
+    view[3][2] =  glm::dot(eye, front);
     
     return view;
 }
 
-mat4 Maths::orthographic(const float l, const float r,
-                         const float b, const float t,
-                         const float n, const float f)
+glm::mat4 Maths::perspective(const float fov,  const float aspect,
+                             const float near, const float far)
 {
-    mat4 projection = mat4(1.0f);
-    projection[0]  =   2.0f / (r - l);
-    projection[5]  =   2.0f / (t - b);
-    projection[10] =   2.0f / (n - f);
-    projection[12] = - (r + l) / (r - l);
-    projection[13] = - (t + b) / (t - b);
-    projection[14] =   (n + f) / (n - f);
-    
-    return projection;
-}
+    float top   = near * tan(fov / 2.0f);
+    float right = aspect * top;
 
-mat4 Maths::perspective(const float fov, const float aspect, const float n,
-                        const float f)
-{
-    float t = n * tan(fov / 2.0f);
-    float r = aspect * t;
-
-    mat4 projection;
-    projection[0]  =   n / r;
-    projection[5]  =   n / t;
-    projection[10] = - (f + n) / (f - n);
-    projection[11] = - 1.0f;
-    projection[14] = - 2.0f * f * n / (f - n);
+    glm::mat4 projection;
+    projection[0][0] = near / right;
+    projection[1][1] = near / top;
+    projection[2][2] = -(far + near) / (far - near);
+    projection[2][3] = -1.0f;
+    projection[3][2] = -2.0f * far * near / (far - near);
     
     return projection;
 }
@@ -756,25 +770,25 @@ So now we have a `Camera` class lets use it to calculate our view and projection
 
 ```cpp
 // Create camera object
-Camera camera(glm::vec3(0.0f, 0.0f, 5.0f));
+Camera camera(glm::vec3(1.0f, 1.0f, 0.0f));
 ```
 
 Then calculate the view and projection matrices just before we calculate the MVP matrix by adding the following code.
 
 ```cpp
 // Calculate view and projection matrices
-camera.target = vec3(0.0f, 0.0f, -4.0f);
+camera.target = glm::vec3(0.0f, 0.0f, -4.0f);
 camera.calculateMatrices();
 ```
 
-Here we needed to specify the $\vec{target}$ camera vector so that the camera is looking at the centre of the cube before invoking the `calculateMatrices()` method. The last thing we need to do is to use th e view and projection matrices from the `camera` object when calculating the MVP matrix. Edit your code so that it looks like the following.
+Here we needed to specify the $\mathbf{target}$ camera vector so that the camera is looking at the centre of the cube before invoking the `calculateMatrices()` method. The last thing we need to do is to use the view and projection matrices from the `camera` object when calculating the MVP matrix. Edit your code so that it looks like the following.
 
 ```cpp
 //Calculate the MVP matrix and send it to the vertex shader
-mat4 mvp = camera.projection * camera.view * model;
+glm::mat4 mvp = camera.projection * camera.view * model;
 ```
 
-Compile and run your code to check that everything is working correctly.
+Compile and run your code to check that everything is working correctly. You can now comment out the codes used to calculate the view and projection matrices as this is no long used. 
 
 ---
 
@@ -784,7 +798,7 @@ The last thing we are going to do in this lab is to add some more cubes to our 3
 
 ```cpp
 // Cube positions
-vec3 pos[] = {
+vec3 cubePositions[] = {
     vec3( 0.0f,  0.0f,  0.0f),
     vec3( 2.0f,  5.0f, -10.0f),
     vec3(-3.0f, -2.0f, -3.0f),
@@ -800,40 +814,42 @@ vec3 pos[] = {
 // Cube rotation angles
 float angle[10];
 for (unsigned int i = 0 ; i < 10 ; i++)
-    angle[i] = Maths::radians(20.0f * i);
+    cubeAngles[i] = Maths::radians(20.0f * i);
 ```
 
-This creates two arrays of `vec3` objects: `pos` that contain the co-ordinates of the centres of 10 cubes and `angle` that contains a rotation angle based on the loop variable `i`. In the **render loop** replace the code used to calculate the model matrix and render the cube with the following.
+This creates two arrays of `glm::vec3` objects: `cubePositions` that contain the co-ordinates of the centres of 10 cubes and `cubeAngles` that contains a rotation angle based on the loop variable `i`. In the **render loop** replace the code used to calculate the MVP matrix and render the cube with the following.
 
 ```cpp
 // Loop through cubes and draw each one
 for (int i = 0; i < 10; i++)
 {
     // Calculate the model matrix
-    mat4 translate = Maths::translate(pos[i]);
-    mat4 scale     = Maths::scale(vec3(0.5f, 0.5f, 0.5f));
-    mat4 rotate    = Maths::rotate(angle[i], vec3(1.0f, 1.0f, 1.0f));
-    mat4 model     = translate * rotate * scale;
+    glm::mat4 translate = Maths::translate(cubePositions[i]);
+    glm::mat4 scale     = Maths::scale(glm::vec3(0.5f, 0.5f, 0.5f));
+    glm::mat4 rotate    = Maths::rotate(cubeAngles[i], glm::vec3(1.0f, 1.0f, 1.0f));
+    glm::mat4 model     = translate * rotate * scale;
 
     // Calculate the MVP matrix
-    mat4 mvp = camera.projection * camera.view * model;
+    glm::mat4 mvp = camera.projection * camera.view * model;
 
     // Send MVP matrix to the vertex shader
     unsigned int mvpID = glGetUniformLocation(shaderID, "mvp");
-    glUniformMatrix4fv(mvpID, 1, GL_FALSE, &mvp[0]);
+    glUniformMatrix4fv(mvpID, 1, GL_FALSE, &mvp[0][0]);
 
     // Draw the triangles
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    glDrawElements(GL_TRIANGLES, sizeof(indices) / sizeof(unsigned int), 
+    glDrawElements(GL_TRIANGLES, sizeof(indices) / sizeof(unsigned int),
                    GL_UNSIGNED_INT, 0);
 }
 ```
 
-Here we loop through each of the elements of the `pos` array which are `vec3` objects containing the co-ordinates of each cube. These are used to calculate the translation matrix for the current cube, which is also scaled down by one half in each co-ordinate direction and rotated about the vector $(1, 1, 1)$ using the rotation angle for the current cube.
+Here we loop through each of the 10 cubes and calculate the model matrix using the `cubePositions` and `cubeAngles` vectors. We need to change the position of the camera so that we can see all of the cubes. Add the following code before the view and projection matrices are calculated.
 
-Note that since the camera is in the same position for each cube we calculate these before looping through each cube. Change the position of the camera to $(0, 0, 5)$ by changing the `camera` object declaration (before the `main()` function) and change $\vec{target}$ camera vector in the `camera` object creation so that the camera looks at $(0,0,0)$.
+```cpp
+camera.eye = glm::vec3(0.0f, 0.0f, 5.0f);
+```
 
-Run your program and you should see the following.
+This moves the camera position to $(0, 0, 5)$. Run your program and you should see the following.
 
 ```{figure} ../_images/06_multiple_cubes.png
 :width: 500
@@ -843,13 +859,7 @@ Run your program and you should see the following.
 
 ## Exercises
 
-1. Change the projection matrix so that it use orthographic projection.
-
-```{figure} ../_images/06_Ex1.png
-:width: 400
-```
-
-2. Move the camera position o that it moves in a circle centred at the first cube with radius 10 with a rotation speed such that it completes one full rotation every 5 seconds. Hint: $x = c_x + r\cos(\theta)$ and $z = c_z + r\sin(\theta)$ gives the $x$ and $y$ co-ordinates on a circle centred at $(c_x, c_y, c_z)$ with radius $r$.
+1. Move the camera position so that it moves in a circle centred at the first cube with radius 10 with a rotation speed such that it completes one full rotation every 5 seconds. Hint: $x = c_x + r\cos(\theta)$ and $z = c_z + r\sin(\theta)$ gives the $x$ and $y$ co-ordinates on a circle centred at $(c_x, c_y, c_z)$ with radius $r$.
 
 <center>
 <video controls muted="true" loop="true" width="400">
@@ -865,7 +875,7 @@ Run your program and you should see the following.
 </video>
 </center>
 
-1. Add a feature to your program that allows the user to increase or decrease the field of view angle using the up and down arrow keys. Your code should limit the field of view angle so it is never less than $10^\circ$ or greater than $90^\circ$. Hint: The `keyboardInput()` function at the bottom of the **main.cpp** file checks if the <a href="https://www.glfw.org/docs/3.3/group__keys.html" target="_blank">escape key</a> has been pressed and quits the application if it has.
+4. Add a feature to your program that allows the user to increase or decrease the field of view angle using the up and down arrow keys. Your code should limit the field of view angle so it is never less than $10^\circ$ or greater than $90^\circ$. Hint: The `keyboardInput()` function at the bottom of the **main.cpp** file checks if the <a href="https://www.glfw.org/docs/3.3/group__keys.html" target="_blank">escape key</a> has been pressed and quits the application if it has.
 
 <center>
 <video controls muted="true" loop="true" width="400">

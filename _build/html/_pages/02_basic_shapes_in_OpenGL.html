@@ -61,7 +61,7 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"tex": {"macros": {"vec": ["\\mathbf{#1}", 1], "model": ["M\\!odel"], "view": ["V\\!iew"], "mvp": ["MV\\!P"]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script>window.MathJax = {"tex": {"macros": {"model": ["M\\!odel"], "view": ["V\\!iew"], "mvp": ["MV\\!P"]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_pages/02_basic_shapes_in_OpenGL';</script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -369,8 +369,8 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-a-triangle">2.1. Define a triangle</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vertex-array-object-vao">2.1.1. Vertex Array Object (VAO)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vertex-buffer-object-vbo">2.1.2. Vertex Buffer Object (VBO)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vertex-buffer-object-vbo">2.1.1. Vertex Buffer Object (VBO)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vertex-array-object-vao">2.1.2. Vertex Array Object (VAO)</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shaders">2.2. Shaders</a><ul class="nav section-nav flex-column">
@@ -426,20 +426,9 @@ document.write(`
 <span class="p">};</span>
 </pre></div>
 </div>
-<section id="vertex-array-object-vao">
-<h3><span class="section-number">2.1.1. </span>Vertex Array Object (VAO)<a class="headerlink" href="#vertex-array-object-vao" title="Permalink to this heading">#</a></h3>
-<p>Now that we have the co-ordinates we need to send these to the GPU. OpenGL does this using a <a href="https://www.khronos.org/opengl/wiki/Vertex_Specification#Vertex_Array_Object" target="_blank"><strong>Vertex Array Object (VAO)</strong></a> which is a container for the vertex attributes and <a href="https://www.khronos.org/opengl/wiki/Buffer_Object" target="_blank">buffer objects</a> that contain the data for the vertices. To create a VAO enter the following into your <code class="docutils literal notranslate"><span class="pre">Lab02_Basic_shapes.cpp</span></code> file after the <code class="docutils literal notranslate"><span class="pre">vertices</span></code> array.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Create the Vertex Array Object (VAO)</span>
-<span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">VAO</span><span class="p">;</span>
-<span class="n">glGenVertexArrays</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">VAO</span><span class="p">);</span>
-<span class="n">glBindVertexArray</span><span class="p">(</span><span class="n">VAO</span><span class="p">);</span>
-</pre></div>
-</div>
-<p>The <code class="docutils literal notranslate"><span class="pre">glGenVertexArrays()</span></code> function generates a VAO and <code class="docutils literal notranslate"><span class="pre">glBindVertexArray()</span></code> binds it.</p>
-</section>
 <section id="vertex-buffer-object-vbo">
-<span id="vbo-section"></span><h3><span class="section-number">2.1.2. </span>Vertex Buffer Object (VBO)<a class="headerlink" href="#vertex-buffer-object-vbo" title="Permalink to this heading">#</a></h3>
-<p>We now need to define a <a href="https://www.khronos.org/opengl/wiki/Vertex_Specification#Vertex_Buffer_Object" target="_blank"><strong>Vertex Buffer Object (VBO)</strong></a> which is used to store the vertex co-ordinates. Enter the following after we’ve created the VAO.</p>
+<span id="vbo-section"></span><h3><span class="section-number">2.1.1. </span>Vertex Buffer Object (VBO)<a class="headerlink" href="#vertex-buffer-object-vbo" title="Permalink to this heading">#</a></h3>
+<p>OpenGL uses <strong>Buffer Objects (BO)</strong> so store data, so to store the vertex co-ordinates of our triangle we need to create a <a href="https://www.khronos.org/opengl/wiki/Vertex_Specification#Vertex_Buffer_Object" target="_blank"><strong>Vertex Buffer Object (VBO)</strong></a> and copy the contents of the <code class="docutils literal notranslate"><span class="pre">vertices</span></code> array into it. Enter the following after we’ve created the VAO.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Create Vertex Buffer Object (VBO)</span>
 <span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">VBO</span><span class="p">;</span>
 <span class="n">glGenBuffers</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">VBO</span><span class="p">);</span>
@@ -447,7 +436,27 @@ document.write(`
 <span class="n">glBufferData</span><span class="p">(</span><span class="n">GL_ARRAY_BUFFER</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">vertices</span><span class="p">),</span><span class="w"> </span><span class="n">vertices</span><span class="p">,</span><span class="w"> </span><span class="n">GL_STATIC_DRAW</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>Here, after creating and binding the vertex buffer we bind the VBO using <code class="docutils literal notranslate"><span class="pre">glBindBuffer()</span></code> and copy the data from the <code class="docutils literal notranslate"><span class="pre">vertices</span></code> array using the <code class="docutils literal notranslate"><span class="pre">glBufferData()</span></code> function.</p>
+<p>The functions used here are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">glGenBuffers()</span></code> generates a buffer object with the name <code class="docutils literal notranslate"><span class="pre">VBO</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">glBindBuffer()</span></code> binds the VBO to <code class="docutils literal notranslate"><span class="pre">GL_ARRAY_BUFFER</span></code> which tells OpenGL that the VBO contains vertex attributes</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">glBufferData()</span></code> creates a new data store for the VBO, tells OpenGL where to find the data that is to be stored in the VBO and what it is to be used for (<code class="docutils literal notranslate"><span class="pre">GL_STATIC_DRAW</span></code> means the data is not going to be modified)</p></li>
+</ul>
+</section>
+<section id="vertex-array-object-vao">
+<h3><span class="section-number">2.1.2. </span>Vertex Array Object (VAO)<a class="headerlink" href="#vertex-array-object-vao" title="Permalink to this heading">#</a></h3>
+<p>In addition to the VBO we also need to create a <a href="https://www.khronos.org/opengl/wiki/Vertex_Specification#Vertex_Array_Object" target="_blank"><strong>Vertex Array Object (VAO)</strong></a> which is a container object for the vertex attributes. The VAO does not contain any data, instead it references other buffer objects, e.g., the VBO. To create a VAO enter the following into your <code class="docutils literal notranslate"><span class="pre">Lab02_Basic_shapes.cpp</span></code> file after the <code class="docutils literal notranslate"><span class="pre">vertices</span></code> array.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Create the Vertex Array Object (VAO)</span>
+<span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">VAO</span><span class="p">;</span>
+<span class="n">glGenVertexArrays</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">VAO</span><span class="p">);</span>
+<span class="n">glBindVertexArray</span><span class="p">(</span><span class="n">VAO</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The functions used here are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">glGenVertexArrays()</span></code> generates a VAO with the name <code class="docutils literal notranslate"><span class="pre">VAO</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">glBindVertexArray()</span></code> binds the VAO</p></li>
+</ul>
 </section>
 </section>
 <hr class="docutils" />
@@ -505,19 +514,18 @@ document.write(`
 <span class="n">shaderID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LoadShaders</span><span class="p">(</span><span class="s">&quot;vertexShader.glsl&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;fragmentShader.glsl&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>This code creates a program object which will be referred to by the integer <code class="docutils literal notranslate"><span class="pre">shaderID</span></code>.</p>
+<p>This code creates a program object which will be referred to by the integer <code class="docutils literal notranslate"><span class="pre">shaderID</span></code>. Now that we have an ID for our shader programmes, we need to instruct OpenGL to use it. To do this enter the following code</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Use the shader program</span>
+<span class="n">glUseProgram</span><span class="p">(</span><span class="n">shaderID</span><span class="p">);</span>
+</pre></div>
+</div>
 </section>
 </section>
 <hr class="docutils" />
 <section id="draw-the-triangle">
 <h2><span class="section-number">2.3. </span>Draw the triangle<a class="headerlink" href="#draw-the-triangle" title="Permalink to this heading">#</a></h2>
-<p>Now that we have created the VAO and VBO and written the shaders we can now draw the triangle. The commands used to render a frame are contained in a while loop known as a <strong>render loop</strong>. This loop will continue until the window is closed or the escape key is pressed.</p>
-<p>After clearing the window using <code class="docutils literal notranslate"><span class="pre">glClear()</span></code>, we need to instruct OpenGL to use our shader program,  enter the following code</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Use the shader program</span>
-<span class="n">glUseProgram</span><span class="p">(</span><span class="n">shaderID</span><span class="p">);</span>
-</pre></div>
-</div>
-<p>Now we need to bind the VBO to the VAO and tell OpenGL where to find this data. Add the following code after we use the shader program.</p>
+<p>So we have created the VAO and VBO, and written the shaders we can now draw the triangle. The commands used to render a frame are contained in a while loop known as a <strong>render loop</strong>. This loop will continue until the window is closed or the escape key is pressed.</p>
+<p>We need to bind the VBO to the VAO and tell OpenGL where to find this data. To do this add the following code after clearing the window</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Send the VBO to the shaders</span>
 <span class="n">glEnableVertexAttribArray</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
 <span class="n">glBindBuffer</span><span class="p">(</span><span class="n">GL_ARRAY_BUFFER</span><span class="p">,</span><span class="w"> </span><span class="n">VBO</span><span class="p">);</span>
@@ -531,10 +539,11 @@ document.write(`
 </div>
 <p>The three functions we’ve used here are:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">glEnableVertexAttribArray()</span></code> enables a generic vertex array so we can pass our triangle data to OpenGL;</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">glBindBuffer()</span></code> binds our VBO to OpenGL;</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">glVertexAttribPointer()</span></code> tells OpenGL how to interpret the data we are sending it. The input arguments are explained below.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">glEnableVertexAttribArray()</span></code> enables a generic vertex array so we can pass our triangle data to OpenGL</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">glBindBuffer()</span></code> binds our VBO to an array buffer</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">glVertexAttribPointer()</span></code> tells OpenGL how to interpret the data we are sending it</p></li>
 </ul>
+<p>The input arguments for the <code class="docutils literal notranslate"><span class="pre">glVertexAttribPointer()</span></code> function are explained below</p>
 <table class="table">
 <thead>
 <tr class="row-odd"><th class="head text-left"><p>Argument</p></th>
@@ -569,8 +578,11 @@ document.write(`
 <span class="n">glDisableVertexAttribArray</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">glDrawArrays()</span></code> command tells OpenGL to draw whatever data is defined in the VAO. The first argument <code class="docutils literal notranslate"><span class="pre">GL_TRIANGLE</span></code> tells OpenGL that we want to draw a triangle, the second argument <code class="docutils literal notranslate"><span class="pre">0</span></code> specifies that the first vertex starts at the 0 index in the buffer and the third argument <code class="docutils literal notranslate"><span class="pre">3</span></code> specifies that we have 3 vertices.</p>
-<p>Once we have drawn the triangle we no longer need the VBO so we disable it using <code class="docutils literal notranslate"><span class="pre">glDisableVertexAttribArray(0)</span></code> where the <code class="docutils literal notranslate"><span class="pre">0</span></code> is the attribute number (the one used in the <code class="docutils literal notranslate"><span class="pre">glEnableAttribArray()</span></code> function).</p>
+<p>The functions used here are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">glDrawArrays()</span></code> tells OpenGL to draw whatever data is defined in the VAO. The first argument <code class="docutils literal notranslate"><span class="pre">GL_TRIANGLES</span></code> tells OpenGL that we want to draw a triangle, the second argument <code class="docutils literal notranslate"><span class="pre">0</span></code> specifies that the first vertex starts at the 0 index in the buffer and the third argument <code class="docutils literal notranslate"><span class="pre">3</span></code> specifies that we have 3 vertices.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">glDisableVertexAttribArray(0)</span></code> disables the vertex array containing the VBO since it is no longer needed. The input argument  <code class="docutils literal notranslate"><span class="pre">0</span></code> is the attribute number used in the <code class="docutils literal notranslate"><span class="pre">glEnableAttribArray()</span></code> function.</p></li>
+</ul>
 <p>Don’t get too excited just yet. As good programmers we should clean up after ourselves and not leave bits of data lying around. After the close of the do/while loop we de-allocate the vertex and buffer objects as well as deleting the shader program.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Cleanup</span>
 <span class="n">glDeleteBuffers</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">VBO</span><span class="p">);</span>
@@ -590,7 +602,7 @@ document.write(`
 <section id="more-colours">
 <h2><span class="section-number">2.4. </span>More colours<a class="headerlink" href="#more-colours" title="Permalink to this heading">#</a></h2>
 <p>After basking in the glory of your achievements for a few minutes the initial excitement may begin to wane, and your natural curiosity will cause you to wonder whether we can use more than one colour. Well of course, all we need to do is tell OpenGL what colours we want to use for each vertex.</p>
-<p>Create an array that contains RGB colour data for each vertex.</p>
+<p>Create an array that contains RGB colour data for each vertex by entering the following code after we created the <code class="docutils literal notranslate"><span class="pre">vertices</span></code> array.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Define vertex colours</span>
 <span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">colours</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// R   G     B</span>
@@ -600,7 +612,7 @@ document.write(`
 <span class="p">};</span>
 </pre></div>
 </div>
-<p>Here we have assigned the colour red to the first (bottom-left) vertex, green to the second (bottom-right) vertex and blue to the third (top) vertex. Like the vertex buffer, we need to create and bind a buffer for the colours.</p>
+<p>Here we have assigned the colour red to the first (bottom-left) vertex, green to the second (bottom-right) vertex and blue to the third (top) vertex. Like we did with the vertex buffer, we need to create and bind a buffer for the colours.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Create colour buffer</span>
 <span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">colourBuffer</span><span class="p">;</span>
 <span class="n">glGenBuffers</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">colourBuffer</span><span class="p">);</span>
@@ -608,14 +620,14 @@ document.write(`
 <span class="n">glBufferData</span><span class="p">(</span><span class="n">GL_ARRAY_BUFFER</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">colours</span><span class="p">),</span><span class="w"> </span><span class="n">colours</span><span class="p">,</span><span class="w"> </span><span class="n">GL_STATIC_DRAW</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>And where we draw the triangle, we also need to bind the colour information to the VAO so it can be sent to the shaders.</p>
+<p>And where we draw the triangle, we also need to bind the colour buffer to the VAO so it can be sent to the shaders.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Send the colour buffer to the shaders</span>
 <span class="n">glEnableVertexAttribArray</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
 <span class="n">glBindBuffer</span><span class="p">(</span><span class="n">GL_ARRAY_BUFFER</span><span class="p">,</span><span class="w"> </span><span class="n">colourBuffer</span><span class="p">);</span>
 <span class="n">glVertexAttribPointer</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">GL_FLOAT</span><span class="p">,</span><span class="w"> </span><span class="n">GL_FALSE</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="p">)</span><span class="mi">0</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>You will notice that this code is very similar to the code used to send the VBO to the shader. Here we have use the attribute <code class="docutils literal notranslate"><span class="pre">1</span></code> for the colour buffer.</p>
+<p>You will notice that this code is very similar to the code used to send the VBO to the shader. Here we have use the attribute <code class="docutils literal notranslate"><span class="pre">1</span></code> for the colour buffer, if we had used <code class="docutils literal notranslate"><span class="pre">0</span></code> this would have overwritten the VBO.</p>
 <p>If you were to compile and run your program, you might be a little disappointed as your triangle is still red. Well of course, we haven’t told our shaders how to handle colours! Since our colours are associated with the vertices we need to modify the vertex shader to include the colours.</p>
 <div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="cp">#version 330 core</span>
 
@@ -803,8 +815,8 @@ The video below walks you through these lab materials.
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-a-triangle">2.1. Define a triangle</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vertex-array-object-vao">2.1.1. Vertex Array Object (VAO)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vertex-buffer-object-vbo">2.1.2. Vertex Buffer Object (VBO)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vertex-buffer-object-vbo">2.1.1. Vertex Buffer Object (VBO)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vertex-array-object-vao">2.1.2. Vertex Array Object (VAO)</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shaders">2.2. Shaders</a><ul class="nav section-nav flex-column">

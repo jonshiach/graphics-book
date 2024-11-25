@@ -42,7 +42,6 @@ sphinx:
     mathjax3_config:
       tex:
         macros:
-          "vec": ["\\mathbf{#1}", 1]
           "model" : ["M\\!odel"]
           "view" : ["V\\!iew"]
           "mvp" : ["MV\\!P"]

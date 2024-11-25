@@ -40,7 +40,7 @@ glBindTexture(GL_TEXTURE_2D, texture);
 
 Here we have defined a target called `texture` which is an integer used to refer to the texture. The texture is then generated and bound to this target using the `glGenTextures()` and `glBindTexture()` functions.
 
-We now need to load a image into our texture. To do this we are going to make use of the library <a href="https://github.com/nothings/stb/tree/master" target="_blank">`stb_image`</a> which can be found in the **common/** folder. Enter the following code into your program.
+We now need to load a image into our texture. To do this we are going to make use of the <a href="https://github.com/nothings/stb/tree/master" target="_blank">`stb_image`</a> library, the header file for which can be found in the **common/** folder. Enter the following code into your program.
 
 ```cpp
 // Load texture image from file
@@ -50,7 +50,12 @@ stbi_set_flip_vertically_on_load(true);
 unsigned char *data = stbi_load(path, &width, &height, &nChannels, 0);
 ```
 
-Here we use the function `stbi_load()` to read the image data into the `data` variable. The `width`, `height` and `nChannels` variables store the dimensions of the image in pixels and the number of colour channels used. The texture we are using here is **crate.jpeg** which is stored in the **assets/** folder and represents a side of a wooden crate.
+The functions used here are:
+
+- `stbi_set_flip_vertically_on_load()` flips the image vertically since the $(0,0)$ co-ordinate on an images is the top-left corner and OpenGL expects it to be the bottom-right corner
+- `stbi_load()` loads the image specified in the `path` string into the `data` variable and the stores the width, height and number of colour channels into the appropriate variables 
+
+The texture we are using here is **crate.jpeg** which is stored in the **assets/** folder and represents a side of a wooden crate.
 
 ```{figure} ../_images/03_crate.jpeg
 :width: 300
@@ -235,10 +240,10 @@ Comment out the code used to define the `vertices` and `uv` arrays and enter the
 // Define vertex positions
 static const float vertices[] = {
     // x     y     z      index
-    -0.5f, -0.5f, 0.0f,  // 0
-     0.5f, -0.5f, 0.0f,  // 1
-     0.5f,  0.5f, 0.0f,  // 2
-    -0.5f,  0.5f, 0.0f   // 3
+    -0.5f, -0.5f, 0.0f,  // 0       3 -- 2
+     0.5f, -0.5f, 0.0f,  // 1       |  / |  
+     0.5f,  0.5f, 0.0f,  // 2       | /  |
+    -0.5f,  0.5f, 0.0f   // 3       0 -- 1
 };
 
 // Define texture co-ordinates

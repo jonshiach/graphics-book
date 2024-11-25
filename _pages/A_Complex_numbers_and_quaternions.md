@@ -195,15 +195,15 @@ $$ \begin{align*}
     ji &= -k, & kj &= -i, & ik &= -j.
 \end{align*} $$
 
-Consider the [cross products](cross-product-section) between the three unit vectors pointing in the $x$, $y$ and $z$ directions $\vec{i}$, $\vec{j}$ and $\vec{k}$ 
+Consider the [cross products](cross-product-section) between the three unit vectors pointing in the $x$, $y$ and $z$ directions $\mathbf{i}$, $\mathbf{j}$ and $\mathbf{k}$ 
 
 $$ \begin{align*}
-    \vec{i} \times \vec{j} &= \vec{k}, &
-    \vec{j} \times \vec{k} &= \vec{i}, &
-    \vec{k} \times \vec{i} &= \vec{j}, \\
-    \vec{j} \times \vec{i} &= -\vec{k}, &
-    \vec{k} \times \vec{j} &= -\vec{i}, &
-    \vec{i} \times \vec{k} &= -\vec{j}.
+    \mathbf{i} \times \mathbf{j} &= \mathbf{k}, &
+    \mathbf{j} \times \mathbf{k} &= \mathbf{i}, &
+    \mathbf{k} \times \mathbf{i} &= \mathbf{j}, \\
+    \mathbf{j} \times \mathbf{i} &= -\mathbf{k}, &
+    \mathbf{k} \times \mathbf{j} &= -\mathbf{i}, &
+    \mathbf{i} \times \mathbf{k} &= -\mathbf{j}.
 \end{align*} $$
 
 So the three imaginary numbers $i$, $j$ and $k$ can be used to represent the three unit vectors pointing in the $x$, $y$ and $z$ directions and multiplying the imaginary numbers is equivalent to the cross product.
@@ -212,9 +212,9 @@ So the three imaginary numbers $i$, $j$ and $k$ can be used to represent the thr
 
 Quaternions can be expressed more conveniently as an ordered-pair consisting of the real part $w$ and a vector of the imaginary parts
 
-$$ q = [w, \vec{v}], $$
+$$ q = [w, \mathbf{v}], $$
 
-where $\vec{v} = x\vec{i} + y \vec{j} + z \vec{k}$.
+where $\mathbf{v} = x\mathbf{i} + y \mathbf{j} + z \mathbf{k}$.
 
 ### A.2.2 Absolute value of a quaternion
 
@@ -232,8 +232,8 @@ Checking that $|\hat{q}| = 1$
 
 $$ \begin{align*}
     \hat{q} &= \frac{q}{|q|} 
-    = \frac{[w, \vec{v}]}{|q|} 
-    = [\tfrac{w}{|q|}, \tfrac{\vec{v}}{|q|}], \\
+    = \frac{[w, \mathbf{v}]}{|q|} 
+    = [\tfrac{w}{|q|}, \tfrac{\mathbf{v}}{|q|}], \\
     \therefore |\hat{q}| &= \frac{w^2}{|q|^2} + \frac{x^2}{|q|^2} + \frac{y^2}{|q|^2} + \frac{z^2}{|q|^2}
     = \frac{|q|^2}{|q|^2} = 1.
 \end{align*} $$
@@ -242,21 +242,21 @@ $$ \begin{align*}
 
 A **pure quaternion** is a quaternion where the real part has a value of zero, i.e.,
 
-$$ q = [0, \vec{v}]. $$
+$$ q = [0, \mathbf{v}]. $$
 
 A pure quaternion is equivalent to a 3-element vector.
 
-A **real quaternion** is a quaternion where the vector part is the zero vector $\vec{0} = 0\vec{i} + 0\vec{j} + 0\vec{k}$, i.e.,
+A **real quaternion** is a quaternion where the vector part is the zero vector $\mathbf{0} = 0\mathbf{i} + 0\mathbf{j} + 0\mathbf{k}$, i.e.,
 
-$$ q = [w, \vec{0}]. $$
+$$ q = [w, \mathbf{0}]. $$
 
 A real quaternion is equivalent to a real number.
 
 ### A.2.6 Multiplying a quaternion by a scalar
 
-Multiplying a quaternion by a scalar is achieved by multiplying the real part and the vector part by the scalar. Let $q = [w, \vec{v}]$ be a quaternion and $k$ be a scalar then
+Multiplying a quaternion by a scalar is achieved by multiplying the real part and the vector part by the scalar. Let $q = [w, \mathbf{v}]$ be a quaternion and $k$ be a scalar then
 
-$$ kq = [kw, k\vec{v}].$$
+$$ kq = [kw, k\mathbf{v}].$$
 
 ### A.2.7 Quaternion dot product
 
@@ -280,42 +280,42 @@ $$ \begin{align*}
     & \qquad + (w_1w_2 - x_1x_2 - y_1y_2 - z_1z_2).
 \end{align*} $$
 
-Substituting in the pure quaternions $[0,\vec{i}]$, $[0,\vec{j}]$ and $[0,\vec{k}]$ as well as the real quaternion $[1,\vec{0}]$ then
+Substituting in the pure quaternions $[0,\mathbf{i}]$, $[0,\mathbf{j}]$ and $[0,\mathbf{k}]$ as well as the real quaternion $[1,\mathbf{0}]$ then
 
 $$ \begin{align*}
-    q_1q_2 &= (w_1x_2 + w_2x_1 + y_1z_2 - y_2z_1)[0,\vec{i}] \\
-    & \qquad + (w_1y_2 + w_2y_1 + z_1x_2 - z_2x_1)[0,\vec{j}] \\
-    & \qquad + (w_1z_2 + w_2z_1 + x_1y_2 - x_2y_1)[0,\vec{k}] \\
-    & \qquad + (-x_1x_2 - y_1y_2 - z_1z_2 + w_1w_2) [1,\vec{0}] \\
-    &=  [0, (w_1x_2 + w_2x_1 + y_1z_2 - y_2z_1) \vec{i}] \\
-    & \qquad + [0,(w_1y_2 + w_2y_1 + z_1x_2 - z_2x_1) \vec{j}] \\
-    & \qquad + [0,(w_1z_2 + w_2z_1 + x_1y_2 - x_2y_1) \vec{k}] \\
-    & \qquad + [-x_1x_2 - y_1y_2 - z_1z_2 + w_1w_2, \vec{0}] \\
+    q_1q_2 &= (w_1x_2 + w_2x_1 + y_1z_2 - y_2z_1)[0,\mathbf{i}] \\
+    & \qquad + (w_1y_2 + w_2y_1 + z_1x_2 - z_2x_1)[0,\mathbf{j}] \\
+    & \qquad + (w_1z_2 + w_2z_1 + x_1y_2 - x_2y_1)[0,\mathbf{k}] \\
+    & \qquad + (-x_1x_2 - y_1y_2 - z_1z_2 + w_1w_2) [1,\mathbf{0}] \\
+    &=  [0, (w_1x_2 + w_2x_1 + y_1z_2 - y_2z_1) \mathbf{i}] \\
+    & \qquad + [0,(w_1y_2 + w_2y_1 + z_1x_2 - z_2x_1) \mathbf{j}] \\
+    & \qquad + [0,(w_1z_2 + w_2z_1 + x_1y_2 - x_2y_1) \mathbf{k}] \\
+    & \qquad + [-x_1x_2 - y_1y_2 - z_1z_2 + w_1w_2, \mathbf{0}] \\
     &= [(w_1w_2 - x_1x_2 - y_1y_2 - z_1z_2 + w_1w_2), \\
-    & \qquad w_1(x_2\vec{i} + y_2\vec{j} + z_2\vec{k}) + w_2(x_1 \vec{i} + y_1 \vec{j} + z_1\vec{k}) \\
-    & \qquad + (y_1z_2 - y_2z_1)\vec{i} + (z_1x_2 - z_2x_1)\vec{j} + (x_1y_2 - x_2y_1)\vec{k} ]
+    & \qquad w_1(x_2\mathbf{i} + y_2\mathbf{j} + z_2\mathbf{k}) + w_2(x_1 \mathbf{i} + y_1 \mathbf{j} + z_1\mathbf{k}) \\
+    & \qquad + (y_1z_2 - y_2z_1)\mathbf{i} + (z_1x_2 - z_2x_1)\mathbf{j} + (x_1y_2 - x_2y_1)\mathbf{k} ]
 \end{align*} $$
 
 Substituting the dot and cross products
 
 $$ \begin{align*}
-    \vec{v}_1 \cdot \vec{v}_2 &= x_1x_2 + y_1y_2 + z_1z_2, \\
-    \vec{v}_1 \times \vec{v}_2 &= (y_1z_2 - y_2z_1)\vec{i} + (z_1x_2 - z_2x_1)\vec{j} + (x_1y_2 - x_2y_1)\vec{k}
+    \mathbf{v}_1 \cdot \mathbf{v}_2 &= x_1x_2 + y_1y_2 + z_1z_2, \\
+    \mathbf{v}_1 \times \mathbf{v}_2 &= (y_1z_2 - y_2z_1)\mathbf{i} + (z_1x_2 - z_2x_1)\mathbf{j} + (x_1y_2 - x_2y_1)\mathbf{k}
 \end{align*} $$
 
 then
 
 $$ \begin{align*}
-    q_1q_2 &= [w_1w_2 - \vec{v}_1\cdot \vec{v}_2, w_1 \vec{v}_2 + w_2 \vec{v}_1 + \vec{v}_1 \times \vec{v}_2].
+    q_1q_2 &= [w_1w_2 - \mathbf{v}_1\cdot \mathbf{v}_2, w_1 \mathbf{v}_2 + w_2 \mathbf{v}_1 + \mathbf{v}_1 \times \mathbf{v}_2].
 \end{align*} $$(quaternion-product-equation)
 
-Equation {eq}`quaternion-product-equation` is the general equation for calculating the quaternion product $[w_1, \vec{v}_1][w_2, \vec{v}_2]$.
+Equation {eq}`quaternion-product-equation` is the general equation for calculating the quaternion product $[w_1, \mathbf{v}_1][w_2, \mathbf{v}_2]$.
 
 ### A.2.9 Quaternion conjugate
 
-The **conjugate** of a quaternion $q$, denoted by $q^*$, is found by negating the vector part. Let $q = [\vec{v}, w]$ then
+The **conjugate** of a quaternion $q$, denoted by $q^*$, is found by negating the vector part. Let $q = [\mathbf{v}, w]$ then
 
-$$ q^* = [w, -\vec{v}].$$
+$$ q^* = [w, -\mathbf{v}].$$
 
 ### A.2.10 Quaternion inverse
 
@@ -339,13 +339,13 @@ $$ q^{-1} = q^*. $$
 
 ## A.3 Quaternion rotation
 
-In [Lab 4 on transformations](axis-angle-rotation-section) we saw that we can rotate about a vector $\vec{v}$ by an angle $\theta$ using a combination of a translation and rotations about the $x$, $y$ and $z$ axes. The resulting matrix shown in equation {eq}`eq:axis-angle-rotation-matrix` is quite complicated and requires lots of floating point computations. Quaternions gives us a away of performing similar calculation in a way that uses fewer computations and also does not suffer from gimbal lock.
+In [Lab 4 on transformations](axis-angle-rotation-section) we saw that we can rotate about a vector $\mathbf{v}$ by an angle $\theta$ using a combination of a translation and rotations about the $x$, $y$ and $z$ axes. The resulting matrix shown in equation {eq}`eq:axis-angle-rotation-matrix` is quite complicated and requires lots of floating point computations. Quaternions gives us a away of performing similar calculation in a way that uses fewer computations and also does not suffer from gimbal lock.
 
 ```{figure} ../_images/10_Axis_angle_rotation.svg
 :width: 350
 :name: axis-angle-rotation-figure-3
 
-Axis-angle rotation about the vector $\hat{\vec{v}}$.
+Axis-angle rotation about the vector $\hat{\mathbf{v}}$.
 ```
 
 We have seen that we can rotate a complex number by multiplying by
@@ -358,13 +358,13 @@ $$ q = \cos(\theta) + \sin(\theta) i + \sin(\theta) j + \sin(\theta) k, $$
 
 or in vector-scalar form
 
-$$ q = [\cos(\theta), \sin(\theta) \hat{\vec{v}}]. $$
+$$ q = [\cos(\theta), \sin(\theta) \hat{\mathbf{v}}]. $$
 
-To demonstrate rotation using quaternion rotation consider the rotation of the vector $\vec{p} = (2, 0, 0)$ by 45$^\circ$ about the $z$-axis. The rotation quaternion for this is
+To demonstrate rotation using quaternion rotation consider the rotation of the vector $\mathbf{p} = (2, 0, 0)$ by 45$^\circ$ about the $z$-axis. The rotation quaternion for this is
 
 $$ q = [\cos(45^\circ), \sin(45^\circ)(0, 0, 1)] =  [\tfrac{\sqrt2}{2}, (0, 0, \tfrac{\sqrt{2}}{2})], $$
 
-and expressing $\vec{p}$ as a quaternion we have $p = [0, (2, 0, 0)]$ and multiplying by $q$ gives
+and expressing $\mathbf{p}$ as a quaternion we have $p = [0, (2, 0, 0)]$ and multiplying by $q$ gives
 
 $$ \begin{align*}
     qp &= [\tfrac{\sqrt2}{2}, (0, 0, \tfrac{\sqrt{2}}{2})] [0, (2, 0, 0)] \\
@@ -388,7 +388,7 @@ which is the same as the absolute value of $[0, (2, 0, 0)]$. This rotation is sh
 The rotation of the quaternion or $p=(2, 0, 0, 0)$ by multiplying by the rotation quaternion $q = (\frac{\sqrt{2}}{2}, (0, 0, \frac{\sqrt{2}}{2}))$.
 ```
 
-In the rotation example shown above used a quaternion that was perpendicular to the vector being rotated. What happens when we rotate by a quaternion that isn't perpendicular to the vector? Consider the rotation of the same vector $\vec{p} = (2, 0, 0)$ by angle 45$^\circ$ about the vector $\hat{\vec{v}} =  (\frac{\sqrt{2}}{2}, 0, \frac{\sqrt{2}}{2})$ which is not perpendicular to $\vec{p}$. The rotation quaternion is
+In the rotation example shown above used a quaternion that was perpendicular to the vector being rotated. What happens when we rotate by a quaternion that isn't perpendicular to the vector? Consider the rotation of the same vector $\mathbf{p} = (2, 0, 0)$ by angle 45$^\circ$ about the vector $\hat{\mathbf{v}} =  (\frac{\sqrt{2}}{2}, 0, \frac{\sqrt{2}}{2})$ which is not perpendicular to $\mathbf{p}$. The rotation quaternion is
 
 $$ q = [\tfrac{\sqrt{2}}{2}, \tfrac{\sqrt{2}}{2} (\tfrac{\sqrt{2}}{2}, 0, \tfrac{\sqrt{2}}{2})] =[\tfrac{\sqrt{2}}{2}, (\tfrac{1}{2}, 0, \tfrac{1}{2})], $$
 
@@ -427,7 +427,7 @@ So this is a pure quaternion and its absolute value is
 
 $$ |qpq^*| = \sqrt{1^2 + (\sqrt{2})^2 + 1^2} = \sqrt{4} = 2. $$
 
-However, plotting the result of the quaternion rotation ({numref}`quaternion-rotation-3-figure`) we see that $\vec{u}$ has been rotated by 90$^\circ$ as opposed to 45$^\circ$ which we desired.
+However, plotting the result of the quaternion rotation ({numref}`quaternion-rotation-3-figure`) we see that $\mathbf{u}$ has been rotated by 90$^\circ$ as opposed to 45$^\circ$ which we desired.
 
 ```{figure} ../_images/A_Quaternion_rotation_3.svg
 :width: 400
@@ -438,7 +438,7 @@ The rotation of the quaternion or $p=(2, 0, 0, 0)$ by multiplying by the rotatio
 
 This is because when we calcualte $qpq^*$ we are rotating $p$ by $\theta$ twice, therefore we need to halve $\theta$ when calculating the rotation quaternion
 
-$$ q = [\cos(\tfrac{1}{2}\theta), \sin(\tfrac{1}{2}\theta) \hat{\vec{v}}].$$(appendix-rotation-quaternion-equation)
+$$ q = [\cos(\tfrac{1}{2}\theta), \sin(\tfrac{1}{2}\theta) \hat{\mathbf{v}}].$$(appendix-rotation-quaternion-equation)
 
 (quaternion-rotation-matrix-derivation-section)=
 
@@ -456,7 +456,7 @@ $$ \begin{align*}
     & \qquad (p_xw + p_yz - p_zy + p_wx, p_xz + p_yw - p_zx + p_wy, -p_xy + p_yx + p_zw + p_wz)].
 \end{align*} $$
 
-If we write the quaternion $p$ as a 4-element vector of the form $\vec{p} = (p_x, p_y, p_z, p_w)$ (note that the scalar part of $p$, $p_w$, is now at the end of the vector which is synonymous with [homogeneous co-ordinates](homogeneous-coordinates-section)) then we can express the rotation $qp$ as the matrix equation $R_q\vec{p}$ where
+If we write the quaternion $p$ as a 4-element vector of the form $\mathbf{p} = (p_x, p_y, p_z, p_w)$ (note that the scalar part of $p$, $p_w$, is now at the end of the vector which is synonymous with [homogeneous co-ordinates](homogeneous-coordinates-section)) then we can express the rotation $qp$ as the matrix equation $R_q\mathbf{p}$ where
 
 $$ \begin{align*}
     R_q &=
@@ -480,7 +480,7 @@ $$ \begin{align*}
     & \qquad (p_xw - p_yz + p_zy - p_wx, p_xz + p_yw - p_zx - p_wy, -p_xy + p_yx + p_zw - p_wz)].
 \end{align*} $$
 
-This can be expressed by the matrix equation $R_{q^*}\vec{p}$ where
+This can be expressed by the matrix equation $R_{q^*}\mathbf{p}$ where
 
 $$ \begin{align*}
     R_{q^*} &=
@@ -492,7 +492,7 @@ $$ \begin{align*}
     \end{pmatrix}
 \end{align*} $$
 
-The composite quaternion multiplication $qpq^*$ can be written as the matrix equation $R_{q^*}R_q\vec{p}$ (this is the same as calculating $qp$ then multiplying the result on the right by $q^*$). So the rotation matrix is
+The composite quaternion multiplication $qpq^*$ can be written as the matrix equation $R_{q^*}R_q\mathbf{p}$ (this is the same as calculating $qp$ then multiplying the result on the right by $q^*$). So the rotation matrix is
 
 $$ \begin{align*}
     R &= R_{q^*}R_q =
@@ -537,9 +537,9 @@ $$ \begin{align*}
     \end{pmatrix}.
 \end{align*} $$(quaternion-rotation-matrix-2-equation)
 
-The matrix $R$ is the quaternion rotation matrix for rotating a vector $\vec{p}$ by angle $\theta$ about the unit vector $\hat{\vec{v}}$ where $x$, $y$, $z$ and $w$ are the values of the unit rotation quaternion.
+The matrix $R$ is the quaternion rotation matrix for rotating a vector $\mathbf{p}$ by angle $\theta$ about the unit vector $\hat{\mathbf{v}}$ where $x$, $y$, $z$ and $w$ are the values of the unit rotation quaternion.
 
-To demonstrate this lets return to our example of rotating the vector $\vec{p} = (2, 0, 0)$ by 45$^\circ$ about the vector $(\frac{\sqrt{2}}{2}, 0, \frac{\sqrt{2}}{2})$. We first calculate the rotation quaternion $q$
+To demonstrate this lets return to our example of rotating the vector $\mathbf{p} = (2, 0, 0)$ by 45$^\circ$ about the vector $(\frac{\sqrt{2}}{2}, 0, \frac{\sqrt{2}}{2})$. We first calculate the rotation quaternion $q$
 
 $$ \begin{align*}
     q &= [\cos(\tfrac{45^\circ}{2}), \sin(\tfrac{45^\circ}{2}) (\tfrac{\sqrt{2}}{2}, 0, \tfrac{\sqrt{2}}{2})] \\
@@ -558,10 +558,10 @@ $$ \begin{align*}
     \end{pmatrix}.
 \end{align*} $$
 
-Applying the rotation to $\vec{p} = (2, 0, 0, 0)$
+Applying the rotation to $\mathbf{p} = (2, 0, 0, 0)$
 
 $$ \begin{align*}
-    R\vec{p} =
+    R\mathbf{p} =
     \begin{pmatrix}
         0.8536 & -0.5000 & 0.1464 & 0 \\
         0.5000 & 0.7071 & -0.5000 & 0 \\
@@ -572,13 +572,13 @@ $$ \begin{align*}
     = \begin{pmatrix} 1.7071 \\ 1.0000 \\ 0.2929 \\ 0 \end{pmatrix}.
 \end{align*} $$
 
-So the rotated vector is $(1.7071, 1, 0.2929)$ which is plotted in {numref}`quaternion-rotation-4-figure`. We can see that the vector $\vec{p}$ has now been rotated 45$^\circ$ about the vector $\vec{v}$.
+So the rotated vector is $(1.7071, 1, 0.2929)$ which is plotted in {numref}`quaternion-rotation-4-figure`. We can see that the vector $\mathbf{p}$ has now been rotated 45$^\circ$ about the vector $\mathbf{v}$.
 
 ```{figure} ../_images/A_Quaternion_rotation_4.svg
 :width: 400
 :name: quaternion-rotation-4-figure
 
-The rotation of the vector $\vec{p} = (2, 0, 0)$ by angle 45$^\circ$ about the vector $\vec{v} = (\frac{\sqrt{2}}{2}, 0, \frac{\sqrt{2}}{2})$ using the quaternion rotation matrix $R$.
+The rotation of the vector $\mathbf{p} = (2, 0, 0)$ by angle 45$^\circ$ about the vector $\mathbf{v} = (\frac{\sqrt{2}}{2}, 0, \frac{\sqrt{2}}{2})$ using the quaternion rotation matrix $R$.
 ```
 
 (euler-to-quaternion-derivation-section)=
@@ -588,16 +588,16 @@ The rotation of the vector $\vec{p} = (2, 0, 0)$ by angle 45$^\circ$ about the v
 Euler angles are the rotations around the three co-ordinates axes $x$, $y$ and $z$ so equation {eq}`appendix-rotation-quaternion-equation` can be used to give three quaternions for pitch, yaw and roll rotations. Let $c_p = \cos(\frac{1}{2}\theta)$, $s_p =\sin(\frac{1}{2}\theta)$ and $q_p$ be the cosine, sine and rotation quaternion for rotating about the $x$-axis by the pitch angle, and similar for yaw and roll then
 
 $$ \begin{align*}
-    q_p &= [c_p, s_p  \vec{i}], \\
-    q_y &= [c_y, s_y  \vec{j}], \\
-    q_r &= [c_r, s_r  \vec{k}].
+    q_p &= [c_p, s_p  \mathbf{i}], \\
+    q_y &= [c_y, s_y  \mathbf{j}], \\
+    q_r &= [c_r, s_r  \mathbf{k}].
 \end{align*} $$
 
 The combined rotation $q_pq_yq_r$ is
 
 $$ \begin{align*}
-    q_pq_yq_r &= [c_p, s_p\vec{i}] [c_y, s_y\vec{j}] [c_r, s_r\vec{k}] \\
-    &= [c_pc_y, c_ps_y\vec{j} + s_pc_y\vec{i} + s_ps_y\vec{k}] [c_r, s_r\vec{k}] \\
-    &= [c_pc_yc_r - s_ps_ys_r, c_pc_ys_r\vec{k} + c_ps_yc_r\vec{j} + s_pc_yc_r\vec{i} + s_ps_yc_r\vec{k} + c_ps_ys_r\vec{i} - s_pc_ys_r\vec{j}] \\
+    q_pq_yq_r &= [c_p, s_p\mathbf{i}] [c_y, s_y\mathbf{j}] [c_r, s_r\mathbf{k}] \\
+    &= [c_pc_y, c_ps_y\mathbf{j} + s_pc_y\mathbf{i} + s_ps_y\mathbf{k}] [c_r, s_r\mathbf{k}] \\
+    &= [c_pc_yc_r - s_ps_ys_r, c_pc_ys_r\mathbf{k} + c_ps_yc_r\mathbf{j} + s_pc_yc_r\mathbf{i} + s_ps_yc_r\mathbf{k} + c_ps_ys_r\mathbf{i} - s_pc_ys_r\mathbf{j}] \\
     &= [c_pc_yc_r - s_ps_ys_r, (s_pc_yc_r + c_ps_ys_r, c_ps_yc_r - s_pc_ys_r, c_pc_ys_r - s_ps_yc_r)].
 \end{align*} $$

@@ -61,7 +61,7 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"tex": {"macros": {"vec": ["\\mathbf{#1}", 1], "model": ["M\\!odel"], "view": ["V\\!iew"], "mvp": ["MV\\!P"]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script>window.MathJax = {"tex": {"macros": {"model": ["M\\!odel"], "view": ["V\\!iew"], "mvp": ["MV\\!P"]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_pages/05_transformations';</script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -384,11 +384,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#composite-transformations-in-opengl">5.5.1. Composite transformations in OpenGL</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#animations">5.6. Animations</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limiting-the-frame-rate">5.6.1. Limiting the frame rate</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#animating-the-rectangle">5.6.2. Animating the rectangle</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#animating-the-rectangle">5.6. Animating the rectangle</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">5.7. Exercises</a></li>
 </ul>
             </nav>
@@ -403,11 +399,11 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="transformations">
 <span id="transformations-section"></span><h1><span class="section-number">5. </span>Transformations<a class="headerlink" href="#transformations" title="Permalink to this heading">#</a></h1>
-<p>Computer graphics requires that shapes are manipulated in space by moving the shapes, shrinking or stretching, rotating and reflection to name a few. We call these manipulations <strong>transformations</strong>. We need a convenient way of telling the computer how to apply our transformations and for this we make use of matrices which we covered in <a class="reference internal" href="04_vectors_and_matrices.html#vectors-and-matrices-section"><span class="std std-ref">4. Vectors and Matrices</span></a>.</p>
+<p>Computer graphics requires that shapes are manipulated in space by moving the shapes, shrinking or stretching, rotating and reflection to name a few. We call these manipulations <strong>transformations</strong>. We need a convenient way of telling the computer how to apply our transformations and for this we make use of matrices which we covered in the previous lab on <a class="reference internal" href="04_vectors_and_matrices.html#vectors-and-matrices-section"><span class="std std-ref">vectors and matrices</span></a>.</p>
 <p>Each transformation has an associated <strong>transformation matrix</strong> which we use to multiply the vertex co-ordinates of a shape to calculate the vertex co-ordinates of the transformed shape. For example if <span class="math notranslate nohighlight">\(A\)</span> is a transformation matrix for a particular transformation and <span class="math notranslate nohighlight">\((x,y,z)\)</span> are the co-ordinates of a vertex then we apply the transformation using</p>
 <div class="math notranslate nohighlight">
 \[\begin{split} \begin{pmatrix} x' \\ y' \\ x' \end{pmatrix} = A \cdot \begin{pmatrix} x \\ y \\ z \end{pmatrix}, \end{split}\]</div>
-<p>where <span class="math notranslate nohighlight">\((x',y',z')^\mathsf{T}\)</span> are the co-ordinates of the transformed point. Note that all vectors and co-ordinates are written as a column vector when multiplying by a matrix.</p>
+<p>where <span class="math notranslate nohighlight">\((x',y',z')\)</span> are the co-ordinates of the transformed point. Note that all vectors and co-ordinates are written as a column vector when multiplying by a matrix.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The co-ordinate system used by OpenGL is a <a href="https://en.wikipedia.org/wiki/Right-hand_rule" target="_blank">right-hand</a> 3D co-ordinate system (on your right hand the thumb represents the <span class="math notranslate nohighlight">\(x\)</span>-axis, the index finger the <span class="math notranslate nohighlight">\(y\)</span>-axis and the middle finger the <span class="math notranslate nohighlight">\(z\)</span>-axis) with the <span class="math notranslate nohighlight">\(x\)</span>-axis pointing to the right, the <span class="math notranslate nohighlight">\(y\)</span>-axis point upwards and the <span class="math notranslate nohighlight">\(z\)</span>-axis pointing out of the screen towards the user (<a class="reference internal" href="#opengl-co-ordinate-figure"><span class="std std-numref">Fig. 5.1</span></a>).</p>
@@ -420,11 +416,11 @@ document.write(`
 </div>
 <section id="translation">
 <span id="translation-section"></span><h2><span class="section-number">5.1. </span>Translation<a class="headerlink" href="#translation" title="Permalink to this heading">#</a></h2>
-<p>The <strong>translation</strong> transformation when applied to a set of points moves each point by the same amount. For example, consider the triangle in <a class="reference internal" href="#translation-figure"><span class="std std-numref">Fig. 5.2</span></a>, each of the vertices has been translated by the same <strong>translation vector</strong> <span class="math notranslate nohighlight">\(\vec{t}\)</span> which has that effect of moving the triangle.</p>
+<p>The <strong>translation</strong> transformation when applied to a set of points moves each point by the same amount. For example, consider the triangle in <a class="reference internal" href="#translation-figure"><span class="std std-numref">Fig. 5.2</span></a>, each of the vertices has been translated by the same vector <span class="math notranslate nohighlight">\(\mathbf{t}\)</span> which has that effect of moving the triangle.</p>
 <figure class="align-default" id="translation-figure">
 <a class="reference internal image-reference" href="../_images/05_translation.svg"><img alt="../_images/05_translation.svg" height="280" src="../_images/05_translation.svg" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 5.2 </span><span class="caption-text">Translation of a triangle by the translation vector <span class="math notranslate nohighlight">\(\vec{t}= (t_x, t_y, t_z)\)</span>.</span><a class="headerlink" href="#translation-figure" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 5.2 </span><span class="caption-text">Translation of a triangle by the translation vector <span class="math notranslate nohighlight">\(\mathbf{t}= (t_x, t_y, t_z)\)</span>.</span><a class="headerlink" href="#translation-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>A problem we have is that no transformation matrix exists for applying translation to the co-ordinates <span class="math notranslate nohighlight">\((x, y, z)\)</span>, i.e., we can’t find a matrix <span class="math notranslate nohighlight">\(Translate\)</span> such that</p>
@@ -446,7 +442,7 @@ document.write(`
     =
    \begin{pmatrix} x + t_x \\ y + t_y \\ z + t_z \\ 1 \end{pmatrix},
 \end{align*}\end{split}\]</div>
-<p>which is our desired translation. So the <strong>translation matrix</strong> for translating a set of points by the vector <span class="math notranslate nohighlight">\(\vec{t} = (t_x, t_y, t_z)\)</span> is</p>
+<p>which is our desired translation. So the <strong>translation matrix</strong> for translating a set of points by the vector <span class="math notranslate nohighlight">\(\mathbf{t} = (t_x, t_y, t_z)\)</span> is</p>
 <div class="math notranslate nohighlight" id="equation-eq-translation-matrix">
 <span class="eqno">(5.1)<a class="headerlink" href="#equation-eq-translation-matrix" title="Permalink to this equation">#</a></span>\[\begin{split} Translate = \begin{pmatrix}
     1 &amp; 0 &amp; 0 &amp; t_x \\
@@ -454,42 +450,46 @@ document.write(`
     0 &amp; 0 &amp; 1 &amp; t_z \\
     0 &amp; 0 &amp; 0 &amp; 1
 \end{pmatrix}. \end{split}\]</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Recall that OpenGL and glm use <a class="reference internal" href="04_vectors_and_matrices.html#column-major-order-section"><span class="std std-ref">column-major order</span></a>, so when coding transformation matrices into C++ we need to code the transpose of the matrix. So the translation matrix we are going to use is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} Translate = \begin{pmatrix}
+    1 &amp; 0 &amp; 0 &amp; 0 \\
+    0 &amp; 1 &amp; 0 &amp; 0 \\
+    0 &amp; 0 &amp; 1 &amp; 0 \\
+    t_x &amp; t_y &amp; t_z &amp; 1
+\end{pmatrix}.\end{split}\]</div>
+</div>
 <section id="translation-in-opengl">
 <h3><span class="section-number">5.1.1. </span>Translation in OpenGL<a class="headerlink" href="#translation-in-opengl" title="Permalink to this heading">#</a></h3>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Here we will be using the Maths library that we wrote in <a class="reference internal" href="04_vectors_and_matrices.html#vectors-and-matrices-section"><span class="std std-ref">4. Vectors and Matrices</span></a> so if you haven’t yet completed that you will need to do so before continuing.</p>
-</div>
 <p>Now we know the mathematical theory behind applying a transformation lets apply it to OpenGL. Compile and run the <strong>Lab05_Transformations</strong> project and you should be presented with a rectangle textured with our old friend Mario as shown in <a class="reference internal" href="#texture-rectangle-mario-figure"><span class="std std-numref">Fig. 5.3</span></a>.</p>
 <figure class="align-default" id="texture-rectangle-mario-figure">
 <a class="reference internal image-reference" href="../_images/05_mario.png"><img alt="../_images/05_mario.png" src="../_images/05_mario.png" style="width: 500px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 5.3 </span><span class="caption-text">A textured rectangle from <a class="reference internal" href="03_textures.html#textures-section"><span class="std std-ref">3. Textures</span></a>.</span><a class="headerlink" href="#texture-rectangle-mario-figure" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 5.3 </span><span class="caption-text">A textured rectangle from the lab on <a class="reference internal" href="03_textures.html#textures-section"><span class="std std-ref">textures</span></a>.</span><a class="headerlink" href="#texture-rectangle-mario-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>Lets translate the rectangle <span class="math notranslate nohighlight">\(0.4\)</span> to the right and <span class="math notranslate nohighlight">\(0.3\)</span> upwards (remember we are dealing with normalised device co-ordinates so the window co-ordinates are between <span class="math notranslate nohighlight">\(-1\)</span> and <span class="math notranslate nohighlight">\(1\)</span>). The transformation matrix to perform this translation is</p>
+<p>Lets translate the rectangle <span class="math notranslate nohighlight">\(0.4\)</span> to the right and <span class="math notranslate nohighlight">\(0.3\)</span> upwards (remember we are dealing with normalised device co-ordinates so the window co-ordinates are between <span class="math notranslate nohighlight">\(-1\)</span> and <span class="math notranslate nohighlight">\(1\)</span>). The transposed transformation matrix to perform this translation is</p>
 <div class="math notranslate nohighlight">
 \[\begin{split} Translate = \begin{pmatrix}
-    1 &amp; 0 &amp; 0 &amp; 0.4 \\
-    0 &amp; 1 &amp; 0 &amp; 0.3 \\
+    1 &amp; 0 &amp; 0 &amp; 0 \\
+    0 &amp; 1 &amp; 0 &amp; 0 \\
     0 &amp; 0 &amp; 1 &amp; 0 \\
-    0 &amp; 0 &amp; 0 &amp; 1
+    0.4 &amp; 0.3 &amp; 0 &amp; 1
 \end{pmatrix}. \end{split}\]</div>
 <p>In the <strong>Lab05_Transformations.cpp</strong> enter the following code just before we draw the triangles in the render loop.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Define the translation matrix</span>
-<span class="n">mat4</span><span class="w"> </span><span class="n">translate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mat4</span><span class="p">(</span><span class="mf">1.0f</span><span class="p">);</span>
-<span class="n">translate</span><span class="p">[</span><span class="mi">12</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.4</span><span class="p">;</span>
-<span class="n">translate</span><span class="p">[</span><span class="mi">13</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.3</span><span class="p">;</span>
-<span class="n">translate</span><span class="p">[</span><span class="mi">14</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
+<span class="n">glm</span><span class="o">::</span><span class="n">mat4</span><span class="w"> </span><span class="n">translate</span><span class="p">;</span>
+<span class="n">translate</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.4f</span><span class="p">,</span><span class="w"> </span><span class="n">translate</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.3f</span><span class="p">,</span><span class="w"> </span><span class="n">translate</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span>
 </pre></div>
 </div>
-<p>Recall that the indices increment down the columns because the <code class="docutils literal notranslate"><span class="pre">mat4</span></code> objects are defined using <a class="reference internal" href="04_vectors_and_matrices.html#column-major-order-section"><span class="std std-ref">column-major order</span></a>. So the index <code class="docutils literal notranslate"><span class="pre">12</span></code> refers to the element in row 1 column 4, index <code class="docutils literal notranslate"><span class="pre">13</span></code> refers to row 2 column 4 and index <code class="docutils literal notranslate"><span class="pre">14</span></code> refers to row 3 column 4.</p>
-<p>We need a way of passing the <code class="docutils literal notranslate"><span class="pre">translate</span></code> matrix to the shader. We do this using a <a href="https://www.khronos.org/opengl/wiki/Uniform_(GLSL)" target="_blank">uniform</a> like we did for the texture maps in <a class="reference internal" href="03_textures.html#uniforms-section"><span class="std std-ref">3. Textures</span></a>. Add the following code after we have defined the translation matrix.</p>
+<p>We need a way of passing the <code class="docutils literal notranslate"><span class="pre">translate</span></code> matrix to the shader. We do this using a <a href="https://www.khronos.org/opengl/wiki/Uniform_(GLSL)" target="_blank">uniform</a> like we did in the lab on <a class="reference internal" href="03_textures.html#uniforms-section"><span class="std std-ref">texture maps</span></a>. Add the following code after we have defined the translation matrix.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Send the transformation matrix to the shader</span>
-<span class="n">mat4</span><span class="w"> </span><span class="n">transformation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">translate</span><span class="p">;</span>
+<span class="n">glm</span><span class="o">::</span><span class="n">mat4</span><span class="w"> </span><span class="n">transformation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">translate</span><span class="p">;</span>
 <span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">transformationID</span><span class="p">;</span>
 <span class="n">transformationID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">glGetUniformLocation</span><span class="p">(</span><span class="n">shaderID</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;transformation&quot;</span><span class="p">);</span>
-<span class="n">glUniformMatrix4fv</span><span class="p">(</span><span class="n">transformationID</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">GL_FALSE</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">transformation</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+<span class="n">glUniformMatrix4fv</span><span class="p">(</span><span class="n">transformationID</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">GL_FALSE</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">transformation</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]);</span>
 </pre></div>
 </div>
 <p>Here we have created another matrix called <code class="docutils literal notranslate"><span class="pre">transformation</span></code> and copied the <code class="docutils literal notranslate"><span class="pre">translate</span></code> matrix into it (we have done this because we will be combining different transformations into a single matrix later). Then after getting the location of the <code class="docutils literal notranslate"><span class="pre">transformation</span></code> uniform using the <code class="docutils literal notranslate"><span class="pre">glGetUniformatLocation()</span></code> function we send a reference to the first element of the <code class="docutils literal notranslate"><span class="pre">transformation</span></code> matrix to the shaders using <code class="docutils literal notranslate"><span class="pre">glUniformMatrix4fv()</span></code> function.</p>
@@ -507,7 +507,7 @@ document.write(`
 <span class="p">{</span>
 <span class="w">    </span><span class="c1">// Output vertex position</span>
 <span class="w">    </span><span class="n">gl_Position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">transformation</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">vec4</span><span class="p">(</span><span class="n">position</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">);</span>
-<span class="w">    </span>
+
 <span class="w">    </span><span class="c1">// Output texture co-ordinates</span>
 <span class="w">    </span><span class="n">uv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UV</span><span class="p">;</span>
 <span class="p">}</span>
@@ -525,30 +525,37 @@ document.write(`
 <hr class="docutils" />
 <section id="a-maths-class">
 <h2><span class="section-number">5.2. </span>A Maths class<a class="headerlink" href="#a-maths-class" title="Permalink to this heading">#</a></h2>
-<p>Whilst it wasn’t particularly difficult to define the translation matrix, we may be doing this often so it makes sense to write a function to do this. Since we will also have other types of transformations we will create a <code class="docutils literal notranslate"><span class="pre">Maths</span></code> class to contain all of these function. If you open the <strong>maths.hpp</strong> file in the <strong>Lab05_Transformations</strong> project folder you will see it contains the code that you entered for <a class="reference internal" href="04_vectors_and_matrices.html#vectors-and-matrices-section"><span class="std std-ref">4. Vectors and Matrices</span></a>. In the <strong>maths.hpp</strong> file enter the following code to create a <code class="docutils literal notranslate"><span class="pre">Maths</span></code> class with a single method <code class="docutils literal notranslate"><span class="pre">translate()</span></code>.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Maths class</span>
+<p>Whilst it wasn’t particularly difficult to define the translation matrix, we may be doing this often so it makes sense to write a function to do this. Since we will also have other types of transformations we will create a <code class="docutils literal notranslate"><span class="pre">Maths</span></code> class to contain all of these function. If you open the <strong>maths.hpp</strong> file in the <strong>Lab05_Transformations</strong> project folder you will see that it is currently empty. Enter the following code to create a <code class="docutils literal notranslate"><span class="pre">Maths</span></code> class.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cmath&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;glm/glm.hpp&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;glm/gtx/io.hpp&gt;</span>
+
+<span class="c1">// Maths class</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">Maths</span>
 <span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
 <span class="w">    </span><span class="c1">// Transformation matrices</span>
-<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="n">mat4</span><span class="w"> </span><span class="n">translate</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">vec3</span><span class="w"> </span><span class="o">&amp;</span><span class="n">v</span><span class="p">);</span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="n">glm</span><span class="o">::</span><span class="n">mat4</span><span class="w"> </span><span class="n">translate</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">glm</span><span class="o">::</span><span class="n">vec3</span><span class="w"> </span><span class="o">&amp;</span><span class="n">v</span><span class="p">);</span>
 <span class="p">};</span>
 </pre></div>
 </div>
-<p>Then in the <strong>maths.cpp</strong> file enter the following method definition.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">mat4</span><span class="w"> </span><span class="nf">Maths::translate</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">vec3</span><span class="w"> </span><span class="o">&amp;</span><span class="n">v</span><span class="p">)</span>
+<p>Here we include the <code class="docutils literal notranslate"><span class="pre">iostream</span></code>, <code class="docutils literal notranslate"><span class="pre">cmath</span></code> and <code class="docutils literal notranslate"><span class="pre">glm</span></code> libraries before declaring our <code class="docutils literal notranslate"><span class="pre">Maths</span></code> class. We have also declared the method <code class="docutils literal notranslate"><span class="pre">translate()</span></code> that has a single input of a <code class="docutils literal notranslate"><span class="pre">glm::vec3</span></code> object.</p>
+<p>In the <strong>maths.cpp</strong> file enter the following method definition.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;common/maths.hpp&gt;</span>
+
+<span class="n">glm</span><span class="o">::</span><span class="n">mat4</span><span class="w"> </span><span class="nf">Maths::translate</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">glm</span><span class="o">::</span><span class="n">vec3</span><span class="w"> </span><span class="o">&amp;</span><span class="n">v</span><span class="p">)</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="n">mat4</span><span class="w"> </span><span class="n">T</span><span class="p">(</span><span class="mf">1.0f</span><span class="p">);</span>
-<span class="w">    </span><span class="n">T</span><span class="p">[</span><span class="mi">12</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
-<span class="w">    </span><span class="n">T</span><span class="p">[</span><span class="mi">13</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">y</span><span class="p">;</span>
-<span class="w">    </span><span class="n">T</span><span class="p">[</span><span class="mi">14</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">z</span><span class="p">;</span>
-<span class="w">    </span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">T</span><span class="p">;</span>
+<span class="w">    </span><span class="n">glm</span><span class="o">::</span><span class="n">mat4</span><span class="w"> </span><span class="n">translate</span><span class="p">(</span><span class="mf">1.0f</span><span class="p">);</span>
+<span class="w">    </span><span class="n">translate</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">translate</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">translate</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">z</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">translate</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>Here the <code class="docutils literal notranslate"><span class="pre">translate()</span></code> method takes in an input of a 3-element vector and returns the translation matrix that translates co-ordinates by this vector. We can now use this method to calculate our translation matrix. Comment out the code we used to define the <code class="docutils literal notranslate"><span class="pre">translate</span></code> matrix and enter the following.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">mat4</span><span class="w"> </span><span class="n">translate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Maths</span><span class="o">::</span><span class="n">translate</span><span class="p">(</span><span class="n">vec3</span><span class="p">(</span><span class="mf">0.5f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.3f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.2f</span><span class="p">));</span>
+<p>You will notice this is similar to the <code class="docutils literal notranslate"><span class="pre">translate</span></code> matrix we defined in the main program. We can now use this method to calculate any translation matrix. Comment out the code we used to define the <code class="docutils literal notranslate"><span class="pre">translate</span></code> matrix in the main program and enter the following.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">glm</span><span class="o">::</span><span class="n">mat4</span><span class="w"> </span><span class="n">translate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Maths</span><span class="o">::</span><span class="n">translate</span><span class="p">(</span><span class="n">glm</span><span class="o">::</span><span class="n">vec3</span><span class="p">(</span><span class="mf">0.4f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.3f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">));</span>
 </pre></div>
 </div>
 <p>Running the program you should see no change to the output but we can now easily define translation matrices. Experiment with different values for the translation vector to see the effects it has.</p>
@@ -595,13 +602,11 @@ document.write(`
 \end{pmatrix}.\end{split}\]</div>
 <p>Enter the following code into the main program after we defined the <code class="docutils literal notranslate"><span class="pre">translation</span></code> matrix.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Define the scaling matrix</span>
-<span class="n">mat4</span><span class="w"> </span><span class="n">scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mat4</span><span class="p">(</span><span class="mf">1.0f</span><span class="p">);</span>
-<span class="n">scale</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mf">0.4f</span><span class="p">;</span>
-<span class="n">scale</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mf">0.3f</span><span class="p">;</span>
-<span class="n">scale</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">;</span>
+<span class="n">glm</span><span class="o">::</span><span class="n">mat4</span><span class="w"> </span><span class="n">scale</span><span class="p">;</span>
+<span class="n">scale</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.4f</span><span class="p">,</span><span class="w"> </span><span class="n">scale</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.3f</span><span class="p">,</span><span class="w"> </span><span class="n">scale</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">;</span>
 </pre></div>
 </div>
-<p>Note that the indices <code class="docutils literal notranslate"><span class="pre">0</span></code>, <code class="docutils literal notranslate"><span class="pre">5</span></code> and <code class="docutils literal notranslate"><span class="pre">10</span></code> refer to the elements on the main diagonal of a <code class="docutils literal notranslate"><span class="pre">mat4</span></code> object. Also, set the <code class="docutils literal notranslate"><span class="pre">transformation</span></code> matrix equal to the <code class="docutils literal notranslate"><span class="pre">scale</span></code> matrix.</p>
+<p>Note that the indices <code class="docutils literal notranslate"><span class="pre">[0][0]</span></code>, <code class="docutils literal notranslate"><span class="pre">[1][1]</span></code> and <code class="docutils literal notranslate"><span class="pre">[2][2]</span></code> refer to the elements on the main diagonal of a <code class="docutils literal notranslate"><span class="pre">glm::mat4</span></code> object. Also, set the <code class="docutils literal notranslate"><span class="pre">transformation</span></code> matrix equal to the <code class="docutils literal notranslate"><span class="pre">scale</span></code> matrix.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">glm</span><span class="o">::</span><span class="n">mat4</span><span class="w"> </span><span class="n">transformation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scale</span><span class="p">;</span>
 </pre></div>
 </div>
@@ -613,23 +618,20 @@ document.write(`
 </figcaption>
 </figure>
 <p>Like with the translation matrix, it would be useful to have a Maths class method to calculate a scaling matrix. Add the following method prototype to the <code class="docutils literal notranslate"><span class="pre">Maths</span></code> class.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="n">mat4</span><span class="w"> </span><span class="nf">scale</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">vec3</span><span class="w"> </span><span class="o">&amp;</span><span class="n">v</span><span class="p">);</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="n">glm</span><span class="o">::</span><span class="n">mat4</span><span class="w"> </span><span class="nf">scale</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">glm</span><span class="o">::</span><span class="n">vec3</span><span class="w"> </span><span class="o">&amp;</span><span class="n">v</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>Then define the method by entering the following code in the <strong>maths.cpp</strong> file.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">mat4</span><span class="w"> </span><span class="nf">Maths::scale</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">vec3</span><span class="w"> </span><span class="o">&amp;</span><span class="n">v</span><span class="p">)</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">glm</span><span class="o">::</span><span class="n">mat4</span><span class="w"> </span><span class="nf">Maths::scale</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">glm</span><span class="o">::</span><span class="n">vec3</span><span class="w"> </span><span class="o">&amp;</span><span class="n">v</span><span class="p">)</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="n">mat4</span><span class="w"> </span><span class="n">S</span><span class="p">(</span><span class="mf">1.0f</span><span class="p">);</span>
-<span class="w">    </span><span class="n">S</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
-<span class="w">    </span><span class="n">S</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">y</span><span class="p">;</span>
-<span class="w">    </span><span class="n">S</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">z</span><span class="p">;</span>
-<span class="w">    </span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">S</span><span class="p">;</span>
+<span class="w">    </span><span class="n">glm</span><span class="o">::</span><span class="n">mat4</span><span class="w"> </span><span class="n">scale</span><span class="p">(</span><span class="mf">1.0f</span><span class="p">);</span>
+<span class="w">    </span><span class="n">scale</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">x</span><span class="p">;</span><span class="w"> </span><span class="n">scale</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">y</span><span class="p">;</span><span class="w"> </span><span class="n">scale</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">z</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">scale</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 <p>Check that the method works by commenting out the code used to define the <code class="docutils literal notranslate"><span class="pre">scale</span></code> matrix and add the following.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">mat4</span><span class="w"> </span><span class="n">scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Maths</span><span class="o">::</span><span class="n">scale</span><span class="p">(</span><span class="n">vec3</span><span class="p">(</span><span class="mf">0.3f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.4f</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">));</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">glm</span><span class="o">::</span><span class="n">mat4</span><span class="w"> </span><span class="n">scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Maths</span><span class="o">::</span><span class="n">scale</span><span class="p">(</span><span class="n">glm</span><span class="o">::</span><span class="n">vec3</span><span class="p">(</span><span class="mf">0.4f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.3f</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">));</span>
 </pre></div>
 </div>
 <p>Running the program you should see no change to the image from <a class="reference internal" href="#scaling-rectangle-figure"><span class="std std-numref">Fig. 5.6</span></a>.Experiment with different scaling vectors to see the affect this has.</p>
@@ -642,7 +644,7 @@ document.write(`
 <p><span class="caption-number">Fig. 5.7 </span><span class="caption-text">Scaling applied to a triangle not centred at <span class="math notranslate nohighlight">\((0,0,0)\)</span>.</span><a class="headerlink" href="#scaling-not-centred-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>If the desired result is to resize the shape whilst keeping its dimensions and location the same we first need to translate the vertex co-ordinates by <span class="math notranslate nohighlight">\(-\vec{c}\)</span> where <span class="math notranslate nohighlight">\(\vec{c}\)</span> is the centre of volume for the shape so that it is at <span class="math notranslate nohighlight">\((0,0,0)\)</span>. Then we can apply the scaling before translating by <span class="math notranslate nohighlight">\(\vec{c}\)</span> so that the centre of volume is back at the original position (<a class="reference internal" href="#scaling-about-centre-figure"><span class="std std-numref">Fig. 5.8</span></a>).</p>
+<p>If the desired result is to resize the shape whilst keeping its dimensions and location the same we first need to translate the vertex co-ordinates by <span class="math notranslate nohighlight">\(-\mathbf{c}\)</span> where <span class="math notranslate nohighlight">\(\mathbf{c}\)</span> is the centre of volume for the shape so that it is at <span class="math notranslate nohighlight">\((0,0,0)\)</span>. Then we can apply the scaling before translating by <span class="math notranslate nohighlight">\(\mathbf{c}\)</span> so that the centre of volume is back at the original position (<a class="reference internal" href="#scaling-about-centre-figure"><span class="std std-numref">Fig. 5.8</span></a>).</p>
 <figure class="align-default" id="scaling-about-centre-figure">
 <a class="reference internal image-reference" href="../_images/05_scaling_about_centre.svg"><img alt="../_images/05_scaling_about_centre.svg" src="../_images/05_scaling_about_centre.svg" width="700" /></a>
 <figcaption>
@@ -668,12 +670,12 @@ document.write(`
     \begin{pmatrix}
         1 &amp; 0 &amp; 0 &amp; 0 \\
         0 &amp; \cos(\theta) &amp; -\sin(\theta) &amp; 0 \\
-        0 &amp; \sin(\theta) &amp; \cos(\theta) &amp; 0 \\
+        0 &amp; \sin(\theta) &amp;  \cos(\theta) &amp; 0 \\
         0 &amp; 0 &amp; 0 &amp; 1
     \end{pmatrix}, \\
     R_y &amp;=
     \begin{pmatrix}
-        \cos(\theta) &amp; 0 &amp; \sin(\theta) &amp; 0 \\
+         \cos(\theta) &amp; 0 &amp; \sin(\theta) &amp; 0 \\
         0 &amp; 1 &amp; 0 &amp; 0 \\
         -\sin(\theta) &amp; 0 &amp; \cos(\theta) &amp; 0 \\
         0 &amp; 0 &amp; 0 &amp; 1
@@ -681,7 +683,7 @@ document.write(`
     R_z &amp;=
     \begin{pmatrix}
         \cos(\theta) &amp; -\sin(\theta) &amp; 0 &amp; 0 \\
-        \sin(\theta) &amp; \cos(\theta) &amp; 0 &amp; 0 \\
+        \sin(\theta) &amp;  \cos(\theta) &amp; 0 &amp; 0 \\
         0 &amp; 0 &amp; 1 &amp; 0 \\
         0 &amp; 0 &amp; 0 &amp; 1
     \end{pmatrix}.
@@ -698,10 +700,10 @@ Derivation of the rotation matrices (click to show)<div class="sd-summary-down d
 <figure class="align-default" id="rotation-figure">
 <a class="reference internal image-reference" href="../_images/05_rotation.svg"><img alt="../_images/05_rotation.svg" height="300" src="../_images/05_rotation.svg" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 5.10 </span><span class="caption-text">Rotating the vector <span class="math notranslate nohighlight">\(\vec{a}\)</span> anti-clockwise by angle <span class="math notranslate nohighlight">\(\theta\)</span> to the vector <span class="math notranslate nohighlight">\(\vec{b}\)</span>.</span><a class="headerlink" href="#rotation-figure" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 5.10 </span><span class="caption-text">Rotating the vector <span class="math notranslate nohighlight">\(\mathbf{a}\)</span> anti-clockwise by angle <span class="math notranslate nohighlight">\(\theta\)</span> to the vector <span class="math notranslate nohighlight">\(\mathbf{b}\)</span>.</span><a class="headerlink" href="#rotation-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p class="sd-card-text">Consider <a class="reference internal" href="#rotation-figure"><span class="std std-numref">Fig. 5.10</span></a> where the vector <span class="math notranslate nohighlight">\(\vec{a}\)</span> is rotated by angle <span class="math notranslate nohighlight">\(\theta\)</span> to the vector <span class="math notranslate nohighlight">\(\vec{b}\)</span>. To get this rotation we first consider the rotation of the vector <span class="math notranslate nohighlight">\(\vec{t}\)</span>, which has the same length as <span class="math notranslate nohighlight">\(\vec{a}\)</span> and points along the <span class="math notranslate nohighlight">\(x\)</span>-axis, by angle <span class="math notranslate nohighlight">\(\phi\)</span> to get to <span class="math notranslate nohighlight">\(\vec{a}\)</span>. If we form a right-angled triangle (the blue one) then we know the length of the hypotenuse, <span class="math notranslate nohighlight">\(|\vec{a}|\)</span>, and the angle so we can calculate the lengths of the adjacent and opposite sides using trigonometry. Remember our trig ratios (SOH-CAH-TOA)</p>
+<p class="sd-card-text">Consider <a class="reference internal" href="#rotation-figure"><span class="std std-numref">Fig. 5.10</span></a> where the vector <span class="math notranslate nohighlight">\(\mathbf{a}\)</span> is rotated by angle <span class="math notranslate nohighlight">\(\theta\)</span> to the vector <span class="math notranslate nohighlight">\(\mathbf{b}\)</span>. To get this rotation we first consider the rotation of the vector <span class="math notranslate nohighlight">\(\mathbf{t}\)</span>, which has the same length as <span class="math notranslate nohighlight">\(\mathbf{a}\)</span> and points along the <span class="math notranslate nohighlight">\(x\)</span>-axis, by angle <span class="math notranslate nohighlight">\(\phi\)</span> to get to <span class="math notranslate nohighlight">\(\mathbf{a}\)</span>. If we form a right-angled triangle (the blue one) then we know the length of the hypotenuse, <span class="math notranslate nohighlight">\(|\mathbf{a}|\)</span>, and the angle so we can calculate the lengths of the adjacent and opposite sides using trigonometry. Remember our trig ratios (SOH-CAH-TOA)</p>
 <div class="math notranslate nohighlight">
 \[ \begin{align*}
     \sin(\phi) &amp;= \frac{\textsf{opposite}}{\textsf{hypotenuse}}, &amp;
@@ -714,17 +716,17 @@ Derivation of the rotation matrices (click to show)<div class="sd-summary-down d
     \textsf{adjacent} &amp;= \textsf{hypotenuse} \cdot \cos(\phi), \\
     \textsf{opposite} &amp;= \textsf{hypotenuse} \cdot \sin(\phi).
 \end{align*} \end{split}\]</div>
-<p class="sd-card-text">Since <span class="math notranslate nohighlight">\(a_x\)</span> and <span class="math notranslate nohighlight">\(a_y\)</span> are the lengths of the adjacent and opposite sides respectively and <span class="math notranslate nohighlight">\(|\vec{a}|\)</span> is the length of the hypotenuse we have</p>
+<p class="sd-card-text">Since <span class="math notranslate nohighlight">\(a_x\)</span> and <span class="math notranslate nohighlight">\(a_y\)</span> are the lengths of the adjacent and opposite sides respectively and <span class="math notranslate nohighlight">\(|\mathbf{a}|\)</span> is the length of the hypotenuse we have</p>
 <div class="math notranslate nohighlight">
 \[\begin{split} \begin{align*}
-    a_x &amp;= |\vec{a}| \cos(\phi), \\
-    a_y &amp;= |\vec{a}| \sin(\phi).
+    a_x &amp;= |\mathbf{a}| \cos(\phi), \\
+    a_y &amp;= |\mathbf{a}| \sin(\phi).
 \end{align*} \end{split}\]</div>
-<p class="sd-card-text">Now consider the rotation from <span class="math notranslate nohighlight">\(\vec{c}\)</span> by the angle <span class="math notranslate nohighlight">\(\phi + \theta\)</span> to get to <span class="math notranslate nohighlight">\(\vec{b}\)</span>. Using the same method as before we have</p>
+<p class="sd-card-text">Now consider the rotation from <span class="math notranslate nohighlight">\(\mathbf{c}\)</span> by the angle <span class="math notranslate nohighlight">\(\phi + \theta\)</span> to get to <span class="math notranslate nohighlight">\(\mathbf{b}\)</span>. Using the same method as before we have</p>
 <div class="math notranslate nohighlight">
 \[\begin{split} \begin{align*}
-    b_x &amp;= |\vec{a}| \cos(\phi + \theta), \\
-    b_y &amp;= |\vec{a}| \sin(\phi + \theta).
+    b_x &amp;= |\mathbf{a}| \cos(\phi + \theta), \\
+    b_y &amp;= |\mathbf{a}| \sin(\phi + \theta).
 \end{align*} \end{split}\]</div>
 <p class="sd-card-text">We can rewrite <span class="math notranslate nohighlight">\(\cos(\phi+\theta)\)</span> and <span class="math notranslate nohighlight">\(\sin(\phi+\theta)\)</span> using <a href="https://en.wikipedia.org/wiki/List_of_trigonometric_identities#" target="_blank">trigonometric identities</a></p>
 <div class="math notranslate nohighlight">
@@ -735,10 +737,10 @@ Derivation of the rotation matrices (click to show)<div class="sd-summary-down d
 <p class="sd-card-text">so</p>
 <div class="math notranslate nohighlight">
 \[\begin{split} \begin{align*}
-    v_x &amp;= |\vec{a}| \cos(\phi) \cos(\theta) - |\vec{a}| \sin(\phi) \sin(\theta), \\
-    v_y &amp;= |\vec{a}| \sin(\phi) \cos(\theta) + |\vec{a}| \cos(\phi) \sin(\theta).
+    v_x &amp;= |\mathbf{a}| \cos(\phi) \cos(\theta) - |\mathbf{a}| \sin(\phi) \sin(\theta), \\
+    v_y &amp;= |\mathbf{a}| \sin(\phi) \cos(\theta) + |\mathbf{a}| \cos(\phi) \sin(\theta).
 \end{align*} \end{split}\]</div>
-<p class="sd-card-text">Since <span class="math notranslate nohighlight">\( a_x = |\vec{a}| \cos(\phi)\)</span> and <span class="math notranslate nohighlight">\(a_y = |\vec{a}| \sin(\phi)\)</span> then</p>
+<p class="sd-card-text">Since <span class="math notranslate nohighlight">\( a_x = |\mathbf{a}| \cos(\phi)\)</span> and <span class="math notranslate nohighlight">\(a_y = |\mathbf{a}| \sin(\phi)\)</span> then</p>
 <div class="math notranslate nohighlight">
 \[\begin{split} \begin{align*}
     b_x &amp;= a_x \cos(\theta) - a_y \sin(\theta), \\
@@ -751,12 +753,12 @@ Derivation of the rotation matrices (click to show)<div class="sd-summary-down d
     \begin{pmatrix} \cos(\theta) &amp; -\sin(\theta) \\ \sin(\theta) &amp; \cos(\theta) \end{pmatrix}
     \begin{pmatrix} a_x \\ a_y \end{pmatrix},
 \end{align*} \end{split}\]</div>
-<p class="sd-card-text">so the transformation matrix for rotating around the <span class="math notranslate nohighlight">\(z\)</span>-axis in 2D is</p>
+<p class="sd-card-text">so the transformation (non-transposed) matrix for rotating around the <span class="math notranslate nohighlight">\(z\)</span>-axis in 2D is</p>
 <div class="math notranslate nohighlight">
 \[\begin{split} \begin{pmatrix} \cos(\theta) &amp; -\sin(\theta) \\ \sin(\theta) &amp; \cos(\theta) \end{pmatrix}. \end{split}\]</div>
 <p class="sd-card-text">We need a <span class="math notranslate nohighlight">\(4\times 4\)</span> matrix to represent 3D rotation around the <span class="math notranslate nohighlight">\(z\)</span>-axis so we replace the 3rd and 4th row and columns with the 3rd and 4th row and column from the <span class="math notranslate nohighlight">\(4\times 4\)</span> identity matrix giving</p>
 <div class="math notranslate nohighlight">
-\[\begin{split} \begin{pmatrix} 
+\[\begin{split} R_z = \begin{pmatrix}
     \cos(\theta) &amp; -\sin(\theta) &amp; 0 &amp; 0 \\
     \sin(\theta) &amp; \cos(\theta) &amp; 0 &amp; 0 \\
     0 &amp; 0 &amp; 1 &amp; 0 \\
@@ -766,29 +768,24 @@ Derivation of the rotation matrices (click to show)<div class="sd-summary-down d
 </div>
 </details><section id="rotation-in-opengl">
 <h3><span class="section-number">5.4.1. </span>Rotation in OpenGL<a class="headerlink" href="#rotation-in-opengl" title="Permalink to this heading">#</a></h3>
-<p>Lets rotate our original rectangle anti-clockwise about the <span class="math notranslate nohighlight">\(z\)</span>-axis by <span class="math notranslate nohighlight">\(\theta = 45^\circ\)</span>. The rotation matrix to do this is</p>
+<p>Lets rotate our original rectangle anti-clockwise about the <span class="math notranslate nohighlight">\(z\)</span>-axis by <span class="math notranslate nohighlight">\(\theta = 45^\circ\)</span>. The transposed rotation matrix to do this is</p>
 <div class="math notranslate nohighlight">
-\[\begin{split} \begin{pmatrix}
-    \cos(45^\circ) &amp; -\sin(45^\circ) &amp; 0 &amp; 0 \\
-    \sin(45^\circ) &amp; \cos(45^\circ) &amp; 0 &amp; 0 \\
-    0 &amp; 0 &amp; 1 &amp; 0 \\
-    0 &amp; 0 &amp; 0 &amp; 1
-\end{pmatrix} =
+\[\begin{split} Rotate =
 \begin{pmatrix}
-    0.707 &amp; -0.707 &amp; 0 &amp; 0 \\
-    0.707 &amp; 0.707 &amp; 0 &amp; 0 \\
+     \cos(45^\circ) &amp; \sin(45^\circ) &amp; 0 &amp; 0 \\
+    -\sin(45^\circ) &amp; \cos(45^\circ) &amp; 0 &amp; 0 \\
     0 &amp; 0 &amp; 1 &amp; 0 \\
     0 &amp; 0 &amp; 0 &amp; 1
 \end{pmatrix}. \end{split}\]</div>
-<p>Define the rotation matrix using the code below.</p>
+<p>Define the rotation matrix using the code below</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Define the rotation matrix</span>
-<span class="n">mat4</span><span class="w"> </span><span class="n">rotate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mat4</span><span class="p">(</span><span class="mf">1.0f</span><span class="p">);</span>
-<span class="kt">float</span><span class="w"> </span><span class="n">angle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">45.0f</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">M_PI</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">180.0f</span><span class="p">;</span>
-<span class="n">rotate</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span><span class="p">),</span><span class="w"> </span><span class="n">rotate</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">);</span>
-<span class="n">rotate</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">),</span><span class="w"> </span><span class="n">rotate</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w">   </span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span><span class="p">);</span>
+<span class="n">glm</span><span class="o">::</span><span class="n">mat4</span><span class="w"> </span><span class="n">rotate</span><span class="p">;</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">angle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">45.0f</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">3.1416f</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">180.0f</span><span class="p">;</span>
+<span class="n">rotate</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span><span class="p">),</span><span class="w"> </span><span class="n">rotate</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">);</span>
+<span class="n">rotate</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">),</span><span class="w"> </span><span class="n">rotate</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>Note that here we needed to convert <span class="math notranslate nohighlight">\(45^\circ\)</span> into <a href="https://en.wikipedia.org/wiki/Radian" target="_blank"><strong>radians</strong></a> since OpenGL expects angles to be in radians. A radian is equal to <span class="math notranslate nohighlight">\(\dfrac{\pi}{180}\)</span> degrees and <code class="docutils literal notranslate"><span class="pre">M_PI</span></code> is the constant <span class="math notranslate nohighlight">\(\pi\)</span> from the <code class="docutils literal notranslate"><span class="pre">cmath</span></code> library. Set the <code class="docutils literal notranslate"><span class="pre">transformation</span></code> matrix equal to the <code class="docutils literal notranslate"><span class="pre">rotate</span></code> matrix, run the program and you should see the rotated rectangle shown in <a class="reference internal" href="#rotation-rectangle-figure"><span class="std std-numref">Fig. 5.11</span></a>.</p>
+<p>Here we also needed to convert <span class="math notranslate nohighlight">\(45^\circ\)</span> into <a href="https://en.wikipedia.org/wiki/Radian" target="_blank"><strong>radians</strong></a> since OpenGL expects angles to be in radians (1 radian is equal to <span class="math notranslate nohighlight">\(\pi/180\)</span> degrees). Set the <code class="docutils literal notranslate"><span class="pre">transformation</span></code> matrix equal to the <code class="docutils literal notranslate"><span class="pre">rotate</span></code> matrix, run the program and you should see the rotated rectangle shown in <a class="reference internal" href="#rotation-rectangle-figure"><span class="std std-numref">Fig. 5.11</span></a>.</p>
 <figure class="align-default" id="rotation-rectangle-figure">
 <a class="reference internal image-reference" href="../_images/05_rotation.png"><img alt="../_images/05_rotation.png" src="../_images/05_rotation.png" style="width: 500px;" /></a>
 <figcaption>
@@ -798,32 +795,32 @@ Derivation of the rotation matrices (click to show)<div class="sd-summary-down d
 </section>
 <section id="axis-angle-rotation">
 <span id="axis-angle-rotation-section"></span><h3><span class="section-number">5.4.2. </span>Axis-angle rotation<a class="headerlink" href="#axis-angle-rotation" title="Permalink to this heading">#</a></h3>
-<p>The three rotation transformations are only useful if we want to only rotate around one of the three co-ordinate axes. A more useful transformation is the rotation around the axis that points in the direction of a vector, <span class="math notranslate nohighlight">\(\vec{v}\)</span> say, which has its tail at (0,0,0) (<a class="reference internal" href="#axis-angle-rotation-figure"><span class="std std-numref">Fig. 5.12</span></a>).</p>
+<p>The three rotation transformations are only useful if we want to only rotate around one of the three co-ordinate axes. A more useful transformation is the rotation around the axis that points in the direction of a vector, <span class="math notranslate nohighlight">\(\mathbf{v}\)</span> say, which has its tail at (0,0,0) (<a class="reference internal" href="#axis-angle-rotation-figure"><span class="std std-numref">Fig. 5.12</span></a>).</p>
 <figure class="align-default" id="axis-angle-rotation-figure">
-<a class="reference internal image-reference" href="../_images/05_axis_angle_rotation.svg"><img alt="../_images/05_axis_angle_rotation.svg" height="200" src="../_images/05_axis_angle_rotation.svg" /></a>
+<a class="reference internal image-reference" href="../_images/05_axis_angle_rotation.svg"><img alt="../_images/05_axis_angle_rotation.svg" height="300" src="../_images/05_axis_angle_rotation.svg" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 5.12 </span><span class="caption-text">Axis-angle rotation.</span><a class="headerlink" href="#axis-angle-rotation-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>The transformation matrix for rotation around a unit vector <span class="math notranslate nohighlight">\(\hat{\vec{v}} = (v_x, v_y, v_z)\)</span>, anti-clockwise by angle <span class="math notranslate nohighlight">\(\theta\)</span> when looking down the vector is.</p>
+<p>The transposed transformation matrix for rotation around a unit vector <span class="math notranslate nohighlight">\(\hat{\mathbf{v}} = (v_x, v_y, v_z)\)</span>, anti-clockwise by angle <span class="math notranslate nohighlight">\(\theta\)</span> when looking down the vector is.</p>
 <div class="math notranslate nohighlight" id="equation-eq-axis-angle-rotation-matrix">
 <span class="eqno">(5.3)<a class="headerlink" href="#equation-eq-axis-angle-rotation-matrix" title="Permalink to this equation">#</a></span>\[\begin{split} \begin{align*}
     Rotate =
     \begin{pmatrix}
-        v_x^2(1 - \cos(\theta)) + \cos(\theta) &amp;
+        v_x^2 (1 - \cos(\theta)) + \cos(\theta) &amp;
         v_xv_y(1 - \cos(\theta)) + v_z\sin(\theta) &amp;
-        v_xv_z(1 - \cos(\theta)) + v_y\sin(\theta) &amp;
-        0 \\
-        v_xv_y(1 - \cos(\theta)) + v_z\sin(\theta) &amp;
-        v_y^2(1 - \cos(\theta)) + \cos(\theta) &amp;
-        v_yv_z(1 - \cos(\theta)) - v_x\sin(\theta) &amp;
-        0 \\
         v_xv_z(1 - \cos(\theta)) - v_y\sin(\theta) &amp;
+        0 \\
+        v_xv_y(1 - \cos(\theta)) - v_z\sin(\theta) &amp;
+         v_y^2(1 - \cos(\theta)) + \cos(\theta) &amp;
         v_yv_z(1 - \cos(\theta)) + v_x\sin(\theta) &amp;
-        v_z^2(1 - \cos(\theta)) + \cos(\theta) &amp;
+        0 \\
+        v_xv_z(1 - \cos(\theta)) + v_y\sin(\theta) &amp;
+        v_yv_z(1 - \cos(\theta)) - v_x\sin(\theta) &amp;
+        v_z^2 (1 - \cos(\theta)) + \cos(\theta) &amp;
         0 \\
         0 &amp; 0 &amp; 0 &amp; 1
-    \end{pmatrix}
+    \end{pmatrix}.
 \end{align*} \end{split}\]</div>
 <p>Again, you don’t really need to know how this is derived but if you are curious click on the dropdown link below.</p>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
@@ -833,9 +830,9 @@ Derivation of the axis-angle rotation matrix (click to show)<div class="sd-summa
 <div class="sd-summary-up docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
-<p class="sd-card-text">The rotation about the unit vector <span class="math notranslate nohighlight">\(\hat{\vec{v}} = (v_x, v_y, v_z)\)</span> by angle <span class="math notranslate nohighlight">\(\theta\)</span> is the <a class="reference internal" href="#composite-transformations-section"><span class="std std-ref">composition</span></a> of 5 separate rotations:</p>
+<p class="sd-card-text">The rotation about the unit vector <span class="math notranslate nohighlight">\(\hat{\mathbf{v}} = (v_x, v_y, v_z)\)</span> by angle <span class="math notranslate nohighlight">\(\theta\)</span> is the <a class="reference internal" href="#composite-transformations-section"><span class="std std-ref">composition</span></a> of 5 separate rotations:</p>
 <ol class="arabic simple">
-<li><p class="sd-card-text">Rotate <span class="math notranslate nohighlight">\(\hat{\vec{v}}\)</span> around the <span class="math notranslate nohighlight">\(x\)</span>-axis so that it is in the <span class="math notranslate nohighlight">\(xz\)</span>-plane (the <span class="math notranslate nohighlight">\(y\)</span> component of the vector is 0);</p></li>
+<li><p class="sd-card-text">Rotate <span class="math notranslate nohighlight">\(\hat{\mathbf{v}}\)</span> around the <span class="math notranslate nohighlight">\(x\)</span>-axis so that it is in the <span class="math notranslate nohighlight">\(xz\)</span>-plane (the <span class="math notranslate nohighlight">\(y\)</span> component of the vector is 0);</p></li>
 <li><p class="sd-card-text">Rotate the vector around the <span class="math notranslate nohighlight">\(y\)</span>-axis so that it points along the <span class="math notranslate nohighlight">\(z\)</span>-axis (the <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> components are 0 and the <span class="math notranslate nohighlight">\(z\)</span> component is a positive number);</p></li>
 <li><p class="sd-card-text">Perform the rotation around the <span class="math notranslate nohighlight">\(z\)</span>-axis;</p></li>
 <li><p class="sd-card-text">Reverse the rotation around the <span class="math notranslate nohighlight">\(y\)</span>-axis;</p></li>
@@ -845,18 +842,18 @@ Derivation of the axis-angle rotation matrix (click to show)<div class="sd-summa
 <figure class="align-default" id="axis-angle-rotation1-figure">
 <a class="reference internal image-reference" href="../_images/05_axis_angle_rotation_1.svg"><img alt="../_images/05_axis_angle_rotation_1.svg" height="250" src="../_images/05_axis_angle_rotation_1.svg" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 5.13 </span><span class="caption-text">Rotate <span class="math notranslate nohighlight">\(\vec{v}\)</span> around the <span class="math notranslate nohighlight">\(x\)</span>-axis</span><a class="headerlink" href="#axis-angle-rotation1-figure" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 5.13 </span><span class="caption-text">Rotate <span class="math notranslate nohighlight">\(\mathbf{v}\)</span> around the <span class="math notranslate nohighlight">\(x\)</span>-axis</span><a class="headerlink" href="#axis-angle-rotation1-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p class="sd-card-text">Therefore <span class="math notranslate nohighlight">\(\cos(\theta) = \dfrac{v_z}{\sqrt{v_y^2 + v_z^2}}\)</span> and <span class="math notranslate nohighlight">\(\sin(\theta) = \dfrac{v_y}{\sqrt{v_y^2 + v_z^2}}\)</span> so the rotation matrix is</p>
 <div class="math notranslate nohighlight">
-\[\begin{split} R_1 = \begin{pmatrix} 
-    1 &amp; 0 &amp; 0 &amp; 0 \\ 
-    0 &amp; \dfrac{v_z}{\sqrt{v_y^2 + v_z^2}} &amp; -\dfrac{v_y}{\sqrt{v_y^2 + v_z^2}} &amp; 0 \\
-    0 &amp; \dfrac{v_x}{\sqrt{v_y^2 + v_z^2}} &amp;  \dfrac{v_z}{\sqrt{v_y^2 + v_z^2}} &amp; 0 \\
+\[\begin{split} R_1 = \begin{pmatrix}
+    1 &amp; 0 &amp; 0 &amp; 0 \\
+    0 &amp; \dfrac{v_z}{\sqrt{v_y^2 + v_z^2}} &amp; -\dfrac{v_x}{\sqrt{v_y^2 + v_z^2}} &amp; 0 \\
+    0 &amp; \dfrac{v_y}{\sqrt{v_y^2 + v_z^2}} &amp;  \dfrac{v_z}{\sqrt{v_y^2 + v_z^2}} &amp; 0 \\
     0 &amp; 0 &amp; 0 &amp; 1
 \end{pmatrix}.\end{split}\]</div>
-<p class="sd-card-text">The rotation around the <span class="math notranslate nohighlight">\(y\)</span>-axis is achieved by forming another right-angled triangle in the <span class="math notranslate nohighlight">\(xz\)</span>-plane where <span class="math notranslate nohighlight">\(\theta\)</span> has an adjacent side of length <span class="math notranslate nohighlight">\(\sqrt{v_y^2 + v_z^2}\)</span>, an opposite side of length <span class="math notranslate nohighlight">\(v_x\)</span> and a hypotenuse of length 1 since <span class="math notranslate nohighlight">\(\hat{\vec{v}}\)</span> is a unit vector (<a class="reference internal" href="#axis-angle-rotation2-figure"><span class="std std-numref">Fig. 5.14</span></a>).</p>
+<p class="sd-card-text">The rotation around the <span class="math notranslate nohighlight">\(y\)</span>-axis is achieved by forming another right-angled triangle in the <span class="math notranslate nohighlight">\(xz\)</span>-plane where <span class="math notranslate nohighlight">\(\theta\)</span> has an adjacent side of length <span class="math notranslate nohighlight">\(\sqrt{v_y^2 + v_z^2}\)</span>, an opposite side of length <span class="math notranslate nohighlight">\(v_x\)</span> and a hypotenuse of length 1 since <span class="math notranslate nohighlight">\(\hat{\mathbf{v}}\)</span> is a unit vector (<a class="reference internal" href="#axis-angle-rotation2-figure"><span class="std std-numref">Fig. 5.14</span></a>).</p>
 <figure class="align-default" id="axis-angle-rotation2-figure">
 <a class="reference internal image-reference" href="../_images/05_axis_angle_rotation_2.svg"><img alt="../_images/05_axis_angle_rotation_2.svg" height="250" src="../_images/05_axis_angle_rotation_2.svg" /></a>
 <figcaption>
@@ -865,7 +862,7 @@ Derivation of the axis-angle rotation matrix (click to show)<div class="sd-summa
 </figure>
 <p class="sd-card-text">Therefore <span class="math notranslate nohighlight">\(\cos(\theta) = \sqrt{v_y^2 + v_z^2}\)</span> and <span class="math notranslate nohighlight">\(\sin(\theta) = v_x\)</span>. Note that here we are rotating in the clockwise direction so the rotation matrix is</p>
 <div class="math notranslate nohighlight">
-\[\begin{split} R_2 = \begin{pmatrix} 
+\[\begin{split} R_2 = \begin{pmatrix}
     \sqrt{v_y^2 + v_z^2} &amp; 0 &amp; -v_x &amp; 0 \\
     0 &amp; 1 &amp; 0 &amp; 0 \\
     v_x &amp; 0 &amp; \sqrt{v_y^2 + v_z^2} &amp; 0 \\
@@ -898,20 +895,20 @@ Derivation of the axis-angle rotation matrix (click to show)<div class="sd-summa
 <p class="sd-card-text">Multiplying all of the separate matrices together gives</p>
 <div class="math notranslate nohighlight">
 \[\begin{split} \begin{align*}
-    Rotate &amp;= R_1 \cdot R_2 \cdot R_3 \cdot R_4 \cdot R_5 \\
+    Rotate &amp;= R_5 \cdot R_4 \cdot R_3 \cdot R_2 \cdot R_1 \\
     &amp;=
     \begin{pmatrix}
-        v_x^2 + (v_y^2 + v_z^2) \cos(\theta) &amp;
-        v_xv_y(1 - \cos(\theta)) + v_z\sin(\theta) &amp;
-        v_xv_z(1 - \cos(\theta)) + v_y\sin(\theta) &amp; 
+        \dfrac{v_x^2 + (v_y^2 + v_z^2)\cos(\theta)}{\|\mathbf{v}\|^2} &amp;
+        \dfrac{v_xv_y(1 - \cos(\theta))}{\|\mathbf{v}\|^2} + \dfrac{v_z\sin(\theta)}{\|\mathbf{v}\|} &amp;
+        \dfrac{v_xv_z(1 - \cos(\theta))}{\|\mathbf{v}\|^2} - \dfrac{v_y\sin(\theta)}{\|\mathbf{v}\|} &amp;
         0 \\
-        v_xv_y(1 - \cos(\theta)) + v_z\sin(\theta) &amp;
-        v_y^2 + (v_x^2 + v_y^2)\cos(\theta) &amp;
-        v_yv_z(1 - \cos(\theta)) - v_x\sin(\theta) &amp;
+        \dfrac{v_xv_y(1 - \cos(\theta))}{\|\mathbf{v}\|^2} - \dfrac{v_z\sin(\theta)}{\|\mathbf{v}\|} &amp;
+        \dfrac{v_y^2 + (v_x^2 + v_y^2)\cos(\theta)}{\|\mathbf{v}\|^2} &amp;
+        \dfrac{v_yv_z(1 - \cos(\theta))}{\|\mathbf{v}\|^2} - \dfrac{v_x\sin(\theta)}{\|\mathbf{v}\|} &amp;
         0 \\
-        v_xv_z(1 - \cos(\theta)) - v_y\sin(\theta) &amp;
-        v_yv_z(1 - \cos(\theta)) + v_x\sin(\theta) &amp;
-        v_z^2 + (v_x^2 + v_y^2)\cos(\theta) &amp; 
+        \dfrac{v_xv_z(1 - \cos(\theta))}{\|\mathbf{v}\|^2} + \dfrac{v_y\sin(\theta)}{\|\mathbf{v}\|} &amp;
+        \dfrac{v_yv_z(1 - \cos(\theta))}{\|\mathbf{v}\|^2} - \dfrac{v_x\sin(\theta)}{\|\mathbf{v}\|} &amp;
+        \dfrac{v_z^2 + (v_x^2 + v_y^2)\cos(\theta)}{\|\mathbf{v}\|^2} &amp;
         0 \\
         0 &amp; 0 &amp; 0 &amp; 1
     \end{pmatrix}.
@@ -922,17 +919,17 @@ Derivation of the axis-angle rotation matrix (click to show)<div class="sd-summa
     Rotate &amp;= R_1 \cdot R_2 \cdot R_3 \cdot R_4 \cdot R_5 \\
     &amp;=
     \begin{pmatrix}
-         v_x^2(1 - \cos(\theta)) + \cos(\theta) &amp;
-        v_xv_y(1 - \cos(\theta)) + v_z\sin(\theta) &amp;
-        v_xv_z(1 - \cos(\theta)) + v_y\sin(\theta) &amp; 
+        v_x^2 (1 - \cos(\theta)) + \cos(\theta) &amp; 11
+        v_xv_y(1 - \cos(\theta)) - v_z\sin(\theta) &amp; 12
+        v_xv_z(1 - \cos(\theta)) + v_y\sin(\theta) &amp; 13
         0 \\
-        v_xv_y(1 - \cos(\theta)) + v_z\sin(\theta) &amp;
-         v_y^2(1 - \cos(\theta)) + \cos(\theta) &amp;
-        v_yv_z(1 - \cos(\theta)) - v_x\sin(\theta) &amp;
+        v_xv_y(1 - \cos(\theta)) + v_z\sin(\theta) &amp; 21
+         v_y^2(1 - \cos(\theta)) + \cos(\theta) &amp; 22
+        v_yv_z(1 - \cos(\theta)) - v_x\sin(\theta) &amp; 23
         0 \\
-        v_xv_z(1 - \cos(\theta)) - v_y\sin(\theta) &amp;
-        v_yv_z(1 - \cos(\theta)) + v_x\sin(\theta) &amp;
-         v_z^2(1 - \cos(\theta)) + \cos(\theta) &amp;
+        v_xv_z(1 - \cos(\theta)) - v_y\sin(\theta) &amp; 31
+        v_yv_z(1 - \cos(\theta)) + v_x\sin(\theta) &amp; 32
+        v_z^2 (1 - \cos(\theta)) + \cos(\theta) &amp; 33
         0 \\
         0 &amp; 0 &amp; 0 &amp; 1
     \end{pmatrix}.
@@ -941,42 +938,47 @@ Derivation of the axis-angle rotation matrix (click to show)<div class="sd-summa
 </details></section>
 <section id="axis-angle-rotation-in-opengl">
 <h3><span class="section-number">5.4.3. </span>Axis-angle rotation in OpenGL<a class="headerlink" href="#axis-angle-rotation-in-opengl" title="Permalink to this heading">#</a></h3>
-<p>The rotations around the three co-ordinates axis can be calculated using the axis-angle rotation matrix (by letting <span class="math notranslate nohighlight">\(\hat{\vec{v}}\)</span> be <span class="math notranslate nohighlight">\((1,0,0)\)</span>, <span class="math notranslate nohighlight">\((0,1,0)\)</span> or <span class="math notranslate nohighlight">\((0,0,1)\)</span> for rotating around the <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(y\)</span> and <span class="math notranslate nohighlight">\(z\)</span> axes respectively) so it makes sense to define a single function for rotation using <a class="reference internal" href="#equation-eq-axis-angle-rotation-matrix">(5.3)</a>. Define a function in the Maths class be entering the following code.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="n">mat4</span><span class="w"> </span><span class="nf">rotate</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="o">&amp;</span><span class="n">angle</span><span class="p">,</span><span class="w"> </span><span class="n">vec3</span><span class="w"> </span><span class="n">v</span><span class="p">);</span>
+<p>The rotations around the three co-ordinates axis can be calculated using the axis-angle rotation matrix (by letting <span class="math notranslate nohighlight">\(\hat{\mathbf{v}}\)</span> be <span class="math notranslate nohighlight">\((1,0,0)\)</span>, <span class="math notranslate nohighlight">\((0,1,0)\)</span> or <span class="math notranslate nohighlight">\((0,0,1)\)</span> for rotating around the <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(y\)</span> and <span class="math notranslate nohighlight">\(z\)</span> axes respectively) so it makes sense to define a single function for rotation using <a class="reference internal" href="#equation-eq-axis-angle-rotation-matrix">(5.3)</a>. Define a couple of functions in the Maths class by entering the following code.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="nf">radians</span><span class="p">(</span><span class="kt">float</span><span class="w"> </span><span class="n">angle</span><span class="p">);</span>
+<span class="k">static</span><span class="w"> </span><span class="n">glm</span><span class="o">::</span><span class="n">mat4</span><span class="w"> </span><span class="nf">rotate</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="o">&amp;</span><span class="n">angle</span><span class="p">,</span><span class="w"> </span><span class="n">glm</span><span class="o">::</span><span class="n">vec3</span><span class="w"> </span><span class="n">v</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>Then define the method by entering the following code in the <strong>maths.cpp</strong> file.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">mat4</span><span class="w"> </span><span class="nf">Maths::rotate</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="o">&amp;</span><span class="n">angle</span><span class="p">,</span><span class="w"> </span><span class="n">vec3</span><span class="w"> </span><span class="n">v</span><span class="p">)</span>
+<p>Then define these methods by entering the following code in the <strong>maths.cpp</strong> file.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">float</span><span class="w"> </span><span class="nf">Maths::radians</span><span class="p">(</span><span class="kt">float</span><span class="w"> </span><span class="n">angle</span><span class="p">)</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="n">v</span><span class="p">.</span><span class="n">normalise</span><span class="p">();</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">angle</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">3.1416f</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">180.0f</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">glm</span><span class="o">::</span><span class="n">mat4</span><span class="w"> </span><span class="nf">Maths::rotate</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="o">&amp;</span><span class="n">angle</span><span class="p">,</span><span class="w"> </span><span class="n">glm</span><span class="o">::</span><span class="n">vec3</span><span class="w"> </span><span class="n">v</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">glm</span><span class="o">::</span><span class="n">normalize</span><span class="p">(</span><span class="n">v</span><span class="p">);</span>
 <span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span><span class="p">);</span>
 <span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">);</span>
 <span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">x2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">y</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">z2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">z</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">z</span><span class="p">;</span>
 <span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">xy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">xz</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">z</span><span class="p">,</span><span class="w"> </span><span class="n">yz</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">y</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">z</span><span class="p">;</span>
 <span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">xs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">s</span><span class="p">,</span><span class="w">   </span><span class="n">ys</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">y</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">s</span><span class="p">,</span><span class="w">   </span><span class="n">zs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">z</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">s</span><span class="p">;</span>
-<span class="w">    </span>
-<span class="w">    </span><span class="n">mat4</span><span class="w"> </span><span class="n">R</span><span class="p">;</span>
-<span class="w">    </span><span class="n">R</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">c</span><span class="p">;</span>
-<span class="w">    </span><span class="n">R</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">xy</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">zs</span><span class="p">;</span>
-<span class="w">    </span><span class="n">R</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">xz</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">ys</span><span class="p">;</span>
-<span class="w">    </span><span class="n">R</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">xy</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">zs</span><span class="p">;</span>
-<span class="w">    </span><span class="n">R</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">y2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">c</span><span class="p">;</span>
-<span class="w">    </span><span class="n">R</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">yz</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">xs</span><span class="p">;</span>
-<span class="w">    </span><span class="n">R</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">xz</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ys</span><span class="p">;</span>
-<span class="w">    </span><span class="n">R</span><span class="p">[</span><span class="mi">9</span><span class="p">]</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">yz</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">xs</span><span class="p">;</span>
-<span class="w">    </span><span class="n">R</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">z2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">c</span><span class="p">;</span>
-<span class="w">    </span><span class="n">R</span><span class="p">[</span><span class="mi">15</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">;</span>
-<span class="w">    </span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">R</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">glm</span><span class="o">::</span><span class="n">mat4</span><span class="w"> </span><span class="n">rotate</span><span class="p">;</span>
+<span class="w">    </span><span class="n">rotate</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">c</span><span class="p">;</span>
+<span class="w">    </span><span class="n">rotate</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">xy</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">zs</span><span class="p">;</span>
+<span class="w">    </span><span class="n">rotate</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">xz</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">ys</span><span class="p">;</span>
+<span class="w">    </span><span class="n">rotate</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">xy</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">zs</span><span class="p">;</span>
+<span class="w">    </span><span class="n">rotate</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">y2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">c</span><span class="p">;</span>
+<span class="w">    </span><span class="n">rotate</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">yz</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">xs</span><span class="p">;</span>
+<span class="w">    </span><span class="n">rotate</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">xz</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ys</span><span class="p">;</span>
+<span class="w">    </span><span class="n">rotate</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">yz</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">xs</span><span class="p">;</span>
+<span class="w">    </span><span class="n">rotate</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">z2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">c</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">rotate</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 <p>Check that the <code class="docutils literal notranslate"><span class="pre">rotate()</span></code> method works by commenting out the code used to define the rotation matrix and add the following.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">float</span><span class="w"> </span><span class="n">angle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">45.0f</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">M_PI</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">180.0f</span><span class="p">;</span>
-<span class="n">mat4</span><span class="w"> </span><span class="n">rotate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Maths</span><span class="o">::</span><span class="n">rotate</span><span class="p">(</span><span class="n">angle</span><span class="p">,</span><span class="w"> </span><span class="n">vec3</span><span class="p">(</span><span class="mf">0.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">));</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">float</span><span class="w"> </span><span class="n">angle</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="n">Maths</span><span class="o">::</span><span class="n">radians</span><span class="p">(</span><span class="mf">45.0f</span><span class="p">);</span>
+<span class="n">glm</span><span class="o">::</span><span class="n">mat4</span><span class="w"> </span><span class="n">rotate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Maths</span><span class="o">::</span><span class="n">rotate</span><span class="p">(</span><span class="n">angle</span><span class="p">,</span><span class="w"> </span><span class="n">glm</span><span class="o">::</span><span class="n">vec3</span><span class="p">(</span><span class="mf">0.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">));</span>
 </pre></div>
 </div>
-<p>Running the program you should see no change to the image shown in <a class="reference internal" href="#rotation-rectangle-figure"><span class="std std-numref">Fig. 5.11</span></a> Experiment with different angles and rotation vectors to see the affects this has.</p>
+<p>Running the program you should see no change to the image shown in <a class="reference internal" href="#rotation-rectangle-figure"><span class="std std-numref">Fig. 5.11</span></a>. Experiment with different angles and rotation vectors to see the affects this has.</p>
 <hr class="docutils" />
 </section>
 </section>
@@ -989,25 +991,24 @@ Derivation of the axis-angle rotation matrix (click to show)<div class="sd-summa
     &amp;=
     Scale \cdot \begin{pmatrix} x \\ y \\ z \\ 1 \end{pmatrix}.
 \end{align*} \end{split}\]</div>
-<p>Next applying rotation to <span class="math notranslate nohighlight">\((x',y',z',1)^\mathsf{T}\)</span> we have</p>
+<p>Next applying rotation to the scaled co-ordinates we have</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{align*}
-    Rotate \cdot \begin{pmatrix} x' \\ y' \\ z' \\ 1 \end{pmatrix}
-    =
+    \begin{pmatrix} x' \\ y' \\ z' \\ 1 \end{pmatrix} &amp;=
     Rotate \cdot Scale \cdot \begin{pmatrix} x \\ y \\ z \\ 1 \end{pmatrix}.
 \end{align*} \end{split}\]</div>
-<p>Finally applying translation we have</p>
+<p>Finally applying translation to the scaled and rotated co-ordinates we have</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{align*}
-    Translate \cdot \begin{pmatrix} x' \\ y' \\ z' \\ 1 \end{pmatrix}
-    =
+    \begin{pmatrix} x' \\ y' \\ z' \\ 1 \end{pmatrix}
+    &amp;=
     Translate \cdot Rotate \cdot Scale \cdot \begin{pmatrix} x \\ y \\ z \\ 1 \end{pmatrix}.
 \end{align*} \end{split}\]</div>
-<p><span class="math notranslate nohighlight">\( Translate \cdot Rotate \cdot Scale\)</span> is a single <span class="math notranslate nohighlight">\(4 \times 4\)</span> transformation matrix that combines the three transformations known as the <strong>composite transformation matrix</strong>. Note the order that the translations are applied to the co-ordinates is read from right to left.</p>
+<p><span class="math notranslate nohighlight">\(Translate \cdot Rotate \cdot Scale\)</span> is a single <span class="math notranslate nohighlight">\(4 \times 4\)</span> transformation matrix that combines the three transformations known as the <strong>composite transformation matrix</strong>. Note the order that the translations are applied to the co-ordinates is read from right to left so here we have scale <span class="math notranslate nohighlight">\(\to\)</span> rotate <span class="math notranslate nohighlight">\(\to\)</span> translate.</p>
 <section id="composite-transformations-in-opengl">
 <h3><span class="section-number">5.5.1. </span>Composite transformations in OpenGL<a class="headerlink" href="#composite-transformations-in-opengl" title="Permalink to this heading">#</a></h3>
 <p>Lets apply scaling, rotation and translation (in that order) to our rectangle. Since we have already calculated the separate transformation matrices all we need to do is to multiply them together and set it equal to <code class="docutils literal notranslate"><span class="pre">transformation</span></code>.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">glm</span><span class="o">::</span><span class="n">mat4</span><span class="w"> </span><span class="n">transformation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">translate</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">rotate</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">scale</span><span class="p">;</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">glm</span><span class="o">::</span><span class="n">mat4</span><span class="w"> </span><span class="n">transformation</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="n">translate</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">rotate</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">scale</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>After compiling and running the program you should see the image shown in <a class="reference internal" href="#composite-transformation-figure"><span class="std std-numref">Fig. 5.15</span></a>.</p>
@@ -1020,71 +1021,18 @@ Derivation of the axis-angle rotation matrix (click to show)<div class="sd-summa
 <hr class="docutils" />
 </section>
 </section>
-<section id="animations">
-<span id="animating-objects-section"></span><h2><span class="section-number">5.6. </span>Animations<a class="headerlink" href="#animations" title="Permalink to this heading">#</a></h2>
-<p>It may appear that our application is displaying a static image of the textured rectangle but what is actually happening is that the window is constantly being updated with new frame buffers as and when they have been calculated. We can animate our rectangle by applying the transformations within the render loop.</p>
-<section id="limiting-the-frame-rate">
-<h3><span class="section-number">5.6.1. </span>Limiting the frame rate<a class="headerlink" href="#limiting-the-frame-rate" title="Permalink to this heading">#</a></h3>
-<p>Before we animate our rectangle we need to consider the <strong>frame rate</strong> which is the number of Frames Per Second (fps) that is rendered on a display. Typical frame rates are 24 fps for movies, 30 fps for television programs and 60 fps for computer games. Since there will be different calculations occurring in different frames as well as others computational overheads due to background processes, the time between the rendering of two successive frames is not constant. If we were to simply render our scene without considering this we would get a jerky unsatisfying animation. Instead, we limit the frame rate by only rendering a frame once a given time has elapsed since the last frame was rendered.</p>
-<p>We are going to limit our framerate to 60 fps. First we declare a set of float variables to keep track of the time. Before the <code class="docutils literal notranslate"><span class="pre">main()</span></code> function enter the following code.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Timer variables</span>
-<span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">fpsLimit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0f</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">60.0f</span><span class="p">;</span><span class="w">  </span><span class="c1">// limit fps to 60</span>
-<span class="kt">float</span><span class="w"> </span><span class="n">currentTime</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span><span class="w">          </span><span class="c1">// current time in seconds</span>
-<span class="kt">float</span><span class="w"> </span><span class="n">lastTime</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span><span class="w">          </span><span class="c1">// time of last iteration of the loop</span>
-<span class="kt">float</span><span class="w"> </span><span class="n">lastFrame</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span><span class="w">          </span><span class="c1">// time that last frame was rendered</span>
-<span class="kt">float</span><span class="w"> </span><span class="n">deltaTime</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span><span class="w">          </span><span class="c1">// difference in time since last iteration</span>
-</pre></div>
-</div>
-<p>These variables are:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">fpsLimit</span></code> - this is the number of seconds that we wait for before rendering the next frame. So for 60 fps this is 0.0167 seconds</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">currentTime</span></code> - the time since the program was started</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">lastTime</span></code> - the time of the last iteration of the render loop</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">lastFrame</span></code> - the time that the last frame was rendered</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">deltaTime</span></code> - the time that has elapsed since the last iteration of the render loop. This is used to calculate movement</p></li>
-</ul>
-<p>We need to calculate <code class="docutils literal notranslate"><span class="pre">deltaTime</span></code> before our transformation matrices so at the beginning of the render loop enter the following code.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Update timer variables</span>
-<span class="n">currentTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">glfwGetTime</span><span class="p">();</span>
-<span class="n">deltaTime</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="n">currentTime</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">lastTime</span><span class="p">;</span>
-<span class="n">lastTime</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="n">currentTime</span><span class="p">;</span>
-</pre></div>
-</div>
-<p>Here we have used the <code class="docutils literal notranslate"><span class="pre">glfwGetTime()</span></code> function to get the current time since the program was run, we then calculate <code class="docutils literal notranslate"><span class="pre">deltaTime</span></code> which is the time elapsed since the last iteration of the render loop and update the <code class="docutils literal notranslate"><span class="pre">lastTime</span></code> variable ready for the next iteration of the render loop. The last thing we need to do to limit the frame rate is to wait until the time since the last frame was rendered is greater than the fps limit before calling the <code class="docutils literal notranslate"><span class="pre">glfwSwapBuffers()</span></code> function which sends the frame buffer to the display. Edit the code so that it looks like the following.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Limit frame rate</span>
-<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">currentTime</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">lastFrame</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">fpsLimit</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="c1">// Swap buffers</span>
-<span class="w">    </span><span class="n">glfwSwapBuffers</span><span class="p">(</span><span class="n">window</span><span class="p">);</span>
-<span class="w">    </span>
-<span class="w">    </span><span class="c1">// Update time that last frame is rendered</span>
-<span class="w">    </span><span class="n">lastFrame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">currentTime</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="n">glfwPollEvents</span><span class="p">();</span>
-</pre></div>
-</div>
-<p>So now our frames should be rendered every 0.0167 seconds and our animations should appear smooth.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Our approach to limiting the frame rate assumes that the calculations in the render loop take less than our chosen fps. Sometimes this won’t be the case do to the computation resources required. If this is the case then the frame is rendered as soon as the frame buffer was been calculated which may result in a laggy animation. To overcome this we can either reduce the number of calculations and memory calls required to calculate the frame buffer (this usually means compromising on the contents or quality of a scene) or reducing the maximum frame rate (or buy a better computer).</p>
-</div>
-</section>
 <section id="animating-the-rectangle">
-<h3><span class="section-number">5.6.2. </span>Animating the rectangle<a class="headerlink" href="#animating-the-rectangle" title="Permalink to this heading">#</a></h3>
-<p>To animate the rectangle we are going to apply scaling, rotation and translation. Comment out all of the code used to calculate the <code class="docutils literal notranslate"><span class="pre">translate</span></code>, <code class="docutils literal notranslate"><span class="pre">scale</span></code> and <code class="docutils literal notranslate"><span class="pre">rotate</span></code> matrices and add the following code.</p>
+<span id="animating-objects-section"></span><h2><span class="section-number">5.6. </span>Animating the rectangle<a class="headerlink" href="#animating-the-rectangle" title="Permalink to this heading">#</a></h2>
+<p>It may appear that our application is displaying a static image of the textured rectangle but what is actually happening is that the window is constantly being updated with new frame buffers as and when they have been calculated. We can animate our rectangle by applying the transformations within the render loop.</p>
+<p>We are going to animate our rectangle so that is rotates around its own centre. To do this we are going to use the time the has elapsed since the application was started to calculate the rotation angle. Enter the following code just before the transformation matrix is sent to the shader</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Animate rectangle</span>
-<span class="n">rotationAngle</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">deltaTime</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Maths</span><span class="o">::</span><span class="n">radians</span><span class="p">(</span><span class="mf">360.0f</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">2.0f</span><span class="p">);</span>
-<span class="n">mat4</span><span class="w"> </span><span class="n">translate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Maths</span><span class="o">::</span><span class="n">translate</span><span class="p">(</span><span class="n">vec3</span><span class="p">(</span><span class="mf">0.4f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.3f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">));</span>
-<span class="n">mat4</span><span class="w"> </span><span class="n">scale</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="n">Maths</span><span class="o">::</span><span class="n">scale</span><span class="p">(</span><span class="n">vec3</span><span class="p">(</span><span class="mf">0.4f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.3f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">));</span>
-<span class="n">mat4</span><span class="w"> </span><span class="n">rotate</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="n">Maths</span><span class="o">::</span><span class="n">rotate</span><span class="p">(</span><span class="n">rotationAngle</span><span class="p">,</span><span class="w"> </span><span class="n">vec3</span><span class="p">(</span><span class="mf">0.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">));</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">angle</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="n">Maths</span><span class="o">::</span><span class="n">radians</span><span class="p">(</span><span class="n">glfwGetTime</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">360.0f</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">3.0f</span><span class="p">);</span>
+<span class="n">glm</span><span class="o">::</span><span class="n">mat4</span><span class="w"> </span><span class="n">translate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Maths</span><span class="o">::</span><span class="n">translate</span><span class="p">(</span><span class="n">glm</span><span class="o">::</span><span class="n">vec3</span><span class="p">(</span><span class="mf">0.4f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.3f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">));</span>
+<span class="n">glm</span><span class="o">::</span><span class="n">mat4</span><span class="w"> </span><span class="n">scale</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="n">Maths</span><span class="o">::</span><span class="n">scale</span><span class="p">(</span><span class="n">glm</span><span class="o">::</span><span class="n">vec3</span><span class="p">(</span><span class="mf">0.4f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.3f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">));</span>
+<span class="n">glm</span><span class="o">::</span><span class="n">mat4</span><span class="w"> </span><span class="n">rotate</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="n">Maths</span><span class="o">::</span><span class="n">rotate</span><span class="p">(</span><span class="n">angle</span><span class="p">,</span><span class="w"> </span><span class="n">glm</span><span class="o">::</span><span class="n">vec3</span><span class="p">(</span><span class="mf">0.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">));</span>
 </pre></div>
 </div>
-<p>Here we have a variable <code class="docutils literal notranslate"><span class="pre">rotationAngle</span></code> which is the angle used in the <code class="docutils literal notranslate"><span class="pre">rotate()</span></code> function. This is incremented by <code class="docutils literal notranslate"><span class="pre">deltaTime</span></code> multiplied by <span class="math notranslate nohighlight">\(\dfrac{360^\circ}{2}\)</span> which means the rectangle will perform one full rotation every 2 seconds (e.g., if <code class="docutils literal notranslate"><span class="pre">deltaTime</span></code> was 1 then the rotation angle is <span class="math notranslate nohighlight">\(180^\circ\)</span>). We need to declare this variable before the <code class="docutils literal notranslate"><span class="pre">main()</span></code> function so add the following code.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Animation values</span>
-<span class="kt">float</span><span class="w"> </span><span class="n">rotationAngle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span>
-</pre></div>
-</div>
-<p>Compile and run the program and you should see something similar to the following.</p>
+<p>Here we use the <code class="docutils literal notranslate"><span class="pre">glfwGetTime()</span></code> function to get the time of the current frame since the application was started and use it to calculate the rotation angle so that the rectangle performs one complete rotation every 3 seconds. Compile and run the program and you should see something similar to the following.</p>
 <center>
 <video controls muted="true" loop="true" width="500">
     <source src="../_static/05_rotating_mario_1.mp4" type="video/mp4">
@@ -1100,26 +1048,13 @@ Derivation of the axis-angle rotation matrix (click to show)<div class="sd-summa
     <source src="../_static/05_rotating_mario_2.mp4" type="video/mp4">
 </video>
 </center>
-<p>What has happened here is the rectangle has been scaled and translated so that its centre is now at <span class="math notranslate nohighlight">\((0.4, 0.3, 0)\)</span>. Then when rotation is applied the triangle is rotated about the origin. To scale and rotate about an objects centre we must do the scaling and rotation transformations when the object is at the origin before translating to the desired position. So a the transformation to rotate and scale about an objects volume centre is:</p>
-<ul class="simple">
-<li><p>translate vertex co-ordinates so that the volume centre is at <span class="math notranslate nohighlight">\((0,0,0)\)</span></p></li>
-<li><p>apply scaling transformation</p></li>
-<li><p>apply rotation transformation</p></li>
-<li><p>translate vertex co-ordinates so that the volume centre is at the original position.</p></li>
-</ul>
-<p>Remember that the transformation matrices are written right-to-left so the transformation matrix is</p>
-<div class="math notranslate nohighlight">
-\[\begin{align*}
-    Transformation = Translate(\vec{c}) \cdot Rotate \cdot Scale \cdot Translate(-\vec{c}),
-\end{align*} \]</div>
-<p>where <span class="math notranslate nohighlight">\(\vec{c}\)</span> is the volume centre of the object.</p>
-</section>
+<p>What has happened here is the rectangle has been scaled and translated so that its centre is now at <span class="math notranslate nohighlight">\((0.4, 0.3, 0)\)</span>. Then when rotation is applied the triangle is rotated about the origin.</p>
 </section>
 <hr class="docutils" />
 <section id="exercises">
 <h2><span class="section-number">5.7. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
 <ol class="arabic simple">
-<li><p>Scale the original rectangle so that it is a quarter of the original size and apply translation so that the rectangle moves anti-clockwise around a circle centred at the window centre with radius 0.5. Hint: the co-ordinates of points on a circle centered at <span class="math notranslate nohighlight">\((0,0)\)</span> with radius <span class="math notranslate nohighlight">\(r\)</span> can be calculated using <span class="math notranslate nohighlight">\(x = r\cos(t)\)</span> and <span class="math notranslate nohighlight">\(y = r\sin(t)\)</span> where <span class="math notranslate nohighlight">\(t\)</span> is some number.</p></li>
+<li><p>Scale the original rectangle so that it is a quarter of the original size and apply translation so that the rectangle moves anti-clockwise around a circle centred at the window centre with radius 0.5 and completes one full rotation every 5 seconds. Hint: the co-ordinates of points on a circle centered at <span class="math notranslate nohighlight">\((0,0)\)</span> with radius <span class="math notranslate nohighlight">\(r\)</span> can be calculated using <span class="math notranslate nohighlight">\(x = r\cos(t)\)</span> and <span class="math notranslate nohighlight">\(y = r\sin(t)\)</span> where <span class="math notranslate nohighlight">\(t\)</span> is some number.</p></li>
 </ol>
 <center>
 <video controls muted="true" loop="true" width="400">
@@ -1146,9 +1081,10 @@ Derivation of the axis-angle rotation matrix (click to show)<div class="sd-summa
 <li><p>Create a simple screensaver by doing the following:</p></li>
 </ol>
 <ul class="simple">
-<li><p>scale the original rectangle so that it is one fifth its original size</p></li>
-<li><p>move the rectangle using a velocity of <span class="math notranslate nohighlight">\((1, 0.5, 0)\)</span> using <span class="math notranslate nohighlight">\(\vec{p} = \vec{p} + \Delta t \cdot \vec{v}\)</span> where <span class="math notranslate nohighlight">\(\vec{p}\)</span> is the position and <span class="math notranslate nohighlight">\(\vec{v}\)</span> is the velocity</p></li>
-<li><p>reflect the rectangle off the edges of the window by reversing the sign of the elements of the velocity vector when the center of the rectangle gets to within 0.1 of the window edge.</p></li>
+<li><p>Before the <code class="docutils literal notranslate"><span class="pre">main()</span></code> function, define two 3-element vectors for the position and velocity with initial values <span class="math notranslate nohighlight">\(\mathbf{p} = (0,0,0)\)</span> and <span class="math notranslate nohighlight">\(\mathbf{v} = (0.01, 0.005, 0)\)</span> respectively</p></li>
+<li><p>Inside the render loop, calculate the new centre position using <span class="math notranslate nohighlight">\(\mathbf{p} = \mathbf{p} + \mathbf{v}\)</span></p></li>
+<li><p>Scale the original rectangle so that it is one fifth its original size and translate the rectangle so that its center is at <span class="math notranslate nohighlight">\(\mathbf{p}\)</span></p></li>
+<li><p>Reflect the rectangle off the edges of the window by reversing the sign of the elements of the velocity vector when the center of the rectangle gets to within 0.1 of the window edge.</p></li>
 </ul>
 <center>
 <video controls muted="true" loop="true" width="400">
@@ -1244,11 +1180,7 @@ Derivation of the axis-angle rotation matrix (click to show)<div class="sd-summa
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#composite-transformations-in-opengl">5.5.1. Composite transformations in OpenGL</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#animations">5.6. Animations</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limiting-the-frame-rate">5.6.1. Limiting the frame rate</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#animating-the-rectangle">5.6.2. Animating the rectangle</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#animating-the-rectangle">5.6. Animating the rectangle</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">5.7. Exercises</a></li>
 </ul>
   </nav></div>
