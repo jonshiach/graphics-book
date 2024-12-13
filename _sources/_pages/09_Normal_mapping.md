@@ -141,7 +141,7 @@ $$ \begin{align*}
 Once we have the tangent, bitangent and normal vectors we can form a matrix that transforms from the tangent space to an arbitrary space (e.g., the view space). The matrix that achieves this a 3 $\times$ 3 matrix known as the $TBN$ matrix
 
 $$ \begin{align*}
-    \textsf{TBN} &= 
+    TBN &= 
     \begin{pmatrix}
         t_x & b_x & n_x \\
         t_y & b_y & n_y \\
