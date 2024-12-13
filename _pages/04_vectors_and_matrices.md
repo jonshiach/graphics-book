@@ -245,9 +245,11 @@ Note that we need to use float values for scalar multiplication and division, i.
 b / 3 = [    0.333,    0.667,    1.000]
 ```
 
-### Multiplying vectors
+(element-wise-multiplication-section)=
 
-Mathematically speaking the multiplication of two vectors is not defined (instead we have the dot and cross products - see [below](dot-product-section)). However, in computing it is useful to be able to multiply the individual elements of vectors which is done using the `*` operator.
+### Element-wise multiplication
+
+Mathematically speaking the multiplication of two vectors is not defined (instead we have the dot and cross products - see [below](dot-product-section)). However, in computing it is useful to be able to multiply the individual elements of vectors, known as **element-wise multiplication**, which is done using the `*` operator.
 
 Add the following code to your program.
 

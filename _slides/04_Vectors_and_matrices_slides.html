@@ -8,8 +8,8 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="https://unpkg.com/reveal.js//dist/reset.css">
-  <link rel="stylesheet" href="https://unpkg.com/reveal.js//dist/reveal.css">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/reset.css">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/reveal.css">
   <style>
     .reveal .sourceCode {  /* see #7635 */
       overflow: visible;
@@ -92,7 +92,7 @@
     code span.vs { color: #cc9393; } /* VerbatimString */
     code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
   </style>
-  <link rel="stylesheet" href="https://unpkg.com/reveal.js//dist/theme/white.css" id="theme">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/theme/simple.css" id="theme">
   <style>
   .reveal .slides {
       font-size: 0.6em;
@@ -107,7 +107,7 @@
 
   .reveal h1 {
       text-transform: none;
-      font-size: 60px;
+      font-size: 50px;
   }
 
   .reveal h2 {
@@ -137,25 +137,25 @@
   <p class="date">Week 4</p>
 </section>
 
-<section id="vectors" class="title-slide slide level1">
-<h1>Vectors</h1>
+<section id="vectors" class="slide level2">
+<h2>Vectors</h2>
 <p>A vector in is an object with length and direction</p>
 <p>Vectors are written using boldface characters, e.g., <span
 class="math inline">\(\mathbf{a}\)</span>, or underlined when
 handwritten, e.g., <span
 class="math inline">\(\underline{a}\)</span></p>
 <p>In 3D space a vector is defined as a 3-tuple</p>
-<p><span class="math display">\[\begin{align} \mathbf{a} = (a_x, a_y,
-a_z) \end{align} \]</span></p>
+<p><span class="math display">\[\begin{align*} \mathbf{a} = (a_x, a_y,
+a_z) \end{align*} \]</span></p>
 <p>where <span class="math inline">\(a_x,a_y,a_z\)</span> are the signed
 distances along the <span class="math inline">\(x,y,z\)</span> axes</p>
 <center>
-<img src="../_images/04_Vector.svg" width="600"/>
+<!-- <img src="https://raw.githubusercontent.com/jonshiach/graphics-book/refs/heads/gh-pages/_images/04_Vector.svg" width="600"/> -->
+<img src="https://raw.githubusercontent.com/jonshiach/graphics-book/refs/heads/gh-pages/_images/04_Vector.svg" width="600"/>
 </center>
 </section>
-
-<section id="the-glm-library" class="title-slide slide level1">
-<h1>The GLM Library</h1>
+<section id="the-glm-library" class="slide level2">
+<h2>The GLM Library</h2>
 <p>The <a href="https://github.com/g-truc/glm" target="_blank">glm</a>
 library is a popular C++ mathematics library that is designed for use
 with OpenGL</p>
@@ -178,14 +178,12 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#c
 a = [    3.000,    0.000,    4.000]
 b = [    1.000,    2.000,    3.000]</code></pre>
 </section>
-
-<section id="arithmetic-operations-on-vectors"
-class="title-slide slide level1">
-<h1>Arithmetic Operations on Vectors</h1>
+<section id="arithmetic-operations-on-vectors" class="slide level2">
+<h2>Arithmetic Operations on Vectors</h2>
 <p>Given two matrices <span class="math inline">\(\mathbf{a}\)</span>
 and <span class="math inline">\(\mathbf{b}\)</span> and the scalar <span
-class="math inline">\(k\)</span> the following arithmetic operations are
-defined</p>
+class="math inline">\(k\)</span> (a single number) the following
+arithmetic operations are defined</p>
 <table>
 <thead>
 <tr class="header">
@@ -227,11 +225,8 @@ class="math inline">\(\dfrac{\mathbf{a}}{k}\)</span></td>
 </tbody>
 </table>
 </section>
-
-<section>
-<section id="vector-addition-and-subtraction"
-class="title-slide slide level1">
-<h1>Vector addition and subtraction</h1>
+<section id="vector-addition-and-subtraction" class="slide level2">
+<h2>Vector addition and subtraction</h2>
 <p>Vector addition and subtraction of two vectors <span
 class="math inline">\(\mathbf{a} = (a_x, a_y, a_z)\)</span> and <span
 class="math inline">\(\mathbf{b} = (b_x, b_y, b_z)\)</span> is defined
@@ -244,12 +239,12 @@ by</p>
 <div class="column" style="width:40%;">
 Addition
 <center>
-<img src="../_images/04_Vector_addition.svg" width="300"/>
+<img src="https://raw.githubusercontent.com/jonshiach/graphics-book/refs/heads/gh-pages/_images/04_Vector_addition.svg" width="300"/>
 </center>
 </div><div class="column" style="width:60%;">
 Subtraction
 <center>
-<img src="../_images/04_Vector_subtraction.svg" width="400"/>
+<img src="https://raw.githubusercontent.com/jonshiach/graphics-book/refs/heads/gh-pages/_images/04_Vector_subtraction.svg" width="400"/>
 </center>
 </div>
 </div>
@@ -259,16 +254,24 @@ Subtraction
 <p>Given the vectors <span class="math inline">\(\mathbf{a} =
 (3,0,4)\)</span> and <span class="math inline">\(\mathbf{b} = (1, 2,
 3)\)</span> calculate:</p>
-<ul>
-<li>  <span class="math inline">\(\mathbf{a} + \mathbf{b}\)</span>;</li>
-<li>  <span class="math inline">\(\mathbf{a} - \mathbf{b}\)</span></li>
-</ul>
+<ol type="1">
+<li><p>  <span class="math inline">\(\mathbf{a} +
+\mathbf{b}\)</span></p></li>
+<li><p>  <span class="math inline">\(\mathbf{a} -
+\mathbf{b}\)</span></p></li>
+</ol>
 <div class="fragment">
 <p><strong>Solution</strong></p>
+<ol type="1">
+<li></li>
+</ol>
 <p><span class="math display">\[\mathbf{a} + \mathbf{b} = (3 + 1, 0 + 2,
 4 + 3) = (4, 2, 7)\]</span></p>
 </div>
 <div class="fragment">
+<ol start="2" type="1">
+<li></li>
+</ol>
 <p><span class="math display">\[\mathbf{a} - \mathbf{b} = (3 - 1, 0 - 2,
 4 - 3) = (2, -2, 1)\]</span></p>
 </div>
@@ -286,10 +289,9 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#c
 <pre class="text"><code>Arithmetic operations on vectors:
 a + b = [    4.000,    2.000,    7.000]
 a - b = [    2.000,   -2.000,    1.000]</code></pre>
-</section></section>
-<section>
-<section id="scalar-multiplication" class="title-slide slide level1">
-<h1>Scalar multiplication</h1>
+</section>
+<section id="scalar-multiplication" class="slide level2">
+<h2>Scalar multiplication</h2>
 <p>The multiplication of a vector <span class="math inline">\(\mathbf{a}
 = (a_x, a_y, a_z)\)</span> by a scalar <span
 class="math inline">\(k\)</span> is defined by</p>
@@ -299,7 +301,7 @@ class="math inline">\(k\)</span> is defined by</p>
 <p>Multiplying or dividing a vector by a positive scalar has the effect
 of scaling the length of the vector</p>
 <center>
-<img src="../_images/04_Vector_multiplication.svg" alt="image" width="500"/>
+<img src="https://raw.githubusercontent.com/jonshiach/graphics-book/refs/heads/main/_images/04_Vector_multiplication.svg" width="500"/>
 </center>
 </section>
 <section id="example-1" class="slide level2">
@@ -307,16 +309,23 @@ of scaling the length of the vector</p>
 <p>Given the vectors <span class="math inline">\(\mathbf{a} =
 (3,0,4)\)</span> and <span class="math inline">\(\mathbf{b} = (1, 2,
 3)\)</span> calculate:</p>
-<ul>
-<li>  <span class="math inline">\(2\mathbf{a}\)</span>;</li>
-<li>  <span class="math inline">\(\dfrac{\mathbf{b}}{3}\)</span></li>
-</ul>
+<ol type="1">
+<li><p>  <span class="math inline">\(2\mathbf{a}\)</span></p></li>
+<li><p>  <span
+class="math inline">\(\dfrac{\mathbf{b}}{3}\)</span></p></li>
+</ol>
 <div class="fragment">
 <p><strong>Solution</strong></p>
-<p><span class="math display">\[2\mathbf{a} + \mathbf{b} = 2(3, 0, 4) =
-(6, 0, 8) \]</span></p>
+<ol type="1">
+<li></li>
+</ol>
+<p><span class="math display">\[2\mathbf{a} = 2(3, 0, 4) = (6, 0, 8)
+\]</span></p>
 </div>
 <div class="fragment">
+<ol start="2" type="1">
+<li></li>
+</ol>
 <p><span class="math display">\[\dfrac{\mathbf{b}}{3} = \frac{1}{3}(1,
 2, 3) = \left( \frac{1}{3}, \frac{2}{3}, \frac{3}{3} \right) \approx
 (0.333, 0.667, 1)\]</span></p>
@@ -332,33 +341,42 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#c
 <p>Output</p>
 <pre class="text"><code>2a    = [    6.000,    0.000,    8.000]
 b / 3 = [    0.333,    0.667,    1.000]</code></pre>
-</section></section>
-<section>
-<section id="vector-magnitude" class="title-slide slide level1">
-<h1>Vector Magnitude</h1>
+</section>
+<section id="vector-magnitude" class="slide level2">
+<h2>Vector Magnitude</h2>
 <p>The <strong>magnitude</strong> of a vector <span
 class="math inline">\(\mathbf{a} = (a_x, a_y, a_z)\)</span> is denoted
 by <span class="math inline">\(\|\mathbf{a}\|\)</span> is the length
 from the tail of the vector to the head</p>
 <center>
-<img src="../_images/04_Vector_magnitude.svg" width="300" text-align="center"/>
+<img src="https://raw.githubusercontent.com/jonshiach/graphics-book/refs/heads/gh-pages/_images/04_Vector_magnitude.svg" width="300" text-align="center"/>
 </center>
-<p>The magnitude is calculated using and extension of Pythagoras’
-formula</p>
+<p>The magnitude of a vector in 3D is calculated using an extension of
+Pythagoras’ theorem</p>
 <p><span class="math display">\[ \|\mathbf{a}\| = \sqrt{a_x^2 + a_y^2 +
 a_z^2}. \]</span></p>
 </section>
 <section id="example-2" class="slide level2">
 <h2>Example</h2>
-<p>Calculate the magnitude of the vectors <span
-class="math inline">\(\mathbf{a} = (3,0,4)\)</span> and <span
-class="math inline">\(\mathbf{b} = (1, 2, 3)\)</span></p>
+<p>Calculate the magnitude of the vectors</p>
+<ol type="1">
+<li><p>  <span class="math inline">\(\mathbf{a} =
+(3,0,4)\)</span></p></li>
+<li><p><span class="math inline">\(\mathbf{b} = (1, 2,
+3)\)</span></p></li>
+</ol>
 <div class="fragment">
 <p><strong>Solution</strong></p>
+<ol type="1">
+<li></li>
+</ol>
 <p><span class="math display">\[\| \mathbf{a} \| = \sqrt{3^2 + 0^2 +
 4^2} = \sqrt{9 + 0 + 16} = \sqrt{25} = 5\]</span></p>
 </div>
 <div class="fragment">
+<ol start="2" type="1">
+<li></li>
+</ol>
 <p><span class="math display">\[\| \mathbf{b} \| = \sqrt{1^2 + 2^2 +
 3^2} = \sqrt{1 + 4 + 9} = \sqrt{14} \approx 3.742\]</span></p>
 </div>
@@ -376,10 +394,9 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#c
 <pre><code>Vector length:
 length(a) = 5.000
 length(b) = 3.742</code></pre>
-</section></section>
-<section>
-<section id="unit-vectors" class="title-slide slide level1">
-<h1>Unit Vectors</h1>
+</section>
+<section id="unit-vectors" class="slide level2">
+<h2>Unit Vectors</h2>
 <p>A <strong>unit vector</strong> is a vector that has a length of 1</p>
 <p>We can <strong>normalise</strong> a vector by dividing by its
 magnitude to give a unit vector</p>
@@ -421,9 +438,9 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#c
 <p>Output</p>
 <pre><code>aHat = [    0.600,    0.000,    0.800]
 length(aHat) = 1.000</code></pre>
-</section></section>
-<section id="multiplying-vectors" class="title-slide slide level1">
-<h1>Multiplying vectors</h1>
+</section>
+<section id="multiplying-vectors" class="slide level2">
+<h2>Multiplying vectors</h2>
 <p>Mathematically speaking the multiplication of two vectors is not
 defined</p>
 <p>In computing it is useful to be able to multiply the individual
@@ -436,10 +453,8 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb11-1"><a href="#
 <p><span class="math display">\[(3, 0, 4) * (1, 2, 3) = (3 \times 1, 0
 \times 2, 4 \times 3) = (3, 0, 12)\]</span></p>
 </section>
-
-<section>
-<section id="the-dot-product" class="title-slide slide level1">
-<h1>The dot product</h1>
+<section id="the-dot-product" class="slide level2">
+<h2>The dot product</h2>
 <p>The dot product between two vectors <span
 class="math inline">\(\mathbf{a} = (a_x, a_y, a_z)\)</span> and <span
 class="math inline">\(\mathbf{b} = (b_x, b_y, b_z)\)</span> is denoted
@@ -456,7 +471,7 @@ class="math inline">\(\theta\)</span> between the two vectors by</p>
 <p><span class="math display">\[ \mathbf{a} \cdot \mathbf{b} =
 \|\mathbf{a}\| \|\mathbf{b}\| \cos(\theta). \]</span></p>
 <center>
-<img src="../_images/04_Dot_product.svg" width="200">
+<img src="https://raw.githubusercontent.com/jonshiach/graphics-book/refs/heads/gh-pages/_images/04_Dot_product.svg" width="200">
 </center>
 <p>A useful result for graphics is that if <span
 class="math inline">\(\theta=90^\circ\)</span> then <span
@@ -491,10 +506,9 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb13-1"><a href="#
 <p>Output</p>
 <pre class="text"><code>Dot and cross products:
 a . b = 15.000</code></pre>
-</section></section>
-<section>
-<section id="the-cross-product" class="title-slide slide level1">
-<h1>The Cross Product</h1>
+</section>
+<section id="the-cross-product" class="slide level2">
+<h2>The Cross Product</h2>
 <p>The cross product between two vectors <span
 class="math inline">\(\mathbf{a} = (a_x, a_y, a_z)\)</span> and <span
 class="math inline">\(\mathbf{b} = (b_x, b_y, b_z)\)</span> is denoted
@@ -507,7 +521,7 @@ returns a <strong>vector</strong></p>
 is perpendicular to both <span class="math inline">\(\mathbf{a}\)</span>
 and <span class="math inline">\(\mathbf{b}\)</span></p>
 <center>
-<img src="../_images/04_cross_product.svg" width=300>
+<img src="https://raw.githubusercontent.com/jonshiach/graphics-book/refs/heads/gh-pages/_images/04_cross_product.svg" width=300>
 </center>
 </section>
 <section id="example-5" class="slide level2">
@@ -552,10 +566,9 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb15-1"><a href="#
 <pre class="text"><code>a x b = [   -8.000,   -5.000,    6.000]
 a . (a x b) = 0.000
 b . (a x b) = 0.000</code></pre>
-</section></section>
-<section>
-<section id="matrices" class="title-slide slide level1">
-<h1>Matrices</h1>
+</section>
+<section id="matrices" class="slide level2">
+<h2>Matrices</h2>
 <p>A matrix is a rectangular array of numbers.</p>
 <p><span class="math display">\[ \begin{align*}
     A =
@@ -606,10 +619,9 @@ B =
 <div class="fragment">
 <p>But these aren’t right</p>
 </div>
-</section></section>
-<section>
-<section id="column-major" class="title-slide slide level1">
-<h1>Column-major</h1>
+</section>
+<section id="column-major" class="slide level2">
+<h2>Column-major</h2>
 <p>Linear memory is a contiguous block of addresses that can be
 sequentially accessed</p>
 <p>Since matrices are 2D we have a choice whether to store the elements
@@ -627,7 +639,7 @@ matrix</p>
 <p><strong>Column-major</strong> order is where we store the elements
 column-by-column, i.e.,</p>
 <center>
-<img src="../_images/04_Column_major.svg" width="800">
+<img src="https://raw.githubusercontent.com/jonshiach/graphics-book/refs/heads/gh-pages/_images/04_Column_major.svg" width="800">
 </center>
 </section>
 <section id="row-major-order" class="slide level2">
@@ -644,15 +656,14 @@ elements row-by-row, so the matrix</p>
 \end{align*} \]</span></p>
 <p>will be stored as</p>
 <center>
-<img src="../_images/04_Row_major.svg" width="800">
+<img src="https://raw.githubusercontent.com/jonshiach/graphics-book/refs/heads/gh-pages/_images/04_Row_major.svg" width="800">
 </center>
 <p>OpenGL uses column-major order so does glm. When we output a glm
 matrix it is outputed column-by-column, hence why our matrices didn’t
 look right</p>
-</section></section>
-<section>
-<section id="matrix-transpose" class="title-slide slide level1">
-<h1>Matrix Transpose</h1>
+</section>
+<section id="matrix-transpose" class="slide level2">
+<h2>Matrix Transpose</h2>
 <p>The transpose of a matrix <span class="math inline">\(A\)</span> is
 denoted by <span class="math inline">\(A^\mathsf{T}\)</span> and is
 defined by swapping the rows and columns of <span
@@ -683,11 +694,9 @@ A =
 B = 
 [[    5.000,    6.000]
  [    7.000,    8.000]]</code></pre>
-</section></section>
-<section>
-<section id="arithmetic-operations-on-matrices"
-class="title-slide slide level1">
-<h1>Arithmetic operations on matrices</h1>
+</section>
+<section id="arithmetic-operations-on-matrices" class="slide level2">
+<h2>Arithmetic operations on matrices</h2>
 <p>The arithmetic operations on matrices for addition and subtraction of
 two matrices and multiplying by a scalar are the same as for vectors</p>
 <p>E.g., given the matrices</p>
@@ -751,10 +760,9 @@ A - B =
 A / 3 = 
 [[    0.333,    0.667]
  [    1.000,    1.333]]</code></pre>
-</section></section>
-<section>
-<section id="matrix-multiplication" class="title-slide slide level1">
-<h1>Matrix multiplication</h1>
+</section>
+<section id="matrix-multiplication" class="slide level2">
+<h2>Matrix multiplication</h2>
 <p>If <span class="math inline">\(A\)</span> and <span
 class="math inline">\(B\)</span> are two matrices then the element in
 row <span class="math inline">\(i\)</span> and column <span
@@ -827,10 +835,9 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb23-1"><a href="#
 B * A = 
 [[   23.000,   34.000]
  [   31.000,   46.000]]</code></pre>
-</section></section>
-<section>
-<section id="the-identity-matrix" class="title-slide slide level1">
-<h1>The Identity Matrix</h1>
+</section>
+<section id="the-identity-matrix" class="slide level2">
+<h2>The Identity Matrix</h2>
 <p>The identity matrix is a special square matrix where all the elements
 are zero apart from the elements on the diagonal line from the top-left
 element down to the bottom-right element</p>
@@ -870,10 +877,9 @@ I =
  [    0.000,    1.000,    0.000,    0.000]
  [    0.000,    0.000,    1.000,    0.000]
  [    0.000,    0.000,    0.000,    1.000]]</code></pre>
-</section></section>
-<section>
-<section id="inverse-matrix" class="title-slide slide level1">
-<h1>Inverse matrix</h1>
+</section>
+<section id="inverse-matrix" class="slide level2">
+<h2>Inverse matrix</h2>
 <p>The inverse of a matrix <span class="math inline">\(A\)</span> is
 denoted by <span class="math inline">\(A^{-1}\)</span> and satisfies
 <span class="math inline">\(A^{-1} A = AA^{-1} = I\)</span> where <span
@@ -881,7 +887,7 @@ class="math inline">\(I\)</span> is the identity matrix</p>
 <p>The inverse of the matrix <span class="math inline">\(A =
 \begin{pmatrix} 1 &amp; 2 \\ 3 &amp; 4 \end{pmatrix}\)</span> is</p>
 <p><span class="math display">\[ A^{-1} = \begin{pmatrix} -2 &amp; 1 \\
-3/2 &amp; -1/2 \end{pmatrix}. \]</span></p>
+\frac{3}{2} &amp; -\frac{1}{2} \end{pmatrix}. \]</span></p>
 <p>We can check whether this is the inverse of <span
 class="math inline">\(A\)</span> by calculating <span
 class="math inline">\(A^{-1}A\)</span> (or <span class="math inline">\(A
@@ -934,17 +940,17 @@ invA * A =
 invB * B = 
 [[    1.000,    0.000]
  [    0.000,    1.000]]</code></pre>
-</section></section>
+</section>
     </div>
   </div>
 
-  <script src="https://unpkg.com/reveal.js//dist/reveal.js"></script>
+  <script src="https://unpkg.com/reveal.js@^4//dist/reveal.js"></script>
 
   <!-- reveal.js plugins -->
-  <script src="https://unpkg.com/reveal.js//plugin/notes/notes.js"></script>
-  <script src="https://unpkg.com/reveal.js//plugin/search/search.js"></script>
-  <script src="https://unpkg.com/reveal.js//plugin/zoom/zoom.js"></script>
-  <script src="https://unpkg.com/reveal.js//plugin/math/math.js"></script>
+  <script src="https://unpkg.com/reveal.js@^4//plugin/notes/notes.js"></script>
+  <script src="https://unpkg.com/reveal.js@^4//plugin/search/search.js"></script>
+  <script src="https://unpkg.com/reveal.js@^4//plugin/zoom/zoom.js"></script>
+  <script src="https://unpkg.com/reveal.js@^4//plugin/math/math.js"></script>
 
   <script>
 

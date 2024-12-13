@@ -157,46 +157,6 @@ Both `aHat` and `bHat` have magnitudes of 1 which shows they are both unit vecto
 
 Like numbers, we can define the arithmetic operations of addition, subtraction for vectors as well as multiplication and division by a scalar.
 
-### Multiplication and division by a scalar
-
-Multiplication and division of a vector $\mathbf{a} = (a_x, a_y, a_z)$ by a scalar (a number) $k$ are defined by
-
-$$ \begin{align*}
-    k \mathbf{a} &= (ka_x, ka_y, ka_z), \\
-    \frac{\mathbf{a}}{k} &= \left(\frac{a_x}{k}, \frac{a_y}{k}, \frac{a_z}{k} \right).
-\end{align*} $$
-
-Multiplying or dividing a vector by a positive scalar has the effect of scaling the length of the vector. Multiplying or dividing by a negative scalar reverses the direction of the vector.
-
-```{figure} ../_images/04_vector_multiplication.svg
-:height: 180
-```
-
-For example, multiplying the vector $\mathbf{a} = (3, 0, 4)$ by the scalar 2 gives
-
-$$ 2\mathbf{a} = 2(3,0,4) = (6, 0, 8), $$
-
-which has the magnitude
-
-$$ \|2 \mathbf{a} \| = \sqrt{6^2 + 0^2 + 8^2} = \sqrt{36 + 64} = \sqrt{100} = 10 = 2 \|\mathbf{a}\|. $$
-
-To perform scalar multiplication or division on a glm vector we simply use the `*` and `/` operators. To demonstrate this add the following code to your program.
-
-```cpp
-// Arithmetic operations on vectors
-printf("\nArithmetic operations on vectors:\n");
-std::cout << "2a    = " << 2.0f * a << std::endl;
-std::cout << "b / 3 = " << b / 3.0f << std::endl;
-```
-
-Note that we need to use float values for scalar multiplication and division, i.e., `2.0f` and `3.0f` instead of `2` and `3`. Running the program will add the following to the console.
-
-```text
-Arithmetic operations on vectors:
-2a    = [    6.000,    0.000,    8.000]
-b / 3 = [    0.333,    0.667,    1.000]
-```
-
 ### Vector addition and subtraction
 
 The addition and subtraction of two vectors $\mathbf{a} = (a_x, a_y, a_z)$ and $\mathbf{b} = (b_x, b_y, b_z)$ is defined by
@@ -234,6 +194,8 @@ Vector subtraction.
 To calculate the addition and subraction of our vectors add the following code to your program.
 
 ```cpp
+// Arithmetic operations on vectors
+printf("\nArithmetic operations on vectors:\n");
 std::cout << "a + b = " << a + b << std::endl;
 std::cout << "a - b = " << a - b << std::endl;
 ```
@@ -241,13 +203,53 @@ std::cout << "a - b = " << a - b << std::endl;
 Running the program adds the following output to the console.
 
 ```text
+Arithmetic operations on vectors:
 a + b = [    4.000,    2.000,    7.000]
 a - b = [    2.000,   -2.000,    1.000]
 ```
 
-### Multiplying vectors
+### Multiplication and division by a scalar
 
-Mathematically speaking the multiplication of two vectors is not defined (instead we have the dot and cross products - see [below](dot-product-section)). However, in computing it is useful to be able to multiply the individual elements of vectors which is done using the `*` operator.
+Multiplication and division of a vector $\mathbf{a} = (a_x, a_y, a_z)$ by a scalar (a number) $k$ are defined by
+
+$$ \begin{align*}
+    k \mathbf{a} &= (ka_x, ka_y, ka_z), \\
+    \frac{\mathbf{a}}{k} &= \left(\frac{a_x}{k}, \frac{a_y}{k}, \frac{a_z}{k} \right).
+\end{align*} $$
+
+Multiplying or dividing a vector by a positive scalar has the effect of scaling the length of the vector. Multiplying or dividing by a negative scalar reverses the direction of the vector.
+
+```{figure} ../_images/04_vector_multiplication.svg
+:height: 180
+```
+
+For example, multiplying the vector $\mathbf{a} = (3, 0, 4)$ by the scalar 2 gives
+
+$$ 2\mathbf{a} = 2(3,0,4) = (6, 0, 8), $$
+
+which has the magnitude
+
+$$ \|2 \mathbf{a} \| = \sqrt{6^2 + 0^2 + 8^2} = \sqrt{36 + 64} = \sqrt{100} = 10 = 2 \|\mathbf{a}\|. $$
+
+To perform scalar multiplication or division on a glm vector we simply use the `*` and `/` operators. To demonstrate this add the following code to your program.
+
+```cpp
+std::cout << "2a    = " << 2.0f * a << std::endl;
+std::cout << "b / 3 = " << b / 3.0f << std::endl;
+```
+
+Note that we need to use float values for scalar multiplication and division, i.e., `2.0f` and `3.0f` instead of `2` and `3`. Running the program will add the following to the console.
+
+```text
+2a    = [    6.000,    0.000,    8.000]
+b / 3 = [    0.333,    0.667,    1.000]
+```
+
+(element-wise-multiplication-section)=
+
+### Element-wise multiplication
+
+Mathematically speaking the multiplication of two vectors is not defined (instead we have the dot and cross products - see [below](dot-product-section)). However, in computing it is useful to be able to multiply the individual elements of vectors, known as **element-wise multiplication**, which is done using the `*` operator.
 
 Add the following code to your program.
 
@@ -399,8 +401,8 @@ A[1][0] = 3.0f, A[1][1] = 4.0f;
 B = glm::mat2(5.0f, 6.0f, 7.0f, 8.0f);
 
 printf("\nDefining matrices:\n");
-std::cout << "A = " << glm::transpose(A) << "\n" << std::endl;
-std::cout << "B = " << glm::transpose(B) << std::endl;
+std::cout << "A = " << A << "\n" << std::endl;
+std::cout << "B = " << B << std::endl;
 ```
 
 Here we have declared two $2 \times 2$ matrices `A` and `B`. The elements of `A` are defined using matrix indexing and the elements of `B` are defined using the `glm::mat2()` function. Note how the elements of the 2D matrix are indexed using `[row][col]` 
@@ -495,7 +497,7 @@ The arithmetic operations on matrices for addition and subtraction of two matric
 
 ```cpp
 // Aritmetic operations on matrices
-printf("\nAritmetic operations on matrices:\n");
+printf("\nArithmetic operations on matrices:\n");
 std::cout << "A + B = " << glm::transpose(A + B) << "\n" << std::endl;
 std::cout << "A - B = " << glm::transpose(A - B) << "\n" << std::endl;
 std::cout << "2A    = " << glm::transpose(2.0f * A) << "\n" << std::endl;
@@ -505,7 +507,7 @@ std::cout << "A / 3 = " << glm::transpose(A / 3.0f) << "\n" << std::endl;
 Running the program should output the following to the console.
 
 ```text
-Aritmetic operations on matrices:
+Arithmetic operations on matrices:
 A + B = 
 [[    6.000,    8.000]
  [   10.000,   12.000]]

@@ -383,8 +383,6 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">9.5. Exercises</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#source-code">9.6. Source code</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#video-walkthrough">9.7. Video walkthrough</a></li>
 </ul>
             </nav>
         </div>
@@ -398,22 +396,22 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="normal-mapping">
 <span id="normal-mapping-section"></span><h1><span class="section-number">9. </span>Normal Mapping<a class="headerlink" href="#normal-mapping" title="Permalink to this heading">#</a></h1>
-<p>In <a class="reference internal" href="08_Lighting.html#lighting-section"><span class="std std-ref">Lab 8 on lighting</span></a> we saw that the diffuse and specular reflection models used the normal vector to determine the fragment colour. The vertex shader was used to interpolate the normal vectors for each fragment based on the normal vectors at the vertices of a triangle. This works well for smooth objects, but for objects with a rough or patterned surface we don’t get the benefits of highlights and shadow. <strong>Normal mapping</strong> is technique that uses a <a class="reference internal" href="03_textures.html#textures-section"><span class="std std-ref">texture map</span></a> to define the normal vectors for each fragment so that when a lighting model is applied it gives the appearance of a non-flat surface.</p>
+<p>In <a class="reference internal" href="08_Lighting.html#lighting-section"><span class="std std-ref">the last lab on lighting</span></a> we saw that the diffuse and specular reflection models used the normal vector to determine the fragment colour. The vertex shader was used to interpolate the normal vectors for each fragment based on the normal vectors at the vertices of a triangle. This works well for smooth objects, but for objects with a rough or patterned surface we don’t get the benefits of highlights and shadow. <strong>Normal mapping</strong> is technique that uses a <a class="reference internal" href="03_textures.html#textures-section"><span class="std std-ref">texture map</span></a> to define the normal vectors for each fragment so that when a lighting model is applied it gives the appearance of a non-flat surface.</p>
 <figure class="align-default" id="id2">
 <a class="reference internal image-reference" href="../_images/09_normal_mapping.svg"><img alt="../_images/09_normal_mapping.svg" src="../_images/09_normal_mapping.svg" width="600" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 9.1 </span><span class="caption-text">Normal mapping applies a texture of normals for each fragment giving the appearance of a non-flat surface.</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>A <strong>normal map</strong> is a texture where the RGB colour values of each textel is used for the x, y and z values of a normal vector (<a class="reference internal" href="#normal-map-figure"><span class="std std-numref">Fig. 9.2</span></a>). Since the OpenGL co-ordinate system has the z axis pointing out from the screen the colour of a normal map is mainly blue.</p>
+<p>A <strong>normal map</strong> is a texture where the RGB colour values of each textel is used for the normal vector <span class="math notranslate nohighlight">\(\mathbf{n} = (n_x, n_y, n_z)\)</span> where <span class="math notranslate nohighlight">\(n_x\)</span>, <span class="math notranslate nohighlight">\(n_y\)</span> and <span class="math notranslate nohighlight">\(n_z\)</span> values are determined by the red, green and blue colours values respectively (<a class="reference internal" href="#normal-map-figure"><span class="std std-numref">Fig. 9.2</span></a>).</p>
 <figure class="align-default" id="normal-map-figure">
 <a class="reference internal image-reference" href="../_images/09_normal_map.svg"><img alt="../_images/09_normal_map.svg" src="../_images/09_normal_map.svg" width="300" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 9.2 </span><span class="caption-text">The RBG values of a normal map give the values of the normal vectors.</span><a class="headerlink" href="#normal-map-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>Download and build the project files for this lab.</p>
-<p>Compile and run the project and you will see that we have the scene used at the end of <a class="reference internal" href="08_Lighting.html#lighting-section"><span class="std std-ref">Lab 9 Lighting</span></a> with the teapots lit using a point light, a spotlight and a directional light.</p>
+<p>Note that since the OpenGL co-ordinate system has the <span class="math notranslate nohighlight">\(z\)</span>-axis pointing outwards towards the viewer then normal maps take on a mostly blue appearance.</p>
+<p>Compile and run the project <span class="math notranslate nohighlight">\(Lab09_Normal_maps\)</span> and you will see that we have the scene used at the end of <a class="reference internal" href="08_Lighting.html#lighting-section"><span class="std std-ref">last lab on Lighting</span></a> with the teapots lit using two point lights, a spotlight and a directional light.</p>
 <figure class="align-default">
 <a class="reference internal image-reference" href="../_images/09_teapots.png"><img alt="../_images/09_teapots.png" src="../_images/09_teapots.png" style="width: 500px;" /></a>
 </figure>
@@ -422,12 +420,11 @@ document.write(`
 <li><p><code class="docutils literal notranslate"><span class="pre">addPointLight()</span></code>, <code class="docutils literal notranslate"><span class="pre">addSpotLight()</span></code>, <code class="docutils literal notranslate"><span class="pre">addDirLight()</span></code> - these are used to add another light source to the scene</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">toShader()</span></code> - sends all of the lighting uniforms to the shader</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">draw()</span></code> - draws the light source</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">reorder()</span></code> - a private member function that reorders the <code class="docutils literal notranslate"><span class="pre">lights</span></code> vector so that all the point light sources come first, followed by the spotlight sources and then the directional light sources. This means we can avoid if statements in our shader files (this slows down the shaders significantly).</p></li>
 </ul>
 <hr class="docutils" />
 <section id="tangent-space">
 <h2><span class="section-number">9.1. </span>Tangent space<a class="headerlink" href="#tangent-space" title="Permalink to this heading">#</a></h2>
-<p>We have already seen in <a class="reference internal" href="06_3D_worlds.html#d-worlds-section"><span class="std std-ref">Lab 6 3D worlds</span></a> that we can use transformations to map co-ordinates and vectors between the model, view and screen spaces. To apply normal mapping we need to perform our lighting calculations in a new space called the <strong>tangent space</strong>. The tangent space is a 3D space where vectors are defined in terms of three vectors: <strong>tangent</strong>, <strong>bitangent</strong> and <strong>normal</strong> vectors (<a class="reference internal" href="#bitangent-vector-figure"><span class="std std-numref">Fig. 9.3</span></a>).</p>
+<p>We have already seen in <a class="reference internal" href="06_3D_worlds.html#d-worlds-section"><span class="std std-ref">6. 3D worlds</span></a> that we can use transformations to map co-ordinates and vectors between the model, view and screen spaces. To apply normal mapping we need to perform our lighting calculations in a new space called the <strong>tangent space</strong>. The tangent space is a 3D space where vectors are defined in terms of three vectors: <strong>tangent</strong>, <strong>bitangent</strong> and <strong>normal</strong> vectors (<a class="reference internal" href="#bitangent-vector-figure"><span class="std std-numref">Fig. 9.3</span></a>).</p>
 <figure class="align-default" id="bitangent-vector-figure">
 <a class="reference internal image-reference" href="../_images/09_bitangent.svg"><img alt="../_images/09_bitangent.svg" src="../_images/09_bitangent.svg" width="300" /></a>
 <figcaption>
@@ -435,9 +432,9 @@ document.write(`
 </figcaption>
 </figure>
 <ul class="simple">
-<li><p><strong>Normal vector</strong> - we have already met the normal vector which is a vector perpendicular to the surface</p></li>
-<li><p><strong>Tangent vector</strong> - this is a vector that points along the surface so is perpendicular to the normal vector</p></li>
-<li><p><strong>Bitangent vector</strong> - this is a vector that is perpendicular to both the normal and tangent vectors</p></li>
+<li><p><strong>Normal vector</strong>, <span class="math notranslate nohighlight">\(\mathbf{n}\)</span> - we have already met the normal vector which is a vector perpendicular to the surface</p></li>
+<li><p><strong>Tangent vector</strong>, <span class="math notranslate nohighlight">\(\mathbf{t}\)</span> - this is a vector that points along the surface so is perpendicular to the normal vector</p></li>
+<li><p><strong>Bitangent vector</strong>, <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> - this is a vector that is perpendicular to both the normal and tangent vectors</p></li>
 </ul>
 <p>There are an infinite number of vectors on a plane that is perpendicular to the normal vector so we have a choice for the tangent and bitangent vectors. A natural choice is to use vectors that point along the edges of the normal map, we know these are perpendicular and this also means we are consistent for neighbouring triangles.</p>
 <figure class="align-default" id="tbn-figure">
@@ -446,32 +443,32 @@ document.write(`
 <p><span class="caption-number">Fig. 9.4 </span><span class="caption-text">The tangent space is defined by the tangent, bitangent and normal vectors.</span><a class="headerlink" href="#tbn-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>The tangent and bitangent vectors are calculated using the model space vertex co-ordinates of the triangle <span class="math notranslate nohighlight">\(\mathsf{(x_0,y_0,z_0)}\)</span>, <span class="math notranslate nohighlight">\(\mathsf{(x_1,y_1,z_1)}\)</span> and <span class="math notranslate nohighlight">\(\mathsf{(x_2,y_2,z_2)}\)</span> and their corresponding texture co-ordinates <span class="math notranslate nohighlight">\(\mathsf{(u_0,v_0)}\)</span>, <span class="math notranslate nohighlight">\(\mathsf{(u_1,v_1)}\)</span> and <span class="math notranslate nohighlight">\(\mathsf{(u_2,v_2)}\)</span>.</p>
+<p>The tangent and bitangent vectors are calculated using the model space vertex co-ordinates of the triangle <span class="math notranslate nohighlight">\((x_0,y_0,z_0)\)</span>, <span class="math notranslate nohighlight">\((x_1,y_1,z_1)\)</span> and <span class="math notranslate nohighlight">\((x_2,y_2,z_2)\)</span> and their corresponding texture co-ordinates <span class="math notranslate nohighlight">\((u_0,v_0)\)</span>, <span class="math notranslate nohighlight">\((u_1,v_1)\)</span> and <span class="math notranslate nohighlight">\((u_2,v_2)\)</span>.</p>
 <figure class="align-default" id="uv-deltas-figure">
 <a class="reference internal image-reference" href="../_images/09_UV_deltas.svg"><img alt="../_images/09_UV_deltas.svg" src="../_images/09_UV_deltas.svg" width="700" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 9.5 </span><span class="caption-text">The tangent, <span class="math notranslate nohighlight">\(\mathsf{T}\)</span>, and bitangent, <span class="math notranslate nohighlight">\(\mathsf{B}\)</span>, vectors are calculated by mapping the model space triangle onto the normal map space.</span><a class="headerlink" href="#uv-deltas-figure" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 9.5 </span><span class="caption-text">The tangent, <span class="math notranslate nohighlight">\(\mathbf{t}\)</span>, and bitangent, <span class="math notranslate nohighlight">\(\mathbf{b}\)</span>, vectors are calculated by mapping the model space triangle onto the normal map space.</span><a class="headerlink" href="#uv-deltas-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>We first calculate vectors that point along two sides of the triangle in the model space</p>
 <div class="math notranslate nohighlight">
 \[\begin{split} \begin{align*}
-    \mathsf{E}_1 &amp;= \mathsf{(x_1, y_1, z_1) - (x_0, y_0, z_0),} \\
-    \mathsf{E}_2 &amp;= \mathsf{(x_2, y_2, z_2) - (x_1, y_1, z_1),}
+    E_1 &amp;= (x_1, y_1, z_1) - (x_0, y_0, z_0), \\
+    E_2 &amp;= (x_2, y_2, z_2) - (x_1, y_1, z_1),
 \end{align*}\end{split}\]</div>
-<p>and calculate the difference in the <span class="math notranslate nohighlight">\(\mathsf{(u,v)}\)</span> co-ordinates for these edges</p>
+<p>and calculate the difference in the <span class="math notranslate nohighlight">\((u,v)\)</span> co-ordinates for these edges</p>
 <div class="math notranslate nohighlight">
 \[\begin{split} \begin{align*}
-    \mathsf{\Delta u_1} &amp;= \mathsf{u_1 - u_0}, \\
-    \mathsf{\Delta v_1} &amp;= \mathsf{v_1 - v_0}, \\
-    \mathsf{\Delta u_2} &amp;= \mathsf{u_2 - u_1}, \\
-    \mathsf{\Delta v_2} &amp;= \mathsf{v_2 - v_1}.
+    \Delta u_1 &amp;= u_1 - u_0, &amp;
+    \Delta v_1 &amp;= v_1 - v_0, \\
+    \Delta u_2 &amp;= u_2 - u_1, &amp;
+    \Delta v_2 &amp;= v_2 - v_1.
 \end{align*} \end{split}\]</div>
-<p>The tangent, <span class="math notranslate nohighlight">\(\mathsf{T}\)</span>, and bitangent, <span class="math notranslate nohighlight">\(\mathsf{B}\)</span>, vectors can then be calculated using</p>
+<p>The tangent, <span class="math notranslate nohighlight">\(\mathbf{t}\)</span>, and bitangent, <span class="math notranslate nohighlight">\(\mathbf{b}\)</span>, vectors can then be calculated using</p>
 <div class="math notranslate nohighlight" id="equation-tb-equation">
 <span class="eqno">(9.1)<a class="headerlink" href="#equation-tb-equation" title="Permalink to this equation">#</a></span>\[\begin{split} \begin{align*}
-    \mathsf{T} &amp;= \frac{1}{\mathsf{\Delta u_1\Delta v_2 - \Delta u_2\Delta v_1}}(\mathsf{\Delta v_2 \cdot E_1 - \Delta v_1 \cdot E_2}), \\
-    \mathsf{B} &amp;= \frac{1}{\mathsf{\Delta u_1\Delta v_2 - \Delta u_2\Delta v_1}}(\mathsf{\Delta u_1 \cdot E_2 - \Delta u_2 \cdot E_1}).
+    \mathbf{t} &amp;= \frac{1}{\Delta u_1\Delta v_2 - \Delta u_2\Delta v_1}(\Delta v_2 \cdot E_1 - \Delta v_1 \cdot E_2), \\
+    \mathsf{b} &amp;= \frac{1}{\Delta u_1\Delta v_2 - \Delta u_2\Delta v_1}(\Delta u_1 \cdot E_2 - \Delta u_2 \cdot E_1).
 \end{align*} \end{split}\]</div>
 <p>To see the derivation of these equations click on the dropdown below.</p>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
@@ -481,67 +478,66 @@ Calculating the tangent and bitangent vectors<div class="sd-summary-down docutil
 <div class="sd-summary-up docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
-<p class="sd-card-text">Consider <a class="reference internal" href="#uv-deltas-figure"><span class="std std-numref">Fig. 9.5</span></a> where a triangle is mapped onto the normal map using texture co-ordinates <span class="math notranslate nohighlight">\(\mathsf{(u_0,v_0)}\)</span>, <span class="math notranslate nohighlight">\(\mathsf{(u_1,v_1)}\)</span> and <span class="math notranslate nohighlight">\(\mathsf{(u_2,v_2)}\)</span>. If the vectors <span class="math notranslate nohighlight">\(\mathsf{T}\)</span> and <span class="math notranslate nohighlight">\(\mathsf{B}\)</span> point in the co-ordinate directions of the normal map then the tangle space positions along the triangle edges <span class="math notranslate nohighlight">\(\mathsf{E_1}\)</span> and <span class="math notranslate nohighlight">\(\mathsf{E_2}\)</span> can be calculated using</p>
+<p class="sd-card-text">Consider <a class="reference internal" href="#uv-deltas-figure"><span class="std std-numref">Fig. 9.5</span></a> where a triangle is mapped onto the normal map using texture co-ordinates <span class="math notranslate nohighlight">\((u_0,v_0)\)</span>, <span class="math notranslate nohighlight">\((u_1,v_1)\)</span> and <span class="math notranslate nohighlight">\((u_2,v_2)\)</span>. If the vectors <span class="math notranslate nohighlight">\(\mathbf{t}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> point in the co-ordinate directions of the normal map then the tangle space positions along the triangle edges <span class="math notranslate nohighlight">\(E_1\)</span> and <span class="math notranslate nohighlight">\(E_2\)</span> can be calculated using</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{align*}
-    \mathsf{E_1} &amp;= \mathsf{\Delta u_1 \cdot T + \Delta v_1 \cdot B}, \\
-    \mathsf{E_2} &amp;= \mathsf{\Delta u_2 \cdot T + \Delta v_2 \cdot B},
+    E_1 &amp;= \Delta u_1 \cdot \mathbf{t} + \Delta v_1 \cdot \mathbf{b}, \\
+    E_2 &amp;= \Delta u_2 \cdot \mathbf{t} + \Delta v_2 \cdot \mathbf{b},
 \end{align*}\end{split}\]</div>
-<p class="sd-card-text">where <span class="math notranslate nohighlight">\(\mathsf{\Delta u_1 = u_1 - u_0}\)</span>, <span class="math notranslate nohighlight">\(\mathsf{\Delta v_1 = v_1 - v_0}\)</span>, <span class="math notranslate nohighlight">\(\mathsf{\Delta u_2 = u_2 - u_1}\)</span> and <span class="math notranslate nohighlight">\(\mathsf{\Delta v_2 = v_2 - v_1}\)</span>. We can express this using matrices</p>
+<p class="sd-card-text">where <span class="math notranslate nohighlight">\(\Delta u_1 = u_1 - u_0\)</span>, <span class="math notranslate nohighlight">\(\Delta v_1 = v_1 - v_0\)</span>, <span class="math notranslate nohighlight">\(\Delta u_2 = u_2 - u_1\)</span> and <span class="math notranslate nohighlight">\(\Delta v_2 = v_2 - v_1\)</span>. We can express this using matrices</p>
 <div class="math notranslate nohighlight">
 \[\begin{split} \begin{align*}
-    \begin{pmatrix} \mathsf{E_1} \\ \mathsf{E_2} \end{pmatrix} &amp;=
+    \begin{pmatrix} E_1 \\ E_2 \end{pmatrix} &amp;=
     \begin{pmatrix}
-        \mathsf{\Delta u_1} &amp; \mathsf{\Delta v_1} \\
-        \mathsf{\Delta u_2} &amp; \mathsf{\Delta v_2}
+        \Delta u_1 &amp; \Delta v_1 \\
+        \Delta u_2 &amp; \Delta v_2
     \end{pmatrix}
-  \begin{pmatrix} \mathsf{T} \\ \mathsf{B} \end{pmatrix}.
+  \begin{pmatrix} \mathbf{t} \\ \mathbf{b} \end{pmatrix}.
 \end{align*} \end{split}\]</div>
-<p class="sd-card-text">We want to calculate <span class="math notranslate nohighlight">\(\mathsf{T}\)</span> and <span class="math notranslate nohighlight">\(\mathsf{B}\)</span> and we know the values of <span class="math notranslate nohighlight">\(\mathsf{E_1}\)</span>, <span class="math notranslate nohighlight">\(\mathsf{E_2}\)</span>, <span class="math notranslate nohighlight">\(\mathsf{\Delta u_1}\)</span>, <span class="math notranslate nohighlight">\(\mathsf{\Delta v_1}\)</span>, <span class="math notranslate nohighlight">\(\mathsf{\Delta u_2}\)</span> and <span class="math notranslate nohighlight">\(\mathsf{\Delta v_2}\)</span>. Using the <a class="reference internal" href="04_vectors_and_matrices.html#inverse-matrix-section"><span class="std std-ref">inverse</span></a> of the square matrix we can rewrite this equation as</p>
+<p class="sd-card-text">We want to calculate <span class="math notranslate nohighlight">\(\mathbf{t}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> and we know the values of <span class="math notranslate nohighlight">\(E_1\)</span>, <span class="math notranslate nohighlight">\(E_2\)</span>, <span class="math notranslate nohighlight">\(\Delta u_1\)</span>, <span class="math notranslate nohighlight">\(\Delta v_1\)</span>, <span class="math notranslate nohighlight">\(\Delta u_2\)</span> and <span class="math notranslate nohighlight">\(\Delta v_2\)</span>. Using the <a class="reference internal" href="04_vectors_and_matrices.html#inverse-matrix-section"><span class="std std-ref">inverse</span></a> of the square matrix we can rewrite this equation as</p>
 <div class="math notranslate nohighlight">
 \[\begin{split} \begin{align*}
-    \begin{pmatrix} \mathsf{T} \\ \mathsf{B} \end{pmatrix} &amp;=
+    \begin{pmatrix} \mathbf{t} \\ \mathbf{b} \end{pmatrix} &amp;=
     \begin{pmatrix}
-        \mathsf{\Delta u_1} &amp; \mathsf{\Delta v_1} \\
-        \mathsf{\Delta u_2} &amp; \mathsf{\Delta v_2}
+        \Delta u_1 &amp; \Delta v_1 \\
+        \Delta u_2 &amp; \Delta v_2
     \end{pmatrix}^{-1}
-    \begin{pmatrix} \mathsf{E_1} \\ \mathsf{E_2} \end{pmatrix} \\
-    &amp;= 
-    \frac{1}{\mathsf{\Delta u_1\Delta v_2 - \Delta u_2\Delta v_1}}
+    \begin{pmatrix} E_1 \\ E_2 \end{pmatrix} \\
+    &amp;= \frac{1}{\Delta u_1\Delta v_2 - \Delta u_2\Delta v_1}
     \begin{pmatrix}
-        \mathsf{\Delta v_2} &amp; \mathsf{-\Delta v_1} \\
-        \mathsf{-\Delta u_2} &amp; \mathsf{\Delta u_1}
+        \Delta v_2 &amp; -\Delta v_1 \\
+        -\Delta u_2 &amp; \Delta u_1
     \end{pmatrix}
-    \begin{pmatrix} \mathsf{E_1} \\ \mathsf{E_2} \end{pmatrix}.
+    \begin{pmatrix} E_1 \\ E_2 \end{pmatrix}.
 \end{align*} \end{split}\]</div>
-<p class="sd-card-text">Writing the out for the <span class="math notranslate nohighlight">\(\mathsf{T}\)</span> and <span class="math notranslate nohighlight">\(\mathsf{B}\)</span> vectors we have</p>
+<p class="sd-card-text">Writing the out for the <span class="math notranslate nohighlight">\(\mathbf{t}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> vectors we have</p>
 <div class="math notranslate nohighlight">
 \[\begin{split} \begin{align*}
-    \mathsf{T} &amp;= \frac{1}{\mathsf{\Delta u_1\Delta v_2 - \Delta u_2\Delta v_1}}(\mathsf{\Delta v_2 \cdot E_1 - \Delta v_1 \cdot E_2}), \\
-    \mathsf{B} &amp;= \frac{1}{\mathsf{\Delta u_1\Delta v_2 - \Delta u_2\Delta v_1}}(\mathsf{\Delta u_1 \cdot E_2 - \Delta u_2 \cdot E_1}).
+    \mathbf{t} &amp;= \frac{1}{\Delta u_1\Delta v_2 - \Delta u_2\Delta v_1}(\Delta v_2 \cdot E_1 - \Delta v_1 \cdot E_2), \\
+    \mathbf{b} &amp;= \frac{1}{\Delta u_1\Delta v_2 - \Delta u_2\Delta v_1}(\Delta u_1 \cdot E_2 - \Delta u_2 \cdot E_1).
 \end{align*} \end{split}\]</div>
 </div>
-</details><p>Once we have the tangent, bitangent and normal vectors we can form a matrix that transforms from the tangent space to an arbitrary space (e.g., the view space). The matrix that achieves this a 3 <span class="math notranslate nohighlight">\(\times\)</span> 3 matrix known as the <strong>TBN matrix</strong> (we don’t need a 4 <span class="math notranslate nohighlight">\(\times\)</span> 4 matrix since we don’t need to perform a translation)</p>
+</details><p>Once we have the tangent, bitangent and normal vectors we can form a matrix that transforms from the tangent space to an arbitrary space (e.g., the view space). The matrix that achieves this a 3 <span class="math notranslate nohighlight">\(\times\)</span> 3 matrix known as the <span class="math notranslate nohighlight">\(TBN\)</span> matrix</p>
 <div class="math notranslate nohighlight">
 \[\begin{split} \begin{align*}
     \textsf{TBN} &amp;= 
     \begin{pmatrix}
-        \mathsf{T_x} &amp; \mathsf{B_x} &amp; \mathsf{N_x} \\
-        \mathsf{T_y} &amp; \mathsf{B_y} &amp; \mathsf{N_y} \\
-        \mathsf{T_z} &amp; \mathsf{B_z} &amp; \mathsf{N_z}
-    \end{pmatrix}.
+        t_x &amp; b_x &amp; n_x \\
+        t_y &amp; b_y &amp; n_y \\
+        t_z &amp; b_z &amp; n_z
+    \end{pmatrix},
 \end{align*} \end{split}\]</div>
-<p>However, we will be performing our lighting calculations in the tangent space so we want to transform from the view space to the tangent space. To do this we calculate the <a class="reference internal" href="04_vectors_and_matrices.html#inverse-matrix-section"><span class="std std-ref">inverse</span></a> of the TBN matrix. Fortunately this is an orthogonal matrix where the inverse is simply the transpose, i.e., <span class="math notranslate nohighlight">\(\mathsf{(TBN)^{-1}} = \mathsf{(TBN)^{T}}\)</span>, which is an easy calculation.</p>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{t} = (t_x, t_y, t_z)\)</span>, <span class="math notranslate nohighlight">\(\mathbf{b} = (b_x, b_y, b_z)\)</span> and <span class="math notranslate nohighlight">\(\mathbf{n} = (n_x, n_y, n_z)\)</span>. We will be performing our lighting calculations in the tangent space so we want to transform from the view space to the tangent space. To do this we calculate the <a class="reference internal" href="04_vectors_and_matrices.html#inverse-matrix-section"><span class="std std-ref">inverse</span></a> of the <span class="math notranslate nohighlight">\(TBN\)</span> matrix. Fortunately this is an orthogonal matrix where the inverse is simply the transpose, i.e., <span class="math notranslate nohighlight">\(\mathsf{(TBN)^{-1}} = \mathsf{(TBN)^{T}}\)</span>, which is an easy calculation.</p>
 <section id="calculating-the-tangent-and-bitangent-vectors">
 <h3><span class="section-number">9.1.1. </span>Calculating the tangent and bitangent vectors<a class="headerlink" href="#calculating-the-tangent-and-bitangent-vectors" title="Permalink to this heading">#</a></h3>
-<p>All of the lighting calculations are performed by the shaders so we calculate the tangent and bitangent vectors in our C++ program and pass them to the vertex shader using uniforms. The model class contains all of the attributes for a model so we create two vectors that will contain the tangents and bitangents for each of the vertices of the model. In <code class="docutils literal notranslate"><span class="pre">model.hpp</span></code> add the following code after we have declared a vector array for the normals.</p>
+<p>All of the lighting calculations are performed by the shaders so we calculate the tangent and bitangent vectors in our C++ program and pass them to the vertex shader using uniforms. The model class contains all of the attributes for a model so we create two vectors that will contain the tangents and bitangents for each of the vertices of the model. In the <strong>model.hpp</strong> file add the following code after we have declared a vector array for the normals.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">glm</span><span class="o">::</span><span class="n">vec3</span><span class="o">&gt;</span><span class="w"> </span><span class="n">tangents</span><span class="p">;</span>
 <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">glm</span><span class="o">::</span><span class="n">vec3</span><span class="o">&gt;</span><span class="w"> </span><span class="n">bitangents</span><span class="p">;</span>
 </pre></div>
 </div>
-<p>We are going to send the tangents and bitangents to the GPU using vertex buffers in the same way as we did for the vertices, texture co-ordinates and normal vectors. In <code class="docutils literal notranslate"><span class="pre">model.hpp</span></code> under the <code class="docutils literal notranslate"><span class="pre">private:</span></code> declaration add the identifiers for the tangent and bitangent buffers.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">GLuint</span><span class="w"> </span><span class="n">tangentBuffer</span><span class="p">;</span>
-<span class="n">GLuint</span><span class="w"> </span><span class="n">bitangentBuffer</span><span class="p">;</span>
+<p>We are going to send the tangents and bitangents to the GPU using vertex buffers in the same way as we did for the vertices, texture co-ordinates and normal vectors. Under the <code class="docutils literal notranslate"><span class="pre">private:</span></code> declaration add the identifiers for the tangent and bitangent buffers.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">tangentBuffer</span><span class="p">;</span>
+<span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">bitangentBuffer</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>We now create a private method for our model class to calculate the tangent and bitangent vectors. Add the following method declaration.</p>
@@ -549,14 +545,14 @@ Calculating the tangent and bitangent vectors<div class="sd-summary-down docutil
 <span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">calculateTangents</span><span class="p">();</span>
 </pre></div>
 </div>
-<p>Then in the <code class="docutils literal notranslate"><span class="pre">model.cpp</span></code> we define the <code class="docutils literal notranslate"><span class="pre">calculateTangents()</span></code> method.</p>
+<p>Then in the <strong>model.cpp</strong> file we define the <code class="docutils literal notranslate"><span class="pre">calculateTangents()</span></code> method.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">Model</span><span class="p">::</span><span class="n">calculateTangents</span><span class="p">()</span>
 <span class="p">{</span>
     <span class="k">for</span> <span class="p">(</span><span class="n">unsigned</span> <span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">vertices</span><span class="o">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span> <span class="o">+=</span> <span class="mi">3</span><span class="p">)</span>
     <span class="p">{</span>
         <span class="o">//</span> <span class="n">Calculate</span> <span class="n">edge</span> <span class="n">vectors</span> <span class="ow">and</span> <span class="n">deltas</span>
-        <span class="n">glm</span><span class="p">::</span><span class="n">vec3</span> <span class="n">E1</span> <span class="o">=</span> <span class="n">vertices</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">vertices</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-        <span class="n">glm</span><span class="p">::</span><span class="n">vec3</span> <span class="n">E2</span> <span class="o">=</span> <span class="n">vertices</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">vertices</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
+        <span class="n">glm</span><span class="p">::</span><span class="n">vec3</span> <span class="n">E1</span>  <span class="o">=</span> <span class="n">vertices</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">vertices</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+        <span class="n">glm</span><span class="p">::</span><span class="n">vec3</span> <span class="n">E2</span>  <span class="o">=</span> <span class="n">vertices</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">vertices</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
         <span class="nb">float</span> <span class="n">deltaU1</span> <span class="o">=</span> <span class="n">uvs</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">x</span> <span class="o">-</span> <span class="n">uvs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">x</span><span class="p">;</span>
         <span class="nb">float</span> <span class="n">deltaV1</span> <span class="o">=</span> <span class="n">uvs</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">y</span> <span class="o">-</span> <span class="n">uvs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">y</span><span class="p">;</span>
         <span class="nb">float</span> <span class="n">deltaU2</span> <span class="o">=</span> <span class="n">uvs</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">x</span> <span class="o">-</span> <span class="n">uvs</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">x</span><span class="p">;</span>
@@ -578,12 +574,12 @@ Calculating the tangent and bitangent vectors<div class="sd-summary-down docutil
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>This code calculates the tangent and bitangent vectors using equation <a class="reference internal" href="#equation-tb-equation">(9.1)</a> and adds them the <code class="docutils literal notranslate"><span class="pre">tangents</span></code> and <code class="docutils literal notranslate"><span class="pre">bitangents</span></code> lists. We want these to be calculated whenever we create a model so amend the Model class constructor so add the following above <code class="docutils literal notranslate"><span class="pre">setupBuffers()</span></code>.</p>
+<p>This code calculates the tangent and bitangent vectors using equation <a class="reference internal" href="#equation-tb-equation">(9.1)</a> and adds them the <code class="docutils literal notranslate"><span class="pre">tangents</span></code> and <code class="docutils literal notranslate"><span class="pre">bitangents</span></code> vectors. We want these to be calculated whenever we create a model so amend the Model class constructor at the top of the file and add the following before <code class="docutils literal notranslate"><span class="pre">setupBuffers()</span></code> is called.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Calculate tangent and bitangent vectors</span>
 <span class="n">calculateTangents</span><span class="p">();</span>
 </pre></div>
 </div>
-<p>The last addition we need to make to the Model class is to setup the buffers for the tangent and bitangent and copy these across to the GPU. In <code class="docutils literal notranslate"><span class="pre">model.cpp</span></code> add the following to the <code class="docutils literal notranslate"><span class="pre">setupBuffers()</span></code> method (before we unbind the VAO).</p>
+<p>The last addition we need to make to the Model class is to setup the buffers for the tangent and bitangent and copy these across to the GPU. Add the following to the <code class="docutils literal notranslate"><span class="pre">setupBuffers()</span></code> method (before we unbind the VAO).</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Create tangent buffer</span>
 <span class="n">GLuint</span><span class="w"> </span><span class="n">tangentBuffer</span><span class="p">;</span>
 <span class="n">glGenBuffers</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">tangentBuffer</span><span class="p">);</span>
@@ -615,66 +611,64 @@ Calculating the tangent and bitangent vectors<div class="sd-summary-down docutil
 <h2><span class="section-number">9.2. </span>Shaders<a class="headerlink" href="#shaders" title="Permalink to this heading">#</a></h2>
 <section id="vertex-shader">
 <h3><span class="section-number">9.2.1. </span>Vertex shader<a class="headerlink" href="#vertex-shader" title="Permalink to this heading">#</a></h3>
-<p>In the vertex shader we need to calculate the tangent space fragment position, light position and light direction. We could do this in the fragment shader but since that is called for each fragment in the triangle and the vertex shader is just called 3 times per triangle it is much more efficient to do it in the vertex shader. Create a new shader file called <code class="docutils literal notranslate"><span class="pre">normalMapVertexShader.vert</span></code> in the <code class="docutils literal notranslate"><span class="pre">source/</span></code> folder and copy in the code from the <code class="docutils literal notranslate"><span class="pre">vertexShader.vert</span></code> file.</p>
-<p>The first change we need to make to the vertex shader is to declare the new tangent and bitangent inputs. The <code class="docutils literal notranslate"><span class="pre">createBuffers()</span></code> model class bound these to attributes 3 and 4 respectively so edit your file so it looks like the following.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Input vertex data</span>
-<span class="n">layout</span><span class="p">(</span><span class="n">location</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">vec3</span><span class="w"> </span><span class="n">position</span><span class="p">;</span>
-<span class="n">layout</span><span class="p">(</span><span class="n">location</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">vec2</span><span class="w"> </span><span class="n">uv</span><span class="p">;</span>
-<span class="n">layout</span><span class="p">(</span><span class="n">location</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">vec3</span><span class="w"> </span><span class="n">normal</span><span class="p">;</span>
-<span class="n">layout</span><span class="p">(</span><span class="n">location</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">vec3</span><span class="w"> </span><span class="n">tangent</span><span class="p">;</span>
+<p>In the vertex shader we need to calculate the tangent space fragment position, light position and light direction. We could do this in the fragment shader but since that is called for each fragment in the triangle and the vertex shader is just called 3 times per triangle it is much more efficient to do it in the vertex shader.</p>
+<p>The first change we need to make to the vertex shader is to declare the new tangent and bitangent inputs. These were bound to attributes 3 and 4 respectively so edit your file so that we input the tangets and bitangent buffers.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">layout</span><span class="p">(</span><span class="n">location</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">vec3</span><span class="w"> </span><span class="n">tangent</span><span class="p">;</span>
 <span class="n">layout</span><span class="p">(</span><span class="n">location</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">vec3</span><span class="w"> </span><span class="n">bitangent</span><span class="p">;</span>
 </pre></div>
 </div>
-<p>We need to transform the fragment position, light position and direction vector to the tangent space and to do so we calculate the TBN matrix. After the (u,v) co-ordinates have been outputted add the following code.</p>
+<p>We need to transform the fragment position, light position and direction vector to the tangent space and to do so we calculate the <span class="math notranslate nohighlight">\(TBN\)</span> matrix. Before the view space fragment position and normal vector are calculated add the following code.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Calculate the TBN matrix that transforms view space to tangent space</span>
-<span class="n">mat3</span><span class="w"> </span><span class="n">normalMatrix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">transpose</span><span class="p">(</span><span class="n">inverse</span><span class="p">(</span><span class="n">mat3</span><span class="p">(</span><span class="n">view</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">model</span><span class="p">)));</span>
-<span class="n">vec3</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">normalize</span><span class="p">(</span><span class="n">normalMatrix</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">tangent</span><span class="p">);</span>
-<span class="n">vec3</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">normalize</span><span class="p">(</span><span class="n">normalMatrix</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">bitangent</span><span class="p">);</span>
-<span class="n">vec3</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">normalize</span><span class="p">(</span><span class="n">normalMatrix</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">normal</span><span class="p">);</span>
-<span class="n">mat3</span><span class="w"> </span><span class="n">TBN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">transpose</span><span class="p">(</span><span class="n">mat3</span><span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">B</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="p">));</span>
+<span class="n">mat3</span><span class="w"> </span><span class="n">invMV</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">transpose</span><span class="p">(</span><span class="n">inverse</span><span class="p">(</span><span class="n">mat3</span><span class="p">(</span><span class="n">MV</span><span class="p">)));</span>
+<span class="n">vec3</span><span class="w"> </span><span class="n">t</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="n">normalize</span><span class="p">(</span><span class="n">invMV</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">tangent</span><span class="p">);</span>
+<span class="n">vec3</span><span class="w"> </span><span class="n">b</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="n">normalize</span><span class="p">(</span><span class="n">invMV</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">bitangent</span><span class="p">);</span>
+<span class="n">vec3</span><span class="w"> </span><span class="n">n</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="n">normalize</span><span class="p">(</span><span class="n">invMV</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">normal</span><span class="p">);</span>
+<span class="n">mat3</span><span class="w"> </span><span class="n">TBN</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="n">transpose</span><span class="p">(</span><span class="n">mat3</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">));</span>
 </pre></div>
 </div>
-<p>Here we transform the tangent, bitangent and normal vectors to the view space using the matrix from equation <a class="reference internal" href="08_Lighting.html#equation-view-space-normal-equation">(8.1)</a> which are then used to calculate the TBN matrix. Remember that by transposing the TBN matrix we are calculating its inverse so here the TBN matrix will transform from the view space to the tangent space.</p>
+<p>Here we transform the tangent, bitangent and normal vectors to the view space using the matrix from equation <a class="reference internal" href="08_Lighting.html#equation-view-space-normal-equation">(8.3)</a> which are then used to calculate the <span class="math notranslate nohighlight">\(TBN\)</span> matrix. Remember that by transposing the <span class="math notranslate nohighlight">\(TBN\)</span> matrix we are calculating its inverse so here the TBN matrix will transform from the view space to the tangent space.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Some people transform the vectors to the world space instead of the view space, however, this means that we need to also calculate the tangent space position of the camera for the eye vector calculation in the fragment shader. Doing this would mean we have additional uniforms and vector calculations. Since the camera position in the view space is (0,0,0) then it is also (0,0,0) in the tangent space so by transforming the vectors to the view space we don’t need to worry about this.</p>
+<p>Some people transform the vectors to the world space instead of the view space, however, this means that we need to also calculate the tangent space position of the camera for the eye vector calculation in the fragment shader. Doing this would mean we have additional uniforms and vector calculations. Since the camera position in the view space is <span class="math notranslate nohighlight">\((0,0,0)\)</span> then it is also <span class="math notranslate nohighlight">\((0,0,0)\)</span> in the tangent space so by transforming the vectors to the view space we don’t need to worry about this.</p>
 </div>
-<p>All that remains for us to do to the vertex shader is to calculate the tangent space fragment position, light position and direction vector using the TBN matrix. Replace the code used to calculate the view space vectors with the following code.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Output tangent space fragment position</span>
-<span class="n">fragmentPosition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TBN</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">vec3</span><span class="p">(</span><span class="n">view</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">model</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">vec4</span><span class="p">(</span><span class="n">position</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">));</span>
-
-<span class="c1">// Output tangent space light positions and directions</span>
-<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">numPoint</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">numSpot</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">numDir</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<p>We also have to calculate the tangent space fragment position, light position and direction vector using the <span class="math notranslate nohighlight">\(TBN\)</span> matrix. Since we have multiple light sources we need to output an array of vectors for the position and direction of each light source. Add the following to the outputs of the vertex shader</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="k">out</span><span class="w"> </span><span class="kt">vec3</span><span class="w"> </span><span class="n">tangentSpaceLightPosition</span><span class="p">[</span><span class="n">maxLights</span><span class="p">];</span>
+<span class="k">out</span><span class="w"> </span><span class="kt">vec3</span><span class="w"> </span><span class="n">tangentSpaceLightDirection</span><span class="p">[</span><span class="n">maxLights</span><span class="p">];</span>
+</pre></div>
+</div>
+<p>Then replace the code used to calculate the view space vectors with the following code.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Output tangent space fragment position, light positions and directions</span>
+<span class="n">fragmentPosition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TBN</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">vec3</span><span class="p">(</span><span class="n">MV</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">vec4</span><span class="p">(</span><span class="n">position</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">));</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">maxLights</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="n">lightPositions</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TBN</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">vec3</span><span class="p">(</span><span class="n">view</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">vec4</span><span class="p">(</span><span class="n">lights</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">position</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">));</span>
-<span class="w">    </span><span class="n">lightDirections</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TBN</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">vec3</span><span class="p">(</span><span class="n">view</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">vec4</span><span class="p">(</span><span class="n">lights</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">direction</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">));</span>
+<span class="w">    </span><span class="n">tangentSpaceLightPosition</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">TBN</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">lightSources</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">position</span><span class="p">;</span>
+<span class="w">    </span><span class="n">tangentSpaceLightDirection</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TBN</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">lightSources</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">direction</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </section>
 <section id="fragment-shader">
 <h3><span class="section-number">9.2.2. </span>Fragment shader<a class="headerlink" href="#fragment-shader" title="Permalink to this heading">#</a></h3>
-<p>Now that we have transformed the vectors to the tangent space in the vertex shader we need to make a few changes to the fragment shader. The beauty of the tangent space is that it is orthogonal (T, B and N vectors are at right angles) so we don’t need to change any of our lighting calculations. This means we only need to make two changes to the fragment shader. Create a new shader file called <code class="docutils literal notranslate"><span class="pre">normalMapFragmentShader.frag</span></code> in the <code class="docutils literal notranslate"><span class="pre">source/</span></code> folder and copy in the contents of the <code class="docutils literal notranslate"><span class="pre">fragmentShader.frag</span></code> file.</p>
-<p>We have an addition texture for the normal map so we use a sampler uniform to send this to the shader. Add the following where we declared the diffuse map uniform.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">uniform</span><span class="w"> </span><span class="n">sampler2D</span><span class="w"> </span><span class="n">normalMap</span><span class="p">;</span>
+<p>Now that we have transformed the vectors to the tangent space in the vertex shader we need to make a few changes to the fragment shader. The beauty of the tangent space is that it is orthogonal so we don’t need to change any of our lighting calculations. This means we only need to make a few changes to the fragment shader.</p>
+<p>First, declare the inputs for the array of tangent space light source position and direction</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="k">in</span><span class="w"> </span><span class="kt">vec3</span><span class="w"> </span><span class="n">tangentSpaceLightPosition</span><span class="p">[</span><span class="n">maxLights</span><span class="p">];</span>
+<span class="k">in</span><span class="w"> </span><span class="kt">vec3</span><span class="w"> </span><span class="n">tangentSpaceLightDirection</span><span class="p">[</span><span class="n">maxLights</span><span class="p">];</span>
+</pre></div>
+</div>
+<p>We have an additional texture for the normal map so we use a sampler uniform. Add the following where we declared the diffuse map uniform.</p>
+<div class="highlight-glsl notranslate"><div class="highlight"><pre><span></span><span class="k">uniform</span><span class="w"> </span><span class="kt">sampler2D</span><span class="w"> </span><span class="n">normalMap</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>Within the main function we obtain the normal vector from the normal map. Since the values in a texture are between 0 and 1 and we need the values of a normal vector to be between -1 and 1 we scale using the following</p>
 <div class="math notranslate nohighlight">
-\[ \mathsf{normal} = \mathsf{normalise}(2 * \textsf{textel colour} - 1). \]</div>
-<p>So change the <code class="docutils literal notranslate"><span class="pre">normal</span></code> calculation to the following.</p>
+\[ \mathbf{n} = 2 \mathbf{diffuse}_{map} - 1. \]</div>
+<p>Before the <code class="docutils literal notranslate"><span class="pre">main()</span></code> function add the following code</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Get the normal vector from the normal map</span>
-<span class="n">vec3</span><span class="w"> </span><span class="n">normal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">normalize</span><span class="p">(</span><span class="mf">2.0</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">texture</span><span class="p">(</span><span class="n">normalMap</span><span class="p">,</span><span class="w"> </span><span class="n">UV</span><span class="p">).</span><span class="n">rgb</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1.0</span><span class="p">);</span>
+<span class="n">vec3</span><span class="w"> </span><span class="n">Normal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">normalize</span><span class="p">(</span><span class="mf">2.0</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">vec3</span><span class="p">(</span><span class="n">texture</span><span class="p">(</span><span class="n">normalMap</span><span class="p">,</span><span class="w"> </span><span class="n">UV</span><span class="p">))</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1.0</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>We only have a couple of things we need to add to the <code class="docutils literal notranslate"><span class="pre">main.cpp</span></code> file. First tell the shader program we want to use our new vertex and fragment shaders.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">GLuint</span><span class="w"> </span><span class="n">shaderID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LoadShaders</span><span class="p">(</span><span class="s">&quot;normalMapVertexShader.vert&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;normalMapFragmentShader.frag&quot;</span><span class="p">);</span>
-</pre></div>
-</div>
-<p>Then add the normal map texture to the <code class="docutils literal notranslate"><span class="pre">teapot</span></code> object.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Add textures to teapot object</span>
-<span class="n">teapot</span><span class="p">.</span><span class="n">addTexture</span><span class="p">(</span><span class="s">&quot;../objects/blue_diffuse.bmp&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;diffuse&quot;</span><span class="p">);</span>
-<span class="n">teapot</span><span class="p">.</span><span class="n">addTexture</span><span class="p">(</span><span class="s">&quot;../objects/diamond_normal.png&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;normal&quot;</span><span class="p">);</span>
+<p>Then in the <strong>Lab09_Normal_maps.cpp</strong> file add the normal map texture to the <code class="docutils literal notranslate"><span class="pre">teapot</span></code> object where we added the diffuse map.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">teapot</span><span class="p">.</span><span class="n">addTexture</span><span class="p">(</span><span class="s">&quot;../objects/diamond_normal.png&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;normal&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>Compile and run the program and you should see the following.</p>
@@ -711,25 +705,25 @@ Calculating the tangent and bitangent vectors<div class="sd-summary-down docutil
 <p><span class="caption-number">Fig. 9.9 </span><span class="caption-text">Re-orthogonalising T using the Gram-Schmidt process.</span><a class="headerlink" href="#reorthogonalise-t-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>Consider <a class="reference internal" href="#reorthogonalise-t-figure"><span class="std std-numref">Fig. 9.9</span></a> where the tangent vector T is non-orthogonal to the normal vector N. If N and T are unit vectors then if we subtract <span class="math notranslate nohighlight">\(\mathsf{(T \cdot N)N}\)</span> from T then this creates a vector that is orthogonal to N (this is known as the <a href="https://en.wikipedia.org/wiki/Gram–Schmidt_process" target="_blank">Gram-Schmidt process</a>). We can use the cross product between N and T to calculate the bitangent vector B.</p>
-<p>Edit the vertex shader so that we re-orthogonalise T and B</p>
+<p>Consider <a class="reference internal" href="#reorthogonalise-t-figure"><span class="std std-numref">Fig. 9.9</span></a> where the tangent vector <span class="math notranslate nohighlight">\(\mathbf{t}\)</span> is non-orthogonal to the normal vector <span class="math notranslate nohighlight">\(\mathbf{n}\)</span>. If <span class="math notranslate nohighlight">\(\mathbf{n}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{t}\)</span> are unit vectors then if we subtract <span class="math notranslate nohighlight">\((\mathbf{t} \cdot \mathbf{n}) \mathbf{n}\)</span> from <span class="math notranslate nohighlight">\(\mathbf{t}\)</span> then this creates a vector <span class="math notranslate nohighlight">\(\mathbf{t}_{new}\)</span> that is orthogonal to <span class="math notranslate nohighlight">\(\mathbf{n}\)</span> (this is known as the <a href="https://en.wikipedia.org/wiki/Gram–Schmidt_process" target="_blank">Gram-Schmidt process</a>). We can use the cross product between <span class="math notranslate nohighlight">\(\mathbf{n}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{t}\)</span> to calculate the bitangent vector <span class="math notranslate nohighlight">\(\mathbf{n}\)</span>.</p>
+<p>Edit the vertex shader so that we re-orthogonalise <span class="math notranslate nohighlight">\(\mathbf{t}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{b}\)</span>.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Calculate the TBN matrix that transforms view space to tangent space</span>
-<span class="n">mat3</span><span class="w"> </span><span class="n">normalMatrix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">transpose</span><span class="p">(</span><span class="n">inverse</span><span class="p">(</span><span class="n">mat3</span><span class="p">(</span><span class="n">view</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">model</span><span class="p">)));</span>
-<span class="n">vec3</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">normalize</span><span class="p">(</span><span class="n">normalMatrix</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">tangent</span><span class="p">);</span>
-<span class="n">vec3</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">normalize</span><span class="p">(</span><span class="n">normalMatrix</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">normal</span><span class="p">);</span>
-<span class="n">T</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">normalize</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">dot</span><span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">N</span><span class="p">);</span>
-<span class="n">vec3</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cross</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="p">);</span>
-<span class="n">mat3</span><span class="w"> </span><span class="n">TBN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">transpose</span><span class="p">(</span><span class="n">mat3</span><span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">B</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="p">));</span>
+<span class="n">mat3</span><span class="w"> </span><span class="n">invMV</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">transpose</span><span class="p">(</span><span class="n">inverse</span><span class="p">(</span><span class="n">mat3</span><span class="p">(</span><span class="n">MV</span><span class="p">)));</span>
+<span class="n">vec3</span><span class="w"> </span><span class="n">t</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="n">normalize</span><span class="p">(</span><span class="n">invMV</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">tangent</span><span class="p">);</span>
+<span class="n">vec3</span><span class="w"> </span><span class="n">n</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="n">normalize</span><span class="p">(</span><span class="n">invMV</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">normal</span><span class="p">);</span>
+<span class="n">t</span><span class="w">          </span><span class="o">=</span><span class="w"> </span><span class="n">normalize</span><span class="p">(</span><span class="n">t</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">dot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">n</span><span class="p">);</span>
+<span class="n">vec3</span><span class="w"> </span><span class="n">b</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="n">cross</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">);</span>
+<span class="n">mat3</span><span class="w"> </span><span class="n">TBN</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="n">transpose</span><span class="p">(</span><span class="n">mat3</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">));</span>
 </pre></div>
 </div>
-<p>You may notice that here we have calculated the bitangent in the vertex shader using normal and tangent vectors without needed to access the bitangent buffer. To save on memory you could remove the <code class="docutils literal notranslate"><span class="pre">bitangents</span></code> buffer from the Model class since we don’t need these anymore.</p>
+<p>Compile and run the code once against and you should see a screen similar to the one below.</p>
 <figure class="align-default" id="normal-map-orthogonalised-figure">
 <a class="reference internal image-reference" href="../_images/09_normal_map_orthogonalised.png"><img alt="../_images/09_normal_map_orthogonalised.png" src="../_images/09_normal_map_orthogonalised.png" style="width: 500px;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 9.10 </span><span class="caption-text">A normal map with orthogonalised tangent and bitangent vectors.</span><a class="headerlink" href="#normal-map-orthogonalised-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>If you are having difficulty getting to this stage check out the source code files <span class="xref myst">Lab08_Normal_maps</span> and the shader files <span class="xref myst">normalMapVertexShader.vert</span> and <span class="xref myst">normalMapFragmentShader.frag</span>.</p>
+<p>Now our tangent space vectors are orthogonal and we have a correct normal map applied.</p>
 </section>
 <hr class="docutils" />
 <section id="specular-maps">
@@ -890,22 +884,6 @@ Calculating the tangent and bitangent vectors<div class="sd-summary-down docutil
 <a class="reference internal image-reference" href="../_images/09_ex3.png"><img alt="../_images/09_ex3.png" src="../_images/09_ex3.png" style="width: 500px;" /></a>
 </figure>
 </section>
-<hr class="docutils" />
-<section id="source-code">
-<h2><span class="section-number">9.6. </span>Source code<a class="headerlink" href="#source-code" title="Permalink to this heading">#</a></h2>
-<p>The source code for this lab, including the exercise solutions, can be downloaded using the links below.</p>
-<ul class="simple">
-<li><p><span class="xref myst">Lab08_Normal_maps.cpp</span> - normal map applied to a single teapot object</p></li>
-<li><p><span class="xref myst">normalMapVertexShader.vert</span></p></li>
-<li><p><span class="xref myst">normalMapFragmentShader.vert</span></p></li>
-<li><p><span class="xref myst">main.cpp</span> - solutions to the exercises</p></li>
-</ul>
-</section>
-<hr class="docutils" />
-<section id="video-walkthrough">
-<h2><span class="section-number">9.7. </span>Video walkthrough<a class="headerlink" href="#video-walkthrough" title="Permalink to this heading">#</a></h2>
-<p>The video below walks you through these lab materials.</p>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/TVsZjf1Gwu4?si=ezQkt9g-UwzWfnxM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -990,8 +968,6 @@ Calculating the tangent and bitangent vectors<div class="sd-summary-down docutil
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">9.5. Exercises</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#source-code">9.6. Source code</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#video-walkthrough">9.7. Video walkthrough</a></li>
 </ul>
   </nav></div>
 

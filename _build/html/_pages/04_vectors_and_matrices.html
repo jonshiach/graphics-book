@@ -375,9 +375,9 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arithmetic-operations-on-vectors">4.3. Arithmetic operations on vectors</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiplication-and-division-by-a-scalar">4.3.1. Multiplication and division by a scalar</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vector-addition-and-subtraction">4.3.2. Vector addition and subtraction</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiplying-vectors">4.3.3. Multiplying vectors</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vector-addition-and-subtraction">4.3.1. Vector addition and subtraction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiplication-and-division-by-a-scalar">4.3.2. Multiplication and division by a scalar</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#element-wise-multiplication">4.3.3. Element-wise multiplication</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-dot-product">4.3.4. The dot product</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-cross-product">4.3.5. The cross product</a></li>
 </ul>
@@ -533,40 +533,8 @@ length(bHat) = 1.000
 <section id="arithmetic-operations-on-vectors">
 <h2><span class="section-number">4.3. </span>Arithmetic operations on vectors<a class="headerlink" href="#arithmetic-operations-on-vectors" title="Permalink to this heading">#</a></h2>
 <p>Like numbers, we can define the arithmetic operations of addition, subtraction for vectors as well as multiplication and division by a scalar.</p>
-<section id="multiplication-and-division-by-a-scalar">
-<h3><span class="section-number">4.3.1. </span>Multiplication and division by a scalar<a class="headerlink" href="#multiplication-and-division-by-a-scalar" title="Permalink to this heading">#</a></h3>
-<p>Multiplication and division of a vector <span class="math notranslate nohighlight">\(\mathbf{a} = (a_x, a_y, a_z)\)</span> by a scalar (a number) <span class="math notranslate nohighlight">\(k\)</span> are defined by</p>
-<div class="math notranslate nohighlight">
-\[\begin{split} \begin{align*}
-    k \mathbf{a} &amp;= (ka_x, ka_y, ka_z), \\
-    \frac{\mathbf{a}}{k} &amp;= \left(\frac{a_x}{k}, \frac{a_y}{k}, \frac{a_z}{k} \right).
-\end{align*} \end{split}\]</div>
-<p>Multiplying or dividing a vector by a positive scalar has the effect of scaling the length of the vector. Multiplying or dividing by a negative scalar reverses the direction of the vector.</p>
-<figure class="align-default">
-<a class="reference internal image-reference" href="../_images/04_vector_multiplication.svg"><img alt="../_images/04_vector_multiplication.svg" height="180" src="../_images/04_vector_multiplication.svg" /></a>
-</figure>
-<p>For example, multiplying the vector <span class="math notranslate nohighlight">\(\mathbf{a} = (3, 0, 4)\)</span> by the scalar 2 gives</p>
-<div class="math notranslate nohighlight">
-\[ 2\mathbf{a} = 2(3,0,4) = (6, 0, 8), \]</div>
-<p>which has the magnitude</p>
-<div class="math notranslate nohighlight">
-\[ \|2 \mathbf{a} \| = \sqrt{6^2 + 0^2 + 8^2} = \sqrt{36 + 64} = \sqrt{100} = 10 = 2 \|\mathbf{a}\|. \]</div>
-<p>To perform scalar multiplication or division on a glm vector we simply use the <code class="docutils literal notranslate"><span class="pre">*</span></code> and <code class="docutils literal notranslate"><span class="pre">/</span></code> operators. To demonstrate this add the following code to your program.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Arithmetic operations on vectors</span>
-<span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">Arithmetic operations on vectors:</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
-<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;2a    = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mf">2.0f</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;b / 3 = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">3.0f</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-</pre></div>
-</div>
-<p>Note that we need to use float values for scalar multiplication and division, i.e., <code class="docutils literal notranslate"><span class="pre">2.0f</span></code> and <code class="docutils literal notranslate"><span class="pre">3.0f</span></code> instead of <code class="docutils literal notranslate"><span class="pre">2</span></code> and <code class="docutils literal notranslate"><span class="pre">3</span></code>. Running the program will add the following to the console.</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Arithmetic operations on vectors:
-2a    = [    6.000,    0.000,    8.000]
-b / 3 = [    0.333,    0.667,    1.000]
-</pre></div>
-</div>
-</section>
 <section id="vector-addition-and-subtraction">
-<h3><span class="section-number">4.3.2. </span>Vector addition and subtraction<a class="headerlink" href="#vector-addition-and-subtraction" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">4.3.1. </span>Vector addition and subtraction<a class="headerlink" href="#vector-addition-and-subtraction" title="Permalink to this heading">#</a></h3>
 <p>The addition and subtraction of two vectors <span class="math notranslate nohighlight">\(\mathbf{a} = (a_x, a_y, a_z)\)</span> and <span class="math notranslate nohighlight">\(\mathbf{b} = (b_x, b_y, b_z)\)</span> is defined by</p>
 <div class="math notranslate nohighlight" id="equation-eq-vector-addition">
 <span class="eqno">(4.3)<a class="headerlink" href="#equation-eq-vector-addition" title="Permalink to this equation">#</a></span>\[\begin{split} \begin{align*}
@@ -594,19 +562,51 @@ b / 3 = [    0.333,    0.667,    1.000]
 </figcaption>
 </figure>
 <p>To calculate the addition and subraction of our vectors add the following code to your program.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;a + b = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Arithmetic operations on vectors</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">Arithmetic operations on vectors:</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;a + b = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
 <span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;a - b = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>Running the program adds the following output to the console.</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>a + b = [    4.000,    2.000,    7.000]
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Arithmetic operations on vectors:
+a + b = [    4.000,    2.000,    7.000]
 a - b = [    2.000,   -2.000,    1.000]
 </pre></div>
 </div>
 </section>
-<section id="multiplying-vectors">
-<h3><span class="section-number">4.3.3. </span>Multiplying vectors<a class="headerlink" href="#multiplying-vectors" title="Permalink to this heading">#</a></h3>
-<p>Mathematically speaking the multiplication of two vectors is not defined (instead we have the dot and cross products - see <a class="reference internal" href="#dot-product-section"><span class="std std-ref">below</span></a>). However, in computing it is useful to be able to multiply the individual elements of vectors which is done using the <code class="docutils literal notranslate"><span class="pre">*</span></code> operator.</p>
+<section id="multiplication-and-division-by-a-scalar">
+<h3><span class="section-number">4.3.2. </span>Multiplication and division by a scalar<a class="headerlink" href="#multiplication-and-division-by-a-scalar" title="Permalink to this heading">#</a></h3>
+<p>Multiplication and division of a vector <span class="math notranslate nohighlight">\(\mathbf{a} = (a_x, a_y, a_z)\)</span> by a scalar (a number) <span class="math notranslate nohighlight">\(k\)</span> are defined by</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
+    k \mathbf{a} &amp;= (ka_x, ka_y, ka_z), \\
+    \frac{\mathbf{a}}{k} &amp;= \left(\frac{a_x}{k}, \frac{a_y}{k}, \frac{a_z}{k} \right).
+\end{align*} \end{split}\]</div>
+<p>Multiplying or dividing a vector by a positive scalar has the effect of scaling the length of the vector. Multiplying or dividing by a negative scalar reverses the direction of the vector.</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="../_images/04_vector_multiplication.svg"><img alt="../_images/04_vector_multiplication.svg" height="180" src="../_images/04_vector_multiplication.svg" /></a>
+</figure>
+<p>For example, multiplying the vector <span class="math notranslate nohighlight">\(\mathbf{a} = (3, 0, 4)\)</span> by the scalar 2 gives</p>
+<div class="math notranslate nohighlight">
+\[ 2\mathbf{a} = 2(3,0,4) = (6, 0, 8), \]</div>
+<p>which has the magnitude</p>
+<div class="math notranslate nohighlight">
+\[ \|2 \mathbf{a} \| = \sqrt{6^2 + 0^2 + 8^2} = \sqrt{36 + 64} = \sqrt{100} = 10 = 2 \|\mathbf{a}\|. \]</div>
+<p>To perform scalar multiplication or division on a glm vector we simply use the <code class="docutils literal notranslate"><span class="pre">*</span></code> and <code class="docutils literal notranslate"><span class="pre">/</span></code> operators. To demonstrate this add the following code to your program.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;2a    = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mf">2.0f</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;b / 3 = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">3.0f</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Note that we need to use float values for scalar multiplication and division, i.e., <code class="docutils literal notranslate"><span class="pre">2.0f</span></code> and <code class="docutils literal notranslate"><span class="pre">3.0f</span></code> instead of <code class="docutils literal notranslate"><span class="pre">2</span></code> and <code class="docutils literal notranslate"><span class="pre">3</span></code>. Running the program will add the following to the console.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>2a    = [    6.000,    0.000,    8.000]
+b / 3 = [    0.333,    0.667,    1.000]
+</pre></div>
+</div>
+</section>
+<section id="element-wise-multiplication">
+<span id="element-wise-multiplication-section"></span><h3><span class="section-number">4.3.3. </span>Element-wise multiplication<a class="headerlink" href="#element-wise-multiplication" title="Permalink to this heading">#</a></h3>
+<p>Mathematically speaking the multiplication of two vectors is not defined (instead we have the dot and cross products - see <a class="reference internal" href="#dot-product-section"><span class="std std-ref">below</span></a>). However, in computing it is useful to be able to multiply the individual elements of vectors, known as <strong>element-wise multiplication</strong>, which is done using the <code class="docutils literal notranslate"><span class="pre">*</span></code> operator.</p>
 <p>Add the following code to your program.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;a * b = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
 </pre></div>
@@ -726,8 +726,8 @@ Lets create some glm matrix objects for the following matrices</p>
 <span class="n">B</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">glm</span><span class="o">::</span><span class="n">mat2</span><span class="p">(</span><span class="mf">5.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">6.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">7.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">8.0f</span><span class="p">);</span>
 
 <span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">Defining matrices:</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
-<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;A = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">glm</span><span class="o">::</span><span class="n">transpose</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;B = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">glm</span><span class="o">::</span><span class="n">transpose</span><span class="p">(</span><span class="n">B</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;A = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;B = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>Here we have declared two <span class="math notranslate nohighlight">\(2 \times 2\)</span> matrices <code class="docutils literal notranslate"><span class="pre">A</span></code> and <code class="docutils literal notranslate"><span class="pre">B</span></code>. The elements of <code class="docutils literal notranslate"><span class="pre">A</span></code> are defined using matrix indexing and the elements of <code class="docutils literal notranslate"><span class="pre">B</span></code> are defined using the <code class="docutils literal notranslate"><span class="pre">glm::mat2()</span></code> function. Note how the elements of the 2D matrix are indexed using <code class="docutils literal notranslate"><span class="pre">[row][col]</span></code></p>
@@ -801,7 +801,7 @@ B =
 <h2><span class="section-number">4.5. </span>Arithmetic operations on matrices<a class="headerlink" href="#arithmetic-operations-on-matrices" title="Permalink to this heading">#</a></h2>
 <p>The arithmetic operations on matrices for addition and subtraction of two matrices and multiplying and dividing by a scalar are the same as for vectors using the <code class="docutils literal notranslate"><span class="pre">+</span></code>, <code class="docutils literal notranslate"><span class="pre">-</span></code>, <code class="docutils literal notranslate"><span class="pre">*</span></code> and <code class="docutils literal notranslate"><span class="pre">/</span></code> operators. To show these add the following code to your program.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Aritmetic operations on matrices</span>
-<span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">Aritmetic operations on matrices:</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">Arithmetic operations on matrices:</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
 <span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;A + B = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">glm</span><span class="o">::</span><span class="n">transpose</span><span class="p">(</span><span class="n">A</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">B</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
 <span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;A - B = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">glm</span><span class="o">::</span><span class="n">transpose</span><span class="p">(</span><span class="n">A</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">B</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
 <span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;2A    = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">glm</span><span class="o">::</span><span class="n">transpose</span><span class="p">(</span><span class="mf">2.0f</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">A</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
@@ -809,7 +809,7 @@ B =
 </pre></div>
 </div>
 <p>Running the program should output the following to the console.</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Aritmetic operations on matrices:
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Arithmetic operations on matrices:
 A + B = 
 [[    6.000,    8.000]
  [   10.000,   12.000]]
@@ -1093,9 +1093,9 @@ invB * B =
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arithmetic-operations-on-vectors">4.3. Arithmetic operations on vectors</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiplication-and-division-by-a-scalar">4.3.1. Multiplication and division by a scalar</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vector-addition-and-subtraction">4.3.2. Vector addition and subtraction</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiplying-vectors">4.3.3. Multiplying vectors</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vector-addition-and-subtraction">4.3.1. Vector addition and subtraction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiplication-and-division-by-a-scalar">4.3.2. Multiplication and division by a scalar</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#element-wise-multiplication">4.3.3. Element-wise multiplication</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-dot-product">4.3.4. The dot product</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-cross-product">4.3.5. The cross product</a></li>
 </ul>

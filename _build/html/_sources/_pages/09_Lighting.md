@@ -149,7 +149,7 @@ Then edit `fragmentShader.frag` so that it takes in the `lightAmbient` uniform a
 #version 330 core
 
 // Interpolated values from the vertex shaders
-in vec2 UV;
+in vec2 texCoord;
 
 // Output data
 out vec3 fragmentColour;
@@ -317,11 +317,11 @@ Edit `vertexShader.vert` so that is looks like the following.
 
 // Input vertex data
 layout(location = 0) in vec3 position;
-layout(location = 1) in vec2 uv;
+layout(location = 1) in vec2 texCoord;
 layout(location = 2) in vec3 normal;
 
 // Output data
-out vec2 UV;
+out vec2 texCoord;
 out vec3 fragmentPosition;
 out vec3 Normal;
 
@@ -336,7 +336,7 @@ void main()
     gl_Position = projection * view * model * vec4(position, 1.0);
     
     // Output (u,v) co-ordinates
-    UV = uv;
+    UV = texCoord;
     
     // Output view space fragment position and normal
     fragmentPosition = vec3(view * model * vec4(position, 1.0));
@@ -604,7 +604,7 @@ This defines a 10 element array of `Light` data structures (hopefully we will no
 #version 330 core
 
 // Interpolated values from the vertex shaders
-in vec2 UV;
+in vec2 texCoord;
 in vec3 fragmentPosition;
 in vec3 Normal;
 

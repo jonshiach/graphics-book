@@ -92,10 +92,10 @@ Normalised Device Co-ordinates (NDC)
 
 The steps used in the creation of a 3D world and eventually displaying it on screen requires that we transform through several intermediate co-ordinate systems:
 
-- **Model space** - each individual 3D object that will appear in the 3D world is defined in its own space usually with the volume centre of the object at $(0,0,0)$ to make the transformations easier
-- **World space** - the 3D world is constructed by transforming the individual 3D objects using translation, rotation and scaling transformations
-- **View space** - the world space is transformed so that it is viewed from $(0,0,0)$ looking down the $z$-axis
-- **Screen space** - the view space is transformed so that the co-ordinates are expressed using normalised device co-ordinates
+- **Model space** -- each individual 3D object that will appear in the 3D world is defined in its own space usually with the volume centre of the object at $(0,0,0)$ to make the transformations easier
+- **World space** -- the 3D world is constructed by transforming the individual 3D objects using translation, rotation and scaling transformations
+- **View space** -- the world space is transformed so that it is viewed from $(0,0,0)$ looking down the $z$-axis
+- **Screen space** -- the view space is transformed so that the co-ordinates are expressed using normalised device co-ordinates
 
 ```{figure} ../_images/06_mvp.svg
 :width: 500
@@ -105,7 +105,7 @@ Transformations between the model, world, view and screen spaces.
 
 ## Model, view and projection matrices
 
-We saw in [Lab 5](transformations-section) that we apply a transformation by multiplying the object co-ordinates by a transformation matrix. Since we are transforming between difference co-ordinate spaces we have 3 main transformation matrices
+We saw in [5. Transformations](transformations-section) that we apply a transformation by multiplying the object co-ordinates by a transformation matrix. Since we are transforming between difference co-ordinate spaces we have 3 main transformation matrices
 
 - **Model matrix** - transforms the model space co-ordinates for the objects to the world space
 - **View matrix** - transforms the world space co-ordinates to the view space co-ordinates
@@ -115,12 +115,12 @@ We saw in [Lab 5](transformations-section) that we apply a transformation by mul
 
 ### The Model matrix
 
-In [5. Transformations](transformations-section) we saw that we can combine transformations such as translation, scaling and rotation by multiplying the individual transformation matrices together. Lets compute a model matrix for our cube where it is scaled down by a factor of 0.5 in each co-ordinate direction, rotated about the $y$-axis using the time of the current frame as the rotation angle and translated backwards down the $z$-axis so that its centre is at $(0, 0, -4)$. Add the following code inside the rendering loop before we call the `glDrawElements()` function.
+In [5. Transformations](transformations-section) we saw that we can combine transformations such as translation, scaling and rotation by multiplying the individual transformation matrices together. Lets compute a model matrix for our cube where it is scaled down by a factor of 0.5 in each co-ordinate direction, rotated about the $y$-axis using the time of the current frame as the rotation angle and translated backwards down the $z$-axis so that its centre is at $(0, 0, -2)$. Add the following code inside the rendering loop before we call the `glDrawElements()` function.
 
 ```cpp
 // Calculate the model matrix
 float angle         = Maths::radians(glfwGetTime() * 360.0f / 3.0f);
-glm::mat4 translate = Maths::translate(glm::vec3(0.0f, 0.0f, -4.0f));
+glm::mat4 translate = Maths::translate(glm::vec3(0.0f, 0.0f, -2.0f));
 glm::mat4 scale     = Maths::scale(glm::vec3(0.5f, 0.5f, 0.5f));
 glm::mat4 rotate    = Maths::rotate(angle, glm::vec3(0.0f, 1.0f, 0.0f));
 glm::mat4 model     = translate * rotate * scale;
@@ -143,9 +143,9 @@ The view space.
 
 To calculate the world space to view space transformation we require three vectors
 
-- $\mathbf{eye}$ - the co-ordinates of the camera position
-- $\mathbf{target}$ - the co-ordinates of the target point that the camera is pointing
-- $\mathbf{worldUp}$ - a vector pointing straight up in the world space which allows us to orientate the camera, this is usually $(0,1,0)$
+- $\mathbf{eye}$ -- the co-ordinates of the camera position
+- $\mathbf{target}$ -- the co-ordinates of the target point that the camera is pointing
+- $\mathbf{worldUp}$ -- a vector pointing straight up in the world space which allows us to orientate the camera, this is usually $(0, 1, 0)$
 
 ```{figure} ../_images/06_view_space_alignment.svg
 :width: 400
@@ -154,7 +154,7 @@ To calculate the world space to view space transformation we require three vecto
 The vectors used in the transformation to the view space.
 ```
 
-The $\mathbf{eye}$ and $\mathbf{target}$ vectors are either determined by the user through keyboard, mouse or controller inputs or through some predetermined routine. To determine the view space transformation we first translate the camera position by the vector $-\mathbf{eye}$ so that it is at $(0,0,0)$ using the following translation matrix
+The $\mathbf{eye}$ and $\mathbf{target}$ vectors are either determined by the user through keyboard, mouse or controller inputs or through some predetermined routine. To determine the view space transformation we first translate the camera position by the vector $-\mathbf{eye}$ so that it is at $(0, 0, 0)$ using the following translation matrix
 
 $$ \begin{align*}
     Translate =
@@ -182,52 +182,21 @@ $$ \mathbf{up} = \mathbf{right} \times \mathbf{front}.$$
 
 Once these vectors have been calculated the transformation matrix to rotate the $\mathbf{front}$ vector so that it points down the $z$-axis is
 
-<!-- $$ Rotate = \begin{pmatrix}
-    \mathbf{right}_x & \mathbf{up}_x & -\mathbf{front}_x & 0 \\
-    \mathbf{right}_y & \mathbf{up}_y & -\mathbf{front}_y & 0 \\
-    \mathbf{right}_z & \mathbf{up}_z & -\mathbf{front}_z & 0 \\
-    0 & 0 & 0 & 1
-\end{pmatrix}.$$ -->
-
 $$ Rotate = \begin{pmatrix}
-    \mathbf{right}_x & \mathbf{right}_y & \mathbf{right}_z & 0 \\
-    \mathbf{up}_x & \mathbf{up}_y & \mathbf{up}_z & 0 \\
+     \mathbf{right}_x &  \mathbf{right}_y &  \mathbf{right}_z & 0 \\
+     \mathbf{up}_x    &  \mathbf{up}_y    &  \mathbf{up}_z    & 0 \\
     -\mathbf{front}_x & -\mathbf{front}_y & -\mathbf{front}_z & 0 \\
     0 & 0 & 0 & 1
 \end{pmatrix}.$$
 
 The translation matrix and rotation matrix are multiplied together to form the view matrix which transforms the world space co-ordinates to the view space.
 
-<!-- $$ \begin{align*}
-    \view &=  Translate \cdot Rotate \\
-    &=
-    \begin{pmatrix}
-        1 & 0 & 0 & 0 \\
-        0 & 1 & 0 & 0 \\
-        0 & 0 & 1 & 0 \\
-        -\mathbf{eye}_x & -\mathbf{eye}_y & -\mathbf{eye}_z & 1
-    \end{pmatrix} 
-    \begin{pmatrix}
-      \mathbf{right}_x & \mathbf{up}_x & -\mathbf{front}_x & 0 \\
-      \mathbf{right}_y & \mathbf{up}_y & -\mathbf{front}_y & 0 \\
-      \mathbf{right}_z & \mathbf{up}_z & -\mathbf{front}_z & 0 \\
-      0 & 0 & 0 & 1
-    \end{pmatrix} \\
-    &=
-    \begin{pmatrix}
-        \mathbf{right}_x & \mathbf{up}_x & -\mathbf{front}_x & 0 \\
-        \mathbf{right}_y & \mathbf{up}_y & -\mathbf{front}_y & 0 \\
-        \mathbf{right}_z & \mathbf{up}_z & -\mathbf{front}_z & 0 \\
-        -\mathbf{eye} \cdot \mathbf{right} & -\mathbf{eye} \cdot \mathbf{up} & \mathbf{eye} \cdot \mathbf{front} & 1 \\
-    \end{pmatrix}
-\end{align*} $$ -->
-
 $$ \begin{align*}
     \view &= Rotate \cdot Translate \\
     &=
     \begin{pmatrix}
-        \mathbf{right}_x  & \mathbf{right}_y  & \mathbf{right}_z  & 0 \\
-        \mathbf{up}_x     & \mathbf{up}_y     & \mathbf{up}_z     & 0 \\
+         \mathbf{right}_x &  \mathbf{right}_y &  \mathbf{right}_z & 0 \\
+         \mathbf{up}_x    &  \mathbf{up}_y    &  \mathbf{up}_z    & 0 \\
         -\mathbf{front}_x & -\mathbf{front}_y & -\mathbf{front}_z & 0 \\
         0 & 0 & 0 & 1
     \end{pmatrix}
@@ -255,12 +224,12 @@ $$ \view = \begin{pmatrix}
         -\mathbf{eye} \cdot \mathbf{right} & -\mathbf{eye} \cdot \mathbf{up} & \mathbf{eye} \cdot \mathbf{front} & 1 \\
     \end{pmatrix} $$(lookat-matrix-equation)
 
-Lets move the camera back a bit to look at our cube from the position $\mathbf{eye}=(1,1,0)$ looking towards the center of the cube at $\mathbf{target} = (0,0,-4)$. Add the following code after we have calculated the model matrix.
+Lets move the camera to the right, back and up a bit so that it is at $(1, 1, 1)$ looking towards the center of the cube which is at $(0, 0, -2)$. Add the following code after we have calculated the model matrix.
 
 ```cpp
 // Calculate the view matrix
-glm::vec3 eye     = glm::vec3(1.0f, 1.0f, 0.0f);
-glm::vec3 target  = glm::vec3(0.0f, 0.0f, -4.0f);
+glm::vec3 eye     = glm::vec3(1.0f, 1.0f, 1.0f);
+glm::vec3 target  = glm::vec3(0.0f, 0.0f, -2.0f);
 glm::vec3 worldUp = glm::vec3(0.0f, 1.0f, 0.0f);
 glm::vec3 front   = glm::normalize(target - eye);
 glm::vec3 right   = glm::normalize(glm::cross(front, worldUp));
@@ -365,40 +334,42 @@ projection[3][2] =  (near + far) / (near - far);
 
 Now that we have the model, view and projection matrices we need to apply them to our objects. We could do this in our `main()` function but this would mean sending lots of vertex buffers to the GPU and very inefficient. Much better to send a single $4 \times 4$ matrix to the shader and perform the calculations using the GPU since the vertex buffer is already in the GPU memory.
 
-So in our `main()` function we combine the model, view and projection matrices to form a single matrix called the **MVP matrix**.
+So in our `main()` function we combine the model, view and projection matrices to form a single matrix called the $MV\!P$ matrix.
 
-$$ \mvp = Projection \cdot \view \cdot \model. $$
+$$ MV\!P = Projection \cdot \view \cdot \model. $$
 
-We need a way to send the MVP matrix to the vertex shader. We do this using a uniform in the same way as we did for the texture locations in [3. Textures](uniforms-section), enter the following code after we have calculated the projection matrix.
+We need a way to send the $MV\!P$ matrix to the vertex shader. We do this using a uniform in the same way as we did for the texture locations in [3. Textures](uniforms-section), enter the following code after we have calculated the projection matrix.
 
 ```cpp
-// Calculate the MVP matrix and send it to the vertex shader
-glm::mat4 mvp = projection * view * model;
-unsigned int mvpID = glGetUniformLocation(shaderID, "mvp");
-glUniformMatrix4fv(mvpID, 1, GL_FALSE, &mvp[0][0]);
+// Send MVP matrix to the vertex shader
+glm::mat4 MVP = projection * view * model;
+glUniformMatrix4fv(glGetUniformLocation(shaderID, "MVP"), 1, GL_FALSE, &MVP[0][0]);
 ```
 
-Here after calculating the `mvp` matrix we get the location of the uniform and point OpenGL to the first element of the matrix using the <a href="https://registry.khronos.org/OpenGL-Refpages/gl4/html/glUniform.xhtml" target="_blank">`glUniformMatrix4fv()`</a> function.
+Here after calculating the $MV\!P$ matrix we get the location of the uniform and point OpenGL to the first element of the matrix using the <a href="https://registry.khronos.org/OpenGL-Refpages/gl4/html/glUniform.xhtml" target="_blank">`glUniformMatrix4fv()`</a> function.
 
-We also need to update the vertex shader so that is uses the MVP matrix. Edit the **vertexShader.glsl** file in the **Lab06_3D_Worlds** project so that the `gl_Position` vector is calculated by applying the MVP matrix to the vertex position.
+We also need to update the vertex shader so that is uses the $MV\!P$ matrix. Edit the **vertexShader.glsl** file in the **Lab06_3D_Worlds** project so that the `gl_Position` vector is calculated by applying the $MV\!P$ matrix to the vertex position.
 
 ```cpp
 #version 330 core
 
+// Inputs
 layout(location = 0) in vec3 position;
-layout(location = 1) in vec2 UV;
+layout(location = 1) in vec2 uv;
 
-out vec2 uv;
+// Outputs
+out vec2 UV;
 
+// Uniforms
 uniform mat4 mvp;
 
 void main()
 {
     // Output vertex position
     gl_Position = mvp * vec4(position, 1.0);
-
+    
     // Output texture co-ordinates
-    uv = UV;
+    UV = uv;
 }
 ```
 
@@ -668,7 +639,6 @@ Our render loop is starting to look a bit messy so we are going to create a `Cam
 #pragma once
 
 #include <iostream>
-
 #include <common/maths.hpp>
 
 class Camera
@@ -679,23 +649,22 @@ public:
     float aspect = 1024.0f / 768.0f;
     float near   = 0.2f;
     float far    = 100.0f;
-    
+
     // Camera vectors
     glm::vec3 eye;
     glm::vec3 target;
     glm::vec3 worldUp = glm::vec3(0.0f, 1.0f, 0.0f);
-    
+
     // Transformation matrices
     glm::mat4 view;
     glm::mat4 projection;
-    
+
     // Constructor
-    Camera(const glm::vec3 &position);
-    
+    Camera(const glm::vec3 eye, const glm::vec3 target);
+
     // Methods
     void calculateMatrices();
 };
-
 ```
 
 You should be familiar with class declarations by now. Here we have declared a `Camera` class with attributes of the floats for the projection parameters, glm vector objects for the camera vectors and glm matrix objects for the view and projection matrices.
@@ -705,22 +674,23 @@ In the **camera.cpp** file add the following code.
 ```cpp
 #include <common/camera.hpp>
 
-Camera::Camera(const glm::vec3 &position)
+Camera::Camera(const glm::vec3 Eye, const glm::vec3 Target)
 {
-    eye = position;
+    eye    = Eye;
+    target = Target;
 }
 
 void Camera::calculateMatrices()
 {
     // Calculate the view matrix
     view = Maths::lookAt(eye, target, worldUp);
-    
+
     // Calculate the projection matrix
     projection = Maths::perspective(fov, aspect, near, far);
 }
 ```
 
-The `Camera()` constructor takes in a single input of a `glm::vec3` object containing the co-ordinates of the camera position and instantiates the $\mathbf{eye}$ vector. The `calculateMatrices()` method calculates the view and projection matrices. These both use functions from the `Maths` class which we haven't yet defined so lets do this now. In the `Maths` class declare the following functions.
+The Camera class constructor creates a camera object and instantiates the $\mathbf{eye}$ and $\mathbf{target}$ vectors using the values of the two `glm::vec3` objects that are inputted. The `calculateMatrices()` method calculates the view and projection matrices. These both use functions from the `Maths` class which we haven't yet defined so lets do this now. In the `Maths` class declare the following functions.
 
 ```cpp
 // View and projection matrices
@@ -737,7 +707,7 @@ glm::mat4 Maths::lookAt(glm::vec3 eye, glm::vec3 target, glm::vec3 worldUp)
     glm::vec3 front = glm::normalize(target - eye);
     glm::vec3 right = glm::normalize(glm::cross(front, worldUp));
     glm::vec3 up    = glm::cross(right, front);
-    
+
     glm::mat4 view;
     view[0][0] = right.x, view[0][1] = up.x, view[0][2] = -front.x;
     view[1][0] = right.y, view[1][1] = up.y, view[1][2] = -front.y;
@@ -745,7 +715,7 @@ glm::mat4 Maths::lookAt(glm::vec3 eye, glm::vec3 target, glm::vec3 worldUp)
     view[3][0] = -glm::dot(eye, right);
     view[3][1] = -glm::dot(eye, up);
     view[3][2] =  glm::dot(eye, front);
-    
+
     return view;
 }
 
@@ -761,7 +731,7 @@ glm::mat4 Maths::perspective(const float fov,  const float aspect,
     projection[2][2] = -(far + near) / (far - near);
     projection[2][3] = -1.0f;
     projection[3][2] = -2.0f * far * near / (far - near);
-    
+
     return projection;
 }
 ```
@@ -770,31 +740,32 @@ So now we have a `Camera` class lets use it to calculate our view and projection
 
 ```cpp
 // Create camera object
-Camera camera(glm::vec3(1.0f, 1.0f, 0.0f));
+Camera camera(glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3(0.0f, 0.0f, -2.0f));
 ```
 
-Then calculate the view and projection matrices just before we calculate the MVP matrix by adding the following code.
+Here we have placed the camera at $(1, 1, 1)$ pointing towards $(0, 0, -2)$ (the same as before). We then need to calculate the view and projection matrices just before we calculate the $MV\!P$ matrix by adding the following code.
 
 ```cpp
 // Calculate view and projection matrices
-camera.target = glm::vec3(0.0f, 0.0f, -4.0f);
 camera.calculateMatrices();
 ```
 
-Here we needed to specify the $\mathbf{target}$ camera vector so that the camera is looking at the centre of the cube before invoking the `calculateMatrices()` method. The last thing we need to do is to use the view and projection matrices from the `camera` object when calculating the MVP matrix. Edit your code so that it looks like the following.
+The last thing we need to do is to use the view and projection matrices from the `camera` object when calculating the $MV\!P$ matrix. Edit your code so that it looks like the following.
 
 ```cpp
 //Calculate the MVP matrix and send it to the vertex shader
-glm::mat4 mvp = camera.projection * camera.view * model;
+glm::mat4 MVP = camera.projection * camera.view * model;
 ```
 
-Compile and run your code to check that everything is working correctly. You can now comment out the codes used to calculate the view and projection matrices as this is no long used. 
+Compile and run your code to check that everything is working correctly. You can now comment out the codes used to calculate the view and projection matrices as this is no long used.
 
 ---
 
+(multiple-objects-section)= 
+
 ## Multiple objects
 
-The last thing we are going to do in this lab is to add some more cubes to our 3D world. We can do this by defining the position of each cube and then, in the render loop, we loop through each cube and calculate its model matrix, calculate the MVP matrix and then render the current cube. Add the following code to your program before the render loop.
+The last thing we are going to do in this lab is to add some more cubes to our 3D world. We can do this by defining the position of each cube and then, in the render loop, we loop through each cube and calculate its model matrix, calculate the $MV\!P$ matrix and then render the current cube. Add the following code to your program before the render loop.
 
 ```cpp
 // Cube positions
@@ -817,7 +788,7 @@ for (unsigned int i = 0 ; i < 10 ; i++)
     cubeAngles[i] = Maths::radians(20.0f * i);
 ```
 
-This creates two arrays of `glm::vec3` objects: `cubePositions` that contain the co-ordinates of the centres of 10 cubes and `cubeAngles` that contains a rotation angle based on the loop variable `i`. In the **render loop** replace the code used to calculate the MVP matrix and render the cube with the following.
+This creates two arrays of `glm::vec3` objects: `cubePositions` that contain the co-ordinates of the centres of 10 cubes and `cubeAngles` that contains a rotation angle based on the loop variable `i`. In the **render loop** replace the code used to calculate the $MV\!P$ matrix and render the cube with the following.
 
 ```cpp
 // Loop through cubes and draw each one
@@ -830,11 +801,11 @@ for (int i = 0; i < 10; i++)
     glm::mat4 model     = translate * rotate * scale;
 
     // Calculate the MVP matrix
-    glm::mat4 mvp = camera.projection * camera.view * model;
+    glm::mat4 MVP = camera.projection * camera.view * model;
 
     // Send MVP matrix to the vertex shader
-    unsigned int mvpID = glGetUniformLocation(shaderID, "mvp");
-    glUniformMatrix4fv(mvpID, 1, GL_FALSE, &mvp[0][0]);
+    glUniformMatrix4fv(glGetUniformLocation(shaderID, "MVP"), 1,
+                       GL_FALSE, &MVP[0][0]);
 
     // Draw the triangles
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
@@ -846,10 +817,10 @@ for (int i = 0; i < 10; i++)
 Here we loop through each of the 10 cubes and calculate the model matrix using the `cubePositions` and `cubeAngles` vectors. We need to change the position of the camera so that we can see all of the cubes. Add the following code before the view and projection matrices are calculated.
 
 ```cpp
-camera.eye = glm::vec3(0.0f, 0.0f, 5.0f);
+Camera camera(glm::vec3(0.0f, 0.0f, 5.0f), glm::vec3(0.0f, 0.0f, 0.0f));
 ```
 
-This moves the camera position to $(0, 0, 5)$. Run your program and you should see the following.
+This moves the camera position to $(0, 0, 5)$ looking towards $(0, 0, 0)$. Run your program and you should see the following.
 
 ```{figure} ../_images/06_multiple_cubes.png
 :width: 500

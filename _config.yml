@@ -34,7 +34,7 @@ html:
   use_issues_button: true
   use_repository_button: true
 
-exclude_patterns: [/*.cpp]
+exclude_patterns: [/*.cpp, _slides/*]
 
 sphinx:
   config:
