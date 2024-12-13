@@ -149,7 +149,7 @@ $$ \begin{align*}
     \end{pmatrix},
 \end{align*} $$
 
-where $\mathbf{t} = (t_x, t_y, t_z)$, $\mathbf{b} = (b_x, b_y, b_z)$ and $\mathbf{n} = (n_x, n_y, n_z)$. We will be performing our lighting calculations in the tangent space so we want to transform from the view space to the tangent space. To do this we calculate the [inverse](inverse-matrix-section) of the $TBN$ matrix. Fortunately this is an orthogonal matrix where the inverse is simply the transpose, i.e., $\mathsf{(TBN)^{-1}} = \mathsf{(TBN)^{T}}$, which is an easy calculation.
+where $\mathbf{t} = (t_x, t_y, t_z)$, $\mathbf{b} = (b_x, b_y, b_z)$ and $\mathbf{n} = (n_x, n_y, n_z)$. We will be performing our lighting calculations in the tangent space so we want to transform from the view space to the tangent space. To do this we calculate the [inverse](inverse-matrix-section) of the $TBN$ matrix. Fortunately this is an orthogonal matrix where the inverse is simply the transpose, i.e., $TBN^{-1} = TBN^\mathsf{T}$, which is an easy calculation.
 
 ### Calculating the tangent and bitangent vectors
 
