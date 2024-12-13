@@ -190,8 +190,8 @@ void Model::calculateTangents()
         float deltaV2 = uvs[i+2].y - uvs[i+1].y;
         
         // Calculate tangents
-        float fact = 1.0f / (deltaU1 * deltaV2 - deltaU2 * deltaV1);
-        glm::vec3 tangent = fact * (deltaV2 * E1 - deltaV1 * E2);
+        float fact          = 1.0f / (deltaU1 * deltaV2 - deltaU2 * deltaV1);
+        glm::vec3 tangent   = fact * (deltaV2 * E1 - deltaV1 * E2);
         glm::vec3 bitangent = fact * (deltaU1 * E2 - deltaU2 * E1);
         
         // Set the same tangents for the three vertices of the triangle
