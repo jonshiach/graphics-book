@@ -42,24 +42,11 @@ const float vertices[] = {
 };
 ```
 
-### Vertex Array Object (VAO)
-
-Now that we have the co-ordinates we need to send these to the GPU. OpenGL does this using a <a href="https://www.khronos.org/opengl/wiki/Vertex_Specification#Vertex_Array_Object" target="_blank">**Vertex Array Object (VAO)**</a> which is a container for the vertex attributes and <a href="https://www.khronos.org/opengl/wiki/Buffer_Object" target="_blank">buffer objects</a> that contain the data for the vertices. To create a VAO enter the following into your `Lab02_Basic_shapes.cpp` file after the `vertices` array.
-
-```cpp
-// Create the Vertex Array Object (VAO)
-unsigned int VAO;
-glGenVertexArrays(1, &VAO);
-glBindVertexArray(VAO);
-```
-
-The `glGenVertexArrays()` function generates a VAO and `glBindVertexArray()` binds it. 
-
 (vbo-section)=
 
 ### Vertex Buffer Object (VBO)
 
-We now need to define a <a href="https://www.khronos.org/opengl/wiki/Vertex_Specification#Vertex_Buffer_Object" target="_blank">**Vertex Buffer Object (VBO)**</a> which is used to store the vertex co-ordinates. Enter the following after we've created the VAO.
+OpenGL uses **Buffer Objects (BO)** so store data, so to store the vertex co-ordinates of our triangle we need to create a <a href="https://www.khronos.org/opengl/wiki/Vertex_Specification#Vertex_Buffer_Object" target="_blank">**Vertex Buffer Object (VBO)**</a> and copy the contents of the `vertices` array into it. Enter the following after we've created the VAO.
 
 ```cpp
 // Create Vertex Buffer Object (VBO)
@@ -69,7 +56,27 @@ glBindBuffer(GL_ARRAY_BUFFER, VBO);
 glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 ```
 
-Here, after creating and binding the vertex buffer we bind the VBO using `glBindBuffer()` and copy the data from the `vertices` array using the `glBufferData()` function.
+The functions used here are:
+
+- `glGenBuffers()` generates a buffer object with the name `VBO`
+- `glBindBuffer()` binds the VBO to `GL_ARRAY_BUFFER` which tells OpenGL that the VBO contains vertex attributes
+- `glBufferData()` creates a new data store for the VBO, tells OpenGL where to find the data that is to be stored in the VBO and what it is to be used for (`GL_STATIC_DRAW` means the data is not going to be modified)
+
+### Vertex Array Object (VAO)
+
+In addition to the VBO we also need to create a <a href="https://www.khronos.org/opengl/wiki/Vertex_Specification#Vertex_Array_Object" target="_blank">**Vertex Array Object (VAO)**</a> which is a container object for the vertex attributes. The VAO does not contain any data, instead it references other buffer objects, e.g., the VBO. To create a VAO enter the following into your `Lab02_Basic_shapes.cpp` file after the `vertices` array.
+
+```cpp
+// Create the Vertex Array Object (VAO)
+unsigned int VAO;
+glGenVertexArrays(1, &VAO);
+glBindVertexArray(VAO);
+```
+
+The functions used here are:
+
+- `glGenVertexArrays()` generates a VAO with the name `VAO`
+- `glBindVertexArray()` binds the VAO
 
 ---
 
@@ -144,22 +151,20 @@ unsigned int shaderID;
 shaderID = LoadShaders("vertexShader.glsl", "fragmentShader.glsl");
 ```
 
-This code creates a program object which will be referred to by the integer `shaderID`.
-
----
-
-## Draw the triangle
-
-Now that we have created the VAO and VBO and written the shaders we can now draw the triangle. The commands used to render a frame are contained in a while loop known as a **render loop**. This loop will continue until the window is closed or the escape key is pressed.
-
-After clearing the window using `glClear()`, we need to instruct OpenGL to use our shader program,  enter the following code
+This code creates a program object which will be referred to by the integer `shaderID`. Now that we have an ID for our shader programmes, we need to instruct OpenGL to use it. To do this enter the following code
 
 ```cpp
 // Use the shader program
 glUseProgram(shaderID);
 ```
 
-Now we need to bind the VBO to the VAO and tell OpenGL where to find this data. Add the following code after we use the shader program.
+---
+
+## Draw the triangle
+
+So we have created the VAO and VBO, and written the shaders we can now draw the triangle. The commands used to render a frame are contained in a while loop known as a **render loop**. This loop will continue until the window is closed or the escape key is pressed.
+
+We need to bind the VBO to the VAO and tell OpenGL where to find this data. To do this add the following code after clearing the window
 
 ```cpp
 // Send the VBO to the shaders
@@ -175,9 +180,11 @@ glVertexAttribPointer(0,         // attribute
 
 The three functions we've used here are:
 
-- `glEnableVertexAttribArray()` enables a generic vertex array so we can pass our triangle data to OpenGL;
-- `glBindBuffer()` binds our VBO to OpenGL;
-- `glVertexAttribPointer()` tells OpenGL how to interpret the data we are sending it. The input arguments are explained below.
+- `glEnableVertexAttribArray()` enables a generic vertex array so we can pass our triangle data to OpenGL
+- `glBindBuffer()` binds our VBO to an array buffer
+- `glVertexAttribPointer()` tells OpenGL how to interpret the data we are sending it
+
+The input arguments for the `glVertexAttribPointer()` function are explained below
 
 | Argument | Explanation |
 |:--|:--|
@@ -197,9 +204,10 @@ glDrawArrays(GL_TRIANGLES, 0, 3);
 glDisableVertexAttribArray(0);
 ```
 
-The `glDrawArrays()` command tells OpenGL to draw whatever data is defined in the VAO. The first argument `GL_TRIANGLE` tells OpenGL that we want to draw a triangle, the second argument `0` specifies that the first vertex starts at the 0 index in the buffer and the third argument `3` specifies that we have 3 vertices.
+The functions used here are:
 
-Once we have drawn the triangle we no longer need the VBO so we disable it using `glDisableVertexAttribArray(0)` where the `0` is the attribute number (the one used in the `glEnableAttribArray()` function).
+ - `glDrawArrays()` tells OpenGL to draw whatever data is defined in the VAO. The first argument `GL_TRIANGLES` tells OpenGL that we want to draw a triangle, the second argument `0` specifies that the first vertex starts at the 0 index in the buffer and the third argument `3` specifies that we have 3 vertices.
+- `glDisableVertexAttribArray(0)` disables the vertex array containing the VBO since it is no longer needed. The input argument  `0` is the attribute number used in the `glEnableAttribArray()` function.
 
 Don't get too excited just yet. As good programmers we should clean up after ourselves and not leave bits of data lying around. After the close of the do/while loop we de-allocate the vertex and buffer objects as well as deleting the shader program.
 
@@ -224,7 +232,7 @@ The "hello triangle" example
 
 After basking in the glory of your achievements for a few minutes the initial excitement may begin to wane, and your natural curiosity will cause you to wonder whether we can use more than one colour. Well of course, all we need to do is tell OpenGL what colours we want to use for each vertex.
 
-Create an array that contains RGB colour data for each vertex.
+Create an array that contains RGB colour data for each vertex by entering the following code after we created the `vertices` array.
 
 ```cpp
 // Define vertex colours
@@ -236,7 +244,7 @@ const float colours[] = {
 };
 ```
 
-Here we have assigned the colour red to the first (bottom-left) vertex, green to the second (bottom-right) vertex and blue to the third (top) vertex. Like the vertex buffer, we need to create and bind a buffer for the colours.
+Here we have assigned the colour red to the first (bottom-left) vertex, green to the second (bottom-right) vertex and blue to the third (top) vertex. Like we did with the vertex buffer, we need to create and bind a buffer for the colours.
 
 ```cpp
 // Create colour buffer
@@ -246,7 +254,7 @@ glBindBuffer(GL_ARRAY_BUFFER, colourBuffer);
 glBufferData(GL_ARRAY_BUFFER, sizeof(colours), colours, GL_STATIC_DRAW);
 ```
 
-And where we draw the triangle, we also need to bind the colour information to the VAO so it can be sent to the shaders.
+And where we draw the triangle, we also need to bind the colour buffer to the VAO so it can be sent to the shaders.
 
 ```cpp
 // Send the colour buffer to the shaders
@@ -255,7 +263,7 @@ glBindBuffer(GL_ARRAY_BUFFER, colourBuffer);
 glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 ```
 
-You will notice that this code is very similar to the code used to send the VBO to the shader. Here we have use the attribute `1` for the colour buffer.
+You will notice that this code is very similar to the code used to send the VBO to the shader. Here we have use the attribute `1` for the colour buffer, if we had used `0` this would have overwritten the VBO.
 
 If you were to compile and run your program, you might be a little disappointed as your triangle is still red. Well of course, we haven't told our shaders how to handle colours! Since our colours are associated with the vertices we need to modify the vertex shader to include the colours.
 

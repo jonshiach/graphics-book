@@ -61,7 +61,7 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"tex": {"macros": {"vec": ["\\mathbf{#1}", 1], "model": ["M\\!odel"], "view": ["V\\!iew"], "mvp": ["MV\\!P"]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script>window.MathJax = {"tex": {"macros": {"model": ["M\\!odel"], "view": ["V\\!iew"], "mvp": ["MV\\!P"]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_pages/04_vectors_and_matrices';</script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -375,9 +375,9 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arithmetic-operations-on-vectors">4.3. Arithmetic operations on vectors</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiplication-and-division-by-a-scalar">4.3.1. Multiplication and division by a scalar</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vector-addition-and-subtraction">4.3.2. Vector addition and subtraction</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiplying-vectors">4.3.3. Multiplying vectors</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vector-addition-and-subtraction">4.3.1. Vector addition and subtraction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiplication-and-division-by-a-scalar">4.3.2. Multiplication and division by a scalar</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#element-wise-multiplication">4.3.3. Element-wise multiplication</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-dot-product">4.3.4. The dot product</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-cross-product">4.3.5. The cross product</a></li>
 </ul>
@@ -422,21 +422,21 @@ document.write(`
 <hr class="docutils" />
 <section id="vectors">
 <h2><span class="section-number">4.2. </span>Vectors<a class="headerlink" href="#vectors" title="Permalink to this heading">#</a></h2>
-<p>A vector in is an object with magnitude (length) and direction. A vector is denoted by a lower case letter in boldface, e.g., <span class="math notranslate nohighlight">\(\vec{a}\)</span> (or underlined when writing by hand), and represented mathematically by a tuple which is an ordered set of numbers. In geometry, each number in the vector represents the length along the co-ordinate axes. For example, consider the 3-element vector</p>
+<p>A vector in is an object with magnitude (length) and direction. A vector is denoted by a lower case letter in boldface, e.g., <span class="math notranslate nohighlight">\(\mathbf{a}\)</span> (or underlined when writing by hand), and represented mathematically by a tuple which is an ordered set of numbers. In geometry, each number in the vector represents the length along the co-ordinate axes. For example, consider the 3-element vector</p>
 <div class="math notranslate nohighlight">
-\[ \vec{a} = (a_x, a_y, a_z). \]</div>
-<p>Here <span class="math notranslate nohighlight">\(\vec{a}\)</span> has 3 elements so is a vector in 3D space where <span class="math notranslate nohighlight">\(a_x\)</span>, <span class="math notranslate nohighlight">\(a_y\)</span> and <span class="math notranslate nohighlight">\(a_z\)</span> are the lengths of the vector in the <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(y\)</span>, and <span class="math notranslate nohighlight">\(z\)</span> directions.</p>
+\[ \mathbf{a} = (a_x, a_y, a_z). \]</div>
+<p>Here <span class="math notranslate nohighlight">\(\mathbf{a}\)</span> has 3 elements so is a vector in 3D space where <span class="math notranslate nohighlight">\(a_x\)</span>, <span class="math notranslate nohighlight">\(a_y\)</span> and <span class="math notranslate nohighlight">\(a_z\)</span> are the lengths of the vector in the <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(y\)</span>, and <span class="math notranslate nohighlight">\(z\)</span> directions.</p>
 <figure class="align-default" id="id1">
 <a class="reference internal image-reference" href="../_images/04_Vector.svg"><img alt="../_images/04_Vector.svg" height="200" src="../_images/04_Vector.svg" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 4.1 </span><span class="caption-text">The vector <span class="math notranslate nohighlight">\(\vec{a} = (a_x, a_y, a_z)\)</span>.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 4.1 </span><span class="caption-text">The vector <span class="math notranslate nohighlight">\(\mathbf{a} = (a_x, a_y, a_z)\)</span>.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Lets create the following 3D vector objects in C++.</p>
 <div class="math notranslate nohighlight">
 \[ \begin{align*}
-    \vec{a} &amp;= (3, 0, 4), &amp;
-    \vec{b} &amp;= (1, 2, 3).
+    \mathbf{a} &amp;= (3, 0, 4), &amp;
+    \mathbf{b} &amp;= (1, 2, 3).
 \end{align*} \]</div>
 <p>Add the following code to the <code class="docutils literal notranslate"><span class="pre">main()</span></code> function.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Vectors</span>
@@ -463,21 +463,21 @@ b = [    1.000,    2.000,    3.000]
 </div>
 <section id="vector-magnitude">
 <span id="vector-magnitude-section"></span><h3><span class="section-number">4.2.1. </span>Vector magnitude<a class="headerlink" href="#vector-magnitude" title="Permalink to this heading">#</a></h3>
-<p>The <strong>magnitude</strong> of a vector <span class="math notranslate nohighlight">\(\vec{a} = (a_x, a_y, a_z)\)</span> is denoted by <span class="math notranslate nohighlight">\(\|\vec{a}\|\)</span> is the length from the tail of the vector to the head.</p>
+<p>The <strong>magnitude</strong> of a vector <span class="math notranslate nohighlight">\(\mathbf{a} = (a_x, a_y, a_z)\)</span> is denoted by <span class="math notranslate nohighlight">\(\|\mathbf{a}\|\)</span> is the length from the tail of the vector to the head.</p>
 <figure class="align-default" id="id2">
 <a class="reference internal image-reference" href="../_images/04_Vector_magnitude.svg"><img alt="../_images/04_Vector_magnitude.svg" height="100" src="../_images/04_Vector_magnitude.svg" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 4.2 </span><span class="caption-text">The magnitude of <span class="math notranslate nohighlight">\(\vec{a}\)</span> is the length of the vector.</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 4.2 </span><span class="caption-text">The magnitude of <span class="math notranslate nohighlight">\(\mathbf{a}\)</span> is the length of the vector.</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>The magnitude is calculated using an extension of Pythagoras’ theorem, for example for 3D vectors the magnitude is</p>
 <div class="math notranslate nohighlight" id="equation-eq-vector-magnitude">
-<span class="eqno">(4.1)<a class="headerlink" href="#equation-eq-vector-magnitude" title="Permalink to this equation">#</a></span>\[ \|\vec{a}\| = \sqrt{a_x^2 + a_y^2 + a_z^2}. \]</div>
-<p>For example, for the vectors <span class="math notranslate nohighlight">\(\vec{a}\)</span> and <span class="math notranslate nohighlight">\(\vec{b}\)</span> given above the magnitudes are</p>
+<span class="eqno">(4.1)<a class="headerlink" href="#equation-eq-vector-magnitude" title="Permalink to this equation">#</a></span>\[ \|\mathbf{a}\| = \sqrt{a_x^2 + a_y^2 + a_z^2}. \]</div>
+<p>For example, for the vectors <span class="math notranslate nohighlight">\(\mathbf{a}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> given above the magnitudes are</p>
 <div class="math notranslate nohighlight">
 \[\begin{split} \begin{align*}
-    \| \vec{a} \| &amp;= \sqrt{3^2 + 0^2 + 4^2} = \sqrt{9 + 0 + 16} = \sqrt{25} = 5, \\
-    \| \vec{b} \| &amp;= \sqrt{1^2 + 2^2 + 3^2} = \sqrt{1 + 4 + 9} = \sqrt{14} = 3.742\ldots
+    \| \mathbf{a} \| &amp;= \sqrt{3^2 + 0^2 + 4^2} = \sqrt{9 + 0 + 16} = \sqrt{25} = 5, \\
+    \| \mathbf{b} \| &amp;= \sqrt{1^2 + 2^2 + 3^2} = \sqrt{1 + 4 + 9} = \sqrt{14} = 3.742\ldots
 \end{align*}  \end{split}\]</div>
 <p>The <code class="docutils literal notranslate"><span class="pre">glm::length()</span></code> function calculates the magnitude of a glm vector object. To demonstrate this,  add the following code to your program.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Vector length</span>
@@ -495,17 +495,17 @@ length(b) = 3.742
 </section>
 <section id="unit-vectors">
 <span id="unit-vectors-section"></span><h3><span class="section-number">4.2.2. </span>Unit vectors<a class="headerlink" href="#unit-vectors" title="Permalink to this heading">#</a></h3>
-<p>A <strong>unit vector</strong> is a vector that has a length of 1. We can find a unit vector that points in the same direction as a non-zero vector <span class="math notranslate nohighlight">\(\vec{a}\)</span>, which is denoted by <span class="math notranslate nohighlight">\(\hat{\vec{a}}\)</span> (pronounced <em>a-hat</em>), by dividing by its magnitude, i.e.,</p>
+<p>A <strong>unit vector</strong> is a vector that has a length of 1. We can find a unit vector that points in the same direction as a non-zero vector <span class="math notranslate nohighlight">\(\mathbf{a}\)</span>, which is denoted by <span class="math notranslate nohighlight">\(\hat{\mathbf{a}}\)</span> (pronounced <em>a-hat</em>), by dividing by its magnitude, i.e.,</p>
 <div class="math notranslate nohighlight" id="equation-eq-unit-vector">
-<span class="eqno">(4.2)<a class="headerlink" href="#equation-eq-unit-vector" title="Permalink to this equation">#</a></span>\[ \hat{\vec{a}} = \frac{\vec{a}}{\|\vec{a}\|}. \]</div>
-<p>This process is called <strong>normalising a vector</strong>. For example, to determine a unit vector pointing in the same direction as <span class="math notranslate nohighlight">\(\vec{a} = (3, 0, 4)\)</span> we normalise it by dividing by its magnitude which we have already calculated is 5.</p>
+<span class="eqno">(4.2)<a class="headerlink" href="#equation-eq-unit-vector" title="Permalink to this equation">#</a></span>\[ \hat{\mathbf{a}} = \frac{\mathbf{a}}{\|\mathbf{a}\|}. \]</div>
+<p>This process is called <strong>normalising a vector</strong>. For example, to determine a unit vector pointing in the same direction as <span class="math notranslate nohighlight">\(\mathbf{a} = (3, 0, 4)\)</span> we normalise it by dividing by its magnitude which we have already calculated is 5.</p>
 <div class="math notranslate nohighlight">
 \[ \begin{align*}
-    \hat{\vec{a}} &amp;= \frac{(3, 0, 4)}{5} = \left( \frac{3}{5}, 0, \frac{4}{5} \right) = (0.6, 0, 0.8).
+    \hat{\mathbf{a}} &amp;= \frac{(3, 0, 4)}{5} = \left( \frac{3}{5}, 0, \frac{4}{5} \right) = (0.6, 0, 0.8).
 \end{align*} \]</div>
-<p>Checking that <span class="math notranslate nohighlight">\(\hat{\vec{a}}\)</span> has a magnitude of 1</p>
+<p>Checking that <span class="math notranslate nohighlight">\(\hat{\mathbf{a}}\)</span> has a magnitude of 1</p>
 <div class="math notranslate nohighlight">
-\[ \|\hat{\vec{a}}\| = \sqrt{0.6^2 + 0^2 + 0.8^2} = \sqrt{0.36 + 0.64} = \sqrt{1} = 1.\]</div>
+\[ \|\hat{\mathbf{a}}\| = \sqrt{0.6^2 + 0^2 + 0.8^2} = \sqrt{0.36 + 0.64} = \sqrt{1} = 1.\]</div>
 <p>Normalising a vector is an operation that is used a lot in graphics programming so the glm library has the function <code class="docutils literal notranslate"><span class="pre">glm::normalize()</span></code> to do this. Add the following code to your program.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Normalising vectors</span>
 <span class="n">glm</span><span class="o">::</span><span class="n">vec3</span><span class="w"> </span><span class="n">aHat</span><span class="p">,</span><span class="w"> </span><span class="n">bHat</span><span class="p">;</span>
@@ -533,60 +533,28 @@ length(bHat) = 1.000
 <section id="arithmetic-operations-on-vectors">
 <h2><span class="section-number">4.3. </span>Arithmetic operations on vectors<a class="headerlink" href="#arithmetic-operations-on-vectors" title="Permalink to this heading">#</a></h2>
 <p>Like numbers, we can define the arithmetic operations of addition, subtraction for vectors as well as multiplication and division by a scalar.</p>
-<section id="multiplication-and-division-by-a-scalar">
-<h3><span class="section-number">4.3.1. </span>Multiplication and division by a scalar<a class="headerlink" href="#multiplication-and-division-by-a-scalar" title="Permalink to this heading">#</a></h3>
-<p>Multiplication and division of a vector <span class="math notranslate nohighlight">\(\vec{a} = (a_x, a_y, a_z)\)</span> by a scalar (a number) <span class="math notranslate nohighlight">\(k\)</span> are defined by</p>
-<div class="math notranslate nohighlight">
-\[\begin{split} \begin{align*}
-    k \vec{a} &amp;= (ka_x, ka_y, ka_z), \\
-    \frac{\vec{a}}{k} &amp;= \left(\frac{a_x}{k}, \frac{a_y}{k}, \frac{a_z}{k} \right).
-\end{align*} \end{split}\]</div>
-<p>Multiplying or dividing a vector by a positive scalar has the effect of scaling the length of the vector. Multiplying or dividing by a negative scalar reverses the direction of the vector.</p>
-<figure class="align-default">
-<a class="reference internal image-reference" href="../_images/04_vector_multiplication.svg"><img alt="../_images/04_vector_multiplication.svg" height="180" src="../_images/04_vector_multiplication.svg" /></a>
-</figure>
-<p>For example, multiplying the vector <span class="math notranslate nohighlight">\(\vec{a} = (3, 0, 4)\)</span> by the scalar 2 gives</p>
-<div class="math notranslate nohighlight">
-\[ 2\vec{a} = 2(3,0,4) = (6, 0, 8), \]</div>
-<p>which has the magnitude</p>
-<div class="math notranslate nohighlight">
-\[ \|2 \vec{a} \| = \sqrt{6^2 + 0^2 + 8^2} = \sqrt{36 + 64} = \sqrt{100} = 10 = 2 \|\vec{a}\|. \]</div>
-<p>To perform scalar multiplication or division on a glm vector we simply use the <code class="docutils literal notranslate"><span class="pre">*</span></code> and <code class="docutils literal notranslate"><span class="pre">/</span></code> operators. To demonstrate this add the following code to your program.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Arithmetic operations on vectors</span>
-<span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">Arithmetic operations on vectors:</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
-<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;2a    = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mf">2.0f</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;b / 3 = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">3.0f</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-</pre></div>
-</div>
-<p>Note that we need to use float values for scalar multiplication and division, i.e., <code class="docutils literal notranslate"><span class="pre">2.0f</span></code> and <code class="docutils literal notranslate"><span class="pre">3.0f</span></code> instead of <code class="docutils literal notranslate"><span class="pre">2</span></code> and <code class="docutils literal notranslate"><span class="pre">3</span></code>. Running the program will add the following to the console.</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Arithmetic operations on vectors:
-2a    = [    6.000,    0.000,    8.000]
-b / 3 = [    0.333,    0.667,    1.000]
-</pre></div>
-</div>
-</section>
 <section id="vector-addition-and-subtraction">
-<h3><span class="section-number">4.3.2. </span>Vector addition and subtraction<a class="headerlink" href="#vector-addition-and-subtraction" title="Permalink to this heading">#</a></h3>
-<p>The addition and subtraction of two vectors <span class="math notranslate nohighlight">\(\vec{a} = (a_x, a_y, a_z)\)</span> and <span class="math notranslate nohighlight">\(\vec{b} = (b_x, b_y, b_z)\)</span> is defined by</p>
+<h3><span class="section-number">4.3.1. </span>Vector addition and subtraction<a class="headerlink" href="#vector-addition-and-subtraction" title="Permalink to this heading">#</a></h3>
+<p>The addition and subtraction of two vectors <span class="math notranslate nohighlight">\(\mathbf{a} = (a_x, a_y, a_z)\)</span> and <span class="math notranslate nohighlight">\(\mathbf{b} = (b_x, b_y, b_z)\)</span> is defined by</p>
 <div class="math notranslate nohighlight" id="equation-eq-vector-addition">
 <span class="eqno">(4.3)<a class="headerlink" href="#equation-eq-vector-addition" title="Permalink to this equation">#</a></span>\[\begin{split} \begin{align*}
-    \vec{a} + \vec{b} &amp;= (a_x + b_x, a_y + b_y, a_z + b_z), \\
-    \vec{a} - \vec{b} &amp;= (a_x - b_x, a_y - b_y, a_z - b_z).
+    \mathbf{a} + \mathbf{b} &amp;= (a_x + b_x, a_y + b_y, a_z + b_z), \\
+    \mathbf{a} - \mathbf{b} &amp;= (a_x - b_x, a_y - b_y, a_z - b_z).
 \end{align*} \end{split}\]</div>
-<p>For example, given the vectors <span class="math notranslate nohighlight">\(\vec{a} = (3,0,4)\)</span> and <span class="math notranslate nohighlight">\(\vec{b} = (1, 2, 3)\)</span></p>
+<p>For example, given the vectors <span class="math notranslate nohighlight">\(\mathbf{a} = (3,0,4)\)</span> and <span class="math notranslate nohighlight">\(\mathbf{b} = (1, 2, 3)\)</span></p>
 <div class="math notranslate nohighlight">
 \[\begin{split} \begin{align*}
-    \vec{a} + \vec{b} &amp;= (3, 0, 4) + (1, 2, 3) = (3 + 1, 0 + 2, 4 + 3) = (4, 2, 7), \\
-    \vec{a} - \vec{b} &amp;= (3, 0, 4) - (1, 2, 3) = (3 - 1, 0 - 2, 4 - 3) = (2, -2, 1).
+    \mathbf{a} + \mathbf{b} &amp;= (3, 0, 4) + (1, 2, 3) = (3 + 1, 0 + 2, 4 + 3) = (4, 2, 7), \\
+    \mathbf{a} - \mathbf{b} &amp;= (3, 0, 4) - (1, 2, 3) = (3 - 1, 0 - 2, 4 - 3) = (2, -2, 1).
 \end{align*} \end{split}\]</div>
-<p>What is happening in a geometrical sense when we add and subtract vectors? Take a look at <a class="reference internal" href="#vector-addition-figure"><span class="std std-numref">Fig. 4.3</span></a>, here the vector <span class="math notranslate nohighlight">\(\vec{b}\)</span> has been added to the vector <span class="math notranslate nohighlight">\(\vec{a}\)</span> where the tail of <span class="math notranslate nohighlight">\(\vec{b}\)</span> is placed at the head of <span class="math notranslate nohighlight">\(\vec{a}\)</span>. The resulting vector <span class="math notranslate nohighlight">\(\vec{a} + \vec{b}\)</span> points from the tail of <span class="math notranslate nohighlight">\(\vec{a}\)</span> to the head of <span class="math notranslate nohighlight">\(\vec{b}\)</span>.</p>
+<p>What is happening in a geometrical sense when we add and subtract vectors? Take a look at <a class="reference internal" href="#vector-addition-figure"><span class="std std-numref">Fig. 4.3</span></a>, here the vector <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> has been added to the vector <span class="math notranslate nohighlight">\(\mathbf{a}\)</span> where the tail of <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> is placed at the head of <span class="math notranslate nohighlight">\(\mathbf{a}\)</span>. The resulting vector <span class="math notranslate nohighlight">\(\mathbf{a} + \mathbf{b}\)</span> points from the tail of <span class="math notranslate nohighlight">\(\mathbf{a}\)</span> to the head of <span class="math notranslate nohighlight">\(\mathbf{b}\)</span>.</p>
 <figure class="align-default" id="vector-addition-figure">
 <a class="reference internal image-reference" href="../_images/04_Vector_addition.svg"><img alt="../_images/04_Vector_addition.svg" height="150" src="../_images/04_Vector_addition.svg" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 4.3 </span><span class="caption-text">Vector addition.</span><a class="headerlink" href="#vector-addition-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>The subtraction of the vector <span class="math notranslate nohighlight">\(\vec{b}\)</span> does similar, but since <span class="math notranslate nohighlight">\(\vec{a} - \vec{b} = \vec{a} + (-1)\vec{b}\)</span> then the direction of <span class="math notranslate nohighlight">\(\vec{b}\)</span> is reversed so <span class="math notranslate nohighlight">\(\vec{a} - \vec{b}\)</span> is the same as placing the tail of <span class="math notranslate nohighlight">\(-\vec{b}\)</span> at the head of <span class="math notranslate nohighlight">\(\vec{a}\)</span>.</p>
+<p>The subtraction of the vector <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> does similar, but since <span class="math notranslate nohighlight">\(\mathbf{a} - \mathbf{b} = \mathbf{a} + (-1)\mathbf{b}\)</span> then the direction of <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> is reversed so <span class="math notranslate nohighlight">\(\mathbf{a} - \mathbf{b}\)</span> is the same as placing the tail of <span class="math notranslate nohighlight">\(-\mathbf{b}\)</span> at the head of <span class="math notranslate nohighlight">\(\mathbf{a}\)</span>.</p>
 <figure class="align-default" id="vector-subraction-figure">
 <a class="reference internal image-reference" href="../_images/04_Vector_subtraction.svg"><img alt="../_images/04_Vector_subtraction.svg" height="180" src="../_images/04_Vector_subtraction.svg" /></a>
 <figcaption>
@@ -594,19 +562,51 @@ b / 3 = [    0.333,    0.667,    1.000]
 </figcaption>
 </figure>
 <p>To calculate the addition and subraction of our vectors add the following code to your program.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;a + b = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Arithmetic operations on vectors</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">Arithmetic operations on vectors:</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;a + b = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
 <span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;a - b = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>Running the program adds the following output to the console.</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>a + b = [    4.000,    2.000,    7.000]
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Arithmetic operations on vectors:
+a + b = [    4.000,    2.000,    7.000]
 a - b = [    2.000,   -2.000,    1.000]
 </pre></div>
 </div>
 </section>
-<section id="multiplying-vectors">
-<h3><span class="section-number">4.3.3. </span>Multiplying vectors<a class="headerlink" href="#multiplying-vectors" title="Permalink to this heading">#</a></h3>
-<p>Mathematically speaking the multiplication of two vectors is not defined (instead we have the dot and cross products - see <a class="reference internal" href="#dot-product-section"><span class="std std-ref">below</span></a>). However, in computing it is useful to be able to multiply the individual elements of vectors which is done using the <code class="docutils literal notranslate"><span class="pre">*</span></code> operator.</p>
+<section id="multiplication-and-division-by-a-scalar">
+<h3><span class="section-number">4.3.2. </span>Multiplication and division by a scalar<a class="headerlink" href="#multiplication-and-division-by-a-scalar" title="Permalink to this heading">#</a></h3>
+<p>Multiplication and division of a vector <span class="math notranslate nohighlight">\(\mathbf{a} = (a_x, a_y, a_z)\)</span> by a scalar (a number) <span class="math notranslate nohighlight">\(k\)</span> are defined by</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
+    k \mathbf{a} &amp;= (ka_x, ka_y, ka_z), \\
+    \frac{\mathbf{a}}{k} &amp;= \left(\frac{a_x}{k}, \frac{a_y}{k}, \frac{a_z}{k} \right).
+\end{align*} \end{split}\]</div>
+<p>Multiplying or dividing a vector by a positive scalar has the effect of scaling the length of the vector. Multiplying or dividing by a negative scalar reverses the direction of the vector.</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="../_images/04_vector_multiplication.svg"><img alt="../_images/04_vector_multiplication.svg" height="180" src="../_images/04_vector_multiplication.svg" /></a>
+</figure>
+<p>For example, multiplying the vector <span class="math notranslate nohighlight">\(\mathbf{a} = (3, 0, 4)\)</span> by the scalar 2 gives</p>
+<div class="math notranslate nohighlight">
+\[ 2\mathbf{a} = 2(3,0,4) = (6, 0, 8), \]</div>
+<p>which has the magnitude</p>
+<div class="math notranslate nohighlight">
+\[ \|2 \mathbf{a} \| = \sqrt{6^2 + 0^2 + 8^2} = \sqrt{36 + 64} = \sqrt{100} = 10 = 2 \|\mathbf{a}\|. \]</div>
+<p>To perform scalar multiplication or division on a glm vector we simply use the <code class="docutils literal notranslate"><span class="pre">*</span></code> and <code class="docutils literal notranslate"><span class="pre">/</span></code> operators. To demonstrate this add the following code to your program.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;2a    = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mf">2.0f</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;b / 3 = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">3.0f</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Note that we need to use float values for scalar multiplication and division, i.e., <code class="docutils literal notranslate"><span class="pre">2.0f</span></code> and <code class="docutils literal notranslate"><span class="pre">3.0f</span></code> instead of <code class="docutils literal notranslate"><span class="pre">2</span></code> and <code class="docutils literal notranslate"><span class="pre">3</span></code>. Running the program will add the following to the console.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>2a    = [    6.000,    0.000,    8.000]
+b / 3 = [    0.333,    0.667,    1.000]
+</pre></div>
+</div>
+</section>
+<section id="element-wise-multiplication">
+<span id="element-wise-multiplication-section"></span><h3><span class="section-number">4.3.3. </span>Element-wise multiplication<a class="headerlink" href="#element-wise-multiplication" title="Permalink to this heading">#</a></h3>
+<p>Mathematically speaking the multiplication of two vectors is not defined (instead we have the dot and cross products - see <a class="reference internal" href="#dot-product-section"><span class="std std-ref">below</span></a>). However, in computing it is useful to be able to multiply the individual elements of vectors, known as <strong>element-wise multiplication</strong>, which is done using the <code class="docutils literal notranslate"><span class="pre">*</span></code> operator.</p>
 <p>Add the following code to your program.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;a * b = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
 </pre></div>
@@ -619,25 +619,25 @@ a - b = [    2.000,   -2.000,    1.000]
 </section>
 <section id="the-dot-product">
 <span id="dot-product-section"></span><h3><span class="section-number">4.3.4. </span>The dot product<a class="headerlink" href="#the-dot-product" title="Permalink to this heading">#</a></h3>
-<p>The <strong>dot product</strong> between two vectors <span class="math notranslate nohighlight">\(\vec{a} = (a_x, a_y, a_z)\)</span> and <span class="math notranslate nohighlight">\(\vec{b} = (b_x, b_y, b_z)\)</span> is denoted by <span class="math notranslate nohighlight">\(\vec{a} \cdot \vec{b}\)</span> and returns a scalar. The dot product is calculated using</p>
+<p>The <strong>dot product</strong> between two vectors <span class="math notranslate nohighlight">\(\mathbf{a} = (a_x, a_y, a_z)\)</span> and <span class="math notranslate nohighlight">\(\mathbf{b} = (b_x, b_y, b_z)\)</span> is denoted by <span class="math notranslate nohighlight">\(\mathbf{a} \cdot \mathbf{b}\)</span> and returns a scalar. The dot product is calculated using</p>
 <div class="math notranslate nohighlight" id="equation-eq-dot-product">
-<span class="eqno">(4.4)<a class="headerlink" href="#equation-eq-dot-product" title="Permalink to this equation">#</a></span>\[ \vec{a} \cdot \vec{b} = a_xb_x + a_yb_y + a_zb_z. \]</div>
+<span class="eqno">(4.4)<a class="headerlink" href="#equation-eq-dot-product" title="Permalink to this equation">#</a></span>\[ \mathbf{a} \cdot \mathbf{b} = a_xb_x + a_yb_y + a_zb_z. \]</div>
 <p>The dot product is related to the angle <span class="math notranslate nohighlight">\(\theta\)</span> between the two vectors (<a class="reference internal" href="#angle-between-vectors-figure"><span class="std std-numref">Fig. 4.5</span></a>) by</p>
 <div class="math notranslate nohighlight" id="equation-eq-dot-product-geometric">
-<span class="eqno">(4.5)<a class="headerlink" href="#equation-eq-dot-product-geometric" title="Permalink to this equation">#</a></span>\[ \vec{a} \cdot \vec{b} = \|\vec{a}\| \|\vec{b}\| \cos(\theta). \]</div>
+<span class="eqno">(4.5)<a class="headerlink" href="#equation-eq-dot-product-geometric" title="Permalink to this equation">#</a></span>\[ \mathbf{a} \cdot \mathbf{b} = \|\mathbf{a}\| \|\mathbf{b}\| \cos(\theta). \]</div>
 <figure class="align-default" id="angle-between-vectors-figure">
 <a class="reference internal image-reference" href="../_images/04_Dot_product.svg"><img alt="../_images/04_Dot_product.svg" height="125" src="../_images/04_Dot_product.svg" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 4.5 </span><span class="caption-text">The angle <span class="math notranslate nohighlight">\(\theta\)</span> between the vectors <span class="math notranslate nohighlight">\(\vec{a}\)</span> and <span class="math notranslate nohighlight">\(\vec{b}\)</span>.</span><a class="headerlink" href="#angle-between-vectors-figure" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 4.5 </span><span class="caption-text">The angle <span class="math notranslate nohighlight">\(\theta\)</span> between the vectors <span class="math notranslate nohighlight">\(\mathbf{a}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{b}\)</span>.</span><a class="headerlink" href="#angle-between-vectors-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>A useful result for computer graphics is that if <span class="math notranslate nohighlight">\(\theta=90^\circ\)</span> then <span class="math notranslate nohighlight">\(\cos(\theta) = 0\)</span> and equation <a class="reference internal" href="#equation-eq-dot-product-geometric">(4.5)</a> becomes</p>
 <div class="math notranslate nohighlight">
-\[ \vec{a} \cdot \vec{b} = 0. \]</div>
-<p>In order words, if the dot product of two vectors is zero then the two vectors are perpendicular. For example, given the vectors <span class="math notranslate nohighlight">\(\vec{a} = (3, 0, 4)\)</span> and <span class="math notranslate nohighlight">\(\vec{b} = (1, 2, 3)\)</span> the dot product between these is</p>
+\[ \mathbf{a} \cdot \mathbf{b} = 0. \]</div>
+<p>In order words, if the dot product of two vectors is zero then the two vectors are perpendicular. For example, given the vectors <span class="math notranslate nohighlight">\(\mathbf{a} = (3, 0, 4)\)</span> and <span class="math notranslate nohighlight">\(\mathbf{b} = (1, 2, 3)\)</span> the dot product between these is</p>
 <div class="math notranslate nohighlight">
 \[ \begin{align*}
-    \vec{a} \cdot \vec{b} &amp;= (3, 0, 4) \cdot (1, 2, 3)
+    \mathbf{a} \cdot \mathbf{b} &amp;= (3, 0, 4) \cdot (1, 2, 3)
     = 3 + 0 + 12
     = 15.
 \end{align*} \]</div>
@@ -655,9 +655,9 @@ a . b = 15.000
 </section>
 <section id="the-cross-product">
 <span id="cross-product-section"></span><h3><span class="section-number">4.3.5. </span>The cross product<a class="headerlink" href="#the-cross-product" title="Permalink to this heading">#</a></h3>
-<p>The <strong>cross product</strong> between two vectors <span class="math notranslate nohighlight">\(\vec{a} = (a_x, a_y, a_z)\)</span> and <span class="math notranslate nohighlight">\(\vec{b} = (b_x, b_y, b_z)\)</span> is denoted by <span class="math notranslate nohighlight">\(\vec{a} \times \vec{b}\)</span> and returns a vector. The cross product is calculated using</p>
+<p>The <strong>cross product</strong> between two vectors <span class="math notranslate nohighlight">\(\mathbf{a} = (a_x, a_y, a_z)\)</span> and <span class="math notranslate nohighlight">\(\mathbf{b} = (b_x, b_y, b_z)\)</span> is denoted by <span class="math notranslate nohighlight">\(\mathbf{a} \times \mathbf{b}\)</span> and returns a vector. The cross product is calculated using</p>
 <div class="math notranslate nohighlight" id="equation-eq-cross-product">
-<span class="eqno">(4.6)<a class="headerlink" href="#equation-eq-cross-product" title="Permalink to this equation">#</a></span>\[ \vec{a} \times \vec{b} = (a_yb_z - a_zb_y, a_zb_x - a_xb_z, a_xb_y - a_yb_x). \]</div>
+<span class="eqno">(4.6)<a class="headerlink" href="#equation-eq-cross-product" title="Permalink to this equation">#</a></span>\[ \mathbf{a} \times \mathbf{b} = (a_yb_z - a_zb_y, a_zb_x - a_xb_z, a_xb_y - a_yb_x). \]</div>
 <p>The cross product between two vectors produces another vector that is perpendicular to both of the vectors (<a class="reference internal" href="#cross-product-figure"><span class="std std-numref">Fig. 4.6</span></a>). This is another incredibly useful result as it allows us to calculate a <a class="reference internal" href="07_Moving_the_camera.html#normal-vector-section"><span class="std std-ref"><strong>normal vector</strong></span></a> to a polygon which are used in calculating how light is reflected off surfaces (see <a class="reference internal" href="08_Lighting.html#lighting-section"><span class="std std-ref">8. Lighting</span></a>).</p>
 <figure class="align-default" id="cross-product-figure">
 <a class="reference internal image-reference" href="../_images/04_cross_product.svg"><img alt="../_images/04_cross_product.svg" height="200" src="../_images/04_cross_product.svg" /></a>
@@ -665,18 +665,18 @@ a . b = 15.000
 <p><span class="caption-number">Fig. 4.6 </span><span class="caption-text">The cross product between two vectors gives a vector that is perpendicular to both vectors.</span><a class="headerlink" href="#cross-product-figure" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>For example, given the vectors <span class="math notranslate nohighlight">\(\vec{a} = (3,0,4)\)</span> and <span class="math notranslate nohighlight">\(\vec{b} = (1, 2, 3)\)</span> the cross product <span class="math notranslate nohighlight">\(\vec{a} \times \vec{b}\)</span> is</p>
+<p>For example, given the vectors <span class="math notranslate nohighlight">\(\mathbf{a} = (3,0,4)\)</span> and <span class="math notranslate nohighlight">\(\mathbf{b} = (1, 2, 3)\)</span> the cross product <span class="math notranslate nohighlight">\(\mathbf{a} \times \mathbf{b}\)</span> is</p>
 <div class="math notranslate nohighlight">
 \[\begin{split} \begin{align*}
-    \vec{a} \times \vec{b} &amp;= (3, 0, 4) \times (1, 2, 3) \\
+    \mathbf{a} \times \mathbf{b} &amp;= (3, 0, 4) \times (1, 2, 3) \\
     &amp;= (0 \times 3 - 4 \times 2, 4 \times 1 - 3 \times 3, 3 \times 2 - 0 \times 3) \\
     &amp;= (-8, -5, 6).
 \end{align*} \end{split}\]</div>
-<p>We can show that <span class="math notranslate nohighlight">\(\vec{a} \times \vec{b}\)</span> is perpendicular to both <span class="math notranslate nohighlight">\(\vec{a}\)</span> and <span class="math notranslate nohighlight">\(\vec{b}\)</span> using the dot product</p>
+<p>We can show that <span class="math notranslate nohighlight">\(\mathbf{a} \times \mathbf{b}\)</span> is perpendicular to both <span class="math notranslate nohighlight">\(\mathbf{a}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> using the dot product</p>
 <div class="math notranslate nohighlight">
 \[\begin{split} \begin{align*}
-    \vec{a} \cdot (\vec{a} \times \vec{b}) &amp;= (3, 0, 4) \cdot (-8, -5, 6) = -24 + 0 + 24 = 0, \\
-    \vec{b} \cdot (\vec{a} \times \vec{b}) &amp;= (1, 2, 3) \cdot (-8, -5, 6) = - 8 - 10 + 18 = 0.
+    \mathbf{a} \cdot (\mathbf{a} \times \mathbf{b}) &amp;= (3, 0, 4) \cdot (-8, -5, 6) = -24 + 0 + 24 = 0, \\
+    \mathbf{b} \cdot (\mathbf{a} \times \mathbf{b}) &amp;= (1, 2, 3) \cdot (-8, -5, 6) = - 8 - 10 + 18 = 0.
 \end{align*} \end{split}\]</div>
 <p>The glm function <code class="docutils literal notranslate"><span class="pre">glm::cross()</span></code> calculates the cross product of two vectors. To demonstrate its use, add the following code to your program.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;a x b = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">glm</span><span class="o">::</span><span class="n">cross</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
@@ -726,8 +726,8 @@ Lets create some glm matrix objects for the following matrices</p>
 <span class="n">B</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">glm</span><span class="o">::</span><span class="n">mat2</span><span class="p">(</span><span class="mf">5.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">6.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">7.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">8.0f</span><span class="p">);</span>
 
 <span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">Defining matrices:</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
-<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;A = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">glm</span><span class="o">::</span><span class="n">transpose</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;B = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">glm</span><span class="o">::</span><span class="n">transpose</span><span class="p">(</span><span class="n">B</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;A = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;B = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>Here we have declared two <span class="math notranslate nohighlight">\(2 \times 2\)</span> matrices <code class="docutils literal notranslate"><span class="pre">A</span></code> and <code class="docutils literal notranslate"><span class="pre">B</span></code>. The elements of <code class="docutils literal notranslate"><span class="pre">A</span></code> are defined using matrix indexing and the elements of <code class="docutils literal notranslate"><span class="pre">B</span></code> are defined using the <code class="docutils literal notranslate"><span class="pre">glm::mat2()</span></code> function. Note how the elements of the 2D matrix are indexed using <code class="docutils literal notranslate"><span class="pre">[row][col]</span></code></p>
@@ -801,7 +801,7 @@ B =
 <h2><span class="section-number">4.5. </span>Arithmetic operations on matrices<a class="headerlink" href="#arithmetic-operations-on-matrices" title="Permalink to this heading">#</a></h2>
 <p>The arithmetic operations on matrices for addition and subtraction of two matrices and multiplying and dividing by a scalar are the same as for vectors using the <code class="docutils literal notranslate"><span class="pre">+</span></code>, <code class="docutils literal notranslate"><span class="pre">-</span></code>, <code class="docutils literal notranslate"><span class="pre">*</span></code> and <code class="docutils literal notranslate"><span class="pre">/</span></code> operators. To show these add the following code to your program.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Aritmetic operations on matrices</span>
-<span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">Aritmetic operations on matrices:</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">Arithmetic operations on matrices:</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
 <span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;A + B = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">glm</span><span class="o">::</span><span class="n">transpose</span><span class="p">(</span><span class="n">A</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">B</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
 <span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;A - B = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">glm</span><span class="o">::</span><span class="n">transpose</span><span class="p">(</span><span class="n">A</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">B</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
 <span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;2A    = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">glm</span><span class="o">::</span><span class="n">transpose</span><span class="p">(</span><span class="mf">2.0f</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">A</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
@@ -809,7 +809,7 @@ B =
 </pre></div>
 </div>
 <p>Running the program should output the following to the console.</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Aritmetic operations on matrices:
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Arithmetic operations on matrices:
 A + B = 
 [[    6.000,    8.000]
  [   10.000,   12.000]]
@@ -831,8 +831,8 @@ A / 3 =
 <span id="matrix-multiplication-section"></span><h3><span class="section-number">4.5.1. </span>Matrix multiplication<a class="headerlink" href="#matrix-multiplication" title="Permalink to this heading">#</a></h3>
 <p>So multiplication of a matrix by a scalar is the same for matrices as it is for vectors. However, the multiplication of two matrices <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> is defined in a very specific way. If <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> are two matrices then the element in row <span class="math notranslate nohighlight">\(i\)</span> and column <span class="math notranslate nohighlight">\(j\)</span> of the matrix <span class="math notranslate nohighlight">\(AB\)</span> is calculated using</p>
 <div class="math notranslate nohighlight" id="equation-eq-matrix-multiplication">
-<span class="eqno">(4.7)<a class="headerlink" href="#equation-eq-matrix-multiplication" title="Permalink to this equation">#</a></span>\[ [AB]_{ij} = \vec{a}_i \cdot \vec{b}_j, \]</div>
-<p>where <span class="math notranslate nohighlight">\(\vec{a}_i\)</span> is the vector formed from row <span class="math notranslate nohighlight">\(i\)</span> of <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(\vec{b}_j\)</span> is the vector formed from column <span class="math notranslate nohighlight">\(j\)</span> of <span class="math notranslate nohighlight">\(B\)</span>. For example, given the <span class="math notranslate nohighlight">\(2\times 2\)</span> matrices <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> defined earlier</p>
+<span class="eqno">(4.7)<a class="headerlink" href="#equation-eq-matrix-multiplication" title="Permalink to this equation">#</a></span>\[ [AB]_{ij} = \mathbf{a}_i \cdot \mathbf{b}_j, \]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{a}_i\)</span> is the vector formed from row <span class="math notranslate nohighlight">\(i\)</span> of <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(\mathbf{b}_j\)</span> is the vector formed from column <span class="math notranslate nohighlight">\(j\)</span> of <span class="math notranslate nohighlight">\(B\)</span>. For example, given the <span class="math notranslate nohighlight">\(2\times 2\)</span> matrices <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> defined earlier</p>
 <div class="math notranslate nohighlight">
 \[\begin{split} \begin{align*}
     A &amp;= \begin{pmatrix} 1 &amp; 2 \\ 3 &amp; 4 \end{pmatrix}, &amp;
@@ -994,13 +994,13 @@ invB * B =
 <span id="vectors-exercises"></span><h2><span class="section-number">4.6. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
 <ol class="arabic">
 <li><p>Three points have the co-ordinates <span class="math notranslate nohighlight">\(P = (5, 1, 3)\)</span>, <span class="math notranslate nohighlight">\(Q = (10, 7, 4)\)</span> and <span class="math notranslate nohighlight">\(R = (0, 5, -3)\)</span>. Use your maths library to output the following:</p>
-<p>(a) The vector <span class="math notranslate nohighlight">\(\vec{p}\)</span> that points from P to Q;<br>
-(b) The vector <span class="math notranslate nohighlight">\(\vec{q}\)</span> that points from Q to R;<br>
-(c) The vector <span class="math notranslate nohighlight">\(\vec{r}\)</span> that points from R to P;<br>
-(d) The length of the vector <span class="math notranslate nohighlight">\(\vec{p}\)</span>;<br>
-(e) A unit vector that points in the direction of the vector <span class="math notranslate nohighlight">\(\vec{q}\)</span>;<br>
-(f) The dot product <span class="math notranslate nohighlight">\(\vec{p} \cdot \vec{q}\)</span>;<br>
-(g) The cross product <span class="math notranslate nohighlight">\(\vec{q} \times \vec{r}\)</span>.</p>
+<p>(a) The vector <span class="math notranslate nohighlight">\(\mathbf{p}\)</span> that points from P to Q;<br>
+(b) The vector <span class="math notranslate nohighlight">\(\mathbf{q}\)</span> that points from Q to R;<br>
+(c) The vector <span class="math notranslate nohighlight">\(\mathbf{r}\)</span> that points from R to P;<br>
+(d) The length of the vector <span class="math notranslate nohighlight">\(\mathbf{p}\)</span>;<br>
+(e) A unit vector that points in the direction of the vector <span class="math notranslate nohighlight">\(\mathbf{q}\)</span>;<br>
+(f) The dot product <span class="math notranslate nohighlight">\(\mathbf{p} \cdot \mathbf{q}\)</span>;<br>
+(g) The cross product <span class="math notranslate nohighlight">\(\mathbf{q} \times \mathbf{r}\)</span>.</p>
 </li>
 <li><p>The three matrices <span class="math notranslate nohighlight">\(A\)</span>, <span class="math notranslate nohighlight">\(B\)</span> and <span class="math notranslate nohighlight">\(C\)</span> are defined as</p></li>
 </ol>
@@ -1093,9 +1093,9 @@ invB * B =
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arithmetic-operations-on-vectors">4.3. Arithmetic operations on vectors</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiplication-and-division-by-a-scalar">4.3.1. Multiplication and division by a scalar</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vector-addition-and-subtraction">4.3.2. Vector addition and subtraction</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiplying-vectors">4.3.3. Multiplying vectors</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vector-addition-and-subtraction">4.3.1. Vector addition and subtraction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiplication-and-division-by-a-scalar">4.3.2. Multiplication and division by a scalar</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#element-wise-multiplication">4.3.3. Element-wise multiplication</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-dot-product">4.3.4. The dot product</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-cross-product">4.3.5. The cross product</a></li>
 </ul>

@@ -22,23 +22,23 @@ The **glm/glm.hpp** is a header file for the glm library and **glm/gtx/io.hpp** 
 
 ## Vectors
 
-A vector in is an object with magnitude (length) and direction. A vector is denoted by a lower case letter in boldface, e.g., $\vec{a}$ (or underlined when writing by hand), and represented mathematically by a tuple which is an ordered set of numbers. In geometry, each number in the vector represents the length along the co-ordinate axes. For example, consider the 3-element vector
+A vector in is an object with magnitude (length) and direction. A vector is denoted by a lower case letter in boldface, e.g., $\mathbf{a}$ (or underlined when writing by hand), and represented mathematically by a tuple which is an ordered set of numbers. In geometry, each number in the vector represents the length along the co-ordinate axes. For example, consider the 3-element vector
 
-$$ \vec{a} = (a_x, a_y, a_z). $$
+$$ \mathbf{a} = (a_x, a_y, a_z). $$
 
-Here $\vec{a}$ has 3 elements so is a vector in 3D space where $a_x$, $a_y$ and $a_z$ are the lengths of the vector in the $x$, $y$, and $z$ directions.
+Here $\mathbf{a}$ has 3 elements so is a vector in 3D space where $a_x$, $a_y$ and $a_z$ are the lengths of the vector in the $x$, $y$, and $z$ directions.
 
 ```{figure} ../_images/04_Vector.svg
 :height: 200
 
-The vector $\vec{a} = (a_x, a_y, a_z)$.
+The vector $\mathbf{a} = (a_x, a_y, a_z)$.
 ```
 
 Lets create the following 3D vector objects in C++.
 
 $$ \begin{align*}
-    \vec{a} &= (3, 0, 4), &
-    \vec{b} &= (1, 2, 3).
+    \mathbf{a} &= (3, 0, 4), &
+    \mathbf{b} &= (1, 2, 3).
 \end{align*} $$
 
 Add the following code to the `main()` function.
@@ -72,23 +72,23 @@ b = [    1.000,    2.000,    3.000]
 
 ### Vector magnitude
 
-The **magnitude** of a vector $\vec{a} = (a_x, a_y, a_z)$ is denoted by $\|\vec{a}\|$ is the length from the tail of the vector to the head.
+The **magnitude** of a vector $\mathbf{a} = (a_x, a_y, a_z)$ is denoted by $\|\mathbf{a}\|$ is the length from the tail of the vector to the head.
 
 ```{figure} ../_images/04_Vector_magnitude.svg
 :height: 100
 
-The magnitude of $\vec{a}$ is the length of the vector.
+The magnitude of $\mathbf{a}$ is the length of the vector.
 ```
 
 The magnitude is calculated using an extension of Pythagoras' theorem, for example for 3D vectors the magnitude is
 
-$$ \|\vec{a}\| = \sqrt{a_x^2 + a_y^2 + a_z^2}. $$(eq:vector-magnitude)
+$$ \|\mathbf{a}\| = \sqrt{a_x^2 + a_y^2 + a_z^2}. $$(eq:vector-magnitude)
 
-For example, for the vectors $\vec{a}$ and $\vec{b}$ given above the magnitudes are
+For example, for the vectors $\mathbf{a}$ and $\mathbf{b}$ given above the magnitudes are
 
 $$ \begin{align*}
-    \| \vec{a} \| &= \sqrt{3^2 + 0^2 + 4^2} = \sqrt{9 + 0 + 16} = \sqrt{25} = 5, \\
-    \| \vec{b} \| &= \sqrt{1^2 + 2^2 + 3^2} = \sqrt{1 + 4 + 9} = \sqrt{14} = 3.742\ldots
+    \| \mathbf{a} \| &= \sqrt{3^2 + 0^2 + 4^2} = \sqrt{9 + 0 + 16} = \sqrt{25} = 5, \\
+    \| \mathbf{b} \| &= \sqrt{1^2 + 2^2 + 3^2} = \sqrt{1 + 4 + 9} = \sqrt{14} = 3.742\ldots
 \end{align*}  $$
 
 The `glm::length()` function calculates the magnitude of a glm vector object. To demonstrate this,  add the following code to your program.
@@ -112,19 +112,19 @@ length(b) = 3.742
 
 ### Unit vectors
 
-A **unit vector** is a vector that has a length of 1. We can find a unit vector that points in the same direction as a non-zero vector $\vec{a}$, which is denoted by $\hat{\vec{a}}$ (pronounced *a-hat*), by dividing by its magnitude, i.e.,
+A **unit vector** is a vector that has a length of 1. We can find a unit vector that points in the same direction as a non-zero vector $\mathbf{a}$, which is denoted by $\hat{\mathbf{a}}$ (pronounced *a-hat*), by dividing by its magnitude, i.e.,
 
-$$ \hat{\vec{a}} = \frac{\vec{a}}{\|\vec{a}\|}. $$(eq:unit-vector)
+$$ \hat{\mathbf{a}} = \frac{\mathbf{a}}{\|\mathbf{a}\|}. $$(eq:unit-vector)
 
-This process is called **normalising a vector**. For example, to determine a unit vector pointing in the same direction as $\vec{a} = (3, 0, 4)$ we normalise it by dividing by its magnitude which we have already calculated is 5.
+This process is called **normalising a vector**. For example, to determine a unit vector pointing in the same direction as $\mathbf{a} = (3, 0, 4)$ we normalise it by dividing by its magnitude which we have already calculated is 5.
 
 $$ \begin{align*}
-    \hat{\vec{a}} &= \frac{(3, 0, 4)}{5} = \left( \frac{3}{5}, 0, \frac{4}{5} \right) = (0.6, 0, 0.8).
+    \hat{\mathbf{a}} &= \frac{(3, 0, 4)}{5} = \left( \frac{3}{5}, 0, \frac{4}{5} \right) = (0.6, 0, 0.8).
 \end{align*} $$
 
-Checking that $\hat{\vec{a}}$ has a magnitude of 1
+Checking that $\hat{\mathbf{a}}$ has a magnitude of 1
 
-$$ \|\hat{\vec{a}}\| = \sqrt{0.6^2 + 0^2 + 0.8^2} = \sqrt{0.36 + 0.64} = \sqrt{1} = 1.$$
+$$ \|\hat{\mathbf{a}}\| = \sqrt{0.6^2 + 0^2 + 0.8^2} = \sqrt{0.36 + 0.64} = \sqrt{1} = 1.$$
 
 Normalising a vector is an operation that is used a lot in graphics programming so the glm library has the function `glm::normalize()` to do this. Add the following code to your program.
 
@@ -157,63 +157,23 @@ Both `aHat` and `bHat` have magnitudes of 1 which shows they are both unit vecto
 
 Like numbers, we can define the arithmetic operations of addition, subtraction for vectors as well as multiplication and division by a scalar.
 
-### Multiplication and division by a scalar
-
-Multiplication and division of a vector $\vec{a} = (a_x, a_y, a_z)$ by a scalar (a number) $k$ are defined by
-
-$$ \begin{align*}
-    k \vec{a} &= (ka_x, ka_y, ka_z), \\
-    \frac{\vec{a}}{k} &= \left(\frac{a_x}{k}, \frac{a_y}{k}, \frac{a_z}{k} \right).
-\end{align*} $$
-
-Multiplying or dividing a vector by a positive scalar has the effect of scaling the length of the vector. Multiplying or dividing by a negative scalar reverses the direction of the vector.
-
-```{figure} ../_images/04_vector_multiplication.svg
-:height: 180
-```
-
-For example, multiplying the vector $\vec{a} = (3, 0, 4)$ by the scalar 2 gives
-
-$$ 2\vec{a} = 2(3,0,4) = (6, 0, 8), $$
-
-which has the magnitude
-
-$$ \|2 \vec{a} \| = \sqrt{6^2 + 0^2 + 8^2} = \sqrt{36 + 64} = \sqrt{100} = 10 = 2 \|\vec{a}\|. $$
-
-To perform scalar multiplication or division on a glm vector we simply use the `*` and `/` operators. To demonstrate this add the following code to your program.
-
-```cpp
-// Arithmetic operations on vectors
-printf("\nArithmetic operations on vectors:\n");
-std::cout << "2a    = " << 2.0f * a << std::endl;
-std::cout << "b / 3 = " << b / 3.0f << std::endl;
-```
-
-Note that we need to use float values for scalar multiplication and division, i.e., `2.0f` and `3.0f` instead of `2` and `3`. Running the program will add the following to the console.
-
-```text
-Arithmetic operations on vectors:
-2a    = [    6.000,    0.000,    8.000]
-b / 3 = [    0.333,    0.667,    1.000]
-```
-
 ### Vector addition and subtraction
 
-The addition and subtraction of two vectors $\vec{a} = (a_x, a_y, a_z)$ and $\vec{b} = (b_x, b_y, b_z)$ is defined by
+The addition and subtraction of two vectors $\mathbf{a} = (a_x, a_y, a_z)$ and $\mathbf{b} = (b_x, b_y, b_z)$ is defined by
 
 $$ \begin{align*}
-    \vec{a} + \vec{b} &= (a_x + b_x, a_y + b_y, a_z + b_z), \\
-    \vec{a} - \vec{b} &= (a_x - b_x, a_y - b_y, a_z - b_z).
+    \mathbf{a} + \mathbf{b} &= (a_x + b_x, a_y + b_y, a_z + b_z), \\
+    \mathbf{a} - \mathbf{b} &= (a_x - b_x, a_y - b_y, a_z - b_z).
 \end{align*} $$(eq:vector-addition)
 
-For example, given the vectors $\vec{a} = (3,0,4)$ and $\vec{b} = (1, 2, 3)$
+For example, given the vectors $\mathbf{a} = (3,0,4)$ and $\mathbf{b} = (1, 2, 3)$
 
 $$ \begin{align*}
-    \vec{a} + \vec{b} &= (3, 0, 4) + (1, 2, 3) = (3 + 1, 0 + 2, 4 + 3) = (4, 2, 7), \\
-    \vec{a} - \vec{b} &= (3, 0, 4) - (1, 2, 3) = (3 - 1, 0 - 2, 4 - 3) = (2, -2, 1).
+    \mathbf{a} + \mathbf{b} &= (3, 0, 4) + (1, 2, 3) = (3 + 1, 0 + 2, 4 + 3) = (4, 2, 7), \\
+    \mathbf{a} - \mathbf{b} &= (3, 0, 4) - (1, 2, 3) = (3 - 1, 0 - 2, 4 - 3) = (2, -2, 1).
 \end{align*} $$
 
-What is happening in a geometrical sense when we add and subtract vectors? Take a look at {numref}`vector-addition-figure`, here the vector $\vec{b}$ has been added to the vector $\vec{a}$ where the tail of $\vec{b}$ is placed at the head of $\vec{a}$. The resulting vector $\vec{a} + \vec{b}$ points from the tail of $\vec{a}$ to the head of $\vec{b}$. 
+What is happening in a geometrical sense when we add and subtract vectors? Take a look at {numref}`vector-addition-figure`, here the vector $\mathbf{b}$ has been added to the vector $\mathbf{a}$ where the tail of $\mathbf{b}$ is placed at the head of $\mathbf{a}$. The resulting vector $\mathbf{a} + \mathbf{b}$ points from the tail of $\mathbf{a}$ to the head of $\mathbf{b}$. 
 
 ```{figure} ../_images/04_Vector_addition.svg
 :height: 150
@@ -222,7 +182,7 @@ What is happening in a geometrical sense when we add and subtract vectors? Take 
 Vector addition.
 ```
 
-The subtraction of the vector $\vec{b}$ does similar, but since $\vec{a} - \vec{b} = \vec{a} + (-1)\vec{b}$ then the direction of $\vec{b}$ is reversed so $\vec{a} - \vec{b}$ is the same as placing the tail of $-\vec{b}$ at the head of $\vec{a}$.
+The subtraction of the vector $\mathbf{b}$ does similar, but since $\mathbf{a} - \mathbf{b} = \mathbf{a} + (-1)\mathbf{b}$ then the direction of $\mathbf{b}$ is reversed so $\mathbf{a} - \mathbf{b}$ is the same as placing the tail of $-\mathbf{b}$ at the head of $\mathbf{a}$.
 
 ```{figure} ../_images/04_Vector_subtraction.svg
 :height: 180
@@ -234,6 +194,8 @@ Vector subtraction.
 To calculate the addition and subraction of our vectors add the following code to your program.
 
 ```cpp
+// Arithmetic operations on vectors
+printf("\nArithmetic operations on vectors:\n");
 std::cout << "a + b = " << a + b << std::endl;
 std::cout << "a - b = " << a - b << std::endl;
 ```
@@ -241,13 +203,53 @@ std::cout << "a - b = " << a - b << std::endl;
 Running the program adds the following output to the console.
 
 ```text
+Arithmetic operations on vectors:
 a + b = [    4.000,    2.000,    7.000]
 a - b = [    2.000,   -2.000,    1.000]
 ```
 
-### Multiplying vectors
+### Multiplication and division by a scalar
 
-Mathematically speaking the multiplication of two vectors is not defined (instead we have the dot and cross products - see [below](dot-product-section)). However, in computing it is useful to be able to multiply the individual elements of vectors which is done using the `*` operator.
+Multiplication and division of a vector $\mathbf{a} = (a_x, a_y, a_z)$ by a scalar (a number) $k$ are defined by
+
+$$ \begin{align*}
+    k \mathbf{a} &= (ka_x, ka_y, ka_z), \\
+    \frac{\mathbf{a}}{k} &= \left(\frac{a_x}{k}, \frac{a_y}{k}, \frac{a_z}{k} \right).
+\end{align*} $$
+
+Multiplying or dividing a vector by a positive scalar has the effect of scaling the length of the vector. Multiplying or dividing by a negative scalar reverses the direction of the vector.
+
+```{figure} ../_images/04_vector_multiplication.svg
+:height: 180
+```
+
+For example, multiplying the vector $\mathbf{a} = (3, 0, 4)$ by the scalar 2 gives
+
+$$ 2\mathbf{a} = 2(3,0,4) = (6, 0, 8), $$
+
+which has the magnitude
+
+$$ \|2 \mathbf{a} \| = \sqrt{6^2 + 0^2 + 8^2} = \sqrt{36 + 64} = \sqrt{100} = 10 = 2 \|\mathbf{a}\|. $$
+
+To perform scalar multiplication or division on a glm vector we simply use the `*` and `/` operators. To demonstrate this add the following code to your program.
+
+```cpp
+std::cout << "2a    = " << 2.0f * a << std::endl;
+std::cout << "b / 3 = " << b / 3.0f << std::endl;
+```
+
+Note that we need to use float values for scalar multiplication and division, i.e., `2.0f` and `3.0f` instead of `2` and `3`. Running the program will add the following to the console.
+
+```text
+2a    = [    6.000,    0.000,    8.000]
+b / 3 = [    0.333,    0.667,    1.000]
+```
+
+(element-wise-multiplication-section)=
+
+### Element-wise multiplication
+
+Mathematically speaking the multiplication of two vectors is not defined (instead we have the dot and cross products - see [below](dot-product-section)). However, in computing it is useful to be able to multiply the individual elements of vectors, known as **element-wise multiplication**, which is done using the `*` operator.
 
 Add the following code to your program.
 
@@ -267,29 +269,29 @@ So each element of `a * b` is the product of the corresponding elements in the v
 
 ### The dot product
 
-The **dot product** between two vectors $\vec{a} = (a_x, a_y, a_z)$ and $\vec{b} = (b_x, b_y, b_z)$ is denoted by $\vec{a} \cdot \vec{b}$ and returns a scalar. The dot product is calculated using
+The **dot product** between two vectors $\mathbf{a} = (a_x, a_y, a_z)$ and $\mathbf{b} = (b_x, b_y, b_z)$ is denoted by $\mathbf{a} \cdot \mathbf{b}$ and returns a scalar. The dot product is calculated using
 
-$$ \vec{a} \cdot \vec{b} = a_xb_x + a_yb_y + a_zb_z. $$(eq:dot-product)
+$$ \mathbf{a} \cdot \mathbf{b} = a_xb_x + a_yb_y + a_zb_z. $$(eq:dot-product)
 
 The dot product is related to the angle $\theta$ between the two vectors ({numref}`angle-between-vectors-figure`) by
 
-$$ \vec{a} \cdot \vec{b} = \|\vec{a}\| \|\vec{b}\| \cos(\theta). $$(eq:dot-product-geometric)
+$$ \mathbf{a} \cdot \mathbf{b} = \|\mathbf{a}\| \|\mathbf{b}\| \cos(\theta). $$(eq:dot-product-geometric)
 
 ```{figure} ../_images/04_Dot_product.svg
 :height: 125
 :name: angle-between-vectors-figure
 
-The angle $\theta$ between the vectors $\vec{a}$ and $\vec{b}$.
+The angle $\theta$ between the vectors $\mathbf{a}$ and $\mathbf{b}$.
 ```
 
 A useful result for computer graphics is that if $\theta=90^\circ$ then $\cos(\theta) = 0$ and equation {eq}`eq:dot-product-geometric` becomes
 
-$$ \vec{a} \cdot \vec{b} = 0. $$
+$$ \mathbf{a} \cdot \mathbf{b} = 0. $$
 
-In order words, if the dot product of two vectors is zero then the two vectors are perpendicular. For example, given the vectors $\vec{a} = (3, 0, 4)$ and $\vec{b} = (1, 2, 3)$ the dot product between these is
+In order words, if the dot product of two vectors is zero then the two vectors are perpendicular. For example, given the vectors $\mathbf{a} = (3, 0, 4)$ and $\mathbf{b} = (1, 2, 3)$ the dot product between these is
 
 $$ \begin{align*}
-    \vec{a} \cdot \vec{b} &= (3, 0, 4) \cdot (1, 2, 3)
+    \mathbf{a} \cdot \mathbf{b} &= (3, 0, 4) \cdot (1, 2, 3)
     = 3 + 0 + 12
     = 15.
 \end{align*} $$
@@ -313,9 +315,9 @@ a . b = 15.000
 
 ### The cross product
 
-The **cross product** between two vectors $\vec{a} = (a_x, a_y, a_z)$ and $\vec{b} = (b_x, b_y, b_z)$ is denoted by $\vec{a} \times \vec{b}$ and returns a vector. The cross product is calculated using
+The **cross product** between two vectors $\mathbf{a} = (a_x, a_y, a_z)$ and $\mathbf{b} = (b_x, b_y, b_z)$ is denoted by $\mathbf{a} \times \mathbf{b}$ and returns a vector. The cross product is calculated using
 
-$$ \vec{a} \times \vec{b} = (a_yb_z - a_zb_y, a_zb_x - a_xb_z, a_xb_y - a_yb_x). $$(eq:cross-product)
+$$ \mathbf{a} \times \mathbf{b} = (a_yb_z - a_zb_y, a_zb_x - a_xb_z, a_xb_y - a_yb_x). $$(eq:cross-product)
 
 The cross product between two vectors produces another vector that is perpendicular to both of the vectors ({numref}`cross-product-figure`). This is another incredibly useful result as it allows us to calculate a [**normal vector**](normal-vector-section) to a polygon which are used in calculating how light is reflected off surfaces (see [8. Lighting](lighting-section)).
 
@@ -326,19 +328,19 @@ The cross product between two vectors produces another vector that is perpendicu
 The cross product between two vectors gives a vector that is perpendicular to both vectors.
 ```
 
-For example, given the vectors $\vec{a} = (3,0,4)$ and $\vec{b} = (1, 2, 3)$ the cross product $\vec{a} \times \vec{b}$ is
+For example, given the vectors $\mathbf{a} = (3,0,4)$ and $\mathbf{b} = (1, 2, 3)$ the cross product $\mathbf{a} \times \mathbf{b}$ is
 
 $$ \begin{align*}
-    \vec{a} \times \vec{b} &= (3, 0, 4) \times (1, 2, 3) \\
+    \mathbf{a} \times \mathbf{b} &= (3, 0, 4) \times (1, 2, 3) \\
     &= (0 \times 3 - 4 \times 2, 4 \times 1 - 3 \times 3, 3 \times 2 - 0 \times 3) \\
     &= (-8, -5, 6).
 \end{align*} $$
 
-We can show that $\vec{a} \times \vec{b}$ is perpendicular to both $\vec{a}$ and $\vec{b}$ using the dot product
+We can show that $\mathbf{a} \times \mathbf{b}$ is perpendicular to both $\mathbf{a}$ and $\mathbf{b}$ using the dot product
 
 $$ \begin{align*}
-    \vec{a} \cdot (\vec{a} \times \vec{b}) &= (3, 0, 4) \cdot (-8, -5, 6) = -24 + 0 + 24 = 0, \\
-    \vec{b} \cdot (\vec{a} \times \vec{b}) &= (1, 2, 3) \cdot (-8, -5, 6) = - 8 - 10 + 18 = 0.
+    \mathbf{a} \cdot (\mathbf{a} \times \mathbf{b}) &= (3, 0, 4) \cdot (-8, -5, 6) = -24 + 0 + 24 = 0, \\
+    \mathbf{b} \cdot (\mathbf{a} \times \mathbf{b}) &= (1, 2, 3) \cdot (-8, -5, 6) = - 8 - 10 + 18 = 0.
 \end{align*} $$
 
 The glm function `glm::cross()` calculates the cross product of two vectors. To demonstrate its use, add the following code to your program.
@@ -399,8 +401,8 @@ A[1][0] = 3.0f, A[1][1] = 4.0f;
 B = glm::mat2(5.0f, 6.0f, 7.0f, 8.0f);
 
 printf("\nDefining matrices:\n");
-std::cout << "A = " << glm::transpose(A) << "\n" << std::endl;
-std::cout << "B = " << glm::transpose(B) << std::endl;
+std::cout << "A = " << A << "\n" << std::endl;
+std::cout << "B = " << B << std::endl;
 ```
 
 Here we have declared two $2 \times 2$ matrices `A` and `B`. The elements of `A` are defined using matrix indexing and the elements of `B` are defined using the `glm::mat2()` function. Note how the elements of the 2D matrix are indexed using `[row][col]` 
@@ -495,7 +497,7 @@ The arithmetic operations on matrices for addition and subtraction of two matric
 
 ```cpp
 // Aritmetic operations on matrices
-printf("\nAritmetic operations on matrices:\n");
+printf("\nArithmetic operations on matrices:\n");
 std::cout << "A + B = " << glm::transpose(A + B) << "\n" << std::endl;
 std::cout << "A - B = " << glm::transpose(A - B) << "\n" << std::endl;
 std::cout << "2A    = " << glm::transpose(2.0f * A) << "\n" << std::endl;
@@ -505,7 +507,7 @@ std::cout << "A / 3 = " << glm::transpose(A / 3.0f) << "\n" << std::endl;
 Running the program should output the following to the console.
 
 ```text
-Aritmetic operations on matrices:
+Arithmetic operations on matrices:
 A + B = 
 [[    6.000,    8.000]
  [   10.000,   12.000]]
@@ -528,9 +530,9 @@ A / 3 =
 
 So multiplication of a matrix by a scalar is the same for matrices as it is for vectors. However, the multiplication of two matrices $A$ and $B$ is defined in a very specific way. If $A$ and $B$ are two matrices then the element in row $i$ and column $j$ of the matrix $AB$ is calculated using
 
-$$ [AB]_{ij} = \vec{a}_i \cdot \vec{b}_j, $$(eq:matrix-multiplication)
+$$ [AB]_{ij} = \mathbf{a}_i \cdot \mathbf{b}_j, $$(eq:matrix-multiplication)
 
-where $\vec{a}_i$ is the vector formed from row $i$ of $A$ and $\vec{b}_j$ is the vector formed from column $j$ of $B$. For example, given the $2\times 2$ matrices $A$ and $B$ defined earlier
+where $\mathbf{a}_i$ is the vector formed from row $i$ of $A$ and $\mathbf{b}_j$ is the vector formed from column $j$ of $B$. For example, given the $2\times 2$ matrices $A$ and $B$ defined earlier
 
 $$ \begin{align*}
     A &= \begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}, &
@@ -718,13 +720,13 @@ invB * B =
 
 1. Three points have the co-ordinates $P = (5, 1, 3)$, $Q = (10, 7, 4)$ and $R = (0, 5, -3)$. Use your maths library to output the following:
 
-    (a) The vector $\vec{p}$ that points from P to Q;<br>
-    (b) The vector $\vec{q}$ that points from Q to R;<br>
-    (c) The vector $\vec{r}$ that points from R to P;<br>
-    (d) The length of the vector $\vec{p}$;<br>
-    (e) A unit vector that points in the direction of the vector $\vec{q}$;<br>
-    (f) The dot product $\vec{p} \cdot \vec{q}$;<br>
-    (g) The cross product $\vec{q} \times \vec{r}$.
+    (a) The vector $\mathbf{p}$ that points from P to Q;<br>
+    (b) The vector $\mathbf{q}$ that points from Q to R;<br>
+    (c) The vector $\mathbf{r}$ that points from R to P;<br>
+    (d) The length of the vector $\mathbf{p}$;<br>
+    (e) A unit vector that points in the direction of the vector $\mathbf{q}$;<br>
+    (f) The dot product $\mathbf{p} \cdot \mathbf{q}$;<br>
+    (g) The cross product $\mathbf{q} \times \mathbf{r}$.
 
 2. The three matrices $A$, $B$ and $C$ are defined as
 

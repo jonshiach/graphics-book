@@ -2,13 +2,13 @@
 
 # Transformations
 
-Computer graphics requires that shapes are manipulated in space by moving the shapes, shrinking or stretching, rotating and reflection to name a few. We call these manipulations **transformations**. We need a convenient way of telling the computer how to apply our transformations and for this we make use of matrices which we covered in the previous lab on [4. Vectors and Matrices](vectors-and-matrices-section).
+Computer graphics requires that shapes are manipulated in space by moving the shapes, shrinking or stretching, rotating and reflection to name a few. We call these manipulations **transformations**. We need a convenient way of telling the computer how to apply our transformations and for this we make use of matrices which we covered in the previous lab on [vectors and matrices](vectors-and-matrices-section).
 
 Each transformation has an associated **transformation matrix** which we use to multiply the vertex co-ordinates of a shape to calculate the vertex co-ordinates of the transformed shape. For example if $A$ is a transformation matrix for a particular transformation and $(x,y,z)$ are the co-ordinates of a vertex then we apply the transformation using
 
 $$ \begin{pmatrix} x' \\ y' \\ x' \end{pmatrix} = A \cdot \begin{pmatrix} x \\ y \\ z \end{pmatrix}, $$
 
-where $(x',y',z')^\mathsf{T}$ are the co-ordinates of the transformed point. Note that all vectors and co-ordinates are written as a column vector when multiplying by a matrix.
+where $(x',y',z')$ are the co-ordinates of the transformed point. Note that all vectors and co-ordinates are written as a column vector when multiplying by a matrix.
 
 
 ````{note}
@@ -26,13 +26,13 @@ The OpenGL co-ordinate system.
 
 ## Translation
 
-The **translation** transformation when applied to a set of points moves each point by the same amount. For example, consider the triangle in {numref}`translation-figure`, each of the vertices has been translated by the same vector $\vec{t}$ which has that effect of moving the triangle.
+The **translation** transformation when applied to a set of points moves each point by the same amount. For example, consider the triangle in {numref}`translation-figure`, each of the vertices has been translated by the same vector $\mathbf{t}$ which has that effect of moving the triangle.
 
 ```{figure} ../_images/05_translation.svg
 :height: 280
 :name: translation-figure
 
-Translation of a triangle by the translation vector $\vec{t}= (t_x, t_y, t_z)$.
+Translation of a triangle by the translation vector $\mathbf{t}= (t_x, t_y, t_z)$.
 ```
 
 A problem we have is that no transformation matrix exists for applying translation to the co-ordinates $(x, y, z)$, i.e., we can't find a matrix $Translate$ such that
@@ -59,7 +59,7 @@ $$ \begin{align*}
    \begin{pmatrix} x + t_x \\ y + t_y \\ z + t_z \\ 1 \end{pmatrix},
 \end{align*}$$
 
-which is our desired translation. So the **translation matrix** for translating a set of points by the vector $\vec{t} = (t_x, t_y, t_z)$ is
+which is our desired translation. So the **translation matrix** for translating a set of points by the vector $\mathbf{t} = (t_x, t_y, t_z)$ is
 
 $$ Translate = \begin{pmatrix}
     1 & 0 & 0 & t_x \\
@@ -68,14 +68,16 @@ $$ Translate = \begin{pmatrix}
     0 & 0 & 0 & 1
 \end{pmatrix}. $$(eq:translation-matrix)
 
-Recall that OpenGL and glm use [column-major order](column-major-order-section) so we need to transpose our transformation matrices so that when the co-ordinates are multiplied by the translation matrix we have the correct result. So the translation matrix we are going to use is
+```{important}
+Recall that OpenGL and glm use [column-major order](column-major-order-section), so when coding transformation matrices into C++ we need to code the transpose of the matrix. So the translation matrix we are going to use is
 
-$$ Translate^\mathsf{T} = \begin{pmatrix}
+$$ Translate = \begin{pmatrix}
     1 & 0 & 0 & 0 \\
     0 & 1 & 0 & 0 \\
     0 & 0 & 1 & 0 \\
     t_x & t_y & t_z & 1
-\end{pmatrix}. $$(eq:translation-matrix)
+\end{pmatrix}.$$
+```
 
 ### Translation in OpenGL
 
@@ -85,12 +87,12 @@ Now we know the mathematical theory behind applying a transformation lets apply 
 :width: 500
 :name: texture-rectangle-mario-figure
 
-A textured rectangle from [3. Textures](textures-section).
+A textured rectangle from the lab on [textures](textures-section).
 ```
 
-Lets translate the rectangle $0.4$ to the right and $0.3$ upwards (remember we are dealing with normalised device co-ordinates so the window co-ordinates are between $-1$ and $1$). The transformation matrix to perform this translation is
+Lets translate the rectangle $0.4$ to the right and $0.3$ upwards (remember we are dealing with normalised device co-ordinates so the window co-ordinates are between $-1$ and $1$). The transposed transformation matrix to perform this translation is
 
-$$ Translate = \begin{pmatrix} 
+$$ Translate = \begin{pmatrix}
     1 & 0 & 0 & 0 \\
     0 & 1 & 0 & 0 \\
     0 & 0 & 1 & 0 \\
@@ -105,7 +107,7 @@ glm::mat4 translate;
 translate[3][0] = 0.4f, translate[3][1] = 0.3f, translate[3][2] = 0.0f;
 ```
 
-We need a way of passing the `translate` matrix to the shader. We do this using a <a href="https://www.khronos.org/opengl/wiki/Uniform_(GLSL)" target="_blank">uniform</a> like we did for the texture maps in [3. Textures](uniforms-section). Add the following code after we have defined the translation matrix.
+We need a way of passing the `translate` matrix to the shader. We do this using a <a href="https://www.khronos.org/opengl/wiki/Uniform_(GLSL)" target="_blank">uniform</a> like we did in the lab on [texture maps](uniforms-section). Add the following code after we have defined the translation matrix.
 
 ```cpp
 // Send the transformation matrix to the shader
@@ -122,20 +124,23 @@ All we now have to do is modify the vertex shader to use the `transformation` ma
 ```cpp
 #version 330 core
 
+// Inputs
 layout(location = 0) in vec3 position;
-layout(location = 1) in vec2 UV;
+layout(location = 1) in vec2 uv;
 
-out vec2 uv;
+// Outputs
+out vec2 UV;
 
+// Uniforms
 uniform mat4 transformation;
 
 void main()
 {
     // Output vertex position
     gl_Position = transformation * vec4(position, 1.0);
-
+    
     // Output texture co-ordinates
-    uv = UV;
+    UV = uv;
 }
 ```
 
@@ -160,6 +165,7 @@ Whilst it wasn't particularly difficult to define the translation matrix, we may
 #include <iostream>
 #include <cmath>
 #include <glm/glm.hpp>
+#include <glm/gtx/io.hpp>
 
 // Maths class
 class Maths
@@ -239,7 +245,7 @@ $$ Scale = \begin{pmatrix}
     0 & 0 & 0 & 1
 \end{pmatrix}.$$
 
-Enter the following code into the main program after we defined the `translation` matrix (note that transposing the scaling matrix does not change the matrix).
+Enter the following code into the main program after we defined the `translation` matrix.
 
 ```cpp
 // Define the scaling matrix
@@ -297,7 +303,7 @@ If scaling is applied to a shape that is not centred at $(0,0,0)$ then the trans
 Scaling applied to a triangle not centred at $(0,0,0)$.
 ```
 
-If the desired result is to resize the shape whilst keeping its dimensions and location the same we first need to translate the vertex co-ordinates by $-\vec{c}$ where $\vec{c}$ is the centre of volume for the shape so that it is at $(0,0,0)$. Then we can apply the scaling before translating by $\vec{c}$ so that the centre of volume is back at the original position ({numref}`scaling-about-centre-figure`).
+If the desired result is to resize the shape whilst keeping its dimensions and location the same we first need to translate the vertex co-ordinates by $-\mathbf{c}$ where $\mathbf{c}$ is the centre of volume for the shape so that it is at $(0,0,0)$. Then we can apply the scaling before translating by $\mathbf{c}$ so that the centre of volume is back at the original position ({numref}`scaling-about-centre-figure`).
 
 ```{figure} ../_images/05_scaling_about_centre.svg
 :width: 700
@@ -329,12 +335,12 @@ $$ \begin{align*}
     \begin{pmatrix}
         1 & 0 & 0 & 0 \\
         0 & \cos(\theta) & -\sin(\theta) & 0 \\
-        0 & \sin(\theta) & \cos(\theta) & 0 \\
+        0 & \sin(\theta) &  \cos(\theta) & 0 \\
         0 & 0 & 0 & 1
     \end{pmatrix}, \\
     R_y &=
     \begin{pmatrix}
-        \cos(\theta) & 0 & \sin(\theta) & 0 \\
+         \cos(\theta) & 0 & \sin(\theta) & 0 \\
         0 & 1 & 0 & 0 \\
         -\sin(\theta) & 0 & \cos(\theta) & 0 \\
         0 & 0 & 0 & 1
@@ -342,7 +348,7 @@ $$ \begin{align*}
     R_z &=
     \begin{pmatrix}
         \cos(\theta) & -\sin(\theta) & 0 & 0 \\
-        \sin(\theta) & \cos(\theta) & 0 & 0 \\
+        \sin(\theta) &  \cos(\theta) & 0 & 0 \\
         0 & 0 & 1 & 0 \\
         0 & 0 & 0 & 1
     \end{pmatrix}.
@@ -358,10 +364,10 @@ We will consider rotation about the $z$-axis and will restrict our co-ordinates 
 :height: 300
 :name: rotation-figure
 
-Rotating the vector $\vec{a}$ anti-clockwise by angle $\theta$ to the vector $\vec{b}$.
+Rotating the vector $\mathbf{a}$ anti-clockwise by angle $\theta$ to the vector $\mathbf{b}$.
 ```
 
-Consider {numref}`rotation-figure` where the vector $\vec{a}$ is rotated by angle $\theta$ to the vector $\vec{b}$. To get this rotation we first consider the rotation of the vector $\vec{t}$, which has the same length as $\vec{a}$ and points along the $x$-axis, by angle $\phi$ to get to $\vec{a}$. If we form a right-angled triangle (the blue one) then we know the length of the hypotenuse, $|\vec{a}|$, and the angle so we can calculate the lengths of the adjacent and opposite sides using trigonometry. Remember our trig ratios (SOH-CAH-TOA)
+Consider {numref}`rotation-figure` where the vector $\mathbf{a}$ is rotated by angle $\theta$ to the vector $\mathbf{b}$. To get this rotation we first consider the rotation of the vector $\mathbf{t}$, which has the same length as $\mathbf{a}$ and points along the $x$-axis, by angle $\phi$ to get to $\mathbf{a}$. If we form a right-angled triangle (the blue one) then we know the length of the hypotenuse, $|\mathbf{a}|$, and the angle so we can calculate the lengths of the adjacent and opposite sides using trigonometry. Remember our trig ratios (SOH-CAH-TOA)
 
 $$ \begin{align*}
     \sin(\phi) &= \frac{\textsf{opposite}}{\textsf{hypotenuse}}, &
@@ -376,18 +382,18 @@ $$ \begin{align*}
     \textsf{opposite} &= \textsf{hypotenuse} \cdot \sin(\phi).
 \end{align*} $$
 
-Since $a_x$ and $a_y$ are the lengths of the adjacent and opposite sides respectively and $|\vec{a}|$ is the length of the hypotenuse we have
+Since $a_x$ and $a_y$ are the lengths of the adjacent and opposite sides respectively and $|\mathbf{a}|$ is the length of the hypotenuse we have
 
 $$ \begin{align*}
-    a_x &= |\vec{a}| \cos(\phi), \\
-    a_y &= |\vec{a}| \sin(\phi).
+    a_x &= |\mathbf{a}| \cos(\phi), \\
+    a_y &= |\mathbf{a}| \sin(\phi).
 \end{align*} $$
 
-Now consider the rotation from $\vec{c}$ by the angle $\phi + \theta$ to get to $\vec{b}$. Using the same method as before we have
+Now consider the rotation from $\mathbf{c}$ by the angle $\phi + \theta$ to get to $\mathbf{b}$. Using the same method as before we have
 
 $$ \begin{align*}
-    b_x &= |\vec{a}| \cos(\phi + \theta), \\
-    b_y &= |\vec{a}| \sin(\phi + \theta).
+    b_x &= |\mathbf{a}| \cos(\phi + \theta), \\
+    b_y &= |\mathbf{a}| \sin(\phi + \theta).
 \end{align*} $$
 
 We can rewrite $\cos(\phi+\theta)$ and $\sin(\phi+\theta)$ using <a href="https://en.wikipedia.org/wiki/List_of_trigonometric_identities#" target="_blank">trigonometric identities</a>
@@ -397,14 +403,14 @@ $$ \begin{align*}
     \sin(\phi + \theta) &= \sin(\phi) \cos(\theta) + \cos(\phi) \sin(\theta),
 \end{align*} $$
 
-so 
+so
 
 $$ \begin{align*}
-    v_x &= |\vec{a}| \cos(\phi) \cos(\theta) - |\vec{a}| \sin(\phi) \sin(\theta), \\
-    v_y &= |\vec{a}| \sin(\phi) \cos(\theta) + |\vec{a}| \cos(\phi) \sin(\theta).
+    v_x &= |\mathbf{a}| \cos(\phi) \cos(\theta) - |\mathbf{a}| \sin(\phi) \sin(\theta), \\
+    v_y &= |\mathbf{a}| \sin(\phi) \cos(\theta) + |\mathbf{a}| \cos(\phi) \sin(\theta).
 \end{align*} $$
 
-Since $ a_x = |\vec{a}| \cos(\phi)$ and $a_y = |\vec{a}| \sin(\phi)$ then
+Since $ a_x = |\mathbf{a}| \cos(\phi)$ and $a_y = |\mathbf{a}| \sin(\phi)$ then
 
 $$ \begin{align*}
     b_x &= a_x \cos(\theta) - a_y \sin(\theta), \\
@@ -419,13 +425,13 @@ $$ \begin{align*}
     \begin{pmatrix} a_x \\ a_y \end{pmatrix},
 \end{align*} $$
 
-so the transformation matrix for rotating around the $z$-axis in 2D is
+so the transformation (non-transposed) matrix for rotating around the $z$-axis in 2D is
 
 $$ \begin{pmatrix} \cos(\theta) & -\sin(\theta) \\ \sin(\theta) & \cos(\theta) \end{pmatrix}. $$
 
 We need a $4\times 4$ matrix to represent 3D rotation around the $z$-axis so we replace the 3rd and 4th row and columns with the 3rd and 4th row and column from the $4\times 4$ identity matrix giving
 
-$$ \begin{pmatrix} 
+$$ R_z = \begin{pmatrix}
     \cos(\theta) & -\sin(\theta) & 0 & 0 \\
     \sin(\theta) & \cos(\theta) & 0 & 0 \\
     0 & 0 & 1 & 0 \\
@@ -437,11 +443,11 @@ The rotation matrices for the rotation around the $x$ and $y$ axes are derived u
 
 ### Rotation in OpenGL
 
-Lets rotate our original rectangle anti-clockwise about the $z$-axis by $\theta = 45^\circ$. The rotation matrix to do this is (remember that we need to transpose the rotation matrix when defining the glm matrix, so the minus sign in front of the $\sin$ function switches to the bottom-left)
+Lets rotate our original rectangle anti-clockwise about the $z$-axis by $\theta = 45^\circ$. The transposed rotation matrix to do this is
 
-$$ Rotate^\mathsf{T} =
+$$ Rotate =
 \begin{pmatrix}
-    \cos(45^\circ) & \sin(45^\circ) & 0 & 0 \\
+     \cos(45^\circ) & \sin(45^\circ) & 0 & 0 \\
     -\sin(45^\circ) & \cos(45^\circ) & 0 & 0 \\
     0 & 0 & 1 & 0 \\
     0 & 0 & 0 & 1
@@ -452,12 +458,12 @@ Define the rotation matrix using the code below
 ```cpp
 // Define the rotation matrix
 glm::mat4 rotate;
-float angle = 45.0f * M_PI / 180.0f;
+float angle = 45.0f * 3.1416f / 180.0f;
 rotate[0][0] =  cos(angle), rotate[0][1] = sin(angle);
 rotate[1][0] = -sin(angle), rotate[1][1] = cos(angle);
 ```
 
-Here we also needed to convert $45^\circ$ into <a href="https://en.wikipedia.org/wiki/Radian" target="_blank">**radians**</a> since OpenGL expects angles to be in radians. A radian is equal to $\dfrac{\pi}{180}$ degrees and `M_PI` is the constant $\pi$ from the `cmath` library. Set the `transformation` matrix equal to the `rotate` matrix, run the program and you should see the rotated rectangle shown in {numref}`rotation-rectangle-figure`.
+Here we also needed to convert $45^\circ$ into <a href="https://en.wikipedia.org/wiki/Radian" target="_blank">**radians**</a> since OpenGL expects angles to be in radians (1 radian is equal to $\pi/180$ degrees). Set the `transformation` matrix equal to the `rotate` matrix, run the program and you should see the rotated rectangle shown in {numref}`rotation-rectangle-figure`.
 
 ```{figure} ../_images/05_rotation.png
 :width: 500
@@ -470,67 +476,67 @@ Rectangle rotated anti-clockwise about the $z$-axis by $45^\circ$.
 
 ### Axis-angle rotation
 
-The three rotation transformations are only useful if we want to only rotate around one of the three co-ordinate axes. A more useful transformation is the rotation around the axis that points in the direction of a vector, $\vec{v}$ say, which has its tail at (0,0,0) ({numref}`axis-angle-rotation-figure`).
+The three rotation transformations are only useful if we want to only rotate around one of the three co-ordinate axes. A more useful transformation is the rotation around the axis that points in the direction of a vector, $\mathbf{v}$ say, which has its tail at (0,0,0) ({numref}`axis-angle-rotation-figure`).
 
 ```{figure} ../_images/05_axis_angle_rotation.svg
-:height: 200
+:height: 300
 :name: axis-angle-rotation-figure
 
 Axis-angle rotation.
 ```
 
-The transformation matrix for rotation around a unit vector $\hat{\vec{v}} = (v_x, v_y, v_z)$, anti-clockwise by angle $\theta$ when looking down the vector is (this matrix has been transposed to help us code the glm matrix).
+The transposed transformation matrix for rotation around a unit vector $\hat{\mathbf{v}} = (v_x, v_y, v_z)$, anti-clockwise by angle $\theta$ when looking down the vector is.
 
 $$ \begin{align*}
-    Rotate^\mathsf{T} =
+    Rotate =
     \begin{pmatrix}
-        v_x^2(1 - \cos(\theta)) + \cos(\theta) &
+        v_x^2 (1 - \cos(\theta)) + \cos(\theta) &
         v_xv_y(1 - \cos(\theta)) + v_z\sin(\theta) &
         v_xv_z(1 - \cos(\theta)) - v_y\sin(\theta) &
         0 \\
-        v_xv_y(1 - \cos(\theta)) + v_z\sin(\theta) &
-        v_y^2(1 - \cos(\theta)) + \cos(\theta) &
+        v_xv_y(1 - \cos(\theta)) - v_z\sin(\theta) &
+         v_y^2(1 - \cos(\theta)) + \cos(\theta) &
         v_yv_z(1 - \cos(\theta)) + v_x\sin(\theta) &
         0 \\
         v_xv_z(1 - \cos(\theta)) + v_y\sin(\theta) &
         v_yv_z(1 - \cos(\theta)) - v_x\sin(\theta) &
-        v_z^2(1 - \cos(\theta)) + \cos(\theta) &
+        v_z^2 (1 - \cos(\theta)) + \cos(\theta) &
         0 \\
         0 & 0 & 0 & 1
-    \end{pmatrix}
+    \end{pmatrix}.
 \end{align*} $$(eq:axis-angle-rotation-matrix)
 
 Again, you don't really need to know how this is derived but if you are curious click on the dropdown link below.
 
 ````{dropdown} Derivation of the axis-angle rotation matrix (click to show)
 
-The rotation about the unit vector $\hat{\vec{v}} = (v_x, v_y, v_z)$ by angle $\theta$ is the [composition](composite-transformations-section) of 5 separate rotations:
+The rotation about the unit vector $\hat{\mathbf{v}} = (v_x, v_y, v_z)$ by angle $\theta$ is the [composition](composite-transformations-section) of 5 separate rotations:
 
-1. Rotate $\hat{\vec{v}}$ around the $x$-axis so that it is in the $xz$-plane (the $y$ component of the vector is 0);
+1. Rotate $\hat{\mathbf{v}}$ around the $x$-axis so that it is in the $xz$-plane (the $y$ component of the vector is 0);
 2. Rotate the vector around the $y$-axis so that it points along the $z$-axis (the $x$ and $y$ components are 0 and the $z$ component is a positive number);
 3. Perform the rotation around the $z$-axis;
 4. Reverse the rotation around the $y$-axis;
 5. Reverse the rotation around the $x$-axis.
 
-The rotation around the $x$-axis is achieved by forming a right-angled triangle in the $yz$-plane where the the angle of rotation $\theta$ has an adjacent side of length $v_z$, an opposite side of length $v_y$ and a hypotenuse of length $\sqrt{v_y^2 + v_z^2}$ ({numref}`axis-angle-rotation1-figure`). 
+The rotation around the $x$-axis is achieved by forming a right-angled triangle in the $yz$-plane where the the angle of rotation $\theta$ has an adjacent side of length $v_z$, an opposite side of length $v_y$ and a hypotenuse of length $\sqrt{v_y^2 + v_z^2}$ ({numref}`axis-angle-rotation1-figure`).
 
 ```{figure} ../_images/05_axis_angle_rotation_1.svg
 :height: 250
 :name: axis-angle-rotation1-figure
 
-Rotate $\vec{v}$ around the $x$-axis
+Rotate $\mathbf{v}$ around the $x$-axis
 ```
 
 Therefore $\cos(\theta) = \dfrac{v_z}{\sqrt{v_y^2 + v_z^2}}$ and $\sin(\theta) = \dfrac{v_y}{\sqrt{v_y^2 + v_z^2}}$ so the rotation matrix is
 
-$$ R_1 = \begin{pmatrix} 
-    1 & 0 & 0 & 0 \\ 
-    0 & \dfrac{v_z}{\sqrt{v_y^2 + v_z^2}} & -\dfrac{v_y}{\sqrt{v_y^2 + v_z^2}} & 0 \\
-    0 & \dfrac{v_x}{\sqrt{v_y^2 + v_z^2}} &  \dfrac{v_z}{\sqrt{v_y^2 + v_z^2}} & 0 \\
+$$ R_1 = \begin{pmatrix}
+    1 & 0 & 0 & 0 \\
+    0 & \dfrac{v_z}{\sqrt{v_y^2 + v_z^2}} & -\dfrac{v_x}{\sqrt{v_y^2 + v_z^2}} & 0 \\
+    0 & \dfrac{v_y}{\sqrt{v_y^2 + v_z^2}} &  \dfrac{v_z}{\sqrt{v_y^2 + v_z^2}} & 0 \\
     0 & 0 & 0 & 1
 \end{pmatrix}.$$
 
-The rotation around the $y$-axis is achieved by forming another right-angled triangle in the $xz$-plane where $\theta$ has an adjacent side of length $\sqrt{v_y^2 + v_z^2}$, an opposite side of length $v_x$ and a hypotenuse of length 1 since $\hat{\vec{v}}$ is a unit vector ({numref}`axis-angle-rotation2-figure`).
+The rotation around the $y$-axis is achieved by forming another right-angled triangle in the $xz$-plane where $\theta$ has an adjacent side of length $\sqrt{v_y^2 + v_z^2}$, an opposite side of length $v_x$ and a hypotenuse of length 1 since $\hat{\mathbf{v}}$ is a unit vector ({numref}`axis-angle-rotation2-figure`).
 
 ```{figure} ../_images/05_axis_angle_rotation_2.svg
 :height: 250
@@ -541,7 +547,7 @@ Rotate around the $y$-axis
 
 Therefore $\cos(\theta) = \sqrt{v_y^2 + v_z^2}$ and $\sin(\theta) = v_x$. Note that here we are rotating in the clockwise direction so the rotation matrix is
 
-$$ R_2 = \begin{pmatrix} 
+$$ R_2 = \begin{pmatrix}
     \sqrt{v_y^2 + v_z^2} & 0 & -v_x & 0 \\
     0 & 1 & 0 & 0 \\
     v_x & 0 & \sqrt{v_y^2 + v_z^2} & 0 \\
@@ -577,20 +583,20 @@ $$ \begin{align*}
 Multiplying all of the separate matrices together gives
 
 $$ \begin{align*}
-    Rotate &= R_1 \cdot R_2 \cdot R_3 \cdot R_4 \cdot R_5 \\
+    Rotate &= R_5 \cdot R_4 \cdot R_3 \cdot R_2 \cdot R_1 \\
     &=
     \begin{pmatrix}
-        v_x^2 + (v_y^2 + v_z^2) \cos(\theta) &
-        v_xv_y(1 - \cos(\theta)) + v_z\sin(\theta) &
-        v_xv_z(1 - \cos(\theta)) + v_y\sin(\theta) & 
+        \dfrac{v_x^2 + (v_y^2 + v_z^2)\cos(\theta)}{\|\mathbf{v}\|^2} &
+        \dfrac{v_xv_y(1 - \cos(\theta))}{\|\mathbf{v}\|^2} + \dfrac{v_z\sin(\theta)}{\|\mathbf{v}\|} &
+        \dfrac{v_xv_z(1 - \cos(\theta))}{\|\mathbf{v}\|^2} - \dfrac{v_y\sin(\theta)}{\|\mathbf{v}\|} &
         0 \\
-        v_xv_y(1 - \cos(\theta)) + v_z\sin(\theta) &
-        v_y^2 + (v_x^2 + v_y^2)\cos(\theta) &
-        v_yv_z(1 - \cos(\theta)) - v_x\sin(\theta) &
+        \dfrac{v_xv_y(1 - \cos(\theta))}{\|\mathbf{v}\|^2} - \dfrac{v_z\sin(\theta)}{\|\mathbf{v}\|} &
+        \dfrac{v_y^2 + (v_x^2 + v_y^2)\cos(\theta)}{\|\mathbf{v}\|^2} &
+        \dfrac{v_yv_z(1 - \cos(\theta))}{\|\mathbf{v}\|^2} - \dfrac{v_x\sin(\theta)}{\|\mathbf{v}\|} &
         0 \\
-        v_xv_z(1 - \cos(\theta)) - v_y\sin(\theta) &
-        v_yv_z(1 - \cos(\theta)) + v_x\sin(\theta) &
-        v_z^2 + (v_x^2 + v_y^2)\cos(\theta) & 
+        \dfrac{v_xv_z(1 - \cos(\theta))}{\|\mathbf{v}\|^2} + \dfrac{v_y\sin(\theta)}{\|\mathbf{v}\|} &
+        \dfrac{v_yv_z(1 - \cos(\theta))}{\|\mathbf{v}\|^2} - \dfrac{v_x\sin(\theta)}{\|\mathbf{v}\|} &
+        \dfrac{v_z^2 + (v_x^2 + v_y^2)\cos(\theta)}{\|\mathbf{v}\|^2} &
         0 \\
         0 & 0 & 0 & 1
     \end{pmatrix}.
@@ -602,17 +608,17 @@ $$ \begin{align*}
     Rotate &= R_1 \cdot R_2 \cdot R_3 \cdot R_4 \cdot R_5 \\
     &=
     \begin{pmatrix}
-         v_x^2(1 - \cos(\theta)) + \cos(\theta) &
-        v_xv_y(1 - \cos(\theta)) + v_z\sin(\theta) &
-        v_xv_z(1 - \cos(\theta)) + v_y\sin(\theta) & 
+        v_x^2 (1 - \cos(\theta)) + \cos(\theta) & 11
+        v_xv_y(1 - \cos(\theta)) - v_z\sin(\theta) & 12
+        v_xv_z(1 - \cos(\theta)) + v_y\sin(\theta) & 13
         0 \\
-        v_xv_y(1 - \cos(\theta)) + v_z\sin(\theta) &
-         v_y^2(1 - \cos(\theta)) + \cos(\theta) &
-        v_yv_z(1 - \cos(\theta)) - v_x\sin(\theta) &
+        v_xv_y(1 - \cos(\theta)) + v_z\sin(\theta) & 21
+         v_y^2(1 - \cos(\theta)) + \cos(\theta) & 22
+        v_yv_z(1 - \cos(\theta)) - v_x\sin(\theta) & 23
         0 \\
-        v_xv_z(1 - \cos(\theta)) - v_y\sin(\theta) &
-        v_yv_z(1 - \cos(\theta)) + v_x\sin(\theta) &
-         v_z^2(1 - \cos(\theta)) + \cos(\theta) &
+        v_xv_z(1 - \cos(\theta)) - v_y\sin(\theta) & 31
+        v_yv_z(1 - \cos(\theta)) + v_x\sin(\theta) & 32
+        v_z^2 (1 - \cos(\theta)) + \cos(\theta) & 33
         0 \\
         0 & 0 & 0 & 1
     \end{pmatrix}.
@@ -622,7 +628,7 @@ $$ \begin{align*}
 
 ### Axis-angle rotation in OpenGL
 
-The rotations around the three co-ordinates axis can be calculated using the axis-angle rotation matrix (by letting $\hat{\vec{v}}$ be $(1,0,0)$, $(0,1,0)$ or $(0,0,1)$ for rotating around the $x$, $y$ and $z$ axes respectively) so it makes sense to define a single function for rotation using {eq}`eq:axis-angle-rotation-matrix`. Define a couple of functions in the Maths class by entering the following code.
+The rotations around the three co-ordinates axis can be calculated using the axis-angle rotation matrix (by letting $\hat{\mathbf{v}}$ be $(1,0,0)$, $(0,1,0)$ or $(0,0,1)$ for rotating around the $x$, $y$ and $z$ axes respectively) so it makes sense to define a single function for rotation using {eq}`eq:axis-angle-rotation-matrix`. Define a couple of functions in the Maths class by entering the following code.
 
 ```cpp
 static float radians(float angle);
@@ -634,7 +640,7 @@ Then define these methods by entering the following code in the **maths.cpp** fi
 ```cpp
 float Maths::radians(float angle)
 {
-    return angle * M_PI / 180.0f;
+    return angle * 3.1416f / 180.0f;
 }
 
 glm::mat4 Maths::rotate(const float &angle, glm::vec3 v)
@@ -664,7 +670,7 @@ glm::mat4 Maths::rotate(const float &angle, glm::vec3 v)
 Check that the `rotate()` method works by commenting out the code used to define the rotation matrix and add the following.
 
 ```cpp
-float angle = 45.0f * M_PI / 180.0f;
+float angle      = Maths::radians(45.0f);
 glm::mat4 rotate = Maths::rotate(angle, glm::vec3(0.0f, 0.0f, 1.0f));
 ```
 
@@ -683,23 +689,22 @@ $$ \begin{align*}
     Scale \cdot \begin{pmatrix} x \\ y \\ z \\ 1 \end{pmatrix}.
 \end{align*} $$
 
-Next applying rotation to $(x',y',z',1)^\mathsf{T}$ we have
+Next applying rotation to the scaled co-ordinates we have
 
 $$\begin{align*}
-    Rotate \cdot \begin{pmatrix} x' \\ y' \\ z' \\ 1 \end{pmatrix}
-    =
+    \begin{pmatrix} x' \\ y' \\ z' \\ 1 \end{pmatrix} &=
     Rotate \cdot Scale \cdot \begin{pmatrix} x \\ y \\ z \\ 1 \end{pmatrix}.
 \end{align*} $$
 
-Finally applying translation we have
+Finally applying translation to the scaled and rotated co-ordinates we have
 
 $$\begin{align*}
-    Translate \cdot \begin{pmatrix} x' \\ y' \\ z' \\ 1 \end{pmatrix}
-    =
+    \begin{pmatrix} x' \\ y' \\ z' \\ 1 \end{pmatrix}
+    &=
     Translate \cdot Rotate \cdot Scale \cdot \begin{pmatrix} x \\ y \\ z \\ 1 \end{pmatrix}.
 \end{align*} $$
 
-$ Translate \cdot Rotate \cdot Scale$ is a single $4 \times 4$ transformation matrix that combines the three transformations known as the **composite transformation matrix**. Note the order that the translations are applied to the co-ordinates is read from right to left.
+$Translate \cdot Rotate \cdot Scale$ is a single $4 \times 4$ transformation matrix that combines the three transformations known as the **composite transformation matrix**. Note the order that the translations are applied to the co-ordinates is read from right to left so here we have scale $\to$ rotate $\to$ translate.
 
 ### Composite transformations in OpenGL
 
@@ -722,84 +727,21 @@ Scaling, rotation and translation applied to the textured rectangle.
 
 (animating-objects-section)=
 
-## Animations
+## Animating the rectangle
 
 It may appear that our application is displaying a static image of the textured rectangle but what is actually happening is that the window is constantly being updated with new frame buffers as and when they have been calculated. We can animate our rectangle by applying the transformations within the render loop.
 
-### Limiting the frame rate
-
-Before we animate our rectangle we need to consider the **frame rate** which is the number of Frames Per Second (fps) that is rendered on a display. Typical frame rates are 24 fps for movies, 30 fps for television programs and 60 fps for computer games. Since there will be different calculations occurring in different frames as well as others computational overheads due to background processes, the time between the rendering of two successive frames is not constant. If we were to simply render our scene without considering this we would get a jerky unsatisfying animation. Instead, we limit the frame rate by only rendering a frame once a given time has elapsed since the last frame was rendered.
-
-We are going to limit our framerate to 60 fps. First we declare a set of float variables to keep track of the time. Before the `main()` function enter the following code.
-
-```cpp
-// Timer variables
-const float fpsLimit = 1.0f / 60.0f;  // limit fps to 60
-float currentTime    = 0.0f;          // current time in seconds
-float lastTime       = 0.0f;          // time of last iteration of the loop
-float lastFrame      = 0.0f;          // time that last frame was rendered
-float deltaTime      = 0.0f;          // difference in time since last iteration
-```
-
-These variables are:
-
-- `fpsLimit` - this is the number of seconds that we wait for before rendering the next frame. So for 60 fps this is 0.0167 seconds
-- `currentTime` - the time since the program was started
-- `lastTime` - the time of the last iteration of the render loop
-- `lastFrame` - the time that the last frame was rendered
-- `deltaTime` - the time that has elapsed since the last iteration of the render loop. This is used to calculate movement
-
-We need to calculate `deltaTime` before our transformation matrices so at the beginning of the render loop enter the following code.
-
-```cpp
-// Update timer variables
-currentTime = glfwGetTime();
-deltaTime   = currentTime - lastTime;
-lastTime    = currentTime;
-```
-
-Here we have used the `glfwGetTime()` function to get the current time since the program was run, we then calculate `deltaTime` which is the time elapsed since the last iteration of the render loop and update the `lastTime` variable ready for the next iteration of the render loop. The last thing we need to do to limit the frame rate is to wait until the time since the last frame was rendered is greater than the fps limit before calling the `glfwSwapBuffers()` function which sends the frame buffer to the display. Enter the following code you have drown the triangles.
-
-```cpp
-// Limit frame rate
-if (currentTime - lastFrame >= fpsLimit)
-{
-    // Swap buffers
-    glfwSwapBuffers(window);
-    
-    // Update time that last frame is rendered
-    lastFrame = currentTime;
-}
-glfwPollEvents();
-```
-
-So now our frames should be rendered every 0.0167 seconds and our animations should appear smooth.
-
-```{note}
-Our approach to limiting the frame rate assumes that the calculations in the render loop take less than our chosen fps. Sometimes this won't be the case do to the computation resources required. If this is the case then the frame is rendered as soon as the frame buffer was been calculated which may result in a laggy animation. To overcome this we can either reduce the number of calculations and memory calls required to calculate the frame buffer (this usually means compromising on the contents or quality of a scene) or reducing the maximum frame rate (or buy a better computer).
-```
-
-### Animating the rectangle
-
-To animate the rectangle we are going to apply scaling, rotation and translation. Comment out all of the code used to calculate the `translate`, `scale` and `rotate` matrices and add the following code.
+We are going to animate our rectangle so that is rotates around its own centre. To do this we are going to use the time the has elapsed since the application was started to calculate the rotation angle. Enter the following code just before the transformation matrix is sent to the shader
 
 ```cpp
 // Animate rectangle
-rotationAngle += deltaTime * Maths::radians(360.0f / 2.0f);
+float angle         = Maths::radians(glfwGetTime() * 360.0f / 3.0f);
 glm::mat4 translate = Maths::translate(glm::vec3(0.4f, 0.3f, 0.0f));
 glm::mat4 scale     = Maths::scale(glm::vec3(0.4f, 0.3f, 0.0f));
-glm::mat4 rotate    = Maths::rotate(rotationAngle,
-                                    glm::vec3(0.0f, 0.0f, 1.0f));
+glm::mat4 rotate    = Maths::rotate(angle, glm::vec3(0.0f, 0.0f, 1.0f));
 ```
 
-Here we have a variable `rotationAngle` which is the angle used in the `rotate()` function. This is incremented by `deltaTime` multiplied by $\dfrac{360^\circ}{2}$ which means the rectangle will perform one full rotation every 2 seconds (e.g., if `deltaTime` was 1 then the rotation angle is $180^\circ$). We need to declare this variable before the `main()` function so add the following code.
-
-```cpp
-// Animation values
-float rotationAngle = 0.0f;
-```
-
-Compile and run the program and you should see something similar to the following.
+Here we use the `glfwGetTime()` function to get the time of the current frame since the application was started and use it to calculate the rotation angle so that the rectangle performs one complete rotation every 3 seconds. Compile and run the program and you should see something similar to the following.
 
 <center>
 <video controls muted="true" loop="true" width="500">
@@ -821,26 +763,13 @@ Compile and run the program and we have something quite different.
 </video>
 </center>
 
-What has happened here is the rectangle has been scaled and translated so that its centre is now at $(0.4, 0.3, 0)$. Then when rotation is applied the triangle is rotated about the origin. To scale and rotate about an objects centre we must do the scaling and rotation transformations when the object is at the origin before translating to the desired position. So a the transformation to rotate and scale about an objects volume centre is:
-
-- translate vertex co-ordinates so that the volume centre is at $(0,0,0)$
-- apply scaling transformation
-- apply rotation transformation
-- translate vertex co-ordinates so that the volume centre is at the original position.
-
-Remember that the transformation matrices are written right-to-left so the transformation matrix is
-
-$$\begin{align*}
-    Transformation = Translate(\vec{c}) \cdot Rotate \cdot Scale \cdot Translate(-\vec{c}),
-\end{align*} $$
-
-where $\vec{c}$ is the volume centre of the object.
+What has happened here is the rectangle has been scaled and translated so that its centre is now at $(0.4, 0.3, 0)$. Then when rotation is applied the triangle is rotated about the origin. 
 
 ---
 
 ## Exercises
 
-1. Scale the original rectangle so that it is a quarter of the original size and apply translation so that the rectangle moves anti-clockwise around a circle centred at the window centre with radius 0.5. Hint: the co-ordinates of points on a circle centered at $(0,0)$ with radius $r$ can be calculated using $x = r\cos(t)$ and $y = r\sin(t)$ where $t$ is some number.
+1. Scale the original rectangle so that it is a quarter of the original size and apply translation so that the rectangle moves anti-clockwise around a circle centred at the window centre with radius 0.5 and completes one full rotation every 5 seconds. Hint: the co-ordinates of points on a circle centered at $(0,0)$ with radius $r$ can be calculated using $x = r\cos(t)$ and $y = r\sin(t)$ where $t$ is some number.
 
 <center>
 <video controls muted="true" loop="true" width="400">
@@ -866,9 +795,10 @@ where $\vec{c}$ is the volume centre of the object.
 
 4. Create a simple screensaver by doing the following:
 
-- scale the original rectangle so that it is one fifth its original size;
-- move the rectangle using a velocity of $\vec{v} = (1, 0.5, 0)$ and the position is calculated using $\vec{p} = \vec{p} + \Delta t \cdot \vec{v}$;
-- reflect the rectangle off the edges of the window by reversing the sign of the elements of the velocity vector when the center of the rectangle gets to within 0.1 of the window edge.
+- Before the `main()` function, define two 3-element vectors for the position and velocity with initial values $\mathbf{p} = (0,0,0)$ and $\mathbf{v} = (0.01, 0.005, 0)$ respectively
+- Inside the render loop, calculate the new centre position using $\mathbf{p} = \mathbf{p} + \mathbf{v}$
+- Scale the original rectangle so that it is one fifth its original size and translate the rectangle so that its center is at $\mathbf{p}$
+- Reflect the rectangle off the edges of the window by reversing the sign of the elements of the velocity vector when the center of the rectangle gets to within 0.1 of the window edge.
 
 <center>
 <video controls muted="true" loop="true" width="400">

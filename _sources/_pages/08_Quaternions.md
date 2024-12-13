@@ -137,15 +137,15 @@ $$ z = \cos(\theta) + i\sin(\theta). $$
 
 We can do similar in 4D space by multiplying a quaternion by the rotation quaternion
 
-$$ q = [\cos(\tfrac{1}{2}\theta), \sin(\tfrac{1}{2}\theta) \hat{\vec{v}}], $$(rotation-quaternion-equation)
+$$ q = [\cos(\tfrac{1}{2}\theta), \sin(\tfrac{1}{2}\theta) \hat{\mathbf{v}}], $$(rotation-quaternion-equation)
 
-where $\hat{\vec{v}}$ is a unit vector around which we are rotating (see [Appendix: Quaternion rotation](appendix-quaternion-rotation-section) for the derivation of this).
+where $\hat{\mathbf{v}}$ is a unit vector around which we are rotating (see [Appendix: Quaternion rotation](appendix-quaternion-rotation-section) for the derivation of this).
 
 ```{figure} ../_images/10_Axis_angle_rotation.svg
 :width: 350
 :name: axis-angle-rotation-figure-2
 
-Axis-angle rotation about the vector $\hat{\vec{v}}$.
+Axis-angle rotation about the vector $\hat{\mathbf{v}}$.
 ```
 
 We have been using $4 \times 4$ matrices to compute the transformations to convert between model, view and screen spaces so in order to use quaternions for rotations we need to calculate a $4 \times 4$ rotation matrix that is equivalent to multiplying by the rotation quaternion from equation {eq}`rotation-quaternion-equation`.
@@ -463,9 +463,9 @@ The another advantage that quaternions have over Euler angles is that we can int
 :width: 400
 ```
 
-If $\vec{p}_1$ and $\vec{p}_2$ are two points then an interpolated point $\vec{p}_t$ is calculated using
+If $\mathbf{p}_1$ and $\mathbf{p}_2$ are two points then an interpolated point $\mathbf{p}_t$ is calculated using
 
-$$ \operatorname{LERP}(\vec{p}_1, \vec{p}_2, t) = \vec{p}_1 + t(\vec{p}_2 - \vec{p}_1), $$
+$$ \operatorname{LERP}(\mathbf{p}_1, \mathbf{p}_2, t) = \mathbf{p}_1 + t(\mathbf{p}_2 - \mathbf{p}_1), $$
 
 where $t$ is a value between 0 and 1. **SLERP** stands for Spherical Linear intERPpolation and is a method used to interpolate between two orientations emanating from the centre of a sphere.
 

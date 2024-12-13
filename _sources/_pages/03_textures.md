@@ -40,7 +40,7 @@ glBindTexture(GL_TEXTURE_2D, texture);
 
 Here we have defined a target called `texture` which is an integer used to refer to the texture. The texture is then generated and bound to this target using the `glGenTextures()` and `glBindTexture()` functions.
 
-We now need to load a image into our texture. To do this we are going to make use of the library <a href="https://github.com/nothings/stb/tree/master" target="_blank">`stb_image`</a> which can be found in the **common/** folder. Enter the following code into your program.
+We now need to load a image into our texture. To do this we are going to make use of the <a href="https://github.com/nothings/stb/tree/master" target="_blank">`stb_image`</a> library, the header file for which can be found in the **common/** folder. Enter the following code into your program.
 
 ```cpp
 // Load texture image from file
@@ -50,7 +50,12 @@ stbi_set_flip_vertically_on_load(true);
 unsigned char *data = stbi_load(path, &width, &height, &nChannels, 0);
 ```
 
-Here we use the function `stbi_load()` to read the image data into the `data` variable. The `width`, `height` and `nChannels` variables store the dimensions of the image in pixels and the number of colour channels used. The texture we are using here is **crate.jpeg** which is stored in the **assets/** folder and represents a side of a wooden crate.
+The functions used here are:
+
+- `stbi_set_flip_vertically_on_load()` flips the image vertically since the $(0,0)$ co-ordinate on an images is the top-left corner and OpenGL expects it to be the bottom-right corner
+- `stbi_load()` loads the image specified in the `path` string into the `data` variable and the stores the width, height and number of colour channels into the appropriate variables 
+
+The texture we are using here is **crate.jpeg** which is stored in the **assets/** folder and represents a side of a wooden crate.
 
 ```{figure} ../_images/03_crate.jpeg
 :width: 300
@@ -126,10 +131,12 @@ Edit the **vertexShader.glsl** file in the **Lab03_Textures** project so that it
 ```glsl
 #version 330 core
 
+// Inputs
 layout(location = 0) in vec3 position;
-layout(location = 1) in vec2 UV;
+layout(location = 1) in vec2 uv;
 
-out vec2 uv;
+// Outputs
+out vec2 UV;
 
 void main()
 {
@@ -137,11 +144,12 @@ void main()
     gl_Position = vec4(position, 1.0);
     
     // Output texture co-ordinates
-    uv = UV;
+    UV = uv;
 }
+
 ```
 
-You may notice some changes from our vertex shader from [Lab02 Basic Shapes in OpenGL](vertex-shader-section). We now have a second input `UV` which is a 2-element vector which are the $(u,v)$ texture coordinates which are outputted as the 2-element vector `uv` (remember that the `gl_Position` vector is passed to the fragment shader by default).
+You may notice some changes from our vertex shader from [Lab02 Basic Shapes in OpenGL](vertex-shader-section). We now have a second input `uv` which is a 2-element vector which are the $(u,v)$ texture coordinates which are outputted as the 2-element vector `UV` (remember that the `gl_Position` vector is passed to the fragment shader by default).
 
 #### Fragment shader
 
@@ -150,16 +158,20 @@ The fragment shader is where we need to retrieve the sample colour from the text
 ```glsl
 #version 330 core
 
-in vec2 uv;
+// Input
+in vec2 UV;
 
+// Output
 out vec3 colour;
 
-uniform sampler2D textureMap;
+// Uniforms
+uniform sampler2D texture;
 
 void main()
 {
-    colour = vec3(texture(textureMap, uv));
+    colour = vec3(texture(texture, UV));
 }
+
 ```
 
 Here we now have an input of the 2-element vector `uv` which has been outputted from the vertex shader. Since our texture is a 2D image then we use the <a href="https://www.khronos.org/opengl/wiki/Sampler_(GLSL)" target="_blank">`sampler2D`</a> GLSL type to declare the uniform `textureMap` (uniforms are explained [below](uniforms-section)). The colour of the fragment is taken from the texture using the `texture()` function where the first argument is the name of the texture uniform and the second argument is the $(u,v)$ texture co-ordinates of the fragment.
@@ -186,7 +198,7 @@ So the lower-right (blue) triangle has vertex co-ordinates $(-0.5, -0.5, 0)$, $(
 
 ```cpp
 // Define vertex positions
-static const GLfloat vertices[] = {
+static const float vertices[] = {
     -0.5f, -0.5f, 0.0f,    // triangle 1
      0.5f, -0.5f, 0.0f,
      0.5f,  0.5f, 0.0f,
@@ -235,10 +247,10 @@ Comment out the code used to define the `vertices` and `uv` arrays and enter the
 // Define vertex positions
 static const float vertices[] = {
     // x     y     z      index
-    -0.5f, -0.5f, 0.0f,  // 0
-     0.5f, -0.5f, 0.0f,  // 1
-     0.5f,  0.5f, 0.0f,  // 2
-    -0.5f,  0.5f, 0.0f   // 3
+    -0.5f, -0.5f, 0.0f,  // 0       3 -- 2
+     0.5f, -0.5f, 0.0f,  // 1       |  / |  
+     0.5f,  0.5f, 0.0f,  // 2       | /  |
+    -0.5f,  0.5f, 0.0f   // 3       0 -- 1
 };
 
 // Define texture co-ordinates
@@ -308,7 +320,7 @@ Compile and run the program and you should be presented with a (hopefully) famil
 Its a me, Mario!
 ```
 
-Now we can experiment with specifying texture co-ordinates outside of the range 0 to 1. Edit the `uv` array to change all of the `1.0f` values to `4.0f`. Compile and run the program and you should see the image shown in {numref}`GL_REPEAT-figure`
+Now we can experiment with specifying texture co-ordinates outside of the range 0 to 1. Edit the `uv` array to change all of the `1.0f` values to `2.0f`. Compile and run the program and you should see the image shown in {numref}`GL_REPEAT-figure`
 
 ```{figure} ../_images/03_GL_REPEAT.png
 :width: 500
@@ -519,18 +531,20 @@ The last thing we need to do is update the fragment shader so that it uses both 
 ```cpp
 #version 330 core
 
-in vec2 uv;
+// Input
+in vec2 UV;
 
+// Output
 out vec3 colour;
 
+// Uniforms
 uniform sampler2D texture1;
 uniform sampler2D texture2;
 
 void main()
 {
-    colour = vec3(mix(texture(texture1, uv), texture(texture2, uv), 0.7));
+    colour = vec3(mix(texture(texture1, UV), texture(texture2, UV), 0.7));
 }
-
 ```
 
 Here we have defined the two `sampler2D` uniforms `texture1` and `texture2`, these need to be the same as what we called them in the `glGetUniformLocation()` functions. We then use the `mix()` function to combine the two textures so that 30% of the fragment colour is from the first texture (the crate) and the remaining 70% is from the second texture (Mario). Compile and run the program and you should see the image shown in {numref}`two-textures-figure`.
