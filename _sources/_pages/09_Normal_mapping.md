@@ -190,7 +190,7 @@ void Model::calculateTangents()
         float deltaV2 = uvs[i+2].y - uvs[i+1].y;
         
         // Calculate tangents
-        float denom          = 1.0f / (deltaU1 * deltaV2 - deltaU2 * deltaV1);
+        float denom         = 1.0f / (deltaU1 * deltaV2 - deltaU2 * deltaV1);
         glm::vec3 tangent   = (deltaV2 * E1 - deltaV1 * E2) * denom;
         glm::vec3 bitangent = (deltaU1 * E2 - deltaU2 * E1) * denom;
         
